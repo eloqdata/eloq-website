@@ -1,0 +1,48 @@
+---
+title: LOAD DATA INFILE
+summary: 介绍LOAD DATA INFILE的功能与用法
+aliases: ['/cn/sql-reference/data-manipulation/insert-and-load-data/load-data-infile']
+---
+
+# LOAD DATA INFILE
+
+LOAD DATA INFILE可以用来将文本文件中的数据读入数据库表中
+
+>**注意**
+>使用LOAD DATA INFILE语句时，表格必须已经存在于数据库中。如果尝试将数据加载到不存在的表中，MariaDB会返回一个错误。
+>
+## 具体用法示例
+
+使用`LOAD DATA LOCAL INFILE`将客户端本地文件加载到MonograpnDB数据库中
+
+`LOAD DATA LOCAL INFILE`与`LOAD DATA INFILE`的区别
+当执行`LOAD DATA INFILE`语句时，MonographDB会尝试从自己的文件系统中读取输入文件。相比之下，当执行`LOAD DATA LOCAL INFILE`语句时，客户端会尝试从自己的文件系统中读取输入文件，并将输入文件的内容发送到MonographDB服务器。这样可以将客户端本地文件系统中的文件加载到数据库中。因此，`LOAD DATA LOCAL INFILE`语句比`LOAD DATA INFILE`语句更适合在客户端上处理本地文件
+
+* 假设有一个名为"employees.csv"的文件，它的内容如下：
+```
+id,first_name,last_name,age，salary
+1,John,Doe,30,20000
+2,Jane,Smith,25,10000
+3,Bob,Johnson,45,30000
+```
+现在，我们可以使用以下语句将这个文件加载到名为"local_employees"的表中：
+```sql
+LOAD DATA LOCAL INFILE '/path/to/employees.csv'
+INTO TABLE local_employees
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+```
+>**注意**
+>local_employees表格必须在执行LOAD DATA LOCAL INFILE创建，或者在执行LOAD DATA LOCAL INFILE之前通过下面的建表语句创建
+>```sql
+>CREATE TABLE `local_employees` (
+>`employee_id` int(6) NOT NULL DEFAULT '0',
+>`first_name` varchar(20) DEFAULT NULL,
+>`last_name` varchar(25) NOT NULL,
+>`age` int(6) DEFAULT NULL,
+>`salary` double(8,2) DEFAULT NULL,
+> PRIMARY KEY (`employee_id`)
+>) ENGINE=monograph DEFAULT CHARSET=utf8;
+>```
