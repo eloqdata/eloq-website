@@ -1,54 +1,53 @@
 ---
-title: Client Connect
-summary: Details on how to connect to MonographDB using clients
+title: Client Connection
+summary: Learn how to connect to the MonoGraphDB database using common SQL clients.
 ---
 
-# 客户端接入
+# client connection
 
-本文档介绍了如何使用终端之外的客户端连接MonographDB并进行查询。
+This document describes how to use a client other than a terminal to connect to MonographDB.
 
-文档操作环境为
-* win11 操作系统
+The document operating environment is
+* win11 operating system
 
-客户端连接示例包括但不限于如下几种：
+Examples of client connections include but are not limited to the following:
 * Navicat
 * Oracle MySQL Workbench
 * SQLyog
 
 1. [Navicat](https://navicat.com/en/products)
-下载并安装相应操作系统的Navicat for MySQL客户端安装包。
+Download and install the Navicat for MySQL client installation package of the corresponding operating system.
 ![](../media/connect-to-monodb/client/navicat-for-mysql-download.png)
-打开Navicat客户端，新建MariaDB连接
+Open the Navicat client and create a MariaDB connection
 ![](../media/connect-to-monodb/client/navicat-new-sql-connection.jpg)
-输入数据库所在的服务器(Host)的IP，端口(Port)号(默认情况下3300)，数据库用户名(User Name)为`mono`以及在创建该用户时的设置的用户密码即可完成连接设置。
+Enter the IP of the server (Host) where the database is located, the port (Port) number (3300 by default), the database user name (User Name) is `mono` and the user password set when creating the user to complete the connection settings .
 ![](../media/connect-to-monodb/client/navicat-connection-setting.jpg)
-测试连接成功后，保存连接，新建查询
+After the test connection is successful, save the connection and create a new query
 ![](../media/connect-to-monodb/client/navicat-connection-new-query.jpg)
-写SQL语句并点击运行，运行成功。
+Write the SQL statement and click Run, it runs successfully.
 ![](../media/connect-to-monodb/client/navicat-sql-execution.jpg)
 
 
 2. [Oracle MySQL Workbench](https://dev.mysql.com/downloads/file/?id=517975)
-从官网上下载并安装Mysql Workbench客户端安装包。
-打开Mysql Workbench客户端，新建Mysql连接。
+Download and install the Mysql Workbench client installation package from the official website.
+Open the Mysql Workbench client and create a new Mysql connection.
 ![](../media/connect-to-monodb/client/workbench-new-sql-connection.jpg)
-输入数据库所在的服务器(Host)的IP，端口(Port)号(默认情况下3300)，数据库用户名(User Name)为`mono`以及在创建该用户时的设置的用户密码即可完成连接设置。
+Enter the IP of the server (Host) where the database is located, the port (Port) number (3300 by default), the database user name (User Name) is `mono` and the user password set when creating the user to complete the connection settings .
 ![](../media/connect-to-monodb/client/workbench-connection-setting.jpg)
-连接成功
+connection succeeded
 ![](../media/connect-to-monodb/client/workbench-connection-success.jpg)
-新建查询，写SQL语句并点击运行。
+Create a new query, write a SQL statement and click Run.
 ![](../media/connect-to-monodb/client/workbench-sql-execution.jpg)
 
 
 3. [SQLyog](https://webyog.com/product/sqlyog/)
 
-下载并安装相应操作系统的SQLyog安装包。
-打开SQLyog客户端，新建连接
+Download and install the SQLyog installation package for the corresponding operating system.
+Open the SQLyog client and create a new connection
 ![](../media/connect-to-monodb/client/SQLyog-new-sql-connection.jpg)
-输入数据库所在的服务器(Host)的IP，端口(Port)号(默认情况下3300)，数据库用户名(User Name)为`mono`以及在创建该用户时的设置的用户密码即可完成连接设置。
+Enter the IP of the server (Host) where the database is located, the port (Port) number (3300 by default), the database user name (User Name) is `mono` and the user password set when creating the user to complete the connection settings .
 ![](../media/connect-to-monodb/client/SQLyog-connection-setting.jpg)
-连接成功
+connection succeeded
 ![](../media/connect-to-monodb/client/SQLyog-connection-success.jpg)
-新建查询，写SQL语句并点击运行。
+Create a new query, write a SQL statement and click Run.
 ![](../media/connect-to-monodb/client/SQLyog-sql-execution.jpg)
-
