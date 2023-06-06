@@ -1,43 +1,42 @@
 ---
-title: SELECT INTO OUTFILE
-summary: 介绍SELECT INTO OUTFILE的功能与用法
-aliases: ['/cn/sql-reference/data-manipulation/selecting-data/select-into-outfile']
+title: SELECT INTO OUTFILE | MonographDB SQL Statement Reference
+summary: Introduces the function and usage of SELECT INTO OUTFILE
 ---
 
 # SELECT INTO OUTFILE
 
-`SELECT INTO OUTFILE`语句可以将查询结果写入一个文件，并且可以使用列和行终止符来指定输出格式。默认情况下，列使用制表符(\t)作为终止符，行使用换行符(\n)作为终止符。
+The `SELECT INTO OUTFILE` statement writes the query results to a file and can specify the output format using column and row terminators. By default, columns use tabs (\t) as terminators, and rows use line feeds (\n) as terminators.
 
->**注意**
->写入的文件不能存在同名文件，用户需要有FILE权限才能运行`SELECT INTO OUTFILE`。MonographDB需要对于文件写入的位置具有文件写入权限。
+>**Note**
+>MonographDB requires file write permission.
 >
-## 具体用法示例
+## Examples
 
-* 对于测试用表`employees`，查询相应的员工id(employee_id)，员工电话号码(phone_number)以及薪水(salary)，并将其存入主目录下的employees文件,输出文件中的字段将由逗号分隔并用双引号括起来，每条记录将以换行符终止。
+* For the test table `employees`, query the employee id (employee_id), employee phone number (phone_number) and salary (salary) and store them in the employees file in the home directory, the fields in the output file will be separated by commas and enclosed in double quotes, and each row will be terminated by a newline character. Each record will be terminated by a line break.
 ```sql
 SELECT employee_id,phone_number, salary from employees
   INTO OUTFILE '/path/to/part_employees.txt'
   FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
-  LINES TERMINATED BY '\n';
+  LINES TERMINATED BY '\n'
 ```
-* 将整张employees表导出到相应的CSV文件
+* Export the entire employees table to the corresponding CSV file
 ```sql
 SELECT * INTO OUTFILE '/path/to/full_mployees.csv'
 FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
-FROM employees;
+FROM employees
 ```
-* 导出满足特定条件的记录到CSV文件
+* Export records that meet certain criteria to a CSV file
 ```sql
 SELECT * INTO OUTFILE '/path/to/IT.csv'
 FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 FROM employees
-WHERE job_id = 'IT_PROG ';
+WHERE job_id = 'IT_PROG '
 ```
 
 
-## MySQL 兼容性
-`SELECT INTO OUTFILE`语句与 MySQL 8.0 的“SELECT INTO OUTFILE”功能完全兼容
+## MySQL Compatibility
+The `SELECT INTO OUTFILE` statement is fully compatible with MySQL 8.0's `SELECT INTO OUTFILE` feature.
 
-更多详情，请参考[mariadb:SELECT INTO OUTFILE](https://mariadb.com/kb/en/select-into-outfile/)
+For more details, please refer to [mariadb:SELECT INTO OUTFILE](https://mariadb.com/kb/en/select-into-outfile/)

@@ -1,48 +1,51 @@
 ---
-title: LOAD DATA INFILE
-summary: 介绍LOAD DATA INFILE的功能与用法
-aliases: ['/cn/sql-reference/data-manipulation/insert-and-load-data/load-data-infile']
+title: LOAD DATA INFILE | MonographDB SQL Statement Reference
+summary: An overview of the usage of LOAD DATA INFILE for the MonographDB database.
 ---
 
 # LOAD DATA INFILE
 
-LOAD DATA INFILE可以用来将文本文件中的数据读入数据库表中
+The `LOAD DATA INFILE` can be used to load data into a MonographDB table.
 
->**注意**
->使用LOAD DATA INFILE语句时，表格必须已经存在于数据库中。如果尝试将数据加载到不存在的表中，MariaDB会返回一个错误。
+>**Note**
+>When using the `LOAD DATA INFILE` statement, the table must already exist in the database. MonographDB will return an error if you try to load data into a table that does not exist.
 >
-## 具体用法示例
 
-使用`LOAD DATA LOCAL INFILE`将客户端本地文件加载到MonograpnDB数据库中
+## Examples
 
-`LOAD DATA LOCAL INFILE`与`LOAD DATA INFILE`的区别
-当执行`LOAD DATA INFILE`语句时，MonographDB会尝试从自己的文件系统中读取输入文件。相比之下，当执行`LOAD DATA LOCAL INFILE`语句时，客户端会尝试从自己的文件系统中读取输入文件，并将输入文件的内容发送到MonographDB服务器。这样可以将客户端本地文件系统中的文件加载到数据库中。因此，`LOAD DATA LOCAL INFILE`语句比`LOAD DATA INFILE`语句更适合在客户端上处理本地文件
+Load local files into a MonographDB database using `LOAD DATA LOCAL INFILE`
 
-* 假设有一个名为"employees.csv"的文件，它的内容如下：
-```
-id,first_name,last_name,age，salary
-1,John,Doe,30,20000
-2,Jane,Smith,25,10000
-3,Bob,Johnson,45,30000
-```
-现在，我们可以使用以下语句将这个文件加载到名为"local_employees"的表中：
+
+* Suppose there is a file named `employees.csv` with the following contents:
+    ```
+    id,first_name,last_name,age,salary
+    1,John,Doe,30,20000
+    2,Jane,Smith,25,10,000
+    3,Bob,Johnson,45,30000
+    ```
+Now, we can load this file into a table named "local_employees"
 ```sql
 LOAD DATA LOCAL INFILE '/path/to/employees.csv'
 INTO TABLE local_employees
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
-IGNORE 1 ROWS;
+IGNORE 1 ROWS.
 ```
->**注意**
->local_employees表格必须在执行LOAD DATA LOCAL INFILE创建，或者在执行LOAD DATA LOCAL INFILE之前通过下面的建表语句创建
+
+Difference between `LOAD DATA LOCAL INFILE` and `LOAD DATA INFILE`
+
+When the `LOAD DATA INFILE` statement is executed, MonographDB tries to read the input files from its own file system. In contrast, when the `LOAD DATA LOCAL INFILE` statement is executed, the client tries to read the input file from its own file system and sends the contents of the input file to the MonographDB server. This loads the files from the client's local file system into the database. Therefore, the `LOAD DATA LOCAL INFILE` statement is more suitable for handling local files on the client than the `LOAD DATA INFILE` statement.
+
+>**Note**
+The `local_employees` table must be created either by executing `LOAD DATA LOCAL INFILE` or by the following table build statement before executing `LOAD DATA LOCAL INFILE`
 >```sql
 >CREATE TABLE `local_employees` (
->`employee_id` int(6) NOT NULL DEFAULT '0',
->`first_name` varchar(20) DEFAULT NULL,
->`last_name` varchar(25) NOT NULL,
->`age` int(6) DEFAULT NULL,
->`salary` double(8,2) DEFAULT NULL,
+>`employee_id` int(6) NOT NULL DEFAULT '0'.
+>`first_name` varchar(20) DEFAULT NULL.
+>`last_name` varchar(25) NOT NULL.
+>`age` int(6) DEFAULT NULL.
+>`salary` double(8,2) DEFAULT NULL.
 > PRIMARY KEY (`employee_id`)
->) ENGINE=monograph DEFAULT CHARSET=utf8;
+>) ENGINE=monograph DEFAULT CHARSET=utf8.
 >```
