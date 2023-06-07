@@ -169,8 +169,18 @@ headTags: [
       {
         id: 'monographdb',
         path: 'monographdb',
-        routeBasePath: 'monograpdb',
+        routeBasePath: 'monographdb',
         sidebarPath: require.resolve('./sidebarsMonographdb.js'),
+        // ... other options
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'indocs',
+        path: 'indocs',
+        routeBasePath: 'indocs',
+        sidebarPath: require.resolve('./sidebarsindocs.js'),
         // ... other options
       },
     ],

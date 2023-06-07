@@ -42,4 +42,11 @@
 在多个AWS Region分别启动多个Auto Scaling Group，实例会自动连接到对应region的AWS DynamoDB。
 设置DynamoDB的表为Global Table，实现数据多写和跨Region自动同步。
 
+## 产品部署成本预估
+
+### 产品部署项目所需计费服务列表 
+
+产品提供下列服务（以下均必选）
+AWS EC2
+
 
