@@ -9,6 +9,7 @@ title: Difference with MySQL
 1. In the monograph engine, all manual input of auto-increment will be ignored.
 For example, the following SQL statement is used to create a table named `t1`,
 The table consists of two columns, `i` and `j`, where `i` is the primary key, an integer type, and is set to auto-increment. `j` is also an integer type.
+
     ```sql
     create table t1(i int primary key auto_increment, j int)engine=monograph;
     ```
