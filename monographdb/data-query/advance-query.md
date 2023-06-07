@@ -1,7 +1,6 @@
 ---
 title: Advanced SQL Operations
 summary: Introduces advanced query functions in MonographDB
-aliases: ['/cn/data_query/advance_query']
 sidebar_position: 2
 ---
 # Advanced Search

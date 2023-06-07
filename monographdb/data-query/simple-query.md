@@ -1,7 +1,6 @@
 ---
 title: Simple Query
 summary: Introduce the basic query functions in MonographDB
-aliases: ['/cn/data_query/simple_query']
 sidebar_position: 1
 ---
 # Simple query
