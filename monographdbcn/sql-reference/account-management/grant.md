@@ -1,7 +1,6 @@
 ---
 title: GRANT
 summary: 介绍GRANT的功能与用法
-aliases: ['/cn/sql-reference/account-management/revoke']
 ---
 
 # GRANT

@@ -1,7 +1,6 @@
 ---
 title: LOAD DATA INFILE
 summary: 介绍LOAD DATA INFILE的功能与用法
-aliases: ['/cn/sql-reference/data-manipulation/insert-and-load-data/load-data-infile']
 ---
 
 # LOAD DATA INFILE

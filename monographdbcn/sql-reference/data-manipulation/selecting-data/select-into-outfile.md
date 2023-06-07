@@ -1,7 +1,6 @@
 ---
 title: SELECT INTO OUTFILE
 summary: 介绍SELECT INTO OUTFILE的功能与用法
-aliases: ['/cn/sql-reference/data-manipulation/selecting-data/select-into-outfile']
 ---
 
 # SELECT INTO OUTFILE

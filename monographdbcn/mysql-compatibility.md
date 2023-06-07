@@ -1,7 +1,6 @@
 ---
 title: 与 MySQL 兼容性比较
 summary: 本文对 MonographDB 和 MySQL 二者之间从语法和功能特性上做出详细的对比。
-aliases: ['/cn/mysql-compatibility/','/cn/reference/mysql-compatibility/']
 ---
 
 # 与MySQL兼容性对比

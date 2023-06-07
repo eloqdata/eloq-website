@@ -1,7 +1,6 @@
 ---
 title: ALTER USER
 summary: 介绍ALTER USER的功能与用法
-aliases: ['/cn/sql-reference/account-management/alter-user']
 ---
 
 # ALTER USER

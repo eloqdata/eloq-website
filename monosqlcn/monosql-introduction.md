@@ -1,7 +1,6 @@
 ---
 title: MonoSQL产品简介
 summary: MonoSQL工具的介绍，了解MonoSQL的整体架构与运作原理
-aliases: ['cn/monosql/monosql-introdcution']
 ---
 
 # MonoSQL简介

@@ -1,7 +1,6 @@
 ---
 title: Monograph测试数据库构建
 summary: Monograph测试数据库、测试数据表创建
-aliases: ['cn/data-query/test-scheme-design']
 sidebar_position: 3
 ---
 

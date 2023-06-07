@@ -1,7 +1,6 @@
 ---
 title: REVOKE
 summary: 介绍REVOKE的功能与用法
-aliases: ['/cn/sql-reference/account-management/revoke']
 ---
 
 # REVOKE

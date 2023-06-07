@@ -1,7 +1,6 @@
 ---
 title: CREATE USER
 summary: 介绍CREATE USER的弄能与用法
-aliases: ['/cn/sql-reference/account-management/create-user']
 ---
 
 # CREATE USER

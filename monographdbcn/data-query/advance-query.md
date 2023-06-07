@@ -1,7 +1,6 @@
 ---
 title: 高级SQL操作
 summary: 介绍MonographDB中的高级查询功能
-aliases: ['/cn/data_query/advance_query']
 sidebar_position: 2
 ---
 # 高级查询

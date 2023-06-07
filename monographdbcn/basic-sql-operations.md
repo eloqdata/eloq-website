@@ -1,6 +1,6 @@
 ---
 title: SQL 基本操作
-aliases: ['/cn/basic-sql-operations/','/cn/how-to/get-started/explore-sql/']
+summary: 利用MonographDB进行基本的SQL操作
 ---
 # SQL 基本操作
 成功部署MonographDB集群之后，便可以连接数据库执行相应的SQL语句。由于MonographDB兼容MySQL，用户可以使用MySQL客户端连接MonograhDB，并且可以直接执行相应的SQL语句（**注意**：部分Mysql语句不支持，具体可见[与Mysql兼容性对比](./mysql-compatibility.md)

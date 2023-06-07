@@ -1,7 +1,6 @@
 ---
 title: CREATE ROLE
 summary: 介绍CREATE ROLE的功能与用法
-aliases: ['/cn/sql-reference/account-management/create-role']
 ---
 
 # ALTER USER

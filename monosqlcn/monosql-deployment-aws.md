@@ -1,7 +1,6 @@
 ---
 title: MonoSQL上手指南
 summary: 使用`AWS Network Load Balancer`与` Auto Scaling Group `在AWS上部署MonoSQL
-aliases: ['cn/monosql/mono-deployment-aws']
 ---
 
 本章介绍如何在AWS上部署MonoSQL，关于MonoSQL的具体介绍，可查看[MonoSQL产品介绍](../monosql/monosql-introduction.md)
@@ -19,7 +18,7 @@ DynamoDB是有AWS提供的NoSQL数据库服务，它可以快速、可靠地存�
 ![](media/EC2-new.jpg)
 点击`启动新实例`，进入后续的EC2实例具体配置环节。
    + 步骤1：配置实例名称，设置为`Mono-Bootstrap`。
-   + 步骤2：从`AWS Market Place`中查找AMI镜像`MonoSQLServer`，设置AMI为`MonoSQLServer`，
+   + 步骤2：从`AWS Market Place`中查找AMI镜像`MonoSQLServer`，设置AMI为`MonoSQLServer`。
    + 步骤3：设置实例类型为`c5.4xlarge`
    + 步骤4：设置密钥对，用于ssh免密登陆，可以使用已有密钥对或者创建新密钥对
    + 步骤4：配置EC2实例的网络，注意此处设置的安全组必须允许来自3306端口的流量，以进行数据库的访问与设置。

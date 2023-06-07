@@ -1,7 +1,6 @@
 ---
 title: 基本SQL操作
 summary: 介绍MonographDB中的基本查询功能
-aliases: ['/cn/data_query/simple_query']
 sidebar_position: 1
 ---
 # 基本查询

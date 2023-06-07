@@ -1,7 +1,6 @@
 ---
 title: MonoGraphDB 数据库快速上手指南
 summary: 了解如何快速上手使用 MonoGraphDB 数据库。
-aliases: ['/doc/cn/dev/quick-start-with-monographdb/','/doc/n/dev/how-to/get-started/local-cluster/install-from-docker-compose/']
 ---
 
 # MonographDB 数据库快速上手指南

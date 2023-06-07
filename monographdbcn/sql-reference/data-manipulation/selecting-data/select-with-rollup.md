@@ -1,7 +1,6 @@
 ---
 title: SELECT WITH ROLLUP
 summary: 介绍SELECT WITH ROLLUP的功能与用法
-aliases: ['/cn/sql-reference/data-manipulation/selecting-data/select-with-rollup']
 ---
 
 # SELECT WITH ROLLUP
