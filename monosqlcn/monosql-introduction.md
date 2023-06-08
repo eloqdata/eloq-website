@@ -4,7 +4,7 @@ summary: MonoSQL工具的介绍，了解MonoSQL的整体架构与运作原理
 ---
 
 # MonoSQL简介
-MonoSQL是[成章数据](http://www.monographdata.cn/)公司自主设计、研发的基于DynamoDB的封装器，是一款可以帮助用户从Mysql或者MariaDB迁移到DynamoDB的虚拟镜像产品，具备无状态，自动扩容，数据安全等优点，借助MonoSQL，您可以继续使用JDBC或ODBC协议在DynamoDB实现数据的存储、检索和更新等操作，而不需更改原先的引用程序。
+MonoSQL是[成章数据](http://www.monographdata.com/)公司自主设计、研发的基于DynamoDB的封装器，是一款可以帮助用户从Mysql或者MariaDB迁移到DynamoDB的虚拟镜像产品，具备无状态，自动扩容，数据安全等优点，借助MonoSQL，您可以继续使用JDBC或ODBC协议在DynamoDB实现数据的存储、检索和更新等操作，而不需更改原先的引用程序。
 
 在内核设计上，MonoSQL整体架构可以拆分为多个模块，各个模块之间互相通信，组成一体化的服务、运维、监控系统，对应的架构图如下：
 ![architecture](media/arch.jpg)
