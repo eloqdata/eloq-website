@@ -31,6 +31,62 @@ For installation on other platforms, please refer to the [official documentation
 
 ###  Install and configure the EKS cluster
 
+#### config eks iam user
+
+Use root user to create iam user `eks` and attach desired policies.
+
+```
+-- EksAllAccess.json  Note please replace account_id
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "eks:*",
+            "Resource": "*"
+        },
+        {
+            "Action": [
+                "ssm:GetParameter",
+                "ssm:GetParameters"
+            ],
+            "Resource": [
+                "arn:aws:ssm:*:<account_id>:parameter/aws/*",
+                "arn:aws:ssm:*::parameter/aws/*"
+            ],
+            "Effect": "Allow"
+        },
+        {
+             "Action": [
+               "kms:CreateGrant",
+               "kms:DescribeKey"
+             ],
+             "Resource": "*",
+             "Effect": "Allow"
+        },
+        {
+             "Action": [
+               "logs:PutRetentionPolicy"
+             ],
+             "Resource": "*",
+             "Effect": "Allow"
+        }        
+    ]
+}
+```
+
+
+```shell
+ACCOUNT_ID=$(aws sts get-caller-identity --query 'Account' --output text)
+aws iam attach-user-policy --user-name eks --policy-arn arn:aws:iam::aws:policy/AmazonEC2FullAccess
+aws iam attach-user-policy --user-name eks --policy-arn arn:aws:iam::aws:policy/AWSCloudFormat
+ionFullAccess
+aws iam create-policy --policy-name EksAllAccess --policy-document file://EksAllAccess.json
+aws iam attach-user-policy --user-name eks --policy-arn arn:aws:iam::${ACCOUNT_ID}:policy/EksAllAccess
+aws iam create-policy --policy-name IamLimitedAccess --policy-document file://IamLimitedAccess.json
+aws iam attach-user-policy --user-name eks --policy-arn arn:aws:iam::${ACCOUNT_ID}:policy/IamLimitedAccess
+```
+
 #### eksctl Install
 
 `eksctl` is a Kubernetes command line management tool similar to `kubectl` for creating and managing Kubernetes clusters on AWS EKS. For Unix platforms, please follow the command below to install
@@ -57,6 +113,8 @@ For other platforms, please see their [official  documentation](https://github.c
 
 #### Create EKS Cluster
 
+Switch to user `eks` to create EKS cluster.
+
 MonoSQL database instances are stateless nodes, and we recommend using EC2 instances of [compute-optimized instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/compute-optimized-instances.html) as EKS  node pools. Create a pool of nodes per availability zone if possible for availability reasons.
 
 ```yaml
@@ -64,13 +122,13 @@ apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 metadata:
   name: ${EKS_CLUSTER_NAME}
-  region: ap-northeast-1
+  region: ${MY_REGION}
 
 nodeGroups:
   - name: monosql-ap-1a
     desiredCapacity: 1
     privateNetworking: true
-    availabilityZones: ["ap-northeast-1a"]
+    availabilityZones: ["${MY_REGION}a"]
     instanceType: c5.2xlarge
     labels:
       dedicated: monosql
@@ -79,7 +137,7 @@ nodeGroups:
   - name: monosql-ap-1d
     desiredCapacity: 1
     privateNetworking: true
-    availabilityZones: ["ap-northeast-1d"]
+    availabilityZones: ["${MY_REGION}d"]
     instanceType: c5.2xlarge
     labels:
       dedicated: monosql
@@ -88,7 +146,7 @@ nodeGroups:
   - name: monosql-ap-1c
     desiredCapacity: 1
     privateNetworking: true
-    availabilityZones: ["ap-northeast-1c"]
+    availabilityZones: ["${MY_REGION}c"]
     instanceType: c5.2xlarge
     labels:
       dedicated: monosql
@@ -151,14 +209,14 @@ The MonoSQL operator provides a stable IP address to the public through ELB and 
 3. Create IAM Service Account
 
    ```shell
-   # Replace ${EKS_CLUSTER_NAME} with the name of your cluster, 111122223333 with your account ID
+   # Replace ${EKS_CLUSTER_NAME} with the name of your cluster, please replace ${ACCOUNT_ID}
    #!/bin/bash
    eksctl create iamserviceaccount \
    	--cluster=${EKS_CLUSTER_NAME} \
    	--namespace=kube-system \
    	--name=aws-load-balancer-controller \
    	--role-name AWSMonographLoadBalancerControllerIAMPolicy \
-   	--attach-policy-arn=arn:aws:iam::111122223333:policy/AWSLoadBalancerControllerIAMPolicy \
+   	--attach-policy-arn=arn:aws:iam::${ACCOUNT_ID}:policy/AWSLoadBalancerControllerIAMPolicy \
    	--approve
    ```
 
@@ -188,7 +246,7 @@ To ensure that MonoSQL works properly, you need to be able to access DynamoDB an
 1. Copy the following content and name it `dynamo-and-sqs-policy.json`
 
    ```json
-   -- Replace 111122223333 with your account ID and ap-northeast-1 with your region name.
+   -- Please replace ${ACCOUNT_ID} with your account ID and ${MY_REGION} with your region name.
    {
      "Version": "2012-10-17",
      "Statement": [
@@ -196,13 +254,13 @@ To ensure that MonoSQL works properly, you need to be able to access DynamoDB an
          "Sid": "AllAPIActionsOnMonoSQLTables",
          "Effect": "Allow",
          "Action": "dynamodb:*",
-         "Resource": "arn:aws:dynamodb:ap-northeast-1:111122223333:table/*"
+         "Resource": "arn:aws:dynamodb:${MY_REGION}:${ACCOUNT_ID}:table/*"
        },
        {
          "Sid": "AllAPIActionOnMonoSqsQueues",
          "Effect": "Allow",
          "Action": "sqs:*",
-         "Resource": "arn:aws:sqs:ap-northeast-1:111122223333:*"
+         "Resource": "arn:aws:sqs:${MY_REGION}:${ACCOUNT_ID}:*"
        }
      ]
    }
@@ -220,13 +278,13 @@ To ensure that MonoSQL works properly, you need to be able to access DynamoDB an
 3. Create IAM Service Account
 
    ```bash
-   #  Replace ${EKS_CLUSTER_NAME} with the name of your cluster 111122223333 with your account ID
+   #  Replace ${EKS_CLUSTER_NAME} with the name of your cluster ${ACCOUNT_ID} with your account ID
    # If specifying a namespace, please create it beforehand and replace ${YOUR_NAMESPACE} with the correct namespace name.
    eksctl create iamserviceaccount \
    	--cluster=${EKS_CLUSTER_NAME} \
    	--namespace=${YOUR_NAMESPACE} \
    	--name=monosql-aws-access \
-   	--attach-policy-arn=arn:aws:iam::111122223333:policy/MonoSQLResourceIAMPolicy \
+   	--attach-policy-arn=arn:aws:iam::${ACCOUNT_ID}:policy/MonoSQLResourceIAMPolicy \
    	--override-existing-serviceaccounts \
    	--approve
    ```
@@ -274,7 +332,7 @@ spec:
     limits:
       memory: "4000Mi"
       cpu: "4"
-  image: 831875755683.dkr.ecr.ap-northeast-1.amazonaws.com/monosql:latest
+  image: 709825985650.dkr.ecr.${MY_REGION}.amazonaws.com/monosql:latest
   # imagePullSecrets:
   #  - name: awsecr-cred
   sqlPort: 3300
@@ -284,7 +342,7 @@ spec:
   sqsQueueName: monosql_sqs_queue1
   dynamo:
     defaultCredential: "ON"
-    region: "ap-northeast-1"
+    region: "${MY_REGION}"
 ```
 
 Deploy MonoSQL Cluster via kubectl
@@ -332,7 +390,7 @@ monosql-sts-monosqlcluster   2/2     48s
 # check the status of MonoSQL service
 > kubectl get service   --namespace monosql-operator
 NAME                         TYPE           CLUSTER-IP      EXTERNAL-IP                                         PORT(S)          AGE
-monosql-srv-monosqlcluster   LoadBalancer   10.100.198.52   k8s-monosqlo-monosqls-XX.ap-northeast-1.amazonaws.com   3300:32430/TCP   4m29s
+monosql-srv-monosqlcluster   LoadBalancer   10.100.198.52   k8s-monosqlo-monosqls-XX.${MY_REGION}.amazonaws.com   3300:32430/TCP   4m29s
 
 # Check the status of elb
 > aws elbv2 describe-load-balancers --query 'LoadBalancers[*].[State.Code,LoadBalancerName,DNSName]' --output json
@@ -341,7 +399,7 @@ monosql-srv-monosqlcluster   LoadBalancer   10.100.198.52   k8s-monosqlo-monosql
     [
         "active",
         "k8s-monosqlo-monosqls-000000",
-        "k8s-monosqlo-monosqls-000000-f5123456.elb.ap-northeast-1.amazonaws.com"
+        "k8s-monosqlo-monosqls-000000-f5123456.elb.${MY_REGION}.amazonaws.com"
     ]
 ]
 
