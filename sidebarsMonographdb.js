@@ -25,7 +25,7 @@ const sidebars = {
 	  ],
 	  "Connect to DB": [
 	          "connect-to-monodb/connect-by-client",
-			  "connect-to-monodb/locust-test"
+	          "connect-to-monodb/locust-test",
 	  ],
 	  "Data Query": [
 		  "data-query/simple-query",
