@@ -207,15 +207,16 @@ The MonoSQL operator provides a stable IP address to the public through ELB and 
    ```shell
    # Replace ${EKS_CLUSTER_NAME} with the name of your cluster, please replace ${ACCOUNT_ID}
    #!/bin/bash
-   eksctl utils associate-iam-oidc-provider --cluster ${EKS_CLUSTER_NAME} --region ${REGION} --approve
+   eksctl utils associate-iam-oidc-provider --cluster ${EKS_CLUSTER_NAME} --region ${MY_REGION} --approve
    eksctl create iamserviceaccount \
    	--cluster=${EKS_CLUSTER_NAME} \
    	--namespace=kube-system \
    	--name=aws-load-balancer-controller \
-   	--role-name AWSMonographLoadBalancerControllerIAMPolicy \
-   	--attach-policy-arn=arn:aws:iam::${ACCOUNT_ID}:policy/AWSLoadBalancerControllerIAMPolicy \
+   	--role-name AWSMonographLoadBalancerControllerRole \
+   	--attach-policy-arn=arn:aws:iam::${ACCOUNT_ID}:policy/AWSMonographLoadBalancerControllerIAMPolicy \
+       --region ${MY_REGION} \
    	--approve
-        --region ${REGION}
+
    ```
 
 4. Install AWS Load Balance Controller via helm3 
@@ -276,14 +277,14 @@ To ensure that MonoSQL works properly, you need to be able to access DynamoDB an
 3. Create IAM Service Account
 
    ```bash
-   #  Replace ${EKS_CLUSTER_NAME} with the name of your cluster ${ACCOUNT_ID} with your account ID
-   # If specifying a namespace, please create it beforehand and replace ${YOUR_NAMESPACE} with the correct namespace name.
+   #  Replace ${EKS_CLUSTER_NAME} with the name of your cluster, ${ACCOUNT_ID} with your account ID, ${MY_REGION} with your region name
    eksctl create iamserviceaccount \
    	--cluster=${EKS_CLUSTER_NAME} \
-   	--namespace=${YOUR_NAMESPACE} \
+   	--namespace=kube-system \
    	--name=monosql-aws-access \
    	--attach-policy-arn=arn:aws:iam::${ACCOUNT_ID}:policy/MonoSQLResourceIAMPolicy \
    	--override-existing-serviceaccounts \
+       --region ${MY_REGION} \
    	--approve
    ```
 
