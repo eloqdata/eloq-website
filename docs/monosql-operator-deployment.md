@@ -178,7 +178,7 @@ aws eks describe-cluster --name ${EKS_CLUSTER_NAME}  --query "cluster.resourcesV
 # Run the following commands for all the above subnet ids in order. 
 aws ec2 create-tags  --resource ${SUBNET_ID} --tags Key=kubernetes.io/role/elb,Value="" \
            Key=kubernetes.io/role/internal-elb,Value="" \
-           kubernetes.io/cluster/${EKS_CLUSTER_NAME},Value="owned"
+           Key=kubernetes.io/cluster/${EKS_CLUSTER_NAME},Value="owned"
 ```
 
 **Note: Either way, it is required that you have the correct IAM permissions. Please ensure that you have the correct permissions to access EKS resources. You can also create an EKS Cluster through the AWS Management Console. Please refer to [this document](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-console.html) for details.**
@@ -190,11 +190,7 @@ The MonoSQL operator provides a stable IP address to the public through ELB and 
 1. Download the IAM policy file from the following address
 
    ```bash
-   # US-East or US-West AWS Regions
-   curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.4.7/docs/install/aws-load-balance-controller-policy_us-gov.json
-   
-   # All other AWS Regions
-   curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.4.7/docs/install/aws-load-balance-controller-policy.json
+   curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.4.7/docs/install/iam_policy.json
    ```
 
 2. Create IAM policy for AWS Load Balancer Controller.
@@ -203,7 +199,7 @@ The MonoSQL operator provides a stable IP address to the public through ELB and 
    #!/bin/bash
    aws iam create-policy \
    	--policy-name AWSMonographLoadBalancerControllerIAMPolicy \
-   	--policy-document file://"aws-load-balance-controller-policy.json"
+   	--policy-document file://iam_policy.json
    ```
 
 3. Create IAM Service Account
@@ -211,6 +207,7 @@ The MonoSQL operator provides a stable IP address to the public through ELB and 
    ```shell
    # Replace ${EKS_CLUSTER_NAME} with the name of your cluster, please replace ${ACCOUNT_ID}
    #!/bin/bash
+   eksctl utils associate-iam-oidc-provider --cluster ${EKS_CLUSTER_NAME} --region ${REGION} --approve
    eksctl create iamserviceaccount \
    	--cluster=${EKS_CLUSTER_NAME} \
    	--namespace=kube-system \
@@ -218,6 +215,7 @@ The MonoSQL operator provides a stable IP address to the public through ELB and 
    	--role-name AWSMonographLoadBalancerControllerIAMPolicy \
    	--attach-policy-arn=arn:aws:iam::${ACCOUNT_ID}:policy/AWSLoadBalancerControllerIAMPolicy \
    	--approve
+        --region ${REGION}
    ```
 
 4. Install AWS Load Balance Controller via helm3 
@@ -305,6 +303,8 @@ helm list --namespace [NAMESPACE_NAME]
 ```
 
 #### Deploy MonoSQL Cluster use MonoSQL Operator
+
+To obtain the MonoSQL docker image, please Subscribe and Launch `MonoSQL Cloud`. Follow the instruction of `Container images` to create license token.
 
 Copy the following content and name it `monosql-cluster.yaml`
 
