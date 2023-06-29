@@ -27,6 +27,20 @@ pip install pymysql mysql-connector sqlalchemy gevent locust
 - PoolClient: `self.client.execute("SELECT * FROM test.sbtest1 WHERE id>1 AND id<100;")`
 - PrepareStmtClient: `self.client.execute("SELECT * FROM test.sbtest1 WHERE id > ? AND id < ?;", (1, 100, ))`
 
+**Add a new task in class `QueryUser` to test your query**
+```python
+# locustfile.py
+class QueryUser(MyLocust):
+    @task
+    def test_query_1(self):
+        # self.client.execute("SELECT * FROM test.sbtest1 where id=?;", (1, ))
+        # self.client.execute("SELECT * FROM test.sbtest1 where id=1;")
+    @task
+    def test_query_2(self):
+        # self.client.execute("SELECT * FROM test.sbtest1 where id>? AND id<?;", (1, 100, ))
+        # self.client.execute("SELECT * FROM test.sbtest1 where id>1 AND id<100;")
+```
+
 ## How to run locust
 1. You can specify information such as IP address and Port number in the config.py file
 ```config.py
