@@ -7,6 +7,9 @@ summary: Learn how to use locust to test the database.
 
 This document describes how to use locust to test the database
 
+## source code
+https://github.com/monographdb/locust_example
+
 ## Installation
 ```shell
 pip install pymysql mysql-connector sqlalchemy gevent locust
