@@ -277,10 +277,10 @@ To ensure that MonoSQL works properly, you need to be able to access DynamoDB an
 3. Create IAM Service Account
 
    ```bash
-   #  Replace ${EKS_CLUSTER_NAME} with the name of your cluster, ${ACCOUNT_ID} with your account ID, ${MY_REGION} with your region name
+   #  Replace ${EKS_CLUSTER_NAME} with the name of your cluster, ${ACCOUNT_ID} with your account ID, ${MY_REGION} with your region name, ${MY_NAMESPACE} witch your namespace.
    eksctl create iamserviceaccount \
    	--cluster=${EKS_CLUSTER_NAME} \
-   	--namespace=kube-system \
+   	--namespace=${MY_NAMESPACE} \
    	--name=monosql-aws-access \
    	--attach-policy-arn=arn:aws:iam::${ACCOUNT_ID}:policy/MonoSQLResourceIAMPolicy \
    	--override-existing-serviceaccounts \
@@ -307,14 +307,36 @@ helm list --namespace [NAMESPACE_NAME]
 
 To obtain the MonoSQL docker image, please Subscribe and Launch `MonoSQL Cloud`. Follow the instruction of `Container images` to create license token.
 
-Copy the following content and name it `monosql-cluster.yaml`
+1. Create a Namespace with the name `monosql-operator` using the following file. **You can skip this step if it already exists**. Copy the following content and name it `monosql-operator-namespace.yaml`
 
 ```yaml
 kind: Namespace
 apiVersion: v1
 metadata:
   name: monosql-operator
----
+  labels:
+    app.kubernetes.io/name: MonoSQL
+
+```
+
+```bash
+ kubectl apply -f monosql-operator-namespace.yaml
+```
+
+2. Create a secret using the following file. Please replace DOCKER_SERVER , YOUR_TOKEN and MY_NAMSPACE with the correct values.
+
+   ```bash
+   kubectl create secret monosql-secret \
+     --docker-server ${DOCKER_SERVER} \
+     --docker-username=AWS \
+     --docker-password=${YOUR_TOKEN} -n ${MY_NAMSPACE}
+   ```
+
+3. Copy the following content and name it `monosql-cluster.yaml`
+
+   **Note: Please replace the ${MY_REGION} in the following file with the actual region name.  Also, please pre-configure the `imagePullSecrets` base to the Token in Marketplacce.**
+
+```yaml
 apiVersion: monosql-service.monographdb.com/v1alpha1
 kind: MonoSQLCluster
 metadata:
@@ -325,17 +347,17 @@ metadata:
   name: monosqlcluster
   namespace: monosql-operator
 spec:
-  replica: 2
+  replica: 1
   resources:
     requests:
-      memory: "500Mi"
+      memory: "1000Mi"
       cpu: "1"
     limits:
-      memory: "4000Mi"
-      cpu: "4"
-  image: 709825985650.dkr.ecr.${MY_REGION}.amazonaws.com/monosql:latest
-  # imagePullSecrets:
-  #  - name: awsecr-cred
+      memory: "2000Mi"
+      cpu: "2"
+  image: 709825985650.dkr.ecr.us-east-1.amazonaws.com/monograph-data/monosql:0.2.0 
+  imagePullSecrets:
+    - name: monosql-secret
   sqlPort: 3300
   maxConnection: 2000
   serviceAccount: monosql-aws-access
