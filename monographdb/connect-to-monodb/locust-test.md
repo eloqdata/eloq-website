@@ -12,7 +12,11 @@ https://github.com/monographdb/locust_example
 
 ## Installation
 ```shell
+sudo apt update
+sudo apt install python3-pip
 pip install pymysql mysql-connector sqlalchemy gevent locust
+export PATH=/home/ubuntu/.local/bin:$PATH
+ulimit -n 16384
 ```
 
 ## How to let the client run your query
