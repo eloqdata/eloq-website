@@ -7,7 +7,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'MonographDB: Next Generation Multi-model Database',
-  tagline: 'Data Substate powered modular database which enables vertical and horizontal expanding of the decoupled components: compute, memory, storange and log separately.',
+  tagline: 'Data Substate powered modular database which enables vertical and horizontal expanding of the decoupled components: compute, memory, storage and log separately.',
   favicon: 'img/monosql_logo.png',
 
   // Set the production url of your site here

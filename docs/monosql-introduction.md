@@ -1,5 +1,5 @@
 ---
-title: MonoSQL introduction
+title: MonoSQL Introduction
 summary: This document introduces the MonoSQL tool, providing an overview of its architecture and operating principles. 
 aliases: ['cn/monosql/monosql-introdcution']
 sidebar_position: 1
