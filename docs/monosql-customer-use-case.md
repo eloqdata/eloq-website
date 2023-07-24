@@ -43,3 +43,37 @@ MonoSQL's key features includes:
 5. Security. MonoSQL has full access control and supports encryption at rest.
 6. High Availability. MonoSQL supports global tables in DynamoDB which survives region failure.
 
+
+MonoSQL is the stateless SQL wrapper for Amazon DynamoDB. Customer is enable to migrate from RDS to DynamoDB without modifying their application code, but can still benefit from the consistent performance at scale, full managed and high availability features supplied by DynamoDB. MonoSQL is MySQL8.0 compatible. Customer can still use JDBC/ODBC to connect to database and use rich SQL query language like join, aggrgate and recursive cte to query data.
+
+
+MonoSQL is suitable for various NoSQL user cases including: game state and player data store in gaming industry, shopping cart and inventory tracking in retail industry, metadata store in entertainment industry, user event and click stream in ad industry etc.
+
+The biggest value of MonoSQL is to save cost, improve performance, reduce administrative overhead for customer. MonoSQL acheives these goals by helping customer to move the use case, which is more suitable for NoSQL, from SQL/RDS database to Amazon DynamoDB.
+By introducing MonoSQL, more customers could differentiate and identify their NoSQL scenarios and migrate from legacy SQL database to Amazon DynamoDB easily. 
+
+
+
+Title: MonoSQL - Bring SQL capability to DynamoDB
+
+ 
+
+MonoSQL is the stateless SQL wrapper for Amazon DynamoDB.
+
+ 
+
+MonoSQL's key features includes:
+
+1. MySQL compatible. MonoSQL supports JDBC/ODBC drivers, basic transactions and complete SQL query API incuding Join, Aggregation and Recursive CTE etc.
+
+2. SQL layer can dynamically expand and shrink based on workload.
+
+3. Flexible. MonoSQL supports fast schema change.
+
+Security. MonoSQL has full access control and supports encryption at rest.
+
+4. High Availability. MonoSQL supports global tables in DynamoDB which survives region failure.
+
+ 
+
+User cases including: game state and player data store in gaming industry, shopping cart and inventory tracking in retail industry, metadata store in entertainment industry, user event and click stream in ad industry etc.
