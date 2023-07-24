@@ -1,3 +1,6 @@
+---
+title: How to deploy monitor for MonographDB
+---
 
 # Table of Contents
 

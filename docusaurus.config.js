@@ -184,6 +184,16 @@ headTags: [
         // ... other options
       },
     ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'dev',
+        path: 'dev',
+        routeBasePath: 'dev',
+        sidebarPath: require.resolve('./sidebarsDev.js'),
+        // ... other options
+      },
+    ],
   ],
 
   themeConfig:
