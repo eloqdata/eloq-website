@@ -18,10 +18,8 @@ const sidebars = {
   //monoredisSidebar: ['MonoRedis'],
   //monosqlSidebar: ['MonoSQL'],
   "monosql": {"Get Started": ["monosql-deployment-aws", "monosql-operator-deployment"],
-  "Feature Overview": ["monosql-introduction","monosql-mysql-diff"]
-  "Migration": ["monosql-data-migration-overview","monosql-migration-awsdms","monosql-migration-ddb-import"],
-  "Data Modeling",
-  "MonoSQL Internal"}
+  "Feature Overview": ["monosql-introduction","monosql-mysql-diff"],
+  "Migration": ["monosql-data-migration-overview","monosql-migration-awsdms","monosql-migration-ddb-import"]}
 
   // But you can create a sidebar manually
   /*
