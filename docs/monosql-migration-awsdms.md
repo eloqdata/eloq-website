@@ -100,6 +100,9 @@ Apply the above change in the **Parameter groups** of Amazon RDS console.
 ![](media/create_migration_task3.png)
 
 21. Click **Create task** button to start the migration job.
+22. In AWS DMS console, select **Database migration tasks** in the sidebar. check the migration task status in the panel.
+
+![](media/create_migration_task.png)
 
 ## Troubleshooting 
 
