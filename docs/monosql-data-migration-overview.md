@@ -21,7 +21,7 @@ Cutover is to switch business traffic from source database to target database Mo
 
 Immediate cutover mode switches from source database to MonoSQL in a single cutover. To be specific all the workloads will be changed to MonoSQL at once. The cutover point is selected when MonoSQL and source database are in nearly sync state, which means MonoSQL can catch up the source database in subsecond.
 
-Optionally, you can add a fallback plan to the simple all-at-once cutover.
+Optionally, you can add a fallback plan to the simple immediate cutover.
 
 In addition to moving data to MonoSQL, data is also replicated from MonoSQL back to the source database in case you need to roll back the migration. Continuous replication is already possible when performing a zero-downtime migration that dual writes to both databases. Otherwise, you will need to ensure that data is replicated in the reverse direction at cutover.
 
@@ -35,7 +35,7 @@ This approach enables you to take your time with the migration, and to pause or 
 ### Data Modeling
 MonoSQL is built on top of Amazon DynamoDB, which is a NoSQL database with different data modeling best practice compared to SQL database.
 
-For DynamoDB data modeling best practice, please refer to [Data modeling foundations]https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/data-modeling-foundations.html() for details. Here is a brief summary of the two table desgin type of DynamoDB: single table and multiple table.
+For DynamoDB data modeling best practice, please refer to [Data modeling foundations](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/data-modeling-foundations.html) for details. Here is a brief summary of the two table desgin type of DynamoDB: single table and multiple table.
 
 Single table design is a pattern that allows you to store multiple types (entities) of data in a single DynamoDB table. It aims to optimize data access patterns, improve performance, and reduce costs by eliminating the need for maintaining multiple tables and complex relationships between them. This is possible because DynamoDB stores items with the same partition key (known as an item collection) on the same partition(s) as each other. In this design, different types of data are stored as items in the same table, and each item is identified by a unique sort key.
 

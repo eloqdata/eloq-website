@@ -1,12 +1,9 @@
 ---
-title: Quick Start Guide for MonoSQL
-summary: Deploying MonoSQL on AWS using AWS Network Load Balancer and Auto Scaling Group.
-aliases: ['cn/monosql/mono-deployment-aws']
-sidebar_position: 2
+title: Deploy MonoSQL Using Auto Scaling Group
 ---
 
-# Quick Start Guide for MonoSQL
-
+# Deploy MonoSQL Using Auto Scaling Group
+ 
 This document describes how to deploy MonoSQL on AWS. For more information about MonoSQL, please refer to the [MonoSQL Introduction](./monosql-introduction.md)
 
 ## Deployment prepare

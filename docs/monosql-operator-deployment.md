@@ -1,8 +1,8 @@
 ---
-title: MonoSQL Deployment Solution based on Kubernetes Operator.
+title: Deploy MonoSQL Using Kubernetes Operator
 ---
 
-# MonoSQL deployment solution based on Kubernetes Operator 
+# Deploy MonoSQL Using Kubernetes Operator
 
 ## 1. About MonoSQL Operator （MonoSQL Controller Manager）
 
