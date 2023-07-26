@@ -76,7 +76,7 @@ summary: 了解如何快速上手使用 MonoGraphDB 数据库。
     which ssh
     which sshd
     ```
-正常情况下，用户如果上述的命令没有输出，则说明相应的服务没有安装。用户需要安装相应的ssh服务并且进行相应ssh服务的开启
+    正常情况下，用户如果上述的命令没有输出，则说明相应的服务没有安装。用户需要安装相应的ssh服务并且进行相应ssh服务的开启
 
 +  centos安装ssh服务并开启
     ```shell
@@ -98,8 +98,8 @@ summary: 了解如何快速上手使用 MonoGraphDB 数据库。
 + 为了使得每个节点都可以通过公钥登陆到其他的节点，在本地需要生成自己的公钥
     > **注意：**
     > 注意此处使用的是ed25519加密签名算法，相比于普通的RSA签名算法，其更快、更安全，字节数更短。
-    ```shell
-    ssh-keygen -t ed25519
+    ```bash
+    ssh-keygen -t ed25519 -f ~/.ssh/ed25519_mono
     ```
 
     运行上面的命令后会出现一系列提示，可以一路回车，其中有一个问题是，要不要对私钥设置口令（`passphrase`），如果担心私钥的安全，可以自行设置。
@@ -107,19 +107,19 @@ summary: 了解如何快速上手使用 MonoGraphDB 数据库。
 
 + 生成的公钥`id_ed25519.pub`添加到authorized_keys
     ```shell
-    cat .ssh/id_ed25519.pub | ssh username@host 'cat >> .ssh/authorized_keys'
+    cat .ssh/ed25519_mono.pub | ssh username@host 'cat >> .ssh/authorized_keys'
     ```
-    如果要将MonoGraph服务安装在本地，则只需要运行下面的
+    如果要将MonographDB服务安装在本地，则只需要运行下面的
     ```shell
-    cat .ssh/id_ed25519.pub | ssh $USER@localhost 'cat >> .ssh/authorized_keys'
+    cat .ssh/ed25519_mono.pub | ssh $USER@localhost 'cat >> .ssh/authorized_keys'
     ```
 + 给ssh目录设置权限
     ```shell
     chmod 700 ~/.ssh
     chmod 600 ~/.ssh/authorized_keys
     ```
-3. 获取MonoGraphDB安装包
-首先需要从云端仓库上进行最新MonoGraphDB的安装镜像的下载
+3. 获取MonographDB安装包
+首先需要从云端仓库上进行最新MonographDB的安装镜像的下载
 + 首先进行相应的AWS命令行界面工具（aws cli）的下载
     ```shell
     # aws cli工具包的下载 
@@ -145,67 +145,88 @@ Monograph Waiter是一个用于开发与管理MonographDB的工具包，其中�
 ### 实施部署
 
 1. 部署MonographDB
+- 修改 config/remote_env
+
+  该文件目前为Cassandra 启动需要的JAVA_HOME路径，根据安装平台修改，具体如下：
+
+  ```bash
+  # ububtu
+  JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+  # centos
+  JAVA_HOME=/usr/lib/jvm/java-11-openjdk
+  ```
+
+  
+
 + 修改集群配置文件
-按下面的配置模板，编辑配置文件config/deployment.yaml，其中：
+  按下面的配置模板，编辑配置文件config/deployment.yaml，其中：
+  
   * `username: "mono"`：表示通过 `mono`系统用户（当前系统用户名）来做集群的内部管理，默认使用 22 端口通过 ssh 登录目标机器
   * `auth_type`：ssh登陆验证的方式，默认为keypair形式
   * `keypair`: 设置为通过网络配置的ssh私钥文件存放地址
   * `host`：设置为本部署主机的IP，如果只需要安装在本机，则设置为localhost
-  * `install_image`：可以设置为本地已经下载的Monograph安装包或者远程的MonographDB的下载地址
+  * `tx_image`：MonographDB TxService安装包，支持本地地址以及远程地址。
+  *  `log_image`:  MonographDB LogService安装包，支持本地地址以及远程地址。
   * `install_dir`：设置为用户安装集群的期望存放位置，此位置须为`username`所指定的用户所具有读写权限的文件夹位置，如果安装目录不存在，目前需要提前手工创建。
   * `storage_service`：配置`Cassandra`数据库的远程下载网址`download_url`，安装位置`(host)`，如果配置成`localhost`,表示安装在本地。
   * `monitor`：配置MonographDB的相关监控软件（prometheus、 grafana）的远程下载网址、安装位置以及安装端口。
-  配置模板如下：
+    配置模板如下：
+    
     ```yaml
     connection:
-    username: "mono"
-    auth_type: "keypair"
-    auth:
-    keypair: "/home/$USER/.ssh/id_rsa"
+      username: "centos"
+      auth_type: "keypair"
+      auth:
+        keypair: "/home/centos/.ssh/ed25519_mono"
     deployment:
-    install_image: "file:///home/ubuntu/monographdb-release.tar.gz"
-    cluster_name:  $CLUSTER_NAME
-    install_dir: "/$USER/opt"
-    port:
-    mysql_port: 3300
-    monograph_port:
-    start: 8100
-    end: 8200
-    mono_service:
-    host:
-    - localhost
-    storage_service:
-    cassandra:
-    download_url: "https://archive.apache.org/dist/cassandra/4.1.0/apache-cassandra-4.1.0-bin.tar.gz"
-    storage_cluster: "mono-cass-cluster"
-    host:
-        - localhost
-    monitor:
-    data_dir: ""
-    monograph_metrics:
-    path: "/mono_metrics"
-    port: 18081
-    prometheus:
-    download_url: "https://github.com/prometheus/prometheus/releases/download/v2.42.0/prometheus-2.42.0.linux-amd64.tar.gz"
-    port: 9090
-    host: "localhost"
-    grafana:
-    download_url: "https://dl.grafana.com/oss/release/grafana-9.3.6.linux-amd64.tar.gz"
-    port: 3300
-    host: "localhost"
-    node_exporter: "https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_exporter-1.5.0.linux-amd64.tar.gz"
-    node_exporter_port: 9200
-    mysql_exporter: "https://github.com/prometheus/mysqld_exporter/releases/download/v0.14.0/mysqld_exporter-0.14.0.linux-amd64.tar.gz"
-    mysql_exporter_port: 9300
-    cassandra_collector:
-    mcac_agent: "https://github.com/datastax/metric-collector-for-apache-cassandra/releases/download/v0.3.4/datastax-mcac-agent-0.3.4-4.1-beta1.tar.gz"
-    mcac_port: 9103
-
-    #    dynamodb:
-    #      access_key_id: "",
-    #      secret_key: ""
-    #      region: "XXXX",
-    #      endpoint: "";
+      # monographdb 安装包路径 file:// 表示文件在本地。目前支持http 和 file 。
+      tx_image: "file:///home/centos/monographdb-txservice-sd-release-bin-0.2.0.tar.gz"
+      log_image: "file:///home/centos/monographdb-logservice-sd-release-bin-0.2.0.tar.gz"
+      cluster_name: "mono-poc"
+      # monographdb 安装路径，当前用户对该目录需要具备读写权限 。
+      install_dir: "/data/opt"
+      port:
+        mysql_port: 3300
+        monograph_port:
+          start: 8000
+          end: 8009
+      log_service:
+        nodes:
+          - host: localhost
+            port: 9000
+            data_dir:
+              - "/data/opt/log_data"
+        replica: 1    
+      tx_service:
+        # tx service 安装节点，可以是多个，但不能重复
+        host:
+          - localhost
+      storage_service:
+        cassandra:
+          download_url: "https://dlcdn.apache.org/cassandra/4.1.3/apache-cassandra-4.1.3-bin.tar.gz"
+          storage_cluster: "mono-cass-cluster"
+          host:
+            - localhost
+      monitor:
+        data_dir: ""
+        monograph_metrics:
+          path: "/mono_metrics"
+          port: 18081
+        prometheus:
+          download_url: "https://github.com/prometheus/prometheus/releases/download/v2.42.0/prometheus-2.42.0.linux-amd64.tar.gz"
+          port: 9500
+          host: "localhost"
+        grafana:
+          download_url: "https://dl.grafana.com/oss/release/grafana-9.3.6.linux-amd64.tar.gz"
+          port: 3301
+          host: "localhost"
+        node_exporter: "https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_exporter-1.5.0.linux-amd64.tar.gz"
+        node_exporter_port: 9200
+        mysql_exporter: "https://github.com/prometheus/mysqld_exporter/releases/download/v0.14.0/mysqld_exporter-0.14.0.linux-amd64.tar.gz"
+        mysql_exporter_port: 9300
+        cassandra_collector:
+          mcac_agent: "https://github.com/datastax/metric-collector-for-apache-cassandra/releases/download/v0.3.4/datastax-mcac-agent-0.3.4-4.1-beta1.tar.gz"
+          mcac_port: 9103
     ```
 
 
