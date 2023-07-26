@@ -265,7 +265,27 @@ Monograph Waiter是一个用于开发与管理MonographDB的工具包，其中�
     ```shell
     ./cluster_mgr status -cluster $CLUSTER_NAME
     ```
+
+### 批量导入数据
+
+`mono_load.py` 是MonographDB的数据批量加载工具，其运行依赖 python3 通过一下命令安装其运行时依赖
+
+```bash
+sudo pip3 install chardet
+sudo pip3 install mysql-connector
+```
+
+请根据当前的安装环境将下列参数修改正确
+
+```bash
+python3 monograph_load.py -h $MYSQL_HOST -U $MYSQL_USER \ 
+   -P $MYSQL_PASSWORD -d $MYSQL_DB -w $WORKER_NUMBER -f $CSV_FILE
+```
+
+
+
 ## 更多探索
+
 - 如果你刚刚部署好一套 MonographDB 本地测试集群：
     - 学习 [MonographDB SQL 操作](./basic-sql-operations.md)
     - [迁移数据到 MonographDB](./migration-overview.md)
