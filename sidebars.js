@@ -19,7 +19,8 @@ const sidebars = {
   //monosqlSidebar: ['MonoSQL'],
   "monosql": {"Get Started": ["monosql-deployment-aws", "monosql-operator-deployment"],
   "Feature Overview": ["monosql-introduction","monosql-mysql-diff"],
-  "Migration": ["monosql-data-migration-overview","monosql-migration-awsdms","monosql-migration-ddb-import"]}
+  "Migration": ["monosql-data-migration-overview","monosql-migration-awsdms","monosql-migration-ddb-import"],
+  "Benchmark": ["monosql-benchmark-sysbench"]}
 
   // But you can create a sidebar manually
   /*
