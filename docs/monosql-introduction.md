@@ -22,7 +22,7 @@ MonoSQL servers are stateless, with all the catalog and user data stored in Dyna
 ## MonoSQL architecture
 
 MonoSQL's overall architecture can be divided into multiple modules that communicate with each other to form an integrated service, as shown in the following architecture diagram (Auto Scaling group based architecture):
-![architecture](./media/dynosql/arch.jpg)
+![architecture](./media/monosql_arch2023-07-25.png)
 
 - MySQL client sends SQL query to Amazon Network Load Balancer(NLB).
 - Network Load Balancer redirects queries to MonoSQL servers in Auto Scaling Group.
@@ -50,12 +50,12 @@ MonoSQL is a high-performance database that supports millisecond-level response 
 - **High Availability**
 Inherit from DynamoDB, MonoSQL has high availability and durability features. It replicate table across regions and support up to 99.999% availability. While MySQL requires complex backup and recovery operations to achieve similar results.
 
-The biggest challenge and pain point in migrating from MySQL or MariaDB to DynamoDB is that they have different APIs and query languages, requiring corresponding modifications to application programs and code to access DynamoDB correctly. MonoSQL can help users directly use their existing programs to complete the above data access operations, reducing the migration costs significantly.
+The biggest challenge and pain point in migrating from MySQL or MariaDB to DynamoDB is that they have different APIs and query languages, requiring modifications to application code to access DynamoDB using SDK instead of SQL. MonoSQL can help users directly use their existing programs to complete the above data access operations, reducing the migration costs significantly.
 
-## Usage Limitations
+## Usage Limitation
 MonoSQL does not support the following MySQL features:
 - Trigger
 - Auto increment keyword
 
-## MonoSQL Best Practice
+## Best Practice
 - range scan on partition key is not recommended, since it requires a full table scan. Full table scan is disabled by default to help user save cost. User can execute `set monosql_full_tbl_scan=on` to run range scan query on partition key. Note that range scan on sort key is supported.
