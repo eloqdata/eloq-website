@@ -71,9 +71,7 @@ c5.2xlarge * 4    | 480        | 61920.87  | 7.7         | 12.30           |
 c5.2xlarge * 8    | 960        | 126394.36 | 7.5         | 11.87           |
 c5.2xlarge * 16   | 1920       | 249806.74 | 7.6         | 12.30           |
 
-<p align="center">
-<img src="media/monosql_select.png" width=100% height=100%>
-</p>
+![](./media/monosql_select.png)
 
 **OLTP_UPADTE_NON_INDEX Performance**
 
@@ -84,9 +82,7 @@ c5.2xlarge * 4    | 480        | 59023.22  | 8.1         | 11.87           |
 c5.2xlarge * 8    | 960        | 119305.26 | 8.0         | 11.45           |
 c5.2xlarge * 16   | 1920       | 232533.59 | 8.2         | 11.87           |
 
-<p align="center">
-<img src="media/monosql_update.png" width=100% height=100%>
-</p>
+![](./media/monosql_update.png)
 
 **OLTP_INSERT Performance**
 
@@ -97,7 +93,4 @@ c5.2xlarge * 4    | 480        | 59280.73  | 8.1         | 11.87           |
 c5.2xlarge * 8    | 960        | 119394.46 | 8.0         | 11.45           |
 c5.2xlarge * 16   | 1920       | 233812.24 | 8.2         | 11.87           |
 
-<p align="center">
-<img src="media/monosql_insert.png" width=100% height=100%>
-</p>
-
+![](./media/monosql_insert.png)

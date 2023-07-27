@@ -3,8 +3,6 @@ title: MonoSQL上手指南
 summary: 使用`AWS Network Load Balancer`与` Auto Scaling Group `在AWS上部署MonoSQL
 ---
 
-本章介绍如何在AWS上部署MonoSQL，关于MonoSQL的具体介绍，可查看[MonoSQL产品介绍](../monosql/monosql-introduction.md)
-
 # MonoSQL快速上手指南
 
 ## 部署准备

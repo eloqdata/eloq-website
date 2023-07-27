@@ -187,6 +187,26 @@ headTags: [
     [
       '@docusaurus/plugin-content-docs',
       {
+        id: 'monographdbcn',
+        path: 'monographdbcn',
+        routeBasePath: 'monographdbcn',
+        sidebarPath: require.resolve('./sidebarsMonographdbcn.js'),
+        // ... other options
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'monosqlcn',
+        path: 'monosqlcn',
+        routeBasePath: 'monosqlcn',
+        sidebarPath: require.resolve('./sidebarsMonoSQLcn.js'),
+        // ... other options
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
         id: 'dev',
         path: 'dev',
         routeBasePath: 'dev',

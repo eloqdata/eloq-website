@@ -4,16 +4,7 @@ summary: 了解如何快速上手使用 MonoGraphDB 数据库。
 ---
 
 # MonographDB 数据库快速上手指南
-本指南介绍如何快速上手体验 MonographDB 数据库，在`单节点`上快速部署使用MonographDB的步骤：
-- [单节点生产环境安装部署](#在单机上安装部署单个数据库系统)(支持ubuntu与centos)
-
-> **注意：**
->
-> 本指南中的 MonographDB 部署方式仅适用于快速上手体验，不适用于生产环境。
->
-> - 如需在多节点上部署MonographDB，请参考[在多节点上部署 MonographDB 指南](./cluster-deployment.md)。
-> - 如需在 Kubernetes 上部署 MonographDB，请参考[快速上手 MonographDB Operator](./monographdb-in-kubernetes.md)。
-> - 如需在云上管理 MonographDB，请参考 [MonographDB Cloud 快速上手指南](./monograph-in-cloud.md)。
+本指南介绍如何快速上手体验 MonographDB 数据库，在`单节点`上快速部署使用MonographDB的步骤。
 
 ## 在单机上安装部署单个数据库系统
 
@@ -28,7 +19,7 @@ summary: 了解如何快速上手使用 MonoGraphDB 数据库。
 
 1. 系统配置
 
-下面是一些安装MonoGraph数据库之前所要进行的必要配置。
+下面是一些安装MonographDB之前所要进行的必要配置。
   + 使用下面的命令编辑系统配置文件`/etc/security/limits.d/20-nproc.conf`
     ```shell
     sudo vi /etc/security/limits.d/20-nproc.conf
@@ -119,28 +110,16 @@ summary: 了解如何快速上手使用 MonoGraphDB 数据库。
     chmod 600 ~/.ssh/authorized_keys
     ```
 3. 获取MonographDB安装包
-首先需要从云端仓库上进行最新MonographDB的安装镜像的下载
-+ 首先进行相应的AWS命令行界面工具（aws cli）的下载
-    ```shell
-    # aws cli工具包的下载 
-    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-    # aws cli工具包解压
-    unzip awscliv2.zip
-    # aws cli工具的安装
-    sudo ./aws/install
-    ```
-+ 通过aws cli工具的`get-object`命令进行MonoGraphDB安装包的下载
-    ```shell
-    aws s3api get-object --bucket monographdb-release --key main-centos-7-range/monographdb-release-bin.tar.gz monographdb-release-bin.tar.gz
-    ```
-
+请下载MonographDB的安装包
+```
+monographdb-txservice-sd-release-bin-0.2.0.tar.gz
+monographdb-logservice-sd-release-bin-0.2.0.tar.gz
+```
 4.Monograph Waiter的下载
 Monograph Waiter是一个用于开发与管理MonographDB的工具包，其中包含`cluster_mgr`, 一个用于集群安装部署和管理的命令行工具，旨在让非Kubernetes环境下更容易安装和管理MonographDB集群。
-+ 通过aws cli工具的`get-object`命令进行Monograph Waiter安装包的下载
-    ```shell
-    aws s3api get-object --bucket monographdb-release --key main-centos-7-range/mono_cluster_mgr_dist.tar.gz mono_cluster_mgr_dist.tar.gz
-    tar -zxvf mono_cluster_mgr_dist.tar.gz
-    ```
+```
+waiter-cluster-mgr-centos7.tar.gz
+```
 
 ### 实施部署
 
@@ -288,5 +267,4 @@ python3 monograph_load.py -h $MYSQL_HOST -U $MYSQL_USER \
 
 - 如果你刚刚部署好一套 MonographDB 本地测试集群：
     - 学习 [MonographDB SQL 操作](./basic-sql-operations.md)
-    - [迁移数据到 MonographDB](./migration-overview.md)
 
