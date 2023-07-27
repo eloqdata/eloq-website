@@ -144,6 +144,25 @@ waiter-cluster-mgr-centos7.tar.gz
   ```
   
 
++ 修改monographDB启动选项
+编辑配置文件config/my_template.cnf，添加线程池相关参数，并根据机器配置进行调整CPU和内存参数。
+```
+# under [mariadb]
+# enable thread pool
+thread_handling=pool-of-threads
+thread_pool_max_threads=4
+thread_pool_dedicated_listener=1
+# thread_pool_size should be 3/4 of physical CPU core number.
+thread_pool_size=12
+
+# under monograph
+# core_num should be 1/4 of physical CPU core number.
+monograph_core_num=4
+# node_memory_limit_mb is the buffer pool of monographDB,
+# should be less than 60% physical memory.
+monograph_node_memory_limit_mb=4000
+```
+
 + 修改集群配置文件
   按下面的配置模板，编辑配置文件config/deployment.yaml，其中：
   
