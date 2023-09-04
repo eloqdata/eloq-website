@@ -8,9 +8,13 @@ This document describes how to deploy MonoSQL on AWS. For more information about
 
 ## Deployment prepare
 1. The user needs to be able to access AWS services and select a region, take `ap-northeast-1(Tokyo)` region as example for the subsequent operations and deployments.
-2. Create an `IAM role` named **monosql** as the instance configuration file for subsequent `MonoSQLServer` and `MonoSQL Monitor`, the role's permission must include `AmazonEC2ReadOnlyAccess`、`AmazonSQSFullAccess`、`AmazonDynamoDBFullAccess`、`CloudWatchLogsFullAccess` and `CloudWatchAgentServerPolicy`. The specific creation process can refer to the following demonstration or the official AWS documentation on[ Creating an IAM Role in IAM](https://docs.aws.amazon.com/zh_cn/mediaconvert/latest/ug/creating-the-iam-role-in-iam.html)
+2. Create an `IAM role` named **monosql** as the instance configuration file for subsequent `MonoSQLServer` and `MonoSQL Monitor`, the role's permission must include `AmazonEC2ReadOnlyAccess`,`AmazonSQSFullAccess`,`AmazonSNSFullAccess`,`AmazonDynamoDBFullAccess`,`CloudWatchLogsFullAccess` and `CloudWatchAgentServerPolicy`. The specific creation process can refer to the following demonstration or the official AWS documentation on[ Creating an IAM Role in IAM](https://docs.aws.amazon.com/zh_cn/mediaconvert/latest/ug/creating-the-iam-role-in-iam.html)
 ![](./media/dynosql/IAM-role.gif)
-
+3. Create security group. Add custom inbound rules:
++ TCP Port 3306 MonoSQL
++ TCP Port 3000 Grafana
++ TCP Port 9090 Prometheus
++ TCP Port 18081 Node exporter
 ## Bootstrap MonoSQL to Create System Tables in DynamoDB
 Before using MonoSQL to access DynamoDB, you are required to create system tables firstly.
 
@@ -23,32 +27,28 @@ Click **launch instance**, to enter the specific configuration process for the E
    + Step 2：Choose the AMI image named `MonoSQL for DynamoDB` from `AWS Market Place`.
    + Step 3：Set the instance type to `c5.large`.
    + Step 4：Set the ssh keypair for SSH login without password, you can use the existing key pair or create a new one.
-   + Step 5：Configure the network of the EC2 instance, note that the security group set here must allow flow from port 3306 or database access and setting. After completing the above configuration, verify that it is correct, then you can launch the instance.
+   + Step 5：Configure the network of the EC2 instance, use security group created before. After completing the above configuration, verify that it is correct, then you can launch the instance.
 ![aws-ec2-setting](./media/dynosql/aws-ec2-setting.gif)
 
 2. Create system table corresponding to MonoSQL in DynamoDB
    + SSH into the newly created EC2 instance and run the following command to bootstrap MonoSQL to create system tables in `AWS DynamoDB`
         ```bash
-        /home/ubuntu/install/scripts/mysql_install_db --defaults-file=/home/ubuntu/dynosql.cnf --basedir=/home/ubuntu/install --datadir=/home/ubuntu/data0 --plugin-dir=/home/ubuntu/install/lib/plugin > log 2>&1 &
+        bash bootstrap.sh
         ```
-        ![aws-instance-create-system-table](./media/dynosql/create-system-table.jpg)
-       Run the tail -f log command to check if the execution was successful. If there is a ok prompt, it means that the bootstrapping was successful. Bootstrap may take several minutes.
-        ![aws-instance-log-ok](./media/dynosql/log-ok.jpg)
-    + View the tables in `AWS DynamoDB`, You can see the tables created by MonoSQL in MonoSQL in `AWS DynamoDB`, further indicating that the bootstrapping was successful.
+    + Bootstrap may take several minutes. View the tables in `AWS DynamoDB`, You can see the tables created by MonoSQL in MonoSQL in `AWS DynamoDB`.
         ![aws-dynamoDB-tables](./media/dynosql/tables-now.gif)
     + Start the database service
         ```bash
-        /home/ubuntu/install/bin/mysqld --defaults-file=/home/ubuntu/dynosql.cnf > mysql_log 2>&1 &
+        /home/ubuntu/install/bin/mysqld --defaults-file=/home/ubuntu/bootstrap.cnf > mysql_log 2>&1 &
         ```
     + Connect to the database by the socket.
         ```bash
         # connect to db.
-        sudo /home/ubuntu/install/bin/mysql -S /tmp/mysqld3306.sock test
+        sudo /home/ubuntu/install/bin/mysql -S /tmp/mysqld3306.sock
         ```
     + Create a SQL user `sysb`for benchmark testing and a user `mono` for database monitoring by the following command.
         ```sql
         # create sysbench user and monitor user.
-        delete from mysql.user where User='';
         CREATE USER 'sysb'@'%' IDENTIFIED BY 'sysb';
         GRANT ALL PRIVILEGES ON * . * TO  'sysb'@'%';
 

@@ -2,8 +2,9 @@
 
 This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
-# Quick Guid
+# Quick Guide
 
+sudo systemctl start nginx
 npm run build
 sudo cp -R ./build/* /var/www/html/
 
