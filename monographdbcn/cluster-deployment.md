@@ -13,7 +13,7 @@ summary: 了解在多台服务器上快速部署、使用MonoGraphDB集群。
 本节介绍如何配置MonographDB拓扑的YAML文件部署MonographDB集群。
 ### 部署准备
 准备多台部署主机，确保其软件满足相关要求：
-* 推荐安装Centos7及以上版本
+* 推荐安装Ubuntu2004版本
   
 * 运行环境需要接入互联网访问，用于下载MonographDB及其相关依赖。
 对于MonographDB集群拓扑，可以通过更改YAML文件按需配置所需要的集群数量，在本次测试中，集群拓扑如下表所示：
@@ -28,9 +28,10 @@ summary: 了解在多台服务器上快速部署、使用MonoGraphDB集群。
 1. 系统配置
 
 下面是一些安装MonographDB之前所要进行的必要配置。
-  + 使用下面的命令编辑系统配置文件`/etc/security/limits.d/20-nproc.conf`
+  + 使用下面的命令编辑系统配置文件`/etc/security/limits.d/20-nproc.conf`(centos) `/etc/security/limits.conf` (ubuntu)
     ```shell
     sudo vi /etc/security/limits.d/20-nproc.conf
+    sudo vi /etc/security/limits.conf
     ```
     在相应的文件末尾添加如下的资源限制参数
     ```shell
@@ -118,16 +119,13 @@ summary: 了解在多台服务器上快速部署、使用MonoGraphDB集群。
     chmod 600 ~/.ssh/authorized_keys
     ```
 3. 获取MonographDB安装包
-请下载MonographDB的安装包
+请下载MonographDB的安装包,解压后包括下述文件
 ```
-monographdb-txservice-sd-release-bin-0.2.0.tar.gz
-monographdb-logservice-sd-release-bin-0.2.0.tar.gz
+monographdb-tx-release-bin.tar.gz
+monographdb-log-release-bin.tar.gz
+waiter-cluster-mgr-ubuntu2004.tar.gz
 ```
-4.Monograph Waiter的下载
 Monograph Waiter是一个用于开发与管理MonographDB的工具包，其中包含`cluster_mgr`, 一个用于集群安装部署和管理的命令行工具，旨在让非Kubernetes环境下更容易安装和管理MonographDB集群。
-```
-waiter-cluster-mgr-centos7.tar.gz
-```
 
 ### 实施部署
 
@@ -175,18 +173,20 @@ monograph_node_memory_limit_mb=4000
   * `install_dir`：设置为用户安装集群的期望存放位置，此位置须为`username`所指定的用户所具有读写权限的文件夹位置，如果安装目录不存在，目前需要提前手工创建。
   * `storage_service`：配置`Cassandra`数据库的远程下载网址`download_url`，安装位置`(host)`，如果配置成`localhost`,表示安装在本地。
   * `monitor`：配置MonographDB的相关监控软件（prometheus、 grafana）的远程下载网址、安装位置以及安装端口。
+  * `log_service`: data_dir 负责指定磁盘的位置 /data/opt/log_data1 /data/opt/log_data2 /data/opt/log_data3
+  * `内网安装`: 无法连接外网下载Cassandra，可以提前下载上传，使用file:///home/file_path从本地安装Cassanra等组件。
     配置模板如下：
     
     ```yaml
     connection:
-      username: "centos"
+      username: "ubuntu"
       auth_type: "keypair"
       auth:
-        keypair: "/home/centos/.ssh/ed25519_mono"
+        keypair: "/home/ubuntu/.ssh/ed25519_mono"
     deployment:
       # monographdb 安装包路径 file:// 表示文件在本地。目前支持http 和 file 。
-      tx_image: "file:///home/centos/monographdb-txservice-sd-release-bin-0.2.0.tar.gz"
-      log_image: "file:///home/centos/monographdb-logservice-sd-release-bin-0.2.0.tar.gz"
+      tx_image: "file:///home/ubuntu/monographdb-tx-release-bin.tar.gz"
+      log_image: "file:///home/ubuntu/monographdb-log-release-bin.tar.gz"
       cluster_name: "mono-poc"
       # monographdb 安装路径，当前用户对该目录需要具备读写权限 。
       install_dir: "/data/opt"
@@ -200,7 +200,9 @@ monograph_node_memory_limit_mb=4000
           - host: 10.0.1.2
             port: 9000
             data_dir:
-              - "/data/opt/log_data"
+              - "/data/opt/log_data1"
+              - "/data/opt/log_data2"
+              - "/data/opt/log_data3"
         replica: 1    
       tx_service:
         # tx service 安装节点，可以是多个，但不能重复

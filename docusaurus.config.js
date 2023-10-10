@@ -207,6 +207,16 @@ headTags: [
     [
       '@docusaurus/plugin-content-docs',
       {
+        id: 'monorpc',
+        path: 'monorpc',
+        routeBasePath: 'monorpc',
+        sidebarPath: require.resolve('./sidebarsMonorpc.js'),
+        // ... other options
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
         id: 'dev',
         path: 'dev',
         routeBasePath: 'dev',
