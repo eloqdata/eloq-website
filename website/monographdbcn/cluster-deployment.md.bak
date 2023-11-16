@@ -1,0 +1,156 @@
+---
+title: MonoGraphDB 数据库集群部署、使用指南
+summary: 了解在多台服务器上快速部署、使用MonoGraphDB集群。
+---
+
+# MonographDB 数据库集群部署、使用指南
+本文档描述了在多台服务器上快速部署、使用MonographDB集群的步骤。以四个节点作为例子，其中一个节点作为主节点，其余三个作为数据节点
+- [多节点生产环境安装部署](#在多机上部署数据库系统)(支持centos)
+
+> **注意：**
+>
+> 本指南中的 MonographDB 部署方式适用于多节点部署MonographDB集群，不适用于生产环境。
+>
+> - 如需在 Kubernetes 上部署 MonographDB，请参考[快速上手 MonographDB Operator](../cn/monographdb-in-kubernetes.md)。
+> - 如需在云上管理 MonographDB，请参考 [MonographDB Cloud 快速上手指南](../cn/monograph-in-cloud.md)。
+
+## 在多机上安装部署数据库集群
+
+- 适用场景：希望用多台服务器，体验MonographDB的完整拓扑的集群，并模拟生产环境下的部署步骤。
+
+本节介绍如何配置MonographDB拓扑的YAML文件部署MonographDB集群。
+### 部署准备
+准备多台部署主机，确保其软件满足相关要求：
+* 推荐安装Centos7及以上版本
+  
+* 运行环境需要接入互联网访问，用于下载MonographDB及其相关依赖。
+对于MonographDB集群拓扑，可以通过更改YAML文件按需配置所需要的集群数量，在本次测试中，集群拓扑如下表所示：
+下表中拓扑实例的 IP 为示例IP IP。在实际部署时，请替换为实际的 IP。
+
+| 实例 | 个数 | IP | 配置 |
+|:-- | :-- | :-- | :-- |
+|mono_service| 4 | 10.0.1.1 <br/> 10.0.1.2 <br/> 10.0.1.3 <br/> 10.0.1.4| 范围端口 <br/> 全局目录配置|
+|storage_service| 4 | 10.0.1.1 <br/> 10.0.1.2 <br/> 10.0.1.3 <br/> 10.0.1.4 | 默认端口 <br/> 全局目录配置 |
+|Monitor| 1 | 10.0.1.1 | 默认端口 <br/> 全局目录配置 |
+
+1. 环境准备
+    多台机器中的`每台`均需完成系统环境的基本配置，具体配置步骤可参考[单节点Monograph部署环境配置](../cn/cluster-deployment.md)
+2. 复制MonographDB安装包
+    将最新的`monographdb-release.tar.gz`安装包复制到远程服务器的所有节点
+    ```shell
+    scp <本地tar包所在路径> <用户名>@<服务器 IP 地址>: <服务器路径>
+    ```
+3. 集群网络配置
+    在网络配置中，需要保证`每台`服务器都能够通过主机名、IP访问集群中的其他节点，具体配置步骤可参考[单节点Monograph部署网络配置](../cn/cluster-deployment.md)
+
+### 实施部署
+Monograph_waiter工具可以实现在本地机器上对于多个服务器节点的安装与部署，主要通过修改相应的YAML文件实现。
++ 创建并启动集群
+按下面的配置模板，编辑配置文件demployment.yaml，其中：
+  * `username: "centos"`：表示通过 `centos`系统用户（当前系统用户名）来做集群的内部管理，默认使用 22 端口通过 ssh 登录目标机器
+  * `auth_type`：ssh登陆验证的方式，默认为keypair形式，不需修改。
+  * `keypair`: 设置为ssh私钥文件存放地址，注意此ssh密钥必须对多台服务器均具有访问权限
+  * `host`：设置为多节点的实际IP地址，用户可以按需配置
+  * `install_image`：可以设置为本地已经下载的Monograph安装包或者远程的MonographDB的下载地址
+  * `install_dir`：设置为用户安装集群的期望存放位置，此位置须为`username`所指定的用户所具有读写权限的文件夹位置。
+  * `storage_service`：配置用户安装`nosql`型数据库`cassandra`的远程下载网址`download_url`，安装位置在那台机器`(host)`下，设置文件中配置成`localhost`,表示安装在本地。
+  * `monitor`：配置MonographDB的相关监控软件（prometheus、 grafana、 cassandra_collector）的远程下载网址、安装位置以及安装端口。
+  配置模板如下：
+
+    ```yaml
+    connection:
+    username: "centos"
+    auth_type: "keypair"
+    auth:
+        keypair: "~/xx.pem"
+    deployment:
+    install_image: "file:///home/centos/monographdb-release-bin.tar.gz"
+    cluster_name: "mono_cloud"
+    install_dir: "/home/centos"
+    port:
+        mysql_port: 3300
+        monograph_port:
+        start: 8100
+        end: 8200
+    mono_service:
+        host:
+        - 10.0.1.1
+        - 10.0.1.2
+        - 10.0.1.3
+        - 10.0.1.4
+    storage_service:
+        cassandra:
+        download_url: "https://archive.apache.org/dist/cassandra/4.1.0/apache-cassandra-4.1.0-bin.tar.gz"
+        storage_cluster: "mono-cass-cluster"
+        host:
+        - 10.0.1.1
+        - 10.0.1.2
+        - 10.0.1.3
+        - 10.0.1.4
+    monitor:
+        data_dir: ""
+        monograph_metrics:
+        path: "/mono_metrics"
+        port: 18081
+        prometheus:
+        download_url: "https://github.com/prometheus/prometheus/releases/download/v2.42.0/prometheus-2.42.0.linux-amd64.tar.gz"
+        port: 9090
+        host: "10.0.1.1"
+        grafana:
+        download_url: "https://dl.grafana.com/oss/release/grafana-9.3.6.linux-amd64.tar.gz"
+        port: 3300
+        host: "10.0.1.1"
+        node_exporter: "https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_exporter-1.5.0.linux-amd64.tar.gz"
+        node_exporter_port: 9200
+        mysql_exporter: "https://github.com/prometheus/mysqld_exporter/releases/download/v0.14.0/mysqld_exporter-0.14.0.linux-amd64.tar.gz"
+        mysql_exporter_port: 9300
+        cassandra_collector:
+        mcac_agent: "https://github.com/datastax/metric-collector-for-apache-cassandra/releases/download/v0.3.4/datastax-mcac-agent-0.3.4-4.1-beta1.tar.gz"
+        mcac_port: 9103
+
+    #    dynamodb:
+    #      access_key_id: "",
+    #      secret_key: ""
+    #      region: "XXXX",
+    #      endpoint: "";
+    ```
+
+
+
+> **注意：**
+> 上述的demployment.yaml文件是默认配置文件，用户可以按需配置需要安装的软件。对于某些不需要安装的软件，只需要将其从配置文件中删除即可。
++ 安装MonographDB所需的依赖文件
+    ```shell
+    ./cluster_mgr run-deps --topology-file ${PWD}/config/deployment.yaml
+    ```
++ 执行MonographDB集群部署命令
+    ```
+    ./cluster_mgr deploy --topology-file ${PWD}/config/deployment.yaml
+    ```
++ 执行MonographDB集群安装命令
+    ```
+    ./cluster_mgr install --cluster  $CLUSTER_NAME
+    ```
+
+> **注意：**
+> 在安装MonographDB集群的过程中首先需要设置好JDK(JAVA Development Kit)的开发环境，并且设置好相应的JAVA_HOME与PATH,为了防止cassandra执行过程中出错
+
++ 启动MonographDB集群
+    ```shell
+    ./cluster_mgr start  --cluster  $CLUSTER_NAME
+    ```
++ 访问集群
+  - 访问 MonographDB 数据库，默认情况下，`mysql`安装在`/home/$USER/opt/mono-poc/monographdb-release/install/`下，进入到该目录下，使用socket来连接数据库。
+    ```shell
+    cd /home/$USER/opt/ $CLUSTER_NAME/monographdb-release/install/
+    sudo ./bin/mysql -u root  -S /tmp/mysql3300.sock
+    ```
+  - 执行以下命令可以查看集群的状态：
+    ```shell
+    ./cluster_mgr status -cluster $CLUSTER_NAME
+    ```
+## 更多探索
+- 如果你刚刚部署好一套 MonographDB 本地测试集群：
+    - 学习 [MonographDB SQL 操作](../cn/basic-sql-operations.md)
+    - [迁移数据到 MonographDB](../cn/migration-overview.md)
+

@@ -6,10 +6,10 @@
  */
 
 const users = require('./showcase.json');
-const versions = require('./versions.json');
+//const versions = require('./versions.json');
 
-const lastVersion = versions[0];
-const copyright = `Copyright © ${new Date().getFullYear()} Meta Platforms, Inc.`;
+//const lastVersion = versions[0];
+const copyright = `Copyright © ${new Date().getFullYear()} Monographdata, Inc.`;
 
 const commonDocsOptions = {
   breadcrumbs: false,
@@ -24,11 +24,12 @@ const isDeployPreview = process.env.PREVIEW_DEPLOY === 'true';
 
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
-  title: 'React Native',
-  tagline: 'A framework for building native apps using React',
-  organizationName: 'facebook',
-  projectName: 'react-native',
-  url: 'https://reactnative.dev',
+  title: 'MonoStrate: Next Generation Multi-model Database',
+  tagline:
+    'Data Substrate powered modular database which enables vertical and horizontal expanding of the decoupled components: compute, memory, storage and log separately.',
+  organizationName: 'monographdata',
+  projectName: 'MonoStrate',
+  url: 'https://monographdata.com',
   baseUrl: '/',
   clientModules: [
     require.resolve('./modules/snackPlayerInitializer.js'),
@@ -46,7 +47,7 @@ module.exports = {
     },
     {src: 'https://snack.expo.dev/embed.js', defer: true},
   ],
-  favicon: 'img/favicon.ico',
+  favicon: 'img/monosql_logo.png',
   titleDelimiter: '·',
   customFields: {
     users,
@@ -73,18 +74,11 @@ module.exports = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          path: '../docs',
-          sidebarPath: require.resolve('./sidebars.json'),
-          editCurrentVersion: true,
-          onlyIncludeVersions: isDeployPreview
-            ? ['current', ...versions.slice(0, 2)]
-            : undefined,
-          versions: {
-            [lastVersion]: {
-              badge: false, // Do not show version badge for last RN version
-            },
-          },
-          ...commonDocsOptions,
+          sidebarPath: require.resolve('./sidebars.js'),
+          // Please change this to your repo.
+          // Remove this to remove the "edit this page" links.
+          //         editUrl:
+          //           'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         blog: {
           path: 'blog',
@@ -116,105 +110,59 @@ module.exports = {
   plugins: [
     'docusaurus-plugin-sass',
     [
-      'content-docs',
-      /** @type {import('@docusaurus/plugin-content-docs').Options} */
-      ({
-        id: 'architecture',
-        path: 'architecture',
-        routeBasePath: '/architecture',
-        sidebarPath: require.resolve('./sidebarsArchitecture.json'),
-        ...commonDocsOptions,
-      }),
-    ],
-    [
-      'content-docs',
-      /** @type {import('@docusaurus/plugin-content-docs').Options} */
-      ({
-        id: 'contributing',
-        path: 'contributing',
-        routeBasePath: '/contributing',
-        sidebarPath: require.resolve('./sidebarsContributing.json'),
-        ...commonDocsOptions,
-      }),
-    ],
-    [
-      'content-docs',
-      /** @type {import('@docusaurus/plugin-content-docs').Options} */
-      ({
-        id: 'community',
-        path: 'community',
-        routeBasePath: '/community',
-        sidebarPath: require.resolve('./sidebarsCommunity.json'),
-        ...commonDocsOptions,
-      }),
-    ],
-    [
-      '@docusaurus/plugin-pwa',
+      '@docusaurus/plugin-content-docs',
       {
-        debug: true,
-        offlineModeActivationStrategies: ['appInstalled', 'queryString'],
-        pwaHead: [
-          {
-            tagName: 'link',
-            rel: 'icon',
-            href: '/img/pwa/manifest-icon-512.png',
-          },
-          {
-            tagName: 'link',
-            rel: 'manifest',
-            href: '/manifest.json',
-          },
-          {
-            tagName: 'meta',
-            name: 'theme-color',
-            content: '#20232a',
-          },
-          {
-            tagName: 'meta',
-            name: 'apple-mobile-web-app-capable',
-            content: 'yes',
-          },
-          {
-            tagName: 'meta',
-            name: 'apple-mobile-web-app-status-bar-style',
-            content: '#20232a',
-          },
-          {
-            tagName: 'link',
-            rel: 'apple-touch-icon',
-            href: '/img/pwa/manifest-icon-512.png',
-          },
-          {
-            tagName: 'link',
-            rel: 'mask-icon',
-            href: '/img/pwa/manifest-icon-512.png',
-            color: '#06bcee',
-          },
-          {
-            tagName: 'meta',
-            name: 'msapplication-TileImage',
-            href: '/img/pwa/manifest-icon-512.png',
-          },
-          {
-            tagName: 'meta',
-            name: 'msapplication-TileColor',
-            content: '#20232a',
-          },
-        ],
+        id: 'monographdb',
+        path: 'monographdb',
+        routeBasePath: 'monographdb',
+        sidebarPath: require.resolve('./sidebarsMonographdb.js'),
+        // ... other options
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'indocs',
+        path: 'indocs',
+        routeBasePath: 'indocs',
+        sidebarPath: require.resolve('./sidebarsindocs.js'),
+        // ... other options
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'monographdbcn',
+        path: 'monographdbcn',
+        routeBasePath: 'monographdbcn',
+        sidebarPath: require.resolve('./sidebarsMonographdbcn.js'),
+        // ... other options
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'monosqlcn',
+        path: 'monosqlcn',
+        routeBasePath: 'monosqlcn',
+        sidebarPath: require.resolve('./sidebarsMonoSQLcn.js'),
+        // ... other options
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'monorpc',
+        path: 'monorpc',
+        routeBasePath: 'monorpc',
+        sidebarPath: require.resolve('./sidebarsMonorpc.js'),
+        // ... other options
       },
     ],
   ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      announcementBar: {
-        id: 'support_ukraine',
-        content:
-          'Support Ukraine 🇺🇦 <a target="_blank" rel="noopener noreferrer" href="https://opensource.facebook.com/support-ukraine"> Help Provide Humanitarian Aid to Ukraine</a>.',
-        backgroundColor: '#20232a',
-        textColor: '#fff',
-        isCloseable: false,
-      },
       prism: {
         defaultLanguage: 'jsx',
         theme: require('./core/PrismTheme'),
@@ -229,59 +177,49 @@ module.exports = {
         ],
       },
       navbar: {
-        title: 'React Native',
+        title: 'MonoStrate',
         logo: {
-          src: 'img/header_logo.svg',
-          alt: 'React Native',
+          src: 'img/monosql_logo.png',
+          alt: 'MonoStrate',
         },
         style: 'dark',
         items: [
           {
-            label: 'Development',
+            label: 'Product',
             type: 'dropdown',
             position: 'right',
             items: [
               {
-                label: 'Guides',
-                type: 'doc',
-                docId: 'getting-started',
+                label: 'MonographDB',
+                to: '/product_monographdb',
               },
               {
-                label: 'Components',
-                type: 'doc',
-                docId: 'components-and-apis',
+                label: 'MonoCache',
+                to: '/product_monocache',
               },
               {
-                label: 'APIs',
-                type: 'doc',
-                docId: 'accessibilityinfo',
-              },
-              {
-                label: 'Architecture',
-                type: 'doc',
-                docId: 'architecture-overview',
-                docsPluginId: 'architecture',
+                label: 'MonoSQL',
+                to: '/product_monosql',
               },
             ],
           },
           {
-            type: 'doc',
-            docId: 'overview',
-            label: 'Contributing',
+            label: 'Documentation',
             position: 'right',
-            docsPluginId: 'contributing',
-          },
-          {
-            type: 'doc',
-            docId: 'overview',
-            label: 'Community',
-            position: 'right',
-            docsPluginId: 'community',
-          },
-          {
-            to: '/showcase',
-            label: 'Showcase',
-            position: 'right',
+            href: '#',
+            items: [
+              {
+                label: 'MonographDB',
+                type: 'doc',
+                docsPluginId: 'monographdb',
+                docId: 'quick-start',
+              },
+              {
+                label: 'MonoSQL',
+                type: 'doc',
+                docId: 'monosql-introduction',
+              },
+            ],
           },
           {
             to: '/blog',
@@ -289,21 +227,9 @@ module.exports = {
             position: 'right',
           },
           {
-            type: 'docsVersionDropdown',
-            position: 'left',
-            dropdownActiveClassDisabled: true,
-            dropdownItemsAfter: [
-              {
-                to: '/versions',
-                label: 'All versions',
-              },
-            ],
-          },
-          {
-            href: 'https://github.com/facebook/react-native',
-            'aria-label': 'GitHub repository',
+            to: '/contact',
+            label: 'Contact us',
             position: 'right',
-            className: 'navbar-github-link',
           },
         ],
       },
@@ -312,90 +238,37 @@ module.exports = {
         style: 'dark',
         links: [
           {
-            title: 'Develop',
+            title: 'Docs',
             items: [
               {
-                label: 'Guides',
-                to: 'docs/getting-started',
-              },
-              {
-                label: 'Components',
-                to: 'docs/components-and-apis',
-              },
-              {
-                label: 'APIs',
-                to: 'docs/accessibilityinfo',
-              },
-              {
-                label: 'Architecture',
-                to: 'architecture/overview',
+                label: 'Document',
+                to: '/docs/monosql-introduction',
               },
             ],
           },
           {
-            title: 'Participate',
+            title: 'Community',
             items: [
-              {
-                label: 'Showcase',
-                to: 'showcase',
-              },
-              {
-                label: 'Contributing',
-                to: 'contributing/overview',
-              },
-              {
-                label: 'Community',
-                to: 'community/overview',
-              },
-              {
-                label: 'Directory',
-                href: 'https://reactnative.directory/',
-              },
               {
                 label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/react-native',
+                href: 'https://stackoverflow.com/questions/tagged/monographdb',
               },
             ],
           },
           {
-            title: 'Find us',
+            title: 'More',
             items: [
               {
                 label: 'Blog',
-                to: 'blog',
-              },
-              {
-                label: 'Twitter',
-                href: 'https://twitter.com/reactnative',
-              },
-              {
-                label: 'GitHub',
-                href: 'https://github.com/facebook/react-native',
-              },
-            ],
-          },
-          {
-            title: 'Explore More',
-            items: [
-              {
-                label: 'ReactJS',
-                href: 'https://reactjs.org/',
-              },
-              {
-                label: 'Privacy Policy',
-                href: 'https://opensource.fb.com/legal/privacy/',
-              },
-              {
-                label: 'Terms of Service',
-                href: 'https://opensource.fb.com/legal/terms/',
+                to: '/blog',
               },
             ],
           },
         ],
         logo: {
-          alt: 'Meta Open Source Logo',
-          src: 'img/oss_logo.svg',
-          href: 'https://opensource.fb.com/',
+          alt: 'MonographDB Logo',
+          src: 'img/monosql_logo.png',
+          href: 'https://www.monographdata.com/',
         },
         copyright,
       },

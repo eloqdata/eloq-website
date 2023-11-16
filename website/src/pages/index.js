@@ -13,19 +13,13 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 import Layout from '@theme/Layout';
-import CodeBlock from '@theme/CodeBlock';
-
-import CrossPlatformSVG from '../../static/img/homepage/cross-platform.svg';
-import {setupDissectionAnimation} from './animations/_dissectionAnimation';
-import {setupHeaderAnimations} from './animations/_headerAnimation';
 
 const textContent = {
   intro: `
-React Native combines the best parts of native development with React,
-a best-in-class JavaScript library for building user interfaces.
-<br/><br/>
-<strong>Use a little—or a lot</strong>. You can use React Native today in your existing
-Android and iOS projects or you can create a whole new app from scratch.
+  Data Substrate abstracts core functionality common to all data management scenarios.<br/><br/>
+  Data Substrate is responsible for managing <strong>Caching</strong>, <strong>Concurrency control</strong>, <strong>Durability</strong>
+  <strong>Consistency</strong> and <strong>Fault tolerance</strong>.<br/><br/>
+  Customized database can be assembled by compute engine, data substrate and cloud kv store.
   `,
   nativeCode: `
 React primitives render to native platform UI, meaning your app uses the
@@ -34,6 +28,42 @@ same native platform APIs other apps do.
 <strong>Many platforms</strong>, one React. Create platform-specific versions of components
 so a single codebase can share code across platforms. With React Native,
 one team can maintain multiple platforms and share a common technology—React.
+  `,
+  whydatasubstrate: `
+  Modern Enterprises require versatile data management systems to satisfy complicated business needs.<br/><br/>
+  This causes many headaches for system admins:
+  long data pipelines,
+  repetitive functionality,
+  complex system management,
+  low resource utilization,
+  inconsistent synchronizations
+  `,
+  hybridscaling: `
+  For read-heavy workloads, scale out the data substrate’s memory for distributed caching.<br/><br/>
+  For write-heavy workloads, scale out the data substrate’s log for parallel logging with patented one phase commit protocol.<br/><br/>
+  For big data, scale out the data store to increase capacity with minimal compute cost for cold data.
+  `,
+  elasticlog: `
+  Write intensive workload requires the scalability of log service.
+				Traditional databases write and fsync redo logs in the order of log sequence number into
+				a single disk, which becomes the bottleneck of the whole system. MonographDB's patented
+				1-PC technique enables concurrent transactions to write and fsync redo logs into multiple
+				disks in parallel. Benchmark shows 4X TPS improvement compared with AWS Aurora.
+  `,
+  elasticmem: `
+  Read intensive workload requires the scalability of memory resource.
+				To achieve low read latency, it is important to hold all the hot data into memory.
+				MonographDB supports hash and range partition, which can store a large amount of hot data
+				across multiple hosts. As the hot data grows, MonographDB can scale-out the cluster and rebalance
+				the data range automatically. Cold data will be checkpointed into KV stores which can serve cache
+				miss read.
+  `,
+  decouplestore: `
+  Large dataset requires a decouple storage layer which can be individually scaled regardless of
+				read and write traffic. To reserve additional compute and memory for cold data is a waste of
+				resource. Traditional shared-nothing architecture requires to add more compute nodes as the data
+				volumn scales even if the read and write traffic is unchanged. MonographDB's decoupled cloud
+				storage enable you to only pay for the disk plus the IOPS cost of cold data.
   `,
   codeExample: `
 import React from 'react';
@@ -115,15 +145,9 @@ function HomeCallToAction() {
     <>
       <ActionButton
         type="primary"
-        href={useBaseUrl('docs/environment-setup')}
+        href={useBaseUrl('monographdb/cluster-deployment')}
         target="_self">
         Get started
-      </ActionButton>
-      <ActionButton
-        type="secondary"
-        href={useBaseUrl('docs/getting-started')}
-        target="_self">
-        Learn the basics
       </ActionButton>
     </>
   );
@@ -202,75 +226,27 @@ function ScreenRect({className, fill, stroke}) {
 }
 
 function LogoAnimation() {
-  return (
-    <svg
-      className="LogoAnimation init"
-      width={350}
-      height={350}
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="-200 -200 400 400">
-      <title>React Logo</title>
-      <clipPath id="screen">
-        <ScreenRect fill="none" stroke="gray" />
-      </clipPath>
-      <rect
-        x="-25"
-        y="120"
-        width="50"
-        height="25"
-        rx="2"
-        fill="white"
-        stroke="none"
-        className="stand"
-      />
-      <polygon
-        points="-125,90 125,90 160,145 -160,145"
-        fill="white"
-        stroke="white"
-        strokeWidth="5"
-        strokeLinejoin="round"
-        className="base"
-      />
-      <ScreenRect className="background" stroke="none" />
-      <g clipPath="url(#screen)" className="logo">
-        <g className="logoInner">
-          <circle cx="0" cy="0" r="30" fill="#61dafb" />
-          <g stroke="#61dafb" strokeWidth="15" fill="none" id="logo">
-            <ellipse rx="165" ry="64" />
-            <ellipse rx="165" ry="64" transform="rotate(60)" />
-            <ellipse rx="165" ry="64" transform="rotate(120)" />
-          </g>
-        </g>
-        <line
-          x1="-30"
-          x2="30"
-          y1="130"
-          y2="130"
-          stroke="white"
-          strokeWidth="8"
-          strokeLinecap="round"
-          className="speaker"
-        />
-      </g>
-      <ScreenRect fill="none" stroke="white" />
-    </svg>
-  );
+  return <img alt="" src={useBaseUrl('img/monosql_logo.png')} />;
 }
 
 function HeaderHero() {
   return (
     <Section background="dark" className="HeaderHero">
+      {/*
       <div className="socialLinks">
         <TwitterButton accountName="reactnative" />
         <GitHubStarButton />
-      </div>
+      </div>*/}
       <TwoColumns
         reverse
         columnOne={<LogoAnimation />}
         columnTwo={
           <>
-            <h1 className="title">React Native</h1>
-            <p className="tagline">Learn once, write&nbsp;anywhere.</p>
+            <h1 className="title">MonoStrate</h1>
+            <p className="tagline">
+              Assemble your database according to customized requirement powered
+              by Data&nbsp;Substrate.
+            </p>
             <div className="buttons">
               <HomeCallToAction />
             </div>
@@ -285,155 +261,70 @@ function NativeApps() {
   return (
     <Section className="NativeApps" background="light">
       <TwoColumns
-        reverse
         columnOne={
-          <TextColumn
-            title="Create native apps for Android, iOS, and more using React"
-            text={textContent.intro}
-          />
-        }
-        columnTwo={<img alt="" src={useBaseUrl('img/homepage/phones.png')} />}
-      />
-    </Section>
-  );
-}
-
-function NativeCode() {
-  return (
-    <Section className="NativeCode" background="tint">
-      <TwoColumns
-        columnOne={
-          <TextColumn
-            title="Written in JavaScript—rendered with native code"
-            text={textContent.nativeCode}
-          />
+          <TextColumn title="What is Data Substrate" text={textContent.intro} />
         }
         columnTwo={
-          <CodeBlock language="jsx">{textContent.codeExample}</CodeBlock>
+          <img alt="" src={useBaseUrl('img/homepage/datasubstrate.png')} />
         }
       />
     </Section>
   );
 }
 
-function NativeDevelopment() {
+function ElasticLogging() {
   return (
-    <Section className="NativeDevelopment" background="light">
+    <Section className="NativeApps" background="tint">
       <TwoColumns
         reverse
         columnOne={
           <TextColumn
-            title="Native Development For Everyone"
-            text={textContent.forEveryone}
+            title="Why Data Substrate"
+            text={textContent.whydatasubstrate}
           />
         }
         columnTwo={
-          <div className="dissection">
-            {[0, 1, 2, 3].map(i => (
-              <img
-                alt=""
-                key={i}
-                src={useBaseUrl(`img/homepage/dissection/${i}.png`)}
-              />
-            ))}
-          </div>
+          <img alt="" src={useBaseUrl('img/homepage/datasubstratewhy.png')} />
         }
       />
     </Section>
   );
 }
-
-function CrossPlatform() {
+function ElasticMemory() {
   return (
-    <Section className="CrossPlatform" background="tint">
+    <Section className="NativeApps" background="light">
       <TwoColumns
         columnOne={
           <TextColumn
-            title="Seamless Cross-Platform"
-            text={textContent.crossPlatform}
+            title="Elastic at any scale for any workloads"
+            text={textContent.hybridscaling}
           />
-        }
-        columnTwo={<CrossPlatformSVG />}
-      />
-    </Section>
-  );
-}
-
-function FastRefresh() {
-  return (
-    <Section className="FastRefresh" background="light">
-      <TwoColumns
-        reverse
-        columnOne={
-          <TextColumn title="Fast Refresh" text={textContent.fastRefresh} />
         }
         columnTwo={
-          <video
-            muted
-            autoPlay
-            loop
-            playsInline
-            src={useBaseUrl(`img/homepage/ReactRefresh.mp4`)}
+          <img
+            alt=""
+            src={useBaseUrl('img/homepage/datasubstratehybridscale.png')}
           />
         }
       />
     </Section>
   );
 }
-
-function VideoContent() {
+function DecoupleStore() {
   return (
-    <div>
-      <Section className="VideoContent" background="tint">
-        <br />
-        <TwoColumns
-          columnOne={
-            <TextColumn
-              title="Talks and Videos"
-              text={textContent.talks}
-              moreContent={<TwitterButton accountName="reactnative" />}
-            />
-          }
-          columnTwo={
-            <div className="vidWrapper">
-              <iframe
-                src="https://www.youtube.com/embed/NCAY0HIfrwc"
-                title="Mobile Innovation with React Native, ComponentKit, and Litho"
-                frameBorder="0"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </div>
-          }
-        />
-        <br />
-        <TwoColumns
-          columnOne={
-            <>
-              <p>
-                The{' '}
-                <a href="https://opensource.facebook.com/">
-                  Meta Open Source team
-                </a>{' '}
-                has put together a short overview of React Native, where they
-                explained the project in beginner's terms.
-              </p>
-            </>
-          }
-          columnTwo={
-            <div className="vidWrapper">
-              <iframe
-                src="https://www.youtube.com/embed/wUDeLT6WXnQ"
-                title="Explain Like I'm 5: React Native"
-                frameBorder="0"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </div>
-          }
-        />
-      </Section>
-    </div>
+    <Section className="NativeApps" background="tint">
+      <TwoColumns
+        columnOne={
+          <TextColumn
+            title="Decoupled Cloud Storage"
+            text={textContent.decouplestore}
+          />
+        }
+        columnTwo={
+          <img alt="" src={useBaseUrl('img/homepage/decoupledstorage2.png')} />
+        }
+      />
+    </Section>
   );
 }
 
@@ -541,21 +432,13 @@ function Community() {
 
 function GetStarted() {
   return (
-    <Section className="GetStarted" background="dark">
+    <Section className="GetStarted" background="tint">
       <div className="content">
-        <Heading text="Give it a try" />
-        <ol className="steps">
-          <li>
-            <p>Run this</p>
-            <div className="terminal">
-              <code>npx react-native init MyTestApp</code>
-            </div>
-          </li>
-          <li>
-            <p>Read these</p>
-            <HomeCallToAction />
-          </li>
-        </ol>
+        <h2 className="Heading">
+          <a href="http://localhost:3000/product_monographdb">
+            View Prodcut Details
+          </a>
+        </h2>
       </div>
     </Section>
   );
@@ -567,30 +450,22 @@ const useHomePageAnimations = () => {
 };
 
 const Index = () => {
-  useHomePageAnimations();
   return (
     <Layout
       description="A framework for building native apps using React"
       wrapperClassName="homepage">
       <Head>
-        <title>React Native · Learn once, write anywhere</title>
-        <meta
-          property="og:title"
-          content="React Native · Learn once, write anywhere"
-        />
+        <title>MonoStrate · Modular Database</title>
+        <meta property="og:title" content="MonoStrate · Modular Database" />
         <meta
           property="twitter:title"
-          content="React Native · Learn once, write anywhere"
+          content="MonoStrate · Modular Database"
         />
       </Head>
       <HeaderHero />
       <NativeApps />
-      <NativeCode />
-      <NativeDevelopment />
-      <CrossPlatform />
-      <FastRefresh />
-      <VideoContent />
-      <Community />
+      <ElasticLogging />
+      <ElasticMemory />
       <GetStarted />
     </Layout>
   );
