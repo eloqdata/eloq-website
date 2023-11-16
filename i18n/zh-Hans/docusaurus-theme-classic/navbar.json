@@ -1,0 +1,30 @@
+{
+  "title": {
+    "message": "MonoStrate",
+    "description": "The title in the navbar"
+  },
+  "logo.alt": {
+    "message": "My Site Logo",
+    "description": "The alt text of navbar logo"
+  },
+  "item.label.Documentation": {
+    "message": "文档",
+    "description": "Navbar item with label Documentation"
+  },
+  "item.label.Blog": {
+    "message": "博客",
+    "description": "Navbar item with label Blog"
+  },
+  "item.label.Contact Us": {
+    "message": "联系我们",
+    "description": "Navbar item with label Contact Us"
+  },
+  "item.label.MonoSQL": {
+    "message": "MonoSQL",
+    "description": "Navbar item with label MonoSQL"
+  },
+  "item.label.MonographDB": {
+    "message": "MonographDB",
+    "description": "Navbar item with label MonographDB"
+  }
+}

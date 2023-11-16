@@ -1,36 +1,29 @@
 import React from 'react';
 import clsx from 'clsx';
 import styles from './styles.module.css';
+import { translate } from '@docusaurus/Translate';
 
+const ModularArchitecture = translate({message: 'Modular Architecture',})
 const FeatureList = [
   {
-    title: 'Modular Architecture',
+    title: translate({message: 'Modular Architecture',}),
     Svg: require('@site/static/img/module.svg').default,
     description: (
-      <>
-        MonographDB supports multi-model data analysis and supplies a unified 
-        data platform by embedding diffenrent data engines in a pluggable way.
-      </>
+      translate({message: 'MonoStrate supports multi-model data analysis and supplies a unified data platform by embedding diffenrent data engines in a pluggable way.'})
     ),
   },
   {
-    title: 'High Performance',
+    title: translate({message: 'High Performance',}),
     Svg: require('@site/static/img/highperf.svg').default,
     description: (
-      <>
-	MonographDB enables high query performance and data injestion speed with
-	scalable memory and logging layer.
-      </>
+	translate({message: 'MonoStrate enables high query performance and data injestion speed with scalable memory and logging layer.'})
     ),
   },
   {
-    title: 'Low Cost',
+    title: translate({message: 'Low Cost',}),
     Svg: require('@site/static/img/costsave.svg').default,
     description: (
-      <>
-        Serverless architecture enables a cost effective pay mode. Hot data 
-	only access Data Substrate which reduces the IOPS of the storage layer.
-      </>
+        translate({message: 'Serverless architecture enables a cost effective pay mode. Hot data only access Data Substrate which reduces the IOPS of the storage layer.'})
     ),
   },
 ];

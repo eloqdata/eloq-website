@@ -1,13 +1,14 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
+//const translate = require('@docusaurus/Translate');
 
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'MonographDB: Next Generation Multi-model Database',
-  tagline: 'Data Substate powered modular database which enables vertical and horizontal expanding of the decoupled components: compute, memory, storage and log separately.',
+  title: 'MonoStrate: Next Generation Multi-model Database',
+  tagline: 'Data Substrate powered modular database which enables vertical and horizontal expanding of the decoupled components: compute, memory, storage and log separately.',
   favicon: 'img/monosql_logo.png',
 
   // Set the production url of your site here
@@ -123,7 +124,7 @@ headTags: [
   // to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
-    locales: ['en'],
+    locales: ['en', 'zh-Hans'],
   },
 
   presets: [
@@ -232,13 +233,17 @@ headTags: [
       // Replace with your project's social card
       image: 'img/monosql_logo.png',
       navbar: {
-        title: 'MonographDB',
+        title: 'MonoStrate',
         logo: {
           alt: 'My Site Logo',
           src: 'img/monosql_logo.png',
         },
 
         items: [
+	  {
+	    type: 'localeDropdown',
+	    position: 'right',
+	  },
           /*{
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',

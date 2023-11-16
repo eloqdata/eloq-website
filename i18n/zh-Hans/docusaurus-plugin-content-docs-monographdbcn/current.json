@@ -1,0 +1,26 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.monographdb.category.快速上手": {
+    "message": "快速上手",
+    "description": "The label for category 快速上手 in sidebar monographdb"
+  },
+  "sidebar.monographdb.category.连接数据库": {
+    "message": "连接数据库",
+    "description": "The label for category 连接数据库 in sidebar monographdb"
+  },
+  "sidebar.monographdb.category.数据查询": {
+    "message": "数据查询",
+    "description": "The label for category 数据查询 in sidebar monographdb"
+  },
+  "sidebar.monographdb.category.MySQL兼容性": {
+    "message": "MySQL兼容性",
+    "description": "The label for category MySQL兼容性 in sidebar monographdb"
+  },
+  "sidebar.monographdb.category.SQL参考": {
+    "message": "SQL参考",
+    "description": "The label for category SQL参考 in sidebar monographdb"
+  }
+}

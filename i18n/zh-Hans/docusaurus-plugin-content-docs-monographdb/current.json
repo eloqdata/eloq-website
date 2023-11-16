@@ -1,0 +1,26 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.monographdb.category.Quick Start": {
+    "message": "Quick Start",
+    "description": "The label for category Quick Start in sidebar monographdb"
+  },
+  "sidebar.monographdb.category.Connect to DB": {
+    "message": "Connect to DB",
+    "description": "The label for category Connect to DB in sidebar monographdb"
+  },
+  "sidebar.monographdb.category.Data Query": {
+    "message": "Data Query",
+    "description": "The label for category Data Query in sidebar monographdb"
+  },
+  "sidebar.monographdb.category.Mysql Compatibility": {
+    "message": "Mysql Compatibility",
+    "description": "The label for category Mysql Compatibility in sidebar monographdb"
+  },
+  "sidebar.monographdb.category.SQL Reference": {
+    "message": "SQL Reference",
+    "description": "The label for category SQL Reference in sidebar monographdb"
+  }
+}

@@ -175,9 +175,8 @@ result-body:
 ```
 {}
 ```
-<p align="left">
-<img  width="600px" src="blob/images/MultiTransfer-succeed.png">
-</p>
+
+![](blob/images/MultiTransfer-succeed.png)
 
 【失败时的返回】  
 result-status: 200  
@@ -186,6 +185,4 @@ result-body:
 {"error":true,"err_msg":"xxxx"}
 ```
 
-<p align="left">
-<img  width="600px" src="blob/images/MultiTransfer-failed.png">
-</p>
+![](blob/images/MultiTransfer-failed.png)

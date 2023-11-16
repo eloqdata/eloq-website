@@ -1,0 +1,10 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.monographdb.category.Quick Start": {
+    "message": "Quick Start",
+    "description": "The label for category Quick Start in sidebar monographdb"
+  }
+}

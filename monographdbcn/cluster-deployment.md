@@ -17,7 +17,7 @@ summary: 了解在多台服务器上快速部署、使用MonoGraphDB集群。
   
 * 运行环境需要接入互联网访问，用于下载MonographDB及其相关依赖。
 对于MonographDB集群拓扑，可以通过更改YAML文件按需配置所需要的集群数量，在本次测试中，集群拓扑如下表所示：
-下表中拓扑实例的 IP 为示例IP IP。在实际部署时，请替换为实际的 IP。
+下表中拓扑实例的 IP 为示例IP IP。在实际部署时，请替换为实际的 IP。**注意:单机请使用127.0.0.1。不能使用localhost**
 
 | 实例 | 个数 | IP |
 |:-- | :-- | :-- |
@@ -68,6 +68,14 @@ summary: 了解在多台服务器上快速部署、使用MonoGraphDB集群。
     ```shell
     logout
     ```
+ + Ubuntu18.04需要额外安装gcc11
+    ```shell
+    sudo apt update
+    sudo apt install software-properties-common -y
+    sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+    sudo apt update
+    sudo apt install gcc-11 g++-11 -y
+    ```
 
 2. 单节点网络配置
  `ssh`服务配置，用户首先需要在自己的系统上安装好相应的`ssh`服务，`ssh`服务需要有`ssh`客户端以及`ssh`服务端的支持。
@@ -106,13 +114,11 @@ summary: 了解在多台服务器上快速部署、使用MonoGraphDB集群。
     运行结束后，会在$HOME/.ssh目录下生成两个文件，一个是私钥文件`id_ed25519`，一个是公钥文件`id_ed25519.pub`
 
 + 生成的公钥`id_ed25519.pub`添加到authorized_keys
-    ```shell
-    cat .ssh/ed25519_mono.pub | ssh username@host 'cat >> .ssh/authorized_keys'
-    ```
     如果要将MonographDB服务安装在本地，则只需要运行下面的
     ```shell
-    cat .ssh/ed25519_mono.pub | ssh $USER@localhost 'cat >> .ssh/authorized_keys'
+    cat .ssh/ed25519_mono.pub >> .ssh/authorized_keys
     ```
+    对于分布式环境，需要将ed25519_mono.pub内容写入所有节点的authorized_keys文件中
 + 给ssh目录设置权限
     ```shell
     chmod 700 ~/.ssh
@@ -130,18 +136,6 @@ Monograph Waiter是一个用于开发与管理MonographDB的工具包，其中�
 ### 实施部署
 
 1. 部署MonographDB
-- 修改 config/remote_env
-
-  该文件目前为Cassandra 启动需要的JAVA_HOME路径，根据安装平台修改，具体如下：
-
-  ```bash
-  # ububtu
-  JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
-  # centos
-  JAVA_HOME=/usr/lib/jvm/java-11-openjdk
-  ```
-  
-
 + 修改monographDB启动选项
 编辑配置文件config/my_template.cnf，添加线程池相关参数，并根据机器配置进行调整CPU和内存参数。
 ```
@@ -150,11 +144,11 @@ Monograph Waiter是一个用于开发与管理MonographDB的工具包，其中�
 thread_handling=pool-of-threads
 thread_pool_max_threads=4
 thread_pool_dedicated_listener=1
-# thread_pool_size should be 3/4 of physical CPU core number.
-thread_pool_size=12
+# thread_pool_size should be 3/8 of CPU core number.
+thread_pool_size=4
 
 # under monograph
-# core_num should be 1/4 of physical CPU core number.
+# core_num should be 3/8 of CPU core number.
 monograph_core_num=4
 # node_memory_limit_mb is the buffer pool of monographDB,
 # should be less than 60% physical memory.
@@ -167,11 +161,11 @@ monograph_node_memory_limit_mb=4000
   * `username: "mono"`：表示通过 `mono`系统用户（当前系统用户名）来做集群的内部管理，默认使用 22 端口通过 ssh 登录目标机器
   * `auth_type`：ssh登陆验证的方式，默认为keypair形式
   * `keypair`: 设置为通过网络配置的ssh私钥文件存放地址
-  * `host`：设置为本部署主机的IP，如果只需要安装在本机，则设置为localhost
+  * `host`：设置为本部署主机的IP，如果只需要安装在本机，则设置为127.0.0.1 **注意：不能使用localhost**
   * `tx_image`：MonographDB TxService安装包，支持本地地址以及远程地址。
   *  `log_image`:  MonographDB LogService安装包，支持本地地址以及远程地址。
   * `install_dir`：设置为用户安装集群的期望存放位置，此位置须为`username`所指定的用户所具有读写权限的文件夹位置，如果安装目录不存在，目前需要提前手工创建。
-  * `storage_service`：配置`Cassandra`数据库的远程下载网址`download_url`，安装位置`(host)`，如果配置成`localhost`,表示安装在本地。
+  * `storage_service`：配置`Cassandra`数据库的远程下载网址`download_url`，安装位置`(host)`，如果配置成`127.0.0.1`,表示安装在本地。
   * `monitor`：配置MonographDB的相关监控软件（prometheus、 grafana）的远程下载网址、安装位置以及安装端口。
   * `log_service`: data_dir 负责指定磁盘的位置 /data/opt/log_data1 /data/opt/log_data2 /data/opt/log_data3
   * `内网安装`: 无法连接外网下载Cassandra，可以提前下载上传，使用file:///home/file_path从本地安装Cassanra等组件。
@@ -183,12 +177,14 @@ monograph_node_memory_limit_mb=4000
       auth_type: "keypair"
       auth:
         keypair: "/home/ubuntu/.ssh/ed25519_mono"
+      port: 22
     deployment:
       # monographdb 安装包路径 file:// 表示文件在本地。目前支持http 和 file 。
       tx_image: "file:///home/ubuntu/monographdb-tx-release-bin.tar.gz"
       log_image: "file:///home/ubuntu/monographdb-log-release-bin.tar.gz"
       cluster_name: "mono-poc"
       # monographdb 安装路径，当前用户对该目录需要具备读写权限 。
+      # `sudo chown -R $USER:$USER /data/opt`
       install_dir: "/data/opt"
       port:
         mysql_port: 3300
@@ -239,7 +235,7 @@ monograph_node_memory_limit_mb=4000
 
 
 > **注意：**
-> 上述的deployment.yaml文件是默认配置文件，用户可以按需配置需要安装的软件。对于某些不需要安装的软件，只需要将其从配置文件中删除即可。
+> 上述的deployment.yaml文件是默认配置文件，用户可以按需配置需要安装的软件。对于某些不需要安装的软件，只需要将其从配置文件中删除即可。如果不需要监控，请将yaml文件中monitor选项全部删除。
 + 安装MonographDB所需的依赖文件
     ```shell
     ./cluster_mgr run-deps --topology-file ${PWD}/config/deployment.yaml

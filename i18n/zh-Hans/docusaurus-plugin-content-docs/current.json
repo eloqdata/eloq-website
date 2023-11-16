@@ -1,0 +1,22 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.monosql.category.Get Started": {
+    "message": "Get Started",
+    "description": "The label for category Get Started in sidebar monosql"
+  },
+  "sidebar.monosql.category.Feature Overview": {
+    "message": "Feature Overview",
+    "description": "The label for category Feature Overview in sidebar monosql"
+  },
+  "sidebar.monosql.category.Migration": {
+    "message": "Migration",
+    "description": "The label for category Migration in sidebar monosql"
+  },
+  "sidebar.monosql.category.Benchmark": {
+    "message": "Benchmark",
+    "description": "The label for category Benchmark in sidebar monosql"
+  }
+}
