@@ -435,7 +435,7 @@ function GetStarted() {
     <Section className="GetStarted" background="tint">
       <div className="content">
         <h2 className="Heading">
-          <a href="http://localhost:3000/product_monographdb">
+          <a href="https://www.monographdata.com/product_monographdb">
             View Prodcut Details
           </a>
         </h2>

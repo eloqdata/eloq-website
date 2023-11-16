@@ -197,10 +197,6 @@ module.exports = {
                 label: 'MonoCache',
                 to: '/product_monocache',
               },
-              {
-                label: 'MonoSQL',
-                to: '/product_monosql',
-              },
             ],
           },
           {
