@@ -145,7 +145,7 @@ function HomeCallToAction() {
     <>
       <ActionButton
         type="primary"
-        href={useBaseUrl('monographdb/cluster-deployment')}
+        href={useBaseUrl('monographdb/cluster-deployment.html')}
         target="_self">
         Get started
       </ActionButton>

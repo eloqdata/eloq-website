@@ -7,48 +7,32 @@ summary: Learn how to deploy and use the MonographDB cluster
 
 This document describes how to quickly deploy a MonographDB cluster on multiple Linux servers.
 
-- [Installation and deployment of multi-node production environment] (#Deploy database system on multiple machines) (support centos)
-
-> **Note**
->
-> The MonographDB deployment in this guide is suitable for multi-node deployment of MonographDB clusters and can be used in production environments.
->
-> - To deploy MonographDB on Kubernetes, please refer to [Quick Start MonographDB Operator](./monographdb-in-kubernetes.md).
-> - To manage MonographDB on the cloud, please refer to [MonographDB Cloud Quick Start Guide](./monograph-in-cloud.md).
-
-## Install and deploy MonographDB clusters on multiple machines
-
-- Scenario: Use multiple machines to experience the complete topology of MonographDB clusters, and simulate the deployment in the production environment.
-
-This section describes how to configure the YAML file of the MonographDB topology to deploy a MonographDB cluster.
-
 ### Deployment prepare
 
-Prepare multiple target machines and ensure that their software meets the following requirements:
+Ensure the following requirements:
 
-- CentOS 7 or Ubuntu 16.04(or later versions) is installed
+- Recommended hardware of compute node and storage node is 32+ physical CPU, 64GB+ memory. Hardware of log node
+  is 4+ physical CPU, 16GB+ memory and 3 SSD disks. Log node can be deployed with compute node together.
 
-- The Linux systems need to have access to the Internet, which is required to download MonographDB and its related dependencies
+- Recommended os version: Ubuntu 20.04. Supported version: Centos 7, Centos Steam 8.
 
-For the MonographDB cluster topology, you can configure the required number of clusters on demand by changing the YAML file. In this deployment, the cluster topology is shown in the following table
+- The Linux systems need to have access to the Internet, which is required to download MonographDB and its related dependencies.
+
+For the MonographDB cluster topology, you can configure the required number of clusters on demand by changing the YAML file. In this deployment, the cluster topology is shown in the following table.
 
 > **Note**
-> The IP address of the following instances only serves as an example IP. In your actual deployment, you need to replace the IP with your actual IP.
+> The IP address of the following instances only serves as an example IP. In your actual deployment, you need to replace the IP with your actual IP. Don't use hostname like localhost, please use 127.0.0.1 instead.
 
-| Instance        | count | IP                                                    | Configuration                                     |
-| :-------------- | :---- | :---------------------------------------------------- | :------------------------------------------------ |
-| mono_service    | 4     | 10.0.1.1 <br/> 10.0.1.2 <br/> 10.0.1.3 <br/> 10.0.1.4 | range ports <br/> Global directory configuration  |
-| storage_service | 4     | 10.0.1.1 <br/> 10.0.1.2 <br/> 10.0.1.3 <br/> 10.0.1.4 | Default port <br/> Global directory configuration |
-| Monitor         | 1     | 10.0.1.1                                              | Default Port <br/> Global Directory Configuration |
+| Instance        | Count | IP       |
+| :-------------- | :---- | :------- |
+| tx_service      | 1     | 10.0.1.1 |
+| log_service     | 1     | 10.0.1.2 |
+| storage_service | 1     | 10.0.1.3 |
+| monitor         | 1     | 10.0.1.3 |
 
 1. Environment Configuration
    Each of the multiple machines needs to complete the basic configuration of the system environment. For specific configuration steps, please refer to [Single Node Monograph Deployment Environment Configuration](./quick-start.md)
-2. Transfer the MonographDB installation package
-   Transfer the latest `monographdb-release.tar.gz` installation package to all machines
-   ```shell
-   scp <path of local tar package> <username>@<server IP address>: <server path>
-   ```
-3. Cluster network configuration
+2. Cluster network configuration
    It is necessary to ensure that each server can access other servers in the cluster through ssh. For specific configuration steps, please refer to [Single Node Monograph Deployment Network Configuration](./quick-start.md)
 
 ### Deployment implementation
@@ -64,68 +48,67 @@ The `Monograph_waiter` tool can realize the installation and deployment on multi
   - `host`: Set as the actual IP address of multiple servers
   - `install_image`: Can be set to the downloaded Monograph installation package locally or the download address of the remote MonographDB
   - `install_dir`: Set to the desired storage location for the user to install the cluster. This location must be the folder location with read and write permissions for the user specified by `username`. If the installation directory does not exist, it needs to be manually created in advance.
-  - `storage_service`: Configure the remote download URL `download_url` of the `Cassandra` database, the installation location `(host)`, if configured as `localhost`, it means that the installation is locally.
+  - `storage_service`: Configure the remote download URL `download_url` of the `Cassandra` database, the installation location `(host)`, if configured as `127.0.0.1`, it means that the installation is locally.
   - `monitor`: Configure the remote download URL, installation location and installation port of MonographDB’s related monitoring software (prometheus, grafana).
     The configuration template is as follows:
 
+    ```yaml
+    connection:
+    username: "centos"
+    auth_type: "keypair"
+    auth:
+        keypair: "~/xx.pem"
+    deployment:
+    install_image: "file:///home/centos/monographdb-release-bin.tar.gz"
+    cluster_name: "mono_cloud"
+    install_dir: "/home/centos"
+    port:
+        mysql_port: 3300
+        monograph_port:
+        start: 8100
+        end: 8200
+    mono_service:
+        host:
+        - 10.0.1.1
+        - 10.0.1.2
+        - 10.0.1.3
+        - 10.0.1.4
+    storage_service:
+        cassandra:
+        download_url: "https://archive.apache.org/dist/cassandra/4.1.0/apache-cassandra-4.1.0-bin.tar.gz"
+        storage_cluster: "mono-cass-cluster"
+        host:
+        - 10.0.1.1
+        - 10.0.1.2
+        - 10.0.1.3
+        - 10.0.1.4
+    monitor:
+        data_dir: ""
+        monograph_metrics:
+        path: "/mono_metrics"
+        port: 18081
+        prometheus:
+        download_url: "https://github.com/prometheus/prometheus/releases/download/v2.42.0/prometheus-2.42.0.linux-amd64.tar.gz"
+        port: 9090
+        host: "10.0.1.1"
+        grafana:
+        download_url: "https://dl.grafana.com/oss/release/grafana-9.3.6.linux-amd64.tar.gz"
+        port: 3300
+        host: "10.0.1.1"
+        node_exporter: "https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_exporter-1.5.0.linux-amd64.tar.gz"
+        node_exporter_port: 9200
+        mysql_exporter: "https://github.com/prometheus/mysqld_exporter/releases/download/v0.14.0/mysqld_exporter-0.14.0.linux-amd64.tar.gz"
+        mysql_exporter_port: 9300
+        cassandra_collector:
+        mcac_agent: "https://github.com/datastax/metric-collector-for-apache-cassandra/releases/download/v0.3.4/datastax-mcac-agent-0.3.4-4.1-beta1.tar.gz"
+        mcac_port: 9103
 
-      ```yaml
-      connection:
-      username: "centos"
-      auth_type: "keypair"
-      auth:
-          keypair: "~/xx.pem"
-      deployment:
-      install_image: "file:///home/centos/monographdb-release-bin.tar.gz"
-      cluster_name: "mono_cloud"
-      install_dir: "/home/centos"
-      port:
-          mysql_port: 3300
-          monograph_port:
-          start: 8100
-          end: 8200
-      mono_service:
-          host:
-          - 10.0.1.1
-          - 10.0.1.2
-          - 10.0.1.3
-          - 10.0.1.4
-      storage_service:
-          cassandra:
-          download_url: "https://archive.apache.org/dist/cassandra/4.1.0/apache-cassandra-4.1.0-bin.tar.gz"
-          storage_cluster: "mono-cass-cluster"
-          host:
-          - 10.0.1.1
-          - 10.0.1.2
-          - 10.0.1.3
-          - 10.0.1.4
-      monitor:
-          data_dir: ""
-          monograph_metrics:
-          path: "/mono_metrics"
-          port: 18081
-          prometheus:
-          download_url: "https://github.com/prometheus/prometheus/releases/download/v2.42.0/prometheus-2.42.0.linux-amd64.tar.gz"
-          port: 9090
-          host: "10.0.1.1"
-          grafana:
-          download_url: "https://dl.grafana.com/oss/release/grafana-9.3.6.linux-amd64.tar.gz"
-          port: 3300
-          host: "10.0.1.1"
-          node_exporter: "https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_exporter-1.5.0.linux-amd64.tar.gz"
-          node_exporter_port: 9200
-          mysql_exporter: "https://github.com/prometheus/mysqld_exporter/releases/download/v0.14.0/mysqld_exporter-0.14.0.linux-amd64.tar.gz"
-          mysql_exporter_port: 9300
-          cassandra_collector:
-          mcac_agent: "https://github.com/datastax/metric-collector-for-apache-cassandra/releases/download/v0.3.4/datastax-mcac-agent-0.3.4-4.1-beta1.tar.gz"
-          mcac_port: 9103
-
-      #    dynamodb:
-      #      access_key_id: "",
-      #      secret_key: ""
-      #      region: "XXXX",
-      #      endpoint: "";
-      ```
+    #    dynamodb:
+    #      access_key_id: "",
+    #      secret_key: ""
+    #      region: "XXXX",
+    #      endpoint: "";
+    ```
 
 > **Note:**
 > The deployment.yaml file above is the default configuration file, and users can configure the software to be installed as needed. For some software that does not need to be installed, it only needs to be deleted from the configuration file.

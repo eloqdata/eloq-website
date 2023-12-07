@@ -67,7 +67,7 @@ TS_DB_NAME = "test"
 USE_PREPARE_STMT = False
 ```
 
-2.  Run `bash start_worker.sh ${WorkerNumber}`. `${Workernumber}` indicates how many Locust processes will be created. We will have one master process and ${WorkerNumber} workers processes. If you want to run Locust with multiple machines, please refer to [how to run distributed](https://docs.locust.io/en/stable/running-distributed.html#running-distributed).
+2.  Run `bash start_worker.sh ${WorkerNumber}`. `${Workernumber}` indicates how many Locust processes will be created. We will have one master process and `${WorkerNumber}` workers processes. If you want to run Locust with multiple machines, please refer to [how to run distributed](https://docs.locust.io/en/stable/running-distributed.html#running-distributed).
 
 3.  Wait a few seconds until all workers are connected to the master.
 

@@ -17,14 +17,15 @@ summary: 了解如何快速上手使用 MonoGraphDB 数据库。
 
 准备一台部署主机，确保其软件满足相关要求：
 
-- 安装 Centos7 及以上版本
-- 运行环境需要接入互联网访问，用于下载 MonographDB 及其相关依赖。
+- 硬件配置: 建议计算和存储节点 CPU 32 物理核以上，内存 64GB 以上。日志节点推荐 3 块以上 SSD 磁盘，CPU 4 物理核以上。日志>节点支持和计算节点联合部署。
+- 推荐安装 Ubuntu2004 操作系统，支持 CentOS7，CentOS Stream 8。
+- 运行环境需要接入互联网访问，用于下载 MonographDB 及其相关依赖。**注意:单机请使用 127.0.0.1。不能使用 localhost**
 
 1. 系统配置
 
 下面是一些安装 MonographDB 之前所要进行的必要配置。
 
-- 使用下面的命令编辑系统配置文件`/etc/security/limits.d/20-nproc.conf`
+- 使用下面的命令编辑系统配置文件`/etc/security/limits.d/20-nproc.conf or /etc/security/limits.conf`
   ```shell
   sudo vi /etc/security/limits.d/20-nproc.conf
   ```
@@ -62,6 +63,19 @@ summary: 了解如何快速上手使用 MonoGraphDB 数据库。
 - 重新登陆会话，使得上述的更改生效,然后再次登陆
   ```shell
   logout
+  ```
+- Ubuntu18.04 需要额外安装 gcc11
+  ```shell
+  sudo apt update
+  sudo apt install software-properties-common -y
+  sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+  sudo apt update
+  sudo apt install gcc-11 g++-11 -y
+  ```
+- Centos8 需要额外安装 openssl10
+  ```shell
+  sudo dnf makecache --refresh
+  sudo dnf -y install compat-openssl10
   ```
 
 2. 单节点网络配置
@@ -108,11 +122,8 @@ summary: 了解如何快速上手使用 MonoGraphDB 数据库。
 
 - 生成的公钥`id_ed25519.pub`添加到 authorized_keys
   ```shell
-  cat .ssh/ed25519_mono.pub | ssh username@host 'cat >> .ssh/authorized_keys'
-  ```
-  如果要将 MonographDB 服务安装在本地，则只需要运行下面的
-  ```shell
-  cat .ssh/ed25519_mono.pub | ssh $USER@localhost 'cat >> .ssh/authorized_keys'
+  cat ~/.ssh/ed25519_mono.pub >> ~/.ssh/authorized_keys
+  ssh-keyscan -H 127.0.0.1 >> ~/.ssh/known_hosts
   ```
 - 给 ssh 目录设置权限
   ```shell
@@ -120,37 +131,26 @@ summary: 了解如何快速上手使用 MonoGraphDB 数据库。
   chmod 600 ~/.ssh/authorized_keys
   ```
 
-3. 获取 MonographDB 安装包
-   请下载 MonographDB 的安装包
+3. 联系我们获取 MonographDB 安装包
 
 ```
-monographdb-txservice-sd-release-bin-0.2.0.tar.gz
-monographdb-logservice-sd-release-bin-0.2.0.tar.gz
-```
-
-4.Monograph Waiter 的下载
-Monograph Waiter 是一个用于开发与管理 MonographDB 的工具包，其中包含`cluster_mgr`, 一个用于集群安装部署和管理的命令行工具，旨在让非 Kubernetes 环境下更容易安装和管理 MonographDB 集群。
-
-```
-waiter-cluster-mgr-centos7.tar.gz
+monographdb-tx-release-bin.tar.gz
+monographdb-log-release-bin.tar.gz
+waiter-cluster-mgr.tar.gz
 ```
 
 ### 实施部署
 
 1. 部署 MonographDB
 
-- 修改 config/remote_env
+- 解压 waiter-cluster-mgr.tar.gz，里面包含 cluster_mgr 安装程序，和配置文件夹 config。
 
-  该文件目前为 Cassandra 启动需要的 JAVA_HOME 路径，根据安装平台修改，具体如下：
+```
+tar -zxvf waiter-cluster-mgr.tar.gz
+cd mono_cluster_mgr_dist
+```
 
-  ```bash
-  # ububtu
-  JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
-  # centos
-  JAVA_HOME=/usr/lib/jvm/java-11-openjdk
-  ```
-
-* 修改 monographDB 启动选项
+- 修改 monographDB 启动选项
   编辑配置文件 config/my_template.cnf，添加线程池相关参数，并根据机器配置进行调整 CPU 和内存参数。
 
 ```
@@ -159,12 +159,12 @@ waiter-cluster-mgr-centos7.tar.gz
 thread_handling=pool-of-threads
 thread_pool_max_threads=4
 thread_pool_dedicated_listener=1
-# thread_pool_size should be 3/4 of physical CPU core number.
-thread_pool_size=12
+# thread_pool_size should be 3/8 of physical CPU core number.
+thread_pool_size=6
 
 # under monograph
-# core_num should be 1/4 of physical CPU core number.
-monograph_core_num=4
+# core_num should e 3/8 of physical CPU core number.
+monograph_core_num=6
 # node_memory_limit_mb is the buffer pool of monographDB,
 # should be less than 60% physical memory.
 monograph_node_memory_limit_mb=4000
@@ -173,27 +173,27 @@ monograph_node_memory_limit_mb=4000
 - 修改集群配置文件
   按下面的配置模板，编辑配置文件 config/deployment.yaml，其中：
 
-  - `username: "mono"`：表示通过 `mono`系统用户（当前系统用户名）来做集群的内部管理，默认使用 22 端口通过 ssh 登录目标机器
+  - `username: "ubuntu"`：表示通过 `ubuntu`系统用户（当前系统用户名）来做集群的内部管理，默认使用 22 端口通过 ssh 登录目标机器。**ubuntu 需要有 sudo 权限，不支持使用 root 用户安装数据库**
   - `auth_type`：ssh 登陆验证的方式，默认为 keypair 形式
   - `keypair`: 设置为通过网络配置的 ssh 私钥文件存放地址
-  - `host`：设置为本部署主机的 IP，如果只需要安装在本机，则设置为 localhost
+  - `host`：设置为本部署主机的 IP，如果只需要安装在本机，则设置为 127.0.0.1，不要使用 localhost
   - `tx_image`：MonographDB TxService 安装包，支持本地地址以及远程地址。
   - `log_image`: MonographDB LogService 安装包，支持本地地址以及远程地址。
   - `install_dir`：设置为用户安装集群的期望存放位置，此位置须为`username`所指定的用户所具有读写权限的文件夹位置，如果安装目录不存在，目前需要提前手工创建。
-  - `storage_service`：配置`Cassandra`数据库的远程下载网址`download_url`，安装位置`(host)`，如果配置成`localhost`,表示安装在本地。
-  - `monitor`：配置 MonographDB 的相关监控软件（prometheus、 grafana）的远程下载网址、安装位置以及安装端口。
+  - `storage_service`：配置`Cassandra`数据库的远程下载网址`download_url`，安装位置`(host)`，如果配置成`127.0.0.1`,表示安装在本地。
+  - `monitor`：配置 MonographDB 的相关监控软件（prometheus、 grafana）的远程下载网址、安装位置以及安装端口。**目前 monitor 需要安装在 storage_service 所在节点**。
     配置模板如下：
 
     ```yaml
     connection:
-      username: 'centos'
+      username: 'ubuntu'
       auth_type: 'keypair'
       auth:
-        keypair: '/home/centos/.ssh/ed25519_mono'
+        keypair: '/home/ubuntu/.ssh/ed25519_mono'
     deployment:
       # monographdb 安装包路径 file:// 表示文件在本地。目前支持http 和 file 。
-      tx_image: 'file:///home/centos/monographdb-txservice-sd-release-bin-0.2.0.tar.gz'
-      log_image: 'file:///home/centos/monographdb-logservice-sd-release-bin-0.2.0.tar.gz'
+      tx_image: 'file:///home/ubuntu/monographdb-tx-release-bin.tar.gz'
+      log_image: 'file:///home/ubuntu/monographdb-log-release-bin.tar.gz'
       cluster_name: 'mono-poc'
       # monographdb 安装路径，当前用户对该目录需要具备读写权限 。
       install_dir: '/data/opt'
@@ -204,21 +204,23 @@ monograph_node_memory_limit_mb=4000
           end: 8009
       log_service:
         nodes:
-          - host: localhost
+          - host: 127.0.0.1
             port: 9000
             data_dir:
-              - '/data/opt/log_data'
+              - '/data1/opt/log_data'
+              - '/data2/opt/log_data'
+              - '/data3/opt/log_data'
         replica: 1
       tx_service:
         # tx service 安装节点，可以是多个，但不能重复
         host:
-          - localhost
+          - 127.0.0.1
       storage_service:
         cassandra:
           download_url: 'https://dlcdn.apache.org/cassandra/4.1.3/apache-cassandra-4.1.3-bin.tar.gz'
           storage_cluster: 'mono-cass-cluster'
           host:
-            - localhost
+            - 127.0.0.1
       monitor:
         data_dir: ''
         monograph_metrics:
@@ -227,11 +229,11 @@ monograph_node_memory_limit_mb=4000
         prometheus:
           download_url: 'https://github.com/prometheus/prometheus/releases/download/v2.42.0/prometheus-2.42.0.linux-amd64.tar.gz'
           port: 9500
-          host: 'localhost'
+          host: '127.0.0.1'
         grafana:
           download_url: 'https://dl.grafana.com/oss/release/grafana-9.3.6.linux-amd64.tar.gz'
           port: 3301
-          host: 'localhost'
+          host: '127.0.0.1'
         node_exporter: 'https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_exporter-1.5.0.linux-amd64.tar.gz'
         node_exporter_port: 9200
         mysql_exporter: 'https://github.com/prometheus/mysqld_exporter/releases/download/v0.14.0/mysqld_exporter-0.14.0.linux-amd64.tar.gz'
@@ -241,10 +243,7 @@ monograph_node_memory_limit_mb=4000
           mcac_port: 9103
     ```
 
-> **注意：**
-> 上述的 deployment.yaml 文件是默认配置文件，用户可以按需配置需要安装的软件。对于某些不需要安装的软件，只需要将其从配置文件中删除即可。
-
-- 安装 MonographDB 所需的依赖文件
+- 安装 MonographDB 所需的依赖文件.请在`mono_cluster_mgr_dist`文件夹下执行
   ```shell
   ./cluster_mgr run-deps --topology-file ${PWD}/config/deployment.yaml
   ```
@@ -253,12 +252,10 @@ monograph_node_memory_limit_mb=4000
   ./cluster_mgr deploy --topology-file ${PWD}/config/deployment.yaml
   ```
 - 执行 MonographDB 集群安装命令
+
   ```
   ./cluster_mgr install --cluster  $CLUSTER_NAME
   ```
-
-> **注意：**
-> 在安装 MonographDB 集群的过程中首先需要设置好 JDK(JAVA Development Kit)的开发环境，并且设置好相应的 JAVA_HOME 与 PATH,为了防止 cassandra 执行过程中出错
 
 - 启动 MonographDB 集群
 
@@ -266,15 +263,24 @@ monograph_node_memory_limit_mb=4000
   ./cluster_mgr start  --cluster  $CLUSTER_NAME
   ```
 
+- 启动监控
+
+  ```shell
+  ./cluster_mgr monitor --cluster $CLUSTER_NAME --command start
+  ```
+
 - 访问集群
-  - 访问 MonographDB 数据库，默认情况下，`mysql`安装在`/home/$USER/opt/mono-poc/monographdb-release/install/`下，进入到该目录下，使用 socket 方式来连接数据库。更多连接方式请参考[客户端连接](./connect-to-monodb/connect-by-client.md)。
+  - 访问 MonographDB 数据库，默认情况下，`mysql`安装在`/data/opt/mono-poc/monograph-tx-service-release/install/`下，进入到该目录下，使用 socket 方式来连接数据库。更多连接方式请参考[客户端连接](./connect-to-monodb/connect-by-client.md)。
     ```shell
-    cd /home/$USER/opt/$CLUSTER_NAME/monographdb-release/install/
+    cd /data/opt/mono-poc/monograph-tx-service-release/install/
     sudo ./bin/mysql -u root  -S /tmp/mysql3300.sock
+    CREATE USER 'sysb'@'%' IDENTIFIED BY 'sysb';
+    GRANT ALL PRIVILEGES ON * . * TO  'sysb'@'%';
+    FLUSH PRIVILEGES;
     ```
   - 执行以下命令可以查看集群的状态：
     ```shell
-    ./cluster_mgr status -cluster $CLUSTER_NAME
+    ./cluster_mgr status --cluster $CLUSTER_NAME
     ```
 
 ### 批量导入数据
@@ -282,6 +288,8 @@ monograph_node_memory_limit_mb=4000
 `mono_load.py` 是 MonographDB 的数据批量加载工具，其运行依赖 python3 通过一下命令安装其运行时依赖
 
 ```bash
+sudo apt install python3 -y
+sudo apt install python3-pip -y
 sudo pip3 install chardet
 sudo pip3 install mysql-connector
 ```
@@ -289,7 +297,8 @@ sudo pip3 install mysql-connector
 请根据当前的安装环境将下列参数修改正确
 
 ```bash
-python3 monograph_load.py -h $MYSQL_HOST -U $MYSQL_USER \
+python3 mono_load.py --help
+python3 mono_load.py -h $MYSQL_HOST -U $MYSQL_USER \
    -P $MYSQL_PASSWORD -d $MYSQL_DB -w $WORKER_NUMBER -f $CSV_FILE
 ```
 

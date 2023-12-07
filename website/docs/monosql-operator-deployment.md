@@ -332,7 +332,7 @@ metadata:
 
 3. Copy the following content and name it `monosql-cluster.yaml`
 
-   **Note: Please replace the ${MY_REGION} in the following file with the actual region name. Also, please pre-configure the `imagePullSecrets` base to the Token in Marketplacce.**
+   **Note: Please replace the `${MY_REGION}` in the following file with the actual region name. Also, please pre-configure the `imagePullSecrets` base to the Token in Marketplace.**
 
 ```yaml
 apiVersion: monosql-service.monographdb.com/v1alpha1

@@ -15,9 +15,10 @@ summary: 了解在多台服务器上快速部署、使用MonoGraphDB集群。
 
 ### 部署准备
 
-准备多台部署主机，确保其软件满足相关要求：
+准备多台部署主机，确保其软硬件满足相关要求：
 
-- 推荐安装 Ubuntu2004 版本
+- 硬件配置: 建议计算和存储节点 CPU 32 物理核以上，内存 64GB 以上。日志节点推荐 3 块以上 SSD 磁盘，CPU 4 物理核以上。日志节点支持和计算节点联合部署。
+- 推荐安装 Ubuntu2004 版本，支持 CentOS 7, CentOS Stream 8。
 - 运行环境需要接入互联网访问，用于下载 MonographDB 及其相关依赖。
   对于 MonographDB 集群拓扑，可以通过更改 YAML 文件按需配置所需要的集群数量，在本次测试中，集群拓扑如下表所示：
   下表中拓扑实例的 IP 为示例 IP IP。在实际部署时，请替换为实际的 IP。**注意:单机请使用 127.0.0.1。不能使用 localhost**
@@ -74,12 +75,19 @@ summary: 了解在多台服务器上快速部署、使用MonoGraphDB集群。
   logout
   ```
 - Ubuntu18.04 需要额外安装 gcc11
+
   ```shell
   sudo apt update
   sudo apt install software-properties-common -y
   sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
   sudo apt update
   sudo apt install gcc-11 g++-11 -y
+  ```
+
+- Centos8 需要额外安装 openssl10
+  ```shell
+  sudo dnf makecache --refresh
+  sudo dnf -y install compat-openssl10
   ```
 
 2. 单节点网络配置
@@ -127,7 +135,8 @@ summary: 了解在多台服务器上快速部署、使用MonoGraphDB集群。
 - 生成的公钥`id_ed25519.pub`添加到 authorized_keys
   如果要将 MonographDB 服务安装在本地，则只需要运行下面的
   ```shell
-  cat .ssh/ed25519_mono.pub >> .ssh/authorized_keys
+  cat ~/.ssh/ed25519_mono.pub >> ~/.ssh/authorized_keys
+  ssh-keyscan -H 127.0.0.1 >> ~/.ssh/known_hosts
   ```
   对于分布式环境，需要将 ed25519_mono.pub 内容写入所有节点的 authorized_keys 文件中
 - 给 ssh 目录设置权限
@@ -142,7 +151,7 @@ summary: 了解在多台服务器上快速部署、使用MonoGraphDB集群。
 ```
 monographdb-tx-release-bin.tar.gz
 monographdb-log-release-bin.tar.gz
-waiter-cluster-mgr-ubuntu2004.tar.gz
+waiter-cluster-mgr.tar.gz
 ```
 
 Monograph Waiter 是一个用于开发与管理 MonographDB 的工具包，其中包含`cluster_mgr`, 一个用于集群安装部署和管理的命令行工具，旨在让非 Kubernetes 环境下更容易安装和管理 MonographDB 集群。
@@ -174,7 +183,7 @@ monograph_node_memory_limit_mb=4000
 - 修改集群配置文件
   按下面的配置模板，编辑配置文件 config/deployment.yaml，其中：
 
-  - `username: "mono"`：表示通过 `mono`系统用户（当前系统用户名）来做集群的内部管理，默认使用 22 端口通过 ssh 登录目标机器
+  - `username: "ubuntu"`：表示通过 `ubuntu`系统用户（当前系统用户名）来做集群的内部管理，默认使用 22 端口通过 ssh 登录目标机器,**ubuntu 需要有 sudo 权限，不支持使用 root 用户安装数据库**
   - `auth_type`：ssh 登陆验证的方式，默认为 keypair 形式
   - `keypair`: 设置为通过网络配置的 ssh 私钥文件存放地址
   - `host`：设置为本部署主机的 IP，如果只需要安装在本机，则设置为 127.0.0.1 **注意：不能使用 localhost**
@@ -182,7 +191,7 @@ monograph_node_memory_limit_mb=4000
   - `log_image`: MonographDB LogService 安装包，支持本地地址以及远程地址。
   - `install_dir`：设置为用户安装集群的期望存放位置，此位置须为`username`所指定的用户所具有读写权限的文件夹位置，如果安装目录不存在，目前需要提前手工创建。
   - `storage_service`：配置`Cassandra`数据库的远程下载网址`download_url`，安装位置`(host)`，如果配置成`127.0.0.1`,表示安装在本地。
-  - `monitor`：配置 MonographDB 的相关监控软件（prometheus、 grafana）的远程下载网址、安装位置以及安装端口。
+  - `monitor`：配置 MonographDB 的相关监控软件（prometheus、 grafana）的远程下载网址、安装位置以及安装端口。**目前 monitor 需要安装在 storage_service 所在节点**。
   - `log_service`: data_dir 负责指定磁盘的位置 /data/opt/log_data1 /data/opt/log_data2 /data/opt/log_data3
   - `内网安装`: 无法连接外网下载 Cassandra，可以提前下载上传，使用 file:///home/file_path 从本地安装 Cassanra 等组件。
     配置模板如下：
@@ -260,12 +269,10 @@ monograph_node_memory_limit_mb=4000
   ./cluster_mgr deploy --topology-file ${PWD}/config/deployment.yaml
   ```
 - 执行 MonographDB 集群安装命令
+
   ```
   ./cluster_mgr install --cluster  $CLUSTER_NAME
   ```
-
-> **注意：**
-> 在安装 MonographDB 集群的过程中首先需要设置好 JDK(JAVA Development Kit)的开发环境，并且设置好相应的 JAVA_HOME 与 PATH,为了防止 cassandra 执行过程中出错
 
 - 启动 MonographDB 集群
 
@@ -273,15 +280,24 @@ monograph_node_memory_limit_mb=4000
   ./cluster_mgr start  --cluster  $CLUSTER_NAME
   ```
 
+- 启动监控
+
+  ```shell
+  ./cluster_mgr monitor --cluster $CLUSTER_NAME --command start
+  ```
+
 - 访问集群
-  - 访问 MonographDB 数据库，默认情况下，`mysql`安装在`/home/$USER/opt/mono-poc/monographdb-release/install/`下，进入到该目录下，使用 socket 方式来连接数据库。更多连接方式请参考[客户端连接](./connect-to-monodb/connect-by-client.md)。
+  - 访问 MonographDB 数据库，默认情况下，`mysql`安装在`/data/opt/mono-poc/monograph-tx-service-release/install/`下，进入到该目录下，使用 socket 方式来连接数据库。更多连接方式请参考[客户端连接](./connect-to-monodb/connect-by-client.md)。
     ```shell
-    cd /home/$USER/opt/$CLUSTER_NAME/monographdb-release/install/
+    cd /data/opt/mono-poc/monograph-tx-service-release/install/
     sudo ./bin/mysql -u root  -S /tmp/mysql3300.sock
+    CREATE USER 'sysb'@'%' IDENTIFIED BY 'sysb';
+    GRANT ALL PRIVILEGES ON * . * TO  'sysb'@'%';
+    FLUSH PRIVILEGES;
     ```
   - 执行以下命令可以查看集群的状态：
     ```shell
-    ./cluster_mgr status -cluster $CLUSTER_NAME
+    ./cluster_mgr status --cluster $CLUSTER_NAME
     ```
 
 ### 批量导入数据
@@ -289,6 +305,8 @@ monograph_node_memory_limit_mb=4000
 `mono_load.py` 是 MonographDB 的数据批量加载工具，其运行依赖 python3 通过一下命令安装其运行时依赖
 
 ```bash
+sudo apt install python3 -y
+sudo apt install python3-pip -y
 sudo pip3 install chardet
 sudo pip3 install mysql-connector
 ```
@@ -296,7 +314,8 @@ sudo pip3 install mysql-connector
 请根据当前的安装环境将下列参数修改正确
 
 ```bash
-python3 monograph_load.py -h $MYSQL_HOST -U $MYSQL_USER \
+python3 mono_load.py --help
+python3 mono_load.py -h $MYSQL_HOST -U $MYSQL_USER \
    -P $MYSQL_PASSWORD -d $MYSQL_DB -w $WORKER_NUMBER -f $CSV_FILE
 ```
 
