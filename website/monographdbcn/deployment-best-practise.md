@@ -1,9 +1,31 @@
 ---
-title: 集群部署
-summary: 了解在多台服务器上快速部署、使用MonoGraphDB集群。
+title: 集群规划最佳实践
 ---
 
-# MonographDB 数据库集群部署、使用指南
+# MonographDB 集群规划最佳实践
+
+MonographDB 是一款计算，内存，存储和日志四元解耦的数据库。针对不同的工作负载，支持灵活伸缩不同模块，以最低的成本实现最优的查询性能。
+
+1. 写流量大的场景，扩展 logservice 日志层。
+2. 读流量大，热数据多的场景，扩展 txservice 内存事务层。
+3. 数据量大，特别是冷数据多的场景，扩展存储层。
+4. 高可用场景
+
+## 正常读写混合负载推荐配置
+
+CPU 按照 1:2:6 比例配置，假设 72 个 core，txservice 节点 48 个 core，logservice 节点 8 个 core，Cassandra 节点 16 个 core
+
+内存按照 1:4:12 比例配置，假设 272GB 内存，txservice 节点 192GB，logservice 节点 16GB，Cassandra 节点 64GB (注：CPU 和内存按照一定比例配置，日志节点可以选取高 CPU 配置的机器)
+
+磁盘容量需求以 Cassandra 为主，日志节点需要配置多块磁盘，但每块磁盘大小 100GB 即可。
+
+## 热数据多场景
+
+扩展 txservice。CPU 按照 1:2:12 比例配置，内存按照 1:4:24 比例配置。
+
+## 写入流量大场景
+
+扩展 logservice。CPU 按照 1:1:3 比例配置，内存按照 1:4:12 比例配置。日志节点每两个 CPUcore，挂载一块磁盘。
 
 本文档描述了在多台服务器上快速部署、使用 MonographDB 集群的步骤。
 
