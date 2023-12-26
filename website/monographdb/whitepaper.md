@@ -1,3 +1,22 @@
+# Table of Contents
+
+* **Overview**
+    * Data Substrate: The Foundation for Versatile and Elastic Data Management
+* **Products**
+    * MonographDB: A Distributed NewSQL Database for Elastic Performance at Any Scale
+    * MonoCacheDB: Unleashing Blazing-Fast Performance with Transactional Cache
+* **Benchmark**
+    * Benchmark Report of MonographDB
+    * Benchmark Report of MonoCacheDB
+
+<p align="center">
+<br/><br/>
+<br/><br/>
+<img src="./media/background.png" alt="drawing" width="720"/>
+</p>
+
+<div style="page-break-after: always;"></div>
+
 # Data Substrate: The Foundation for Versatile and Elastic Data Management
 
 In today's data-driven world, organizations face mounting challenges managing and utilizing information effectively. Traditional database systems often struggle to adapt to rapidly evolving business needs, leading to complex setups, rigid scalability, and operational headaches. Introducing Data Substrate, a revolutionary abstraction layer that empowers you to build customized, dynamic databases tailored to your specific requirements.
@@ -117,7 +136,7 @@ Gone are the days of performance trade-offs and inflexible scalability in distri
 MonographDB is the future of distributed SQL. Are you ready to break free?
 
 
-# MonoCacheDB: Unleashing Blazing-Fast Performance with Transactional Reliability
+# MonoCacheDB: Unleashing Blazing-Fast Performance with Transactional Cache
 ## Introduction
 
 In today's fast-paced digital landscape, speed and reliability are paramount. Latency is the enemy, and data integrity is a non-negotiable. Traditional caching solutions like Redis offer fast reads, but lack the robust transaction support needed for mission-critical applications. Introducing MonoCacheDB, a revolutionary distributed transactional cache powered by Data Substrate, that shatters performance barriers while ensuring rock-solid data consistency.
@@ -184,7 +203,7 @@ Forget about performance compromises and sacrificing data integrity. MonoCacheDB
 
 The demand for high-performance, scalable databases that can meet the challenges of modern data-intensive applications continues to grow. NewSQL databases have emerged to address these needs, offering the transactional consistency of traditional RDBMS systems with the scalability and performance of NoSQL databases.
 
-In this benchmark report, we compare the performance of MonographDB, a distributed NewSQL database powered by Data Substrate, with CockroachDB, a popular open-source NewSQL database. The goal of this comparison is to evaluate the performance of MonographDB under various workloads especially distributed transaction workloads and its potential to deliver exceptional performance for demanding applications.
+In this benchmark report, we compare the performance of MonographDB, a distributed NewSQL database powered by Data Substrate, with a popular open-source NewSQL database (refer to NewSQL-X in this report). The goal of this comparison is to evaluate the performance of MonographDB under various workloads especially distributed transaction workloads and its potential to deliver exceptional performance for demanding applications.
 
 ## Benchmark Setup
 
@@ -212,13 +231,13 @@ Deployment Details:
 
 | Service type | EC2 type       | Node count | Disk count |
 | ------------ | -------------- | ---------- | ---------- |
-| CockroachDB  | n2-standard-32 | 3          | 1          |
+| NewSQL-X     | n2-standard-32 | 3          | 1          |
 
-To provide comprehensive insights, the benchmark also included experiments conducted on n2-standard-16 instance types for MonographDB txservice and CockroachDB.
+To provide comprehensive insights, the benchmark also included experiments conducted on n2-standard-16 instance types for MonographDB txservice and NewSQL-X.
 
 Disk Considerations:
 
-- CockroachDB's official benchmark report employed Local SSDs, which cannot persist data after instance restarts.
+- NewSQL-X's official benchmark report employed Local SSDs, which cannot persist data after instance restarts.
 - To align with cloud-native environments and ensure data persistence, this benchmark utilized PD-SSD disks in GCP for both databases.
 
 ## Results
@@ -230,21 +249,21 @@ Y-axis: Measures the QPS (Queries Per Second).
 - Distributed Transaction Workload:
 
 <p align="center">
-<img src="./media/write_only_cock_mono.png" alt="drawing" width="350"/>
+<img src="./media/gen-chart-python/write_only_cock_mono.png" alt="drawing" width="350"/>
 </p>
 
 - Single Update Workload:
 
 <p align="center">
-<img src="./media/update_non_index_cock_mono.png" alt="drawing" width="350"/>
+<img src="./media/gen-chart-python/update_non_index_cock_mono.png" alt="drawing" width="350"/>
 </p>
 
 - Point Select Workload:
 
 <p align="center">
-<img src="./media/point_select_cock_mono.png" alt="drawing" width="350"/>
+<img src="./media/gen-chart-python/point_select_cock_mono.png" alt="drawing" width="350"/>
 </p>
 
 ## Key Takeaways
 
-MonographDB consistently outperformed CockroachDB in terms of QPS across both hardware configurations. These results demonstrate MonographDB's superior ability to handle distributed transactions and deliver high performance under demanding workloads. Its innovative Data Substrate architecture enables it to achieve significantly higher QPS compared to CockroachDB, making it a compelling choice for organizations seeking a high-performance, scalable NewSQL database solution.
+MonographDB consistently outperformed NewSQL-X in terms of QPS across both hardware configurations. These results demonstrate MonographDB's superior ability to handle distributed transactions and deliver high performance under demanding workloads. Its innovative Data Substrate architecture enables it to achieve significantly higher QPS compared to NewSQL-X, making it a compelling choice for organizations seeking a high-performance, scalable NewSQL database solution.
