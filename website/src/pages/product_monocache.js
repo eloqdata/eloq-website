@@ -16,28 +16,16 @@ import Layout from '@theme/Layout';
 
 const textContent = {
   intro: `
-  MonoCache is a transactional cache service. Different from cache service like Redis, which has limited support
-  for transaction. MonoCache guarantees full ACID properties in a distributed transaction across a distributed
-  cluster. It enables MonoCache to be used as a primary database standalone. No MySQL + Redis combination, No
-  cache coherence pain points any more.
+  MonoCache is a transactional cache service that goes beyond traditional options like Redis. With full ACID properties across distributed transactions and clusters, it can even replace MySQL + Redis combinations, eliminating cache coherence issues entirely.
   `,
   lowcostmodel: `
-  Benefit from Data Substrate, MonoCache stores hot data in memory for fast query performance. Warm and cold data
-  will be checkpointed into cloud KV store asynchronously. This architecture avoids storing cold data in finite and
-  expensive DRAM while supports cache miss read in a transactional way. Furthermore, cloud kv store has lower
-  operation cost and asynchronous checkpoint can reduce the IOPS of cloud KV store.
+  Leveraging the power of Data Substrate, MonoCache stores frequently accessed data in memory for blazing-fast query performance. As data cools, it is seamlessly transferred to a low-cost cloud key-value store through asynchronous checkpoints. This innovative architecture eliminates the need to store cold data in expensive DRAM while still allowing transactional reads for cache misses. Additionally, the cloud storage offers lower operational costs, while asynchronous checkpointing minimizes IOPS requirements, further optimizing performance and cost-effectiveness.
   `,
   autoscaling: `
-  MonoCache support hybrid scaling at different mudules. When hot data's volumn is large, scaling the memory.
-  When write traffic increases, scaling the log service. When history data becomes large, scaling the cloud kv
-  storage. Scaling the right modules accroding to your workload pattern.
+  MonoCache offers flexible, modular scaling to optimize resource utilization based on your workload patterns. When large volumes of hot data require faster access, you can scale the memory. If write traffic surges, scaling the log service ensures smooth handling. As historical data accumulates, scaling the cloud KV storage provides seamless growth. This targeted approach allows you to scale the right modules at the right time, maximizing performance and efficiency.
   `,
   highperf: `
-  Redis achieves atomicity by using a single-threaded architecture which leads to the waste of system resources on
-  modern hardwares. Like Dragonfly, MonoCache follows multiple-threaded architecture to fully utilize system
-  resource and achieve blazing fast performance. Furthermore MonoCache increases transactional write performance by
-  parallel logging.
-
+  Unlike Redis, which relies on a single-threaded architecture that underutilizes modern hardware, MonoCache leverages a multi-threaded approach to maximize resource utilization and achieve blazing-fast performance. By further optimizing write performance through parallel logging, MonoCache delivers a significant advantage in transactional write throughput.
   `,
   nativeCode: `
 React primitives render to native platform UI, meaning your app uses the
@@ -245,9 +233,9 @@ function HeaderHero() {
         columnOne={<LogoAnimation />}
         columnTwo={
           <>
-            <h1 className="title">MonoCache</h1>
+            <h1 className="title">MonoCacheDB</h1>
             <p className="tagline">
-              A distributed transactional cache service powered by
+              A distributed transactional cache database powered by
               Data&nbsp;Substrate. Store data in cache with lower cost and
               higher availability.
             </p>

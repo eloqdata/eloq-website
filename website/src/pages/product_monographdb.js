@@ -16,10 +16,7 @@ import Layout from '@theme/Layout';
 
 const textContent = {
   intro: `
-  MonographDB is compatible with MySQL protocol by leveraging the MySQL Parser and Executor
-  as compute engine. Innodb storage engine is replaced by enhanced Data Substrate, which supports
-  different transaction isolation level and concurrency control protocol, distributed buffer pool,
-  data persistence and high availability.
+  MonographDB maintains compatibility with the MySQL protocol by leveraging the existing MySQL Parser and Executor as its compute engine. However, it replaces the Innodb storage engine with the enhanced Data Substrate. This advanced engine provides support for various transaction isolation levels, concurrency control protocols, distributed buffer pools, data persistence, and high availability, offering a more robust and scalable solution.
   `,
   nativeCode: `
 React primitives render to native platform UI, meaning your app uses the
@@ -81,26 +78,13 @@ Members of the React Native team frequently speak at various conferences.
 You can follow the latest news from the React Native team on Twitter
   `,
   elasticlog: `
-  Write intensive workload requires the scalability of log service.
-				Traditional databases write and fsync redo logs in the order of log sequence number into
-				a single disk, which becomes the bottleneck of the whole system. MonographDB's patented
-				1-PC technique enables concurrent transactions to write and fsync redo logs into multiple
-				disks in parallel. Benchmark shows 4X TPS improvement compared with AWS Aurora.
+  Write-intensive workloads demand highly scalable logging services. Traditional databases write and fsync redo logs to a single disk in the order of their sequence number, creating a bottleneck for the entire system. MonographDB's patented one-phase commit technique allows concurrent transactions to write and synchronize redo logs to multiple disks in parallel. Benchmarks demonstrate a 4x improvement in transactions per second compared to MySQL.
   `,
   elasticmem: `
-  Read intensive workload requires the scalability of memory resource.
-				To achieve low read latency, it is important to hold all the hot data into memory.
-				MonographDB supports hash and range partition, which can store a large amount of hot data
-				across multiple hosts. As the hot data grows, MonographDB can scale-out the cluster and rebalance
-				the data range automatically. Cold data will be checkpointed into KV stores which can serve cache
-				miss read.
+  Read-intensive workloads demand highly scalable memory resources. To minimize read latency, keeping all hot data in memory is crucial. MonographDB supports both hash and range partitioning, enabling it to store vast amounts of hot data across multiple hosts. As the hot data volume increases, MonographDB can automatically scale out the cluster and rebalance the data range. Additionally, cold data is periodically checkpointed to key-value stores, which can serve cache miss read.
   `,
   decouplestore: `
-  Large dataset requires a decouple storage layer which can be individually scaled regardless of
-				read and write traffic. To reserve additional compute and memory for cold data is a waste of
-				resource. Traditional shared-nothing architecture requires to add more compute nodes as the data
-				volumn scales even if the read and write traffic is unchanged. MonographDB's decoupled cloud
-				storage enable you to only pay for the disk plus the IOPS cost of cold data.
+  Large datasets necessitate a decoupled storage layer that can be scaled independently of read and write traffic. Allocating additional compute and memory resources for cold data is wasteful. Traditional shared-nothing architectures require adding more compute nodes as data volume increases, even if read and write traffic remain constant. MonographDB's decoupled cloud storage allows you to pay only for the disk space and IOPS costs associated with cold data, leading to cost savings and efficient resource utilization.
   `,
 };
 

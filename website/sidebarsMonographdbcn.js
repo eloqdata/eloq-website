@@ -18,7 +18,13 @@ const sidebars = {
   //monoredisSidebar: ['MonoRedis'],
   //monosqlSidebar: ['MonoSQL'],
   monographdb: {
-    快速上手: ['quick-start', 'basic-sql-operations', 'cluster-deployment'],
+    快速上手: [
+      'preconfig',
+      'quick-start',
+      'cluster-deployment',
+      'upgrade-guide',
+      'basic-sql-operations',
+    ],
     连接数据库: ['connect-to-monodb/connect-by-client'],
     数据查询: [
       'data-query/simple-query',

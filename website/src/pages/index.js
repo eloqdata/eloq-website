@@ -7,6 +7,7 @@
 
 import React, {useEffect} from 'react';
 import GitHubButton from 'react-github-btn';
+import Typed from '@theme/Typed';
 
 import Head from '@docusaurus/Head';
 import useBaseUrl from '@docusaurus/useBaseUrl';
@@ -16,10 +17,10 @@ import Layout from '@theme/Layout';
 
 const textContent = {
   intro: `
-  Data Substrate abstracts core functionality common to all data management scenarios.<br/><br/>
+  Data Substrate is a layer of abstraction that provides core functionalities commonly needed for managing data across various scenarios.<br/><br/>
   Data Substrate is responsible for managing <strong>Caching</strong>, <strong>Concurrency control</strong>, <strong>Durability</strong>
   <strong>Consistency</strong> and <strong>Fault tolerance</strong>.<br/><br/>
-  Customized database can be assembled by compute engine, data substrate and cloud kv store.
+  Customized databases can be assembled by compute engine, data substrate and cloud kv store.
   `,
   nativeCode: `
 React primitives render to native platform UI, meaning your app uses the
@@ -30,18 +31,14 @@ so a single codebase can share code across platforms. With React Native,
 one team can maintain multiple platforms and share a common technology—React.
   `,
   whydatasubstrate: `
-  Modern Enterprises require versatile data management systems to satisfy complicated business needs.<br/><br/>
-  This causes many headaches for system admins:
-  long data pipelines,
-  repetitive functionality,
-  complex system management,
-  low resource utilization,
-  inconsistent synchronizations
+  Modern enterprises need versatile data management systems to support complex business needs, but traditional approaches often lead to headaches for system administrators. <br/><br/> These headaches can include long data pipelines, repetitive functionality, complex system management, low resource utilization, and inconsistent synchronizations.
   `,
   hybridscaling: `
-  For read-heavy workloads, scale out the data substrate’s memory for distributed caching.<br/><br/>
-  For write-heavy workloads, scale out the data substrate’s log for parallel logging with patented one phase commit protocol.<br/><br/>
-  For big data, scale out the data store to increase capacity with minimal compute cost for cold data.
+  For read-intensive workloads, scale out the data substrate's memory for distributed caching, ensuring fast data retrieval.<br/><br/>
+
+  For write-heavy workloads, scale out the data substrate's log to enable parallel logging alongside our patented one-phase commit protocol, guaranteeing data duration and high availability.<br/><br/>
+
+  For large datasets, scale out the data store to increase storage capacity while minimizing compute costs for less frequently accessed data.
   `,
   elasticlog: `
   Write intensive workload requires the scalability of log service.
@@ -244,8 +241,10 @@ function HeaderHero() {
           <>
             <h1 className="title">MonoStrate</h1>
             <p className="tagline">
-              Assemble your database according to customized requirement powered
-              by Data&nbsp;Substrate.
+              <Typed
+                strings={['>_ Assemble your database using Data Substrate.']}
+                typeSpeed={75}
+              />
             </p>
             <div className="buttons">
               <HomeCallToAction />

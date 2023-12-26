@@ -194,7 +194,7 @@ module.exports = {
                 to: '/product_monographdb',
               },
               {
-                label: 'MonoCache',
+                label: 'MonoCacheDB',
                 to: '/product_monocache',
               },
             ],
