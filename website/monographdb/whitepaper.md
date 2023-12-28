@@ -1,13 +1,13 @@
 # Table of Contents
-
-* **Overview**
-    * Data Substrate: The Foundation for Versatile and Elastic Data Management
+    
 * **Products**
     * MonographDB: A Distributed NewSQL Database for Elastic Performance at Any Scale
     * MonoCacheDB: Unleashing Blazing-Fast Performance with Transactional Cache
 * **Benchmark**
     * Benchmark Report of MonographDB
     * Benchmark Report of MonoCacheDB
+* **Appendix**
+    * Assemble your database using Data Substrate
 
 <p align="center">
 <br/><br/>
@@ -17,55 +17,9 @@
 
 <div style="page-break-after: always;"></div>
 
-# Data Substrate: The Foundation for Versatile and Elastic Data Management
-
-In today's data-driven world, organizations face mounting challenges managing and utilizing information effectively. Traditional database systems often struggle to adapt to rapidly evolving business needs, leading to complex setups, rigid scalability, and operational headaches. Introducing Data Substrate, a revolutionary abstraction layer that empowers you to build customized, dynamic databases tailored to your specific requirements.
-
-## What is Data Substrate?
-
-Think of Data Substrate as the invisible backbone of your data management solution. It acts as a unified platform, encapsulating critical functionalities commonly needed across diverse data scenarios. From ensuring consistency and data durability to handling concurrency and fault tolerance, Data Substrate takes care of the essential groundwork, freeing you to focus on building the bespoke database your business needs.
-
-Moreover, Data Substrate's modular design and vertical scalability let you tailor it to your specific requirements. This means you can independently scale each layer – compute engines, Data Substrate itself, and cloud storage – to perfectly match your workload demands. Additionally, its cloud-powered cost-efficiency utilizes low-cost storage options for cold data, keeping your resources optimized. With a range of flexible engines at your disposal, you can craft a database perfectly suited to your application, whether it's a high-performance SQL engine for online transaction processing or a kv-based engine for flexible content management, and even wasm based engine for any user defined function.
-
-<!-- ![](./media/datasubstrate.png) -->
-<p align="center">
-<img src="./media/datasubstrate_wp.png" alt="drawing" width="350"/>
-</p>
-<!-- <img src="./media/datasubstrate.png" alt="drawing" style="width:200px;"/> -->
 
 
-### Key Components:
 
-* Compute Engines: The architecture's top layer consists of a variety of adaptable compute engines, including SQL, KV, document, and graph engines. These engines seamlessly integrate with Data Substrate, offering flexibility in data processing and analysis.
-* Data Substrate: This core layer acts as the backbone of the architecture, providing essential functionalities:
-    * Caching: Optimizes performance by storing frequently accessed data in memory for rapid retrieval.
-    * Concurrency Control: Ensures transaction ACID and supports multi-write architecture.
-    * Data Persistence: Guarantees data durability by storing it persistently, even in case of system failures.
-    * Consistency: Maintains data coherence across multiple components and operations.
-    * Fault Tolerance: Enhances resilience by handling errors and fast recovery without data loss.
-* Cloud Storage: Data Substrate integrates with diverse cloud storage solutions like AWS DynamoDB and Google Bigtable, serving two crucial purposes:
-    * Cold Data Storage: Cost-effectively stores less frequently accessed data, reducing compute resource requirements.
-    * Cache Miss Handling: Fetches data from cloud storage when it's not found in the cache, ensuring comprehensive data accessibility.
-    * Break free from vendor lock-in and embrace true cloud independence with Data Substrate's seamless hybrid cloud storage architecture. 
-
-
-## Why Choose Data Substrate?
-
-Modern enterprises require nimble data systems that can seamlessly adapt to their unique workload demands. Data Substrate empowers you to break free from the limitations of traditional database approaches, addressing common pain points such as:
-
-- Long, cumbersome data pipelines: Data Substrate streamlines data flow, eliminating redundant processing and simplifying your data infrastructure.
-- Repetitive hand-coding of core functionalities: No more reinventing the wheel! Data Substrate provides a robust foundation, letting you focus on your specific data logic.
-- Low resource utilization: Data Substrate ensures efficient resource allocation, scaling the right components to match your workload demands and preventing wasted capacity.
-- Inconsistent data synchronization: Eliminate data siloes and ensure seamless data consistency across your entire system with Data Substrate's transactional cache mechanism.
-- Choose your cloud, your way: Data Substrate empowers you to orchestrate your data seamlessly across multiple clouds, creating a hybrid environment that aligns perfectly with your business needs and empowers strategic decision-making.
-
-## Key Features of Data Substrate:
-
-Data Substrate shines through its unparalleled elasticity and adaptability. It automatically adjusts to your needs, ensuring optimal performance regardless of workload variations. Here are some key highlights:
-
-- Elastic Scaling: Adapt to diverse workloads effortlessly. For read-intensive scenarios, Data Substrate scales out its memory, enabling distributed caching and lightning-fast data retrieval.
-- Parallel Write Optimization: No more bottlenecks! Data Substrate's patented one-phase commit protocol and parallel logging capabilities handle write-heavy workloads with ease, guaranteeing data durability and high availability even under extreme pressure.
-- Cost-Effective Scalability: Large datasets are no match for Data Substrate. Seamlessly scale out your cloud storage without overloading compute resources, minimizing costs for infrequently accessed data.
 
 
 
@@ -201,13 +155,22 @@ Forget about performance compromises and sacrificing data integrity. MonoCacheDB
 
 ## Introduction
 
-The demand for high-performance, scalable databases that can meet the challenges of modern data-intensive applications continues to grow. NewSQL databases have emerged to address these needs, offering the transactional consistency of traditional RDBMS systems with the scalability and performance of NoSQL databases.
+The demand for high-performance, scalable databases that can meet the challenges of modern data-intensive applications continues to grow. NewSQL databases have emerged to address these needs, offering the transactional consistency of traditional RDBMS systems with the scalability of NoSQL databases.
 
-In this benchmark report, we compare the performance of MonographDB, a distributed NewSQL database powered by Data Substrate, with a popular open-source NewSQL database (refer to NewSQL-X in this report). The goal of this comparison is to evaluate the performance of MonographDB under various workloads especially distributed transaction workloads and its potential to deliver exceptional performance for demanding applications.
+While NewSQL promises both scalability and transactional consistency, many struggle with performance. Compared to single-node solutions like MySQL, their cost-efficiency suffers, and high latency renders them unsuitable for latency-sensitive tasks.
 
-## Benchmark Setup
+MonographDB shatters NewSQL performance barriers with a unique approach: in-memory transaction processing powered by data substrate, a one-phase commit protocol to minimize disk I/O, and asynchronous key-value store access to eliminate latency bottlenecks.
 
-### Workload:
+To illuminate MonographDB's edge, we'll conduct experiments focusing on: 
+
+- Benchmarking MonographDB against leading NewSQL databases on mixed workload including distributed transaction to prove its performance superiority.
+- Exposesing the limits of traditional databases and underscores the crucial role of scalable memory for consistent performance, with RDS MySQL plummeting due to cache misses, unfixable even by adding read replicas.
+- Revealing how write-intensive workloads in the cloud benefit less from scaling CPU and memory, demonstrating the value of MonographDB's decoupled architecture. Instead, focusing on scaling the true bottleneck like the log service unlocks unmatched performance.
+
+
+## Experiment I:
+
+In the first senario, we compare the performance of MonographDB, a distributed NewSQL database powered by Data Substrate, with a popular open-source NewSQL database (refer to NewSQL-X in this report). The goal of this comparison is to evaluate the performance of MonographDB under various workloads especially distributed transaction workloads and its potential to deliver exceptional performance for demanding applications.
 
 A mixed workload was used, simulating a combination of read and write operations to assess overall performance.
 - Distributed Transaction: Transactions spanned multiple database instances, ensuring a thorough evaluation of distributed transaction handling capabilities. Each transaction involved a combination of update, delete, or insert queries, simulating the complexity of real-world applications.
@@ -216,22 +179,15 @@ A mixed workload was used, simulating a combination of read and write operations
 
 ### Hardware and Software:
 
-Harnessing its decoupled architecture, MonographDB empowers strategic resource allocation to optimize performance across different components. In this benchmark:
+To test against NewSQL database in the same hardware configuration, we deploy MonographDB in co-locate mode, i.e. deploy TxService, LogService and KVStore in the same node. The deployment details is as follows:
 
-- Enhanced Transaction Performance: MonographDB dedicated more CPU resources to the txservice, responsible for transaction processing, directly boosting transaction throughput.
-- Parallel Logging: By allocating additional disks to the logservice, MonographDB ensured efficient logging operations, minimizing potential bottlenecks.
+| Service type | Node type      | Node count | Disk count     |
+| ------------ | -------------- | ---------- | -------------- |
+| MonographDB  | n2-standard-32 | 3          | 350G*1 + 50G*3 |
 
-Deployment Details:
-
-| Service type | EC2 type       | Node count | Disk count |
+| Service type | Node type      | Node count | Disk count |
 | ------------ | -------------- | ---------- | ---------- |
-| txservice    | n2-standard-32 | 3          | 1          |
-| logservice   | n2-standard-16 | 1          | 6          |
-| cassandra    | n2-standard-8  | 1          | 1          |
-
-| Service type | EC2 type       | Node count | Disk count |
-| ------------ | -------------- | ---------- | ---------- |
-| NewSQL-X     | n2-standard-32 | 3          | 1          |
+| NewSQL-X     | n2-standard-32 | 3          | 500G*1     |
 
 To provide comprehensive insights, the benchmark also included experiments conducted on n2-standard-16 instance types for MonographDB txservice and NewSQL-X.
 
@@ -239,8 +195,11 @@ Disk Considerations:
 
 - NewSQL-X's official benchmark report employed Local SSDs, which cannot persist data after instance restarts.
 - To align with cloud-native environments and ensure data persistence, this benchmark utilized PD-SSD disks in GCP for both databases.
+- To leverage MonographDB's parallel logging capabilities and maximize I/O performance, we equipped LogService with three 50GB SSD disks.
 
-## Results
+### Results
+
+Firstly, we study the throughput of the two databases under diffrent workloads.
 
 X-axis: Represents the varying thread numbers employed during the benchmark, simulating different levels of concurrent database access.
 
@@ -249,21 +208,176 @@ Y-axis: Measures the QPS (Queries Per Second).
 - Distributed Transaction Workload:
 
 <p align="center">
-<img src="./media/gen-chart-python/write_only_cock_mono.png" alt="drawing" width="350"/>
+<img src="./media/gen-chart-python/write_only_cock_mono_colocate_qps.png" alt="drawing" width="400"/>
 </p>
 
 - Single Update Workload:
 
 <p align="center">
-<img src="./media/gen-chart-python/update_non_index_cock_mono.png" alt="drawing" width="350"/>
+<img src="./media/gen-chart-python/update_non_index_cock_mono_colocate_qps.png" alt="drawing" width="400"/>
 </p>
 
 - Point Select Workload:
 
 <p align="center">
-<img src="./media/gen-chart-python/point_select_cock_mono.png" alt="drawing" width="350"/>
+<img src="./media/gen-chart-python/point_select_cock_mono_colocate_qps.png" alt="drawing" width="400"/>
 </p>
 
-## Key Takeaways
+Next, we study the latency of the two databases.
+
+X-axis: Represents the varying thread numbers employed during the benchmark, simulating different levels of concurrent database access.
+
+Y-axis: Measures the Latency.
+
+- Distributed Transaction Workload:
+
+<p align="center">
+<img src="./media/gen-chart-python/write_only_cock_mono_colocate_lat.png" alt="drawing" width="400"/>
+</p>
+
+- Single Update Workload:
+
+<p align="center">
+<img src="./media/gen-chart-python/update_non_index_cock_mono_colocate_lat.png" alt="drawing" width="400"/>
+</p>
+
+- Point Select Workload:
+
+<p align="center">
+<img src="./media/gen-chart-python/point_select_cock_mono_colocate_lat.png" alt="drawing" width="400"/>
+</p>
+
+### Key Takeaways
 
 MonographDB consistently outperformed NewSQL-X in terms of QPS across both hardware configurations. These results demonstrate MonographDB's superior ability to handle distributed transactions and deliver high performance under demanding workloads. Its innovative Data Substrate architecture enables it to achieve significantly higher QPS compared to NewSQL-X, making it a compelling choice for organizations seeking a high-performance, scalable NewSQL database solution.
+
+## Expeiment II:
+
+Many organizations fall into the trap of adding read replicas to RDS MySQL, hoping to address cache misses. This experiment reveals the futility of such efforts and introduces MonographDB's memory scale out capability for maintaining performance under memory constraints.
+
+### Hardware and Software:
+
+To ensure a level hardware playing field for benchmarking against MySQL RDS, we deployed MonographDB in co-locate mode, housing TxService, LogService, and KVStore within the same node. Here's a breakdown of the deployment configurations:
+
+* Small T-shirt size (for small hot data):
+    * MonographDB: 1 node with 16 cores
+    * MySQL RDS: 1 node with 16 cores
+* Large T-shirt size (for large hot data):
+    * MonographDB: 6 nodes with 16 cores each node
+    * MySQL RDS: 1 read-write node + 5 read-only nodes with 16 cores each node
+
+
+### Results
+
+X-axis: Represents the varying hot data size from 10 milltion records to 400 million records, simulating the cache miss as data size increases.
+
+Y-axis: Measures the QPS (Queries Per Second).
+
+- We utilize Point Select with uniform distribution to randomly select search keys, ensuring each key has an equal probability of being chosen.
+
+<p align="center">
+<img src="./media/gen-chart-python/point_select_rds_mono.png" alt="drawing" width="400"/>
+</p>
+
+## Expeiment III:
+
+Harnessing its decoupled architecture, MonographDB empowers strategic resource allocation to optimize performance across different components. In this benchmark, we reveals the fact that scaling CPU and memory doesn't help when disk becomes the bottleneck for write-intensive workloads. We demonstrate the value of MonographDB's decoupled architecture which supports to focus on scaling the true bottleneck like the log service by allocating additional disks to unlocks unmatched performance.
+
+### Hardware and Software:
+
+Leveraging MonographDB's decoupled architecture, we strategically distributed its components across nodes for optimal resource utilization. Our baseline configuration featured a 48-core TxService node coupled with a single-disk LogService node. We then explored performance gains by scaling the TxService node to 64 cores and increasing LogService disk count to 3.
+
+| Service type | Node type      | Node count | Disk count |
+| ------------ | -------------- | ---------- | ---------- |
+| txservice    | n2-standard-48 | 1          | 1          |
+| logservice   | n2-standard-8  | 1          | 1          |
+| cassandra    | n2-standard-8  | 1          | 1          |
+
+| Service type | Node type      | Node count | Disk count |
+| ------------ | -------------- | ---------- | ---------- |
+| txservice    | n2-standard-64 | 1          | 1          |
+| logservice   | n2-standard-8  | 1          | 1          |
+| cassandra    | n2-standard-8  | 1          | 1          |
+
+| Service type | Node type      | Node count | Disk count |
+| ------------ | -------------- | ---------- | ---------- |
+| txservice    | n2-standard-48 | 1          | 1          |
+| logservice   | n2-standard-8  | 1          | 3          |
+| cassandra    | n2-standard-8  | 1          | 1          |
+
+### Results
+
+Firstly, we study the throughput of different choice of scaling.
+
+X-axis: Represents the varying thread numbers employed during the benchmark, simulating different levels of concurrent database access.
+
+Y-axis: Measures the QPS (Queries Per Second).
+
+- Single Update Workload
+
+<p align="center">
+<img src="./media/gen-chart-python/scale_log_qps.png" alt="drawing" width="400"/>
+</p>
+
+Next, we study the latency of different choice of scaling.
+
+X-axis: Represents the varying thread numbers employed during the benchmark, simulating different levels of concurrent database access.
+
+Y-axis: Measures the Latency.
+
+- Single Update Workload
+
+<p align="center">
+<img src="./media/gen-chart-python/scale_log_lat.png" alt="drawing" width="400"/>
+</p>
+
+
+
+# Appendix: Assemble your database using Data Substrate
+
+In today's data-driven world, organizations face mounting challenges managing and utilizing information effectively. Traditional database systems often struggle to adapt to rapidly evolving business needs, leading to complex setups, rigid scalability, and operational headaches. Introducing Data Substrate, a revolutionary abstraction layer that empowers you to build customized, dynamic databases tailored to your specific requirements.
+
+## What is Data Substrate?
+
+Think of Data Substrate as the invisible backbone of your data management solution. It acts as a unified platform, encapsulating critical functionalities commonly needed across diverse data scenarios. From ensuring consistency and data durability to handling concurrency and fault tolerance, Data Substrate takes care of the essential groundwork, freeing you to focus on building the bespoke database your business needs.
+
+Moreover, Data Substrate's modular design and vertical scalability let you tailor it to your specific requirements. This means you can independently scale each layer – compute engines, Data Substrate itself, and cloud storage – to perfectly match your workload demands. Additionally, its cloud-powered cost-efficiency utilizes low-cost storage options for cold data, keeping your resources optimized. With a range of flexible engines at your disposal, you can craft a database perfectly suited to your application, whether it's a high-performance SQL engine for online transaction processing or a kv-based engine for flexible content management, and even wasm based engine for any user defined function.
+
+<!-- ![](./media/datasubstrate.png) -->
+<p align="center">
+<img src="./media/datasubstrate_wp.png" alt="drawing" width="350"/>
+</p>
+<!-- <img src="./media/datasubstrate.png" alt="drawing" style="width:200px;"/> -->
+
+
+### Key Components:
+
+* Compute Engines: The architecture's top layer consists of a variety of adaptable compute engines, including SQL, KV, document, and graph engines. These engines seamlessly integrate with Data Substrate, offering flexibility in data processing and analysis.
+* Data Substrate: This core layer acts as the backbone of the architecture, providing essential functionalities:
+    * Caching: Optimizes performance by storing frequently accessed data in memory for rapid retrieval.
+    * Concurrency Control: Ensures transaction ACID and supports multi-write architecture.
+    * Data Persistence: Guarantees data durability by storing it persistently, even in case of system failures.
+    * Consistency: Maintains data coherence across multiple components and operations.
+    * Fault Tolerance: Enhances resilience by handling errors and fast recovery without data loss.
+* Cloud Storage: Data Substrate integrates with diverse cloud storage solutions like AWS DynamoDB and Google Bigtable, serving two crucial purposes:
+    * Cold Data Storage: Cost-effectively stores less frequently accessed data, reducing compute resource requirements.
+    * Cache Miss Handling: Fetches data from cloud storage when it's not found in the cache, ensuring comprehensive data accessibility.
+    * Break free from vendor lock-in and embrace true cloud independence with Data Substrate's seamless hybrid cloud storage architecture. 
+
+## Why Choose Data Substrate?
+
+Modern enterprises require nimble data systems that can seamlessly adapt to their unique workload demands. Data Substrate empowers you to break free from the limitations of traditional database approaches, addressing common pain points such as:
+
+- Long, cumbersome data pipelines: Data Substrate streamlines data flow, eliminating redundant processing and simplifying your data infrastructure.
+- Repetitive hand-coding of core functionalities: No more reinventing the wheel! Data Substrate provides a robust foundation, letting you focus on your specific data logic.
+- Low resource utilization: Data Substrate ensures efficient resource allocation, scaling the right components to match your workload demands and preventing wasted capacity.
+- Inconsistent data synchronization: Eliminate data siloes and ensure seamless data consistency across your entire system with Data Substrate's transactional cache mechanism.
+- Choose your cloud, your way: Data Substrate empowers you to orchestrate your data seamlessly across multiple clouds, creating a hybrid environment that aligns perfectly with your business needs and empowers strategic decision-making.
+
+## Key Features of Data Substrate:
+
+Data Substrate shines through its unparalleled elasticity and adaptability. It automatically adjusts to your needs, ensuring optimal performance regardless of workload variations. Here are some key highlights:
+
+- Elastic Scaling: Adapt to diverse workloads effortlessly. For read-intensive scenarios, Data Substrate scales out its memory, enabling distributed caching and lightning-fast data retrieval.
+- Parallel Write Optimization: No more bottlenecks! Data Substrate's patented one-phase commit protocol and parallel logging capabilities handle write-heavy workloads with ease, guaranteeing data durability and high availability even under extreme pressure.
+- Cost-Effective Scalability: Large datasets are no match for Data Substrate. Seamlessly scale out your cloud storage without overloading compute resources, minimizing costs for infrequently accessed data.
