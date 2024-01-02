@@ -1,13 +1,13 @@
 # Table of Contents
-    
-* **Products**
-    * MonographDB: A Distributed NewSQL Database for Elastic Performance at Any Scale
-    * MonoCacheDB: Unleashing Blazing-Fast Performance with Transactional Cache
-* **Benchmark**
-    * Benchmark Report of MonographDB
-    * Benchmark Report of MonoCacheDB
-* **Appendix**
-    * Assemble your database using Data Substrate
+
+- **Products**
+  - MonographSQL: A Distributed NewSQL Database for Elastic Performance at Any Scale
+  - MonographKV: Unleashing Blazing-Fast Performance with Transactional Cache
+- **Benchmark**
+  - Benchmark Report of MonographSQL
+  - Benchmark Report of MonographKV
+- **Appendix**
+  - Assemble your database using Data Substrate
 
 <p align="center">
 <br/><br/>
@@ -17,29 +17,21 @@
 
 <div style="page-break-after: always;"></div>
 
-
-
-
-
-
-
-
-# MonographDB: A Distributed NewSQL Database for Elastic Performance at Any Scale
+# MonographSQL: A Distributed NewSQL Database for Elastic Performance at Any Scale
 
 ## Introduction
 
 In today's data-driven world, organizations face the challenge of managing ever-increasing volumes of data while ensuring high performance, scalability, and cost-effectiveness. Traditional database systems often struggle to meet these demands, leading to bottlenecks and performance limitations.
 
-MonographDB is a revolutionary distributed NewSQL database that addresses these challenges head-on. Powered by its innovative Data Substrate, MonographDB delivers exceptional elasticity, scalability, and performance for latency-sensitive workloads, making it an ideal choice for modern enterprises.
+MonographSQL is a revolutionary distributed NewSQL database that addresses these challenges head-on. Powered by its innovative Data Substrate, MonographSQL delivers exceptional elasticity, scalability, and performance for latency-sensitive workloads, making it an ideal choice for modern enterprises.
 
 ## Achitecture
 
-MonographDB is a decoupled distributed database powered by Data Substrate. Its architecture includes a frontend compute engine compatible with the MySQL protocol. Within Data Substrate, the TxService is responsible for caching hot data and managing transaction processing, while the LogService handles data persistence. LogService replicas are distributed across different availability zones (AZs) to ensure tolerance to AZ-level failures. The underlying storage layer supports pluggable key-value (KV) storages, such as AWS DynamoDB, Google Bigtable, and Cassandra. These cloud storage services store cold data for cache misses and provide high availability for baseline data.
+MonographSQL is a decoupled distributed database powered by Data Substrate. Its architecture includes a frontend compute engine compatible with the MySQL protocol. Within Data Substrate, the TxService is responsible for caching hot data and managing transaction processing, while the LogService handles data persistence. LogService replicas are distributed across different availability zones (AZs) to ensure tolerance to AZ-level failures. The underlying storage layer supports pluggable key-value (KV) storages, such as AWS DynamoDB, Google Bigtable, and Cassandra. These cloud storage services store cold data for cache misses and provide high availability for baseline data.
 
 <p align="center">
-<img src="./media/monographdb_wp.png" alt="drawing" width="400"/>
+<img src="./media/MonographSQL_wp.png" alt="drawing" width="400"/>
 </p>
-
 
 ## Key Features
 
@@ -66,10 +58,11 @@ MonographDB is a decoupled distributed database powered by Data Substrate. Its a
 - Independent scaling of storage and compute resources
 - Cost-effective management of large datasets
 - Optimized resource utilization for cold data
-- Avoid cloud vendor lock-in and future-proof your data ecosystem with MonographDB's seamless hybrid cloud storage
+- Avoid cloud vendor lock-in and future-proof your data ecosystem with MonographSQL's seamless hybrid cloud storage
 
 ## Use Cases
-MonographDB's unique blend of performance, elasticity, and cost-effectiveness makes it ideal for a wide range of use cases across industries. Here are just a few examples:
+
+MonographSQL's unique blend of performance, elasticity, and cost-effectiveness makes it ideal for a wide range of use cases across industries. Here are just a few examples:
 
 - **FinTech**: Payment Processing: Handle high-volume transactions with blazing-fast speed and rock-solid reliability. Guarantee data consistency while keeping the latency of complex transactions low.
 
@@ -77,81 +70,19 @@ MonographDB's unique blend of performance, elasticity, and cost-effectiveness ma
 
 - **E-Commerce**: Order Management: Process orders quickly and efficiently with elastic scalability that handles peak traffic without delays. Ensure data accuracy and prevent order fulfillment errors.
 
-- **Saas**: Metadata Management: Manage huge amount of metadata of your SaaS platform efficiently with MonographDB's distributed architecture. Scale seamlessly to accommodate growing metadata volumes without compromising performance or availability.
+- **Saas**: Metadata Management: Manage huge amount of metadata of your SaaS platform efficiently with MonographSQL's distributed architecture. Scale seamlessly to accommodate growing metadata volumes without compromising performance or availability.
 
-## MonographDB: Embrace the Future of Distributed SQL:
+## MonographSQL: Embrace the Future of Distributed SQL:
 
-Gone are the days of performance trade-offs and inflexible scalability in distributed SQL. MonographDB rewrites the rules with:
+Gone are the days of performance trade-offs and inflexible scalability in distributed SQL. MonographSQL rewrites the rules with:
 
-- Elastic Scaling on Demand: Scale seamlessly to match your workload. Need blazing-fast queries? Scale up the compute engine. Facing write-heavy traffic? Scale out the log service. MonographDB adapts precisely, ensuring optimal performance without overpaying.
-- Cost-Effective Efficiency: Leave expensive two-phase commit behind. MonographDB's innovative architecture delivers exceptional performance without unnecessary bloat, significantly reducing operational costs compared to traditional NewSQL systems.
-- Ditch the Clunky Workarounds: Forget about complex sharding and cumbersome data management. MonographDB simplifies your infrastructure, empowering you to focus on building great applications, not battling database overhead.
+- Elastic Scaling on Demand: Scale seamlessly to match your workload. Need blazing-fast queries? Scale up the compute engine. Facing write-heavy traffic? Scale out the log service. MonographSQL adapts precisely, ensuring optimal performance without overpaying.
+- Cost-Effective Efficiency: Leave expensive two-phase commit behind. MonographSQL's innovative architecture delivers exceptional performance without unnecessary bloat, significantly reducing operational costs compared to traditional NewSQL systems.
+- Ditch the Clunky Workarounds: Forget about complex sharding and cumbersome data management. MonographSQL simplifies your infrastructure, empowering you to focus on building great applications, not battling database overhead.
 
-MonographDB is the future of distributed SQL. Are you ready to break free?
+MonographSQL is the future of distributed SQL. Are you ready to break free?
 
-
-# MonoCacheDB: Unleashing Blazing-Fast Performance with Transactional Cache
-## Introduction
-
-In today's fast-paced digital landscape, speed and reliability are paramount. Latency is the enemy, and data integrity is a non-negotiable. Traditional caching solutions like Redis offer fast reads, but lack the robust transaction support needed for mission-critical applications. Introducing MonoCacheDB, a revolutionary distributed transactional cache powered by Data Substrate, that shatters performance barriers while ensuring rock-solid data consistency.
-
-## Achitecture
-
-MonoCacheDB is a decoupled distributed database powered by Data Substrate. Its architecture includes a frontend compute engine compatible with the Redis protocol. Within Data Substrate, the TxService is responsible for caching hot data and managing transaction processing, while the LogService handles data persistence. LogService replicas are distributed across different availability zones (AZs) to ensure tolerance to AZ-level failures. The underlying storage layer supports pluggable key-value (KV) storages, such as AWS DynamoDB, Google Bigtable, and Cassandra. These cloud storage services store cold data for cache misses and provide high availability for baseline data.
-
-<p align="center">
-<img src="./media/monocachedb_wp.png" alt="drawing" width="400"/>
-</p>
-
-## Beyond Caching, Embracing Transactions
-
-Unlike its peers, MonoCacheDB transcends the limitations of simple key-value stores. It seamlessly integrates full ACID (Atomicity, Consistency, Isolation, Durability) properties across distributed transactions and clusters. This unlocks unprecedented functionality, empowering you to:
-
-- Ditch the Duo: Say goodbye to the cumbersome MySQL + Redis combo. MonoCacheDB eliminates cache coherence issues entirely, simplifying your architecture and boosting efficiency.
-- Transactional Confidence: Ensure data integrity across reads and writes, even in complex distributed environments.
-- Unlock New Application Scenarios: Tackle use cases beyond traditional caching, venturing into the realm of transactional microservices and stateful data management.
-
-## Cost-Conscious Performance Made Simple
-
-MonoCacheDB leverages Data Substrate's innovative architecture to deliver performance and cost-effectiveness in perfect harmony:
-
-- Memory for Speed: Frequently accessed data dances in-memory, guaranteeing lightning-fast reads and blazing-fast write performance through parallel logging.
-- Cloud for Cold Data: As data cools, it gracefully migrates to cost-effective cloud key-value stores, freeing up precious DRAM resources.
-- Asynchronous Checkpoints: Minimize IOPS requirements and optimize performance while keeping transactional reads readily available for cache misses.
-- Operational Efficiency: Slash operational costs with cloud storage and enjoy streamlined maintenance thanks to Data Substrate's modular design.
-
-## Leverage Parallel Processing Power:
-
-MonoCacheDB doesn't settle for single-threaded limitations. It flexes its multi-threaded architecture to:
-
-- Maximize Hardware Potential: Uncork the full power of modern CPUs, maximizing resource utilization and delivering exceptional performance.
-- Crush Bottlenecks with Concurrent Execution: Say goodbye to single-threaded limitations. MonoCacheDB's multi-threaded architecture handles tasks simultaneously, significantly boosting performance and efficiency.
-
-## Scale on Demand, Optimize on the Fly
-
-MonoCacheDB adapts to your dynamic needs, scaling seamlessly to match your workload:
-
-- Memory Scaling: When hot data demands grow, instantly expand in-memory capacity for uninterrupted performance.
-- Log Service Optimization: Handle surges in write traffic by effortlessly scaling the log service.
-- Cloud Storage Growth: As historical data accumulates, seamlessly expand the cloud storage layer to accommodate your evolving needs.
-
-## Use Cases
-
-- **GenAI-Ready File System**: Empower the era of general artificial intelligence with a metadata engine capable of handling billions of files seamlessly.
-
-- **Gaming**: Leaderboards and Player Profiles: Manage global leaderboards and player data with high concurrency and low latency, ensuring a smooth and responsive experience for millions of gamers.
-
-- **Ad-tech:**: Real-time Bidding and Ad Serving: Handle high-volume ad requests and deliver relevant ads with millisecond latency, maximizing ad performance and revenue.
-
-- **E-commerce**: Inventory Management and Product Catalog: Ensure real-time inventory updates and fast product searches for millions of items, optimizing customer experience and preventing stockouts.
-
-
-## MonoCacheDB: The Future of Caching is Here
-
-Forget about performance compromises and sacrificing data integrity. MonoCacheDB delivers the best of both worlds: blazing speed, unwavering reliability, and cost-effective scalability. So, ditch the clunky workarounds and embrace the future of caching with MonoCacheDB.
-
-
-# Benchmark Report of MonographDB
+# Benchmark Report of MonographSQL
 
 ## Introduction
 
@@ -159,43 +90,43 @@ The demand for high-performance, scalable databases that can meet the challenges
 
 While NewSQL promises both scalability and transactional consistency, many struggle with performance. Compared to single-node solutions like MySQL, their cost-efficiency suffers, and high latency renders them unsuitable for latency-sensitive tasks.
 
-MonographDB shatters NewSQL performance barriers with a unique approach: in-memory transaction processing powered by data substrate, a one-phase commit protocol to minimize disk I/O, and asynchronous key-value store access to eliminate latency bottlenecks.
+MonographSQL shatters NewSQL performance barriers with a unique approach: in-memory transaction processing powered by data substrate, a one-phase commit protocol to minimize disk I/O, and asynchronous key-value store access to eliminate latency bottlenecks.
 
-To illuminate MonographDB's edge, we'll conduct experiments focusing on: 
+To illuminate MonographSQL's edge, we'll conduct experiments focusing on:
 
-- Benchmarking MonographDB against leading NewSQL databases on mixed workload including distributed transaction to prove its performance superiority.
+- Benchmarking MonographSQL against leading NewSQL databases on mixed workload including distributed transaction to prove its performance superiority.
 - Exposesing the limits of traditional databases and underscores the crucial role of scalable memory for consistent performance, with RDS MySQL plummeting due to cache misses, unfixable even by adding read replicas.
-- Revealing how write-intensive workloads in the cloud benefit less from scaling CPU and memory, demonstrating the value of MonographDB's decoupled architecture. Instead, focusing on scaling the true bottleneck like the log service unlocks unmatched performance.
-
+- Revealing how write-intensive workloads in the cloud benefit less from scaling CPU and memory, demonstrating the value of MonographSQL's decoupled architecture. Instead, focusing on scaling the true bottleneck like the log service unlocks unmatched performance.
 
 ## Experiment I:
 
-In the first senario, we compare the performance of MonographDB, a distributed NewSQL database powered by Data Substrate, with a popular open-source NewSQL database (refer to NewSQL-X in this report). The goal of this comparison is to evaluate the performance of MonographDB under various workloads especially distributed transaction workloads and its potential to deliver exceptional performance for demanding applications.
+In the first senario, we compare the performance of MonographSQL, a distributed NewSQL database powered by Data Substrate, with a popular open-source NewSQL database (refer to NewSQL-X in this report). The goal of this comparison is to evaluate the performance of MonographSQL under various workloads especially distributed transaction workloads and its potential to deliver exceptional performance for demanding applications.
 
 A mixed workload was used, simulating a combination of read and write operations to assess overall performance.
+
 - Distributed Transaction: Transactions spanned multiple database instances, ensuring a thorough evaluation of distributed transaction handling capabilities. Each transaction involved a combination of update, delete, or insert queries, simulating the complexity of real-world applications.
 - Single Update: Transactions featured a single non-index update, assessing the efficiency of handling basic write operations.
 - Point Select: Transactions involved a single point select query, measuring the speed and efficiency of basic read operations.
 
 ### Hardware and Software:
 
-To test against NewSQL database in the same hardware configuration, we deploy MonographDB in co-locate mode, i.e. deploy TxService, LogService and KVStore in the same node. The deployment details is as follows:
+To test against NewSQL database in the same hardware configuration, we deploy MonographSQL in co-locate mode, i.e. deploy TxService, LogService and KVStore in the same node. The deployment details is as follows:
 
 | Service type | Node type      | Node count | Disk count     |
 | ------------ | -------------- | ---------- | -------------- |
-| MonographDB  | n2-standard-32 | 3          | 350G*1 + 50G*3 |
+| MonographSQL | n2-standard-32 | 3          | 350G*1 + 50G*3 |
 
 | Service type | Node type      | Node count | Disk count |
 | ------------ | -------------- | ---------- | ---------- |
-| NewSQL-X     | n2-standard-32 | 3          | 500G*1     |
+| NewSQL-X     | n2-standard-32 | 3          | 500G\*1    |
 
-To provide comprehensive insights, the benchmark also included experiments conducted on n2-standard-16 instance types for MonographDB txservice and NewSQL-X.
+To provide comprehensive insights, the benchmark also included experiments conducted on n2-standard-16 instance types for MonographSQL txservice and NewSQL-X.
 
 Disk Considerations:
 
 - NewSQL-X's official benchmark report employed Local SSDs, which cannot persist data after instance restarts.
 - To align with cloud-native environments and ensure data persistence, this benchmark utilized PD-SSD disks in GCP for both databases.
-- To leverage MonographDB's parallel logging capabilities and maximize I/O performance, we equipped LogService with three 50GB SSD disks.
+- To leverage MonographSQL's parallel logging capabilities and maximize I/O performance, we equipped LogService with three 50GB SSD disks.
 
 ### Results
 
@@ -249,23 +180,22 @@ Y-axis: Measures the Latency.
 
 ### Key Takeaways
 
-MonographDB consistently outperformed NewSQL-X in terms of QPS across both hardware configurations. These results demonstrate MonographDB's superior ability to handle distributed transactions and deliver high performance under demanding workloads. Its innovative Data Substrate architecture enables it to achieve significantly higher QPS compared to NewSQL-X, making it a compelling choice for organizations seeking a high-performance, scalable NewSQL database solution.
+MonographSQL consistently outperformed NewSQL-X in terms of QPS across both hardware configurations. These results demonstrate MonographSQL's superior ability to handle distributed transactions and deliver high performance under demanding workloads. Its innovative Data Substrate architecture enables it to achieve significantly higher QPS compared to NewSQL-X, making it a compelling choice for organizations seeking a high-performance, scalable NewSQL database solution.
 
 ## Expeiment II:
 
-Many organizations fall into the trap of adding read replicas to RDS MySQL, hoping to address cache misses. This experiment reveals the futility of such efforts and introduces MonographDB's memory scale out capability for maintaining performance under memory constraints.
+Many organizations fall into the trap of adding read replicas to RDS MySQL, hoping to address cache misses. This experiment reveals the futility of such efforts and introduces MonographSQL's memory scale out capability for maintaining performance under memory constraints.
 
 ### Hardware and Software:
 
-To ensure a level hardware playing field for benchmarking against MySQL RDS, we deployed MonographDB in co-locate mode, housing TxService, LogService, and KVStore within the same node. Here's a breakdown of the deployment configurations:
+To ensure a level hardware playing field for benchmarking against MySQL RDS, we deployed MonographSQL in co-locate mode, housing TxService, LogService, and KVStore within the same node. Here's a breakdown of the deployment configurations:
 
-* Small T-shirt size (for small hot data):
-    * MonographDB: 1 node with 16 cores
-    * MySQL RDS: 1 node with 16 cores
-* Large T-shirt size (for large hot data):
-    * MonographDB: 6 nodes with 16 cores each node
-    * MySQL RDS: 1 read-write node + 5 read-only nodes with 16 cores each node
-
+- Small T-shirt size (for small hot data):
+  - MonographSQL: 1 node with 16 cores
+  - MySQL RDS: 1 node with 16 cores
+- Large T-shirt size (for large hot data):
+  - MonographSQL: 6 nodes with 16 cores each node
+  - MySQL RDS: 1 read-write node + 5 read-only nodes with 16 cores each node
 
 ### Results
 
@@ -281,11 +211,11 @@ Y-axis: Measures the QPS (Queries Per Second).
 
 ## Expeiment III:
 
-Harnessing its decoupled architecture, MonographDB empowers strategic resource allocation to optimize performance across different components. In this benchmark, we reveals the fact that scaling CPU and memory doesn't help when disk becomes the bottleneck for write-intensive workloads. We demonstrate the value of MonographDB's decoupled architecture which supports to focus on scaling the true bottleneck like the log service by allocating additional disks to unlocks unmatched performance.
+Harnessing its decoupled architecture, MonographSQL empowers strategic resource allocation to optimize performance across different components. In this benchmark, we reveals the fact that scaling CPU and memory doesn't help when disk becomes the bottleneck for write-intensive workloads. We demonstrate the value of MonographSQL's decoupled architecture which supports to focus on scaling the true bottleneck like the log service by allocating additional disks to unlocks unmatched performance.
 
 ### Hardware and Software:
 
-Leveraging MonographDB's decoupled architecture, we strategically distributed its components across nodes for optimal resource utilization. Our baseline configuration featured a 48-core TxService node coupled with a single-disk LogService node. We then explored performance gains by scaling the TxService node to 64 cores and increasing LogService disk count to 3.
+Leveraging MonographSQL's decoupled architecture, we strategically distributed its components across nodes for optimal resource utilization. Our baseline configuration featured a 48-core TxService node coupled with a single-disk LogService node. We then explored performance gains by scaling the TxService node to 64 cores and increasing LogService disk count to 3.
 
 | Service type | Node type      | Node count | Disk count |
 | ------------ | -------------- | ---------- | ---------- |
@@ -331,7 +261,65 @@ Y-axis: Measures the Latency.
 <img src="./media/gen-chart-python/scale_log_lat.png" alt="drawing" width="400"/>
 </p>
 
+# MonographKV: Unleashing Blazing-Fast Performance with Transactional Cache
 
+## Introduction
+
+In today's fast-paced digital landscape, speed and reliability are paramount. Latency is the enemy, and data integrity is a non-negotiable. Traditional caching solutions like Redis offer fast reads, but lack the robust transaction support needed for mission-critical applications. Introducing MonographKV, a revolutionary distributed transactional cache powered by Data Substrate, that shatters performance barriers while ensuring rock-solid data consistency.
+
+## Achitecture
+
+MonographKV is a decoupled distributed database powered by Data Substrate. Its architecture includes a frontend compute engine compatible with the Redis protocol. Within Data Substrate, the TxService is responsible for caching hot data and managing transaction processing, while the LogService handles data persistence. LogService replicas are distributed across different availability zones (AZs) to ensure tolerance to AZ-level failures. The underlying storage layer supports pluggable key-value (KV) storages, such as AWS DynamoDB, Google Bigtable, and Cassandra. These cloud storage services store cold data for cache misses and provide high availability for baseline data.
+
+<p align="center">
+<img src="./media/MonographKV_wp.png" alt="drawing" width="400"/>
+</p>
+
+## Beyond Caching, Embracing Transactions
+
+Unlike its peers, MonographKV transcends the limitations of simple key-value stores. It seamlessly integrates full ACID (Atomicity, Consistency, Isolation, Durability) properties across distributed transactions and clusters. This unlocks unprecedented functionality, empowering you to:
+
+- Ditch the Duo: Say goodbye to the cumbersome MySQL + Redis combo. MonographKV eliminates cache coherence issues entirely, simplifying your architecture and boosting efficiency.
+- Transactional Confidence: Ensure data integrity across reads and writes, even in complex distributed environments.
+- Unlock New Application Scenarios: Tackle use cases beyond traditional caching, venturing into the realm of transactional microservices and stateful data management.
+
+## Cost-Conscious Performance Made Simple
+
+MonographKV leverages Data Substrate's innovative architecture to deliver performance and cost-effectiveness in perfect harmony:
+
+- Memory for Speed: Frequently accessed data dances in-memory, guaranteeing lightning-fast reads and blazing-fast write performance through parallel logging.
+- Cloud for Cold Data: As data cools, it gracefully migrates to cost-effective cloud key-value stores, freeing up precious DRAM resources.
+- Asynchronous Checkpoints: Minimize IOPS requirements and optimize performance while keeping transactional reads readily available for cache misses.
+- Operational Efficiency: Slash operational costs with cloud storage and enjoy streamlined maintenance thanks to Data Substrate's modular design.
+
+## Leverage Parallel Processing Power:
+
+MonographKV doesn't settle for single-threaded limitations. It flexes its multi-threaded architecture to:
+
+- Maximize Hardware Potential: Uncork the full power of modern CPUs, maximizing resource utilization and delivering exceptional performance.
+- Crush Bottlenecks with Concurrent Execution: Say goodbye to single-threaded limitations. MonographKV's multi-threaded architecture handles tasks simultaneously, significantly boosting performance and efficiency.
+
+## Scale on Demand, Optimize on the Fly
+
+MonographKV adapts to your dynamic needs, scaling seamlessly to match your workload:
+
+- Memory Scaling: When hot data demands grow, instantly expand in-memory capacity for uninterrupted performance.
+- Log Service Optimization: Handle surges in write traffic by effortlessly scaling the log service.
+- Cloud Storage Growth: As historical data accumulates, seamlessly expand the cloud storage layer to accommodate your evolving needs.
+
+## Use Cases
+
+- **GenAI-Ready File System**: Empower the era of general artificial intelligence with a metadata engine capable of handling billions of files seamlessly.
+
+- **Gaming**: Leaderboards and Player Profiles: Manage global leaderboards and player data with high concurrency and low latency, ensuring a smooth and responsive experience for millions of gamers.
+
+- **Ad-tech:**: Real-time Bidding and Ad Serving: Handle high-volume ad requests and deliver relevant ads with millisecond latency, maximizing ad performance and revenue.
+
+- **E-commerce**: Inventory Management and Product Catalog: Ensure real-time inventory updates and fast product searches for millions of items, optimizing customer experience and preventing stockouts.
+
+## MonographKV: The Future of Caching is Here
+
+Forget about performance compromises and sacrificing data integrity. MonographKV delivers the best of both worlds: blazing speed, unwavering reliability, and cost-effective scalability. So, ditch the clunky workarounds and embrace the future of caching with MonographKV.
 
 # Appendix: Assemble your database using Data Substrate
 
@@ -349,20 +337,19 @@ Moreover, Data Substrate's modular design and vertical scalability let you tailo
 </p>
 <!-- <img src="./media/datasubstrate.png" alt="drawing" style="width:200px;"/> -->
 
-
 ### Key Components:
 
-* Compute Engines: The architecture's top layer consists of a variety of adaptable compute engines, including SQL, KV, document, and graph engines. These engines seamlessly integrate with Data Substrate, offering flexibility in data processing and analysis.
-* Data Substrate: This core layer acts as the backbone of the architecture, providing essential functionalities:
-    * Caching: Optimizes performance by storing frequently accessed data in memory for rapid retrieval.
-    * Concurrency Control: Ensures transaction ACID and supports multi-write architecture.
-    * Data Persistence: Guarantees data durability by storing it persistently, even in case of system failures.
-    * Consistency: Maintains data coherence across multiple components and operations.
-    * Fault Tolerance: Enhances resilience by handling errors and fast recovery without data loss.
-* Cloud Storage: Data Substrate integrates with diverse cloud storage solutions like AWS DynamoDB and Google Bigtable, serving two crucial purposes:
-    * Cold Data Storage: Cost-effectively stores less frequently accessed data, reducing compute resource requirements.
-    * Cache Miss Handling: Fetches data from cloud storage when it's not found in the cache, ensuring comprehensive data accessibility.
-    * Break free from vendor lock-in and embrace true cloud independence with Data Substrate's seamless hybrid cloud storage architecture. 
+- Compute Engines: The architecture's top layer consists of a variety of adaptable compute engines, including SQL, KV, document, and graph engines. These engines seamlessly integrate with Data Substrate, offering flexibility in data processing and analysis.
+- Data Substrate: This core layer acts as the backbone of the architecture, providing essential functionalities:
+  - Caching: Optimizes performance by storing frequently accessed data in memory for rapid retrieval.
+  - Concurrency Control: Ensures transaction ACID and supports multi-write architecture.
+  - Data Persistence: Guarantees data durability by storing it persistently, even in case of system failures.
+  - Consistency: Maintains data coherence across multiple components and operations.
+  - Fault Tolerance: Enhances resilience by handling errors and fast recovery without data loss.
+- Cloud Storage: Data Substrate integrates with diverse cloud storage solutions like AWS DynamoDB and Google Bigtable, serving two crucial purposes:
+  - Cold Data Storage: Cost-effectively stores less frequently accessed data, reducing compute resource requirements.
+  - Cache Miss Handling: Fetches data from cloud storage when it's not found in the cache, ensuring comprehensive data accessibility.
+  - Break free from vendor lock-in and embrace true cloud independence with Data Substrate's seamless hybrid cloud storage architecture.
 
 ## Why Choose Data Substrate?
 
