@@ -163,6 +163,11 @@ module.exports = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      colorMode: {
+        defaultMode: 'dark',
+        disableSwitch: true,
+        respectPrefersColorScheme: false,
+      },
       prism: {
         defaultLanguage: 'jsx',
         theme: require('./core/PrismTheme'),
@@ -177,10 +182,10 @@ module.exports = {
         ],
       },
       navbar: {
-        title: 'MonoStrate',
+        title: 'MonographDB',
         logo: {
           src: 'img/monosql_logo.png',
-          alt: 'MonoStrate',
+          alt: 'MonographDB',
         },
         style: 'dark',
         items: [

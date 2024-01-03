@@ -5,7 +5,6 @@
   - Benchmark Report of MonographSQL
 - **MonographKV**
   - MonographKV: Unleashing Blazing-Fast Performance with Transactional Store
-  - Benchmark Report of MonographKV
 - **Appendix**
   - Assemble your database using Data Substrate
 

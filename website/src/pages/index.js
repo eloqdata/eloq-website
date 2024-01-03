@@ -349,7 +349,7 @@ function HeaderHero() {
         columnOne={<LogoAnimation />}
         columnTwo={
           <>
-            <h1 className="title">MonoStrate</h1>
+            <h1 className="title">MonographDB</h1>
             <p className="tagline">
               Assemble your database according to customized requirement powered
               by Data&nbsp;Substrate.
@@ -565,17 +565,17 @@ const Index = () => {
       description="A framework for building native apps using React"
       wrapperClassName="homepage">
       <Head>
-        <title>MonoStrate · Modular Database</title>
-        <meta property="og:title" content="MonoStrate · Modular Database" />
+        <title>MonographDB · Modular Database</title>
+        <meta property="og:title" content="MonographDB · Modular Database" />
         <meta
           property="twitter:title"
-          content="MonoStrate · Modular Database"
+          content="MonographDB · Modular Database"
         />
       </Head>
 
       <div class="container1">
         <div class="product-left-column">
-          <h1 className="title">MonoStrate</h1>
+          <h1 className="title">MonographDB</h1>
           <p className="tagline">
             Assemble your database according to customized requirement powered
             by Data&nbsp;Substrate.
