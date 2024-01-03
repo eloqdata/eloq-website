@@ -137,6 +137,18 @@ function TextColumn({title, text, moreContent}) {
   );
 }
 
+function ButtonMonographSQL() {
+  return (
+    <>
+      <ActionButton
+        type="primary"
+        href={useBaseUrl('product_monographdb.html')}
+        target="_self">
+        View Detail
+      </ActionButton>
+    </>
+  );
+}
 function HomeCallToAction() {
   return (
     <>
@@ -223,9 +235,107 @@ function ScreenRect({className, fill, stroke}) {
 }
 
 function LogoAnimation() {
-  return <img alt="" src={useBaseUrl('img/monosql_logo.png')} />;
+  return (
+    <img
+      alt=""
+      width="500"
+      height="800"
+      src={useBaseUrl('img/mono_caotu.png')}
+    />
+  );
 }
 
+function SQLLOGO() {
+  return (
+    <img
+      width="1250"
+      height="50"
+      alt=""
+      src={useBaseUrl('img/monographdb_wp.png')}
+    />
+  );
+}
+
+function MonographSQL() {
+  return (
+    <Section background="dark" className="HeaderHero2">
+      {/*
+      <div className="socialLinks">
+        <TwitterButton accountName="reactnative" />
+        <GitHubStarButton />
+      </div>*/}
+      <TwoColumns
+        reverse
+        columnOne={<SQLLOGO />}
+        columnTwo={
+          <>
+            <p className="taglineproduct">
+              <a href="https://www.monographdata.com">MonographSQL</a>
+            </p>
+            <p className="taglineproductdetail">
+              A distributed NewSQL database powered by Data Substrate. Elastic
+              at any scale for any workload.
+            </p>
+          </>
+        }
+      />
+    </Section>
+  );
+}
+function MonographKV() {
+  return (
+    <Section background="dark" className="HeaderHero2">
+      {/*
+      <div className="socialLinks">
+        <TwitterButton accountName="reactnative" />
+        <GitHubStarButton />
+      </div>*/}
+      <TwoColumns
+        reverse
+        columnOne={<LogoAnimation />}
+        columnTwo={
+          <>
+            <p className="taglineproduct">
+              <a href="https://www.monographdata.com">MonographKV</a>
+            </p>
+            <p className="taglineproductdetail">
+              A distributed transactional cache database powered by Data
+              Substrate. Store data in cache with lower cost and higher
+              availability.
+            </p>
+          </>
+        }
+      />
+    </Section>
+  );
+}
+function MonographSQLWrapper() {
+  return (
+    <Section background="dark" className="HeaderHero2">
+      {/*
+      <div className="socialLinks">
+        <TwitterButton accountName="reactnative" />
+        <GitHubStarButton />
+      </div>*/}
+      <TwoColumns
+        reverse
+        columnOne={<LogoAnimation />}
+        columnTwo={
+          <>
+            <p className="taglineproduct">
+              <a href="https://www.monographdata.com">MonographSQLWrapper</a>
+            </p>
+            <p className="taglineproductdetail">
+              A stateless SQL wrapper for Amazon DynamoDB. Customer is enable to
+              migrate from RDS to DynamoDB without modifying their application
+              code.
+            </p>
+          </>
+        }
+      />
+    </Section>
+  );
+}
 function HeaderHero() {
   return (
     <Section background="dark" className="HeaderHero">
@@ -241,11 +351,17 @@ function HeaderHero() {
           <>
             <h1 className="title">MonoStrate</h1>
             <p className="tagline">
-              <Typed
-                strings={['>_ Assemble your database using Data Substrate.']}
-                typeSpeed={75}
-              />
+              Assemble your database according to customized requirement powered
+              by Data&nbsp;Substrate.
             </p>
+            <p className="taglinecolor">
+              <Typed strings={['- Pluggable Compute Engine']} typeSpeed={75} />
+            </p>
+            <p className="taglinecolor">
+              <Typed strings={['- Hybrid Cloud KV Storage']} typeSpeed={75} />
+            </p>
+            <br />
+            <br />
             <div className="buttons">
               <HomeCallToAction />
             </div>
@@ -314,10 +430,9 @@ function DecoupleStore() {
     <Section className="NativeApps" background="tint">
       <TwoColumns
         columnOne={
-          <TextColumn
-            title="Decoupled Cloud Storage"
-            text={textContent.decouplestore}
-          />
+          <a href="https://www.monographdata.com/product_monographdb">
+            MonographSQL
+          </a>
         }
         columnTwo={
           <img alt="" src={useBaseUrl('img/homepage/decoupledstorage2.png')} />
@@ -431,13 +546,9 @@ function Community() {
 
 function GetStarted() {
   return (
-    <Section className="GetStarted" background="tint">
+    <Section className="GetStarted" background="black">
       <div className="content">
-        <h2 className="Heading">
-          <a href="https://www.monographdata.com/product_monographdb">
-            View Prodcut Details
-          </a>
-        </h2>
+        <h2 className="Heading">Try Our Cutting-Edge Products</h2>
       </div>
     </Section>
   );
@@ -461,11 +572,85 @@ const Index = () => {
           content="MonoStrate · Modular Database"
         />
       </Head>
-      <HeaderHero />
-      <NativeApps />
-      <ElasticLogging />
-      <ElasticMemory />
+
+      <div class="container1">
+        <div class="product-left-column">
+          <h1 className="title">MonoStrate</h1>
+          <p className="tagline">
+            Assemble your database according to customized requirement powered
+            by Data&nbsp;Substrate.
+          </p>
+          <p className="taglinecolor">
+            <Typed strings={['- Pluggable Compute Engine']} typeSpeed={75} />
+          </p>
+          <p className="taglinecolor">
+            <Typed strings={['- Hybrid Cloud Storage']} typeSpeed={75} />
+          </p>
+          <div className="buttons">
+            <HomeCallToAction />
+          </div>
+        </div>
+        <div class="product-right-column">
+          <img
+            alt=""
+            src={useBaseUrl('img/monographdb_website.svg')}
+            type="image/svg+xml"
+            width="800"
+            heigh="auto"
+          />
+        </div>
+      </div>
+
       <GetStarted />
+      <div class="container2 container-with-separator">
+        <div class="product-left-column">
+          <p className="taglineproduct">
+            <a href="https://www.monographdata.com/product_monographdb">
+              MonographSQL
+            </a>
+          </p>
+          <p className="taglineproductdetail">
+            A distributed NewSQL database powered by Data Substrate. Elastic at
+            any scale for any workload.
+          </p>
+        </div>
+        <div class="product-right-column">
+          <img alt="" src={useBaseUrl('img/monographsql_wp.png')} />
+        </div>
+      </div>
+      <div class="container2 container-with-separator">
+        <div class="product-left-column">
+          <p className="taglineproduct">
+            <a href="https://www.monographdata.com/product_monocache">
+              MonographKV
+            </a>
+          </p>
+          <p className="taglineproductdetail">
+            A distributed transactional store powered by Data Substrate. Cache
+            performance with lower cost and strong durability.
+          </p>
+        </div>
+        <div class="product-right-column">
+          <img alt="" src={useBaseUrl('img/monographkv_wp.png')} />
+        </div>
+      </div>
+      <div class="container2">
+        <div class="product-left-column">
+          <p className="taglineproduct">
+            <a href="https://www.monographdata.com/product_monosql">
+              MonographSQLWrapper
+            </a>
+          </p>
+          <p className="taglineproductdetail">
+            A stateless SQL wrapper for Amazon DynamoDB. Customer is enable to
+            migrate from RDS to DynamoDB without modifying their application
+            codes.
+          </p>
+        </div>
+        <div class="product-right-column">
+          <img alt="" src={useBaseUrl('img/monosql_wp.png')} />
+        </div>
+      </div>
     </Layout>
   );
 };

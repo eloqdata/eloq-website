@@ -10,7 +10,9 @@
 :root {
   --brand: #61dafb;
   --dark: #282c34;
-  --deepdark: #20232a;
+  //--dark: black;
+  // --deepdark: #20232a;
+  --deepdark: black;
   --light: #373940;
   --text: #1a1a1a;
   --subtle: #767676;
@@ -535,7 +537,8 @@ a[class*="tagRegular"] {
 
 .navbar {
   &.navbar--dark {
-    background-color: var(--deepdark);
+    //background-color: var(--deepdark);
+    background-color: black;
   }
 
   .navbar__inner {
@@ -564,6 +567,7 @@ a[class*="tagRegular"] {
         font-weight: 400;
         font-size: 14px;
       }
+
       ul {
         /* Control navbar dropdown alignment */
         top: calc(100% + 0px);
@@ -675,7 +679,8 @@ But the navbar sidebar should still support light theme
 So we need to "revert" some CSS vars to not enforce dark mode
  */
 .navbar--dark {
-  --ifm-menu-link-sublist-icon-filter: inherit; /* reset to non-dark value */
+  --ifm-menu-link-sublist-icon-filter: inherit;
+  /* reset to non-dark value */
   --ifm-menu-color: inherit;
   --ifm-navbar-background-color: var(--divider);
 }

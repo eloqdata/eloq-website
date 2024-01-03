@@ -190,12 +190,16 @@ module.exports = {
             position: 'right',
             items: [
               {
-                label: 'MonographDB',
+                label: 'MonographSQL',
                 to: '/product_monographdb',
               },
               {
-                label: 'MonoCacheDB',
+                label: 'MonographKV',
                 to: '/product_monocache',
+              },
+              {
+                label: 'MonoSQL',
+                to: '/product_monosql',
               },
             ],
           },
@@ -205,10 +209,10 @@ module.exports = {
             href: '#',
             items: [
               {
-                label: 'MonographDB',
+                label: 'MonographSQL',
                 type: 'doc',
                 docsPluginId: 'monographdb',
-                docId: 'quick-start',
+                docId: 'introduction',
               },
               {
                 label: 'MonoSQL',

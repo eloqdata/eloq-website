@@ -1,23 +1,66 @@
 ---
-title: MonographDB Introduction
+title: Introduction to MonographSQL
 ---
 
-# MonographDB Introduction
+# MonographSQL: A Distributed NewSQL Database for Elastic Performance at Any Scale
 
-MonographDB
+## Introduction
 
-MonoSQL is a stateless SQL wrapper for Amazon DynamoDB. Customer is enable to migrate from RDS to DynamoDB without modifying their application code, but can still benefit from the consistent performance at scale, full managed and high availability features supplied by DynamoDB. MonoSQL is MySQL8.0 compatible. Customer can still use JDBC/ODBC to connect to database and use rich SQL query language like join, aggrgate and recursive cte to query data.
+In today's data-driven world, organizations face the challenge of managing ever-increasing volumes of data while ensuring high performance, scalability, and cost-effectiveness. Traditional database systems often struggle to meet these demands, leading to bottlenecks and performance limitations.
 
-MonoSQL servers are stateless, with all the catalog and user data stored in DynamoDB. This design makes MonoSQL simple and stable. MonoSQL is fault tolerant, a new instance or pod will be created automatically by auto scaling group or Kubernetes cluster when MonoSQL server failure is detected. The traditional database recovery process is skipped in MonoSQL, since all the data is persistent at DynamoDB following a synchronous way.
+MonographSQL is a revolutionary distributed NewSQL database that addresses these challenges head-on. Powered by its innovative Data Substrate, MonographSQL delivers exceptional elasticity, scalability, and performance for latency-sensitive workloads, making it an ideal choice for modern enterprises.
+
+## Achitecture
+
+MonographSQL is a decoupled distributed database powered by Data Substrate. Its architecture includes a frontend compute engine compatible with the MySQL protocol. Within Data Substrate, the TxService is responsible for caching hot data and managing transaction processing, while the LogService handles data persistence. LogService replicas are distributed across different availability zones (AZs) to ensure tolerance to AZ-level failures. The underlying storage layer supports pluggable key-value (KV) storages, such as AWS DynamoDB, Google Bigtable, and Cassandra. These cloud storage services store cold data for cache misses and provide high availability for baseline data.
+
+![](./media/monographsql_wp.png)
 
 ## Key Features
 
-1. **MySQL Compatible**: MonographDB is compatible with MySQL protocol by leveraging the MySQL Parser and Executor as compute engine. Innodb storage engine is replaced by enhanced Data Substrate, which supports different transaction isolation level and concurrency control protocol, distributed buffer pool, data persistence and high availability.
+### MySQL Compatibility:
 
-2. **Elastic Parallel Logging**: Write intensive workload requires the scalability of log service. Traditional databases write and fsync redo logs in the order of log sequence number into a single disk, which becomes the bottleneck of the whole system. MonographDB's patented 1-PC technique enables concurrent transactions to write and fsync redo logs into multiple disks in parallel. Benchmark shows 4X TPS improvement compared with AWS Aurora.
+- Seamless integration with existing MySQL applications
+- Leverages familiar MySQL protocol and syntax
 
-3. **Elastic Memory Cache**: Read intensive workload requires the scalability of memory resource. To achieve low read latency, it is important to hold all the hot data into memory. MonographDB supports hash and range partition, which can store a large amount of hot data across multiple hosts. As the hot data grows, MonographDB can scale-out the cluster and rebalance the data range automatically. Cold data will be checkpointed into KV stores which can serve cache miss read.
+### Elastic Parallel Logging:
 
-4. **Decoupled Cloud Storage**: Large dataset requires a decouple storage layer which can be individually scaled regardless of read and write traffic. To reserve additional compute and memory for cold data is a waste of resource. Traditional shared-nothing architecture requires to add more compute nodes as the data volumn scales even if the read and write traffic is unchanged. MonographDB's decoupled cloud storage enable you to only pay for the disk plus the IOPS cost of cold data.
+- Patented one-phase commit technique for distributed transaction performance
+- 4x improvement in transactions per second in single node mode compared to MySQL
+- Eliminates logging bottlenecks for write-intensive workloads
 
-5. **High Performance Distributed Transaction**:
+### Elastic Memory Cache:
+
+- Minimizes read latency with highly scalable in-memory data storage
+- Supports hash and range partitioning for efficient data distribution
+- Automatic scaling and rebalancing for optimal performance
+- Cold data checkpointed to cloud storage for efficient cache miss read
+
+### Decoupled Cloud Storage:
+
+- Independent scaling of storage and compute resources
+- Cost-effective management of large datasets
+- Optimized resource utilization for cold data
+- Avoid cloud vendor lock-in and future-proof your data ecosystem with MonographSQL's seamless hybrid cloud storage
+
+## Use Cases
+
+MonographSQL's unique blend of performance, elasticity, and cost-effectiveness makes it ideal for a wide range of use cases across industries. Here are just a few examples:
+
+- **FinTech**: Payment Processing: Handle high-volume transactions with blazing-fast speed and rock-solid reliability. Guarantee data consistency while keeping the latency of complex transactions low.
+
+- **Gaming**: Game Persistence: Deliver seamless gameplay experiences with reliable transaction handling and consistent game state management. Ensure players never lose progress or encounter disruptions.
+
+- **E-Commerce**: Order Management: Process orders quickly and efficiently with elastic scalability that handles peak traffic without delays. Ensure data accuracy and prevent order fulfillment errors.
+
+- **Saas**: Metadata Management: Manage huge amount of metadata of your SaaS platform efficiently with MonographSQL's distributed architecture. Scale seamlessly to accommodate growing metadata volumes without compromising performance or availability.
+
+## MonographSQL: Embrace the Future of Distributed SQL:
+
+Gone are the days of performance trade-offs and inflexible scalability in distributed SQL. MonographSQL rewrites the rules with:
+
+- Elastic Scaling on Demand: Scale seamlessly to match your workload. Need blazing-fast queries? Scale up the compute engine. Facing write-heavy traffic? Scale out the log service. MonographSQL adapts precisely, ensuring optimal performance without overpaying.
+- Cost-Effective Efficiency: Leave expensive two-phase commit behind. MonographSQL's innovative architecture delivers exceptional performance without unnecessary bloat, significantly reducing operational costs compared to traditional NewSQL systems.
+- Ditch the Clunky Workarounds: Forget about complex sharding and cumbersome data management. MonographSQL simplifies your infrastructure, empowering you to focus on building great applications, not battling database overhead.
+
+MonographSQL is the future of distributed SQL. Are you ready to break free?

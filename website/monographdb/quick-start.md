@@ -1,5 +1,5 @@
 ---
-title: Quick Start Guide for the MonographDB Database Platform
+title: Quick Start Guide for the MonographSQL
 summary: Learn how to quickly get started with the MonographDB database.
 ---
 

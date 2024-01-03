@@ -80,27 +80,18 @@ Members of the React Native team frequently speak at various conferences.
 <br/><br/>
 You can follow the latest news from the React Native team on Twitter
   `,
-  elasticlog: `
-  Write intensive workload requires the scalability of log service.
-				Traditional databases write and fsync redo logs in the order of log sequence number into
-				a single disk, which becomes the bottleneck of the whole system. MonographDB's patented
-				1-PC technique enables concurrent transactions to write and fsync redo logs into multiple
-				disks in parallel. Benchmark shows 4X TPS improvement compared with AWS Aurora.
+  inheritddb: `
+  MonoSQL is built on top of DynamoDB. It benefit from all the Dynamo's features like consistent performance at scale,
+  high availability and full managed service.
   `,
-  elasticmem: `
-  Read intensive workload requires the scalability of memory resource.
-				To achieve low read latency, it is important to hold all the hot data into memory.
-				MonographDB supports hash and range partition, which can store a large amount of hot data
-				across multiple hosts. As the hot data grows, MonographDB can scale-out the cluster and rebalance
-				the data range automatically. Cold data will be checkpointed into KV stores which can serve cache
-				miss read.
+  sqlsupport: `
+  MonoSQL maintains compatibility with the MySQL protocol by leveraging the SQL Parser and Executor.
+  Enjoy DynamoDB's scalability without rewriting your applications. MonoSQL seamlessly bridges the gap, ensuring smooth migrations from MySQL.
   `,
-  decouplestore: `
-  Large dataset requires a decouple storage layer which can be individually scaled regardless of
-				read and write traffic. To reserve additional compute and memory for cold data is a waste of
-				resource. Traditional shared-nothing architecture requires to add more compute nodes as the data
-				volumn scales even if the read and write traffic is unchanged. MonographDB's decoupled cloud
-				storage enable you to only pay for the disk plus the IOPS cost of cold data.
+  hybridcloud: `
+  MonoSQL's architecture make it easy to integrate with other cloud services like GCP Bigtable and Azure CosmosDB.
+  MonoSQL lets you run on any cloud, seamlessly shift between cloud vendors without modifying your code.
+  Break free from vendor lock-in, embrace cloud freedom.
   `,
 };
 
@@ -249,7 +240,7 @@ function NativeApps() {
       <TwoColumns
         reverse
         columnOne={
-          <TextColumn title="MySQL Compatible" text={textContent.intro} />
+          <TextColumn title="SQL Support" text={textContent.sqlsupport} />
         }
         columnTwo={
           <img alt="" src={useBaseUrl('img/homepage/mysqlcompatible.png')} />
@@ -264,10 +255,7 @@ function ElasticLogging() {
     <Section className="NativeApps" background="tint">
       <TwoColumns
         columnOne={
-          <TextColumn
-            title="Elastic Parallel Logging"
-            text={textContent.elasticlog}
-          />
+          <TextColumn title="DynamoDB Inherit" text={textContent.inheritddb} />
         }
         columnTwo={
           <img alt="" src={useBaseUrl('img/homepage/elasticlogging2.png')} />
@@ -282,10 +270,7 @@ function ElasticMemory() {
       <TwoColumns
         reverse
         columnOne={
-          <TextColumn
-            title="Elastic Memory Cache"
-            text={textContent.elasticmem}
-          />
+          <TextColumn title="Hybrid Cloud" text={textContent.hybridcloud} />
         }
         columnTwo={
           <img alt="" src={useBaseUrl('img/homepage/elasticcache.png')} />
@@ -461,7 +446,6 @@ const Index2 = () => {
       <NativeApps />
       <ElasticLogging />
       <ElasticMemory />
-      <DecoupleStore />
     </Layout>
   );
 };

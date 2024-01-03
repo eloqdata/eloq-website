@@ -1,10 +1,10 @@
 # Table of Contents
 
-- **Products**
+- **MonographSQL**
   - MonographSQL: A Distributed NewSQL Database for Elastic Performance at Any Scale
-  - MonographKV: Unleashing Blazing-Fast Performance with Transactional Cache
-- **Benchmark**
   - Benchmark Report of MonographSQL
+- **MonographKV**
+  - MonographKV: Unleashing Blazing-Fast Performance with Transactional Store
   - Benchmark Report of MonographKV
 - **Appendix**
   - Assemble your database using Data Substrate
@@ -30,7 +30,7 @@ MonographSQL is a revolutionary distributed NewSQL database that addresses these
 MonographSQL is a decoupled distributed database powered by Data Substrate. Its architecture includes a frontend compute engine compatible with the MySQL protocol. Within Data Substrate, the TxService is responsible for caching hot data and managing transaction processing, while the LogService handles data persistence. LogService replicas are distributed across different availability zones (AZs) to ensure tolerance to AZ-level failures. The underlying storage layer supports pluggable key-value (KV) storages, such as AWS DynamoDB, Google Bigtable, and Cassandra. These cloud storage services store cold data for cache misses and provide high availability for baseline data.
 
 <p align="center">
-<img src="./media/MonographSQL_wp.png" alt="drawing" width="400"/>
+<img src="./media/monographsql_wp.png" alt="drawing" width="400"/>
 </p>
 
 ## Key Features
@@ -51,7 +51,7 @@ MonographSQL is a decoupled distributed database powered by Data Substrate. Its 
 - Minimizes read latency with highly scalable in-memory data storage
 - Supports hash and range partitioning for efficient data distribution
 - Automatic scaling and rebalancing for optimal performance
-- Cold data checkpointing for efficient cache miss handling
+- Cold data checkpointed to cloud storage for efficient cache miss read
 
 ### Decoupled Cloud Storage:
 
@@ -82,6 +82,8 @@ Gone are the days of performance trade-offs and inflexible scalability in distri
 
 MonographSQL is the future of distributed SQL. Are you ready to break free?
 
+<div style="page-break-after: always;"></div>
+
 # Benchmark Report of MonographSQL
 
 ## Introduction
@@ -95,7 +97,7 @@ MonographSQL shatters NewSQL performance barriers with a unique approach: in-mem
 To illuminate MonographSQL's edge, we'll conduct experiments focusing on:
 
 - Benchmarking MonographSQL against leading NewSQL databases on mixed workload including distributed transaction to prove its performance superiority.
-- Exposesing the limits of traditional databases and underscores the crucial role of scalable memory for consistent performance, with RDS MySQL plummeting due to cache misses, unfixable even by adding read replicas.
+- Exposesing the limits of traditional databases and underscores the crucial role of scalable memory for consistent performance, with AWS RDS plummeting due to cache misses, unfixable even by adding read replicas.
 - Revealing how write-intensive workloads in the cloud benefit less from scaling CPU and memory, demonstrating the value of MonographSQL's decoupled architecture. Instead, focusing on scaling the true bottleneck like the log service unlocks unmatched performance.
 
 ## Experiment I:
@@ -112,21 +114,24 @@ A mixed workload was used, simulating a combination of read and write operations
 
 To test against NewSQL database in the same hardware configuration, we deploy MonographSQL in co-locate mode, i.e. deploy TxService, LogService and KVStore in the same node. The deployment details is as follows:
 
-| Service type | Node type      | Node count | Disk count     |
-| ------------ | -------------- | ---------- | -------------- |
-| MonographSQL | n2-standard-32 | 3          | 350G*1 + 50G*3 |
-
 | Service type | Node type      | Node count | Disk count |
 | ------------ | -------------- | ---------- | ---------- |
 | NewSQL-X     | n2-standard-32 | 3          | 500G\*1    |
 
-To provide comprehensive insights, the benchmark also included experiments conducted on n2-standard-16 instance types for MonographSQL txservice and NewSQL-X.
+| Service type | Node type      | Node count | Disk count |
+| ------------ | -------------- | ---------- | ---------- |
+| MonographSQL | n2-standard-32 | 3          | 500G\*1    |
+
+To illustrate MonographSQL's parallel logging capabilities and maximize I/O performance, we setup a new MonographSQL deployment with three 50GB SSD disks. Note that three 50GB SSD disks are significantly cheaper than 96 cores of compute resources in the cloud.
+
+| Service type | Node type      | Node count | Disk count       |
+| ------------ | -------------- | ---------- | ---------------- |
+| MonographSQL | n2-standard-32 | 3          | 350G\*1 + 50G\*3 |
 
 Disk Considerations:
 
-- NewSQL-X's official benchmark report employed Local SSDs, which cannot persist data after instance restarts.
+- NewSQL-X's official benchmark report employed local SSDs, which cannot persist data after instance restarts.
 - To align with cloud-native environments and ensure data persistence, this benchmark utilized PD-SSD disks in GCP for both databases.
-- To leverage MonographSQL's parallel logging capabilities and maximize I/O performance, we equipped LogService with three 50GB SSD disks.
 
 ### Results
 
@@ -178,9 +183,11 @@ Y-axis: Measures the Latency.
 <img src="./media/gen-chart-python/point_select_cock_mono_colocate_lat.png" alt="drawing" width="400"/>
 </p>
 
+The above results shows that MonographSQL consistently outperformed NewSQL-X in terms of QPS and latency among different kinds of workloads. This advantage is particularly evident for distributed transactions. When configured with three additional disks for Parallel Logging, MonographSQL further elevates its write throughput.
+
 ### Key Takeaways
 
-MonographSQL consistently outperformed NewSQL-X in terms of QPS across both hardware configurations. These results demonstrate MonographSQL's superior ability to handle distributed transactions and deliver high performance under demanding workloads. Its innovative Data Substrate architecture enables it to achieve significantly higher QPS compared to NewSQL-X, making it a compelling choice for organizations seeking a high-performance, scalable NewSQL database solution.
+Compared with NewSQL, MonographSQL has superior ability to handle distributed transactions and deliver high performance under demanding workloads. Its innovative Data Substrate architecture enables it to achieve significantly higher QPS compared to NewSQL-X, making it a compelling choice for organizations seeking a high-performance, scalable NewSQL database solution.
 
 ## Expeiment II:
 
@@ -190,16 +197,12 @@ Many organizations fall into the trap of adding read replicas to RDS MySQL, hopi
 
 To ensure a level hardware playing field for benchmarking against MySQL RDS, we deployed MonographSQL in co-locate mode, housing TxService, LogService, and KVStore within the same node. Here's a breakdown of the deployment configurations:
 
-- Small T-shirt size (for small hot data):
-  - MonographSQL: 1 node with 16 cores
-  - MySQL RDS: 1 node with 16 cores
-- Large T-shirt size (for large hot data):
-  - MonographSQL: 6 nodes with 16 cores each node
-  - MySQL RDS: 1 read-write node + 5 read-only nodes with 16 cores each node
+- MonographSQL: 6 nodes with 16 cores/64GB memory each node
+- AWS RDS(MySQL): 1 read-write node + 5 read-only nodes with 16 cores/64GB memory each node
 
 ### Results
 
-X-axis: Represents the varying hot data size from 10 milltion records to 400 million records, simulating the cache miss as data size increases.
+X-axis: Represents the varying hot data size from 100 milltion records to 400 million records, simulating the cache miss as data size increases.
 
 Y-axis: Measures the QPS (Queries Per Second).
 
@@ -208,6 +211,14 @@ Y-axis: Measures the QPS (Queries Per Second).
 <p align="center">
 <img src="./media/gen-chart-python/point_select_rds_mono.png" alt="drawing" width="400"/>
 </p>
+
+Results demonstrate that AWS RDS outperforms MonographSQL when data size is small and can be fully cached in a single node's memory. As data size increases, the QPS of AWS RDS drops sharply which is caused by a large amount of cache miss. However, MonographSQL can keep consistent performance.
+
+### Key Takeaways
+
+- For datasets that fit within a single node's memory (under 200 million records), read replicas provide a performance advantage over distributed memory architectures. This is due to: RDS read replicas operate as independent databases, ensuring all queries are executed locally, eliminating the overhead of remote communication. Conversely, MonographSQL's distributed memory architecture necessitates remote memory access via RPC (Remote Procedure Calls) for read requests spanning multiple shards, introducing latency and potentially impacting performance.
+
+- For datasets exceeding single-node memory capacity (around 300 million records), distributed memory architectures like MonographSQL outperform read replicas in read performance. The reason is twofold. 1. RDS cache misses hamper performance: as data surpasses single-node memory, RDS experiences frequent cache misses due to randomly distributed queries, leading to significantly slower reads. Even adding more read replicas doesn't mitigate this issue. 2. MonographSQL scales to cache everything: MonographSQL's distributed memory architecture shines in these scenarios. It scales horizontally, effectively caching all hot data across multiple nodes, ensuring consistent and high read performance regardless of dataset size.
 
 ## Expeiment III:
 
@@ -237,7 +248,21 @@ Leveraging MonographSQL's decoupled architecture, we strategically distributed i
 
 ### Results
 
-Firstly, we study the throughput of different choice of scaling.
+Firstly, we study the read throughput of different choice of scaling.
+
+X-axis: Represents the varying thread numbers employed during the benchmark, simulating different levels of concurrent database access.
+
+Y-axis: Measures the QPS (Queries Per Second).
+
+- Point Select Workload
+
+<p align="center">
+<img src="./media/gen-chart-python/scale_cpu_qps.png" alt="drawing" width="400"/>
+</p>
+
+Results demonstrate that scaling CPU cores from 48 to 64 yields a notable increase in read throughput, while scaling log resources offers no improvement. This aligns with expectations, as read-intensive workloads primarily benefit from additional processing power rather than enhanced logging capabilities.
+
+Next, we study the write throughput of different choice of scaling.
 
 X-axis: Represents the varying thread numbers employed during the benchmark, simulating different levels of concurrent database access.
 
@@ -249,17 +274,13 @@ Y-axis: Measures the QPS (Queries Per Second).
 <img src="./media/gen-chart-python/scale_log_qps.png" alt="drawing" width="400"/>
 </p>
 
-Next, we study the latency of different choice of scaling.
+Results show that scaling CPU beyond 48 cores didn't enhance write throughput, but scaling logs did, uncovering disk I/O as the system's primary bottleneck.
 
-X-axis: Represents the varying thread numbers employed during the benchmark, simulating different levels of concurrent database access.
+### Key Takeaways
 
-Y-axis: Measures the Latency.
+MonographSQL's revolutionary decoupled architecture breaks free from monolithic scaling limitations. Its distinct components—CPU/memory, logs, and key-value store—scale independently, enabling targeted resource allocation. Optimize write throughput by scaling logs, unleash read performance with CPU/memory scaling, and accommodate massive datasets with key-value store expansion.
 
-- Single Update Workload
-
-<p align="center">
-<img src="./media/gen-chart-python/scale_log_lat.png" alt="drawing" width="400"/>
-</p>
+<div style="page-break-after: always;"></div>
 
 # MonographKV: Unleashing Blazing-Fast Performance with Transactional Cache
 
