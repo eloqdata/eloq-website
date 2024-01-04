@@ -593,7 +593,7 @@ const Index = () => {
         <div class="product-right-column">
           <img
             alt=""
-            src={useBaseUrl('img/monographdb_website.svg')}
+            src={useBaseUrl('img/monograph_website_hero.svg')}
             type="image/svg+xml"
             width="800"
             heigh="auto"
@@ -615,7 +615,7 @@ const Index = () => {
           </p>
         </div>
         <div class="product-right-column">
-          <img alt="" src={useBaseUrl('img/monographsql_wp.png')} />
+          <img alt="" src={useBaseUrl('img/MySQL_Clients.svg')} />
         </div>
       </div>
       <div class="container2 container-with-separator">
@@ -631,7 +631,7 @@ const Index = () => {
           </p>
         </div>
         <div class="product-right-column">
-          <img alt="" src={useBaseUrl('img/monographkv_wp.png')} />
+          <img alt="" src={useBaseUrl('img/Redis_Clients.svg')} />
         </div>
       </div>
       <div class="container2">
@@ -648,7 +648,7 @@ const Index = () => {
           </p>
         </div>
         <div class="product-right-column">
-          <img alt="" src={useBaseUrl('img/monosql_wp.png')} />
+          <img alt="" src={useBaseUrl('img/AWS.svg')} />
         </div>
       </div>
     </Layout>
