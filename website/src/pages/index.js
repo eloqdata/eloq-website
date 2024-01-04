@@ -615,7 +615,13 @@ const Index = () => {
           </p>
         </div>
         <div class="product-right-column">
-          <img alt="" src={useBaseUrl('img/MySQL_Clients.svg')} />
+          <img
+            alt=""
+            src={useBaseUrl('img/MySQL_Clients.svg')}
+            type="image/svg+xml"
+            width="800"
+            heigh="auto"
+          />
         </div>
       </div>
       <div class="container2 container-with-separator">
@@ -631,7 +637,13 @@ const Index = () => {
           </p>
         </div>
         <div class="product-right-column">
-          <img alt="" src={useBaseUrl('img/Redis_Clients.svg')} />
+          <img
+            alt=""
+            src={useBaseUrl('img/Redis_Clients.svg')}
+            type="image/svg+xml"
+            width="800"
+            heigh="auto"
+          />
         </div>
       </div>
       <div class="container2">
@@ -648,7 +660,13 @@ const Index = () => {
           </p>
         </div>
         <div class="product-right-column">
-          <img alt="" src={useBaseUrl('img/AWS.svg')} />
+          <img
+            alt=""
+            src={useBaseUrl('img/AWS.svg')}
+            type="image/svg+xml"
+            width="800"
+            heigh="auto"
+          />
         </div>
       </div>
     </Layout>
