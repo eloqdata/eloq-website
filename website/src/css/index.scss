@@ -862,6 +862,7 @@ html[data-theme="dark"] .Section p a {
   text-align: left;
   flex: 0 0 50%;
   padding-right: 100px;
+  max-width: 100%;
   /* Set width to 60% and prevent shrinking */
   /*position: relative;*/
 }
@@ -869,6 +870,8 @@ html[data-theme="dark"] .Section p a {
 .product-right-column img {
   flex: 0 0 50%;
   padding-left: 200px;
+  max-width: 100%;
+  //width: 100%;
   height: auto;
 }
 
