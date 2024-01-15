@@ -19,11 +19,12 @@ waiter-cluster-mgr.tar.gz
 
 1. 部署 MonographDB
 
-- 解压 waiter-cluster-mgr.tar.gz，里面包含 cluster_mgr 安装程序，和配置文件夹 config。
+- 安装 cluster_mgr
 
-```
-tar -zxvf waiter-cluster-mgr.tar.gz
-cd mono_cluster_mgr_dist
+```shell
+curl --proto '=https' --tlsv1.2 -sSf https://dzkle3nb4zzyc.cloudfront.net/mono-waiter/install.sh | sh
+
+cd ${CLUSTER_MGR_HOME}
 ```
 
 - 修改 monographDB 启动选项
@@ -67,6 +68,7 @@ monograph_node_memory_limit_mb=4000
       auth:
         keypair: '/home/ubuntu/.ssh/ed25519_mono'
     deployment:
+      product: 'Monograph'
       # monographdb 安装包路径 file:// 表示文件在本地。目前支持http 和 file 。
       tx_image: 'file:///home/ubuntu/monographdb-tx-release-bin.tar.gz'
       log_image: 'file:///home/ubuntu/monographdb-log-release-bin.tar.gz'
@@ -119,30 +121,10 @@ monograph_node_memory_limit_mb=4000
           mcac_port: 9103
     ```
 
-- 安装 MonographDB 所需的依赖文件.请在`mono_cluster_mgr_dist`文件夹下执行
-  ```shell
-  ./cluster_mgr run-deps --topology-file ${PWD}/config/deployment.yaml
-  ```
-- 执行 MonographDB 集群部署命令
-  ```
-  ./cluster_mgr deploy --topology-file ${PWD}/config/deployment.yaml
-  ```
-- 执行 MonographDB 集群安装命令
-
-  ```
-  ./cluster_mgr install --cluster  $CLUSTER_NAME
-  ```
-
-- 启动 MonographDB 集群
+- 启动集群
 
   ```shell
-  ./cluster_mgr start  --cluster  $CLUSTER_NAME
-  ```
-
-- 启动监控
-
-  ```shell
-  ./cluster_mgr monitor --cluster $CLUSTER_NAME --command start
+  cluster_mgr launch --topology-file ${PWD}/config/deployment.yaml
   ```
 
 - 访问集群
@@ -161,7 +143,30 @@ monograph_node_memory_limit_mb=4000
 
 ### 批量导入数据
 
-`mono_load.py` 是 MonographDB 的数据批量加载工具，其运行依赖 python3 通过一下命令安装其运行时依赖
+#### mydumper
+
+推荐使用 [mydumper](https://github.com/monographdb/mydumper) 导出/导入数据.
+
+```shell
+# for ubuntu20.04
+wget https://dzkle3nb4zzyc.cloudfront.net/mydumper/mydumper_focal.tar.gz
+# for ubuntu22.04
+wget https://dzkle3nb4zzyc.cloudfront.net/mydumper/mydumper_jammy.tar.gz
+
+tar -xzvf mydumper.tar.gz
+cd mydumper
+
+# edit your config
+vim monograph.cnf
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${PWD}/lib
+./mydumper --defaults-file ./monograph.cnf --outputdir exported
+./myloader --defaults-file ./monograph.cnf --directory exported
+```
+
+#### mono_load.py
+
+你也可以使用脚本导入， `mono_load.py` 是 MonographDB 的数据批量加载工具，其运行依赖 python3 通过以下命令安装其运行时依赖
 
 ```bash
 sudo apt install python3 -y

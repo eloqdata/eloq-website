@@ -19,6 +19,7 @@ const sidebars = {
   //monosqlSidebar: ['MonoSQL'],
   monographdb: {
     快速上手: [
+      'playground',
       'preconfig',
       'quick-start',
       'cluster-deployment',

@@ -19,6 +19,7 @@ const sidebars = {
   //monosqlSidebar: ['MonoSQL'],
   monographdb: {
     'Quick Start': [
+      'playground',
       'introduction',
       'quick-start',
       'basic-sql-operations',

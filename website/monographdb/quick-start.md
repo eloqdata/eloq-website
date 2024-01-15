@@ -156,6 +156,7 @@ waiter-cluster-mgr.tar.gz
     auth:
     keypair: "/home/$USER/.ssh/id_rsa"
         deployment:
+        product: "Monograph"
         install_image: "file:///home/ubuntu/monographdb-release.tar.gz"
         cluster_name:  $CLUSTER_NAME
         install_dir: "/$USER/opt"
@@ -203,21 +204,10 @@ waiter-cluster-mgr.tar.gz
 > **Note:**
 > The above deployment.yaml file is the default configuration file, and users can configure the software to be installed according to their needs. For some software that does not need to be installed, it only needs to be deleted from the configuration file.
 
-- Dependency files needed to install MonographDB
-  ```shell
-  ./cluster_mgr run-deps --topology-file ${PWD}/config/deployment.yaml
-  ```
-- Execute the MonographDB cluster deployment command
-  ```
-  ./cluster_mgr deploy --topology-file ${PWD}/config/deployment.yaml
-  ```
-- Execute the MonographDB cluster installation command
-  `./cluster_mgr install --cluster $CLUSTER_NAME`
-
-- Start the MonographDB cluster
+- Launch cluster
 
   ```shell
-  ./cluster_mgr start --cluster $CLUSTER_NAME
+  cluster_mgr launch --topology-file ${PWD}/config/deployment.yaml
   ```
 
 - Access the cluster
