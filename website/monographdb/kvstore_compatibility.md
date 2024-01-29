@@ -71,45 +71,45 @@ title: MonographKVStore Redis Command Capabilities
 - [✅] HDEL
 - [✅] HEXISTS
 - [✅] HGET
-- [ ] HGETALL
+- [✅] HGETALL
 - [✅] HINCRBY
-- [ ] HINCRBYFLOAT
+- [✅] HINCRBYFLOAT
 - [✅] HKEYS
 - [✅] HLEN
-- [ ] HMGET
+- [✅] HMGET
 - [✅] HSET
 - [✅] HSETNX
-- [ ] HSTRLEN
-- [ ] HVALS
-- [ ] HRANDFIELD
+- [0] HSTRLEN
+- [✅] HVALS
+- [1] HRANDFIELD
 - [✅] HSCAN
-- [ ] HMSET (Deprecated)
+- [✅] HMSET (Deprecated)
 
 ## List
 
-- [ ] BLMOVE
-- [ ] BLMPOP
-- [ ] BLPOP
-- [ ] BRPOP
-- [ ] BRPOPLPUSH
-- [] LINDEX
-- [ ] LINSERT
+- [5-] BLMOVE //here blocking means client will be blocked when source of BLMOVE is empty until another client push the item into the source.
+- [5-] BLMPOP
+- [5-] BLPOP
+- [5-] BRPOP
+- [5-] BRPOPLPUSH
+- [0] LINDEX
+- [1] LINSERT
 - [✅] LLEN
-- [ ] LMOVE
-- [ ] LMPOP
+- [2] LMOVE
+- [1] LMPOP
 - [✅] LPOP
-- [ ] LPOS
+- [2] LPOS
 - [✅] LPUSH
-- [ ] LPUSHX
+- [0] LPUSHX
 - [✅] LRANGE
-- [ ] LREM
-- [ ] LSET
+- [1] LREM
+- [0] LSET
 - [✅] LTRIM
 - [✅] RPOP
-- [ ] RPOPLPUSH
+- [ ] RPOPLPUSH(deprecated 6.2.0)
 - [✅] RPUSH
-- [ ] RPUSHX
-- [ ] SORT (Note: The SORT command also works on Lists)
+- [0] RPUSHX
+- [5] SORT (Note: The SORT command also works on Lists)
 
 ## Pub/Sub
 
@@ -143,79 +143,79 @@ title: MonographKVStore Redis Command Capabilities
 ## Set
 
 - [✅] SADD
-- [ ] SCARD
-- [ ] SDIFF
-- [ ] SDIFFSTORE
-- [ ] SINTER
-- [ ] SINTERSTORE
-- [ ] SISMEMBER
+- [✅] SCARD
+- [✅] SDIFF
+- [✅] SDIFFSTORE
+- [✅] SINTER
+- [✅] SINTERSTORE
+- [✅] SISMEMBER
 - [✅] SMEMBERS
-- [ ] SMISMEMBER
-- [ ] SMOVE
-- [ ] SPOP
-- [ ] SRANDMEMBER
+- [1] SMISMEMBER
+- [✅] SMOVE
+- [✅] SPOP
+- [✅] SRANDMEMBER
 - [✅] SREM
-- [ ] SSCAN
-- [ ] SUNION
-- [ ] SUNIONSTORE
+- [✅] SSCAN
+- [✅] SUNION
+- [✅] SUNIONSTORE
 
 ## Sorted Set
 
 - [ ] BZPOPMIN
 - [ ] BZPOPMAX
 - [✅] ZADD
-- [ ] ZCARD
-- [ ] ZCOUNT
-- [ ] ZDIFF
-- [ ] ZDIFFSTORE
-- [ ] ZINCRBY
-- [ ] ZINTER
-- [ ] ZINTERCARD
-- [ ] ZINTERSTORE
-- [ ] ZLEXCOUNT
-- [ ] ZMPOP
-- [ ] ZMSCORE
-- [ ] ZPOPMAX
-- [ ] ZPOPMIN
-- [ ] ZRANDMEMBER
+- [0] ZCARD
+- [1] ZCOUNT
+- [4-] ZDIFF
+- [4-] ZDIFFSTORE
+- [4-] ZINCRBY
+- [4-] ZINTER
+- [4-] ZINTERCARD
+- [4-] ZINTERSTORE
+- [1] ZLEXCOUNT
+- [3] ZMPOP
+- [1] ZMSCORE
+- [1] ZPOPMAX
+- [1] ZPOPMIN
+- [1] ZRANDMEMBER
 - [✅] ZRANGE
 - [✅] ZRANGEBYLEX
 - [✅] ZRANGEBYSCORE
-- [ ] ZRANK
+- [1] ZRANK
 - [✅] ZREM
-- [ ] ZREMRANGEBYLEX
-- [ ] ZREMRANGEBYRANK
-- [ ] ZREMRANGEBYSCORE
-- [ ] ZREVRANGE
-- [ ] ZREVRANGEBYLEX
-- [ ] ZREVRANGEBYSCORE
-- [ ] ZREVRANK
-- [ ] ZSCAN
+- [1] ZREMRANGEBYLEX
+- [1] ZREMRANGEBYRANK
+- [1] ZREMRANGEBYSCORE
+- [1] ZREVRANGE
+- [1] ZREVRANGEBYLEX
+- [1] ZREVRANGEBYSCORE
+- [1] ZREVRANK
+- [3] ZSCAN
 - [✅] ZSCORE
-- [ ] ZUNION
-- [ ] ZUNIONSTORE
+- [4-] ZUNION
+- [4-] ZUNIONSTORE
 
 ## String
 
-- [ ] APPEND
+- [1] APPEND
 - [✅] DECR
 - [✅] DECRBY
 - [✅] GET
-- [ ] GETRANGE
+- [✅] GETRANGE
 - [✅] GETSET
 - [✅] INCR
 - [✅] INCRBY
-- [ ] INCRBYFLOAT
+- [✅] INCRBYFLOAT
 - [✅] MGET
 - [✅] MSET
-- [ ] MSETNX
-- [ ] PSETEX
+- [1] MSETNX
+- [x] PSETEX // ttl is not required.
 - [✅] SET
 - [✅] SETEX
-- [] SETNX
-- [ ] SETRANGE
+- [✅] SETNX
+- [✅] SETRANGE
 - [✅] STRLEN
-- [ ] SUBSTR (Deprecated)
+- [0] SUBSTR (Deprecated) //same as getrange
 
 ## Transactions
 
