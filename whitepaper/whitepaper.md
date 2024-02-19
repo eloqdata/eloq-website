@@ -16,13 +16,13 @@
 
 <div style="page-break-after: always;"></div>
 
-# MonographSQL: A Distributed NewSQL Database for Elastic Performance at Any Scale
+# MonographSQL: A Distributed SQL Database for Elastic Performance at Any Scale
 
 ## Introduction
 
 In today's data-driven world, organizations face the challenge of managing ever-increasing volumes of data while ensuring high performance, scalability, and cost-effectiveness. Traditional database systems often struggle to meet these demands, leading to bottlenecks and performance limitations.
 
-MonographSQL is a revolutionary distributed NewSQL database that addresses these challenges head-on. Powered by its innovative Data Substrate, MonographSQL delivers exceptional elasticity, scalability, and performance for latency-sensitive workloads, making it an ideal choice for modern enterprises.
+MonographSQL is a revolutionary distributed SQL database that addresses these challenges head-on. Powered by its innovative Data Substrate, MonographSQL delivers exceptional elasticity, scalability, and performance for latency-sensitive workloads, making it an ideal choice for modern enterprises.
 
 ## Achitecture
 

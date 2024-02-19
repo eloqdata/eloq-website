@@ -79,9 +79,9 @@ title: MonographKVStore Redis Command Capabilities
 - [✅] HMGET
 - [✅] HSET
 - [✅] HSETNX
-- [0] HSTRLEN
+- [✅] HSTRLEN
 - [✅] HVALS
-- [1] HRANDFIELD
+- [✅] HRANDFIELD
 - [✅] HSCAN
 - [✅] HMSET (Deprecated)
 
@@ -92,23 +92,23 @@ title: MonographKVStore Redis Command Capabilities
 - [5-] BLPOP
 - [5-] BRPOP
 - [5-] BRPOPLPUSH
-- [0] LINDEX
-- [1] LINSERT
+- [✅] LINDEX
+- [✅] LINSERT
 - [✅] LLEN
 - [2] LMOVE
 - [1] LMPOP
 - [✅] LPOP
-- [2] LPOS
+- [✅] LPOS
 - [✅] LPUSH
 - [0] LPUSHX
 - [✅] LRANGE
 - [1] LREM
-- [0] LSET
+- [✅] LSET
 - [✅] LTRIM
 - [✅] RPOP
 - [ ] RPOPLPUSH(deprecated 6.2.0)
 - [✅] RPUSH
-- [0] RPUSHX
+- [✅] RPUSHX
 - [5] SORT (Note: The SORT command also works on Lists)
 
 ## Pub/Sub
@@ -150,7 +150,7 @@ title: MonographKVStore Redis Command Capabilities
 - [✅] SINTERSTORE
 - [✅] SISMEMBER
 - [✅] SMEMBERS
-- [1] SMISMEMBER
+- [✅] SMISMEMBER
 - [✅] SMOVE
 - [✅] SPOP
 - [✅] SRANDMEMBER
@@ -172,11 +172,11 @@ title: MonographKVStore Redis Command Capabilities
 - [4-] ZINTER
 - [4-] ZINTERCARD
 - [4-] ZINTERSTORE
-- [1] ZLEXCOUNT
+- [✅] ZLEXCOUNT
 - [3] ZMPOP
 - [1] ZMSCORE
-- [1] ZPOPMAX
-- [1] ZPOPMIN
+- [✅] ZPOPMAX
+- [✅] ZPOPMIN
 - [1] ZRANDMEMBER
 - [✅] ZRANGE
 - [✅] ZRANGEBYLEX
@@ -197,7 +197,7 @@ title: MonographKVStore Redis Command Capabilities
 
 ## String
 
-- [1] APPEND
+- [✅] APPEND
 - [✅] DECR
 - [✅] DECRBY
 - [✅] GET
@@ -208,14 +208,14 @@ title: MonographKVStore Redis Command Capabilities
 - [✅] INCRBYFLOAT
 - [✅] MGET
 - [✅] MSET
-- [1] MSETNX
+- [✅] MSETNX
 - [x] PSETEX // ttl is not required.
 - [✅] SET
 - [✅] SETEX
 - [✅] SETNX
 - [✅] SETRANGE
 - [✅] STRLEN
-- [0] SUBSTR (Deprecated) //same as getrange
+- [✅] SUBSTR (Deprecated) //same as getrange
 
 ## Transactions
 
