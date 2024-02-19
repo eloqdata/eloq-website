@@ -142,6 +142,16 @@ module.exports = {
     [
       '@docusaurus/plugin-content-docs',
       {
+        id: 'monographkv',
+        path: 'monographkv',
+        routeBasePath: 'monographkv',
+        sidebarPath: require.resolve('./sidebarsMonographkv.js'),
+        // ... other options
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
         id: 'monosqlcn',
         path: 'monosqlcn',
         routeBasePath: 'monosqlcn',
@@ -218,6 +228,12 @@ module.exports = {
                 type: 'doc',
                 docsPluginId: 'monographdb',
                 docId: 'introduction',
+              },
+              {
+                label: 'MonographKV',
+                type: 'doc',
+                docsPluginId: 'monographkv',
+                docId: 'playground',
               },
               {
                 label: 'MonoSQL',

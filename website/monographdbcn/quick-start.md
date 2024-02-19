@@ -22,7 +22,7 @@ waiter-cluster-mgr.tar.gz
 - 安装 cluster_mgr
 
 ```shell
-curl --proto '=https' --tlsv1.2 -sSf https://dzkle3nb4zzyc.cloudfront.net/mono-waiter/install.sh | sh
+curl --proto '=https' --tlsv1.2 -sSf https://d44nokjo5ywh8.cloudfront.net/mono-waiter/install.sh | sh
 
 cd ${CLUSTER_MGR_HOME}
 ```
@@ -149,9 +149,9 @@ monograph_node_memory_limit_mb=4000
 
 ```shell
 # for ubuntu20.04
-wget https://dzkle3nb4zzyc.cloudfront.net/mydumper/mydumper_focal.tar.gz
+wget https://d44nokjo5ywh8.cloudfront.net/mydumper/mydumper_focal.tar.gz
 # for ubuntu22.04
-wget https://dzkle3nb4zzyc.cloudfront.net/mydumper/mydumper_jammy.tar.gz
+wget https://d44nokjo5ywh8.cloudfront.net/mydumper/mydumper_jammy.tar.gz
 
 tar -xzvf mydumper.tar.gz
 cd mydumper

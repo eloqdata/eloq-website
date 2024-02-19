@@ -1,6 +1,10 @@
+---
+title: Playground
+---
+
 # Playground
 
-Run a MonographDB Playground locally.
+Run a MonoCache Playground locally.
 
 Install cluster_mgr
 
@@ -11,5 +15,5 @@ curl --proto '=https' --tlsv1.2 -sSf https://d44nokjo5ywh8.cloudfront.net/mono-w
 Start to play with MonographDB
 
 ```shell
-cluster_mgr demo --product monograph
+cluster_mgr demo --product redis
 ```
