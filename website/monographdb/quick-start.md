@@ -139,6 +139,7 @@ waiter-cluster-mgr.tar.gz
 - modify the cluster configuration file
   According to the following configuration template, edit the configuration file config/deployment.yaml as your need, where:
 
+  - `product: "Redis"`: This can be set as Monograph or Redis
   - `username: "mono"`: Indicates that the `mono` system user (the current system user name) is used for internal management of the cluster. By default, port 22 is used to log in to the target machine via ssh
   - `auth_type`: ssh login verification method, the default is the keypair form
   - `keypair`: set to the storage address of the ssh private key file configured through the network
@@ -155,11 +156,11 @@ waiter-cluster-mgr.tar.gz
     auth_type: "keypair"
     auth:
     keypair: "/home/$USER/.ssh/id_rsa"
-        deployment:
-        product: "Monograph"
-        install_image: "file:///home/ubuntu/monographdb-release.tar.gz"
-        cluster_name:  $CLUSTER_NAME
-        install_dir: "/$USER/opt"
+    deployment:
+    product: "Monograph"
+    version: "0.3.3"
+    cluster_name:  $CLUSTER_NAME
+    install_dir: "/$USER/opt"
     port:
     mysql_port: 3300
     monograph_port:

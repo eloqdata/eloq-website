@@ -42,6 +42,7 @@ The `Monograph_waiter` tool can realize the installation and deployment on multi
 - Create and start the cluster
   According to the following configuration template, edit the configuration file deployment.yaml as you need, where:
 
+  - `product: "Redis"`: This can be set as Monograph or Redis
   - `username: "centos"`: The management of the cluster is done through the `centos` system user (the current system user name), port 22 is used to log in to the target machine via ssh
   - `auth_type`: The way of ssh login verification, the default is keypair
   - `keypair`: Set as the location of the ssh private key, note that this ssh key must have access to multiple servers
@@ -59,7 +60,8 @@ The `Monograph_waiter` tool can realize the installation and deployment on multi
     auth:
         keypair: "~/xx.pem"
     deployment:
-    install_image: "file:///home/centos/monographdb-release-bin.tar.gz"
+    product: "Monograph"
+    version: "0.3.3"
     cluster_name: "mono_cloud"
     install_dir: "/home/centos"
     port:
@@ -113,36 +115,11 @@ The `Monograph_waiter` tool can realize the installation and deployment on multi
 > **Note:**
 > The deployment.yaml file above is the default configuration file, and users can configure the software to be installed as needed. For some software that does not need to be installed, it only needs to be deleted from the configuration file.
 
-- Dependency files needed to install MonographDB
-  ```shell
-  ./cluster_mgr run-deps --topology-file ${PWD}/config/deployment.yaml
-  ```
-- Execute the MonographDB cluster deployment command
-  ```
-  ./cluster_mgr deploy --topology-file ${PWD}/config/deployment.yaml
-  ```
-- Execute the MonographDB cluster installation command
-  ```
-  ./cluster_mgr install --cluster $CLUSTER_NAME
-  ```
+- Launch cluster
 
-> **Note:**
-> In the process of installing the MonographDB cluster, you first need to set up the development environment of JDK (JAVA Development Kit), and set up the corresponding JAVA_HOME and PATH, in order to prevent errors during the execution of cassandra
-
-- Start the MonographDB cluster
   ```shell
-   ./cluster_mgr start --cluster $CLUSTER_NAME
+  cluster_mgr launch --topology-file ${PWD}/config/deployment.yaml
   ```
-- Access the cluster
-  - Access the MonographDB database. By default, `mysql` is installed under `/home/$USER/opt/mono-poc/monographdb-release/install/`, enter this directory, and use socket to connect to the database.
-    ```shell
-    cd /home/$USER/opt/$CLUSTER_NAME/monographdb-release/install/
-    sudo ./bin/mysql -u root -S /tmp/mysql3300.sock
-    ```
-  - Execute the following command to view the status of the cluster:
-    ```shell
-    ./cluster_mgr status -cluster $CLUSTER_NAME
-    ```
 
 ## See also
 

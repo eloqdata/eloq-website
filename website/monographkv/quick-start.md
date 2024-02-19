@@ -129,17 +129,18 @@ After the ssh key generation, two files will be generated in the $HOME/.ssh dire
 - modify the cluster configuration file
   According to the following configuration template, edit the configuration file config/deployment.yaml as your need, where:
 
+  - `product: "Redis"`: This can be set as Monograph or Redis
   - `username: "mono"`: Indicates that the `mono` system user (the current system user name) is used for internal management of the cluster. By default, port 22 is used to log in to the target machine via ssh
   - `auth_type`: ssh login verification method, the default is the keypair form
   - `keypair`: set to the storage address of the ssh private key file configured through the network
   - `host`: Set it to the IP of the deployment host, if it only needs to be installed on this machine, set it to 127.0.0.1. Please do not use `localhost`
-  - `install_image`: Can be set to the downloaded Monograph installation package locally or the download address of the remote MonographDB
+  - `tx_image`: Can be set to the downloaded Monograph installation package locally or the download address of the remote MonographDB
   - `install_dir`: Set to the desired storage location for the user to install the cluster. This location must be the folder location with read and write permissions for the user specified by `username`. If the installation directory does not exist, it needs to be manually created in advance.
   - `storage_service`: Configure the remote download URL `download_url` of the `Cassandra` database, the installation location `(host)`, if configured as `127.0.0.1`, it means that the installation is locally.
   - `monitor`: Configure the remote download URL, installation location and installation port of MonographDB’s related monitoring software (prometheus, grafana).
     The configuration template is as follows:
 
-````yaml
+```yaml
 connection:
     username: "mono"
     auth_type: "keypair"
@@ -151,10 +152,10 @@ deployment:
     cluster_name:  $CLUSTER_NAME
     install_dir: "/$USER/opt"
     port:
-    mysql_port: 3300
-    monograph_port:
-    start: 8100
-    end: 8200
+      mysql_port: 3300
+      monograph_port:
+        start: 8100
+        end: 8200
     mono_service:
     host: - localhost
     storage_service:
@@ -182,14 +183,12 @@ deployment:
     cassandra_collector:
     mcac_agent: "https://github.com/datastax/metric-collector-for-apache-cassandra/releases/download/v0.3.4/datastax-mcac-agent-0.3.4-4.1-beta1.tar.gz"
     mcac_port: 9103
-
          #    dynamodb:
          #      access_key_id: "",
          #      secret_key: ""
          #      region: "XXXX",
          #      endpoint: "";
-             ```
-````
+```
 
 > **Note:**
 > The above deployment.yaml file is the default configuration file, and users can configure the software to be installed according to their needs. For some software that does not need to be installed, it only needs to be deleted from the configuration file.

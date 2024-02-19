@@ -5,7 +5,7 @@
 准备 cluster_mgr
 
 ```shell
-curl --proto '=https' --tlsv1.2 -sSf https://d44nokjo5ywh8.cloudfront.net/mono-waiter/install.sh | sh
+curl --proto '=https' --tlsv1.2 -sSf https://www.monographdata.com/download/mono-waiter/install.sh | sh
 ```
 
 启动

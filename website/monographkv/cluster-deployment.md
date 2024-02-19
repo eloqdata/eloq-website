@@ -42,6 +42,7 @@ The `Monograph_waiter` tool can realize the installation and deployment on multi
 - Create and start the cluster
   According to the following configuration template, edit the configuration file deployment.yaml as you need, where:
 
+  - `product: "Redis"`: This can be set as Monograph or Redis
   - `username: "centos"`: The management of the cluster is done through the `centos` system user (the current system user name), port 22 is used to log in to the target machine via ssh
   - `auth_type`: The way of ssh login verification, the default is keypair
   - `keypair`: Set as the location of the ssh private key, note that this ssh key must have access to multiple servers
