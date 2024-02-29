@@ -16,7 +16,7 @@ import Layout from '@theme/Layout';
 
 const textContent = {
   intro: `
-  MonographSQL maintains compatibility with the MySQL protocol by leveraging the existing MySQL Parser and Executor as its compute engine. However, it replaces the Innodb storage engine with the enhanced Data Substrate. This advanced engine provides support for various transaction isolation levels, concurrency control protocols, distributed buffer pools, data persistence, and high availability, offering a more robust and scalable solution.
+  MonostrateSQL maintains compatibility with the MySQL protocol by leveraging the existing MySQL Parser and Executor as its compute engine. However, it replaces the Innodb storage engine with the enhanced Data Substrate. This advanced engine provides support for various transaction isolation levels, concurrency control protocols, distributed buffer pools, data persistence, and high availability, offering a more robust and scalable solution.
   `,
   nativeCode: `
 React primitives render to native platform UI, meaning your app uses the
@@ -78,13 +78,13 @@ Members of the React Native team frequently speak at various conferences.
 You can follow the latest news from the React Native team on Twitter
   `,
   elasticlog: `
-  Write-intensive workloads demand highly scalable logging services. Traditional databases write and fsync redo logs to a single disk in the order of their sequence number, creating a bottleneck for the entire system. MonographSQL's patented one-phase commit technique allows concurrent transactions to write and synchronize redo logs to multiple disks in parallel. Benchmarks demonstrate a 4x improvement in transactions per second compared to MySQL.
+  Write-intensive workloads demand highly scalable logging services. Traditional databases write and fsync redo logs to a single disk in the order of their sequence number, creating a bottleneck for the entire system. MonostrateSQL's patented one-phase commit technique allows concurrent transactions to write and synchronize redo logs to multiple disks in parallel. Benchmarks demonstrate a 4x improvement in transactions per second compared to MySQL.
   `,
   elasticmem: `
-  Read-intensive workloads demand highly scalable memory resources. To minimize read latency, keeping all hot data in memory is crucial. MonographSQL supports both hash and range partitioning, enabling it to store vast amounts of hot data across multiple hosts. As the hot data volume increases, MonographSQL can automatically scale out the cluster and rebalance the data range. Additionally, cold data is periodically checkpointed to key-value stores, which can serve cache miss read.
+  Read-intensive workloads demand highly scalable memory resources. To minimize read latency, keeping all hot data in memory is crucial. MonostrateSQL supports both hash and range partitioning, enabling it to store vast amounts of hot data across multiple hosts. As the hot data volume increases, MonostrateSQL can automatically scale out the cluster and rebalance the data range. Additionally, cold data is periodically checkpointed to key-value stores, which can serve cache miss read.
   `,
   decouplestore: `
-  Large datasets necessitate a decoupled storage layer that can be scaled independently of read and write traffic. Allocating additional compute and memory resources for cold data is wasteful. Traditional shared-nothing architectures require adding more compute nodes as data volume increases, even if read and write traffic remain constant. MonographSQL's decoupled cloud storage allows you to pay only for the disk space and IOPS costs associated with cold data, leading to cost savings and efficient resource utilization.
+  Large datasets necessitate a decoupled storage layer that can be scaled independently of read and write traffic. Allocating additional compute and memory resources for cold data is wasteful. Traditional shared-nothing architectures require adding more compute nodes as data volume increases, even if read and write traffic remain constant. MonostrateSQL's decoupled cloud storage allows you to pay only for the disk space and IOPS costs associated with cold data, leading to cost savings and efficient resource utilization.
   `,
 };
 
@@ -211,7 +211,7 @@ function HeaderHero() {
         columnOne={<LogoAnimation />}
         columnTwo={
           <>
-            <h1 className="title">MonographSQL</h1>
+            <h1 className="title">MonostrateSQL</h1>
             <p className="tagline">
               A distributed NewSQL database powered by Data&nbsp;Substrate.
               Elastic at any scale for any workload.

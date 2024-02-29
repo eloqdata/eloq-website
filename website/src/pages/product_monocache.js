@@ -16,16 +16,16 @@ import Layout from '@theme/Layout';
 
 const textContent = {
   intro: `
-  MonographKV is a transactional store service that goes beyond traditional options like Redis. With full ACID properties across distributed transactions and clusters, it can even replace MySQL + Redis combinations, eliminating cache coherence issues entirely.
+  MonostrateKV is a transactional store service that goes beyond traditional options like Redis. With full ACID properties across distributed transactions and clusters, it can even replace MySQL + Redis combinations, eliminating cache coherence issues entirely.
   `,
   lowcostmodel: `
-  Leveraging the power of Data Substrate, MonographKV stores frequently accessed data in memory for blazing-fast query performance. As data cools, it is seamlessly transferred to a low-cost cloud key-value store through asynchronous checkpoints. This innovative architecture eliminates the need to store cold data in expensive DRAM while still allowing transactional reads for cache misses. Additionally, the cloud storage offers lower operational costs, while asynchronous checkpointing minimizes IOPS requirements, further optimizing performance and cost-effectiveness.
+  Leveraging the power of Data Substrate, MonostrateKV stores frequently accessed data in memory for blazing-fast query performance. As data cools, it is seamlessly transferred to a low-cost cloud key-value store through asynchronous checkpoints. This innovative architecture eliminates the need to store cold data in expensive DRAM while still allowing transactional reads for cache misses. Additionally, the cloud storage offers lower operational costs, while asynchronous checkpointing minimizes IOPS requirements, further optimizing performance and cost-effectiveness.
   `,
   autoscaling: `
-  MonographKV offers flexible, modular scaling to optimize resource utilization based on your workload patterns. When large volumes of hot data require faster access, you can scale the memory. If write traffic surges, scaling the log service ensures smooth handling. As historical data accumulates, scaling the cloud KV storage provides seamless growth. This targeted approach allows you to scale the right modules at the right time, maximizing performance and efficiency.
+  MonostrateKV offers flexible, modular scaling to optimize resource utilization based on your workload patterns. When large volumes of hot data require faster access, you can scale the memory. If write traffic surges, scaling the log service ensures smooth handling. As historical data accumulates, scaling the cloud KV storage provides seamless growth. This targeted approach allows you to scale the right modules at the right time, maximizing performance and efficiency.
   `,
   highperf: `
-  Unlike Redis, which relies on a single-threaded architecture that underutilizes modern hardware, MonographKV leverages a multi-threaded approach to maximize resource utilization and achieve blazing-fast performance. By further optimizing write performance through parallel logging, MonographKV delivers a significant advantage in transactional write throughput.
+  Unlike Redis, which relies on a single-threaded architecture that underutilizes modern hardware, MonostrateKV leverages a multi-threaded approach to maximize resource utilization and achieve blazing-fast performance. By further optimizing write performance through parallel logging, MonostrateKV delivers a significant advantage in transactional write throughput.
   `,
   nativeCode: `
 React primitives render to native platform UI, meaning your app uses the
@@ -233,7 +233,7 @@ function HeaderHero() {
         columnOne={<LogoAnimation />}
         columnTwo={
           <>
-            <h1 className="title">MonographKV</h1>
+            <h1 className="title">MonostrateKV</h1>
             <p className="tagline">
               A distributed transactional cache database powered by
               Data&nbsp;Substrate. Store data in cache with lower cost and

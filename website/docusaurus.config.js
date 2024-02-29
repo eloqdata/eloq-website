@@ -192,10 +192,10 @@ module.exports = {
         ],
       },
       navbar: {
-        title: 'MonographDB',
+        title: 'MonostrateDB',
         logo: {
           src: 'img/monosql_logo.png',
-          alt: 'MonographDB',
+          alt: 'MonostrateDB',
         },
         style: 'dark',
         items: [
@@ -205,11 +205,11 @@ module.exports = {
             position: 'right',
             items: [
               {
-                label: 'MonographSQL',
+                label: 'MonostrateSQL',
                 to: '/product_monographdb',
               },
               {
-                label: 'MonographKV',
+                label: 'MonostrateKV',
                 to: '/product_monocache',
               },
               {
@@ -224,13 +224,13 @@ module.exports = {
             href: '#',
             items: [
               {
-                label: 'MonographSQL',
+                label: 'MonostrateSQL',
                 type: 'doc',
                 docsPluginId: 'monographdb',
                 docId: 'introduction',
               },
               {
-                label: 'MonographKV',
+                label: 'MonostrateKV',
                 type: 'doc',
                 docsPluginId: 'monographkv',
                 docId: 'playground',

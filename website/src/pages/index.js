@@ -270,7 +270,7 @@ function MonographSQL() {
         columnTwo={
           <>
             <p className="taglineproduct">
-              <a href="https://www.monographdata.com">MonographSQL</a>
+              <a href="https://www.monographdata.com">MonostrateSQL</a>
             </p>
             <p className="taglineproductdetail">
               A distributed NewSQL database powered by Data Substrate. Elastic
@@ -296,7 +296,7 @@ function MonographKV() {
         columnTwo={
           <>
             <p className="taglineproduct">
-              <a href="https://www.monographdata.com">MonographKV</a>
+              <a href="https://www.monographdata.com">MonostrateKV</a>
             </p>
             <p className="taglineproductdetail">
               A distributed transactional cache database powered by Data
@@ -323,7 +323,7 @@ function MonographSQLWrapper() {
         columnTwo={
           <>
             <p className="taglineproduct">
-              <a href="https://www.monographdata.com">MonographSQLWrapper</a>
+              <a href="https://www.monographdata.com">MonoSQL</a>
             </p>
             <p className="taglineproductdetail">
               A stateless SQL wrapper for Amazon DynamoDB. Customer is enable to
@@ -349,7 +349,7 @@ function HeaderHero() {
         columnOne={<LogoAnimation />}
         columnTwo={
           <>
-            <h1 className="title">MonographDB</h1>
+            <h1 className="title">MonostrateDB</h1>
             <p className="tagline">
               Assemble your database according to customized requirement powered
               by Data&nbsp;Substrate.
@@ -431,7 +431,7 @@ function DecoupleStore() {
       <TwoColumns
         columnOne={
           <a href="https://www.monographdata.com/product_monographdb">
-            MonographSQL
+            MonostrateSQL
           </a>
         }
         columnTwo={
@@ -565,7 +565,7 @@ const Index = () => {
       description="A framework for building native apps using React"
       wrapperClassName="homepage">
       <Head>
-        <title>MonographDB · Modular Database</title>
+        <title>MonostrateDB · Modular Database</title>
         <meta property="og:title" content="MonographDB · Modular Database" />
         <meta
           property="twitter:title"
@@ -575,7 +575,7 @@ const Index = () => {
 
       <div class="container1">
         <div class="product-left-column">
-          <h1 className="title">MonographDB</h1>
+          <h1 className="title">MonostrateDB</h1>
           <p className="tagline">
             Assemble your database according to customized requirement powered
             by Data&nbsp;Substrate.
@@ -606,7 +606,7 @@ const Index = () => {
         <div class="product-left-column">
           <p className="taglineproduct">
             <a href="https://www.monographdata.com/product_monographdb">
-              MonographSQL
+              MonostrateSQL
             </a>
           </p>
           <p className="taglineproductdetail">
@@ -628,7 +628,7 @@ const Index = () => {
         <div class="product-left-column">
           <p className="taglineproduct">
             <a href="https://www.monographdata.com/product_monocache">
-              MonographKV
+              MonostrateKV
             </a>
           </p>
           <p className="taglineproductdetail">
@@ -649,9 +649,7 @@ const Index = () => {
       <div class="container2">
         <div class="product-left-column">
           <p className="taglineproduct">
-            <a href="https://www.monographdata.com/product_monosql">
-              MonographSQLWrapper
-            </a>
+            <a href="https://www.monographdata.com/product_monosql">MonoSQL</a>
           </p>
           <p className="taglineproductdetail">
             A stateless SQL wrapper for Amazon DynamoDB. Customer is enable to
