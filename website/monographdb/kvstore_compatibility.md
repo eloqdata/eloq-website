@@ -95,14 +95,14 @@ title: MonographKVStore Redis Command Capabilities
 - [✅] LINDEX
 - [✅] LINSERT
 - [✅] LLEN
-- [2] LMOVE
+- [✅] LMOVE
 - [1] LMPOP
 - [✅] LPOP
 - [✅] LPOS
 - [✅] LPUSH
-- [0] LPUSHX
+- [✅] LPUSHX
 - [✅] LRANGE
-- [1] LREM
+- [✅] LREM
 - [✅] LSET
 - [✅] LTRIM
 - [✅] RPOP
@@ -164,8 +164,8 @@ title: MonographKVStore Redis Command Capabilities
 - [ ] BZPOPMIN
 - [ ] BZPOPMAX
 - [✅] ZADD
-- [0] ZCARD
-- [1] ZCOUNT
+- [✅] ZCARD
+- [✅] ZCOUNT
 - [4-] ZDIFF
 - [4-] ZDIFFSTORE
 - [4-] ZINCRBY
@@ -190,7 +190,7 @@ title: MonographKVStore Redis Command Capabilities
 - [1] ZREVRANGEBYLEX
 - [1] ZREVRANGEBYSCORE
 - [1] ZREVRANK
-- [3] ZSCAN
+- [✅] ZSCAN
 - [✅] ZSCORE
 - [4-] ZUNION
 - [4-] ZUNIONSTORE
