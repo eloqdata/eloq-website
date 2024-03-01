@@ -270,11 +270,11 @@ function MonographSQL() {
         columnTwo={
           <>
             <p className="taglineproduct">
-              <a href="https://www.monographdata.com">MonostrateSQL</a>
+              <a href="https://www.monographdata.com">Monostrate</a>
             </p>
             <p className="taglineproductdetail">
-              A distributed NewSQL database powered by Data Substrate. Elastic
-              at any scale for any workload.
+              A distributed SQL database powered by Data Substrate. Elastic at
+              any scale for any workload.
             </p>
           </>
         }
@@ -431,7 +431,7 @@ function DecoupleStore() {
       <TwoColumns
         columnOne={
           <a href="https://www.monographdata.com/product_monographdb">
-            MonostrateSQL
+            Monostrate
           </a>
         }
         columnTwo={
@@ -606,7 +606,7 @@ const Index = () => {
         <div class="product-left-column">
           <p className="taglineproduct">
             <a href="https://www.monographdata.com/product_monographdb">
-              MonostrateSQL
+              Monostrate
             </a>
           </p>
           <p className="taglineproductdetail">

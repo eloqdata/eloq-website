@@ -224,7 +224,7 @@ module.exports = {
             href: '#',
             items: [
               {
-                label: 'MonostrateSQL',
+                label: 'Monostrate',
                 type: 'doc',
                 docsPluginId: 'monographdb',
                 docId: 'introduction',
@@ -248,9 +248,15 @@ module.exports = {
             position: 'right',
           },
           {
-            to: '/contact',
-            label: 'Contact us',
+            label: 'Download',
+            type: 'dropdown',
             position: 'right',
+            items: [
+              {
+                label: 'Monostrate',
+                to: '/download_monostratedb',
+              },
+            ],
           },
         ],
       },
