@@ -240,7 +240,7 @@ Copy the above yaml file and name it `eloqkv-cluster.yaml`. Then execute:
 kubectl apply -f eloq-cluster.yaml
 ```
 
-For a more detailed CR configuration please refer to the document [Configure an EloqKV Cluster on AWS EKS](file:///Users/pangzhenzhou/workspace/golang/src/eloq-operator/docs/general/config-eloqkv-cluster-eks.md)
+For a more detailed CR configuration please refer to the document [Configure an EloqKV Cluster on AWS EKS](./configure-eloqkv-resource.md)
 
 ### Verify the deployment
 
