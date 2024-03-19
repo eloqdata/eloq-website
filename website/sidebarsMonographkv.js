@@ -20,6 +20,8 @@ const sidebars = {
       'playground',
       'quick-start',
       'cluster-deployment',
+      'deployment-eloq-kv-aws-eks',
+      'configure-eloqkv-resource',
     ],
   },
 };

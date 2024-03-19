@@ -6,7 +6,7 @@ title: MonographKVStore Redis Command Capabilities
 
 ## Bitmap
 
-- [ ] BITCOUNT
+- [✅] BITCOUNT
 - [ ] BITFIELD
 - [ ] BITFIELD_RO
 - [ ] BITOP
@@ -16,7 +16,7 @@ title: MonographKVStore Redis Command Capabilities
 
 ## Connection
 
-- [ ] AUTH
+- [✅] AUTH
 - [ ] CLIENT CACHING
 - [ ] CLIENT GETNAME
 - [ ] CLIENT ID
@@ -59,7 +59,7 @@ title: MonographKVStore Redis Command Capabilities
 - [ ] RENAMENX
 - [ ] RESTORE
 - [✅] SCAN
-- [ ] SORT
+- [✅] SORT
 - [ ] TOUCH
 - [ ] TTL
 - [ ] TYPE
@@ -96,7 +96,7 @@ title: MonographKVStore Redis Command Capabilities
 - [✅] LINSERT
 - [✅] LLEN
 - [✅] LMOVE
-- [1] LMPOP
+- [✅] LMPOP
 - [✅] LPOP
 - [✅] LPOS
 - [✅] LPUSH
@@ -109,7 +109,7 @@ title: MonographKVStore Redis Command Capabilities
 - [ ] RPOPLPUSH(deprecated 6.2.0)
 - [✅] RPUSH
 - [✅] RPUSHX
-- [5] SORT (Note: The SORT command also works on Lists)
+- [✅] SORT (Note: The SORT command also works on Lists)
 
 ## Pub/Sub
 
@@ -166,34 +166,34 @@ title: MonographKVStore Redis Command Capabilities
 - [✅] ZADD
 - [✅] ZCARD
 - [✅] ZCOUNT
-- [4-] ZDIFF
-- [4-] ZDIFFSTORE
-- [4-] ZINCRBY
-- [4-] ZINTER
-- [4-] ZINTERCARD
-- [4-] ZINTERSTORE
+- [✅] ZDIFF
+- [✅] ZDIFFSTORE
+- [✅] ZINCRBY
+- [✅] ZINTER
+- [✅] ZINTERCARD
+- [✅] ZINTERSTORE
 - [✅] ZLEXCOUNT
-- [3] ZMPOP
-- [1] ZMSCORE
+- [✅] ZMPOP
+- [✅] ZMSCORE
 - [✅] ZPOPMAX
 - [✅] ZPOPMIN
-- [1] ZRANDMEMBER
+- [✅] ZRANDMEMBER
 - [✅] ZRANGE
 - [✅] ZRANGEBYLEX
 - [✅] ZRANGEBYSCORE
-- [1] ZRANK
+- [✅] ZRANK
 - [✅] ZREM
-- [1] ZREMRANGEBYLEX
-- [1] ZREMRANGEBYRANK
-- [1] ZREMRANGEBYSCORE
-- [1] ZREVRANGE
-- [1] ZREVRANGEBYLEX
-- [1] ZREVRANGEBYSCORE
-- [1] ZREVRANK
+- [✅] ZREMRANGEBYLEX
+- [✅] ZREMRANGEBYRANK
+- [✅] ZREMRANGEBYSCORE
+- [✅] ZREVRANGE
+- [✅] ZREVRANGEBYLEX
+- [✅] ZREVRANGEBYSCORE
+- [✅] ZREVRANK
 - [✅] ZSCAN
 - [✅] ZSCORE
-- [4-] ZUNION
-- [4-] ZUNIONSTORE
+- [✅] ZUNION
+- [✅] ZUNIONSTORE
 
 ## String
 
