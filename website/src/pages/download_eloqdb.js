@@ -16,10 +16,7 @@ import Layout from '@theme/Layout';
 
 const textContent = {
   intro: `
-  EloqDB is compatible with MySQL protocol by leveraging the MySQL Parser and Executor
-  as compute engine. Innodb storage engine is replaced by enhanced Data Substrate, which supports
-  different transaction isolation level and concurrency control protocol, distributed buffer pool,
-  data persistence and high availability.
+  MonostrateSQL maintains compatibility with the MySQL protocol by leveraging the existing MySQL Parser and Executor as its compute engine. However, it replaces the Innodb storage engine with the enhanced Data Substrate. This advanced engine provides support for various transaction isolation levels, concurrency control protocols, distributed buffer pools, data persistence, and high availability, offering a more robust and scalable solution.
   `,
   nativeCode: `
 React primitives render to native platform UI, meaning your app uses the
@@ -80,18 +77,14 @@ Members of the React Native team frequently speak at various conferences.
 <br/><br/>
 You can follow the latest news from the React Native team on Twitter
   `,
-  inheritddb: `
-  MonoSQL is built on top of DynamoDB. It benefit from all the Dynamo's features like consistent performance at scale,
-  high availability and full managed service.
+  elasticlog: `
+  Write-intensive workloads demand highly scalable logging services. Traditional databases write and fsync redo logs to a single disk in the order of their sequence number, creating a bottleneck for the entire system. MonostrateSQL's patented one-phase commit technique allows concurrent transactions to write and synchronize redo logs to multiple disks in parallel. Benchmarks demonstrate a 4x improvement in transactions per second compared to MySQL.
   `,
-  sqlsupport: `
-  MonoSQL maintains compatibility with the MySQL protocol by leveraging the SQL Parser and Executor.
-  Enjoy DynamoDB's scalability without rewriting your applications. MonoSQL seamlessly bridges the gap, ensuring smooth migrations from MySQL.
+  elasticmem: `
+  Read-intensive workloads demand highly scalable memory resources. To minimize read latency, keeping all hot data in memory is crucial. MonostrateSQL supports both hash and range partitioning, enabling it to store vast amounts of hot data across multiple hosts. As the hot data volume increases, MonostrateSQL can automatically scale out the cluster and rebalance the data range. Additionally, cold data is periodically checkpointed to key-value stores, which can serve cache miss read.
   `,
-  hybridcloud: `
-  MonoSQL's architecture make it easy to integrate with other cloud services like GCP Bigtable and Azure CosmosDB.
-  MonoSQL lets you run on any cloud, seamlessly shift between cloud vendors without modifying your code.
-  Break free from vendor lock-in, embrace cloud freedom.
+  decouplestore: `
+  Large datasets necessitate a decoupled storage layer that can be scaled independently of read and write traffic. Allocating additional compute and memory resources for cold data is wasteful. Traditional shared-nothing architectures require adding more compute nodes as data volume increases, even if read and write traffic remain constant. MonostrateSQL's decoupled cloud storage allows you to pay only for the disk space and IOPS costs associated with cold data, leading to cost savings and efficient resource utilization.
   `,
 };
 
@@ -122,9 +115,9 @@ function HomeCallToAction() {
     <>
       <ActionButton
         type="primary"
-        href={useBaseUrl('docs/monosql-deployment-aws')}
+        href={useBaseUrl('download/monostrate_sql.tar.gz')}
         target="_self">
-        Get started
+        Download Software
       </ActionButton>
     </>
   );
@@ -218,11 +211,10 @@ function HeaderHero() {
         columnOne={<LogoAnimation />}
         columnTwo={
           <>
-            <h1 className="title">MonoSQL</h1>
+            <h1 className="title">MonostrateSQL</h1>
             <p className="tagline">
-              A distributed SQL wrapper for NoSQL database powered by
-              Data&nbsp;Substrate. Switch to NoSQL without modifing your SQL
-              code.
+              A distributed SQL database powered by Data&nbsp;Substrate. Elastic
+              at any scale for any workload.
             </p>
             <div className="buttons">
               <HomeCallToAction />
@@ -240,7 +232,7 @@ function NativeApps() {
       <TwoColumns
         reverse
         columnOne={
-          <TextColumn title="SQL Support" text={textContent.sqlsupport} />
+          <TextColumn title="MySQL Compatible" text={textContent.intro} />
         }
         columnTwo={
           <img alt="" src={useBaseUrl('img/homepage/mysqlcompatible.png')} />
@@ -255,7 +247,10 @@ function ElasticLogging() {
     <Section className="NativeApps" background="tint">
       <TwoColumns
         columnOne={
-          <TextColumn title="DynamoDB Inherit" text={textContent.inheritddb} />
+          <TextColumn
+            title="Elastic Parallel Logging"
+            text={textContent.elasticlog}
+          />
         }
         columnTwo={
           <img alt="" src={useBaseUrl('img/homepage/elasticlogging2.png')} />
@@ -270,7 +265,10 @@ function ElasticMemory() {
       <TwoColumns
         reverse
         columnOne={
-          <TextColumn title="Hybrid Cloud" text={textContent.hybridcloud} />
+          <TextColumn
+            title="Elastic Memory Cache"
+            text={textContent.elasticmem}
+          />
         }
         columnTwo={
           <img alt="" src={useBaseUrl('img/homepage/elasticcache.png')} />
@@ -426,28 +424,22 @@ const useHomePageAnimations = () => {
   useEffect(() => setupDissectionAnimation(), []);
 };
 
-const Index2 = () => {
+const Index3 = () => {
   return (
     <Layout
       description="A framework for building native apps using React"
       wrapperClassName="homepage">
       <Head>
-        <title>React Native · Learn once, write anywhere</title>
-        <meta
-          property="og:title"
-          content="React Native · Learn once, write anywhere"
-        />
+        <title>MonoStrate · Modular Database</title>
+        <meta property="og:title" content="MonoStrate · Modular Database" />
         <meta
           property="twitter:title"
-          content="React Native · Learn once, write anywhere"
+          content="MonoStrate · Modular Database"
         />
       </Head>
       <HeaderHero />
-      <NativeApps />
-      <ElasticLogging />
-      <ElasticMemory />
     </Layout>
   );
 };
 
-export default Index2;
+export default Index3;

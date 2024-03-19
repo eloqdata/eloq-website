@@ -43,15 +43,15 @@ one team can maintain multiple platforms and share a common technology—React.
   elasticlog: `
   Write intensive workload requires the scalability of log service.
 				Traditional databases write and fsync redo logs in the order of log sequence number into
-				a single disk, which becomes the bottleneck of the whole system. MonographDB's patented
+				a single disk, which becomes the bottleneck of the whole system. EloqSQL's patented
 				1-PC technique enables concurrent transactions to write and fsync redo logs into multiple
 				disks in parallel. Benchmark shows 4X TPS improvement compared with AWS Aurora.
   `,
   elasticmem: `
   Read intensive workload requires the scalability of memory resource.
 				To achieve low read latency, it is important to hold all the hot data into memory.
-				MonographDB supports hash and range partition, which can store a large amount of hot data
-				across multiple hosts. As the hot data grows, MonographDB can scale-out the cluster and rebalance
+				EloqSQL supports hash and range partition, which can store a large amount of hot data
+				across multiple hosts. As the hot data grows, EloqSQL can scale-out the cluster and rebalance
 				the data range automatically. Cold data will be checkpointed into KV stores which can serve cache
 				miss read.
   `,
@@ -59,7 +59,7 @@ one team can maintain multiple platforms and share a common technology—React.
   Large dataset requires a decouple storage layer which can be individually scaled regardless of
 				read and write traffic. To reserve additional compute and memory for cold data is a waste of
 				resource. Traditional shared-nothing architecture requires to add more compute nodes as the data
-				volumn scales even if the read and write traffic is unchanged. MonographDB's decoupled cloud
+				volumn scales even if the read and write traffic is unchanged. EloqSQL's decoupled cloud
 				storage enable you to only pay for the disk plus the IOPS cost of cold data.
   `,
   codeExample: `
@@ -137,12 +137,12 @@ function TextColumn({title, text, moreContent}) {
   );
 }
 
-function ButtonMonographSQL() {
+function ButtonEloqSQL() {
   return (
     <>
       <ActionButton
         type="primary"
-        href={useBaseUrl('product_monographdb.html')}
+        href={useBaseUrl('product_eloqdb.html')}
         target="_self">
         View Detail
       </ActionButton>
@@ -154,7 +154,7 @@ function HomeCallToAction() {
     <>
       <ActionButton
         type="primary"
-        href={useBaseUrl('monographdb/cluster-deployment.html')}
+        href={useBaseUrl('eloqkv/quick-start.html')}
         target="_self">
         Get started
       </ActionButton>
@@ -251,12 +251,12 @@ function SQLLOGO() {
       width="1250"
       height="50"
       alt=""
-      src={useBaseUrl('img/monographdb_wp.png')}
+      src={useBaseUrl('img/eloqdb_wp.png')}
     />
   );
 }
 
-function MonographSQL() {
+function EloqSQL() {
   return (
     <Section background="dark" className="HeaderHero2">
       {/*
@@ -270,11 +270,11 @@ function MonographSQL() {
         columnTwo={
           <>
             <p className="taglineproduct">
-              <a href="https://www.monographdata.com">MonographSQL</a>
+              <a href="https://www.eloquentdb.com">EloqSQL</a>
             </p>
             <p className="taglineproductdetail">
-              A distributed NewSQL database powered by Data Substrate. Elastic
-              at any scale for any workload.
+              A distributed SQL database powered by Data Substrate. Elastic at
+              any scale for any workload.
             </p>
           </>
         }
@@ -282,7 +282,7 @@ function MonographSQL() {
     </Section>
   );
 }
-function MonographKV() {
+function EloqKV() {
   return (
     <Section background="dark" className="HeaderHero2">
       {/*
@@ -296,7 +296,7 @@ function MonographKV() {
         columnTwo={
           <>
             <p className="taglineproduct">
-              <a href="https://www.monographdata.com">MonographKV</a>
+              <a href="https://www.eloquentdb.com">EloqKV</a>
             </p>
             <p className="taglineproductdetail">
               A distributed transactional cache database powered by Data
@@ -309,7 +309,7 @@ function MonographKV() {
     </Section>
   );
 }
-function MonographSQLWrapper() {
+function EloqSQLWrapper() {
   return (
     <Section background="dark" className="HeaderHero2">
       {/*
@@ -323,7 +323,7 @@ function MonographSQLWrapper() {
         columnTwo={
           <>
             <p className="taglineproduct">
-              <a href="https://www.monographdata.com">MonographSQLWrapper</a>
+              <a href="https://www.eloquentdb.com">EloqSQLWrapper</a>
             </p>
             <p className="taglineproductdetail">
               A stateless SQL wrapper for Amazon DynamoDB. Customer is enable to
@@ -349,7 +349,7 @@ function HeaderHero() {
         columnOne={<LogoAnimation />}
         columnTwo={
           <>
-            <h1 className="title">MonographDB</h1>
+            <h1 className="title">EloquentDB</h1>
             <p className="tagline">
               Assemble your database according to customized requirement powered
               by Data&nbsp;Substrate.
@@ -430,9 +430,7 @@ function DecoupleStore() {
     <Section className="NativeApps" background="tint">
       <TwoColumns
         columnOne={
-          <a href="https://www.monographdata.com/product_monographdb">
-            MonographSQL
-          </a>
+          <a href="https://www.eloquentdb.com/product_eloqsql">EloqSQL</a>
         }
         columnTwo={
           <img alt="" src={useBaseUrl('img/homepage/decoupledstorage2.png')} />
@@ -565,17 +563,17 @@ const Index = () => {
       description="A framework for building native apps using React"
       wrapperClassName="homepage">
       <Head>
-        <title>MonographDB · Modular Database</title>
-        <meta property="og:title" content="MonographDB · Modular Database" />
+        <title>EloquentDB · Modular Database</title>
+        <meta property="og:title" content="EloquentDB · Modular Database" />
         <meta
           property="twitter:title"
-          content="MonographDB · Modular Database"
+          content="EloquentDB · Modular Database"
         />
       </Head>
 
       <div class="container1">
         <div class="product-left-column">
-          <h1 className="title">MonographDB</h1>
+          <h1 className="title">EloquentDB</h1>
           <p className="tagline">
             Assemble your database according to customized requirement powered
             by Data&nbsp;Substrate.
@@ -593,7 +591,7 @@ const Index = () => {
         <div class="product-right-column">
           <img
             alt=""
-            src={useBaseUrl('img/monograph_website_hero.svg')}
+            src={useBaseUrl('img/eloq_website_hero.svg')}
             type="image/svg+xml"
             width="800"
             heigh="auto"
@@ -605,31 +603,7 @@ const Index = () => {
       <div class="container2 container-with-separator">
         <div class="product-left-column">
           <p className="taglineproduct">
-            <a href="https://www.monographdata.com/product_monographdb">
-              MonographSQL
-            </a>
-          </p>
-          <p className="taglineproductdetail">
-            A distributed NewSQL database powered by Data Substrate. Elastic at
-            any scale for any workload.
-          </p>
-        </div>
-        <div class="product-right-column">
-          <img
-            alt=""
-            src={useBaseUrl('img/MySQL_Clients.svg')}
-            type="image/svg+xml"
-            width="800"
-            heigh="auto"
-          />
-        </div>
-      </div>
-      <div class="container2 container-with-separator">
-        <div class="product-left-column">
-          <p className="taglineproduct">
-            <a href="https://www.monographdata.com/product_monocache">
-              MonographKV
-            </a>
+            <a href="https://www.eloquentdb.com/product_eloqkv">EloqKV</a>
           </p>
           <p className="taglineproductdetail">
             A distributed transactional store powered by Data Substrate. Cache
@@ -646,11 +620,31 @@ const Index = () => {
           />
         </div>
       </div>
+      <div class="container2 container-with-separator">
+        <div class="product-left-column">
+          <p className="taglineproduct">
+            <a href="https://www.eloquentdb.com/product_eloqsql">EloqSQL</a>
+          </p>
+          <p className="taglineproductdetail">
+            A distributed SQL database powered by Data Substrate. Elastic at any
+            scale for any workload.
+          </p>
+        </div>
+        <div class="product-right-column">
+          <img
+            alt=""
+            src={useBaseUrl('img/MySQL_Clients.svg')}
+            type="image/svg+xml"
+            width="800"
+            heigh="auto"
+          />
+        </div>
+      </div>
       <div class="container2">
         <div class="product-left-column">
           <p className="taglineproduct">
-            <a href="https://www.monographdata.com/product_monosql">
-              MonographSQLWrapper
+            <a href="https://www.eloquentdb.com/product_monosql">
+              EloqSQLWrapper
             </a>
           </p>
           <p className="taglineproductdetail">

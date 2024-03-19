@@ -1,3 +1,0 @@
-# doc
-
-monograph document

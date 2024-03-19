@@ -1,6 +1,12 @@
+eloq:
+  name: EloquentDB
+  title: EloqentDB core team
+  url: https://github.com/monographdb
+  image_url: https://github.com/monographdb.png
+
 mono:
-  name: MonographDB
-  title: MonographDB core team
+  name: EloquentDB
+  title: EloqentDB core team
   url: https://github.com/monographdb
   image_url: https://github.com/monographdb.png
 

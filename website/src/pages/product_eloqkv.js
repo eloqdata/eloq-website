@@ -16,10 +16,16 @@ import Layout from '@theme/Layout';
 
 const textContent = {
   intro: `
-  EloqDB is compatible with MySQL protocol by leveraging the MySQL Parser and Executor
-  as compute engine. Innodb storage engine is replaced by enhanced Data Substrate, which supports
-  different transaction isolation level and concurrency control protocol, distributed buffer pool,
-  data persistence and high availability.
+  EloqKV is a transactional store service that goes beyond traditional options like Redis. With full ACID properties across distributed transactions and clusters, it can even replace MySQL + Redis combinations, eliminating cache coherence issues entirely.
+  `,
+  lowcostmodel: `
+  Leveraging the power of Data Substrate, EloqKV stores frequently accessed data in memory for blazing-fast query performance. As data cools, it is seamlessly transferred to a low-cost cloud key-value store through asynchronous checkpoints. This innovative architecture eliminates the need to store cold data in expensive DRAM while still allowing transactional reads for cache misses. Additionally, the cloud storage offers lower operational costs, while asynchronous checkpointing minimizes IOPS requirements, further optimizing performance and cost-effectiveness.
+  `,
+  autoscaling: `
+  EloqKV offers flexible, modular scaling to optimize resource utilization based on your workload patterns. When large volumes of hot data require faster access, you can scale the memory. If write traffic surges, scaling the log service ensures smooth handling. As historical data accumulates, scaling the cloud KV storage provides seamless growth. This targeted approach allows you to scale the right modules at the right time, maximizing performance and efficiency.
+  `,
+  highperf: `
+  Unlike Redis, which relies on a single-threaded architecture that underutilizes modern hardware, EloqKV leverages a multi-threaded approach to maximize resource utilization and achieve blazing-fast performance. By further optimizing write performance through parallel logging, EloqKV delivers a significant advantage in transactional write throughput.
   `,
   nativeCode: `
 React primitives render to native platform UI, meaning your app uses the
@@ -80,18 +86,27 @@ Members of the React Native team frequently speak at various conferences.
 <br/><br/>
 You can follow the latest news from the React Native team on Twitter
   `,
-  inheritddb: `
-  MonoSQL is built on top of DynamoDB. It benefit from all the Dynamo's features like consistent performance at scale,
-  high availability and full managed service.
+  elasticlog: `
+  Write intensive workload requires the scalability of log service.
+				Traditional databases write and fsync redo logs in the order of log sequence number into
+				a single disk, which becomes the bottleneck of the whole system. EloqDB's patented
+				1-PC technique enables concurrent transactions to write and fsync redo logs into multiple
+				disks in parallel. Benchmark shows 4X TPS improvement compared with AWS Aurora.
   `,
-  sqlsupport: `
-  MonoSQL maintains compatibility with the MySQL protocol by leveraging the SQL Parser and Executor.
-  Enjoy DynamoDB's scalability without rewriting your applications. MonoSQL seamlessly bridges the gap, ensuring smooth migrations from MySQL.
+  elasticmem: `
+  Read intensive workload requires the scalability of memory resource.
+				To achieve low read latency, it is important to hold all the hot data into memory.
+				EloqDB supports hash and range partition, which can store a large amount of hot data
+				across multiple hosts. As the hot data grows, EloqDB can scale-out the cluster and rebalance
+				the data range automatically. Cold data will be checkpointed into KV stores which can serve cache
+				miss read.
   `,
-  hybridcloud: `
-  MonoSQL's architecture make it easy to integrate with other cloud services like GCP Bigtable and Azure CosmosDB.
-  MonoSQL lets you run on any cloud, seamlessly shift between cloud vendors without modifying your code.
-  Break free from vendor lock-in, embrace cloud freedom.
+  decouplestore: `
+  Large dataset requires a decouple storage layer which can be individually scaled regardless of
+				read and write traffic. To reserve additional compute and memory for cold data is a waste of
+				resource. Traditional shared-nothing architecture requires to add more compute nodes as the data
+				volumn scales even if the read and write traffic is unchanged. EloqDB's decoupled cloud
+				storage enable you to only pay for the disk plus the IOPS cost of cold data.
   `,
 };
 
@@ -122,7 +137,7 @@ function HomeCallToAction() {
     <>
       <ActionButton
         type="primary"
-        href={useBaseUrl('docs/monosql-deployment-aws')}
+        href={useBaseUrl('docs/environment-setup')}
         target="_self">
         Get started
       </ActionButton>
@@ -212,21 +227,21 @@ function HeaderHero() {
       {/*<div className="socialLinks">
         <TwitterButton accountName="reactnative" />
         <GitHubStarButton />
-  </div>*/}
+      </div>*/}
       <TwoColumns
         reverse
         columnOne={<LogoAnimation />}
         columnTwo={
           <>
-            <h1 className="title">MonoSQL</h1>
+            <h1 className="title">EloqKV</h1>
             <p className="tagline">
-              A distributed SQL wrapper for NoSQL database powered by
-              Data&nbsp;Substrate. Switch to NoSQL without modifing your SQL
-              code.
+              A distributed transactional kv store powered by
+              Data&nbsp;Substrate. Store data in layered storage with lower cost
+              and higher availability.
             </p>
-            <div className="buttons">
+            {/*<div className="buttons">
               <HomeCallToAction />
-            </div>
+        </div>*/}
           </>
         }
       />
@@ -240,57 +255,66 @@ function NativeApps() {
       <TwoColumns
         reverse
         columnOne={
-          <TextColumn title="SQL Support" text={textContent.sqlsupport} />
+          <TextColumn
+            title="Strong Transaction Support"
+            text={textContent.intro}
+          />
         }
         columnTwo={
-          <img alt="" src={useBaseUrl('img/homepage/mysqlcompatible.png')} />
+          <img
+            alt=""
+            src={useBaseUrl('img/homepage/monocache_transaction.png')}
+          />
         }
       />
     </Section>
   );
 }
 
-function ElasticLogging() {
+function AutoScaling() {
   return (
-    <Section className="NativeApps" background="tint">
+    <Section className="AutoScaling" background="tint">
       <TwoColumns
         columnOne={
-          <TextColumn title="DynamoDB Inherit" text={textContent.inheritddb} />
+          <TextColumn title="Fast Scaling" text={textContent.autoscaling} />
         }
         columnTwo={
-          <img alt="" src={useBaseUrl('img/homepage/elasticlogging2.png')} />
+          <img
+            alt=""
+            src={useBaseUrl('img/homepage/monocache_autoscaling.png')}
+          />
         }
       />
     </Section>
   );
 }
-function ElasticMemory() {
+function HighPerf() {
   return (
-    <Section className="NativeApps" background="light">
+    <Section className="HighPerf" background="light">
       <TwoColumns
         reverse
         columnOne={
-          <TextColumn title="Hybrid Cloud" text={textContent.hybridcloud} />
+          <TextColumn title="High Performance" text={textContent.highperf} />
         }
         columnTwo={
-          <img alt="" src={useBaseUrl('img/homepage/elasticcache.png')} />
+          <img alt="" src={useBaseUrl('img/homepage/monocache_highperf.png')} />
         }
       />
     </Section>
   );
 }
-function DecoupleStore() {
+function LowCostModel() {
   return (
     <Section className="NativeApps" background="tint">
       <TwoColumns
         columnOne={
-          <TextColumn
-            title="Decoupled Cloud Storage"
-            text={textContent.decouplestore}
-          />
+          <TextColumn title="Low Cost Model" text={textContent.lowcostmodel} />
         }
         columnTwo={
-          <img alt="" src={useBaseUrl('img/homepage/decoupledstorage2.png')} />
+          <img
+            alt=""
+            src={useBaseUrl('img/homepage/monocache_lowcostmodel.png')}
+          />
         }
       />
     </Section>
@@ -444,8 +468,9 @@ const Index2 = () => {
       </Head>
       <HeaderHero />
       <NativeApps />
-      <ElasticLogging />
-      <ElasticMemory />
+      <LowCostModel />
+      <AutoScaling />
+      <HighPerf />
     </Layout>
   );
 };

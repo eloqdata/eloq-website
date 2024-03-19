@@ -9,7 +9,7 @@ const users = require('./showcase.json');
 //const versions = require('./versions.json');
 
 //const lastVersion = versions[0];
-const copyright = `Copyright © ${new Date().getFullYear()} Monographdata, Inc.`;
+const copyright = `Copyright © ${new Date().getFullYear()} Eloqdata, Inc.`;
 
 const commonDocsOptions = {
   breadcrumbs: false,
@@ -24,12 +24,12 @@ const isDeployPreview = process.env.PREVIEW_DEPLOY === 'true';
 
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
-  title: 'MonoStrate: Next Generation Multi-model Database',
+  title: 'EloquentDB: Next Generation Multi-model Database',
   tagline:
     'Data Substrate powered modular database which enables vertical and horizontal expanding of the decoupled components: compute, memory, storage and log separately.',
-  organizationName: 'monographdata',
-  projectName: 'MonoStrate',
-  url: 'https://monographdata.com',
+  organizationName: 'Eloquentdb',
+  projectName: 'EloquentDB',
+  url: 'https://www.eloquentdb.com',
   baseUrl: '/',
   clientModules: [
     require.resolve('./modules/snackPlayerInitializer.js'),
@@ -47,7 +47,7 @@ module.exports = {
     },
     {src: 'https://snack.expo.dev/embed.js', defer: true},
   ],
-  favicon: 'img/monosql_logo.png',
+  favicon: 'img/eloq_logo.png',
   titleDelimiter: '·',
   customFields: {
     users,
@@ -112,10 +112,10 @@ module.exports = {
     [
       '@docusaurus/plugin-content-docs',
       {
-        id: 'monographdb',
-        path: 'monographdb',
-        routeBasePath: 'monographdb',
-        sidebarPath: require.resolve('./sidebarsMonographdb.js'),
+        id: 'eloqsql',
+        path: 'eloqsql',
+        routeBasePath: 'eloqsql',
+        sidebarPath: require.resolve('./sidebarsEloqSQL.js'),
         // ... other options
       },
     ],
@@ -132,20 +132,20 @@ module.exports = {
     [
       '@docusaurus/plugin-content-docs',
       {
-        id: 'monographdbcn',
-        path: 'monographdbcn',
-        routeBasePath: 'monographdbcn',
-        sidebarPath: require.resolve('./sidebarsMonographdbcn.js'),
+        id: 'eloqsqlcn',
+        path: 'eloqsqlcn',
+        routeBasePath: 'eloqsqlcn',
+        sidebarPath: require.resolve('./sidebarsEloqSQLcn.js'),
         // ... other options
       },
     ],
     [
       '@docusaurus/plugin-content-docs',
       {
-        id: 'monographkv',
-        path: 'monographkv',
-        routeBasePath: 'monographkv',
-        sidebarPath: require.resolve('./sidebarsMonographkv.js'),
+        id: 'eloqkv',
+        path: 'eloqkv',
+        routeBasePath: 'eloqkv',
+        sidebarPath: require.resolve('./sidebarsEloqKV.js'),
         // ... other options
       },
     ],
@@ -192,10 +192,10 @@ module.exports = {
         ],
       },
       navbar: {
-        title: 'MonographDB',
+        title: 'EloquentDB',
         logo: {
-          src: 'img/monosql_logo.png',
-          alt: 'MonographDB',
+          src: 'img/eloq_logo.png',
+          alt: 'EloquentDB',
         },
         style: 'dark',
         items: [
@@ -205,12 +205,12 @@ module.exports = {
             position: 'right',
             items: [
               {
-                label: 'MonographSQL',
-                to: '/product_monographdb',
+                label: 'EloqKV',
+                to: '/product_eloqkv',
               },
               {
-                label: 'MonographKV',
-                to: '/product_monocache',
+                label: 'EloqSQL',
+                to: '/product_eloqsql',
               },
               {
                 label: 'MonoSQL',
@@ -224,16 +224,16 @@ module.exports = {
             href: '#',
             items: [
               {
-                label: 'MonographSQL',
+                label: 'EloqKV',
                 type: 'doc',
-                docsPluginId: 'monographdb',
-                docId: 'introduction',
+                docsPluginId: 'eloqkv',
+                docId: 'playground',
               },
               {
-                label: 'MonographKV',
+                label: 'EloqSQL',
                 type: 'doc',
-                docsPluginId: 'monographkv',
-                docId: 'playground',
+                docsPluginId: 'eloqsql',
+                docId: 'introduction',
               },
               {
                 label: 'MonoSQL',
@@ -272,7 +272,7 @@ module.exports = {
             items: [
               {
                 label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/monographdb',
+                href: 'https://stackoverflow.com/questions/tagged/eloqdb',
               },
             ],
           },
@@ -287,9 +287,9 @@ module.exports = {
           },
         ],
         logo: {
-          alt: 'MonographDB Logo',
-          src: 'img/monosql_logo.png',
-          href: 'https://www.monographdata.com/',
+          alt: 'EloqDB Logo',
+          src: 'img/eloq_logo.png',
+          href: 'https://www.eloquentdb.com/',
         },
         copyright,
       },

@@ -1,0 +1,27 @@
+<!-- docs/_sidebar.md -->
+- 关于EloqSQL
+  * [EloqSQL 简介](cn/overview.md)
+  * [与MySQL 的兼容性](cn/mysql-compatibility.md)
+- 快速上手
+  * [快速上手](cn/quick-start)
+  * [SQL 基本操作](cn/basic-sql-operations.md)
+  * [多集群部署](cn/cluster-deployment.md)
+- 数据查询
+   * [简单查询](cn/data-query/simple-query.md)
+   * [高级查询](cn/data-query/advance-query.md)
+   * [示例测试表格构建](cn/data-query/test-scheme-design.md)
+- sql 参考
+  - account-management
+    * [alter user](cn/sql-reference/account-management/alter-user.md)
+    * [create role](cn/sql-reference/account-management/create-role.md)
+    * [create user](cn/sql-reference/account-management/create-user.md)
+    * [grant](cn/sql-reference/account-management/grant.md)
+    * [revoke](cn/sql-reference/account-management/revoke.md)
+ - administrative
+ - data-definition
+ - data-manipulation
+ - preapred
+ - programmatic-and-compound
+ - stored-routine
+ - table
+ - transactions
