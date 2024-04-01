@@ -39,7 +39,7 @@ Each of the multiple machines needs to complete the basic configuration of the s
 
 The `cluster_mgr` tool can realize the installation and deployment on multiple servers by modifying the parameters in deployment YAML files.
 
-Create and start the cluster according to the following configuration template, edit the configuration file deployment.yaml as you need:
+Create and start the cluster according to the following configuration template, edit the configuration file deployment_kv.yaml as you need:
 
 ```yaml
 connection:
@@ -89,5 +89,5 @@ deployment:
 Launch cluster
 
 ```shell
-cluster_mgr launch --topology-file ${CLUSTER_MGR_HOME}/config/deployment.yaml
+cluster_mgr launch --topology-file ${CLUSTER_MGR_HOME}/config/deployment_kv.yaml
 ```
