@@ -22,7 +22,7 @@ Prepare a deployment host and ensure its software meets the following requiremen
 1. Deploy EloqKV
 
 - modify the cluster configuration file
-  According to the following configuration template, edit the configuration file config/deployment.yaml as your need, where:
+  According to the following configuration template, edit the configuration file config/deployment_kv.yaml as your need, where:
 
   - `product: "EloqKV"`: This can be set as EloqSQL or EloqKV
   - `username: "ubuntu"`: Indicates that the `ubuntu` system user (the current system user name) is used for internal management of the cluster. By default, port 22 is used to log in to the target machine via ssh
@@ -86,10 +86,10 @@ deployment:
 ```
 
 > **Note:**
-> The above deployment.yaml file is the default configuration file, and users can configure the software to be installed according to their needs. For some software that does not need to be installed, it only needs to be deleted from the configuration file.
+> The above deployment_kv.yaml file is the default configuration file, and users can configure the software to be installed according to their needs. For some software that does not need to be installed, it only needs to be deleted from the configuration file.
 
 - Launch cluster
 
   ```shell
-  cluster_mgr launch --topology-file ${CLUSTER_MGR_HOME}/config/deployment.yaml
+  cluster_mgr launch --topology-file ${CLUSTER_MGR_HOME}/config/deployment_kv.yaml
   ```
