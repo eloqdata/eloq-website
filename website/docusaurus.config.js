@@ -24,12 +24,12 @@ const isDeployPreview = process.env.PREVIEW_DEPLOY === 'true';
 
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
-  title: 'EloquentDB: Next Generation Multi-model Database',
+  title: 'EloqDB: Next Generation Multi-model Database',
   tagline:
     'Data Substrate powered modular database which enables vertical and horizontal expanding of the decoupled components: compute, memory, storage and log separately.',
-  organizationName: 'Eloquentdb',
-  projectName: 'EloquentDB',
-  url: 'https://www.eloquentdb.com',
+  organizationName: 'Eloqdb',
+  projectName: 'EloqDB',
+  url: 'https://www.eloqdata.com',
   baseUrl: '/',
   clientModules: [
     require.resolve('./modules/snackPlayerInitializer.js'),
@@ -192,10 +192,10 @@ module.exports = {
         ],
       },
       navbar: {
-        title: 'EloquentDB',
+        title: 'EloqDB',
         logo: {
           src: 'img/eloq_logo.png',
-          alt: 'EloquentDB',
+          alt: 'EloqDB',
         },
         style: 'dark',
         items: [
@@ -227,7 +227,7 @@ module.exports = {
                 label: 'EloqKV',
                 type: 'doc',
                 docsPluginId: 'eloqkv',
-                docId: 'playground',
+                docId: 'introduction',
               },
               {
                 label: 'EloqSQL',

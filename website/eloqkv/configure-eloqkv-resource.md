@@ -9,11 +9,11 @@ This document introduces how to configure an EloqKV cluster for production deplo
 
 ### Configure resource
 
-To ensure that EloqKV can be properly scheduled and run by EKS, we strongly recommend that you configure the Pod's QoS (Guaranteed-level quality of service) and make the resource limit equal to the request. Also, because EloqKV uses a multi-core architecture to maximize performance, the EloqKV service should have at least 2 CPU units.
+To ensure that EloqDB can be properly scheduled and run by EKS, we strongly recommend that you configure the Pod's QoS (Guaranteed-level quality of service) and make the resource limit equal to the request. Also, because EloqDB uses a multi-core architecture to maximize performance, the EloqDB service should have at least 2 CPU units.
 
 ### Configure EloqKV
 
-To deploy EloqKV, you need to declare the EloqKVCluster CR. refer to the following example for specificity:
+To deploy EloqDB, you need to declare the EloqDBCluster CR. refer to the following example for specificity:
 
 ```yaml
 kind: Namespace
@@ -21,10 +21,10 @@ apiVersion: v1
 metadata:
   name: eloq-operator-test
   labels:
-    app.kubernetes.io/name: EloqKVCluster
+    app.kubernetes.io/name: EloqDBCluster
 ---
 apiVersion: eloqdbcluster.eloqdata.com/v1alpha1
-kind: EloqKVCluster
+kind: EloqDBCluster
 metadata:
   labels:
     app.kubernetes.io/name: eloqdbcluster
@@ -98,21 +98,21 @@ spec:
   store:
     storageType: cass
     properties:
-      - name: eloq_cass_hosts
+      - name: monograph_cass_hosts
         value: your-cassandra-host
-      - name: eloq_cass_port
+      - name: monograph_cass_port
         value: your-cassandra-port
-      - name: eloq_cass_user
+      - name: monograph_cass_user
         value: your-cassandra-user
-      - name: eloq_cass_password
+      - name: monograph_cass_password
         value: your-cassandra-password
 ```
 
 ### Cluster Name
 
-The cluster name can be configured by changing **`metadata.name`** in the EloqKVCluster CR.
+The cluster name can be configured by changing **`metadata.name`** in the EloqDBCluster CR.
 
-### Select a specific node for EloqKV's services
+### Select a specific node for EloqDB's services
 
 If you wish to run the database on a machine with a specific specification, you can modify it in the following way. The Following configuration snippet applies to both Tx and Log. Both: **`spec.tx.schedulePolicy` **and **`spec.log.schedulePolicy`**
 

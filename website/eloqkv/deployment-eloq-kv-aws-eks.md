@@ -72,10 +72,10 @@ eksctl create iamserviceaccount \
 ### Deploy eloq-operator
 
 ```shell
-helm repo add eloqdata https://eloqdb.github.io/eloq-charts/
+helm repo add eloqdata https://monographdb.github.io/monograph-charts/
 helm repo update
 # for example: helm install eloq-operator eloqdata/eloq-operator --namespace eloq-operator-system
-helm install [RELEASE_NAME]  eloqdb/eloq-operator --namespace [NAMESPACE_NAME]
+helm install [RELEASE_NAME]  monographdb/eloq-operator --namespace [NAMESPACE_NAME]
 ```
 
 ## Deploy a EloqKV Cluster and the monitoring component.
@@ -89,7 +89,7 @@ helm install [RELEASE_NAME]  eloqdb/eloq-operator --namespace [NAMESPACE_NAME]
 - Mimir
 - Promtail
 
-EloqKVCluster relies on infrastructure from the Prometheus and Grafana communities. If you don't have these components installed in your current environment, you can install them with the following command.
+EloqDBCluster relies on infrastructure from the Prometheus and Grafana communities. If you don't have these components installed in your current environment, you can install them with the following command.
 
 - Create a namespace for the monitoring system:
 
@@ -99,7 +99,7 @@ apiVersion: v1
 metadata:
   name: eloq-monitoring-ns
   labels:
-    app.kubernetes.io/name: EloqKVCluster-Monitoring
+    app.kubernetes.io/name: EloqDBCluster-Monitoring
 ```
 
 Copy the above yaml file and name it `monitoring-ns.yaml`. Then execute:
@@ -120,7 +120,7 @@ aws s3 mb s3://eloq-loki-data --region $REGION
 - Using Helm to install the monitoring components:
 
 ```shell
-helm install eloqdata-monitor-infra -n eloqdb/eloq-monitoring --namespace eloq-monitoring-ns \
+helm install eloqdata-monitor-infra -n monographdb/eloq-monitoring --namespace eloq-monitoring-ns \
   --set global.namespace=eloq-monitoring-ns \
   --set global.serviceAccount.name={your-service-account-name} \
   --set aws.region={your-aws-region} \
@@ -147,10 +147,10 @@ apiVersion: v1
 metadata:
   name: eloq-operator-test
   labels:
-    app.kubernetes.io/name: EloqKVCluster
+    app.kubernetes.io/name: EloqDBCluster
 ---
 apiVersion: eloqdbcluster.eloqdata.com/v1alpha1
-kind: EloqKVCluster
+kind: EloqDBCluster
 metadata:
   labels:
     app.kubernetes.io/name: eloqdbcluster
@@ -224,13 +224,13 @@ spec:
   store:
     storageType: cass
     properties:
-      - name: eloq_cass_hosts
+      - name: monograph_cass_hosts
         value: your-cassandra-host
-      - name: eloq_cass_port
+      - name: monograph_cass_port
         value: your-cassandra-port
-      - name: eloq_cass_user
+      - name: monograph_cass_user
         value: your-cassandra-user
-      - name: eloq_cass_password
+      - name: monograph_cass_password
         value: your-cassandra-password
 ```
 

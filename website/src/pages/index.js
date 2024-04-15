@@ -349,7 +349,7 @@ function HeaderHero() {
         columnOne={<LogoAnimation />}
         columnTwo={
           <>
-            <h1 className="title">EloquentDB</h1>
+            <h1 className="title">EloqDB</h1>
             <p className="tagline">
               Assemble your database according to customized requirement powered
               by Data&nbsp;Substrate.
@@ -564,25 +564,22 @@ const Index = () => {
       wrapperClassName="homepage">
       <Head>
         <title>EloquentDB · Modular Database</title>
-        <meta property="og:title" content="EloquentDB · Modular Database" />
-        <meta
-          property="twitter:title"
-          content="EloquentDB · Modular Database"
-        />
+        <meta property="og:title" content="EloqDB · Modular Database" />
+        <meta property="twitter:title" content="EloqDB · Modular Database" />
       </Head>
 
       <div class="container1">
         <div class="product-left-column">
-          <h1 className="title">EloquentDB</h1>
+          <h1 className="title">EloqKV</h1>
           <p className="tagline">
-            Assemble your database according to customized requirement powered
-            by Data&nbsp;Substrate.
+            High-performance, distributed, transactional key-value store that is
+            compatible with the Redis protocol.
           </p>
           <p className="taglinecolor">
-            <Typed strings={['- Pluggable Compute Engine']} typeSpeed={75} />
+            <Typed strings={['- Transactional Store']} typeSpeed={75} />
           </p>
           <p className="taglinecolor">
-            <Typed strings={['- Hybrid Cloud Storage']} typeSpeed={75} />
+            <Typed strings={['- Layered Storage']} typeSpeed={75} />
           </p>
           <div className="buttons">
             <HomeCallToAction />
@@ -591,7 +588,7 @@ const Index = () => {
         <div class="product-right-column">
           <img
             alt=""
-            src={useBaseUrl('img/eloq_website_hero.svg')}
+            src={useBaseUrl('img/websitehero202404.svg')}
             type="image/svg+xml"
             width="800"
             heigh="auto"
@@ -623,7 +620,9 @@ const Index = () => {
       <div class="container2 container-with-separator">
         <div class="product-left-column">
           <p className="taglineproduct">
-            <a href="https://www.eloquentdb.com/product_eloqsql">EloqSQL</a>
+            <a href="https://www.eloquentdb.com/product_eloqsql">
+              EloqDB for MySQL
+            </a>
           </p>
           <p className="taglineproductdetail">
             A distributed SQL database powered by Data Substrate. Elastic at any

@@ -1,70 +1,8 @@
 ---
-title: EloqKVStore Redis Command Capabilities
+title: EloqKV Redis Command Compatibility
 ---
 
-# EloqKVStore - Redis Command Capabilities
-
-## Bitmap
-
-- [✅] BITCOUNT
-- [ ] BITFIELD
-- [ ] BITFIELD_RO
-- [ ] BITOP
-- [ ] BITPOS
-- [ ] GETBIT
-- [ ] SETBIT
-
-## Connection
-
-- [✅] AUTH
-- [ ] CLIENT CACHING
-- [ ] CLIENT GETNAME
-- [ ] CLIENT ID
-- [ ] CLIENT INFO
-- [ ] CLIENT KILL
-- [ ] CLIENT LIST
-- [ ] CLIENT NO-EVICT
-- [ ] CLIENT NO-TOUCH
-- [ ] CLIENT PAUSE
-- [ ] CLIENT REPLY
-- [ ] CLIENT SETINFO
-- [ ] CLIENT SETNAME
-- [ ] CLIENT TRACKING
-- [ ] CLIENT TRACKINGINFO
-- [ ] CLIENT UNBLOCK
-- [ ] CLIENT UNPAUSE
-- [✅] ECHO
-- [] HELLO
-- [✅] PING
-- [ ] QUIT
-- [ ] RESET
-
-## Generic
-
-- [✅] DEL
-- [ ] DUMP
-- [✅] EXISTS
-- [ ] EXPIRE
-- [ ] EXPIREAT
-- [✅] KEYS
-- [ ] MIGRATE
-- [ ] MOVE
-- [ ] OBJECT
-- [ ] PERSIST
-- [ ] PEXPIRE
-- [ ] PEXPIREAT
-- [ ] PTTL
-- [ ] RANDOMKEY
-- [ ] RENAME
-- [ ] RENAMENX
-- [ ] RESTORE
-- [✅] SCAN
-- [✅] SORT
-- [ ] TOUCH
-- [ ] TTL
-- [ ] TYPE
-- [ ] UNLINK
-- [ ] WAIT
+# EloqKV Redis Command Compatibility
 
 ## Hash
 
@@ -87,11 +25,11 @@ title: EloqKVStore Redis Command Capabilities
 
 ## List
 
-- [5-] BLMOVE //here blocking means client will be blocked when source of BLMOVE is empty until another client push the item into the source.
-- [5-] BLMPOP
-- [5-] BLPOP
-- [5-] BRPOP
-- [5-] BRPOPLPUSH
+- [ ] BLMOVE
+- [ ] BLMPOP
+- [ ] BLPOP
+- [ ] BRPOP
+- [ ] BRPOPLPUSH
 - [✅] LINDEX
 - [✅] LINSERT
 - [✅] LLEN
@@ -110,35 +48,6 @@ title: EloqKVStore Redis Command Capabilities
 - [✅] RPUSH
 - [✅] RPUSHX
 - [✅] SORT (Note: The SORT command also works on Lists)
-
-## Pub/Sub
-
-- [ ] PSUBSCRIBE
-- [ ] PUBLISH
-- [ ] PUBSUB
-- [ ] PUNSUBSCRIBE
-- [ ] SUBSCRIBE
-- [ ] UNSUBSCRIBE
-
-## Scripting
-
-- [✅] EVAL
-- [✅] EVALSHA
-- [ ] FCALL
-- [ ] FUNCTION CREATE
-- [ ] FUNCTION DELETE
-- [ ] FUNCTION DUMP
-- [ ] FUNCTION FLUSH
-- [ ] FUNCTION KILL
-- [ ] FUNCTION LIST
-- [ ] FUNCTION LOAD
-- [ ] FUNCTION RESTORE
-- [ ] FUNCTION STATS
-- [ ] SCRIPT DEBUG
-- [✅] SCRIPT EXISTS
-- [✅] SCRIPT FLUSH
-- [ ] SCRIPT KILL
-- [✅] SCRIPT LOAD
 
 ## Set
 
@@ -209,7 +118,7 @@ title: EloqKVStore Redis Command Capabilities
 - [✅] MGET
 - [✅] MSET
 - [✅] MSETNX
-- [x] PSETEX // ttl is not required.
+- [ ] PSETEX // ttl is not required.
 - [✅] SET
 - [✅] SETEX
 - [✅] SETNX
@@ -224,3 +133,94 @@ title: EloqKVStore Redis Command Capabilities
 - [✅] MULTI
 - [✅] UNWATCH
 - [✅] WATCH
+
+## Scripting
+
+- [✅] EVAL
+- [✅] EVALSHA
+- [ ] FCALL
+- [ ] FUNCTION CREATE
+- [ ] FUNCTION DELETE
+- [ ] FUNCTION DUMP
+- [ ] FUNCTION FLUSH
+- [ ] FUNCTION KILL
+- [ ] FUNCTION LIST
+- [ ] FUNCTION LOAD
+- [ ] FUNCTION RESTORE
+- [ ] FUNCTION STATS
+- [ ] SCRIPT DEBUG
+- [✅] SCRIPT EXISTS
+- [✅] SCRIPT FLUSH
+- [ ] SCRIPT KILL
+- [✅] SCRIPT LOAD
+
+## Bitmap
+
+- [✅] BITCOUNT
+- [ ] BITFIELD
+- [ ] BITFIELD_RO
+- [ ] BITOP
+- [ ] BITPOS
+- [ ] GETBIT
+- [ ] SETBIT
+
+## Connection
+
+- [✅] AUTH
+- [ ] CLIENT CACHING
+- [ ] CLIENT GETNAME
+- [ ] CLIENT ID
+- [ ] CLIENT INFO
+- [ ] CLIENT KILL
+- [ ] CLIENT LIST
+- [ ] CLIENT NO-EVICT
+- [ ] CLIENT NO-TOUCH
+- [ ] CLIENT PAUSE
+- [ ] CLIENT REPLY
+- [ ] CLIENT SETINFO
+- [ ] CLIENT SETNAME
+- [ ] CLIENT TRACKING
+- [ ] CLIENT TRACKINGINFO
+- [ ] CLIENT UNBLOCK
+- [ ] CLIENT UNPAUSE
+- [✅] ECHO
+- [] HELLO
+- [✅] PING
+- [ ] QUIT
+- [ ] RESET
+
+## Generic
+
+- [✅] DEL
+- [ ] DUMP
+- [✅] EXISTS
+- [ ] EXPIRE
+- [ ] EXPIREAT
+- [✅] KEYS
+- [ ] MIGRATE
+- [ ] MOVE
+- [ ] OBJECT
+- [ ] PERSIST
+- [ ] PEXPIRE
+- [ ] PEXPIREAT
+- [ ] PTTL
+- [ ] RANDOMKEY
+- [ ] RENAME
+- [ ] RENAMENX
+- [ ] RESTORE
+- [✅] SCAN
+- [✅] SORT
+- [ ] TOUCH
+- [ ] TTL
+- [ ] TYPE
+- [ ] UNLINK
+- [ ] WAIT
+
+## Pub/Sub
+
+- [ ] PSUBSCRIBE
+- [ ] PUBLISH
+- [ ] PUBSUB
+- [ ] PUNSUBSCRIBE
+- [ ] SUBSCRIBE
+- [ ] UNSUBSCRIBE
