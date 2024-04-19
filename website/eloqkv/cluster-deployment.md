@@ -28,9 +28,11 @@ Install command line tool `cluster_mgr`
 curl --proto '=https' --tlsv1.2 -sSf https://www.eloqdata.com/download/mono-waiter/install.sh | sh
 ```
 
-`cluster_mgr` will be installed at `$HOME/.eloqwaiter`
+`cluster_mgr` will be installed under `$HOME/.eloqwaiter`
 
 The `cluster_mgr` tool can realize the installation and deployment on multiple servers by modifying the parameters in deployment YAML files which are located at `$HOME/.eloqwaiter/config/deployment_kv.yaml`
+
+EloqKV can be deployed in two ways: `Decoupled` or `Coupled` .
 
 ### Decoupled Deployment
 
@@ -180,7 +182,18 @@ deployment:
 cluster_mgr launch --topology-file ${CLUSTER_MGR_HOME}/config/deployment_kv.yaml
 ```
 
-### Enable Persistence Feature
+### Stop Cluster
+
+```shell
+# stop EloqKV servers
+cluster_mgr stop --cluster eloqkv-cluster --all true
+# stop monitor process
+cluster_mgr monitor --cluster eloqkv-cluster --command stop
+```
+
+### Advanced Features
+
+#### Enable Persistence Feature
 
 Edit `/home/${USER}/eloq/eloqkv-cluster/redis.ini` to enable persisitent kv store of EloqKV
 
@@ -190,12 +203,21 @@ skip_kv=false
 ```
 
 Note that enable persisitent kv will consume CPU resource to flush records in memory to kv store periodically. As a result, reduce core_num in `redis.ini` when enable persisitent kv.
+We recommand you to allocate 50% cpu to tx_service if coupled deployment is adopted.
 
-### Enable WAL Feature
+#### Enable WAL Feature
 
 Edit `redis.ini` to enable WAL of EloqKV
 
 ```shell
 [local]
 skip_wal=false
+```
+
+#### Upload Modification
+
+To let your config modification take effect, you can upload config files and restart servers in one command.
+
+```shell
+cluster_mgr update-conf --cluster eloqkv-cluster --restart true
 ```
