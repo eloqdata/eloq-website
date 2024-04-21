@@ -452,19 +452,11 @@ const useHomePageAnimations = () => {
 
 const Index2 = () => {
   return (
-    <Layout
-      description="A framework for building native apps using React"
-      wrapperClassName="homepage">
+    <Layout description="EloqKV" wrapperClassName="homepage">
       <Head>
-        <title>React Native · Learn once, write anywhere</title>
-        <meta
-          property="og:title"
-          content="React Native · Learn once, write anywhere"
-        />
-        <meta
-          property="twitter:title"
-          content="React Native · Learn once, write anywhere"
-        />
+        <title>EloqKV</title>
+        <meta property="og:title" content="EloqKV" />
+        <meta property="twitter:title" content="EloqKV" />
       </Head>
       <HeaderHero />
       <NativeApps />

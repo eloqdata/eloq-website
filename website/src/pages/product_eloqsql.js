@@ -426,16 +426,11 @@ const useHomePageAnimations = () => {
 
 const Index3 = () => {
   return (
-    <Layout
-      description="A framework for building native apps using React"
-      wrapperClassName="homepage">
+    <Layout description="EloqDB" wrapperClassName="homepage">
       <Head>
-        <title>MonoStrate · Modular Database</title>
-        <meta property="og:title" content="MonoStrate · Modular Database" />
-        <meta
-          property="twitter:title"
-          content="MonoStrate · Modular Database"
-        />
+        <title>EloqDB · Modular Database</title>
+        <meta property="og:title" content="EloqDB · Modular Database" />
+        <meta property="twitter:title" content="EloqDB · Modular Database" />
       </Head>
       <HeaderHero />
       <NativeApps />
