@@ -1,5 +1,5 @@
 ---
-title: The guide for deploy a EloqKV Cluster
+title: Deploy EloqKV Cluster
 summary: Learn how to deploy and use the EloqKV cluster
 ---
 
