@@ -33,13 +33,13 @@ About how to create EKS Cluster, Please refer to the following section.
       "Sid": "DynamoDBAccess",
       "Effect": "Allow",
       "Action": "dynamodb:*",
-      "Resource": "arn:aws:dynamodb:${MY_REGION}:${ACCOUNT_ID}:table/*"
+      "Resource": "*"
     },
     {
       "Sid": "S3Access",
       "Effect": "Allow",
       "Action": "s3:*",
-      "Resource": "arn:aws:s3:${MY_REGION}:${ACCOUNT_ID}:*"
+      "Resource": "*"
     }
   ]
 }
@@ -74,8 +74,7 @@ eksctl create iamserviceaccount \
 ```shell
 helm repo add eloqdata https://monographdb.github.io/monograph-charts/
 helm repo update
-# for example: helm install eloq-operator eloqdata/eloq-operator --namespace eloq-operator-system
-helm install [RELEASE_NAME]  monographdb/eloq-operator --namespace [NAMESPACE_NAME]
+helm install eloq-operator  monographdb/eloq-operator --namespace eloq-operator-system
 ```
 
 ## Deploy a EloqKV Cluster and the monitoring component.

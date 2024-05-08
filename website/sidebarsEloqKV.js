@@ -23,7 +23,41 @@ const sidebars = {
       'configure-eloqkv-resource',
     ],
     'Redis Comaptibility': ['kvstore_compatibility'],
+    'Command Reference': [
+      {
+        type: 'category',
+        label: 'Lists',
+        items: [
+          'list/LINDEX',
+          'list/LINSERT',
+          'list/LLEN',
+          'list/LMOVE',
+          'list/LMPOP',
+          'list/LPOP',
+          'list/LPOS',
+          'list/LPUSH',
+          'list/LPUSHX',
+          'list/LRANGE',
+          'list/LREM',
+          'list/LSET',
+          'list/LTRIM',
+          'list/LRPOP',
+          'list/LRPUSH',
+          'list/LRPUSHX',
+        ],
+      },
+      {
+        type: 'category',
+        label: 'Hashes',
+        items: [
+          'hash/HDEL',
+          'hash/HEXISTS',
+          'hash/HGET',
+          'hash/HGETALL',
+          'hash/HINCRBY',
+        ],
+      },
+    ],
   },
 };
-
 module.exports = sidebars;

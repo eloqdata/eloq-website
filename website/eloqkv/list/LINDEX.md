@@ -4,7 +4,7 @@ title: LINDEX
 
 # LINDEX
 
-Retrieves the element at index `index` in the list stored at `key`. If the index is out of bounds, `nil` is returned.
+Returns the element at index `index` in the list stored at `key`. Negative indices are supported, with -1 being the last element of the list, -2 the penultimate, and so forth. When the value at `key` is not a list, an error is returned.
 
 ## Syntax
 
@@ -15,22 +15,31 @@ LINDEX key index
 ## Details
 
 - **Available since:** 1.0.0
-- **Time complexity:** O(N) where N is the number of elements to traverse to get to the element at index. This is O(1) when `index` is near the head or tail of the list.
+- **Time complexity:** O(N) where N is the number of elements in the list. Index fetching is O(1) when the list is implemented as a linked list and small indexes are used.
+- **ACL categories:** `@read`, `@list`, `@slow`
 
 ## Examples
 
-Retrieve the first element from a list:
+Assume we have a list called `mylist` with elements "Hello", "World", and "Goodbye":
 
 ```
-LINDEX mylist 0
+RPUSH mylist "Hello"
+RPUSH mylist "World"
+RPUSH mylist "Goodbye"
 ```
 
-Retrieve the third element from a list:
+Now, let's fetch the element at index 1:
 
 ```
-LINDEX mylist 2
+LINDEX mylist 1
+```
+
+This will output:
+
+```
+"World"
 ```
 
 ## RESP2/RESP3 Reply
 
-Bulk string reply: the element at the specified index, or `nil` if the index is out of range.
+Bulk string reply: the requested element, or `nil` when `index` is out of range.
