@@ -20,6 +20,7 @@ const sidebars = {
   monosql: {
     'Get Started': [
       'monosql-deployment-aws',
+      'eks-deployment',
       'monosql-operator-deployment',
       'monosql-tutorial',
     ],

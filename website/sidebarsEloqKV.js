@@ -19,6 +19,7 @@ const sidebars = {
       'introduction',
       'playground',
       'cluster-deployment',
+      'eks-deployment',
       'deployment-eloq-kv-aws-eks',
       'configure-eloqkv-resource',
     ],
