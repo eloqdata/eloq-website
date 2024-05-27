@@ -7,91 +7,54 @@ summary: How to deploy EloqKVCluster via eloq-operator
 
 This document describes deploying EloqKV on AWS Elastic Kubernetes Service (EKS).
 
-### Prerequisites
+## Prerequisites
 
 Before deploying an EolqDB cluster on AWS EKS, make sure the following requirements are satisfied:
 
 - Install Helm 3: used to deploying elop-operator.
-- Install and configure awscli.
-- Install and configure eksctl, which is used to create Kubernetes clusters.
-- Install kubectl.
+- Install and configure `aws-cli`.
+- Install and configure `eksctl`, which is used to create Kubernetes clusters.
+- Install `kubectl`.
+- An EKS cluster.
 
-### Create an EKS cluster and a node pool
+## Deploy eloq-operator
 
-About how to create EKS Cluster, Please refer to the following section.
-
-### Create Service Account
-
-- Copy the following content and name it `dynamo-and-s3-policy.json`
-
-```
--- Please replace ${ACCOUNT_ID} with your account ID and ${MY_REGION} with your region name.
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "DynamoDBAccess",
-      "Effect": "Allow",
-      "Action": "dynamodb:*",
-      "Resource": "*"
-    },
-    {
-      "Sid": "S3Access",
-      "Effect": "Allow",
-      "Action": "s3:*",
-      "Resource": "*"
-    }
-  ]
-}
-```
-
-- Create IAM policy use `dynamo-and-s3-policy.json`
-
-```shell
-#!/bin/bash
-aws iam create-policy \
-  --policy-name EloqClusterResourceIAMPolicy \
-  --policy-document file://"dynamo-and-s3-policy.json"
-```
-
-- Create IAM Service Account
-
-```shell
-#  Replace ${EKS_CLUSTER_NAME} with the name of your cluster, ${ACCOUNT_ID} with your account ID,
-#  ${MY_REGION} with your region name, ${MY_NAMESPACE} with your namespace. ${SERVICE_ACCOUNT_NAME} with your service account name.
-eksctl create iamserviceaccount \
-  --cluster ${EKS_CLUSTER_NAME} \
-  --namespace ${MY_NAMESPACE} \
-  --name ${SERVICE_ACCOUNT_NAME} \
-  --attach-policy-arn arn:aws:iam::${ACCOUNT_ID}:policy/EloqClusterResourceIAMPolicy \
-  --override-existing-serviceaccounts \
-  --region ${MY_REGION} \
-  --approve
-```
-
-### Deploy eloq-operator
-
-```shell
+```bash
 helm repo add eloqdata https://monographdb.github.io/monograph-charts/
 helm repo update
 helm install eloq-operator  monographdb/eloq-operator --namespace eloq-operator-system
 ```
 
-## Deploy a EloqKV Cluster and the monitoring component.
+## Deploy the monitoring components for `EloqDBCluster`
 
-### Install monitoring component.
+The monitoring system of `EloqDBCluster` relies on the infrastructure of the Prometheus and Grafana communities.  Currently includes the following components:
+
+- kube-prometheus-stack.
+- Loki-distributed.
+- Mimir-distributed.
+- Promtail.
+
+This section introduces how to deploy a complete monitoring system. Specifically, it includes the following steps:
+
+1. Create a namespace for monitoring components.
+2. Create and attach S3 access policy to a service account for monitoring components.
+3. Install monitoring components.
+4. Install EloqKV cluster dashboard.
+5. Install `PodMonitor` to monitor EloqKV cluster.
 
 **The monitoring-related infrastructure installation is optional** and depends on whether you have installed the following components.
 
-- kube-prometheus-stack
-- Loki-distributed
-- Mimir
-- Promtail
+**Please be sure to replace the variable names in the following commands with your own.**
 
-EloqDBCluster relies on infrastructure from the Prometheus and Grafana communities. If you don't have these components installed in your current environment, you can install them with the following command.
+- `AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query 'Account' --output text)`
 
-- Create a namespace for the monitoring system:
+- `EKS_CLUSTER=eloqdb-dev`
 
+- `AWS_REGION="ap-northeast-1"`
+
+### Create a namespace for the monitoring components
+
+Create a namespace using the following manifest:
 ```yaml
 kind: Namespace
 apiVersion: v1
@@ -101,53 +64,212 @@ metadata:
     app.kubernetes.io/name: EloqDBCluster-Monitoring
 ```
 
-Copy the above yaml file and name it `monitoring-ns.yaml`. Then execute:
+Then execute:
 
-```shell
+```bash
 kubectl apply -f monitoring-ns.yaml
 ```
 
-- Create S3 bucket for the monitoring infrastructure:
+### Create and attach S3 access policy to a service account for monitoring components
 
-```shell
-aws s3 mb s3://eloq-mimir-ruler --region $REGION
-aws s3 mb s3://eloq-mimir-blocks --region $REGION
-aws s3 mb s3://eloq-mimir-alertmanager --region $REGION
-aws s3 mb s3://eloq-loki-data --region $REGION
+Create the policy file `monitoring-system-IAM-policy.json` with the following content:
+``` json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "S3Access",
+            "Effect": "Allow",
+            "Action": "s3:*",
+            "Resource": "*"
+        }
+    ]
+}
 ```
 
-- Using Helm to install the monitoring components:
+Create the IAM policy `MonitoringSystemIAMPolicy`:
+``` bash
+aws iam create-policy \
+  --policy-name MonitoringSystemIAMPolicy \
+  --policy-document file://"path/to/monitoring-system-IAM-policy.json"
+```
 
-```shell
+Create the IAM service account:
+```bash
+eksctl create iamserviceaccount \
+  --region ${AWS_REGION} \
+  --cluster ${EKS_CLUSTER} \
+  --namespace eloq-monitoring-ns \
+  --name monitoring-sa \
+  --attach-policy-arn arn:aws:iam::${AWS_ACCOUNT_ID}:policy/MonitoringSystemIAMPolicy \
+  --approve
+```
+
+### Create S3 bucket for the monitoring infrastructure:
+
+**Please be sure to replace the variable names in the following commands with your own.**
+
+- `MIMIR_BLOCKS_STORAGE_BUCKET=eloq-mimir-blocks`
+
+- `MIMIR_RULER_BUCKET=eloq-mimir-ruler`
+
+- `MIMIR_ALERTMANAGER_BUCKET=eloq-mimir-alertmanager`
+
+- `LOKI_BUCKET=eloq-loki-data`
+
+```bash
+aws s3 mb s3://${MIMIR_BLOCKS_STORAGE_BUCKET} --region ${AWS_REGION}
+aws s3 mb s3://${MIMIR_RULER_BUCKET} --region ${AWS_REGION}
+aws s3 mb s3://${MIMIR_ALERTMANAGER_BUCKET} --region ${AWS_REGION}
+aws s3 mb s3://${LOKI_BUCKET} --region ${AWS_REGION}
+```
+
+### Using Helm to install the monitoring components:
+
+**Please be sure to replace the variable names in the following commands with your own.**
+
+- `S3_ENDPOINT="s3.ap-northeast-1.amazonaws.com`
+
+```bash
 helm install eloqdata-monitor-infra -n monographdb/eloq-monitoring --namespace eloq-monitoring-ns \
   --set global.namespace=eloq-monitoring-ns \
-  --set global.serviceAccount.name={your-service-account-name} \
-  --set aws.region={your-aws-region} \
-  --set aws.s3.endpoint={your-aws-s3-endpoint} \
-  --set loki-distributed.bucketnames={loki-bucketname}
-  --set mimir-distributed.ruler_storage.bucket_name={your-mimir-ruler-bucketname}
-  --set mimir-distributed.alertmanager_storage.bucket_name={your-mimir-alertmanager-bucketname}
-  --set mimir-distributed.blocks_storage.bucket_name={your-mimir-blocks_storage-bucketname}
+  --set global.serviceAccount.name=monitoring-sa \
+  --set aws.region=${AWS_REGION} \
+  --set aws.s3.endpoint=${S3_ENDPOINT} \
+  --set loki-distributed.bucketnames=${LOKI_BUCKET} \
+  --set mimir-distributed.ruler_storage.bucket_name=${MIMIR_RULER_BUCKET} \
+  --set mimir-distributed.alertmanager_storage.bucket_name=${MIMIR_ALERTMANAGER_BUCKET} \
+  --set mimir-distributed.blocks_storage.bucket_name={MIMIR_BLOCKS_STORAGE_BUCKET}
 ```
 
-- Install EloqKV Dashboard
+### Install EloqKV cluster dashboard and `PodMonitor`:
 
-> TODO
-
-```shell
-
+Install EloqKV cluster dashboard:
+```bash
+kubectl apply -f https://www.eloqdata.com/download/eloqdb-manifest/eloqkv-overview
 ```
 
-### Deploy a EloqKV Cluster
+Create an `PodMonitor` manifest file named `eloqdb-pods-monitor.yaml` with the following content.
 
+**Please be sure to replace the variable names in the following commands with your own.**
+
+- `KUBE_PROMETHEUS_RELEASE=kube-prometheus-stack`
+
+
+```yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: eloqdata-pods-monitor
+  labels:
+    release: ${KUBE_PROMETHEUS_RELEASE}
+  namespace: eloq-monitoring-ns
+spec:
+  namespaceSelector:
+    any: true
+    # matchNames: {}
+  selector:
+    matchExpressions:
+    - key: eloqdata.com/srv
+      values: ["tx", "log"]
+      operator: In
+  podMetricsEndpoints:
+  - port: "metric-port"
+    path: "/mono_metrics"
+    relabelings:
+    - targetLabel: instance
+      sourceLabels:
+      - __meta_kubernetes_pod_name
+      action: replace
+    - targetLabel: eloqdata_cluster
+      sourceLabels:
+      - __meta_kubernetes_pod_label_eloqdata_com_cluster
+      action: replace
+    - targetLabel: tenant
+      sourceLabels:
+      - __meta_kubernetes_namespace
+      action: keep
+```
+
+Then install the `PodMonitor`:
+```
+kubectl apply -f eloqdb-pods-monitor.yaml
+```
+
+## Deploy an EloqKV Cluster
+
+This section describes how to deploy an EloqKV cluster. Specifically, it includes the following steps:
+
+1. Create a namespace for EloqKV cluster.
+2. Create and attach s3 and dynamodb s3 access policy to a service account for EloqKV cluster.
+3. Deploy EloqKV cluster.
+4. Verify the EloqKV cluster is deployed.
+
+### Create a nmaespace for EloqKV cluster
+
+Create a namespace using the following manifest:
 ```yaml
 kind: Namespace
 apiVersion: v1
 metadata:
-  name: eloq-operator-test
+  name: eloqkv-test
   labels:
     app.kubernetes.io/name: EloqDBCluster
----
+```
+
+### Create and attach s3 and dynamodb s3 access policy to a service account for EloqKV cluster
+
+Copy the following content and name it `dynamo-and-s3-policy.json`:
+```
+-- Please replace ${AWS_ACCOUNT_ID} with your account ID and ${AWS_REGION} with your region name.
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DynamoDBAccess",
+      "Effect": "Allow",
+      "Action": "dynamodb:*",
+      "Resource": "arn:aws:dynamodb:${AWS_REGION}:${AWS_ACCOUNT_ID}:table/*"
+    },
+    {
+      "Sid": "S3Access",
+      "Effect": "Allow",
+      "Action": "s3:*",
+      "Resource": "arn:aws:s3:::*"
+    }
+  ]
+}
+```
+
+Create IAM policy using `dynamo-and-s3-policy.json`:
+
+```bash
+#!/bin/bash
+aws iam create-policy \
+  --policy-name EloqClusterResourceIAMPolicy \
+  --policy-document file://"dynamo-and-s3-policy.json"
+```
+
+Create IAM Service Account:
+**Please be sure to replace the variable names in the following commands with your own.**
+
+- `SERVICE_ACCOUNT=eloqdb-aws-access`
+
+```bash
+eksctl create iamserviceaccount \
+  --cluster ${EKS_CLUSTER} \
+  --namespace eloqkv-test \
+  --name ${SERVICE_ACCOUNT} \
+  --attach-policy-arn arn:aws:iam::${AWS_ACCOUNT_ID}:policy/EloqClusterResourceIAMPolicy \
+  --override-existing-serviceaccounts \
+  --region ${AWS_REGION} \
+  --approve
+```
+
+### Create an EloqKV Cluster
+
+This is an example manifest for EloqKV Cluster:
+```yaml
 apiVersion: eloqdbcluster.eloqdata.com/v1alpha1
 kind: EloqDBCluster
 metadata:
@@ -156,7 +278,7 @@ metadata:
     app.kubernetes.io/part-of: eloq-operator
     app.kubernetes.io/created-by: eloq-operator
   name: my-eloqkv
-  namespace: eloq-operator-test
+  namespace: eloqkv-test
 spec:
   frontend:
     module: 'eloqkv'
@@ -235,18 +357,18 @@ spec:
 
 Copy the above yaml file and name it `eloqkv-cluster.yaml`. Then execute:
 
-```shell
+```bash
 kubectl apply -f eloq-cluster.yaml
 ```
 
 For a more detailed CR configuration please refer to the document [Configure an EloqKV Cluster on AWS EKS](./configure-eloqkv-resource.md)
 
-### Verify the deployment
+### Verify the EloqKV cluster is deployed
 
 The EloqKV cluster starts successfully when all the pods in the StatefulSet are in the `Running` or `Ready` state.
 
-```shell
-kubectl get pods -n eloq-operator-test
+```bash
+kubectl get pods -n eloqkv-test
 ```
 
 ### Access the EloqKV Cluster
@@ -257,26 +379,26 @@ EloqKV is compatible with the Redis protocol, so your application can use a Redi
 
 1. Login to the bastion via ssh
 
-```shell
+```bash
 ssh [-i /your-private-key.pem] ec2-user@<bastion-public-dns-name>
 ```
 
-1. Install the redis-cli
+2. Install the redis-cli
 
-```shell
+```bash
 sudo yum install redis-tools
 ```
 
-1. Connect to the EloqKV cluster
+3. Connect to the EloqKV cluster
 
 You can get the EXTERNAL-IP of the domain name with the following command:
 
-```shell
-kubectl get svc eloq-srv-tx-my-eloqkv-exposed  -n eloq-operator-test
+```bash
+kubectl get svc eloq-srv-tx-my-eloqkv-exposed  -n eloqkv-test
 ```
 
 `<eloqkv-cluster-intranet-loadbalancer-dns-name>` is the LoadBalancer domain name of the EloqKV service.
 
-```shell
+```bash
 redis-cli -h <eloqkv-cluster-intranet-loadbalancer-dns-name> -p 6379
 ```
