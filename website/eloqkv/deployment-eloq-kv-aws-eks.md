@@ -146,7 +146,7 @@ helm install eloqdata-monitor-infra -n monographdb/eloq-monitoring --namespace e
 
 Install EloqKV cluster dashboard:
 ```bash
-kubectl apply -f https://www.eloqdata.com/download/eloqdb-manifest/eloqkv-overview
+kubectl apply -f https://www.eloqdata.com/download/eloqdb-dashboards/eloqkv-overview.yaml
 ```
 
 Create an `PodMonitor` manifest file named `eloqdb-pods-monitor.yaml` with the following content.
