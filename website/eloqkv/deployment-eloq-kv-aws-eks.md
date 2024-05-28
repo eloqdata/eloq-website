@@ -17,6 +17,10 @@ Before deploying an EolqDB cluster on AWS EKS, make sure the following requireme
 - Install `kubectl`.
 - An EKS cluster.
 
+If you don't have an AWS EKS cluster, please check out [Deploy EKS Cluster](eks-deployment.md) for creating one.
+
+If you already have an EKS cluster, we still recommend checking [Deploy EKS Cluster](eks-deployment.md) to ensure your EKS cluster meets the required requirements and configuration.
+
 ## Deploy eloq-operator
 
 ```bash
