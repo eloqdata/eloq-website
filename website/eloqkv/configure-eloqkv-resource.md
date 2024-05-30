@@ -13,7 +13,15 @@ To ensure that EloqDB can be properly scheduled and run by EKS, we strongly reco
 
 ### Configure EloqKV
 
-To deploy EloqDB, you need to declare the EloqDBCluster CR. refer to the following example for specificity:
+Deploying an EloqKV cluster involves several straightforward steps. Below is an overview of the process:
+
+1. **Prepare a Namespace**: Prepare a namespace for EloqKV clusters.
+2. **Configure AWS Resources**: Use the `aws-cli` to create an AWS resource access policy and attach it to a service account.
+3. **Deploy the Cluster**: Launch an EloqKV cluster within the namespace with the service account.
+
+For a detailed guide on each step, please refer to: [Deploy EloqKV on AWS EKS](deployment-eloq-kv-aws-eks.md).
+
+Additionally, here is an example of a Custom Resource (CR) for an EloqKV cluster:
 
 ```yaml
 kind: Namespace
@@ -31,7 +39,7 @@ metadata:
     app.kubernetes.io/part-of: eloq-operator
     app.kubernetes.io/created-by: eloq-operator
   name: my-eloqkv
-  namespace: eloq-operator-test
+  namespace: eloqkv-test
 spec:
   frontend:
     module: 'eloqkv'
@@ -114,8 +122,8 @@ The cluster name can be configured by changing **`metadata.name`** in the EloqDB
 
 ### Select a specific node for EloqDB's services
 
-If you wish to run the database on a machine with a specific specification, you can modify it in the following way. The Following configuration snippet applies to both Tx and Log. Both: **`spec.tx.schedulePolicy` **and **`spec.log.schedulePolicy`**
-
+If you wish to run the database on a machine with a specific specification, you can modify it in the following way.
+The Following configuration snippet applies to both Tx and Log. Both: **`spec.tx.schedulePolicy`** and **`spec.log.schedulePolicy`**.
 ```yaml
 schedulePolicy:
   policyType: preferred
@@ -130,14 +138,16 @@ schedulePolicy:
 
 ### Modify Configuration
 
-eloq-operator provides the default configuration for the database; if you wish to change the default configuration, modify the spec.frontend :
-
+eloq-operator provides the default configuration for the database. To change the default configuration, please modify the `spec.frontend`:
 ```yaml
-frontend:
-  config:
-  items:
-    - name: 'skip_wal'
-      value: 'false'
+  frontend:
+    module: "eloqkv"
+    port: 6379
+    config:
+      operation: upsert
+      rawConfig: |
+        [local]
+        skip_wal=false
 ```
 
 If you configure items that are not recognized by the database, they are ignored.
