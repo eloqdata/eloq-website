@@ -25,6 +25,7 @@ const sidebars = {
       'basic-sql-operations',
       'cluster-deployment',
     ],
+    'Data Migration': ['data-migration/debezium'],
     'Connect to DB': [
       'connect-to-monodb/connect-by-client',
       'connect-to-monodb/locust-test',

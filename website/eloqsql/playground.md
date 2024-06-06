@@ -11,5 +11,5 @@ curl --proto '=https' --tlsv1.2 -sSf https://www.eloqdata.com/download/mono-wait
 Start to play with EloqSQL
 
 ```shell
-cluster_mgr demo --product eloq-sql
+cluster_mgr demo eloq-sql
 ```

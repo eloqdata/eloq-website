@@ -18,7 +18,7 @@ Prepare a deployment host and ensure its software meets the following requiremen
 
 1. System configuration
 
-Below are some necessary configurations to be made before installing MonoGraphDB
+Below are some necessary configurations to be made before installing EloqSQL
 
 - Edit the system configuration file `/etc/security/limits.conf or /etc/security/limits.d/20-nproc.conf` using the following command
   ```shell
@@ -103,17 +103,14 @@ Below are some necessary configurations to be made before installing MonoGraphDB
    sudo service ssh start
   ```
 - In order to enable each node to log in to other nodes through the public key, it needs to generate its own public key locally
+
   ```shell
-  ssh-keygen -t ed25519 -f ~/.ssh/ed25519_mono
+  ssh-keygen
   ```
-  > **Note:**
-  > Note that the ed25519 encryption signature algorithm is used here, which is faster, more secure, and shorter in bytes than the ordinary RSA signature algorithm.
 
-After the ssh key generation, two files will be generated in the $HOME/.ssh directory, one is the private key file `id_ed25519`, and the other is the public key file `id_ed25519.pub`.
-
-- add the public key `id_ed25519.pub` to the authorized_keys. Please run on all the hosts.
+- add the public key `id_rsa.pub` to the authorized_keys. Please run on all the hosts.
   ```shell
-  cat ~/.ssh/ed25519_mono.pub >> ~/.ssh/authorized_keys
+  cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
   ssh-keyscan -H 127.0.0.1 >> ~/.ssh/known_hosts
   ```
 - Set permissions for the ssh directory
@@ -122,108 +119,103 @@ After the ssh key generation, two files will be generated in the $HOME/.ssh dire
    chmod 600 ~/.ssh/authorized_keys
   ```
 
-3. Get the MonoGraphDB installation package
+### Install Deployment Tool
 
-Please contact us to get the latest MonoGraphDB installation image.
+Install command line tool `cluster_mgr`
 
-```
-eloqdb-tx-release-bin.tar.gz
-eloqdb-log-release-bin.tar.gz
-waiter-cluster-mgr.tar.gz
+```shell
+curl --proto '=https' --tlsv1.2 -sSf https://www.eloqdata.com/download/mono-waiter/install.sh | sh
 ```
 
-### Deployment implementation
+`cluster_mgr` will be installed under `$HOME/.eloqwaiter`
 
-1. Deploy EloqSQL
+The `cluster_mgr` tool can realize the installation and deployment on multiple servers by modifying the parameters in deployment YAML files which are located at `$HOME/.eloqwaiter/config/examples/eloqsql_cassandra.yaml`
 
-- modify the cluster configuration file
-  According to the following configuration template, edit the configuration file config/deployment.yaml as your need, where:
+### Deployment EloqSQL Using Config File
 
-  - `product: "Redis"`: This can be set as Eloq or Redis
-  - `username: "mono"`: Indicates that the `mono` system user (the current system user name) is used for internal management of the cluster. By default, port 22 is used to log in to the target machine via ssh
-  - `auth_type`: ssh login verification method, the default is the keypair form
-  - `keypair`: set to the storage address of the ssh private key file configured through the network
-  - `host`: Set it to the IP of the deployment host, if it only needs to be installed on this machine, set it to 127.0.0.1. Please do not use `localhost`
-  - `install_image`: Can be set to the downloaded Eloq installation package locally or the download address of the remote EloqSQL
-  - `install_dir`: Set to the desired storage location for the user to install the cluster. This location must be the folder location with read and write permissions for the user specified by `username`. If the installation directory does not exist, it needs to be manually created in advance.
-  - `storage_service`: Configure the remote download URL `download_url` of the `Cassandra` database, the installation location `(host)`, if configured as `127.0.0.1`, it means that the installation is locally.
-  - `monitor`: Configure the remote download URL, installation location and installation port of EloqSQL’s related monitoring software (prometheus, grafana).
-    The configuration template is as follows:
+- Modify the cluster configuration file.
 
-    ````yaml
-    connection:
-    username: "mono"
-    auth_type: "keypair"
-    auth:
+  Edit the configuration file `.eloqwaiter/config/examples/eloqsql_cassandra.yaml` as your need.
+
+  - Update 127.0.0.1 with node private ip: `sed -i 's/127.0.0.1/your_private_ip/g' .eloqwaiter/config/examples/eloqsql_cassandra.yaml`. Note that keeping 127.0.0.1 will block external access.
+  - Update product version. For example use version 0.4.1: `version: "0.4.1"`.
+  - Update install path `install_dir`. Set to the desired storage location for the user to install the cluster. This location must be the folder location with read and write permissions for the user specified by `username`.
+  - `storage_service`: Configure the endpoint of kv store cluster.
+  - `monitor`: Configure the prometheus and grafana.
+
+```
+connection:
+  username: "$USER"
+  auth_type: "keypair"
+  auth:
     keypair: "/home/$USER/.ssh/id_rsa"
-    deployment:
-    product: "Eloq"
-    version: "0.3.3"
-    cluster_name:  $CLUSTER_NAME
-    install_dir: "/$USER/opt"
-    port:
-    mysql_port: 3300
-    eloq_port:
-    start: 8100
-    end: 8200
-    mono_service:
-    host: - localhost
-    storage_service:
+deployment:
+  cluster_name: "eloqsql-cluster"
+  product: "EloqSQL"
+  version: "latest"
+  install_dir: "/home/$USER/eloq"
+  log_service:
+    nodes:
+      - host: 127.0.0.1
+        port: 9000
+        data_dir:
+          - "/home/$USER/eloq/disk_wal_sql"
+    replica: 1
+  tx_service:
+    host: [127.0.0.1]
+    port: 8000
+    client_port: 3316
+  storage_service:
     cassandra:
-    download_url: "https://archive.apache.org/dist/cassandra/4.1.0/apache-cassandra-4.1.0-bin.tar.gz"
-    storage_cluster: "mono-cass-cluster"
-    host: - localhost
-    monitor:
+      host: [127.0.0.1]
+      kind: !Internal
+        download_url: "https://d143xau9fe26d8.cloudfront.net/others/apache-cassandra-4.1.3-bin.tar.gz"
+        storage_cluster: "eloqsql-cluster"
+  monitor:
     data_dir: ""
-    eloq_metrics:
-    path: "/mono_metrics"
-    port: 18081
+    monograph_metrics:
+      path: "/mono_metrics"
+      port: 18081
     prometheus:
-    download_url: "https://github.com/prometheus/prometheus/releases/download/v2.42.0/prometheus-2.42.0.linux-amd64.tar.gz"
-    port: 9090
-    host: "localhost"
+      download_url: "https://d143xau9fe26d8.cloudfront.net/others/prometheus-2.42.0.linux-amd64.tar.gz"
+      port: 9500
+      host: 127.0.0.1
     grafana:
-    download_url: "https://dl.grafana.com/oss/release/grafana-9.3.6.linux-amd64.tar.gz"
-    port: 3300
-    host: "localhost"
-    node_exporter: "https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_exporter-1.5.0.linux-amd64.tar.gz"
-    node_exporter_port: 9200
-    mysql_exporter: "https://github.com/prometheus/mysqld_exporter/releases/download/v0.14.0/mysqld_exporter-0.14.0.linux-amd64.tar.gz"
-    mysql_exporter_port: 9300
+      download_url: "https://d143xau9fe26d8.cloudfront.net/others/grafana-9.3.6.linux-amd64.tar.gz"
+      port: 3301
+      host: 127.0.0.1
+    node_exporter:
+      url: "https://d143xau9fe26d8.cloudfront.net/others/node_exporter-1.5.0.linux-amd64.tar.gz"
+      port: 9200
+    mysql_exporter:
+      url: "https://d143xau9fe26d8.cloudfront.net/others/mysqld_exporter-0.14.0.linux-amd64.tar.gz"
+      port: 9300
     cassandra_collector:
-    mcac_agent: "https://github.com/datastax/metric-collector-for-apache-cassandra/releases/download/v0.3.4/datastax-mcac-agent-0.3.4-4.1-beta1.tar.gz"
-    mcac_port: 9103
-
-         #    dynamodb:
-         #      access_key_id: "",
-         #      secret_key: ""
-         #      region: "XXXX",
-         #      endpoint: "";
-             ```
-    ````
-
-> **Note:**
-> The above deployment.yaml file is the default configuration file, and users can configure the software to be installed according to their needs. For some software that does not need to be installed, it only needs to be deleted from the configuration file.
+      mcac_agent: "https://d143xau9fe26d8.cloudfront.net/others/datastax-mcac-agent-0.3.4-4.1-beta1.tar.gz"
+      mcac_port: 9103
+```
 
 - Launch cluster
 
   ```shell
-  cluster_mgr launch --topology-file ${PWD}/config/deployment.yaml
+  cluster_mgr launch .eloqwaiter/config/examples/eloqsql_cassandra.yaml
   ```
 
 - Access the cluster
+
   - Access the EloqSQL database. By default, `mysql` is installed in `/home/$USER/opt/mono-poc/eloqdb-release/install/`, enter this directory, and use the socket method to connect to the database. For more connection methods, please refer to [Client Connection](./connect-to-monodb/connect-by-client.md).
+
     ```shell
-    cd /home/$USER/opt/$CLUSTER_NAME/eloqdb-release/install/
-    sudo ./bin/mysql -u root -S /tmp/mysql3300.sock
+    /home/centos/eloq/eloqsql-cluster/monograph-tx-service-release/install/bin/mariadb --user=centos -S /tmp/mysql3316.sock
     ```
+
+  - Execute the following command to check the name of installed cluster:
+
+    ```shell
+    cluster_mgr list
+    ```
+
   - Execute the following command to view the status of the cluster:
     ```shell
-    ./cluster_mgr status -cluster $CLUSTER_NAME
+    cluster_mgr status $CLUSTER_NAME
     ```
-
-## See also
-
-- If you have just deployed a set of EloqSQL local test clusters:
-  - Learn [EloqSQL SQL Operations](./basic-sql-operations.md)
-  - [Migrate data to EloqSQL](./migration-overview.md)
