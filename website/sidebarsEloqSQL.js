@@ -22,14 +22,9 @@ const sidebars = {
       'playground',
       'introduction',
       'quick-start',
-      'basic-sql-operations',
       'cluster-deployment',
     ],
     'Data Migration': ['data-migration/debezium'],
-    'Connect to DB': [
-      'connect-to-monodb/connect-by-client',
-      'connect-to-monodb/locust-test',
-    ],
     'Data Query': ['data-query/simple-query', 'data-query/advance-query'],
     'Mysql Compatibility': ['mysql-compatibility', 'difference_with_mysql'],
     'SQL Reference': [

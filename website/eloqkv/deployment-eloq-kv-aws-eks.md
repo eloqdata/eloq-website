@@ -1,5 +1,5 @@
 ---
-title: Deploy EloqKV on AWS EKS
+title: Deploy EloqKV on EKS
 summary: How to deploy EloqKVCluster via eloq-operator
 ---
 
@@ -31,7 +31,7 @@ helm install eloq-operator  monographdb/eloq-operator --namespace eloq-operator-
 
 ## Deploy the monitoring components for `EloqDBCluster`
 
-The monitoring system of `EloqDBCluster` relies on the infrastructure of the Prometheus and Grafana communities.  Currently includes the following components:
+The monitoring system of `EloqDBCluster` relies on the infrastructure of the Prometheus and Grafana communities. Currently includes the following components:
 
 - kube-prometheus-stack.
 - Loki-distributed.
@@ -59,6 +59,7 @@ This section introduces how to deploy a complete monitoring system. Specifically
 ### Create a namespace for the monitoring components
 
 Create a namespace using the following manifest:
+
 ```yaml
 kind: Namespace
 apiVersion: v1
@@ -77,28 +78,31 @@ kubectl apply -f monitoring-ns.yaml
 ### Create and attach S3 access policy to a service account for monitoring components
 
 Create the policy file `monitoring-system-IAM-policy.json` with the following content:
-``` json
+
+```json
 {
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "S3Access",
-            "Effect": "Allow",
-            "Action": "s3:*",
-            "Resource": "*"
-        }
-    ]
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "S3Access",
+      "Effect": "Allow",
+      "Action": "s3:*",
+      "Resource": "*"
+    }
+  ]
 }
 ```
 
 Create the IAM policy `MonitoringSystemIAMPolicy`:
-``` bash
+
+```bash
 aws iam create-policy \
   --policy-name MonitoringSystemIAMPolicy \
   --policy-document file://"path/to/monitoring-system-IAM-policy.json"
 ```
 
 Create the IAM service account:
+
 ```bash
 eksctl create iamserviceaccount \
   --region ${AWS_REGION} \
@@ -149,6 +153,7 @@ helm install eloqdata-monitor-infra -n monographdb/eloq-monitoring --namespace e
 ### Install EloqKV cluster dashboard and `PodMonitor`:
 
 Install EloqKV cluster dashboard:
+
 ```bash
 kubectl apply -f https://www.eloqdata.com/download/eloqdb-dashboards/eloqkv-overview.yaml
 ```
@@ -158,7 +163,6 @@ Create an `PodMonitor` manifest file named `eloqdb-pods-monitor.yaml` with the f
 **Please be sure to replace the variable names in the following commands with your own.**
 
 - `KUBE_PROMETHEUS_RELEASE=kube-prometheus-stack`
-
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -174,28 +178,29 @@ spec:
     # matchNames: {}
   selector:
     matchExpressions:
-    - key: eloqdata.com/srv
-      values: ["tx", "log"]
-      operator: In
+      - key: eloqdata.com/srv
+        values: ['tx', 'log']
+        operator: In
   podMetricsEndpoints:
-  - port: "metric-port"
-    path: "/mono_metrics"
-    relabelings:
-    - targetLabel: instance
-      sourceLabels:
-      - __meta_kubernetes_pod_name
-      action: replace
-    - targetLabel: eloqdata_cluster
-      sourceLabels:
-      - __meta_kubernetes_pod_label_eloqdata_com_cluster
-      action: replace
-    - targetLabel: tenant
-      sourceLabels:
-      - __meta_kubernetes_namespace
-      action: keep
+    - port: 'metric-port'
+      path: '/mono_metrics'
+      relabelings:
+        - targetLabel: instance
+          sourceLabels:
+            - __meta_kubernetes_pod_name
+          action: replace
+        - targetLabel: eloqdata_cluster
+          sourceLabels:
+            - __meta_kubernetes_pod_label_eloqdata_com_cluster
+          action: replace
+        - targetLabel: tenant
+          sourceLabels:
+            - __meta_kubernetes_namespace
+          action: keep
 ```
 
 Then install the `PodMonitor`:
+
 ```
 kubectl apply -f eloqdb-pods-monitor.yaml
 ```
@@ -212,6 +217,7 @@ This section describes how to deploy an EloqKV cluster. Specifically, it include
 ### Create a nmaespace for EloqKV cluster
 
 Create a namespace using the following manifest:
+
 ```yaml
 kind: Namespace
 apiVersion: v1
@@ -224,6 +230,7 @@ metadata:
 ### Create and attach s3 and dynamodb s3 access policy to a service account for EloqKV cluster
 
 Copy the following content and name it `dynamo-and-s3-policy.json`:
+
 ```
 -- Please replace ${AWS_ACCOUNT_ID} with your account ID and ${AWS_REGION} with your region name.
 {
@@ -273,6 +280,7 @@ eksctl create iamserviceaccount \
 ### Create an EloqKV Cluster
 
 This is an example manifest for EloqKV Cluster:
+
 ```yaml
 apiVersion: eloqdbcluster.eloqdata.com/v1alpha1
 kind: EloqDBCluster

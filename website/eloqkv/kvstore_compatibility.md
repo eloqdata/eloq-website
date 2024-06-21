@@ -25,11 +25,11 @@ title: EloqKV Redis Command Compatibility
 
 ## List
 
-- [ ] BLMOVE
-- [ ] BLMPOP
-- [ ] BLPOP
-- [ ] BRPOP
-- [ ] BRPOPLPUSH
+- [✅] BLMOVE
+- [✅] BLMPOP
+- [✅] BLPOP
+- [✅] BRPOP
+- [✅] BRPOPLPUSH
 - [✅] LINDEX
 - [✅] LINSERT
 - [✅] LLEN
@@ -126,6 +126,25 @@ title: EloqKV Redis Command Compatibility
 - [✅] STRLEN
 - [✅] SUBSTR (Deprecated) //same as getrange
 
+## Pub/Sub
+
+- [✅] PSUBSCRIBE
+- [✅] PUBLISH
+- [✅] PUBSUB
+- [✅] PUNSUBSCRIBE
+- [✅] SUBSCRIBE
+- [✅] UNSUBSCRIBE
+
+## Bitmap
+
+- [✅] BITCOUNT
+- [✅] BITFIELD
+- [✅] BITFIELD_RO
+- [✅] BITOP
+- [✅] BITPOS
+- [ ] GETBIT
+- [ ] SETBIT
+
 ## Transactions
 
 - [✅] DISCARD
@@ -153,16 +172,6 @@ title: EloqKV Redis Command Compatibility
 - [✅] SCRIPT FLUSH
 - [ ] SCRIPT KILL
 - [✅] SCRIPT LOAD
-
-## Bitmap
-
-- [✅] BITCOUNT
-- [ ] BITFIELD
-- [ ] BITFIELD_RO
-- [ ] BITOP
-- [ ] BITPOS
-- [ ] GETBIT
-- [ ] SETBIT
 
 ## Connection
 
@@ -215,12 +224,3 @@ title: EloqKV Redis Command Compatibility
 - [ ] TYPE
 - [ ] UNLINK
 - [ ] WAIT
-
-## Pub/Sub
-
-- [ ] PSUBSCRIBE
-- [ ] PUBLISH
-- [ ] PUBSUB
-- [ ] PUNSUBSCRIBE
-- [ ] SUBSCRIBE
-- [ ] UNSUBSCRIBE

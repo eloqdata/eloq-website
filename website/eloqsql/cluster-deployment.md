@@ -42,75 +42,68 @@ The `Eloq_waiter` tool can realize the installation and deployment on multiple s
 - Create and start the cluster
   According to the following configuration template, edit the configuration file deployment.yaml as you need, where:
 
-  - `product: "Redis"`: This can be set as Eloq or Redis
-  - `username: "centos"`: The management of the cluster is done through the `centos` system user (the current system user name), port 22 is used to log in to the target machine via ssh
-  - `auth_type`: The way of ssh login verification, the default is keypair
-  - `keypair`: Set as the location of the ssh private key, note that this ssh key must have access to multiple servers
-  - `host`: Set as the actual IP address of multiple servers
-  - `install_image`: Can be set to the downloaded Eloq installation package locally or the download address of the remote EloqSQL
-  - `install_dir`: Set to the desired storage location for the user to install the cluster. This location must be the folder location with read and write permissions for the user specified by `username`. If the installation directory does not exist, it needs to be manually created in advance.
-  - `storage_service`: Configure the remote download URL `download_url` of the `Cassandra` database, the installation location `(host)`, if configured as `127.0.0.1`, it means that the installation is locally.
-  - `monitor`: Configure the remote download URL, installation location and installation port of EloqSQL’s related monitoring software (prometheus, grafana).
+  - `install_dir`: Set to the desired storage location for the user to install the cluster.
+  - `log_service`: Configure log service nodes. You can deploy separate log server per disk.
+  - `tx_service`: Configure tx service nodes.
+  - `storage_service`: Configure the kv storage nodes. Currently we support Apapche Cassandra.
+  - `monitor`: Configure the prometheus and grafana monitor stack.
     The configuration template is as follows:
 
-    ```yaml
-    connection:
-    username: "centos"
-    auth_type: "keypair"
-    auth:
-        keypair: "~/xx.pem"
-    deployment:
-    product: "Eloq"
-    version: "0.3.3"
-    cluster_name: "mono_cloud"
-    install_dir: "/home/centos"
-    port:
-        mysql_port: 3300
-        eloq_port:
-        start: 8100
-        end: 8200
-    mono_service:
-        host:
-        - 10.0.1.1
-        - 10.0.1.2
-        - 10.0.1.3
-        - 10.0.1.4
-    storage_service:
-        cassandra:
-        download_url: "https://archive.apache.org/dist/cassandra/4.1.0/apache-cassandra-4.1.0-bin.tar.gz"
-        storage_cluster: "mono-cass-cluster"
-        host:
-        - 10.0.1.1
-        - 10.0.1.2
-        - 10.0.1.3
-        - 10.0.1.4
-    monitor:
-        data_dir: ""
-        eloq_metrics:
-        path: "/mono_metrics"
-        port: 18081
-        prometheus:
-        download_url: "https://github.com/prometheus/prometheus/releases/download/v2.42.0/prometheus-2.42.0.linux-amd64.tar.gz"
-        port: 9090
-        host: "10.0.1.1"
-        grafana:
-        download_url: "https://dl.grafana.com/oss/release/grafana-9.3.6.linux-amd64.tar.gz"
-        port: 3300
-        host: "10.0.1.1"
-        node_exporter: "https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_exporter-1.5.0.linux-amd64.tar.gz"
-        node_exporter_port: 9200
-        mysql_exporter: "https://github.com/prometheus/mysqld_exporter/releases/download/v0.14.0/mysqld_exporter-0.14.0.linux-amd64.tar.gz"
-        mysql_exporter_port: 9300
-        cassandra_collector:
-        mcac_agent: "https://github.com/datastax/metric-collector-for-apache-cassandra/releases/download/v0.3.4/datastax-mcac-agent-0.3.4-4.1-beta1.tar.gz"
-        mcac_port: 9103
-
-    #    dynamodb:
-    #      access_key_id: "",
-    #      secret_key: ""
-    #      region: "XXXX",
-    #      endpoint: "";
-    ```
+```yaml
+connection:
+  username: '$USER'
+  auth_type: 'keypair'
+  auth:
+    keypair: '/home/$USER/.ssh/id_rsa'
+deployment:
+  cluster_name: 'eloqsql-cluster'
+  product: 'EloqSQL'
+  version: 'latest'
+  install_dir: '/home/$USER/eloq'
+  log_service:
+    nodes:
+      - host: 10.0.1.2
+        port: 9000
+        data_dir:
+          - '/data1/eloq/disk_wal_sql'
+      - host: 10.0.1.2
+        port: 9001
+        data_dir:
+          - '/data2/eloq/disk_wal_sql'
+    replica: 1
+  tx_service:
+    host: [10.0.1.1]
+    port: 8000
+    client_port: 3316
+  storage_service:
+    cassandra:
+      host: [10.0.1.3]
+      kind: !Internal
+        download_url: 'https://d143xau9fe26d8.cloudfront.net/others/apache-cassandra-4.1.3-bin.tar.gz'
+        storage_cluster: 'eloqsql-cluster'
+  monitor:
+    data_dir: ''
+    monograph_metrics:
+      path: '/mono_metrics'
+      port: 18081
+    prometheus:
+      download_url: 'https://d143xau9fe26d8.cloudfront.net/others/prometheus-2.42.0.linux-amd64.tar.gz'
+      port: 9500
+      host: 10.0.1.3
+    grafana:
+      download_url: 'https://d143xau9fe26d8.cloudfront.net/others/grafana-9.3.6.linux-amd64.tar.gz'
+      port: 3301
+      host: 10.0.1.3
+    node_exporter:
+      url: 'https://d143xau9fe26d8.cloudfront.net/others/node_exporter-1.5.0.linux-amd64.tar.gz'
+      port: 9200
+    mysql_exporter:
+      url: 'https://d143xau9fe26d8.cloudfront.net/others/mysqld_exporter-0.14.0.linux-amd64.tar.gz'
+      port: 9300
+    cassandra_collector:
+      mcac_agent: 'https://d143xau9fe26d8.cloudfront.net/others/datastax-mcac-agent-0.3.4-4.1-beta1.tar.gz'
+      mcac_port: 9103
+```
 
 > **Note:**
 > The deployment.yaml file above is the default configuration file, and users can configure the software to be installed as needed. For some software that does not need to be installed, it only needs to be deleted from the configuration file.
@@ -118,11 +111,5 @@ The `Eloq_waiter` tool can realize the installation and deployment on multiple s
 - Launch cluster
 
   ```shell
-  cluster_mgr launch --topology-file ${PWD}/config/deployment.yaml
+  cluster_mgr launch .eloqwaiter/config/examples/eloqsql_cassandra.yaml
   ```
-
-## See also
-
-- If you have just deployed a set of EloqSQL local test clusters:
-  - Learn [EloqSQL SQL Operations](./basic-sql-operations.md)
-  - [Migrate data to EloqSQL](./migration-overview.md)

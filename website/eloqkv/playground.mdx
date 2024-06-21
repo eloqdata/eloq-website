@@ -1,8 +1,11 @@
 ---
-title: Deploy EloqKV on Local Machine
+title: Deploy EloqKV With Tarball
 ---
 
-# Table of Contents
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+# Table of Contentss
 
 1. [Deploy Using Tarball](#deploy-using-tarball)
 2. [Deploy Using Cluster_mgr](#deploy-using-cluster_mgr)
@@ -14,11 +17,46 @@ title: Deploy EloqKV on Local Machine
 
 Eloqkv is compatible with CentOS 7, CentOS 8, Ubuntu 18.04, and Ubuntu 20.04. The following example details the process for CentOS 7.
 
+<Tabs
+  groupId="language"
+  defaultValue="centos7"
+  values={[
+    { label: 'Rhel7', value: 'centos7', },
+    { label: 'Rhel8', value: 'centos8', },
+    { label: 'Ubuntu20.04', value: 'ubuntu2004', }
+  ]
+}>
+<TabItem value="centos7">
+
 ```shell
 wget https://d143xau9fe26d8.cloudfront.net/eloqkv/centos7/rocksdb/eloqkv-latest-amd64.tar.gz
 mkdir /home/centos/eloqkv
 tar -zxvf eloqkv-latest-amd64.tar.gz -C /home/centos/eloqkv
 ```
+
+</TabItem>
+
+<TabItem value="centos8">
+
+```shell
+wget https://d143xau9fe26d8.cloudfront.net/eloqkv/centos8/rocksdb/eloqkv-latest-amd64.tar.gz
+mkdir /home/centos/eloqkv
+tar -zxvf eloqkv-latest-amd64.tar.gz -C /home/centos/eloqkv
+```
+
+</TabItem>
+
+<TabItem value="ubuntu2004">
+
+```shell
+wget https://d143xau9fe26d8.cloudfront.net/eloqkv/ubuntu2004/rocksdb/eloqkv-latest-amd64.tar.gz
+mkdir /home/centos/eloqkv
+tar -zxvf eloqkv-latest-amd64.tar.gz -C /home/centos/eloqkv
+```
+
+</TabItem>
+
+</Tabs>
 
 ### Prepare EloqKV config file
 

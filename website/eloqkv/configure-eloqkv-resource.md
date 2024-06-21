@@ -1,5 +1,5 @@
 ---
-title: Configure an EloqKV Cluster on AWS EKS
+title: Configure EloqKV Cluster
 summary: How to configure EloqKV resources.
 ---
 
@@ -124,6 +124,7 @@ The cluster name can be configured by changing **`metadata.name`** in the EloqDB
 
 If you wish to run the database on a machine with a specific specification, you can modify it in the following way.
 The Following configuration snippet applies to both Tx and Log. Both: **`spec.tx.schedulePolicy`** and **`spec.log.schedulePolicy`**.
+
 ```yaml
 schedulePolicy:
   policyType: preferred
@@ -139,15 +140,16 @@ schedulePolicy:
 ### Modify Configuration
 
 eloq-operator provides the default configuration for the database. To change the default configuration, please modify the `spec.frontend`:
+
 ```yaml
-  frontend:
-    module: "eloqkv"
-    port: 6379
-    config:
-      operation: upsert
-      rawConfig: |
-        [local]
-        skip_wal=false
+frontend:
+  module: 'eloqkv'
+  port: 6379
+  config:
+    operation: upsert
+    rawConfig: |
+      [local]
+      skip_wal=false
 ```
 
 If you configure items that are not recognized by the database, they are ignored.

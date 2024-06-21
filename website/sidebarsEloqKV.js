@@ -15,13 +15,20 @@
 const sidebars = {
   // By default, Docusaurus generates a sidebar from the docs folder structure
   eloqkv: {
-    'Quick Start': [
-      'introduction',
-      'playground',
-      'cluster-deployment',
-      'eks-deployment',
-      'deployment-eloq-kv-aws-eks',
-      'configure-eloqkv-resource',
+    Introduction: ['introduction'],
+    'Get Started': [
+      'prerequisite',
+      'install-from-binary',
+      'quick-start',
+      {
+        type: 'category',
+        label: 'Deploy on AWS EKS',
+        items: [
+          'eks-deployment',
+          'deployment-eloq-kv-aws-eks',
+          'configure-eloqkv-resource',
+        ],
+      },
     ],
     'Redis Comaptibility': ['kvstore_compatibility'],
     'Command Reference': [
