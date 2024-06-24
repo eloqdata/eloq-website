@@ -24,7 +24,7 @@ const sidebars = {
       'quick-start',
       'cluster-deployment',
     ],
-    'Data Migration': ['data-migration/debezium'],
+    'Data Migration': ['data-migration/debezium', 'data-migration/dm'],
     'Data Query': ['data-query/simple-query', 'data-query/advance-query'],
     'Mysql Compatibility': ['mysql-compatibility', 'difference_with_mysql'],
     'SQL Reference': [

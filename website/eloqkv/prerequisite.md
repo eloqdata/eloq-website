@@ -9,6 +9,7 @@ summary: Learn how to quickly get started with the EloqSQL database.
 
 Below are some necessary configurations to be made before installing EloqKV
 
+- Ensure your system is connected to the network and can update its package repositories using `yum update` or `apt update`.
 - Edit the system configuration file `/etc/security/limits.conf or /etc/security/limits.d/20-nproc.conf` using the following command
   ```shell
   sudo vi /etc/security/limits.conf
@@ -19,6 +20,22 @@ Below are some necessary configurations to be made before installing EloqKV
   * hard nofile 524288
   * hard core unlimited
   * soft core unlimited
+  ```
+- Create a user with sudo privilege.
+  ```shell
+  sudo adduser newuser
+  sudo usermod -aG wheel newuser
+  sudo visudo
+  newuser ALL=(ALL) NOPASSWD: ALL
+  ```
+- Ensure DNS server is configured in `/etc/resolv.conf`.
+- Ensure hostname is configured.
+  ```shell
+  sudo hostnamectl set-hostname my_hostname
+  ```
+  Edit /etc/hosts
+  ```shell
+  my_ip my_hostname
   ```
 - Use the following command to edit the configuration file `/etc/sysctl.conf`
   ```shell
@@ -44,7 +61,16 @@ Below are some necessary configurations to be made before installing EloqKV
   ```shell
   sudo chown -R $USER:$USER /var/crash
   ```
-- login the session for the above changes to take effect, then log in again
+- Configure ssh service in `/etc/ssh/sshd_config`.
+  ```shell
+  PubkeyAuthentication yes
+  AuthorizedKeysFile .ssh/authorized_keys
+  ```
+  Restart ssh service
+  ```shell
+  sudo systemctl restart sshd
+  ```
+- Login the session for the above changes to take effect, then log in again
 
   ```shell
   log out
