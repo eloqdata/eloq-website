@@ -47,7 +47,7 @@ plt.figure(figsize=(12, 7))
 
 #plt.bar([i - 3*bar_width/2 for i in index], qps_s, bar_width, color=color_s, label='NewSQL 16*3')
 plt.bar([i - bar_width for i in index], qps_m, bar_width, color=color_m, label='NewSQL-X 32c*3')
-plt.bar([i  for i in index], qps_l, bar_width, color=color_l, label='MonographSQL 32c*3 log*3')  # Adjust bar positions
+plt.bar([i  for i in index], qps_l, bar_width, color=color_l, label='MonographSQL 32c*3 log*1')  # Adjust bar positions
 plt.bar([i + bar_width for i in index], qps_x, bar_width, color=color_x, label='MonographSQL 32c*3 log*3')  # Adjust bar positions
 
 plt.xlabel('Thread Num', fontsize=12, fontweight='bold')
