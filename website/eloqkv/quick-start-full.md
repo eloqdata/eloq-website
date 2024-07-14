@@ -15,7 +15,11 @@ Please follow [Prerequisite Document ](https://eloqdata.com/eloqkv/prerequisite)
 
 `cluster_mgr` is a command-line tool designed to manage and operate EloqKV clusters.
 
-Please contact us to acquire the latest `cluster_mgr` install tool.
+Download and install the `cluster_mgr` tool using a single command line instruction.
+
+```shell
+curl --proto '=https' --tlsv1.2 -sSf https://www.eloqdata.com/download/mono-waiter/install.sh | sh
+```
 
 `cluster_mgr` will be installed in the `$HOME/.eloqwaiter` directory. Additionally, the `CLUSTER_MGR_HOME` environment variable will be set to `$HOME/.eloqwaiter`.
 

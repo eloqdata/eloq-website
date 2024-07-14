@@ -209,10 +209,6 @@ module.exports = {
                 to: '/product_eloqkv',
               },
               {
-                label: 'EloqSQL',
-                to: '/product_eloqsql',
-              },
-              {
                 label: 'MonoSQL',
                 to: '/product_monosql',
               },
@@ -227,13 +223,7 @@ module.exports = {
                 label: 'EloqKV',
                 type: 'doc',
                 docsPluginId: 'eloqkv',
-                docId: 'introduction',
-              },
-              {
-                label: 'EloqSQL',
-                type: 'doc',
-                docsPluginId: 'eloqsql',
-                docId: 'introduction',
+                docId: 'install-from-binary',
               },
               {
                 label: 'MonoSQL',
