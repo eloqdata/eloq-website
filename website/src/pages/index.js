@@ -14,6 +14,16 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 import Layout from '@theme/Layout';
+import './FeatureSection.css';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {
+  faBolt,
+  faDollarSign,
+  faExpandArrowsAlt,
+  faCheckCircle,
+  faExchangeAlt,
+  faRedoAlt,
+} from '@fortawesome/free-solid-svg-icons';
 
 const textContent = {
   intro: `
@@ -557,6 +567,57 @@ const useHomePageAnimations = () => {
   useEffect(() => setupDissectionAnimation(), []);
 };
 
+const features = [
+  {
+    icon: faBolt,
+    title: 'High Performance',
+    details: [
+      "Matches the best-in-class in-memory data stores's performance when data fit in memory and persistency is turned off",
+      'Outperforms other persistent KV store when redo log is turned on',
+    ],
+  },
+  {
+    icon: faDollarSign,
+    title: 'Low Cost',
+    details: [
+      'Take advantage of fast SSDs to store data that far exceeds the main memory capacity',
+      'Auto spill cold data to disks to save cost, while sustaining low latency for hot data',
+    ],
+  },
+  {
+    icon: faExpandArrowsAlt,
+    title: 'Scalable',
+    details: [
+      'Scale-up with multi-cores, and scale-out with multiple nodes in a cluster',
+      'Support dynamically scale up or scale down as workload changes, without causing service disruption (currently in Beta)',
+    ],
+  },
+  {
+    icon: faCheckCircle,
+    title: 'Highly Available',
+    details: [
+      'Replicate data to multiple servers and provide fault-tolerance',
+      'Support hot standbys so that failure can be recovered in sub-seconds (currently in Beta)',
+    ],
+  },
+  {
+    icon: faExchangeAlt,
+    title: 'Transactional',
+    details: [
+      'Transactional distributed KV store with full ACID properties',
+      'Redis Transaction commands are supported in single node mode, as well as in cluster mode',
+    ],
+  },
+  {
+    icon: faRedoAlt,
+    title: 'Redis Compatible API',
+    details: [
+      'Implement the popular Redis API',
+      'Applications can be easily migrated and immediately enjoy the rich features and cost benefits',
+    ],
+  },
+];
+
 const Index = () => {
   return (
     <Layout
@@ -597,6 +658,19 @@ const Index = () => {
       </div>
 
       <GetStarted />
+      <div className="feature-section">
+        {features.map((feature, index) => (
+          <div className="feature-card" key={index}>
+            <FontAwesomeIcon icon={feature.icon} className="feature-icon" />
+            <h3>{feature.title}</h3>
+            <ul>
+              {feature.details.map((detail, i) => (
+                <li key={i}>{detail}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
     </Layout>
   );
 };
