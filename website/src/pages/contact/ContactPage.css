@@ -1,0 +1,130 @@
+.contact-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+  color: #ccc; /* Light gray text for general content */
+  /*background-color: #000; /* Black background */
+}
+
+.top-description {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.top-description h1 {
+  font-size: 4em;
+  margin-bottom: 10px;
+  /*color: #fff; /* White color for the heading */
+  color: rgb(120, 200, 244);
+}
+
+.top-description p {
+  font-size: 1.5em;
+  margin: 0;
+  color: #ccc; /* Light gray for the paragraph text */
+}
+
+.content {
+  display: flex;
+  gap: 40px;
+}
+
+.info-panel {
+  flex: 1;
+  padding-right: 20px;
+  border-right: 1px solid #333; /* Dark gray for the border */
+}
+
+.info-section {
+  margin-bottom: 40px;
+  /*background-color: #000; /* Black background */
+}
+
+.info-section h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.info-section p {
+  font-size: 1.5em;
+  line-height: 1.5;
+  color: #ccc; /* Light gray for the paragraph text */
+}
+
+.form-panel {
+  flex: 2;
+  padding-left: 20px;
+  max-width: 600px;
+  width: 100%;
+  //background-color: #000; /* Black background */
+}
+
+.form-panel h2 {
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  color: #fff; /* White color for the form heading */
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-form label {
+  font-size: 1em;
+  margin-bottom: 10px;
+  display: block;
+  color: #ccc; /* Light gray for label text */
+  font-weight: bold; /* Bold text for labels */
+  position: relative; /* For positioning the star */
+}
+
+.contact-form label.required::before {
+  content: "*";
+  color: red;
+  position: absolute;
+  left: -15px; /* Adjust position as needed */
+  top: 0;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  border: 1px solid #333; /* Dark gray for input borders */
+  border-radius: 5px;
+  font-size: 1em;
+  background-color: #222; /* Dark background for input fields */
+  color: #fff; /* White text for input fields */
+}
+
+.contact-form button {
+  padding: 10px 20px;
+  /*background-color: #007bff;*/
+  background-color: rgb(120, 200, 244);
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  align-self: center; /* Center the button */
+  width: 150px; /* Set the button width */
+}
+
+.contact-form button:hover {
+  background-color: #0056b3;
+}
+
+/* New CSS class for red hyperlink */
+.red-link {
+  color: rgb(120, 200, 244);
+  text-decoration: none;
+}
+
+.red-link:hover {
+  text-decoration: underline;
+}
