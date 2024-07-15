@@ -1,3 +1,15 @@
+.contact-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 40px 20px;
+  background-image: url("../../../static/img/eloqsql_website_bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 .contact-page {
   max-width: 1200px;
   margin: 0 auto;
@@ -76,7 +88,7 @@
   font-size: 1em;
   margin-bottom: 10px;
   display: block;
-  color: #ccc; /* Light gray for label text */
+  color: #fff; /* Light gray for label text */
   font-weight: bold; /* Bold text for labels */
   position: relative; /* For positioning the star */
 }
