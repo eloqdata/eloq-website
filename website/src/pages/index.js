@@ -556,7 +556,7 @@ function GetStarted() {
   return (
     <Section className="GetStarted" background="black">
       <div className="content">
-        <h2 className="Heading">Coming Soon</h2>
+        <h2 className="Heading">Try Our Cutting-Edge Products</h2>
       </div>
     </Section>
   );
@@ -658,6 +658,27 @@ const Index = () => {
       </div>
 
       <GetStarted />
+      <div class="container2 container-with-separator">
+        <div class="product-left-column">
+          <p className="taglineproduct">
+            <a href="https://www.eloquentdb.com/product_eloqkv">EloqKV</a>
+          </p>
+          <p className="taglineproductdetail">
+            A distributed transactional store powered by Data Substrate. Cache
+            performance with lower cost and strong durability.
+          </p>
+        </div>
+        <div class="product-right-column">
+          <img
+            alt=""
+            src={useBaseUrl('img/Redis_Clients.svg')}
+            type="image/svg+xml"
+            width="800"
+            heigh="auto"
+          />
+        </div>
+      </div>
+
       <div className="feature-section">
         {features.map((feature, index) => (
           <div className="feature-card" key={index}>
