@@ -17,6 +17,7 @@ const sidebars = {
   eloqkv: {
     Introduction: ['introduction'],
     'Get Started': [
+      'docker-deploy',
       'prerequisite',
       'install-from-binary',
       'quick-start',
