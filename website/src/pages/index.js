@@ -572,32 +572,24 @@ const features = [
     icon: faBolt,
     title: 'High Performance',
     details: [
-      "Matches the best-in-class in-memory data stores's performance when data fit in memory and persistency is turned off",
-      'Outperforms other persistent KV store when redo log is turned on',
+      "Match the best-in-class in-memory data stores when data fit in memory and persistency is turned off",
+      'Outperform other persistent KV stores when logging is turned on',
     ],
   },
   {
     icon: faDollarSign,
     title: 'Low Cost',
     details: [
-      'Take advantage of fast SSDs to store data that far exceeds the main memory capacity',
+      'Take advantage of fast SSDs to store data that exceeds main memory capacity',
       'Auto spill cold data to disks to save cost, while sustaining low latency for hot data',
     ],
   },
   {
     icon: faExpandArrowsAlt,
-    title: 'Scalable',
+    title: 'Scalable and Elastic',
     details: [
       'Scale-up with multi-cores, and scale-out with multiple nodes in a cluster',
-      'Support dynamically scale up or scale down as workload changes, without causing service disruption (currently in Beta)',
-    ],
-  },
-  {
-    icon: faCheckCircle,
-    title: 'Highly Available',
-    details: [
-      'Replicate data to multiple servers and provide fault-tolerance',
-      'Support hot standbys so that failure can be recovered in sub-seconds (currently in Beta)',
+      'Support dynamically scale up or scale down as workload changes, without service disruption (currently in Beta)',
     ],
   },
   {
@@ -605,7 +597,15 @@ const features = [
     title: 'Transactional',
     details: [
       'Transactional distributed KV store with full ACID properties',
-      'Redis Transaction commands are supported in single node mode, as well as in cluster mode',
+      'Redis transaction commands are supported in single node mode and cluster mode with the same semantics',
+    ],
+  },
+  {
+    icon: faCheckCircle,
+    title: 'Highly Available',
+    details: [
+      'Replicate data to multiple servers to provide fault-tolerance',
+      'Support hot standbys so that failure can be recovered in sub-seconds (currently in Beta)',
     ],
   },
   {
@@ -624,7 +624,7 @@ const Index = () => {
       description="A framework for building native apps using React"
       wrapperClassName="homepage">
       <Head>
-        <title>EloquentDB · Modular Database</title>
+        <title>EloqData · Modular Database</title>
         <meta property="og:title" content="EloqDB · Modular Database" />
         <meta property="twitter:title" content="EloqDB · Modular Database" />
       </Head>
@@ -633,14 +633,19 @@ const Index = () => {
         <div class="product-left-column">
           <h1 className="title">EloqKV</h1>
           <p className="tagline">
-            High-performance, distributed, transactional key-value store that is
-            compatible with the Redis protocol.
+            The Revolutionary No-Compromise High-performance, Distributed and Transactional Key-Value Database.
           </p>
           <p className="taglinecolor">
-            <Typed strings={['- Transactional Store']} typeSpeed={75} />
+            <Typed strings={['- High Performance']} typeSpeed={75} />
           </p>
           <p className="taglinecolor">
-            <Typed strings={['- Layered Storage']} typeSpeed={75} />
+            <Typed strings={['- Transactional']} typeSpeed={75} />
+          </p>
+          <p className="taglinecolor">
+            <Typed strings={['- Scalable and Elastic']} typeSpeed={75} />
+          </p>
+          <p className="taglinecolor">
+            <Typed strings={['- Cloud Native']} typeSpeed={75} />
           </p>
           <div className="buttons">
             <HomeCallToAction />
