@@ -221,9 +221,11 @@
 .GetStarted .Heading {
   //color: rgb(0, 221, 255);
   //color: rgb(120, 209, 247);
-  color: rgb(120, 200, 244);
+  //color: rgb(120, 200, 244);
+  color: rgb(222, 67, 31);
   text-align: center;
-  font-size: 40px;
+  //font-size: 40px;
+  font-size: 100px;
 }
 
 .GetStarted .content {
@@ -326,6 +328,7 @@
 
 .HeaderHero .title {
   font-size: 84px;
+  font-family: Geneva;
   color: var(--brand);
   line-height: 1;
   margin-top: 0;
@@ -908,6 +911,9 @@ html[data-theme="dark"] .Section p a {
   padding-bottom: 20px;
   margin: 0;
   font-weight: 500;
+  //font-family: Optima;
+  //font-family: Garamond;
+  font-family: "Noto Sans CJK SC", cursive;
 }
 
 .product-left-column .taglineproduct {
@@ -942,6 +948,7 @@ html[data-theme="dark"] .Section p a {
   transition: opacity 10s ease-in-out;
   /* Delay for opacity changes */
   padding-bottom: 40px;
+  font-family: "Akzidenz-Grotesk BQ", cursive;
   margin: 0;
 }
 
