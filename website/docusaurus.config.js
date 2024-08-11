@@ -223,7 +223,7 @@ module.exports = {
                 docId: 'install-from-binary',
               },
               {
-                label: 'Deploy',
+                label: 'Deploy Cluster',
                 type: 'doc',
                 docsPluginId: 'eloqkv',
                 docId: 'quick-start',
