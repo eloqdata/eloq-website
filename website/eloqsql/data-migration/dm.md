@@ -10,8 +10,14 @@ title: Migrate from MySQL to EloqSQL using DM tool
 ## Download DM Tool
 
 ```shell
-wget https://download.eloqdata.com/eloqsql/dm/eloqdm-0.4.1-linux-amd64.tar.gz
-tar -zxvf eloqdm-0.4.1-linux-amd64.tar.gz
+wget https://download.eloqdata.com/eloqsql/dm/eloqdm-0.4.3-linux-amd64.tar.gz
+tar -zxvf eloqdm-0.4.3-linux-amd64.tar.gz
+```
+
+Optionally, download the eloqdm-helper tool to migrate tables one by one.
+
+```shell
+wget https://download.eloqdata.com/eloqsql/dm/eloqdm-helper.tar.gz
 ```
 
 ## Quick Start

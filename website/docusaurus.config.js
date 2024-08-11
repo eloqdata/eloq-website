@@ -24,13 +24,13 @@ const isDeployPreview = process.env.PREVIEW_DEPLOY === 'true';
 
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
-  title: 'EloqDB: Next Generation Multi-model Database',
+  title: 'EloqData: Next Generation Multi-model Database',
   tagline:
     'Data Substrate powered modular database which enables vertical and horizontal expanding of the decoupled components: compute, memory, storage and log separately.',
   organizationName: 'Eloqdb',
-  projectName: 'EloqDB',
-  url: 'https://www.eloqdata.com',
-  baseUrl: '/',
+  projectName: 'EloqData',
+  url: 'http://www.eloqdata.com',
+  baseUrl: '/preview',
   clientModules: [
     require.resolve('./modules/snackPlayerInitializer.js'),
     require.resolve('./modules/jumpToFragment.js'),
@@ -192,10 +192,11 @@ module.exports = {
         ],
       },
       navbar: {
-        title: 'EloqDB',
+        title: 'EloqData',
         logo: {
-          src: 'img/eloq_logo.png',
-          alt: 'EloqDB',
+          src: 'img/eloqdata_logo.png',
+          alt: 'EloqData',
+          style: {width: '150px', height: 'auto'}, // Adjust width as needed
         },
         style: 'dark',
         items: [
@@ -208,10 +209,6 @@ module.exports = {
                 label: 'EloqKV',
                 to: '/product_eloqkv',
               },
-              {
-                label: 'MonoSQL',
-                to: '/product_monosql',
-              },
             ],
           },
           {
@@ -220,15 +217,22 @@ module.exports = {
             href: '#',
             items: [
               {
-                label: 'EloqKV',
+                label: 'Get Started',
                 type: 'doc',
                 docsPluginId: 'eloqkv',
                 docId: 'install-from-binary',
               },
               {
-                label: 'MonoSQL',
+                label: 'Deploy',
                 type: 'doc',
-                docId: 'monosql-introduction',
+                docsPluginId: 'eloqkv',
+                docId: 'quick-start',
+              },
+              {
+                label: 'Command Reference',
+                type: 'doc',
+                docsPluginId: 'eloqkv',
+                docId: 'list/LINDEX',
               },
             ],
           },
@@ -238,8 +242,13 @@ module.exports = {
             position: 'right',
           },
           {
+            to: '/download',
+            label: 'Download',
+            position: 'right',
+          },
+          {
             to: '/contact',
-            label: 'Contact us',
+            label: 'Contact Us',
             position: 'right',
           },
         ],
@@ -277,9 +286,9 @@ module.exports = {
           },
         ],
         logo: {
-          alt: 'EloqDB Logo',
-          src: 'img/eloq_logo.png',
-          href: 'https://www.eloquentdb.com/',
+          alt: 'EloqData Logo',
+          src: 'img/eloqdata_logo.png',
+          href: 'https://www.eloqdata.com/',
         },
         copyright,
       },

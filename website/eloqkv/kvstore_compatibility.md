@@ -221,6 +221,6 @@ title: EloqKV Redis Command Compatibility
 - [✅] SORT
 - [ ] TOUCH
 - [ ] TTL
-- [ ] TYPE
+- [✅] TYPE
 - [ ] UNLINK
 - [ ] WAIT

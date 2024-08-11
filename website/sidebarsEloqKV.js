@@ -15,9 +15,9 @@
 const sidebars = {
   // By default, Docusaurus generates a sidebar from the docs folder structure
   eloqkv: {
-    'Get Started': [
+    'Get Started': ['install-from-binary', 'docker-deploy'],
+    Deploy: [
       'prerequisite',
-      'install-from-binary',
       'quick-start',
       {
         type: 'category',

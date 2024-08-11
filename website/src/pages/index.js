@@ -556,8 +556,8 @@ function GetStarted() {
   return (
     <Section className="GetStarted" background="black">
       <div className="content">
-        <h2 className="Heading">Coming Soon</h2>
-        {/*<h2 className="Heading">Try Our Cutting-Edge Products</h2>*/}
+        {/*<h2 className="Heading">Coming Soon</h2>*/}
+        <h2 className="Heading">Try Our Cutting-Edge Products</h2>
       </div>
     </Section>
   );
@@ -634,8 +634,7 @@ const Index = () => {
         <div class="product-left-column">
           <h1 className="title">EloqKV</h1>
           <p className="tagline">
-            The Revolutionary No-Compromise High-performance, Distributed and
-            Transactional Key-Value Database.
+            The Revolutionary Distributed Key-Value Database.
           </p>
           <p className="taglinecolor">
             <Typed strings={['- High Performance']} typeSpeed={75} />
@@ -664,7 +663,6 @@ const Index = () => {
         </div>
       </div>
       <GetStarted />
-      {/*
       <div class="container2 container-with-separator">
         <div class="product-left-column">
           <p className="taglineproduct">
@@ -698,7 +696,7 @@ const Index = () => {
             </ul>
           </div>
         ))}
-      </div>*/}
+      </div>
     </Layout>
   );
 };

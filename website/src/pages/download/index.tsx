@@ -130,10 +130,28 @@ const ContactPage: React.FC = () => {
                 </select>
 
                 <label htmlFor="kvtype" className="required">
-                  KV Type:
+                  Persistent Storage:
                 </label>
                 <select id="kvtype" name="kvtype" required>
                   <option value="rocksdb">RocksDB</option>
+                </select>
+
+                <label htmlFor="download-reason" className="required">
+                  Which feature of EloqKV interests you the most?
+                </label>
+                <select id="download-reason" name="download-reason" required>
+                  <option value="" disabled selected hidden>
+                    Please select an option
+                  </option>
+                  <option value="pure-cache">
+                    High Performance Distributed Cache
+                  </option>
+                  <option value="persistent-cache">
+                    Cache with Persistent Storage
+                  </option>
+                  <option value="transactional-db">
+                    Transactional Key Value Database
+                  </option>
                 </select>
 
                 <label htmlFor="company">Company:</label>
