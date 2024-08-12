@@ -47,7 +47,7 @@ module.exports = {
     },
     {src: 'https://snack.expo.dev/embed.js', defer: true},
   ],
-  favicon: 'img/eloq_logo.png',
+  favicon: 'img/eloqdata_logo.png',
   titleDelimiter: '·',
   customFields: {
     users,
@@ -201,17 +201,6 @@ module.exports = {
         style: 'dark',
         items: [
           {
-            label: 'Product',
-            type: 'dropdown',
-            position: 'right',
-            items: [
-              {
-                label: 'EloqKV',
-                to: '/product_eloqkv',
-              },
-            ],
-          },
-          {
             label: 'Documentation',
             position: 'right',
             href: '#',
@@ -242,9 +231,19 @@ module.exports = {
             position: 'right',
           },
           {
-            to: '/download',
             label: 'Download',
+            type: 'dropdown',
             position: 'right',
+            items: [
+              {
+                label: 'EloqKV',
+                to: '/download',
+              },
+              {
+                label: 'EloqCtl',
+                to: '/downloadeloqctl',
+              },
+            ],
           },
           {
             to: '/contact',

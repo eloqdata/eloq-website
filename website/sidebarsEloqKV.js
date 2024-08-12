@@ -18,8 +18,11 @@ const sidebars = {
     'EloqKV Introduction': ['introduction'],
     'Get Started': ['install-from-binary', 'docker-deploy'],
     Deploy: [
-      'prerequisite',
       'quick-start',
+      'quick-start-ha',
+      'manage-cluster',
+      'upgrade',
+      'prerequisite',
       {
         type: 'category',
         label: 'Deploy on AWS EKS',
@@ -30,6 +33,7 @@ const sidebars = {
         ],
       },
     ],
+    Monitor: ['monitor'],
     'Redis Comaptibility': ['kvstore_compatibility'],
     'Command Reference': [
       {

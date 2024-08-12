@@ -1,5 +1,5 @@
 ---
-title: Introduction to EloqKV
+title: Announcing EloqKV
 authors: eloq
 date: 2024-08-12
 tags: [Company]
