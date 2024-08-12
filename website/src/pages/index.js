@@ -573,7 +573,7 @@ const features = [
     icon: faBolt,
     title: 'High Performance',
     details: [
-      'Match the best-in-class in-memory data stores when data fit in memory and persistency is turned off',
+      'Match the best in-memory data stores when data fit in memory and persistency is turned off',
       'Outperform other persistent KV stores when logging is turned on',
     ],
   },
@@ -581,24 +581,24 @@ const features = [
     icon: faDollarSign,
     title: 'Low Cost',
     details: [
-      'Take advantage of fast SSDs to store data that exceeds main memory capacity',
-      'Auto spill cold data to disks to save cost, while sustaining low latency for hot data',
+      'Take advantage of fast SSDs to store data that exceeds memory capacity while still allow fast access',
+      'Leverage tiered-storage in the cloud to further reduce cost of storing large amount of historical data',
     ],
   },
   {
     icon: faExpandArrowsAlt,
     title: 'Scalable and Elastic',
     details: [
-      'Scale-up with multi-cores, and scale-out with multiple nodes in a cluster',
-      'Support dynamically scale up or scale down as workload changes, without service disruption (currently in Beta)',
+      'Scale-up with multi-core and multi-socket servers, and scale-out to multiple nodes in a cluster',
+      'Support dynamic scaling as workload changes, without service disruption (currently in Beta)',
     ],
   },
   {
     icon: faExchangeAlt,
-    title: 'Transactional',
+    title: 'Fully ACID',
     details: [
       'Transactional distributed KV store with full ACID properties',
-      'Redis transaction commands are supported in single node mode and cluster mode with the same semantics',
+      'Redis transaction commands are supported in either single node mode or cluster mode with the same semantics',
     ],
   },
   {
@@ -613,8 +613,8 @@ const features = [
     icon: faRedoAlt,
     title: 'Redis Compatible API',
     details: [
-      'Implement the popular Redis API',
-      'Applications can be easily migrated and immediately enjoy the rich features and cost benefits',
+      'Implement the popular Redis API, support most populars data structures',
+      'No code modification needed for applications to enjoy the rich features and cost benefits of EloqKV',
     ],
   },
 ];
@@ -637,16 +637,16 @@ const Index = () => {
             The Revolutionary Distributed Key-Value Database.
           </p>
           <p className="taglinecolor">
-            <Typed strings={['- High Performance']} typeSpeed={75} />
+            <Typed strings={['- High Performance']} typeSpeed={5} />
           </p>
           <p className="taglinecolor">
-            <Typed strings={['- Transactional']} typeSpeed={75} />
+            <Typed strings={['- Full ACID Support']} typeSpeed={10} />
           </p>
           <p className="taglinecolor">
-            <Typed strings={['- Scalable and Elastic']} typeSpeed={75} />
+            <Typed strings={['- Scalable and Elastic']} typeSpeed={8} />
           </p>
           <p className="taglinecolor">
-            <Typed strings={['- Cloud Native']} typeSpeed={75} />
+            <Typed strings={['- Cloud Native']} typeSpeed={3} />
           </p>
           <div className="buttons">
             <HomeCallToAction />
