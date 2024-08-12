@@ -206,6 +206,12 @@ module.exports = {
             href: '#',
             items: [
               {
+                label: 'Introduction',
+                type: 'doc',
+                docsPluginId: 'eloqkv',
+                docId: 'introduction',
+              },
+              {
                 label: 'Get Started',
                 type: 'doc',
                 docsPluginId: 'eloqkv',

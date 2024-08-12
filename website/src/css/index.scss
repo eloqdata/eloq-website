@@ -845,7 +845,7 @@ html[data-theme="dark"] .Section p a {
   padding-left: 80px;
   padding-right: 100px;
   padding-top: 10px;
-  background-image: url("../../static/img/eloqsql_website_bg.png");
+  background-image: url("../../static/img/eloqsql_website_bg.jpg");
   background-size: 100% 100%;
   //padding-bottom: 20px;
   margin-bottom: 60px;
@@ -913,7 +913,7 @@ html[data-theme="dark"] .Section p a {
   font-weight: 500;
   //font-family: Optima;
   //font-family: Garamond;
-  font-family: "Noto Sans CJK SC", cursive;
+  //font-family: "Noto Sans CJK SC", cursive;
 }
 
 .product-left-column .taglineproduct {
@@ -948,7 +948,7 @@ html[data-theme="dark"] .Section p a {
   transition: opacity 10s ease-in-out;
   /* Delay for opacity changes */
   padding-bottom: 40px;
-  font-family: "Akzidenz-Grotesk BQ", cursive;
+  //font-family: "Akzidenz-Grotesk BQ";
   margin: 0;
 }
 

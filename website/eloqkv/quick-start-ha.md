@@ -1,5 +1,5 @@
 ---
-title: Deploy an EloqKV Cluster Using Eloqctl
+title: Deploy a High Available Cluster Using Eloqctl
 summary: Learn how to quickly get started with the EloqKV database.
 ---
 
