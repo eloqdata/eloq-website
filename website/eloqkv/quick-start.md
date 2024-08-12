@@ -16,7 +16,7 @@ EloqKV is compatible with Redhat 8/9 and Ubuntu 20.04/22.04/24.04
 
 Make sure that you have read the following documents:
 
-- [Prerequisite Document](./prerequisite)
+- [Configuration Checklist](./prerequisite)
 
 ## Step 2. Deploy Eloqctl on the control machine
 

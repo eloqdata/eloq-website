@@ -93,7 +93,7 @@ const ContactPage: React.FC = () => {
                 <p>
                   Eloqctl is a cluster operation and maintenance tool for
                   EloqKV, which supports deploying, starting, stopping and
-                  destroying EloqKV cluster. <br />
+                  destroying EloqKV cluster. <br /> <br />
                   We appreciate your email and contact information, but if you
                   prefer not to share it, feel free to proceed without
                   hesitation.

@@ -1,5 +1,5 @@
 ---
-title: Prerequisite of Installing EloqKV
+title: Configuration Checklist
 summary: Learn how to quickly get started with the EloqSQL database.
 ---
 
