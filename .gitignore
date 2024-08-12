@@ -11,3 +11,4 @@ sync-api-docs/extracted.json
 
 scripts/lint-examples/out/
 
+yarn.lock
