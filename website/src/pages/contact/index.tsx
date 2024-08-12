@@ -34,7 +34,7 @@ const ContactPage: React.FC = () => {
                 <p>
                   Feel free to chat with us on{" "}
                   <a
-                    href="https://www.eloqdata.com"
+                    href="https://discord.gg/ERYgSgkB"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="red-link"

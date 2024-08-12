@@ -155,3 +155,40 @@
 .red-link:hover {
   text-decoration: underline;
 }
+
+.form-group {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.help-icon {
+  margin-left: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #007bff;
+}
+
+.help-message {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #555;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  width: 250px;
+  text-align: left;
+  z-index: 1;
+  margin-top: 5px;
+  font-size: 0.9em;
+}
+
+.form-group:hover .help-message {
+  display: block;
+}
+
+.form-group:hover .help-icon {
+  color: #0056b3;
+}

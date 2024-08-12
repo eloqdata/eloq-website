@@ -19,24 +19,19 @@ const ContactPage: React.FC = () => {
   const triggerDownload = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const kvtype = (document.getElementById("kvtype") as HTMLSelectElement)
-      .value;
     const software_version = (
       document.getElementById("software_version") as HTMLSelectElement
     ).value;
     const os_type = (document.getElementById("os_type") as HTMLSelectElement)
       .value;
 
-    const downloadUrl = `https://download.eloqdata.com/eloqkv/${kvtype}/eloqkv-${software_version}-${os_type}-amd64.tar.gz`;
+    const downloadUrl = `https://download.eloqdata.com/eloqctl/install.sh`;
 
     //console.log('Download URL:', downloadUrl); // Debug log to check the URL
 
     const link = document.createElement("a");
     link.href = downloadUrl;
-    link.setAttribute(
-      "download",
-      `eloqkv-${software_version}-${os_type}-amd64.tar.gz`
-    );
+    link.setAttribute("download", `install.sh`);
     //link.download = `eloqkv-${software_version}-${os_type}-amd64.tar.gz`;
 
     document.body.appendChild(link);
@@ -89,15 +84,17 @@ const ContactPage: React.FC = () => {
         <div className="contact-page">
           <div className="top-description">
             <h1>DOWNLOAD</h1>
-            <p>Get Started with EloqKV</p>
+            <p>Deploy EloqKV Using Eloqctl</p>
           </div>
           <div className="content">
             <div className="info-panel">
               <div className="info-section">
-                <h2>Discover EloqKV</h2>
+                <h2>Discover Eloqctl</h2>
                 <p>
-                  Download and explore our state-of-the-art KV store. We
-                  appreciate your email and contact information, but if you
+                  Eloqctl is a cluster operation and maintenance tool for
+                  EloqKV, which supports deploying, starting, stopping and
+                  destroying EloqKV cluster. <br />
+                  We appreciate your email and contact information, but if you
                   prefer not to share it, feel free to proceed without
                   hesitation.
                 </p>
@@ -116,7 +113,6 @@ const ContactPage: React.FC = () => {
                 <select id="os_type" name="os_type" required>
                   <option value="rhel8">RHEL 8</option>
                   <option value="rhel9">RHEL 9</option>
-                  <option value="ubuntu18">Ubuntu 18.04</option>
                   <option value="ubuntu20">Ubuntu 20.04</option>
                   <option value="ubuntu22">Ubuntu 22.04</option>
                   <option value="ubuntu24">Ubuntu 24.04</option>
@@ -126,20 +122,13 @@ const ContactPage: React.FC = () => {
                   Software Version:
                 </label>
                 <select id="software_version" name="software_version" required>
-                  <option value="0.6.3">0.6.3</option>
+                  <option value="0.6.0">0.6.0</option>
                 </select>
 
-                <label htmlFor="kvtype" className="required">
-                  Persistent Storage:
-                </label>
-                <select id="kvtype" name="kvtype" required>
-                  <option value="rocksdb">RocksDB</option>
-                </select>
-
-                <label htmlFor="download-reason" className="required">
+                <label htmlFor="download-reason">
                   Which feature of EloqKV interests you the most?
                 </label>
-                <select id="download-reason" name="download-reason" required>
+                <select id="download-reason" name="download-reason">
                   <option value="" disabled selected hidden>
                     Please select an option
                   </option>

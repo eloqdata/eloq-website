@@ -129,17 +129,27 @@ const ContactPage: React.FC = () => {
                   <option value="0.6.3">0.6.3</option>
                 </select>
 
-                <label htmlFor="kvtype" className="required">
-                  Persistent Storage:
-                </label>
-                <select id="kvtype" name="kvtype" required>
-                  <option value="rocksdb">RocksDB</option>
-                </select>
+                <div className="form-group">
+                  <label htmlFor="kvtype" className="required">
+                    Persistent Storage:
+                    <span className="help-icon" aria-label="Help">
+                      ?
+                    </span>
+                  </label>
+                  <select id="kvtype" name="kvtype" required>
+                    <option value="rocksdb">RocksDB</option>
+                  </select>
+                  <div className="help-message">
+                    EloqKV supports to persist data into persistent storage
+                    asynchrounously. More persistent storage engine will be
+                    supported in future.
+                  </div>
+                </div>
 
-                <label htmlFor="download-reason" className="required">
+                <label htmlFor="download-reason">
                   Which feature of EloqKV interests you the most?
                 </label>
-                <select id="download-reason" name="download-reason" required>
+                <select id="download-reason" name="download-reason">
                   <option value="" disabled selected hidden>
                     Please select an option
                   </option>
