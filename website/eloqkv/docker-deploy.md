@@ -5,7 +5,7 @@ title: Run EloqKV using docker
 Get started with EloqKV using docker:
 
 ```shell
-docker run -p 6379:6379 --name=eloqkv monographdb/demo-eloqkv
+docker run -p 6379:6379 --name=eloqkv eloqdata/eloqkv
 ```
 
 Connect to EloqKV server:
