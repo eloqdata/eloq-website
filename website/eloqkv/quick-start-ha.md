@@ -77,11 +77,11 @@ deployment:
     prometheus:
       download_url: "https://download.eloqdata.com/others/prometheus-2.42.0.linux-amd64.tar.gz"
       port: 9500
-      host: 127.0.0.1
+      host: 10.0.0.7
     grafana:
       download_url: "https://download.eloqdata.com/others/grafana-9.3.6.linux-amd64.tar.gz"
       port: 3301
-      host: 127.0.0.1
+      host: 10.0.0.7
     node_exporter:
       url: "https://download.eloqdata.com/others/node_exporter-1.5.0.linux-amd64.tar.gz"
       port: 9200
@@ -110,6 +110,9 @@ For detailed explanations for each configuration option available in the YAML fi
   _Type_: `List of Strings`
   _Value_: `[10.0.0.4, 10.0.0.5, 10.0.0.6]`
   When deploy EloqKV with Cassandra as persistent storage engine. The compute and storage are fully decoupled. In this example, we deploy Cassandra in three other machines.
+
+- **`monitor`**
+  Prometheus and grafana are installed at separate host 10.0.0.7.
 
 ## Step 4. Run the deployment command
 
