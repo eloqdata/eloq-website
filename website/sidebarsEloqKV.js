@@ -23,15 +23,6 @@ const sidebars = {
       'manage-cluster',
       'upgrade',
       'prerequisite',
-      {
-        type: 'category',
-        label: 'Deploy on AWS EKS',
-        items: [
-          'eks-deployment',
-          'deployment-eloq-kv-aws-eks',
-          'configure-eloqkv-resource',
-        ],
-      },
     ],
     Monitor: ['monitor'],
     'Redis Comaptibility': ['kvstore_compatibility'],
