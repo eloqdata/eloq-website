@@ -9,7 +9,7 @@ In last blog post, we discussed three properties we envision for future database
 
 <!--truncate-->
 
-# Inspiration: Single-Node RDBMS
+## Inspiration: Single-Node RDBMS
 
 Data substrate draws inspirations from the canonical design of single-node relational database management systems (RDBMS). In a simplified form, a RDBMS kernel contains 4 modules: (1) a disk-resident B+-tree to store data items, (2) a write-ahead log to persist data changes, (3) a buffer pool to cache B+-tree pages in memory, and (4) a lock table to coordinate reads and writes for concurrency control.
 
@@ -33,7 +33,7 @@ Though originally designed for transaction processing, the design principles in 
 
 - Consistency and fault tolerance. Asynchrony results in a window between when the data change is visible in cache and when it is flushed to stable storage. To cope with failures, the system maintains an invariant: the data change must be in cache or stable storage or both. The invariant means (1) for cache replacement, the dirty page cannot be evicted unless it is flushed, and (2) for failover, unflushed changes must be recovered in stable storage or cache.
 
-# Data Substrate
+## Data Substrate
 
 Data substrate abstracts the modules of RDBMS to a higher level and extends the design principles to CRUD operations in distributed environments.
 
