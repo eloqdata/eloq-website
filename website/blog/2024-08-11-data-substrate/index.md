@@ -5,13 +5,13 @@ date: 2024-08-11
 tags: [Company]
 ---
 
-In last blog post, we discussed three properties we envision for future databases: optional ACID, fully elastic, hybrid scaling. In this blog post, we introduce the architecture behind EloqKV that realizes our visions. The architecture centers on a transformative concept called “Data Substrate”. Data substrate abstracts core functionality in online transactional databases (OLTP) and provides a unified layer for CRUD operations. A database built on this unified layer is modular: a database module is optional, can be replaced and can scale up/out independent of other modules.
+In this blog post, we introduce the architecture of EloqKV, which centers on a transformative concept called **Data Substrate**. Data substrate abstracts core functionality in online transactional databases (OLTP) and provides a unified layer for CRUD operations. A database built on this unified layer is modular: a database module is optional, can be replaced and can scale up/out independent of other modules.
 
 <!--truncate-->
 
 ## Inspiration: Single-Node RDBMS
 
-Data substrate draws inspirations from the canonical design of single-node relational database management systems (RDBMS). In a simplified form, a RDBMS kernel contains 4 modules: (1) a disk-resident B+-tree to store data items, (2) a write-ahead log to persist data changes, (3) a buffer pool to cache B+-tree pages in memory, and (4) a lock table to coordinate reads and writes for concurrency control.
+Data substrate draws inspirations from the canonical design of single-node relational database management systems (RDBMS). We revisit what RDBMS does and why it is optimal in single-node environments. In a simplified form, a RDBMS kernel contains 4 modules: (1) a disk-resident B+-tree to store data items, (2) a write-ahead log to persist data changes, (3) a buffer pool to cache B+-tree pages in memory, and (4) a lock table to coordinate reads and writes for concurrency control.
 
 <div style={{ width: '600px', textAlign: 'center' }}>
 ![](img/blog_ds_1.png)
