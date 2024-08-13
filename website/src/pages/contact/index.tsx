@@ -21,7 +21,7 @@ const ContactPage: React.FC = () => {
       <div className="contact-page-container">
         <div className="contact-page">
           <div className="top-description">
-            <h1>GETTING IN TOUCH</h1>
+            <h1>We'd Love to Hear from You</h1>
             <p>
               Please reach out to us if you have any questions regarding sales,
               support, or general inquiries!
@@ -41,15 +41,14 @@ const ContactPage: React.FC = () => {
                   >
                     Discord
                   </a>{" "}
-                  for any inquiries, sales, product demos, information, or
-                  support.
+                  for any prodcut questions.
                 </p>
               </div>
               <div className="info-section">
-                <h2>Contact Form</h2>
+                <h2>Fill Form</h2>
                 <p>
-                  For all other inquiries, please fill out this contact form,
-                  and we will get back to you within one business day.
+                  For other questions, please fill out the contact form, and we
+                  will get back to you within one business day.
                 </p>
               </div>
             </div>

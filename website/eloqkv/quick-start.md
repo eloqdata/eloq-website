@@ -1,36 +1,35 @@
 ---
-title: Deploy EloqKV Using Eloqctl
+title: Deploy Single Node Cluster
 summary: Learn how to quickly get started with the EloqKV database.
 ---
 
-# Deploy an EloqKV Cluster Using Eloqctl
+# Deploy a Single Node EloqKV Cluster Using Eloqctl
 
-Eloqctl is a cluster operation and maintenance tool for EloqKV.
-By using Eloqctl, you can easily perform daily database operations, including deploying, starting, stopping, decommisioning and upgrading an EloqKV cluster, and manage EloqKV cluster parameters.
+`eloqctl` is a powerful tool designed for the operation and maintenance of EloqKV clusters. With Eloqctl, you can effortlessly manage daily database tasks, such as deploying, starting, stopping, decommissioning, and upgrading EloqKV clusters, as well as configuring cluster parameters.
 
-Eloqctl supports to deploy EloqKV tx cluster, EloqKV log cluster, persistent storage cluster like Cassandra and the monitoring system. This document introduces how to deploy EloqKV clusters of different topologies.
+`eloqctl` supports the deployment of various cluster types, including EloqKV transactional clusters, EloqKV log clusters, persistent storage clusters like Cassandra, and associated monitoring systems. This document provides guidance on deploying EloqKV cluster on single node.
 
-## Step 1. Prerequisites
+## 1. Prerequisites
 
-EloqKV is compatible with Redhat 8/9 and Ubuntu 20.04/22.04/24.04
+EloqKV is compatible with Red Hat 8/9 and Ubuntu 20.04, 22.04, and 24.04.
 
-Make sure that you have read the following documents:
+Please ensure you've reviewed the following documents:
 
 - [Configuration Checklist](./prerequisite)
 
-## Step 2. Deploy Eloqctl on the control machine
+## 2. Deploy eloqctl on the control machine
 
-1. Download Eloqctl install script for free:
+1. Get your free eloqctl install script here:
 
 - [Eloqctl Install Script](../downloadeloqctl)
 
-2. Install Eloqctl by running the following command:
+2. To install eloqctl, simply run the following command:
 
 ```
 bash install.sh
 ```
 
-If the following message is displayed, you have successfully installed Eloqctl:
+If the following message is displayed, you have successfully installed `eloqctl`:
 
 ```
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
@@ -43,32 +42,34 @@ source /home/ubuntu/.bash_profile
 ===============================================
 ```
 
-This command installs eloqctl in the `$HOME/.eloqctl` folder. The cluster meta data and downloaded components are also placed in this folder.
+This command installs eloqctl in the $HOME/.eloqctl directory, where the cluster metadata and downloaded components are also stored.
 
-Please run `source $HOME/.bash_profile` to add `$HOME/.eloqctl` to the PATH environment variable, so you can use eloqctl directly.
+Please run `source $HOME/.bash_profile` to add `$HOME/.eloqctl` to the PATH environment variable, so you can use `eloqctl` directly.
 
-After installation, you can check the version of eloqctl:
+Once installed, you can verify the `eloqctl` version by running:
 
 ```
 eloqctl --version
 ```
 
+Result:
+
 ```
 eloqctl 0.6.0
 ```
 
-## Step 3. Initialize cluster topology file
+## 3. Initialize the cluster topology file
 
-Example cluster topology files are located at folder `.eloqctl/config/examples/`.
+Example cluster topology files can be found in the `.eloqctl/config/examples/` directory.
 
-You can choose either `eloqkv_rocksdb.yaml` or `eloqkv_cassandra.yaml` to setup your EloqKV cluster. Please refer to [EloqKV Introduction](./introduction) for the difference between Rocksdb and Cassandra persistent storage engine. In the following, we will use RocksDB as an example to illustrate how to setup the cluster topology file.
+You can select either `eloqkv_rocksdb.yaml` or `eloqkv_cassandra.yaml` to set up your EloqKV cluster. For a detailed comparison between the RocksDB and Cassandra storage engines, please refer to the [EloqKV Introduction](./introduction). In the following example, we will demonstrate how to set up the cluster topology file using RocksDB.
 
 ```
 # example yaml file
 .eloqctl/config/examples/eloqkv_rocksdb.yaml
 ```
 
-Run `vi eloqkv_rocksdb.yaml` to see the configuration file content:
+Open the configuration file by running `vi eloqkv_rocksdb.yaml` to view its contents:
 
 ```
 connection:
@@ -111,88 +112,89 @@ deployment:
       port: 9200
 ```
 
-Next we will provide detailed explanations for each configuration option available in the YAML file.
+Next, we'll provide detailed explanations for each configuration option available in the YAML file.
 
-The `connection` section contains the configurations for connecting to EloqKV nodes from the control machine. If you have followed the [Prerequisite Document](./prerequisite), just keep the `connection` section unchanged.
+The `connection` section includes settings for connecting to EloqKV nodes from the control machine. If you followed the steps in the [Prerequisite Document](./prerequisite), you can leave the connection section unchanged.
 
-The `deployment` section contains the configurations for deploying the cluster meta data and three components: transaction cluster, log cluster and persistent storage cluster.
+The `deployment` section covers the configurations for deploying cluster metadata as well as the three key components: the transaction cluster, log cluster, and persistent storage cluster.
 
 - **`cluster_name`**:  
   _Type_: `String`  
   _Default_: `'eloqkv-cluster'`  
-  The name of the cluster being deployed. This is an identifier for the cluster. You can deploy and manage multiple cluster using `eloqctl`.
+  The name of the cluster being deployed serves as an identifier for the cluster. With `eloqctl`, you can deploy and manage multiple clusters, each distinguished by its unique name.
 
 - **`product`**:  
   _Type_: `String`  
   _Default_: `'EloqKV'`  
-  The product name being deployed. This should remain as `'EloqKV'` for current deployment. In future, we will support different kinds of database products.
+  The product name being deployed should be set to `'EloqKV'` for the current deployment. In the future, `eloqctl` will support the deployment of different database products like `EloqSQL` etc..
 
 - **`version`**:  
   _Type_: `String`  
   _Default_: `'latest'`  
-  Specifies the version of the EloqKV to be installed. The `'latest'` value ensures that the most recent version will be used.
+  Specifies the version of EloqKV to be installed. Setting this to `'latest'` ensures that the most recent version is used.
 
 - **`install_dir`**:  
   _Type_: `String`  
   _Default_: `'/home/${USER}'`  
-  Directory where the product will be installed. The `${USER}` placeholder is dynamically replaced by the current user’s home directory.
+  Specifies the directory where the product will be installed. The `${USER}` placeholder dynamically references the current user's home directory.
 
 - **`tx_service.host`**:  
   _Type_: `List of Strings`  
   _Default_: `[127.0.0.1]`  
-  The list of IP addresses for the transaction service hosts. Transaction service is responsible for handling redis client request and is compaitble with Redis Protocol. One IP address can only appear once.
+  The list of IP addresses for the transaction service hosts. The transaction service handles Redis client requests and is compatible with the Redis Protocol. Note that each IP address can only be listed once.
 
 - **`tx_service.client_port`**:  
   _Type_: `Integer`  
   _Default_: `6389`  
-  The port on which the transaction service listens. Redis clients connect to this port. All the transaction service hosts will use this same client_port.
+  Specifies the port on which the transaction service listens. Redis clients connect to this port, and all transaction service hosts will use the same `client_port`.
 
 - **`log_service.nodes`**:  
-  _Type_: `Composite`
-  Specify the log service hosts. You can set zero to many log service nodes. `Zero` means WAL log is coupled with transaction service. In this setting, you should remove `log_service` section entirely. For `non zero` value, log service is decoupled with transaction service. They are standalone process which can be deployed in a new cluster or share the same cluster with transaction service as your need.
+  _Type_: `Composite`  
+  Specify the log service hosts. You can configure anywhere from zero to multiple log service nodes. Setting this to zero indicates that the Write-Ahead Log (WAL) is coupled with the transaction service, in which case you should remove the log_service section entirely. If you specify a non-zero value, the log service is decoupled from the transaction service, running as a standalone process. This can be deployed in a separate cluster or within the same cluster as the transaction service, depending on your requirements.
+
 - **`log_service.nodes.host`**:  
   _Type_: `String`  
   _Default_: `'127.0.0.1'`  
-  The IP address of each log service process runs at.
+  The IP address where each log service process is running.
 
 - **`log_service.nodes.port`**:  
   _Type_: `Integer`  
   _Default_: `9000`  
-  The port of each log service process listens on.
+  The port on which each log service process listens.
 
 - **`log_service.nodes.data_dir`**:  
   _Type_: `Strings`  
   _Default_: `['/home/${USER}/disk_wal_kv']`  
-  The directory of each log service process appends WAL logs. You can specify a separate disk to log service to improve write throughtput.
+  The directory where each log service process stores its WAL logs. You can specify a separate disk for the log service to improve write throughput.
 
 - **`log_service.replica`**:  
   _Type_: `Integer`  
   _Default_: `1`  
-  The number of replicas for the log service. A value of `1` means there is only one replica. For high availablility, set it to 3 or 5. Node that the node number of log service should be greater than replica number.
+  The number of replicas for the log service. A value of 1 means there is only one replica. For high availability, set this to 3 or 5. Note that the number of log service nodes should be greater than the number of replicas.
 
-The `monitor` section contains the configurations for deploying prometheus and grafana based monitor for EloqKV. Monitor is optional. You should remove the `monitor` section if you don't want to have it. Otherwise, set the `prometheus.host` and `grafana.host` to speficy the location of prometheus and grafana, keep other fields unchanged. Note that we don't support to share prometheus and grafana with other software, you should make sure the port of prometheus and grafana is not listened by other processes.
+The `monitor` section contains configurations for deploying a Prometheus and Grafana-based monitoring system for EloqKV. Monitoring is optional; if you do not wish to include it, simply remove the monitor section. If you choose to enable monitoring, set the prometheus.host and grafana.host fields to specify the locations of Prometheus and Grafana, and leave the other fields unchanged. Note that Prometheus and Grafana cannot be shared with other software, so you must ensure that the ports used by Prometheus and Grafana are not occupied by other processes.
 
 - **`monitor.grafana.host`**:
   _Type_: `String`  
   _Default_: `'127.0.0.1'`  
-  The IP address of grafana service runs at.
+  The IP address where grafana service is running.
 
 - **`monitor.grafana.port`**:
   _Type_: `Integer`  
   _Default_: `'3301'`  
-  The port of grafana service listens on.
+  The port on which grafana service listens.
 
 - **`monitor.prometheus.host`**:
   _Type_: `String`  
   _Default_: `'127.0.0.1'`  
-  The IP address of prometheus service runs at.
+  The IP address where prometheus service is running.
 
 - **`monitor.prometheus.host`**:
   _Type_: `Integer`  
   _Default_: `'9500'`  
-  The port of prometheus service listens on.
+  The port on which prometheus service listens.
 
-## Step 4. Run the deployment command
+## 4. Run the deployment command
 
 After you modified the `eloqkv_rocksdb.yaml`. Use the `eloqctl launch` command to provision an EloqKV cluster
 
@@ -200,9 +202,9 @@ After you modified the `eloqkv_rocksdb.yaml`. Use the `eloqctl launch` command t
 eloqctl launch ${HOME}/.eloqctl/config/examples/eloqkv_rocksdb.yaml
 ```
 
-The command will installed the EloqKV componnets in the desired cluster.
+The command will install the EloqKV components in the specified cluster.
 
-If the following message is displayed, you have successfully provisioned an EloqKV cluster:
+If you see the following message, the EloqKV cluster has been successfully provisioned:
 
 ```
 Launch cluster finished, Enjoy!
@@ -212,4 +214,4 @@ Prometheus: http://127.0.0.1:9500
 Grafana: http://127.0.0.1:3301
 ```
 
-Feel free to use eloqkv-cli or other redis client to connect to EloqKV and have fun.
+Feel free to use `eloqkv-cli` or any other Redis client to connect to EloqKV and enjoy exploring its features.

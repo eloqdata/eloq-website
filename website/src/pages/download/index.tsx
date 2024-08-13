@@ -88,7 +88,7 @@ const ContactPage: React.FC = () => {
       <div className="contact-page-container">
         <div className="contact-page">
           <div className="top-description">
-            <h1>DOWNLOAD</h1>
+            <h1>Access Now</h1>
             <p>
               Try EloqKV by downloading the installation tarball for a seamless
               setup experience

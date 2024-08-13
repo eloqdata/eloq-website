@@ -80,9 +80,9 @@ const ContactPage: React.FC = () => {
       <div className="contact-page-container">
         <div className="contact-page">
           <div className="top-description">
-            <h1>DOWNLOAD</h1>
+            <h1>Access Now</h1>
             <p>
-              Simplify the creation of EloqKV cluster with eloqctl, your
+              Simplify the creation of EloqKV cluster with Eloqctl, your
               essential tool for easy cluster management
             </p>
           </div>
