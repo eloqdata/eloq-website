@@ -44,10 +44,9 @@ title: EloqKV Redis Command Compatibility
 - [✅] LSET
 - [✅] LTRIM
 - [✅] RPOP
-- [ ] RPOPLPUSH(deprecated 6.2.0)
+- [✅] RPOPLPUSH(deprecated 6.2.0)
 - [✅] RPUSH
 - [✅] RPUSHX
-- [✅] SORT (Note: The SORT command also works on Lists)
 
 ## Set
 
@@ -118,9 +117,9 @@ title: EloqKV Redis Command Compatibility
 - [✅] MGET
 - [✅] MSET
 - [✅] MSETNX
-- [ ] PSETEX // ttl is not required.
+- [ ] PSETEX //ttl is not supported yet.
 - [✅] SET
-- [✅] SETEX
+- [ ] SETEX //ttl is not supported yet.
 - [✅] SETNX
 - [✅] SETRANGE
 - [✅] STRLEN
@@ -142,8 +141,8 @@ title: EloqKV Redis Command Compatibility
 - [✅] BITFIELD_RO
 - [✅] BITOP
 - [✅] BITPOS
-- [ ] GETBIT
-- [ ] SETBIT
+- [✅] GETBIT
+- [✅] SETBIT
 
 ## Transactions
 
@@ -176,24 +175,8 @@ title: EloqKV Redis Command Compatibility
 ## Connection
 
 - [✅] AUTH
-- [ ] CLIENT CACHING
-- [ ] CLIENT GETNAME
-- [ ] CLIENT ID
-- [ ] CLIENT INFO
-- [ ] CLIENT KILL
-- [ ] CLIENT LIST
-- [ ] CLIENT NO-EVICT
-- [ ] CLIENT NO-TOUCH
-- [ ] CLIENT PAUSE
-- [ ] CLIENT REPLY
-- [ ] CLIENT SETINFO
-- [ ] CLIENT SETNAME
-- [ ] CLIENT TRACKING
-- [ ] CLIENT TRACKINGINFO
-- [ ] CLIENT UNBLOCK
-- [ ] CLIENT UNPAUSE
 - [✅] ECHO
-- [] HELLO
+- [ ] HELLO
 - [✅] PING
 - [ ] QUIT
 - [ ] RESET
@@ -201,10 +184,11 @@ title: EloqKV Redis Command Compatibility
 ## Generic
 
 - [✅] DEL
-- [ ] DUMP
+- [✅] DUMP
 - [✅] EXISTS
 - [ ] EXPIRE
 - [ ] EXPIREAT
+- [✅] INFO
 - [✅] KEYS
 - [ ] MIGRATE
 - [ ] MOVE
@@ -216,8 +200,9 @@ title: EloqKV Redis Command Compatibility
 - [ ] RANDOMKEY
 - [ ] RENAME
 - [ ] RENAMENX
-- [ ] RESTORE
+- [✅] RESTORE
 - [✅] SCAN
+- [✅] SELECT
 - [✅] SORT
 - [ ] TOUCH
 - [ ] TTL
