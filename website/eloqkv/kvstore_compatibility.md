@@ -69,8 +69,6 @@ title: EloqKV Redis Command Compatibility
 
 ## Sorted Set
 
-- [ ] BZPOPMIN
-- [ ] BZPOPMAX
 - [✅] ZADD
 - [✅] ZCARD
 - [✅] ZCOUNT
@@ -102,6 +100,8 @@ title: EloqKV Redis Command Compatibility
 - [✅] ZSCORE
 - [✅] ZUNION
 - [✅] ZUNIONSTORE
+- [✖] BZPOPMIN
+- [✖] BZPOPMAX
 
 ## String
 
@@ -115,13 +115,13 @@ title: EloqKV Redis Command Compatibility
 - [✅] INCR
 - [✅] INCRBY
 - [✅] INCRBYFLOAT
-- [ ] LCS
+- [✖] LCS
 - [✅] MGET
 - [✅] MSET
 - [✅] MSETNX
-- [ ] PSETEX //ttl is not supported yet.
+- [✖] PSETEX //ttl is not supported yet.
 - [✅] SET
-- [ ] SETEX //ttl is not supported yet.
+- [✖] SETEX //ttl is not supported yet.
 - [✅] SETNX
 - [✅] SETRANGE
 - [✅] STRLEN
@@ -157,59 +157,59 @@ title: EloqKV Redis Command Compatibility
 ## Scripting
 
 - [✅] EVAL
-- [ ] EVAL_RO
+- [✖] EVAL_RO
 - [✅] EVALSHA
-- [ ] EVALSHA_RO
-- [ ] FCALL
-- [ ] FCALL_RO
-- [ ] FUNCTION DELETE
-- [ ] FUNCTION DUMP
-- [ ] FUNCTION FLUSH
-- [ ] FUNCTION KILL
-- [ ] FUNCTION LIST
-- [ ] FUNCTION LOAD
-- [ ] FUNCTION RESTORE
-- [ ] FUNCTION STATS
-- [ ] SCRIPT DEBUG
+- [✖] EVALSHA_RO
+- [✖] FCALL
+- [✖] FCALL_RO
+- [✖] FUNCTION DELETE
+- [✖] FUNCTION DUMP
+- [✖] FUNCTION FLUSH
+- [✖] FUNCTION KILL
+- [✖] FUNCTION LIST
+- [✖] FUNCTION LOAD
+- [✖] FUNCTION RESTORE
+- [✖] FUNCTION STATS
+- [✖] SCRIPT DEBUG
 - [✅] SCRIPT EXISTS
 - [✅] SCRIPT FLUSH
-- [ ] SCRIPT KILL
+- [✖] SCRIPT KILL
 - [✅] SCRIPT LOAD
 
 ## Connection
 
 - [✅] AUTH
 - [✅] ECHO
-- [ ] HELLO
+- [✖] HELLO
 - [✅] PING
-- [ ] QUIT
-- [ ] RESET
+- [✖] QUIT
+- [✖] RESET
 
 ## Generic
 
 - [✅] DEL
 - [✅] DUMP
 - [✅] EXISTS
-- [ ] EXPIRE
-- [ ] EXPIREAT
-- [✅] INFO
+- [✖] EXPIRE
+- [✖] EXPIREAT
+- [✖] INFO
 - [✅] KEYS
-- [ ] MIGRATE
-- [ ] MOVE
-- [ ] OBJECT
-- [ ] PERSIST
-- [ ] PEXPIRE
-- [ ] PEXPIREAT
-- [ ] PTTL
-- [ ] RANDOMKEY
-- [ ] RENAME
-- [ ] RENAMENX
+- [✖] MIGRATE
+- [✖] MOVE
+- [✖] OBJECT
+- [✖] PERSIST
+- [✖] PEXPIRE
+- [✖] PEXPIREAT
+- [✖] PTTL
+- [✖] RANDOMKEY
+- [✖] RENAME
+- [✖] RENAMENX
 - [✅] RESTORE
 - [✅] SCAN
 - [✅] SELECT
 - [✅] SORT
-- [ ] TOUCH
-- [ ] TTL
+- [✖] TOUCH
+- [✖] TTL
 - [✅] TYPE
-- [ ] UNLINK
-- [ ] WAIT
+- [✖] UNLINK
+- [✖] WAIT
