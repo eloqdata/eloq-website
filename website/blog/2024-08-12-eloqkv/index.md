@@ -7,9 +7,11 @@ tags: [Company]
 
 It is a great pleasure for us to formally announce **EloqKV**. EloqKV is the first product based on our revolutionary **Data Substrate** technology，which is a brand new architecture to construct high performance, modular, scalable, and transactional databases in the cloud era. We introduced the Data Substrate technology in several previous blog posts:
 
+<!--truncate-->
+
 - [Why We Need a Common Underpinning for Modern Databases](https://link1)
 - [How We End Up With So Many Databases Today](https://link2)
-- [What is Data Substrate, and How Can It Help](../../../2024/08/11/data-substrate)
+- [What is Data Substrate, and How Can It Help](/blog/2024/08/11/data-substrate)
 
 Similar to many existing key-value stores, EloqKV is highly performant, supporting millions of operations per second in a single server node with sub-milisecond latencies. However, by leveraging Data Substrate technology, EloqKV offers some unique properties that makes it stand out compared with other key-value databases.
 
