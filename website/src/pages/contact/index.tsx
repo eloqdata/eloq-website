@@ -21,7 +21,7 @@ const ContactPage: React.FC = () => {
       <div className="contact-page-container">
         <div className="contact-page">
           <div className="top-description">
-            <h1>GETTING IN TOUCH</h1>
+            <h1>We'd Love to Hear from You</h1>
             <p>
               Please reach out to us if you have any questions or suggestions!
             </p>
@@ -43,7 +43,7 @@ const ContactPage: React.FC = () => {
                 </p>
               </div>
               <div className="info-section">
-                <h2>Contact Form</h2>
+                <h2>Fill Form</h2>
                 <p>
                   For any inquiries, please fill out this contact form, or send
                   us an email directly at{" "}

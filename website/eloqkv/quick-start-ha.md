@@ -1,38 +1,41 @@
 ---
-title: Deploy a High Available Cluster
+title: Deploy High Available Cluster
 summary: Learn how to quickly get started with the EloqKV database.
 ---
 
 # Deploy a High Available Cluster Using Eloqctl
 
-Eloqctl is a cluster operation and maintenance tool for EloqKV.
-By using Eloqctl, you can easily perform daily database operations, including deploying, starting, stopping, decommisioning and upgrading an EloqKV cluster, and manage EloqKV cluster parameters.
+`eloqctl` is a powerful tool designed for the operation and maintenance of EloqKV clusters. With Eloqctl, you can effortlessly manage daily database tasks, such as deploying, starting, stopping, decommissioning, and upgrading EloqKV clusters, as well as configuring cluster parameters.
 
-In the previous document, we have learnt how to deploy EloqKV using `eloqctl`. In this document, we will focus on how to deploy a high available cluster.
+In the previous document, we covered how to deploy single node EloqKV cluster using `eloqctl`. In this document, we will focus on deploying a highly available cluster.
 
-## Step 1. Prerequisites
+## 1. Prerequisites
 
-Please follow previous document [Deploy Single Node Cluster](./quick-start)
+Please ensure you've reviewed the following document:
 
-## Step 2. Deploy Eloqctl on the control machine
+- [Configuration Checklist](./prerequisite)
 
-Please follow previous document [Deploy Single Node Cluster](./quick-start)
+## 2. Deploy Eloqctl on the control machine
 
-## Step 3. Initialize cluster topology file
+For step-by-step guidance, please check out the previous document:
 
-Example cluster topology files are located at folder `.eloqctl/config/examples/`.
+- [Deploy Single Node Cluster](./quick-start)
 
-To deploy high available cluster, choose `eloqkv_cassandra.yaml` as default configuration template.
+## 3. Initialize the cluster topology file
+
+Example cluster topology files can be found in the `.eloqctl/config/examples/` directory.
+
+To deploy a highly available cluster, use `eloqkv_cassandra.yaml` as the default configuration template.
 
 ```
 # example yaml file
 .eloqctl/config/examples/eloqkv_cassandra.yaml
 ```
 
-Edit `vi eloqkv_rocksdb.yaml` to enable high availability. It has two folds:
+To enable high availability, edit the `eloqkv_cassandra.yaml` file. High availability is achieved through two key configurations:
 
-1. Log cluster is distributed and replicated.
-2. Cassandra cluster is distibuted and replicated.
+1. The log cluster must be distributed and replicated.
+2. The Cassandra cluster must be distributed and replicated.
 
 ```
 connection:
@@ -90,31 +93,31 @@ deployment:
       mcac_port: 9103
 ```
 
-For detailed explanations for each configuration option available in the YAML file, please refer to previous document [Deploy Single Node Cluster](./quick-start). In this document, we will focus on the high availability part of configuration file.
+For detailed explanations for each configuration option in the YAML file, please refer to the previous document [Deploy Single Node Cluster](./quick-start). In this document, we will focus specifically on the high availability aspects of the configuration file.
 
 - **`tx_service.host`**:  
   _Type_: `List of Strings`  
-  _Value_: `[10.0.0.1, 10.0.0.2, 10.0.0.3]`
-  Transaction cluster is deploy on three nodes: 10.0.0.1, 10.0.0.2, 10.0.0.3. Data are sharded among the three nodes, each node is responsible for a part of data. If one node fails, other nodes will take over the data belong to the failed node and continue to server the client request.
+  _Value_: `[10.0.0.1, 10.0.0.2, 10.0.0.3]`  
+  The transaction cluster is deployed across three nodes: 10.0.0.1, 10.0.0.2, and 10.0.0.3. Data is sharded among these nodes, with each node responsible for a portion of the data. If one node fails, the remaining nodes will take over the data from the failed node and continue to serve client requests seamlessly.
 
 - **`log_service.nodes`**:  
-  _Type_: `Composite`
-  Here we specify three nodes for log service cluster. They are colocate with transaction cluster. You can also use other machines to deploy log service separately.
+  _Type_: `Composite`  
+  Here, we specify three nodes for the log service cluster, which are co-located with the transaction cluster. Alternatively, you can deploy the log service on separate machines if preferred.
 
 - **`log_service.replica`**:  
   _Type_: `Integer`  
   _Value_: `3`  
-  Set the number of replicas for the log service to 3. This enusre each WAL log record will be replicated in three log nodes. The log will not be lost even if one node failure or disk crash.
+  Set the number of replicas for the log service to 3. This ensures that each WAL log record is replicated across three log nodes. With this setup, the logs will be preserved even in the event of a node failure or disk crash.
 
-- **`storage_service.cassandra.host`**:
-  _Type_: `List of Strings`
-  _Value_: `[10.0.0.4, 10.0.0.5, 10.0.0.6]`
-  When deploy EloqKV with Cassandra as persistent storage engine. The compute and storage are fully decoupled. In this example, we deploy Cassandra in three other machines.
+- **`storage_service.cassandra.host`**:  
+  _Type_: `List of Strings`  
+  _Value_: `[10.0.0.4, 10.0.0.5, 10.0.0.6]`  
+  When deploying EloqKV with Cassandra as the persistent storage engine, the compute and storage components are fully decoupled. In this example, Cassandra is deployed on three separate machines.
 
-- **`monitor`**
-  Prometheus and grafana are installed at separate host 10.0.0.7.
+- **`monitor`**  
+  Prometheus and grafana are installed on a separate host at 10.0.0.7.
 
-## Step 4. Run the deployment command
+## 4. Run the deployment command
 
 After you modified the `eloqkv_cassandra.yaml`. Use the `eloqctl launch` command to provision an EloqKV cluster
 
@@ -122,12 +125,12 @@ After you modified the `eloqkv_cassandra.yaml`. Use the `eloqctl launch` command
 eloqctl launch ${HOME}/.eloqctl/config/examples/eloqkv_cassandra.yaml
 ```
 
-The command will installed the EloqKV componnets in the desired cluster.
+The command will installed the EloqKV componnets in the specified cluster.
 
-If the following message is displayed, you have successfully provisioned an EloqKV cluster:
+If you see the following message, the EloqKV cluster has been successfully provisioned:
 
 ```
 Launch cluster finished, Enjoy!
 ```
 
-Feel free to use eloqkv-cli or other redis client to connect to EloqKV and have fun.
+Feel free to use `eloqkv-cli` or any other Redis client to connect to EloqKV and enjoy exploring its features.
