@@ -88,23 +88,31 @@ const ContactPage: React.FC = () => {
       <div className="contact-page-container">
         <div className="contact-page">
           <div className="top-description">
-            <h1>DOWNLOAD</h1>
-            <p>
-              Try EloqKV by downloading the installation tarball for a seamless
-              setup experience
-            </p>
+            <h1>DOWNLOAD EloqKV</h1>
+            <p>Try EloqKV by Downloading a Binary Tarball for Your OS</p>
           </div>
           <div className="content">
             <div className="info-panel">
               <div className="info-section">
                 <h2>Discover EloqKV</h2>
                 <p>
-                  Download and explore our state-of-the-art KV store. To
-                  simplify the deployment of EloqKV cluster, please download{" "}
-                  <a href="/preview/downloadeloqctl">Eloqctl</a>. <br /> <br />
-                  We appreciate your email and contact information, but if you
-                  prefer not to share it, feel free to proceed without
-                  hesitation.
+                  Download a binary tarball to easily explore our groundbreaking
+                  KV database. To get started, follow the{" "}
+                  <a href="/eloqkv/install-from-binary"> Quick Start </a>
+                  guide.
+                  <br />
+                  <br />
+                  If you're interested in a more in-depth experience, we
+                  recommend trying our
+                  <a href="/preview/downloadeloqctl"> EloqCtl </a> tool to
+                  deploy a cluster and take EloqKV for a more serious test
+                  drive.
+                  <br />
+                  <br />
+                  If you'd like to stay informed about the exciting developments
+                  of EloqKV, you can provide your email and contact information.
+                  However, if you prefer not to receive updates, feel free to
+                  continue without any obligations.
                 </p>
               </div>
             </div>
@@ -121,7 +129,6 @@ const ContactPage: React.FC = () => {
                 <select id="os_type" name="os_type" required>
                   <option value="rhel8">RHEL 8</option>
                   <option value="rhel9">RHEL 9</option>
-                  <option value="ubuntu18">Ubuntu 18.04</option>
                   <option value="ubuntu20">Ubuntu 20.04</option>
                   <option value="ubuntu22">Ubuntu 22.04</option>
                   <option value="ubuntu24">Ubuntu 24.04</option>
@@ -145,9 +152,13 @@ const ContactPage: React.FC = () => {
                     <option value="rocksdb">RocksDB</option>
                   </select>
                   <div className="help-message">
-                    EloqKV supports to persist data into persistent storage
-                    asynchrounously. More persistent storage engine will be
-                    supported in future.
+                    EloqKV can store data in a persistent data storage.
+                    Currently, local RocksDB and distributed Cassandra storage
+                    engines are supported.
+                    <br />
+                    <br />
+                    Additional persistent storage engines will be supported in
+                    the future.
                   </div>
                 </div>
 

@@ -80,23 +80,29 @@ const ContactPage: React.FC = () => {
       <div className="contact-page-container">
         <div className="contact-page">
           <div className="top-description">
-            <h1>DOWNLOAD</h1>
+            <h1>DOWNLOAD EloqCtl</h1>
             <p>
-              Simplify the creation of EloqKV cluster with eloqctl, your
-              essential tool for easy cluster management
+              Simplifying the Creation and Management of EloqKV Cluster with
+              EloqCtl
             </p>
           </div>
           <div className="content">
             <div className="info-panel">
               <div className="info-section">
-                <h2>Discover Eloqctl</h2>
+                <h2>Discover EloqCtl</h2>
                 <p>
-                  Eloqctl is a cluster management tool for EloqKV. To experience
-                  EloqKV with tarball, please download{" "}
-                  <a href="/preview/download">EloqKV</a> <br /> <br />
-                  We appreciate your email and contact information, but if you
-                  prefer not to share it, feel free to proceed without
-                  hesitation.
+                  EloqCtl is a cluster management tool for EloqKV. You can use
+                  it to create and manage EloqKV clusters without the need to
+                  download the
+                  <a href="/preview/download"> tarball </a> separately. Just
+                  follow the instructions
+                  <a href="/docs/eloqctl"> here</a>.
+                  <br />
+                  <br />
+                  If you'd like to stay informed about the exciting developments
+                  of EloqKV, you can provide your email and contact information.
+                  However, if you prefer not to receive updates, feel free to
+                  continue without any obligations.
                 </p>
               </div>
             </div>

@@ -23,8 +23,7 @@ const ContactPage: React.FC = () => {
           <div className="top-description">
             <h1>GETTING IN TOUCH</h1>
             <p>
-              Please reach out to us if you have any questions regarding sales,
-              support, or general inquiries!
+              Please reach out to us if you have any questions or suggestions!
             </p>
           </div>
           <div className="content">
@@ -40,16 +39,24 @@ const ContactPage: React.FC = () => {
                     className="red-link"
                   >
                     Discord
-                  </a>{" "}
-                  for any inquiries, sales, product demos, information, or
-                  support.
+                  </a>
                 </p>
               </div>
               <div className="info-section">
                 <h2>Contact Form</h2>
                 <p>
-                  For all other inquiries, please fill out this contact form,
-                  and we will get back to you within one business day.
+                  For any inquiries, please fill out this contact form, or send
+                  us an email directly at{" "}
+                  <a href="mailto:contact@eloqdata.com">
+                    {" "}
+                    contact@eloqdata.com
+                  </a>
+                  . We will get back to you ASAP.
+                  <br />
+                  <br />
+                  If you'd like to stay informed about the exciting developments
+                  of EloqKV, you can also provide your email and contact
+                  information and leave the message box blank.
                 </p>
               </div>
             </div>
@@ -88,7 +95,7 @@ const ContactPage: React.FC = () => {
                     name="company"
                   />
                 </label>
-                <label className="required">
+                <label>
                   Message:
                   <textarea
                     value={message}
