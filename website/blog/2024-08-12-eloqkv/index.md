@@ -7,21 +7,21 @@ tags: [Company]
 
 It is a great pleasure for us to formally announce **EloqKV**. EloqKV is the first product based on our revolutionary **Data Substrate** technology，which is a brand new architecture to construct high performance, modular, scalable, and transactional databases in the cloud era. We introduced the Data Substrate technology in several previous blog posts:
 
-1. [Why We Need a Common Underpinning for Modern Databases](https://link1)
-2. [How We End Up With So Many Databases Today](https://link2)
-3. [What is Data Substrate, and How Can It Help](https://link3)
+- [Why We Need a Common Underpinning for Modern Databases](https://link1)
+- [How We End Up With So Many Databases Today](https://link2)
+- [What is Data Substrate, and How Can It Help](../../../2024/08/11/data-substrate)
 
-Similar to many existing key-value stores, EloqKV is highly performant, supporting millions of operations per second in a single server node with sub-milisecond latencies. However, by leveraging Data Substrate technology, EloqKV offers some unique properties that makes it stands out compared with other key-value databases.
+Similar to many existing key-value stores, EloqKV is highly performant, supporting millions of operations per second in a single server node with sub-milisecond latencies. However, by leveraging Data Substrate technology, EloqKV offers some unique properties that makes it stand out compared with other key-value databases.
 
-# Fully ACID Transactions when You Need Them.
+## Fully ACID Transactions when You Need Them.
 
-To achieve consistent latency, many key-value stores keep all data in memory, thus significantly increase operational cost because cold data still occupies precious memory space. Durability is often another aspect to be sacrificed in the name of performance, even though well optimized Write Ahead Log (WAL) on fast SSD devices can often achieve acceptable overhead. Last but not least, due to the high cost of distributed transactions, almost all distributed key-value stores forgo transaction support.
+To achieve consistent latency, many key-value stores keep all data in memory, thus significantly increase operational cost because cold data still occupies precious memory space. Durability is often another aspect to be sacrificed in the name of performance, even though well optimized Write Ahead Log (WAL) on fast SSD devices can often achieve acceptable overhead. Last but not least, due to the high cost of distributed transactions, almost all distributed key-value stores offer partial support for transactions.
 
 EloqKV takes the philosophy that ACID is a desirable feature that should not be ignored, but neither should the feature cost extra when not needed. EloqKV can turn on the ACID features on a per-database basis, and a single-key read is never going to cost extra even when the database is set to be transactional.
 
 Even when a database is fully ACID, EloqKV still contains several innovative technologies to reduce overhead. For example, latency of WAL logging on SSD highly depend on logging data volume. In EloqKV, logging can scale independently of the writers, thus reducing the logging latency when more hardware is provided (we have to obey basic physics, afterall). We also avoid using the expensive 2-phase commit protocol for our distributed transactions. Unfortunately, the details of this technology have to be wait to be discussed in a blog or paper in the future.
 
-# Scale as You See Fit
+## Scale as You See Fit
 
 EloqKV is built to be scalable from ground up. Each resource types, including memory, CPU cores, logging SSD devices, and persistent storage can be scaled independently. Such full scalability is especially important in the cloud era, as we can buy the type of resources as we see fit from public cloud providers. Your workload is latency sensitive and you need to keep all data in memory? Reserve a bunch of virtual machines with large memory. You have a lot of updates that need to be persisted? Just buy a few extra EBS volumes to work as logging devices. Your data size is humongous? Use cloud storage such as DynamoDB and S3 to store all your data.
 
@@ -29,7 +29,7 @@ Some of these features are currently not available in our preview release. Pleas
 
 Dynamic scaling, i.e. adding resources as the workload changes, is a feature we are currently working on, and will be released to public preview very soon. Stay tuned.
 
-# You Want Ease of Use? You Get Ease of Use
+## You Want Ease of Use? You Get Ease of Use
 
 EloqKV is compatible with the Redis API, and it supports most of the important data structures in Redis. Therefore, existing applications can take advantage of EloqKV's rich features with practically zero effort.
 
