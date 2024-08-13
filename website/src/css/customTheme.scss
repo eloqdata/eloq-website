@@ -193,7 +193,7 @@ hr {
 
   a {
     @extend %link-style;
-    background-color: transparent;
+
     code {
       background-color: transparent;
       font-size: 90%;
@@ -230,6 +230,7 @@ hr {
     }
 
     tr th {
+      background-color: var(--divider) !important;
       text-transform: uppercase;
       padding: 6px 10px;
       font-size: 0.7rem;
@@ -384,14 +385,6 @@ hr {
 .markdown a:hover {
   color: darkorchid; /* Change to a different shade of purple on hover */
   background-color: transparent; /* Ensure no background color on hover */
-}
-
-.markdown a code {
-  background-color: transparent; /* Remove background from code elements inside links */
-  font-size: 90%; /* Adjust as necessary */
-  padding: 0 6px;
-  top: -1px;
-  position: relative;
 }
 
 html[data-theme="dark"] {
