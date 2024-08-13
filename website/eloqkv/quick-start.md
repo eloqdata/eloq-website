@@ -6,7 +6,7 @@ summary: Learn how to quickly get started with the EloqKV database.
 # Deploy an EloqKV Cluster Using Eloqctl
 
 Eloqctl is a cluster operation and maintenance tool for EloqKV.
-By using Eloqctl, you can easily perform daily database operations, including deploying, starting, stopping, destroying and upgrading an EloqKV cluster, and manage EloqKV cluster parameters.
+By using Eloqctl, you can easily perform daily database operations, including deploying, starting, stopping, decommisioning and upgrading an EloqKV cluster, and manage EloqKV cluster parameters.
 
 Eloqctl supports to deploy EloqKV tx cluster, EloqKV log cluster, persistent storage cluster like Cassandra and the monitoring system. This document introduces how to deploy EloqKV clusters of different topologies.
 
@@ -22,7 +22,7 @@ Make sure that you have read the following documents:
 
 1. Download Eloqctl install script for free:
 
-- [Eloqctl Install Script](../download)
+- [Eloqctl Install Script](../downloadeloqctl)
 
 2. Install Eloqctl by running the following command:
 

@@ -6,7 +6,7 @@ summary: Learn how to quickly get started with the EloqKV database.
 # Upgrade an EloqKV Cluster Using Eloqctl
 
 Eloqctl is a cluster operation and maintenance tool for EloqKV.
-By using Eloqctl, you can easily perform daily database operations, including deploying, starting, stopping, destroying and upgrading an EloqKV cluster, and manage EloqKV cluster parameters.
+By using Eloqctl, you can easily perform daily database operations, including deploying, starting, stopping, decommisioning and upgrading an EloqKV cluster, and manage EloqKV cluster parameters.
 
 In this document, we will illustrate how to use `eloqctl` to upgrade EloqKV cluster.
 

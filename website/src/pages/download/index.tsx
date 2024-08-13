@@ -89,15 +89,20 @@ const ContactPage: React.FC = () => {
         <div className="contact-page">
           <div className="top-description">
             <h1>DOWNLOAD</h1>
-            <p>Get Started with EloqKV</p>
+            <p>
+              Try EloqKV by downloading the installation tarball for a seamless
+              setup experience
+            </p>
           </div>
           <div className="content">
             <div className="info-panel">
               <div className="info-section">
                 <h2>Discover EloqKV</h2>
                 <p>
-                  Download and explore our state-of-the-art KV store. We
-                  appreciate your email and contact information, but if you
+                  Download and explore our state-of-the-art KV store. To
+                  simplify the deployment of EloqKV cluster, please download{" "}
+                  <a href="/preview/downloadeloqctl">Eloqctl</a>. <br /> <br />
+                  We appreciate your email and contact information, but if you
                   prefer not to share it, feel free to proceed without
                   hesitation.
                 </p>

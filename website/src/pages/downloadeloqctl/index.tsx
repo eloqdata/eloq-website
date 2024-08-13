@@ -19,9 +19,6 @@ const ContactPage: React.FC = () => {
   const triggerDownload = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const software_version = (
-      document.getElementById("software_version") as HTMLSelectElement
-    ).value;
     const os_type = (document.getElementById("os_type") as HTMLSelectElement)
       .value;
 
@@ -84,16 +81,19 @@ const ContactPage: React.FC = () => {
         <div className="contact-page">
           <div className="top-description">
             <h1>DOWNLOAD</h1>
-            <p>Deploy EloqKV Using Eloqctl</p>
+            <p>
+              Simplify the creation of EloqKV cluster with eloqctl, your
+              essential tool for easy cluster management
+            </p>
           </div>
           <div className="content">
             <div className="info-panel">
               <div className="info-section">
                 <h2>Discover Eloqctl</h2>
                 <p>
-                  Eloqctl is a cluster operation and maintenance tool for
-                  EloqKV, which supports deploying, starting, stopping and
-                  destroying EloqKV cluster. <br /> <br />
+                  Eloqctl is a cluster management tool for EloqKV. To experience
+                  EloqKV with tarball, please download{" "}
+                  <a href="/preview/download">EloqKV</a> <br /> <br />
                   We appreciate your email and contact information, but if you
                   prefer not to share it, feel free to proceed without
                   hesitation.
@@ -116,13 +116,6 @@ const ContactPage: React.FC = () => {
                   <option value="ubuntu20">Ubuntu 20.04</option>
                   <option value="ubuntu22">Ubuntu 22.04</option>
                   <option value="ubuntu24">Ubuntu 24.04</option>
-                </select>
-
-                <label htmlFor="software_version" className="required">
-                  Software Version:
-                </label>
-                <select id="software_version" name="software_version" required>
-                  <option value="0.6.0">0.6.0</option>
                 </select>
 
                 <label htmlFor="download-reason">

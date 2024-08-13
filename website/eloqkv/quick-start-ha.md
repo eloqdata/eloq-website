@@ -6,7 +6,7 @@ summary: Learn how to quickly get started with the EloqKV database.
 # Deploy a High Available Cluster Using Eloqctl
 
 Eloqctl is a cluster operation and maintenance tool for EloqKV.
-By using Eloqctl, you can easily perform daily database operations, including deploying, starting, stopping, destroying and upgrading an EloqKV cluster, and manage EloqKV cluster parameters.
+By using Eloqctl, you can easily perform daily database operations, including deploying, starting, stopping, decommisioning and upgrading an EloqKV cluster, and manage EloqKV cluster parameters.
 
 In the previous document, we have learnt how to deploy EloqKV using `eloqctl`. In this document, we will focus on how to deploy a high available cluster.
 

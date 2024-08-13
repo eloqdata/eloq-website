@@ -267,7 +267,7 @@ module.exports = {
             items: [
               {
                 label: 'Document',
-                to: '/docs/monosql-introduction',
+                to: '/eloqkv/introduction',
               },
             ],
           },
@@ -277,6 +277,10 @@ module.exports = {
               {
                 label: 'Stack Overflow',
                 href: 'https://stackoverflow.com/questions/tagged/eloqdb',
+              },
+              {
+                label: 'Discord',
+                href: 'https://discord.gg/ERYgSgkB',
               },
             ],
           },
