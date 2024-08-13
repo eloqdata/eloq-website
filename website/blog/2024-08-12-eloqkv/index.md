@@ -39,13 +39,13 @@ EloqKV can be easily deployed as a single node KV store, just as most of the exi
 
 Moreover, due to the built-in cluster awareness and ACID support, a cluster of EloqKV nodes behaves almost exactly the same as a single node EloqKV server. Connecting to one of the nodes, and the Redis compatible client can access and modify data on all nodes in the cluster (potentially with an extra network hop, obviously. We have to obey basic physics, afterall). Moreover, MULTI commands (i.e. Redis transactions) can run in the cluster just as on a single node. No more SLOTS and "CROSSSLOT Keys" errors.
 
-# Performance and Cost
+## Performance and Cost
 
 Performances and costs are always the main metrics used to measure any database systems. It is sufficient to say that we put great amoount of thoguhts on these topics and we invite users to try out EloqKV and evaluate on your own workloads. We won't elaborate too much on these issues in this blog and a seperate blog post will show some performance numbers of EloqKV.
 
 One thing we do want to point out is that some of the advanced capabilities of EloqKV, such as enabling WAL for durability, atomic MULTI operations across multiple nodes, and use SSD to store relatively cold data to reduce memory consumnption may not be as expensive as you might think. Again, please try it out with your own workload, and if you have any comments, suggestions or questions, you can always [contact us](http://link) and we are here to help.
 
-# Introduction to the Preview Release of EloqKV
+## Introduction to the Preview Release of EloqKV
 
 [//]: <> (Transactions in the data substrate embrace optionality. For non-Multi, non-Lua commands, a transaction accesses a single key. This means that the transaction obtains no read lock and thus no unlocking if the command is read-only. If the command modifies the data structure, the transaction 1 obtains the write lock, 2 writes the log and 3 finally releases the lock and applies the command to the data structure. If the log is disabled, the lock-log-unlock path is collapsed into a single phase of applying the command. Hence, when the log is disabled, the execution path of a single Redis command is same as a native cache system. Only if the log is enabled do Redis commands become ACID-compliant and pay the cost of transactions. For Multi commands or Lua scripts, the transaction employs a variant of two-phase locking protocol to ensure global atomicity. Between the locking and unlock phases lies logging the transaction’s commands if the log is enabled.)
 
