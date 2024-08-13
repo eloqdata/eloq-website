@@ -210,9 +210,9 @@ const sidebars = {
         items: [
           'scripting/EVAL',
           'scripting/EVALSHA',
-          'scripting/SCRIPT EXISTS',
-          'scripting/SCRIPT FLUSH',
-          'scripting/SCRIPT LOAD',
+          'scripting/SCRIPTEXISTS',
+          'scripting/SCRIPTFLUSH',
+          'scripting/SCRIPTLOAD',
         ],
       },
       {

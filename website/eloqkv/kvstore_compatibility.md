@@ -109,11 +109,13 @@ title: EloqKV Redis Command Compatibility
 - [✅] DECR
 - [✅] DECRBY
 - [✅] GET
+- [✅] GETDEL
 - [✅] GETRANGE
 - [✅] GETSET
 - [✅] INCR
 - [✅] INCRBY
 - [✅] INCRBYFLOAT
+- [ ] LCS
 - [✅] MGET
 - [✅] MSET
 - [✅] MSETNX
@@ -155,9 +157,11 @@ title: EloqKV Redis Command Compatibility
 ## Scripting
 
 - [✅] EVAL
+- [ ] EVAL_RO
 - [✅] EVALSHA
+- [ ] EVALSHA_RO
 - [ ] FCALL
-- [ ] FUNCTION CREATE
+- [ ] FCALL_RO
 - [ ] FUNCTION DELETE
 - [ ] FUNCTION DUMP
 - [ ] FUNCTION FLUSH
