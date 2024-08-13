@@ -193,7 +193,7 @@ hr {
 
   a {
     @extend %link-style;
-
+    background-color: transparent;
     code {
       background-color: transparent;
       font-size: 90%;
@@ -230,7 +230,6 @@ hr {
     }
 
     tr th {
-      background-color: var(--divider) !important;
       text-transform: uppercase;
       padding: 6px 10px;
       font-size: 0.7rem;
@@ -359,6 +358,40 @@ hr {
       }
     }
   }
+}
+
+.markdown p {
+  line-height: 2; /* Adjust this value as needed */
+  margin-bottom: 1.2em; /* Add some space between paragraphs */
+}
+
+.markdown h2 {
+  font-size: 1.5em; /* Change this value to your preferred size */
+  font-weight: bold; /* Optional: Adjust font weight if needed */
+  margin-top: 2em; /* Optional: Add margin above the heading */
+  margin-bottom: 2em; /* Optional: Add margin below the heading */
+}
+
+.markdown a {
+  color: purple; /* Set link color to purple */
+  font-weight: bold; /* Make the link text bold */
+  text-decoration: underline; /* Add an underline to the link */
+  text-decoration-color: purple; /* Ensure the underline is also purple */
+  text-underline-offset: 2px; /* Adjust the distance of the underline from the text */
+  background-color: transparent; /* Remove any background color */
+}
+/* Optional: Change link color on hover */
+.markdown a:hover {
+  color: darkorchid; /* Change to a different shade of purple on hover */
+  background-color: transparent; /* Ensure no background color on hover */
+}
+
+.markdown a code {
+  background-color: transparent; /* Remove background from code elements inside links */
+  font-size: 90%; /* Adjust as necessary */
+  padding: 0 6px;
+  top: -1px;
+  position: relative;
 }
 
 html[data-theme="dark"] {
