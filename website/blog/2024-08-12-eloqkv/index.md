@@ -9,9 +9,9 @@ We are excited to officially introduce **EloqKV**, the first product built on ou
 
 <!--truncate-->
 
-- [Why We Need a Common Underpinning for Modern Databases](../../../2024/08/08/underpinning)
-- [How We End Up With So Many Databases Today](../../../2024/08/09/landscape)
-- [What is Data Substrate, and How Can It Help](../../../2024/08/11/data-substrate)
+- [Why We Need a Common Underpinning for Modern Databases](/blog/2024/08/08/underpinning)
+- [How We End Up With So Many Databases Today](/blog/2024/08/09/landscape)
+- [What is Data Substrate, and How Can It Help](/blog/2024/08/11/data-substrate)
 
 EloqKV, like many existing key-value stores, delivers exceptional performance, supporting millions of operations per second on a single server node with sub-millisecond latencies. However, with a ground breaking architecture, EloqKV offers some unique advantages that set it apart from other key-value databases.
 

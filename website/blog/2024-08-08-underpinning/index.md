@@ -7,7 +7,7 @@ tags: [Company]
 
 # The Case for a Common Underpinning for Modern DataBases
 
-This is the first part of a 3 part introduction to Data Substrate. You can find the other two parts [here](../../../2024/08/09/landscape) and [here](../../../2024/08/11/data-substrate). In this blog, we review some of the history of DBMS systems.
+This is the first part of a 3 part introduction to Data Substrate. You can find the other two parts [here](/blog/2024/08/09/landscape) and [here](/blog/2024/08/11/data-substrate). In this blog, we review some of the history of DBMS systems.
 
 <!--truncate-->
 

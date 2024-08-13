@@ -5,7 +5,7 @@ date: 2024-08-09
 tags: [Company]
 ---
 
-This is the second part of our three-part introduction to Data Substrate. You can read the other pieces [here](../../../2024/08/08/underpinning) and [here](../../../2024/08/11/data-substrate). In this blog, we discuss why we need so many databases today, why they are now creating so much headache, and what kind of foundation we need to construct the new generation modern databases in the cloud era.
+This is the second part of our three-part introduction to Data Substrate. You can read the other pieces [here](/blog/2024/08/08/underpinning) and [here](/blog/2024/08/11/data-substrate). In this blog, we discuss why we need so many databases today, why they are now creating so much headache, and what kind of foundation we need to construct the new generation modern databases in the cloud era.
 
 <!--truncate-->
 
