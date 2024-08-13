@@ -7,6 +7,8 @@ tags: [Company]
 
 We are excited to officially introduce **EloqKV**, the first product built on our groundbreaking **Data Substrate** technology. This innovative architecture is designed to create high-performance, modular, scalable, and transactional databases tailored for the cloud era. We've discussed Data Substrate in several previous blog posts:
 
+<!--truncate-->
+
 - [Why We Need a Common Underpinning for Modern Databases](../../../2024/08/08/underpinning)
 - [How We End Up With So Many Databases Today](../../../2024/08/09/landscape)
 - [What is Data Substrate, and How Can It Help](../../../2024/08/11/data-substrate)

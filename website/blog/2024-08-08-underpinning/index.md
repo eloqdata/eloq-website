@@ -9,6 +9,8 @@ tags: [Company]
 
 This is the first part of a 3 part introduction to Data Substrate. You can find the other two parts [here](../../../2024/08/09/landscape) and [here](../../../2024/08/11/data-substrate). In this blog, we review some of the history of DBMS systems.
 
+<!--truncate-->
+
 In the early days of computing, data was primarily stored in plain files and processed using custom programs. Managing and extracting insights from these files was challenging and time-consuming. As organizations began to collect and generate more data, the limitations of file-based data management became increasingly apparent. To address these challenges, [relational database management systems (RDBMS)](https://en.wikipedia.org/wiki/Relational_database) were developed in the 1970s. These systems introduced a structured way to store and manage data, ensuring consistency, integrity, and ease of access. The introduction of RDBMS marked a significant milestone in data management, providing a robust solution that has endured over time.
 
 RDBMS utilized a tabular data structure, organizing data into rows and columns. They also offered consistency guarantees, known as the ACID properties, which were crucial for managing data reliably. Additionally, the development of [Structured Query Language (SQL)](https://en.wikipedia.org/wiki/SQL) revolutionized how users interacted with databases. SQL provided a standardized way to query, insert, update, and delete data, making database management accessible to a broader range of users and applications. For over two decades, RDBMS and SQL dominated the world of data management, becoming the backbone of many critical systems and applications.

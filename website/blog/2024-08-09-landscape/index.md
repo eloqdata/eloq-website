@@ -7,6 +7,8 @@ tags: [Company]
 
 This is the second part of our three-part introduction to Data Substrate. You can read the other pieces [here](../../../2024/08/08/underpinning) and [here](../../../2024/08/11/data-substrate). In this blog, we discuss why we need so many databases today, why they are now creating so much headache, and what kind of foundation we need to construct the new generation modern databases in the cloud era.
 
+<!--truncate-->
+
 To understand why we reached our current state, we need to go back to the late 1990s and early 2000s. But before discussing the numerous new database systems, let’s first understand what the old-fashioned Relational Database Management System(RDBMS) is. In our opinion, there are three definitive features of the traditional RDBMS.
 
 - The relational data model [Wikipedia Link](https://en.wikipedia.org/wiki/Relational_model)
