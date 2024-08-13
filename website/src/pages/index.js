@@ -662,7 +662,6 @@ const Index = () => {
           />
         </div>
       </div>
-      <GetStarted />
 
       <div className="feature-section">
         {features.map((feature, index) => (
