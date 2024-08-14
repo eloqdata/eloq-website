@@ -26,7 +26,7 @@ Please ensure you've reviewed the following documents:
 2. To install eloqctl, simply run the following command:
 
 ```
-bash install.sh
+bash eloqctl_installer.sh
 ```
 
 If the following message is displayed, you have successfully installed `eloqctl`:

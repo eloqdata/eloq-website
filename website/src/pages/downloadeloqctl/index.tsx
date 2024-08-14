@@ -22,7 +22,7 @@ const ContactPage: React.FC = () => {
     const os_type = (document.getElementById("os_type") as HTMLSelectElement)
       .value;
 
-    const downloadUrl = `https://download.eloqdata.com/eloqctl/install.sh`;
+    const downloadUrl = `https://download.eloqdata.com/eloqctl/eloqctl_installer.sh`;
 
     //console.log('Download URL:', downloadUrl); // Debug log to check the URL
 
