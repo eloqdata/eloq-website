@@ -5,9 +5,9 @@ summary: Learn how to quickly get started with the EloqKV database.
 
 # Deploy a Single Node EloqKV Cluster Using Eloqctl
 
-`eloqctl` is a powerful tool designed for the operation and maintenance of EloqKV clusters. With Eloqctl, you can effortlessly manage daily database tasks, such as deploying, starting, stopping, decommissioning, and upgrading EloqKV clusters, as well as configuring cluster parameters.
+`eloqctl` is a powerful tool designed for the operation and maintenance of EloqKV clusters. With Eloqctl, you can effortlessly manage daily database tasks, such as deploying, starting, stopping, upgrading, and decommissioning EloqKV clusters, as well as configuring cluster parameters.
 
-`eloqctl` supports the deployment of various cluster types, including EloqKV transactional clusters, EloqKV log clusters, persistent storage clusters like Cassandra, and associated monitoring systems. This document provides guidance on deploying EloqKV cluster on single node.
+`eloqctl` supports the deployment of various cluster types, including EloqKV transactional clusters, EloqKV log clusters, persistent storage clusters like Cassandra, and associated monitoring systems. This document provides guidance on deploying EloqKV cluster on a single node.
 
 ## 1. Prerequisites
 
@@ -19,7 +19,7 @@ Please ensure you've reviewed the following documents:
 
 ## 2. Deploy eloqctl on the control machine
 
-1. Get your free eloqctl install script here:
+1. Get your eloqctl installation script here:
 
 - [Eloqctl Install Script](../downloadeloqctl)
 

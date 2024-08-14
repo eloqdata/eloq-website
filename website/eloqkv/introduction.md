@@ -4,19 +4,19 @@ title: Introduction to EloqKV
 
 # EloqKV: A Distributed Transactional KV store
 
-## Introduction
-
-In today's fast-paced digital landscape, speed and reliability are paramount. Latency is the enemy, and data integrity is a non-negotiable. Traditional caching solutions like Redis offer fast reads, but lack the robust transaction support needed for mission-critical applications. Introducing EloqKV, a revolutionary distributed transactional kv store, that shatters performance barriers while ensuring rock-solid data consistency.
-
 ## Achitecture
 
-EloqKV is a decoupled distributed database powered by Data Substrate. Its architecture includes a frontend compute engine compatible with the Redis protocol. Within Data Substrate, the TxService is responsible for caching hot data and managing transaction processing, while the LogService handles data persistence. LogService replicas are distributed across different availability zones (AZs) to ensure tolerance to AZ-level failures. The underlying storage layer supports pluggable key-value (KV) storages, such as AWS DynamoDB, Cassandra and Rocksdb. These cloud storage services store cold data for cache misses and provide high availability for baseline data.
+EloqKV is a decoupled distributed database powered by Data Substrate, EloqData's groundbreaking new database foundation for the cloud era.
+
+Each EloqKV instance includes a frontend compute engine compatible with the Redis protocol, deployed together with the core TxService to handle data operations. A logically independent LogService handles Write Ahead Logging (WAL) to ensure persistence, and a Persistent Storage Service is deployed for checkpointing memory state and spill cold data over.
+
+In EloqKV, TxService is responsible for concurrency control to handle transactional operations and maintain consistency. Logs can be replicated in LogService and can be distributed across different availability zones (AZs) to ensure tolerance to AZ-level failures. The storage service supports pluggable persistent storage engines such as local RocksDB, remote Cassandra cluster, and cloud storages such as AWS DynamoDB. The persistent storage keep cold data for cache misses and provide high availability against data loss during node failures.
 
 ![](./media/monocachedb_wp.png)
 
 ## Beyond Caching, Embracing Transactions
 
-Unlike its peers, EloqKV transcends the limitations of simple key-value stores. It seamlessly integrates full ACID (Atomicity, Consistency, Isolation, Durability) properties across distributed transactions and clusters. This unlocks unprecedented functionality, empowering you to:
+Unlike many distributed KV stores, EloqKV is full ACID (Atomicity, Consistency, Isolation, Durability) capable. It supports distributed transactions. This unlocks unprecedented functionality, empowering you to:
 
 - Ditch the Duo: Say goodbye to the cumbersome MySQL + Redis combo. EloqKV eliminates cache coherence issues entirely, simplifying your architecture and boosting efficiency.
 - Transactional Confidence: Ensure data integrity across reads and writes, even in complex distributed environments.
