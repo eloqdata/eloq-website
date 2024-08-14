@@ -5,19 +5,21 @@ date: 2024-08-12
 tags: [Company]
 ---
 
-We are excited to officially introduce **EloqKV**, the first product built on our groundbreaking **Data Substrate** technology. This innovative architecture is designed to create high-performance, modular, scalable, and transactional databases tailored for the cloud era. We've discussed Data Substrate in several previous blog posts:
+We are excited to introduce **EloqKV**, a Redis API-compatible, transactional, distributed key-value database. For those familiar with the database landscape, the response might be “Seriously? Yet another key-value DB?”. In this blog post, we discuss what unique values EloqKV offers.
 
 <!--truncate-->
+
+EloqKV is the first product built on our groundbreaking **Data Substrate** technology. This innovative architecture is designed to create high-performance, modular, scalable, and transactional databases tailored for the cloud era. We've discussed Data Substrate in several previous blog posts:
 
 - [Why We Need a Common Underpinning for Modern Databases](/blog/2024/08/08/underpinning)
 - [How We End Up With So Many Databases Today](/blog/2024/08/09/landscape)
 - [What is Data Substrate, and How Can It Help](/blog/2024/08/11/data-substrate)
 
-EloqKV, like many existing key-value stores, delivers exceptional performance, supporting millions of operations per second on a single server node with sub-millisecond latencies. However, with a ground breaking architecture, EloqKV offers some unique values that set it apart from other key-value databases.
+EloqKV, like many existing key-value stores, delivers exceptional performance, supporting millions of operations per second on a single server node with sub-millisecond latencies. However, with a ground breaking new database architecture, EloqKV offers some unique features that set it apart from other key-value databases.
 
 ## Full ACID Transactions when You Need Them
 
-Many key-value stores maintain all data in memory to achieve low latency. However, this approach significantly increases operational costs, as even infrequently accessed (cold) data occupies valuable memory space. Additionally, durability is often compromised in favor of performance, though optimized [Write Ahead Logs (WAL)](https://en.wikipedia.org/wiki/Write-ahead_logging) on fast SSDs help mitigate the write cost. Finally, due to the high cost of distributed transactions, most distributed key-value stores either abandon transaction support altogether or offer only limited, partial transactions.
+Many key-value stores maintain all data in memory to achieve low latency. However, this approach significantly increases operational costs, as even infrequently accessed (cold) data occupies valuable memory space. Additionally, durability is often compromised in favor of performance, though optimized [Write Ahead Logs (WAL)](https://en.wikipedia.org/wiki/Write-ahead_logging) on fast SSDs can often mitigate the write cost. Finally, due to the high cost of distributed transactions, most distributed key-value stores either abandon transaction support altogether or offer only limited, partial transactions.
 
 EloqKV, on the other hand, embraces the philosophy that [ACID](https://en.wikipedia.org/wiki/ACID) (Atomicity, Consistency, Isolation, Durability) is an important feature that shouldn't be overlooked—but it also shouldn't incur extra cost when not needed. EloqKV allows you to enable ACID on a per-database basis. When ACID is disabled, EloqKV incurs no additional operations in read and write paths and thus provides comparable performance to today's non-transactional key-value databases.
 
@@ -39,13 +41,15 @@ EloqKV is fully compatible with the [Redis API](/eloqkv/kvstore_compatibility) a
 
 But EloqKV’s ease of use goes far beyond API compatibility. The real reason EloqKV is user-friendly lies in the fundamental architecture design choices we've made.
 
-EloqKV can be deployed as a single-node key-value store, much like other existing KV stores such as [Redis](https://redis.io/), [ValKey](https://valkey.io/), [Garnet](https://microsoft.github.io/garnet/)or [DragonflyDB](https://www.dragonflydb.io/). However, EloqKV is inherently designed as a distributed system. It can be deployed in a cluster with ease, instantly benefiting from the high availability and scalability that a true distributed system offers—no need for [sentinel](https://redis.io/docs/latest/operate/oss_and_stack/management/sentinel/) or special [cluster mode](https://redis.io/docs/latest/operate/oss_and_stack/management/scaling/).
+EloqKV can be deployed as a single-node key-value store, much like other existing KV stores such as [Redis](https://redis.io/) and [DragonflyDB](https://www.dragonflydb.io/). However, EloqKV is inherently designed as a distributed system. It can be deployed in a cluster with ease, instantly benefiting from the high availability and scalability that a true distributed system offers—no need for [sentinel](https://redis.io/docs/latest/operate/oss_and_stack/management/sentinel/) or special [cluster mode](https://redis.io/docs/latest/operate/oss_and_stack/management/scaling/).
 
 Thanks to its built-in cluster awareness and ACID support, a cluster of EloqKV nodes behave almost identically to a single-node EloqKV server. When connected to one of the nodes, a Redis-compatible client can access and modify data across all nodes in the cluster, potentially with an extra network hop (physics applies), even when the client is not cluster-aware. Furthermore, MULTI commands (i.e., Redis transactions) and Lua scripts can run in the cluster just as they would on a single-node database, eliminating issues like SLOTS and "CROSSSLOT Keys" errors.
 
 ## Performance and Cost
 
-Performance and cost are always key metrics for evaluating any database system. It is sufficient to say that we've put a great deal of thought into these areas, and we encourage you to try out EloqKV and assess it with your own workloads. We will share some performance benchmarks for EloqKV in a separate post.
+Performance and cost are always critical metrics when evaluating database systems. If you browse the websites of some of the [NoSQL](https://www.scylladb.com/compare/) [database](https://aerospike.com/resources/benchmarks/) [vendors](https://www.dragonflydb.io/blog/scaling-performance-redis-vs-dragonfly), you might get the impression that these are the only factors that matter, given the numerous benchmark articles aimed at outdoing competitors.
+
+It is sufficient to say that we've put a great deal of thought into these areas, and we encourage you to try out EloqKV and assess it with your own workloads. We will share some performance benchmarks for EloqKV in a separate post.
 
 One thing we'd like to highlight is that some of EloqKV's advanced features—such as enabling log for durability, performing atomic MULTI operations across multiple nodes, and using SSDs to store less frequently accessed (cold) data to reduce memory consumption—may be more cost-effective than you might expect. We invite you to test it with your own workloads. If you have any comments, suggestions, or questions, feel free to [contact us](/contact).
 
