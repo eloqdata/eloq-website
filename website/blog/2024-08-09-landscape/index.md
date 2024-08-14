@@ -21,7 +21,7 @@ Before late 1990s, data intensive applications traditionally meant business appl
 
 But the meteoric rise of the Internet changed this for good. Internet applications such as search engines, e-commerce sites and social networks redefined what data intensive workload meant. There are three directions that drove the research and commercialization of new database systems, namely scalability, data models, and data access patterns and latency requirements.
 
-### Scalability:
+### Scalability
 
 In the internet era, the sheer volume of data generated every second is staggering. From social media posts and e-commerce transactions to sensor data from IoT devices, the need for efficient, scalable storage systems has never been greater. Traditional relational databases, while robust and reliable, often struggle to keep up with these massive data influxes. This has led to the emergence of new database paradigms designed specifically for scalability.
 
@@ -53,14 +53,14 @@ The third dimension is how much data and computation is needed to process the qu
 
 ### The Aftermath
 
-Over the last 30 years, the varying data models, latency requirements, and scalability demands drove the database systems landscape into one of the most diverse and exciting computer fields. Traditional database companies such as Oracle and Microsoft continue to enjoy success while newcomers such as Snowflake and MongoDB have grown to be worth tens of billion dollars.
+Over the last 30 years, the varying data models, latency requirements, and scalability demands drove the database systems landscape into one of the most diverse and exciting fields. Traditional database companies such as Oracle and Microsoft continue to enjoy success while newcomers such as Snowflake and MongoDB have grown to be big too.
 
-Unfortunately, due to these developments, typical enterprise data infrastructures became extremely complicated. Data nowadays is spread in multiple silo-ed systems. Such an infrastructure not only makes it expensive to store duplicated copies of the same data, but also makes development very complicated.
+Unfortunately, due to these developments, typical enterprise data infrastructures become extremely complicated. Data nowadays is spread in multiple silo-ed systems. Such an infrastructure not only makes it expensive to store duplicated copies of the same data, but also makes development very complicated. Developers also have a nightmare understanding all the intricacies of the consistent models and APIs of different systems.
 
-The obvious problem with so many data stores is the cost issues. Data is stored in multiple places, often duplicated many times unnecessarily thus incurring extra data storage and transformation cost. Databases require administrative staff, and few people have the knowledge and expertise to troubleshoot more than a couple database systems. Procuring a lot of software and dealing with many different vendors is also an expensive endeavor.
+<!-- The obvious problem with so many data stores is cost. Data is stored in multiple places, often duplicated many times unnecessarily thus incurring extra data storage and transformation cost. Databases require administrative staff, and few people have the knowledge and expertise to troubleshoot more than a couple database systems. Procuring a lot of software and dealing with many different vendors is also an expensive endeavor.
 
 A not-so-obvious problem caused by using many database systems is the loss of agility and consistency.
 
 systems is the From a systems administrator’s perspective,
 On the other hand, the developers also have a nightmare understanding all the intricacies of the consistent models and APIs of different systems. We call this “non-smooth”
-The complexity of the system is manifested on two fronts. First, these systems require different skillsets to maintain and operate. It is very difficult and expensive to find enough qualified system administrators to provide sufficient support for round-the-clock reliable operations.
+The complexity of the system is manifested on two fronts. First, these systems require different skillsets to maintain and operate. It is very difficult and expensive to find enough qualified system administrators to provide sufficient support for round-the-clock reliable operations. -->

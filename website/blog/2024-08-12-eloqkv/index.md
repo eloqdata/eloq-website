@@ -23,6 +23,8 @@ EloqKV, on the other hand, embraces the philosophy that [ACID](https://en.wikipe
 
 Even as a fully ACID-compliant database, EloqKV incorporates several innovative technologies to minimize overhead. For instance, the latency of WAL logging is dominated by synchronous writes to stable storage. In EloqKV, logging can scale horizontally and independently, reducing logging latency when additional storage devices are provided (within the limits of physical constraints, of course). Additionally, EloqKV avoids the costly [two-phase commit](https://en.wikipedia.org/wiki/Two_phase_commit) protocol for distributed transactions. The specifics of this technology will be detailed in future blog posts or academic papers.
 
+Transactions not only provide an elegant abstraction for application to use but arise naturally in managing distributed systems. Each time you add a node, migrate a data shard or change metadata, you want the operation to be consistent, atomic and fault tolerant across all nodes, which falls into the scope of transaction processing. Without built-in support of transactions, databases often rely on separate services, such as [etcd](https://etcd.io/) or [Zookeeper](https://zookeeper.apache.org/), to do the job, greatly increasing system management complexity.
+
 ## Scale as You See Fit
 
 EloqKV is designed with scalability in mind from the ground up. Each resource type—memory, CPU cores, logging SSDs, and persistent storage—can be scaled independently. This level of full scalability is particularly crucial in the cloud era, where resources can be easily acquired from public cloud providers.
@@ -55,7 +57,7 @@ One thing we'd like to highlight is that some of EloqKV's advanced features—su
 
 [//]: <> (EloqKV is a key-value database assembled using the data substrate. In front of the data substrate are RPC servers that receive network messages from Redis clients, parse Redis commands and execute them. The executor initializes a transaction via which requests are sent to the CC map to read and write keys and associated data structures. Upon commit, the transaction flushes write commands to the log and updates the in-memory data structure. Changed data structure are periodically flushed to a persistent store, which is either an on-premises system or a cloud service. A flushed key can be evicted from the CC map if there is no sufficient memory capacity. A later read on it will load it back into memory from the persistent store.)
 
-EloqKV is in the preview release and accessible [here](/download). In current release, EloqKV supports two persistent stores: Apache Cassandra and RocksDB. Cassandra is a disaggregated store and may run in a different set of nodes from the data substrate. RocksDB is an embedded store and deployed with nodes hosting the Data Substrate. Deployment of the persistent store is automatic when EloqKV is started.
+EloqKV is in the preview release and accessible [here](/download). EloqKV now supports two persistent stores: Apache Cassandra and RocksDB. Cassandra is a disaggregated store and may run in a different set of nodes from the Data Substrate. RocksDB is an embedded store and deployed with nodes hosting the Data Substrate. Deployment of the persistent store is automatic when EloqKV is started.
 
 <!--truncate-->
 
