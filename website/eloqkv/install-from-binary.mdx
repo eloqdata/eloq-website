@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 
 ## Download and unzip EloqKV tarball
 
-EloqKV is compatible with RHEl 7 and 8, Ubuntu 18.04, 20.04, 22.04 and 24.04. Download
+EloqKV is compatible with RHEl 7 and 8, Ubuntu 20.04, 22.04 and 24.04. Download
 the proper tarball for your operating system from <a href="/download"> here </a>.
 
 After successfully downloading the proper binary, untar it in a directory.
@@ -75,76 +75,116 @@ tar -zxvf eloqkv-0.6.3-ubuntu24-amd64.tar.gz
 
 ## Prepare EloqKV config file
 
-EloqKV uses a configuration file `conf/eloqkv.ini` to customize settings. Below is an example of how to configure EloqKV to run on a local machine.
+EloqKV uses a configuration file to customize settings. An example is provided in `conf/eloqkv.ini`
+under the installation directory. Below is an example of how to configure EloqKV to run on a local machine.
 
-Note: set `ip` field to 127.0.0.1 will block external access to EloqKV. It is recommened to set `ip` to either a private or public IP address.
+Note: set `ip` field to 127.0.0.1 will block external access to EloqKV. It is recommened to set `ip` to
+the actual IP address of the server if you want to access EloqKV from another machine.
 
-```yaml
+Also note that EloqKV will automatically set reasonable default values for its parameters if no user specified
+value is provided in the configuration file. So if you have doubt with a certain parameter, just do not specify
+it in the configuration file.
+
+```shell
 [local]
-# It is recommended to set the IP to either a private or public IP address
+# It is recommended to set the IP to the actual server IP for external access
 ip=127.0.0.1
 port=6379
-# It is recommended to set core_number to approximately 70% of the total available cores for optimal performance.
+
+# It is recommended to set core_number to approximately 70% of the total available
+# cores for optimal performance.
 core_number=3
-# Checkpoint_interval determine the frequency of flushing dirty records into data store
-checkpoint_interval=60
+
 # Set node_memory_limit_mb to 60% of the total system memory to optimize resource allocation.
 node_memory_limit_mb=8192
-# Whether enable data store
+
+# Whether to enable persistent data store
 enable_data_store=none
-# Whether enable redo log
+
+# Whether to enable WAL log
 enable_wal=none
+
+# Where to store log data
 path=data
-# It is recommended to set event_dispatcher_num to one-seventh of core_number for balanced performance.
+
+# It is recommended to set event_dispatcher_num to one-seventh of core_number
+# for balanced performance.
 event_dispatcher_num=1
 
 [cluster]
-# ip_port_list should include all eloqkv nodes. For a single node deployment, set it to match the ip:port specified in the [local] section.
+#ip_port_list should include all eloqkv nodes in a cluster deployment.
+#For a single node deployment, set it to match the ip:port specified in the [local] section.
 ip_port_list=127.0.0.1:6379
 
 [store]
 # data store related configuration. Keep it empty for rocksdb based data store.
 ```
 
-### Start EloqKV server
+## Start EloqKV server
 
 The EloqKV `eloqkv` executable binary is installed in the `EloqKV/bin` directory. Start the server on the local machine using the commands below.
 
 ```shell
 cd ${HOME}/EloqKV
-./bin/eloqkv --config=conf/eloqkv.ini > log 2>&1 &
+./bin/eloqkv --config=conf/eloqkv.ini
 ```
 
-### Connect to EloqKV server
+## Connect to EloqKV server
 
-EloqKV is compatible with Redis protocol. Use any redis client to connect to EloqKV. Please use the same ip and port in config file `eloqkv.ini`
+EloqKV is compatible with the Redis protocol. We have included a `eloq-cli` for your convinence, but any redis client can connect to EloqKV. You can obtain official `redis-cli` by e.g. execute `sudo apt-get install redis-tools` on Ubuntu. Please use the same ip and port in config file `eloqkv.ini` to connect to EloqKV.
 
 ```shell
 redis-cli -h 127.0.0.1 -p 6379
 ```
 
-## Explore More Features
+## Enable Persistent Data Store
 
-### Enable Data Store Feature
+EloqKV supports the integration with pluggable data stores, enabling data persistence even when the EloqKV service is stopped. This capability facilitates the implementation of tiered storage strategies, allowing hot data to reside in memory for quick access, while cold data can be offloaded to disks.
 
-EloqKV supports the integration with pluggable data stores, enabling data persistence even when the EloqKV service is stopped. This capability facilitates the implementation of tiered storage strategies, allowing hot data to reside in memory for quick access, while cold data can be offloaded to more persistent storage solutions.
-
-Edit `eloqkv.ini` and restart database to enable data store of EloqKV.
+Current EloqKV release includes a local RocksDB storage engine. You can turn it on by edit `eloqkv.ini` and restart EloqKV.
 
 ```shell
 [local]
+# set it to all to turn on persistent storage for all databases, you can also selectively
+# turn on storage for specific databases
+#enable_data_store=5
+#enable_data_store=1,3
 enable_data_store=all
+
+# Checkpoint_interval determines the period of flushing records into persistent store
+# so that data in persistent store will not lag too much behind
+checkpoint_interval=60
 ```
 
-Note that enable persisitent kv will consume CPU resource to flush records in memory to kv store periodically. As a result, reduce core_num in `eloqkv.ini` when enable persisitent kv.
+Note that enable persisitent storage will consume CPU resource to flush records in memory to kv store periodically. As a result, reduce core_num in `eloqkv.ini` when enable persisitent kv.
 
-### Enable Transaction Feature
+## Enable WAL for Durability
 
-Upon enabling the Write-Ahead Logging (WAL) and integrating a data store, EloqKV evolves into a fully transactional key-value store. The WAL ensures atomicity in distributed transactions and maintains data integrity by preventing data loss in the event of a system crash.
+By enabling the Write-Ahead Logging (WAL), EloqKV can achieve Durability, i.e. all writes will be logged and data won't get lost in the event of a system crash. WAL need to be combined with persistent data store to work properly.
 
-Edit `eloqkv.ini` and restart database to enable WAL of EloqKV.
+Edit `eloqkv.ini` and restart EloqKV to enable WAL.
 
 ```shell
 [local]
+# set it to all to turn on WAL for all databases, you can also selectively turn on WAL
+# for specific databases
+#enable_wal=5
+#enable_wal=1,3
 enable_wal=all
 ```
+
+## Setting Up a Cluster
+
+It is very simple to set up a cluster of EloqKV. Just start several EloqKV instances on different machines, each provided with a configuration file with nodes listed in the cluster section.
+
+For example, assuming we are setting up a cluster with 3 servers, on 192.168.1.20, 192.168.1.21 and 192.168.1.22:
+
+```shell
+[cluster]
+# ip_port_list should include all eloqkv nodes in the cluster.
+# Make sure to set them to match the ip:port specified in the [local]
+# section of the configuration file on each node.
+ip_port_list=192.168.1.20:6379,192.168.1.21:6379,192.168.1.22:6379
+```
+
+Now you can connect your client to any one of the servers in the cluster and enjoy the increased capacity. Data will be automatically sharded.
