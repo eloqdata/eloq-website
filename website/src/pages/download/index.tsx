@@ -100,7 +100,10 @@ const ContactPage: React.FC = () => {
                 <p>
                   Download a binary tarball to easily explore our groundbreaking
                   KV database. To get started, follow the{" "}
-                  <a href="/eloqkv/install-from-binary"> Quick Start </a>
+                  <a href="/preview/eloqkv/install-from-binary">
+                    {" "}
+                    Quick Start{" "}
+                  </a>
                   guide.
                   <br />
                   <br />
