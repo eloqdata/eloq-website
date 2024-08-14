@@ -246,7 +246,7 @@ module.exports = {
                 to: '/download',
               },
               {
-                label: 'EloqCtl',
+                label: 'Eloqctl',
                 to: '/downloadeloqctl',
               },
             ],

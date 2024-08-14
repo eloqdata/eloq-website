@@ -5,7 +5,9 @@ summary: Learn how to quickly get started with the EloqKV database.
 
 # Upgrade an EloqKV Cluster Using Eloqctl
 
-In this document, we will illustrate how to use `eloqctl` to upgrade EloqKV cluster.
+In this document, we will illustrate how to use `eloqctl` to upgrade EloqKV cluster to a newer version.
+
+Note that this upgrade process is only compatible with minor version upgrades, where a binary swap is sufficient.
 
 ## Get Cluster Name
 

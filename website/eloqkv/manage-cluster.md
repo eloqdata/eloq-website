@@ -68,3 +68,35 @@ eloqctl stop ${cluster_name} -a
 ```
 eloqctl monitor ${cluster_name} stop
 ```
+
+## Update Cluster Configuration
+
+EloqKV offers various configurations, some of which enable features. For example, `enable_data_store` activates persistent data storage, and `enable_wal` enables the Write-Ahead Log for durability. Other configurations are performance-related, such as `core_number` for specifying the number of worker threads, and `node_memory_limit_mb` to set the memory limit.
+
+You can easily adjust these settings using eloqctl. The process is as follows:
+
+1. Edit the configuration file located at `$HOME/.eloqctl/config/EloqKv.ini`. In the example below, core_number is set to 8, and both the persistent data store and Write-Ahead Log are enabled."
+
+```
+[local]
+path=data
+ip=${OVERRIDE}
+port=${OVERRIDE}
+core_number=8
+enable_data_store=all
+enable_wal=all
+[cluster]
+[store]
+[metrics]
+enable_metrics=${OVERRIDE}
+```
+
+2. Use `eloqctl update-conf` to update the configuration file across the cluster and restart it with a single command.
+
+```
+eloqctl update-conf ${cluster_name} --restart
+```
+
+## Scale Cluster
+
+Cluster expansion and shrinkage using `eloqctl` will be available soon!
