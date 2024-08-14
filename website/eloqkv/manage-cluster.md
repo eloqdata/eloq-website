@@ -5,9 +5,6 @@ summary: Learn how to quickly get started with the EloqKV database.
 
 # Manage Cluster Using Eloqctl
 
-Eloqctl is a cluster operation and maintenance tool for EloqKV.
-By using Eloqctl, you can easily perform daily database operations, including deploying, starting, stopping, destroying and upgrading an EloqKV cluster, and manage EloqKV cluster parameters.
-
 In this document, we will illustrate how to use `eloqctl` to manage EloqKV cluster.
 
 Please ensure the cluster is already provisioned. For how to deploy EloqKV cluster, please refer to [Deploy Cluster](./quick-start).
@@ -48,7 +45,7 @@ eloqctl start ${cluster_name}
 
 ## Stop Cluster
 
-1. Graceful Shutdown. The following command will stop the transaction cluster and log cluster gracefully which means all the data in memory will be flushed to persistent storage before the processes exit. In this case, the next launch of cluster is fast since there is redo logs needs to be replayed.
+1. Graceful Shutdown. The following command will stop the transaction cluster and log cluster gracefully which means that all the data in memory will be flushed to persistent storage before the processes exit. In this case, the next launch of cluster is fast since there is no redo logs to be replayed.
 
 ```
 eloqctl stop ${cluster_name}
