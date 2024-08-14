@@ -188,3 +188,12 @@ ip_port_list=192.168.1.20:6379,192.168.1.21:6379,192.168.1.22:6379
 ```
 
 Now you can connect your client to any one of the servers in the cluster and enjoy the increased capacity. Data will be automatically sharded.
+By default, a server will fetch data from other servers automatically if the data is located on another node. You can disable auto-redirect
+and follow the Redis Cluster protocol by letting Redis cluster-aware client route query to the proper node.
+
+```shell
+[local]
+auto_redirect=false
+```
+
+Distributed transactions are always supported in EloqKV clusters. For example, MULTI commands and Lua scritpts will behave the same in a cluster just as on a single node.
