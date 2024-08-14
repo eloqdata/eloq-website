@@ -104,7 +104,7 @@ const ContactPage: React.FC = () => {
                   <br />
                   If you're interested in a more in-depth experience, we
                   recommend trying our
-                  <a href="/preview/downloadeloqctl"> EloqCtl </a> tool to
+                  <a href="/preview/downloadeloqctl"> Eloqctl </a> tool to
                   deploy a cluster and take EloqKV for a more serious test
                   drive.
                   <br />
