@@ -19,11 +19,13 @@ const ContactPage: React.FC = () => {
   const triggerDownload = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const kvtype = (document.getElementById("kvtype") as HTMLSelectElement)
+    /*const kvtype = (document.getElementById("kvtype") as HTMLSelectElement)
       .value;
     const software_version = (
       document.getElementById("software_version") as HTMLSelectElement
-    ).value;
+    ).value;*/
+    const kvtype = "rocksdb";
+    const software_version = "0.6.5";
     const os_type = (document.getElementById("os_type") as HTMLSelectElement)
       .value;
 
@@ -134,7 +136,7 @@ const ContactPage: React.FC = () => {
                   <option value="ubuntu24">Ubuntu 24.04</option>
                 </select>
 
-                <label htmlFor="software_version" className="required">
+                {/*<label htmlFor="software_version" className="required">
                   Software Version:
                 </label>
                 <select id="software_version" name="software_version" required>
@@ -160,7 +162,7 @@ const ContactPage: React.FC = () => {
                     Additional persistent storage engines will be supported in
                     the future.
                   </div>
-                </div>
+                </div>*/}
 
                 <label htmlFor="download-reason">
                   Which feature of EloqKV interests you the most?
