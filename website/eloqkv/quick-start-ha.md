@@ -5,7 +5,7 @@ summary: Learn how to quickly get started with the EloqKV database.
 
 # Deploy a High Available Cluster Using Eloqctl
 
-[Previously](../quick-start), we covered how to deploy a single node EloqKV cluster using `eloqctl`. In this document, we will focus on deploying a highly available cluster.
+[Previously](./quick-start), we covered how to deploy a single node EloqKV cluster using `eloqctl`. In this document, we will focus on deploying a highly available cluster.
 
 ## 1. Prerequisites
 
