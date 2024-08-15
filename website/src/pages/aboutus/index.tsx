@@ -40,7 +40,7 @@ const CompanyPage: React.FC = () => {
                   potential.
                 </p>
               </div>
-              <div className="column">
+              <div className="columna">
                 <img
                   src={visionImage}
                   alt="Our Vision"
@@ -49,15 +49,15 @@ const CompanyPage: React.FC = () => {
               </div>
             </div>
             <br />
-            <div className="row">
-              <div className="column">
+            <div className="rowa">
+              <div className="columna">
                 <img
                   src={missionImage}
                   alt="Our Mission"
                   className="vision-imager"
                 />
               </div>
-              <div className="column">
+              <div className="columna">
                 <h2 className="mission-heading">Our Mission</h2>
                 <p className="large-text">
                   We are redefining how databases are designed. At EloqKV, we
