@@ -89,4 +89,4 @@ QUEUED
 4) OK
 ```
 
-You'll notice that even in a cluster, `MULTI EXEC` operates normally without hiccup, just as in a single node setup.
+You might notice that even in a cluster, MULTI EXEC functions smoothly, just as it would in a single-node setup.
