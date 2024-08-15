@@ -47,15 +47,9 @@ Performance and cost are always critical metrics when evaluating database system
 
 One thing we'd like to highlight is that some of EloqKV's advanced features—such as enabling log for durability, performing atomic MULTI operations across multiple nodes, and using SSDs to store less frequently accessed (cold) data to reduce memory consumption—may be more cost-effective than you might expect. We invite you to test it with your own workloads. If you have any comments, suggestions, or questions, feel free to [contact us](/contact).
 
-## Introduction to the Preview Release of EloqKV
+## Introducing EloqKV for Public Preview
 
-[//]: <> (Transactions in the data substrate embrace optionality. For non-Multi, non-Lua commands, a transaction accesses a single key. This means that the transaction obtains no read lock and thus no unlocking if the command is read-only. If the command modifies the data structure, the transaction 1 obtains the write lock, 2 writes the log and 3 finally releases the lock and applies the command to the data structure. If the log is disabled, the lock-log-unlock path is collapsed into a single phase of applying the command. Hence, when the log is disabled, the execution path of a single Redis command is same as a native cache system. Only if the log is enabled do Redis commands become ACID-compliant and pay the cost of transactions. For Multi commands or Lua scripts, the transaction employs a variant of two-phase locking protocol to ensure global atomicity. Between the locking and unlock phases lies logging the transaction’s commands if the log is enabled.)
-
-[//]: <> (EloqKV can be deployed as a cache by disabling the log and the persistent store, an in-memory database enabling the log and the persistent store and a larger-than-memory database when allocated memory is insufficient to host all data. The transition between the last two is driven by scaling memory cache. EloqKV can scale out the log separately for high write throughput and low latency. Scaling the persistent store is driven by data volume and is outside the scope of the data substrate.)
-
-[//]: <> (EloqKV is a key-value database assembled using the data substrate. In front of the data substrate are RPC servers that receive network messages from Redis clients, parse Redis commands and execute them. The executor initializes a transaction via which requests are sent to the CC map to read and write keys and associated data structures. Upon commit, the transaction flushes write commands to the log and updates the in-memory data structure. Changed data structure are periodically flushed to a persistent store, which is either an on-premises system or a cloud service. A flushed key can be evicted from the CC map if there is no sufficient memory capacity. A later read on it will load it back into memory from the persistent store.)
-
-EloqKV is in the preview release and accessible [here](/download). EloqKV now supports two persistent stores: Apache Cassandra and RocksDB. Cassandra is a disaggregated store and may run in a different set of nodes from the Data Substrate. RocksDB is an embedded store and deployed with nodes hosting the Data Substrate. Deployment of the persistent store is automatic when EloqKV is started.
+Today, we are releasing EloqKV for preview by the general public. This EloqKV release supports two persistent stores: Apache Cassandra and RocksDB. Cassandra is a disaggregated store and may run in a different set of nodes from the EloqKV servers for high availability, while RocksDB is an embedded store. Deployment of the persistent store is automatic when EloqKV is started.
 
 <!--truncate-->
 <p align="center">
@@ -64,12 +58,20 @@ EloqKV is in the preview release and accessible [here](/download). EloqKV now su
 </div>
 </p>
 
-<!-- Transactions in the data substrate embrace optionality. For non-Multi, non-Lua commands, a transaction accesses a single key. This means that the transaction obtains no read lock (and thus no unlocking) if the command is read-only. If the command modifies the data structure, the transaction (1) obtains the write lock, (2) writes the log and (3) finally releases the lock and applies the command to the data structure. If the log is disabled, the lock-log-unlock path is collapsed into a single phase of applying the command. Hence, when the log is disabled, the execution path of a single Redis command is same as a native cache system. Only if the log is enabled do Redis commands become ACID-compliant and pay the cost of transactions. For Multi commands or Lua scripts, the transaction employs a variant of two-phase locking protocol to ensure global atomicity. Between the locking and unlock phases lies logging the transaction’s commands if the log is enabled. -->
+EloqKV can be deployed as
 
-EloqKV can be deployed as a _cache_[^cache_def] (disabling the log and the persistent store), an _in-memory database_[^memdb_def] (enabling the log and the persistent store) or a _larger-than-memory database_[^db_def] (when allocated memory is insufficient to host all data). The transition between the last two is driven by scaling memory (cache). EloqKV can scale out the log separately for high write throughput and low write latency. Scaling the persistent store is driven by data volume.
+- A _cache_ when log and the persistent store are turned off
 
-In next blog post, we will share some results of performance benchmarks of EloqKV. We will show that EloqKV, when used as a cache, delivers excellent performance as mainstream cache solutions. The scaling capability of the log makes EloqKV especially unique in delivering extremely high write performance as an ACID database.
+  An in-memory cache is a software system storing data in main memory to serve fast reads and writes. When used as a cache, delivers excellent performance comparable to mainstream cache solutions.
 
-[^cache_def]: An in-memory cache is a software system storing data in main memory to serve fast reads and writes.
-[^memdb_def]: An in-memory database puts all data in memory, so it provides the same read performance as cache. Different from cache, the in-memory database provides durability by first flushing writes to the log and then applying them to memory-resident data. The in-memory database also maintains snapshots in stable storage, so that upon failures or restarts it recovers full, consistent data in memory.
-[^db_def]: A larger-than-memory database assumes the entire data set may not fit into memory, so it evicts data items to stable storage when memory is full and brings them back into memory when they are later accessed.
+- An _in-memory database_ by enabling the log and the persistent store
+
+  An in-memory database puts all data in memory, so it provides the same read performance as cache. Different from cache, the in-memory database provides durability by first flushing writes to the log and then applying them to memory-resident data. The in-memory database also maintains snapshots in stable storage, so that upon failures or restarts it recovers full, consistent data in memory.
+
+- Or a _larger-than-memory database_ when allocated memory is insufficient to host all data
+
+  A larger-than-memory database assumes the entire data set may not fit into memory, so it evicts data items to stable storage when memory is full and brings them back into memory when they are later accessed. Configured as a larger-than-memory database, EloqKV can serve as a good alternative to many of the NoSQL databases.
+
+The transition between the last two is driven by scaling memory. EloqKV can scale out the log separately for high write throughput and low write latency. Scaling the persistent store is driven by data volume. The scaling capability of the log makes EloqKV especially unique in delivering extremely high write performance as an ACID database.
+
+In next blog post, we will share some results of performance benchmarks of EloqKV.
