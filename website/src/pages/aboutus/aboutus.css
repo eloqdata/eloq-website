@@ -25,12 +25,21 @@
   margin-bottom: 40px;
 }
 
+.company-branding {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centers the content horizontally */
+}
+
+.company-logo {
+  height: 4em; /* This makes the image height consistent with the font size */
+  width: auto; /* Maintain aspect ratio */
+  margin-right: 20px; /* Space between image and text */
+}
+
 .company-name {
-  text-align: center;
-  margin-bottom: 40px;
-  font-size: 4em;
-  margin-bottom: 10px;
-  /*color: #fff; /* White color for the heading */
+  font-size: 4em; /* Adjust this as needed */
+  margin: 0;
   color: rgb(120, 200, 244);
 }
 
@@ -40,14 +49,57 @@
   color: #ccc;
 }
 
-.mission-section {
+.mission-section-join {
   margin-bottom: 40px;
 }
 
-.mission-heading {
+.mission-heading-join {
   font-size: 2rem;
   color: #f2f2f2;
   text-transform: uppercase;
+}
+
+.mission-section {
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 40px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.column {
+  width: 48%;
+}
+
+.mission-heading {
+  font-size: 2.5em;
+  color: #f2f2f2;
+}
+
+.large-text {
+  font-size: 1.2em;
+  color: #cccccc;
+}
+
+.mission-image,
+.vision-imager {
+  width: 70%;
+  margin-right: 20%; /* Adds margin to the left of each office box */
+  height: auto;
+  border-radius: 8px;
+}
+
+.mission-image,
+.vision-imagel {
+  width: 70%;
+  margin-left: 20%; /* Adds margin to the left of each office box */
+  height: auto;
+  border-radius: 8px;
 }
 
 .highlight-text {
