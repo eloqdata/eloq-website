@@ -21,7 +21,7 @@ const CompanyPage: React.FC = () => {
             </div>
 
             <p className="company-tagline">
-              Building the NextGen Databases, the Right Way
+              Build the Next Generation of Databases the Right Way
             </p>
           </header>
 
@@ -32,12 +32,14 @@ const CompanyPage: React.FC = () => {
               <div className="columna">
                 <h2 className="mission-heading">Our Vision</h2>
                 <p className="large-text">
-                  Data is driving the world forward. At EloqKV, we believe that
-                  data is the most valuable asset for any organization. Our
-                  vision is to empower businesses to harness the power of data
-                  to drive innovation and growth. We are committed to building
-                  the right tools that enables businesses to unlock the full
-                  potential of their data.
+                  Data is driving the world towards a better future. At
+                  EloqData, we see data not just as a resource, but as the key
+                  to unlocking limitless possibilities. Our vision is to empower
+                  society to harness this power, letting data tell its story
+                  with clarity and purpose. We are dedicated to creating the
+                  tools that enable people to fully realize the potential of
+                  their data, shaping a world where information flows eloquently
+                  and transforms lives.{" "}
                 </p>
               </div>
               <div className="columna">
@@ -60,10 +62,10 @@ const CompanyPage: React.FC = () => {
               <div className="columna">
                 <h2 className="mission-heading">Our Mission</h2>
                 <p className="large-text">
-                  We are redefining how databases are designed. At EloqKV, we
+                  We are redefining how databases are designed. At EloqData, we
                   are committed to creating a next-generation distributed
-                  database that challenges the status quo. Our innovative data
-                  substrate methodology is crafted to support a variety of
+                  database that challenges the status quo. Our innovative Data
+                  Substrate technology is crafted to support a variety of
                   compute engines, addressing the diverse needs of real-world
                   applications.
                 </p>
