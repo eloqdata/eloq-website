@@ -60,10 +60,11 @@ One thing we'd like to highlight is that some of EloqKV's advanced features—su
 EloqKV is in the preview release and accessible [here](/download). EloqKV now supports two persistent stores: Apache Cassandra and RocksDB. Cassandra is a disaggregated store and may run in a different set of nodes from the Data Substrate. RocksDB is an embedded store and deployed with nodes hosting the Data Substrate. Deployment of the persistent store is automatic when EloqKV is started.
 
 <!--truncate-->
-
-<div style={{ width: '600px', textAlign: 'center' }}>
+<p align="center">
+<div style={{ width: '600px', textAlign: 'center', display: 'block' }}>
 ![](img/archi.png)
 </div>
+</p>
 
 <!-- Transactions in the data substrate embrace optionality. For non-Multi, non-Lua commands, a transaction accesses a single key. This means that the transaction obtains no read lock (and thus no unlocking) if the command is read-only. If the command modifies the data structure, the transaction (1) obtains the write lock, (2) writes the log and (3) finally releases the lock and applies the command to the data structure. If the log is disabled, the lock-log-unlock path is collapsed into a single phase of applying the command. Hence, when the log is disabled, the execution path of a single Redis command is same as a native cache system. Only if the log is enabled do Redis commands become ACID-compliant and pay the cost of transactions. For Multi commands or Lua scripts, the transaction employs a variant of two-phase locking protocol to ensure global atomicity. Between the locking and unlock phases lies logging the transaction’s commands if the log is enabled. -->
 
