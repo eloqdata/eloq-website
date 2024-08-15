@@ -65,14 +65,14 @@
   margin-bottom: 40px;
 }
 
-.row {
+.rowa {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.column {
+.columna {
   width: 48%;
 }
 

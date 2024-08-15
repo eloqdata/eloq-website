@@ -28,8 +28,8 @@ const CompanyPage: React.FC = () => {
           {/* Our Mission Section */}
           {/* Mission and Vision Section */}
           <section className="mission-section">
-            <div className="row">
-              <div className="column">
+            <div className="rowa">
+              <div className="columna">
                 <h2 className="mission-heading">Our Vision</h2>
                 <p className="large-text">
                   Our goal is to deliver a database without compromises. This
