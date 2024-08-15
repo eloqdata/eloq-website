@@ -76,14 +76,6 @@ const CompanyPage: React.FC = () => {
               </div>
             </div>
           </section>
-
-          {/* Footer Section */}
-          <footer className="footer-section">
-            <p>
-              &copy; {new Date().getFullYear()} EloqData Inc. All rights
-              reserved.
-            </p>
-          </footer>
         </div>
       </div>
     </Layout>
