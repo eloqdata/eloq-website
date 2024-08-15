@@ -32,12 +32,12 @@ const CompanyPage: React.FC = () => {
               <div className="columna">
                 <h2 className="mission-heading">Our Vision</h2>
                 <p className="large-text">
-                  Our goal is to deliver a database without compromises. This
-                  means achieving unparalleled performance, high availability,
-                  and ease of use—all at once. We're not just building a
-                  database; we're revolutionizing the very concept of data
-                  management to empower businesses to operate at their fullest
-                  potential.
+                  Data is driving the world forward. At EloqKV, we believe that
+                  data is the most valuable asset for any organization. Our
+                  vision is to empower businesses to harness the power of data
+                  to drive innovation and growth. We are committed to building
+                  the right tools that enables businesses to unlock the full
+                  potential of their data.
                 </p>
               </div>
               <div className="columna">
@@ -75,8 +75,9 @@ const CompanyPage: React.FC = () => {
             <br />
             <h2 className="mission-heading">Join Us</h2>
             <p class="large-text">
-              That’s our vision & mission. If you want to help us fulfill it,{" "}
-              <a href="/contact"> Join Us </a> (we’re hiring!).
+              We are hiring. If you want to work with a world-class team <br />
+              and help define the future of database systems,{" "}
+              <a href="/contact"> Contact Us</a>.
             </p>
           </section>
           <br />
@@ -87,17 +88,21 @@ const CompanyPage: React.FC = () => {
             <br />
             <div className="office-locations">
               <div className="office">
-                <h3>Asia Pacific</h3>
+                <h3>North America</h3>
                 <p>
-                  EloqData PTE.Ltd. <br></br>160 RobinSon Road,<br></br>#14-04
-                  SBF Center,<br></br>Singapore 068914
+                  EloqData Inc. <br></br>
+                  10268 Parkwood Drive 5 <br></br>
+                  Cupertino, CA 94301<br></br>
+                  USA
                 </p>
               </div>
               <div className="office">
-                <h3>North America</h3>
+                <h3>Asia Pacific</h3>
                 <p>
-                  EloqData Inc. <br></br>10268 Parkwood Drive 5,
-                  <br></br>Cupertino, CA 94301,<br></br>USA
+                  EloqData PTE.Ltd. <br></br>
+                  160 Robinson Road<br></br>
+                  #14-04 SBF Center<br></br>
+                  Singapore 068914
                 </p>
                 {/* Example address */}
               </div>

@@ -57,7 +57,7 @@ The values of the design principles go beyond RDBMS. Whether the data item is a 
 
 - _Durability_. Data substrate uses a distributed, replicated log for persisting data changes. Each logger is replicated for high availability. Having multiple loggers provides scalability for write throughput.
 
-- _Cache and concurrency control_. Data substrate uses a distributed, in-memory map for cache and concurrency control. We call this map the "tx map". The map key identifies a data item, and the payload includes the value and meta-data for concurrency control, e.g., a lock. The tx map kills two birds with one stone: accessing a map entry reads/writes the cached value and performs concurrency control, e.g., adding a lock. Indeed, a data item should only be cached and coordinated with other readers and writers when it is accessed. Concurrency control is optional: if the operation is non-transactional or does not require locks (e.g., reads under the isolation level READ COMMITTED), the access does not change the meta-data.
+- _Cache and concurrency control_. Data substrate uses a distributed, in-memory map for cache and concurrency control. We call this map the "TxMap". The map key identifies a data item, and the payload includes the value and meta-data for concurrency control. Accessing a map entry reads/writes the cached value and performs concurrency control. Concurrency control is optional: if the operation is non-transactional or does not require locks, the access does not change the meta-data.
 
 <p align="center">
 <div style={{ width: '600px', textAlign: 'center' }}>
@@ -65,7 +65,7 @@ The values of the design principles go beyond RDBMS. Whether the data item is a 
 </div>
 </p>
 
-- _Asynchrony_. Changed data items are first flushed to the log and then updated in the tx map. Updated data items are asynchronously flushed to a persistent store. The persistent store plays the same role as a B+-tree and stores data items in stable storage. The persistent store exposes Get(), Put() APIs for reading and writing data items.
+- _Asynchrony_. Changed data items are first flushed to the log and then updated in the TxMap. Updated data items are asynchronously flushed to a persistent store. The persistent store plays the same role as a B+-tree and stores data items in stable storage. The persistent store exposes Get(), Put() APIs for reading and writing data items.
 
 <p align="center">
 <div style={{ width: '600px', textAlign: 'center' }}>
@@ -73,7 +73,7 @@ The values of the design principles go beyond RDBMS. Whether the data item is a 
 </div>
 </p>
 
-- _Consistency and fault tolerance_. Data substrate maintains the same invariant as RDBMS: (1) a changed data item cannot be evicted from the tx map until it is flushed to the persistent store, and (2) A fail-over node of the tx map cannot start serving unless unflushed data items are recovered in the tx map from the log.
+- _Consistency and fault tolerance_. Data substrate maintains the same invariant as RDBMS: (1) a changed data item cannot be evicted from the TxMap until it is flushed to the persistent store, and (2) A fail-over node of the TxMap cannot start serving unless unflushed data items are recovered in the TxMap from the log.
 
 <p align="center">
 <div style={{ width: '600px', textAlign: 'center' }}>
@@ -88,16 +88,16 @@ The values of the design principles go beyond RDBMS. Whether the data item is a 
 ![](img/substrate_arch.png)
 </div>
 </p>
-What makes Data Substrate unique is modularity. The tx map exposes APIs for runtime to read and write cached data and manage concurrency control. The persistent storage exposes APIs for the tx map to flush changed data and to retrieve data that have been evicted due to insufficient cache capacity. The log provides APIs to persist data changes and to ship unflushed data to the tx map for recovery. All modules communicate with each other via carefully designed APIs and they make no assumption about where the other modules are located, how they are implemented, or what hardware resources they use.
+What makes Data Substrate unique is modularity. The TxMap exposes APIs for runtime to access data and manage concurrency control. The persistent storage exposes APIs for the TxMap to flush changed data and to retrieve data that have been evicted. The log provides APIs to persist data changes and to ship unflushed data to the TxMap for recovery. Modules communicate with each other via carefully designed APIs, with no assumption about where the other modules are located, how they are implemented, or what hardware resources they use.
 
-Modularity has profound implications for how a database is developed, deployed, and scaled. Data Substrate and the persistent store is agnostic about the data items. Concurrency control and cache replacement algorithms wouldn't change if a data item represents a row or a JSON document. Log entries contain serialized changes to data items, which are also agnostic to data types. The persistent store indexes data items by identifiers and values and use the same index structures. In essence, data of different types face the same system challenges and Data Substrate solves them once for all. Building an operational database of a certain data model is greatly simplified by porting a specific query engine on top.
+Data Substrate and the persistent store is agnostic about the data. Concurrency control and cache replacement algorithms would not change if a data item represents a row or a JSON document. Log entries contain serialized changes to data items, which are also agnostic to data types. The persistent store indexes data items by identifiers and use the same index structures. In essence, data of different types face the same system challenges and Data Substrate solves them once for all. Building an operational database of a certain data model is greatly simplified by porting a specific query engine on top.
 
 Modularity also changes how a database scales. Conventionally, a database either scales vertically or horizontally. The recent trend of disaggregating compute and storage in cloud-native databases allows CPU and storage to scale separately. Data Substrate’s modularity goes a step further and scales the database at the finest granularity: CPU, cache (memory), the log (storage) and the persistent store (storage). This scaling flexibility allows the database to use minimal resources to meet applications’ performance requirements.
 
-- For a read-intensive, latency-sensitive application, the database caches hot data in memory and only scales the cache when the workload surges. Today, a single VM's memory goes from 4 GB to over 256 GB. Thus, scaling the database cache first scales up, and beyond a certain point scales out. The log scale is small, as the workload is mostly-read.
-- For a write-heavy, high-frequency trading application, the database scales the log horizontally to many storage devices to persist changes quickly. Horizontal scaling ensures the write throughput is high, while keeping write latency low. Logging is independent of the cache size and data volume, which may be small and can fit into a single machine’s memory and a disk.
+- For a read-intensive, latency-sensitive application (such as social network feeds), the database caches hot data in memory and only scales the cache when the workload surges. Today, a single VM's memory goes from 4 GB to over 256 GB. Thus, scaling the database cache first scales up, and beyond a certain point scales out. The log scale is small, as the workload is mostly-read.
+- For a write-heavy application (such as hi-frequency trading), the database scales the log horizontally to many storage devices to persist changes quickly. Horizontal scaling ensures the write throughput is high, while keeping write latency low. Logging is independent of the cache size and data volume, which may be small and can fit into a single machine’s memory and a disk.
 
-Data Substrate’s modularity embraces optionality. While we believe ACID transactions are essential to applications, we also believe that ACID transactions should be optional such that applications who don’t need them shall not pay the corresponding cost. In Data Substrate, this is done by disabling some modules or using the system in such a way that ACID transactions are bypassed. For example, by disabling the log, the database drops durability and becomes a cache system. The execution path of writing a single key, which conventionally consists of lock-log-unlock phases in transaction processing, skips the logging phase and is collapsed into a single phase of applying the change in memory.
+While we believe ACID transactions are essential to applications, we also believe that ACID transactions should be optional such that applications that do not need them shall not pay the cost. In Data Substrate, this is achieved by disabling some modules or bypass ACID transaction logics. For example, by disabling the log, the database drops durability and becomes a cache system.
 
 ## Incarnation
 
