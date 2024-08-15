@@ -18,14 +18,15 @@ const CompanyPage: React.FC = () => {
             </p>
           </header>
 
+          <p className="highlight-text">
+            <span className="emphasized-text">
+              Building the NextGen Databases, the Right Way
+            </span>
+          </p>
+
           {/* Our Mission Section */}
           <section className="mission-section">
             <h2 className="mission-heading">Our Mission</h2>
-            <p className="highlight-text">
-              <span className="emphasized-text">
-                Building the Next Generation of Databases
-              </span>
-            </p>
             <p class="large-text">
               We are redefining how databases are designed. At EloqKV, we are
               committed to creating a next-generation distributed database that
@@ -33,11 +34,9 @@ const CompanyPage: React.FC = () => {
               methodology is crafted to support a variety of compute engines,
               addressing the diverse needs of real-world applications.
             </p>
-            <p className="highlight-text">
-              <span className="emphasized-text">
-                No Compromises—Only Excellence
-              </span>
-            </p>
+            <br />
+            <br />
+            <h2 className="mission-heading">Our Vision</h2>
             <p class="large-text">
               Our goal is to deliver a database without compromises. This means
               achieving unparalleled performance, high availability, and ease of
@@ -45,15 +44,20 @@ const CompanyPage: React.FC = () => {
               revolutionizing the very concept of data management to empower
               businesses to operate at their fullest potential.
             </p>
+            <br />
+            <br />
+            <h2 className="mission-heading">Join Us</h2>
             <p class="large-text">
               That’s our vision. If you want to help us fulfill it,{" "}
               <a href="/preview/contact"> Join Us </a> (we’re hiring!).
             </p>
           </section>
-
+          <br />
+          <br />
           {/* Office Locations Section */}
           <section className="offices-section">
             <h2>Office Locations</h2>
+            <br />
             <div className="office-locations">
               <div className="office">
                 <h3>Asia Pacific</h3>
