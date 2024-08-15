@@ -9,9 +9,7 @@ We are excited to introduce **EloqKV**, a Redis API-compatible, transactional, d
 
 <!--truncate-->
 
-EloqKV is the first product built on our groundbreaking **Data Substrate** technology. This innovative architecture is designed to create high-performance, modular, scalable, and transactional databases tailored for the cloud era. We've discussed Data Substrate in last blog post:
-
-- [What is Data Substrate, and How Can It Help](/blog/2024/08/11/data-substrate)
+EloqKV is the first product built on our groundbreaking **Data Substrate** technology. This innovative architecture is designed to create high-performance, modular, scalable, and transactional databases tailored for the cloud era. We've discussed Data Substrate in our [last blog post](/blog/2024/08/11/data-substrate).
 
 EloqKV, like many existing key-value stores, delivers exceptional performance, supporting millions of operations per second on a single server node with sub-millisecond latencies. However, with a ground breaking new database architecture, EloqKV offers some unique features that set it apart from other key-value databases.
 
