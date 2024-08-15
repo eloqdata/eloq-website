@@ -25,9 +25,11 @@ Our answer to this grand question is Data Substrate that modularizes databases.
 
 Data substrate draws inspirations from the canonical design of single-node relational database management systems (RDBMS). To understand where Data Substrate originates, let us revisit what RDBMS does. In a simplified form, a RDBMS kernel contains 4 modules: (1) a disk-resident B+-tree to store data items, (2) a write-ahead log to persist data changes, (3) a buffer pool to cache B+-tree pages in memory, and (4) a lock table to coordinate reads and writes for concurrency control.
 
-<div style={{ width: '600px', textAlign: 'center' }}>
+<p align="center">
+<div style={{ width: '600px', textAlign: 'center'}}>
 ![](img/blog_ds_1.png)
 </div>
+</p>
 
 Now consider a transaction T that reads and updates a data item x. T traverses the B+-tree and for each page searches the buffer pool (①). If this is a cache miss, T locates the disk-resident page (②) and brings it into the buffer pool (③). T eventually pins the page containing x in the buffer pool, adds a read lock on x in the lock table (④), reads x (⑤) and unpins the page.
 
@@ -53,28 +55,35 @@ The values of the design principles go beyond RDBMS. Whether the data item is a 
 
 - _Cache and concurrency control_. Data substrate uses a distributed, in-memory map for cache and concurrency control. We call this map the "tx map". The map key identifies a data item, and the payload includes the value and meta-data for concurrency control, e.g., a lock. The tx map kills one two birds with one stone: accessing a map entry reads/writes the cached value and performs concurrency control, e.g., adding a lock. Indeed, only is a data item accessed should it be cached and coordinated with other readers and writers. Concurrency control is optional: if the operation is non-transactional or does not require locks (e.g., reads under the isolation level READ COMMITTED), the access does not change the meta-data. The tx map is partitioned across multiple cores in a single node or across multiple nodes.
 
+<p align="center">
 <div style={{ width: '600px', textAlign: 'center' }}>
 ![](img/blog_ds_2.png)
 </div>
+</p>
 
 - _Asynchrony_. Changed data items are first flushed to the log and then updated in the tx map. Updated data items are asynchronously flushed to a persistent store in parallel. The persistent store plays the same the role as B+-tree and stores data items in stable storage. The persistent store exposes Get(), Put() APIs for reading and writing data items.
 
+<p align="center">
 <div style={{ width: '600px', textAlign: 'center' }}>
 ![](img/blog_ds_3.png)
 </div>
+</p>
 
 - _Consistency and fault tolerance_. Data substrate maintains the same invariant as RDBMS: (1) a changed data item cannot be evicted from the tx map until it is flushed to the persistent store, and (2) A failed over node of the tx map cannot start serving, until unflushed data items are recovered in the tx map from the log.
 
+<p align="center">
 <div style={{ width: '600px', textAlign: 'center' }}>
 ![](img/blog_ds_4.png)
 </div>
+</p>
 
 ## Modularity
 
+<p align="center">
 <div style={{ width: '600px', textAlign: 'center' }}>
 ![](img/substrate_arch.png)
 </div>
-
+</p>
 What makes Data Substrate unique is modularity. The tx map exposes APIs for runtime to read and write cached data and manage concurrency control. The persistent storage exposes APIs for the tx map to flush changed data and to bring back data who have been evicted due to insufficient cache capacity. The log provides APIs to persist data changes and to ship unflushed data to the tx map for recovery. All modules talk to each other via carefully designed APIs and they make no assumption on where the other modules locate, how they are implemented or what hardware resources they use.
 
 Modularity has profound implications on how a database is developed, deployed and scaled. Data Substrate and the persistent store disregard what a data item looks like: concurrency control and cache replacement algorithms wouldn't change if a data item represents a row or a JSON document; log entries contain serialized post (and optionally pre) images of changed data items or commands that modify them, which are agnostic to data types too; the persistent store index data items by identifiers and values and use same index structures (e.g., B+-tree, LSM-tree). In essence, data of different types face same system challenges for CRUD and Data Substrate solves them all. Building an operational database of a data model is greatly simplified by porting a model-specific query engine on top.
