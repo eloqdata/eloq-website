@@ -76,7 +76,7 @@ const CompanyPage: React.FC = () => {
             <h2 className="mission-heading">Join Us</h2>
             <p class="large-text">
               That’s our vision & mission. If you want to help us fulfill it,{" "}
-              <a href="/preview/contact"> Join Us </a> (we’re hiring!).
+              <a href="/contact"> Join Us </a> (we’re hiring!).
             </p>
           </section>
           <br />

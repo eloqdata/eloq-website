@@ -104,9 +104,9 @@ const ContactPage: React.FC = () => {
                   Eloqctl is a cluster management tool for EloqKV. You can use
                   it to create and manage EloqKV clusters without the need to
                   download the
-                  <a href="/preview/download"> tarball </a> separately. Just
-                  follow the instructions
-                  <a href="/preview/eloqkv/quick-start"> here</a>.
+                  <a href="/download"> tarball </a> separately. Just follow the
+                  instructions
+                  <a href="/eloqkv/quick-start"> here</a>.
                   <br />
                   <br />
                   If you'd like to stay informed about the exciting developments

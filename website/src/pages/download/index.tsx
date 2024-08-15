@@ -110,18 +110,14 @@ const ContactPage: React.FC = () => {
                 <p>
                   Download a binary tarball to easily explore our groundbreaking
                   KV database. To get started, follow the{" "}
-                  <a href="/preview/eloqkv/install-from-binary">
-                    {" "}
-                    Quick Start{" "}
-                  </a>
+                  <a href="/eloqkv/install-from-binary"> Quick Start </a>
                   guide.
                   <br />
                   <br />
                   If you're interested in a more in-depth experience, we
                   recommend trying our
-                  <a href="/preview/downloadeloqctl"> Eloqctl </a> tool to
-                  deploy a cluster and take EloqKV for a more serious test
-                  drive.
+                  <a href="/downloadeloqctl"> Eloqctl </a> tool to deploy a
+                  cluster and take EloqKV for a more serious test drive.
                   <br />
                   <br />
                   If you'd like to stay informed about the exciting developments

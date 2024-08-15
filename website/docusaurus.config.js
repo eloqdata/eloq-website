@@ -30,7 +30,7 @@ module.exports = {
   organizationName: 'Eloqdb',
   projectName: 'EloqData',
   url: 'http://www.eloqdata.com',
-  baseUrl: '/preview',
+  baseUrl: '/',
   clientModules: [
     require.resolve('./modules/snackPlayerInitializer.js'),
     require.resolve('./modules/jumpToFragment.js'),
