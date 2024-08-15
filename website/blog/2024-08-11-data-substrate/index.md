@@ -11,7 +11,7 @@ In this blog post, we introduce our transformative concept **Data Substrate**. D
 
 ## Motivation
 
-In the early days of computing, data were stored in plain files and processed using custom programs. [Relational database management systems (RDBMS)](https://en.wikipedia.org/wiki/Relational_database) emerged in the 1970s to model data as tables, store them in disk with consistency and integrity and provide [SQL](<(https://en.wikipedia.org/wiki/SQL)>) to access them. RDBMS is the _de facto_ solution for data management for more than 2 decade.
+In the early days of computing, data were stored in plain files and processed using custom programs. [Relational database management systems (RDBMS)](https://en.wikipedia.org/wiki/Relational_database) emerged in the 1970s to model data as tables, store them in disk with consistency and integrity and provide [SQL](https://en.wikipedia.org/wiki/SQL) to access them. RDBMS is the _de facto_ solution for data management for more than 2 decade.
 
 But that changed in the early 2000s with the meteoric rise of the Internet. Internet applications, such as search engines, social networks and e-commerce websites, generated large volume of data and redefined data-intensive workloads. ["One Size Does Not Fit All"](https://cs.brown.edu/~ugur/fits_all.pdf) was the catching phrase that defined the next couple of decades in database systems. The database landscape had since evolved in two directions: scalability and data models.
 
