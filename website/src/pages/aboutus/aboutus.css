@@ -1,0 +1,133 @@
+.company-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 40px 20px;
+  background-image: url("../../../static/img/eloqsql_website_bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.company-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+  color: #ccc;
+  /* Light gray text for general content */
+  /*background-color: #000; /* Black background */
+}
+
+.header-section {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.company-name {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 4em;
+  margin-bottom: 10px;
+  /*color: #fff; /* White color for the heading */
+  color: rgb(120, 200, 244);
+}
+
+.company-tagline {
+  font-size: 1.5em;
+  margin: 0;
+  color: #ccc;
+}
+
+.mission-section {
+  margin-bottom: 40px;
+}
+
+.mission-heading {
+  font-size: 1.5rem;
+  color: #f2f2f2;
+  text-transform: uppercase;
+}
+
+.highlight-text {
+  font-size: 1rem;
+  color: #e0e0e0;
+}
+
+.emphasized-text {
+  color: #f75b0c; /* Highlight color for emphasis */
+  font-weight: bold;
+  font-size: 2.5rem;
+}
+
+.mission-call {
+  font-size: 1rem;
+  color: #cccccc;
+  margin-top: 20px;
+}
+
+.offices-section {
+  margin-bottom: 40px;
+}
+
+.office-locations {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.office {
+  width: 48%;
+  background-color: #2a2a2a;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.office h3 {
+  font-size: 1.5rem;
+  color: #f2f2f2;
+}
+
+.office p {
+  font-size: 1rem;
+  color: #b3b3b3;
+}
+
+.join-us-section {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.join-us-section h2 {
+  font-size: 1.8rem;
+  color: #f2f2f2;
+}
+
+.join-us-section p {
+  font-size: 1rem;
+  color: #b3b3b3;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.join-us-section a {
+  color: #4da6ff;
+  text-decoration: none;
+}
+
+.join-us-section a:hover {
+  text-decoration: underline;
+}
+
+.footer-section {
+  text-align: center;
+  margin-top: 40px;
+  color: #777;
+}
+
+.large-text {
+  font-size: 1.2em; /* Adjust the size as needed */
+}

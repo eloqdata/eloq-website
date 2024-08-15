@@ -252,9 +252,19 @@ module.exports = {
             ],
           },
           {
-            to: '/contact',
-            label: 'Contact Us',
+            label: 'Company',
+            type: 'dropdown',
             position: 'right',
+            items: [
+              {
+                label: 'About Us',
+                to: '/aboutus',
+              },
+              {
+                label: 'Contact Us',
+                to: '/contact',
+              },
+            ],
           },
         ],
       },
