@@ -4,6 +4,9 @@ import Layout from "@theme/Layout";
 import FormField from "@site/src/components/FormField";
 import "./aboutus.css"; // Create and import your CSS file
 import React, { useState } from "react";
+import logo from "./eloqdata_logo.png"; // Adjust the path to your actual image location
+import missionImage from "./ourmission.webp"; // Adjust the path to your actual image location
+import visionImage from "./ourvision2.webp"; // Adjust the path to your actual image location
 
 const CompanyPage: React.FC = () => {
   return (
@@ -12,43 +15,67 @@ const CompanyPage: React.FC = () => {
         <div className="company-page">
           {/* Header Section */}
           <header className="header-section">
-            <h1 className="company-name">EloqData</h1>
+            <div className="company-branding">
+              <img src={logo} alt="EloqData Logo" className="company-logo" />
+              <h1 className="company-name">EloqData</h1>
+            </div>
+
             <p className="company-tagline">
-              Eloquently Ingest, Transform, and Process your Data
+              Building the NextGen Databases, the Right Way
             </p>
           </header>
 
-          <p className="highlight-text">
-            <span className="emphasized-text">
-              Building the NextGen Databases, the Right Way
-            </span>
-          </p>
-
           {/* Our Mission Section */}
+          {/* Mission and Vision Section */}
           <section className="mission-section">
-            <h2 className="mission-heading">Our Mission</h2>
-            <p class="large-text">
-              We are redefining how databases are designed. At EloqKV, we are
-              committed to creating a next-generation distributed database that
-              challenges the status quo. Our innovative data substrate
-              methodology is crafted to support a variety of compute engines,
-              addressing the diverse needs of real-world applications.
-            </p>
+            <div className="row">
+              <div className="column">
+                <h2 className="mission-heading">Our Vision</h2>
+                <p className="large-text">
+                  Our goal is to deliver a database without compromises. This
+                  means achieving unparalleled performance, high availability,
+                  and ease of use—all at once. We're not just building a
+                  database; we're revolutionizing the very concept of data
+                  management to empower businesses to operate at their fullest
+                  potential.
+                </p>
+              </div>
+              <div className="column">
+                <img
+                  src={visionImage}
+                  alt="Our Vision"
+                  className="vision-imagel"
+                />
+              </div>
+            </div>
             <br />
-            <br />
-            <h2 className="mission-heading">Our Vision</h2>
-            <p class="large-text">
-              Our goal is to deliver a database without compromises. This means
-              achieving unparalleled performance, high availability, and ease of
-              use—all at once. We're not just building a database; we're
-              revolutionizing the very concept of data management to empower
-              businesses to operate at their fullest potential.
-            </p>
+            <div className="row">
+              <div className="column">
+                <img
+                  src={missionImage}
+                  alt="Our Mission"
+                  className="vision-imager"
+                />
+              </div>
+              <div className="column">
+                <h2 className="mission-heading">Our Mission</h2>
+                <p className="large-text">
+                  We are redefining how databases are designed. At EloqKV, we
+                  are committed to creating a next-generation distributed
+                  database that challenges the status quo. Our innovative data
+                  substrate methodology is crafted to support a variety of
+                  compute engines, addressing the diverse needs of real-world
+                  applications.
+                </p>
+              </div>
+            </div>
+          </section>
+          <section className="mission-section-join">
             <br />
             <br />
             <h2 className="mission-heading">Join Us</h2>
             <p class="large-text">
-              That’s our vision. If you want to help us fulfill it,{" "}
+              That’s our vision & mission. If you want to help us fulfill it,{" "}
               <a href="/preview/contact"> Join Us </a> (we’re hiring!).
             </p>
           </section>
