@@ -970,3 +970,20 @@ html[data-theme="dark"] .Section p a {
 a {
   color: rgb(120, 200, 244);
 }
+.feature-section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.feature-card {
+  width: 100%;
+  max-width: 300px; /* Adjust according to your layout */
+  height: 420px; /* Set a fixed height */
+  padding: 20px;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: auto; /* Handles overflow if the content is too long */
+  box-sizing: border-box;
+}

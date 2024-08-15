@@ -589,7 +589,7 @@ const features = [
     icon: faExpandArrowsAlt,
     title: 'Scalable and Elastic',
     details: [
-      'Scale-up with multi-core and multi-socket servers, and scale-out to multiple nodes in a cluster',
+      'Scale-up with multi-core, and scale-out to multiple nodes in a cluster',
       'Support dynamic scaling as workload changes, without service disruption (currently in Beta)',
     ],
   },
