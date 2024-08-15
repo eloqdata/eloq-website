@@ -9,7 +9,7 @@ const users = require('./showcase.json');
 //const versions = require('./versions.json');
 
 //const lastVersion = versions[0];
-const copyright = `Copyright © ${new Date().getFullYear()} Eloqdata, Inc.`;
+const copyright = `Copyright © ${new Date().getFullYear()} EloqData, Inc.`;
 
 const commonDocsOptions = {
   breadcrumbs: false,
