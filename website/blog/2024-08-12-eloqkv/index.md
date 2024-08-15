@@ -59,7 +59,7 @@ EloqKV is in the preview release and accessible [here](/download). EloqKV now su
 
 <!--truncate-->
 <p align="center">
-<div style={{ width: '600px', textAlign: 'center', display: 'block' }}>
+<div style={{ width: '600px', textAlign: 'center'}}>
 ![](img/archi.png)
 </div>
 </p>

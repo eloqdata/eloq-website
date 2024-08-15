@@ -1916,10 +1916,3 @@ Prevent useless bottom margin for multiline <figcaption> tags in MDX:
 figcaption > p:last-child {
   margin-bottom: 0;
 }
-
-.center-image {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 600px; /* Or any desired width */
-}
