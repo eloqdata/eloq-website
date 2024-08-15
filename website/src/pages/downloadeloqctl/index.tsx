@@ -106,7 +106,7 @@ const ContactPage: React.FC = () => {
                   download the
                   <a href="/preview/download"> tarball </a> separately. Just
                   follow the instructions
-                  <a href="/docs/eloqctl"> here</a>.
+                  <a href="/preview/eloqkv/quick-start"> here</a>.
                   <br />
                   <br />
                   If you'd like to stay informed about the exciting developments
