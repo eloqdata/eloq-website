@@ -23,8 +23,7 @@ const CompanyPage: React.FC = () => {
             <h2 className="mission-heading">Our Mission</h2>
             <p className="highlight-text">
               <span className="emphasized-text">
-                Building the Next Generation of Revolutionary Distributed
-                Databases
+                Building the Next Generation of Databases
               </span>
             </p>
             <p class="large-text">
@@ -57,18 +56,18 @@ const CompanyPage: React.FC = () => {
             <h2>Office Locations</h2>
             <div className="office-locations">
               <div className="office">
-                <h3>Singapore</h3>
+                <h3>Asia Pacific</h3>
                 <p>
-                  EloqData PTE.Ltd. <br></br>160 RobinSon Road, #14-04 SBF
-                  Center, Singapore 068914
+                  EloqData PTE.Ltd. <br></br>160 RobinSon Road,<br></br>#14-04
+                  SBF Center,<br></br>Singapore 068914
                 </p>
               </div>
               <div className="office">
-                <h3>U.S.</h3>
+                <h3>North America</h3>
                 <p>
-                  MonographDB Limited.Ltd. <br></br>10268 Parkwood Drive 5,
-                  Cupertino, CA 94301
-                </p>{" "}
+                  EloqData Inc. <br></br>10268 Parkwood Drive 5,
+                  <br></br>Cupertino, CA 94301,<br></br>USA
+                </p>
                 {/* Example address */}
               </div>
             </div>
@@ -77,7 +76,8 @@ const CompanyPage: React.FC = () => {
           {/* Footer Section */}
           <footer className="footer-section">
             <p>
-              &copy; {new Date().getFullYear()} EloqData. All rights reserved.
+              &copy; {new Date().getFullYear()} EloqData Inc. All rights
+              reserved.
             </p>
           </footer>
         </div>

@@ -634,7 +634,8 @@ const Index = () => {
         <div class="product-left-column">
           <h1 className="title">EloqKV</h1>
           <p className="tagline">
-            The Revolutionary Distributed Key-Value Database.
+            The <span style={{color: '#f75b0c'}}>Revolutionary</span>{' '}
+            Distributed Key-Value Database.
           </p>
           <p className="taglinecolor">
             <Typed strings={['- High Performance']} typeSpeed={5} />

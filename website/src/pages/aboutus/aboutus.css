@@ -58,7 +58,7 @@
 .emphasized-text {
   color: #f75b0c; /* Highlight color for emphasis */
   font-weight: bold;
-  font-size: 2.5rem;
+  font-size: 2.2rem;
 }
 
 .mission-call {
@@ -68,21 +68,24 @@
 }
 
 .offices-section {
-  margin-bottom: 40px;
+  margin-bottom: 10px;
 }
 
 .office-locations {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
 .office {
-  width: 48%;
+  width: 24%;
   background-color: #2a2a2a;
-  padding: 20px;
+  padding: 10px;
   border-radius: 8px;
+  margin-bottom: 60px;
   margin-bottom: 20px;
+  margin-left: 5%; /* Adds margin to the left of each office box */
+  margin-right: 5%; /* Adds margin to the right of each office box */
 }
 
 .office h3 {

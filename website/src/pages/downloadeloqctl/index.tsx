@@ -45,6 +45,16 @@ const ContactPage: React.FC = () => {
 
     formData.append("access_key", "5bb5011a-1ff2-4a20-b49e-4938673427d2");
 
+    // Collect checked checkbox values
+    const selectedFeatures = Array.from(
+      document.querySelectorAll('input[name="download-reason"]:checked')
+    ).map((checkbox) => checkbox.value);
+
+    // Append the selected features to the form data
+    if (selectedFeatures.length > 0) {
+      formData.append("selected_features", selectedFeatures.join(","));
+    }
+
     const response = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
       body: formData,
@@ -127,20 +137,32 @@ const ContactPage: React.FC = () => {
                 <label htmlFor="download-reason">
                   Which feature of EloqKV interests you the most?
                 </label>
-                <select id="download-reason" name="download-reason">
-                  <option value="" disabled selected hidden>
-                    Please select an option
-                  </option>
-                  <option value="pure-cache">
+                <div id="download-reason">
+                  <div className="checkbox-option">
+                    <input
+                      type="checkbox"
+                      name="download-reason"
+                      value="pure-cache"
+                    />
                     High Performance Distributed Cache
-                  </option>
-                  <option value="persistent-cache">
+                  </div>
+                  <div className="checkbox-option">
+                    <input
+                      type="checkbox"
+                      name="download-reason"
+                      value="persistent-cache"
+                    />
                     Cache with Persistent Storage
-                  </option>
-                  <option value="transactional-db">
+                  </div>
+                  <div className="checkbox-option">
+                    <input
+                      type="checkbox"
+                      name="download-reason"
+                      value="transactional-db"
+                    />
                     Transactional Key Value Database
-                  </option>
-                </select>
+                  </div>
+                </div>
 
                 <label htmlFor="company">Company:</label>
                 <input type="text" id="company" name="company" />

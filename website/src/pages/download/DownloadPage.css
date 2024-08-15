@@ -192,3 +192,44 @@
 .form-group:hover .help-icon {
   color: #0056b3;
 }
+
+/* Ensure the checkboxes and labels are aligned properly */
+#download-reason {
+  margin-top: 1px;
+}
+
+#download-reason label {
+  display: block; /* Ensure each label starts on a new line */
+  margin-bottom: 2px; /* Add some space between the checkboxes */
+  cursor: pointer; /* Make the label clickable */
+}
+
+#download-reason input[type="checkbox"] {
+  margin-right: 2px; /* Space between checkbox and label text */
+}
+
+/* Optional: Style for checkboxes */
+#download-reason input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+/* Optional: Adding hover effect for the labels */
+#download-reason label:hover {
+  color: #007bff; /* Change the color on hover */
+}
+
+#download-reason label {
+  display: block; /* Ensure each label starts on a new line */
+  margin: 1px 0; /* Adjust this value to reduce top and bottom margin */
+  cursor: pointer; /* Make the label clickable */
+}
+
+.checkbox-option {
+  margin: 2px 0; /* Adjust margin between options */
+}
+
+#download-reason input[type="checkbox"] {
+  margin-right: 8px; /* Space between checkbox and text */
+}
