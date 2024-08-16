@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 # Prerequisite of Installing EloqKV
 
 The `eloqctl` utility is installed and operated on a control node, it manages several EloqKV server nodes. We discuss how to establish trust between control node and the server nodes,
-and some system setting adjustments on the worker nodes to make them run EloqKV better.
+and some system setting adjustments on the server nodes to make them run EloqKV better.
 
 ## Establish Passwordless SSH and Sudo
 
