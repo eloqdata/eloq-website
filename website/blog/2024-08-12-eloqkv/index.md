@@ -54,7 +54,7 @@ Today, we are releasing EloqKV for preview by the general public. This EloqKV re
 <!--truncate-->
 <p align="center">
 <div style={{ width: '600px', textAlign: 'center'}}>
-![](img/archi.png)
+![](img/eloq_arch_new2.png)
 </div>
 </p>
 
