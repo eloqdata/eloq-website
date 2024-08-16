@@ -35,10 +35,10 @@ If the following message is displayed, you have successfully installed `eloqctl`
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100 16.6M  100 16.6M    0     0   203M      0 --:--:-- --:--:-- --:--:--  205M
-/home/ubuntu/.bash_profile has been modified to add eloqctl to PATH
+/home/eloq/.bash_profile has been modified to add eloqctl to PATH
 ===============================================
 To use it, open a new terminal or execute:
-source /home/ubuntu/.bash_profile
+source /home/eloq/.bash_profile
 ===============================================
 ```
 
@@ -209,7 +209,7 @@ If you see the following message, the EloqKV cluster has been successfully provi
 ```
 Launch cluster finished, Enjoy!
 Connect to server:
-	/home/rocky/eloqkv-cluster/EloqKV/bin/eloqkv-cli -h 127.0.0.1 -p 6389
+	/home/eloq/eloqkv-cluster/EloqKV/bin/eloqkv-cli -h 127.0.0.1 -p 6389
 Prometheus: http://127.0.0.1:9500
 Grafana: http://127.0.0.1:3301
 ```
