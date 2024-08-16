@@ -5,7 +5,11 @@ summary: Learn how to quickly get started with the EloqSQL database.
 
 # Prerequisite of Installing EloqKV
 
-## System configuration
+## Preparing the Management Node
+
+`eloqctl` runs on a management server node and is used to deploy and manage several nodes that runs the EloqKV instances.
+
+## System configuration for EloqKV Nodes
 
 Below are some necessary configurations to be made before installing EloqKV
 
