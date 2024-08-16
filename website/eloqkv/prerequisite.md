@@ -93,7 +93,7 @@ ssh 10.0.0.1
 eloq@10.0.0.1:~$
 ```
 
-## System configuration for EloqKV Nodes
+## System configuration for EloqKV Server Nodes
 
 Below are some necessary configurations to be made before installing EloqKV
 
