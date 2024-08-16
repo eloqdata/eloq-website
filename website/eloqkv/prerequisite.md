@@ -8,15 +8,14 @@ import TabItem from "@theme/TabItem";
 
 # Prerequisite of Installing EloqKV
 
-## Preparing the Control Node
+The `eloqctl` utility is installed and operated on a control node, it manages several EloqKV server nodes. We discuss how to establish trust between control node and the server nodes,
+and some system setting adjustments on the worker nodes to make them run EloqKV better.
 
-The `eloqctl` utility operates on a control machine and is responsible for deploying and managing multiple nodes running EloqKV instances.
+## Establish Passwordless SSH and Sudo
 
-### Establish SSH Mutual Trust and Passwordless Sudo Access
+Before proceeding, please manually configure SSH mutual trust and passwordless sudo between the control node and the server nodes:
 
-Before proceeding, please manually configure SSH mutual trust and passwordless sudo between the control node and the EloqKV nodes:
-
-1. Log in to control machine and each target machine as the root user. Create the `eloq` user account on each machine and set a login password for this account:
+1. Log in on control machine and each server machine as the root user. Create the `eloq` user account on each machine and set a login password:
 
 ```
 useradd -m eloq && \
@@ -78,7 +77,7 @@ ssh-keygen -t rsa
 cat .ssh/id_rsa.pub >> .ssh/authorized_keys
 ```
 
-5. Configure SSH mutual trust between the control machine and the other EloqKV machines. Replace 10.0.0.1 with the IP address of your target machine, and enter the `eloq` user password for the target machine when prompted. Once the command is executed, SSH mutual trust will be established. Repeat this process for each EloqKV machine.
+5. Configure SSH mutual trust between the control machine and the server machines. Replace 10.0.0.1 with the IP address of your target machine, and enter the `eloq` user password for the target machine when prompted. Once the command is executed, SSH mutual trust will be established. Repeat this process for each EloqKV machine.
 
 ```
 ssh-copy-id -i ~/.ssh/id_rsa.pub 10.0.0.1
@@ -149,9 +148,4 @@ Below are some necessary configurations to be made before installing EloqKV
 - Add current user and group ownership to `/var/crash` folder
   ```shell
   sudo chown -R $USER:$USER /var/crash
-  ```
-- Login the session for the above changes to take effect, then log in again
-
-  ```shell
-  log out
   ```
