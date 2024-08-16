@@ -8,13 +8,13 @@ import TabItem from "@theme/TabItem";
 
 # Prerequisite of Installing EloqKV
 
-## Preparing the Management Node
+## Preparing the Control Node
 
-The `eloqctl` utility operates on a management server node and is responsible for deploying and managing multiple nodes running EloqKV instances.
+The `eloqctl` utility operates on a control machine and is responsible for deploying and managing multiple nodes running EloqKV instances.
 
 ### Establish SSH Mutual Trust and Passwordless Sudo Access
 
-Before proceeding, manually configure SSH mutual trust and passwordless sudo between the management node and the EloqKV nodes:
+Before proceeding, please manually configure SSH mutual trust and passwordless sudo between the control node and the EloqKV nodes:
 
 1. Log in to control machine and each target machine as the root user. Create the `eloq` user account on each machine and set a login password for this account:
 
@@ -23,7 +23,7 @@ useradd -m eloq && \
 passwd eloq
 ```
 
-2. To configure passwordless sudo, run the following command and append the line `eloq ALL=(ALL) NOPASSWD: ALL` to the end of the file:
+2. To configure passwordless sudo, run the following command and append the line `eloq ALL=(ALL) NOPASSWD: ALL` to the end of the file on each machine:
 
 ```
 visudo
@@ -33,20 +33,7 @@ visudo
 eloq ALL=(ALL) NOPASSWD: ALL
 ```
 
-3. Log in to the control machine as the `eloq` user, generate an SSH key, and configure SSH mutual trust between the control machine and itself.
-
-```
-ssh-keygen -t rsa
-cat .ssh/id_rsa.pub >> .ssh/authorized_keys
-```
-
-4. Configure SSH mutual trust between the control machine and the other EloqKV machines. Replace 10.0.0.1 with the IP address of your target machine, and enter the `eloq` user password for the target machine when prompted. Once the command is executed, SSH mutual trust will be established. Repeat this process for each EloqKV machine.
-
-```
-ssh-copy-id -i ~/.ssh/id_rsa.pub 10.0.0.1
-```
-
-Note that please ensure password authentication is enabled on the target machine. You can check this in the SSH configuration file:
+3. Please ensure that both password authentication and public key authentication are enabled on each machine. Password authentication is necessary for the control machine to copy the public key to the `authorized_keys` file of the EloqKV nodes. Public key authentication, on the other hand, is used by the `eloqctl` tool to deploy EloqKV clusters. You can verify and configure these settings in the SSH configuration file as follows:
 
 ```
 sudo vi /etc/ssh/sshd_config
@@ -56,6 +43,8 @@ Ensure the following line is set (uncomment if necessary):
 
 ```
 PasswordAuthentication yes
+PubkeyAuthentication yes
+AuthorizedKeysFile .ssh/authorized_keys
 ```
 
 Restart the SSH service to apply the changes:
@@ -82,7 +71,20 @@ sudo systemctl restart ssh
 </TabItem>
 </Tabs>
 
-5. Log in to the control machine using the `eloq` user account, and then attempt to log in to the target machine's IP address using SSH. If you can log in without entering a password, SSH mutual trust has been successfully configured.
+4. Log in to the control machine as the `eloq` user, generate an SSH key, and configure SSH mutual trust between the control machine and itself.
+
+```
+ssh-keygen -t rsa
+cat .ssh/id_rsa.pub >> .ssh/authorized_keys
+```
+
+5. Configure SSH mutual trust between the control machine and the other EloqKV machines. Replace 10.0.0.1 with the IP address of your target machine, and enter the `eloq` user password for the target machine when prompted. Once the command is executed, SSH mutual trust will be established. Repeat this process for each EloqKV machine.
+
+```
+ssh-copy-id -i ~/.ssh/id_rsa.pub 10.0.0.1
+```
+
+6. Log in to the control machine using the `eloq` user account, and then attempt to log in to the target machine's IP address using SSH. If you can log in without entering a password, SSH mutual trust has been successfully configured.
 
 ```
 ssh 10.0.0.1
@@ -90,12 +92,6 @@ ssh 10.0.0.1
 
 ```
 eloq@10.0.0.1:~$
-```
-
-6. After logging in to the target machine as the `eloq` user, run the following command. If everything is fine, then passwordless sudo for the `eloq` user has been successfully configured.
-
-```
-sudo ls
 ```
 
 ## System configuration for EloqKV Nodes
