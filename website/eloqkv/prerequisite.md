@@ -150,15 +150,6 @@ Below are some necessary configurations to be made before installing EloqKV
   ```shell
   sudo chown -R $USER:$USER /var/crash
   ```
-- Configure ssh service in `/etc/ssh/sshd_config`.
-  ```shell
-  PubkeyAuthentication yes
-  AuthorizedKeysFile .ssh/authorized_keys
-  ```
-  Restart ssh service
-  ```shell
-  sudo systemctl restart sshd
-  ```
 - Login the session for the above changes to take effect, then log in again
 
   ```shell
