@@ -109,13 +109,6 @@ Below are some necessary configurations to be made before installing EloqKV
   * hard core unlimited
   * soft core unlimited
   ```
-- Create a user with sudo privilege.
-  ```shell
-  sudo adduser newuser
-  sudo usermod -aG wheel newuser
-  sudo visudo
-  newuser ALL=(ALL) NOPASSWD: ALL
-  ```
 - Ensure DNS server is configured in `/etc/resolv.conf`.
 - Ensure hostname is configured.
   ```shell
