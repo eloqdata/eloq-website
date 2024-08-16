@@ -7,7 +7,53 @@ summary: Learn how to quickly get started with the EloqSQL database.
 
 ## Preparing the Management Node
 
-`eloqctl` runs on a management server node and is used to deploy and manage several nodes that runs the EloqKV instances.
+The `eloqctl` utility operates on a management server node and is responsible for deploying and managing multiple nodes running EloqKV instances.
+
+### Establish SSH Mutual Trust and Passwordless Sudo Access
+
+Before proceeding, manually configure SSH mutual trust and passwordless sudo between the management node and the EloqKV nodes:
+
+1. Log in to each target machine as the root user. Create the `eloq` user account on each machine and set a login password for this account:
+
+```
+useradd eloq && \
+passwd eloq
+```
+
+2. To configure passwordless sudo, run the following command and append the line `eloq ALL=(ALL) NOPASSWD: ALL` to the end of the file:
+
+```
+visudo
+```
+
+```
+eloq ALL=(ALL) NOPASSWD: ALL
+```
+
+3. Log in to the control machine using the `eloq` user, then run the following command. Replace 10.0.0.1 with the IP address of your target machine, and enter the `eloq` user password for the target machine when prompted. Once the command is executed, SSH mutual trust will be established. Repeat this process for other machines as needed. You need to configure SSH mutual trust between the control machine and itself as well.
+
+Note: Newly created `eloq` users do not have a .ssh directory. To create this directory, generate an RSA key using the appropriate command.
+
+```
+ssh-keygen -t rsa
+ssh-copy-id -i ~/.ssh/id_rsa.pub 10.0.0.1
+```
+
+4. Log in to the control machine using the `eloq` user account, and then attempt to log in to the target machine's IP address using SSH. If you can log in without entering a password, SSH mutual trust has been successfully configured.
+
+```
+ssh 10.0.0.1
+```
+
+```
+[eloq@10.0.0.1 ~]$
+```
+
+5. After logging in to the target machine as the `eloq` user, run the following command. If everything is fine, then passwordless sudo for the `eloq` user has been successfully configured.
+
+```
+sudo ls
+```
 
 ## System configuration for EloqKV Nodes
 
