@@ -3,6 +3,9 @@ title: Configuration Checklist
 summary: Learn how to quickly get started with the EloqSQL database.
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 # Prerequisite of Installing EloqKV
 
 ## Preparing the Management Node
@@ -13,10 +16,10 @@ The `eloqctl` utility operates on a management server node and is responsible fo
 
 Before proceeding, manually configure SSH mutual trust and passwordless sudo between the management node and the EloqKV nodes:
 
-1. Log into control machine and each target machine as the root user. Create the `eloq` user account on each machine and set a login password for this account:
+1. Log in to control machine and each target machine as the root user. Create the `eloq` user account on each machine and set a login password for this account:
 
 ```
-useradd eloq && \
+useradd -m eloq && \
 passwd eloq
 ```
 
@@ -30,15 +33,20 @@ visudo
 eloq ALL=(ALL) NOPASSWD: ALL
 ```
 
-3. Log in to the control machine using the `eloq` user, then run the following command. Replace 10.0.0.1 with the IP address of your target machine, and enter the `eloq` user password for the target machine when prompted. Once the command is executed, SSH mutual trust will be established. Repeat this process for other machines as needed. You need to configure SSH mutual trust between the control machine and itself as well.
+3. Log in to the control machine as the `eloq` user, generate an SSH key, and configure SSH mutual trust between the control machine and itself.
 
 ```
 ssh-keygen -t rsa
+cat .ssh/id_rsa.pub >> .ssh/authorized_keys
+```
+
+4. Configure SSH mutual trust between the control machine and the other EloqKV machines. Replace 10.0.0.1 with the IP address of your target machine, and enter the `eloq` user password for the target machine when prompted. Once the command is executed, SSH mutual trust will be established. Repeat this process for each EloqKV machine.
+
+```
 ssh-copy-id -i ~/.ssh/id_rsa.pub 10.0.0.1
 ```
 
-Note that please ensure password authentication is enabled on the target machine.
-You can check this in the SSH configuration file:
+Note that please ensure password authentication is enabled on the target machine. You can check this in the SSH configuration file:
 
 ```
 sudo vi /etc/ssh/sshd_config
@@ -52,21 +60,39 @@ PasswordAuthentication yes
 
 Restart the SSH service to apply the changes:
 
-```
+<Tabs
+groupId="language"
+defaultValue="rhel"
+values={[
+{ label: 'Rhel', value: 'rhel', },
+{ label: 'Ubuntu', value: 'ubuntu', }
+]
+}>
+
+<TabItem value="rhel">
+```shell
 sudo systemctl restart sshd
 ```
+</TabItem>
 
-4. Log in to the control machine using the `eloq` user account, and then attempt to log in to the target machine's IP address using SSH. If you can log in without entering a password, SSH mutual trust has been successfully configured.
+<TabItem value="ubuntu">
+```shell
+sudo systemctl restart ssh
+```
+</TabItem>
+</Tabs>
+
+5. Log in to the control machine using the `eloq` user account, and then attempt to log in to the target machine's IP address using SSH. If you can log in without entering a password, SSH mutual trust has been successfully configured.
 
 ```
 ssh 10.0.0.1
 ```
 
 ```
-[eloq@10.0.0.1 ~]$
+eloq@10.0.0.1:~$
 ```
 
-5. After logging in to the target machine as the `eloq` user, run the following command. If everything is fine, then passwordless sudo for the `eloq` user has been successfully configured.
+6. After logging in to the target machine as the `eloq` user, run the following command. If everything is fine, then passwordless sudo for the `eloq` user has been successfully configured.
 
 ```
 sudo ls
