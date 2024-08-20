@@ -24,50 +24,23 @@ wget https://download.eloqdata.com/eloqsql/dm/eloqdm-helper.tar.gz
 
 ### Deploy a DM cluster
 
-1. Prepare `config` and `logs` directories.
+1. Untar eloqdm and
 
 ```shell
-cd eloqdm
-mkdir config
-mkdir logs
+# supporse we download eloqdm in /data directory
+cd /data
+tar -zxvf eloqdm-0.4.3-linux-amd64.tar.gz
+cd EloqDM
+export PATH=$PATH:${PWD}/bin
 ```
 
-2. Generate DM Master configuration file.
-
-```shell
-cat > config/dm-master.toml <<EOF
-name = "master"
-
-log-level = "info"
-log-file = "logs/dm-master.log"
-
-master-addr = "127.0.0.1:8261"
-peer-urls = "127.0.0.1:8291"
-initial-cluster = "master=http://127.0.0.1:8291"
-EOF
-```
-
-3. Generate DM Worker configuration file.
-
-```shell
-cat > config/dm-worker.toml <<EOF
-name = "worker"
-
-log-level = "info"
-log-file = "logs/dm-worker.log"
-
-worker-addr = "127.0.0.1:8262"
-join = "127.0.0.1:8261"
-EOF
-```
-
-4. Start DM Master.
+2. Start DM Master.
 
 ```shell
 nohup ./dm-master -config config/dm-master.toml &
 ```
 
-5. Start DM Worker.
+3. Start DM Worker.
 
 ```shell
 nohup ./dm-worker -config config/dm-worker.toml &
@@ -75,23 +48,64 @@ nohup ./dm-worker -config config/dm-worker.toml &
 
 ### Prepare the data source
 
-1. Create a configuration file for each data source as follows:
+1. Edit configuration file for each data source as follows:
 
 ```shell
-cat > config/source.yaml <<EOF
+vi config/source.yaml
+```
+
+```
 source-id: "mysql"
 from:
   host: "127.0.0.1"
   user: "mysql-user"
   password: "mysql-pwd"
   port: 3306
-EOF
 ```
 
 2. Register the source the DM cluster.
 
 ```shell
-./dmctl --master-addr=127.0.0.1:8261 operate-source create config/source.yaml
+./bin/dmctl --master-addr=127.0.0.1:8261 operate-source create config/source.yaml
+```
+
+### Migrate archived table using eloqdm-helper
+
+To limit the traffic of source and target database during migration of archived table, we supply a dm-helper tool to migrate archived table one by one.
+
+Note that eloqdm-helper only support `full` mode and can only be used for archived tables.
+
+1. Untar eloqdm-helper
+
+```
+tar -zxvf eloqdm-helper.tar.gz
+cd serial_tasks
+```
+
+2. Install command tool `jq`
+
+```shell
+# centos
+sudo yum install jq
+# ubuntu
+sudo apt install jq
+```
+
+3. Edit the task config template file `task_temp.yaml` to fill correct ip, user, password information.
+
+```shell
+vim task_temp.yaml
+```
+
+4. Prepare the `tables_in.txt` to include all the archived tables in source database.
+
+5. Execute `serial.sh` to migrate table to EloqSQL one to one.
+
+```shell
+# Please replace `MASTER_ADDR` in this script with the address of DM master.
+
+nohup bash serial.sh > out.txt 2>&1 &
+tail -f out.txt
 ```
 
 ### Create a data migration task
