@@ -46,6 +46,14 @@ module.exports = {
       defer: true,
     },
     {src: 'https://snack.expo.dev/embed.js', defer: true},
+    {
+      src: 'https://www.googletagmanager.com/gtag/js?id=G-1321W6Q1MZ',
+      async: true,
+    },
+    {
+      src: 'js/custom-script.js',
+      async: true,
+    },
   ],
   favicon: 'img/eloqdata_logo.png',
   titleDelimiter: '·',
