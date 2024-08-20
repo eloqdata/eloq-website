@@ -2,13 +2,28 @@ import React from "react";
 import Layout from "@theme/Layout";
 import FormField from "@site/src/components/FormField";
 import "./DownloadPage.css"; // Create and import your CSS file
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const ContactPage: React.FC = () => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [company, setCompany] = useState<string>("");
   const [message, setMessage] = useState<string>("");
+
+  useEffect(() => {
+    // Fetch the IP address and set it in the hidden input field
+    fetch("https://api.ipify.org?format=json")
+      .then((response) => response.json())
+      .then((data) => {
+        const ipInput = document.getElementById(
+          "ip_address"
+        ) as HTMLInputElement;
+        if (ipInput) {
+          ipInput.value = data.ip;
+        }
+      })
+      .catch((error) => console.error("Error fetching IP address:", error));
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -169,6 +184,9 @@ const ContactPage: React.FC = () => {
 
                 <label htmlFor="email">Email:</label>
                 <input type="email" id="email" name="email" />
+
+                {/* Hidden input field to store IP address */}
+                <input type="hidden" id="ip_address" name="ip_address" />
 
                 <button type="submit">Download</button>
               </form>
