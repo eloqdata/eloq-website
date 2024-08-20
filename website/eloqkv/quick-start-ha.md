@@ -19,7 +19,20 @@ For step-by-step guidance, please check out the previous document:
 
 - [Deploy Single Node Cluster](./quick-start)
 
-## 3. Initialize the cluster topology file
+## 3. Enable Persistent Data Store and WAL for Durability
+
+Template EloqKV configuration file `EloqKv.ini` can be found in the `.eloqctl/config/` directory.
+
+To deploy a highly available cluster, you need to first enable persistent data dtore and WAL feature in `EloqKv.ini`.
+
+```
+# set it to all to turn on persistent storage for all databases
+enable_data_store=all
+# set it to all to turn on WAL for all databases
+enable_wal=all
+```
+
+## 4. Initialize the cluster topology file
 
 Example cluster topology files can be found in the `.eloqctl/config/examples/` directory.
 
@@ -95,7 +108,6 @@ For detailed explanations for each configuration option in the YAML file, please
 
 - **`tx_service.host`**:  
   _Type_: `List of Strings`  
-  _Value_: `[10.0.0.1, 10.0.0.2, 10.0.0.3]`  
   The transaction cluster is deployed across three nodes: 10.0.0.1, 10.0.0.2, and 10.0.0.3. Data is sharded among these nodes, with each node responsible for a portion of the data. If one node fails, the remaining nodes will take over the data from the failed node and continue to serve client requests seamlessly.
 
 - **`log_service.nodes`**:  
@@ -104,18 +116,17 @@ For detailed explanations for each configuration option in the YAML file, please
 
 - **`log_service.replica`**:  
   _Type_: `Integer`  
-  _Value_: `3`  
   Set the number of replicas for the log service to 3. This ensures that each WAL log record is replicated across three log nodes. With this setup, the logs will be preserved even in the event of a node failure or disk crash.
 
 - **`storage_service.cassandra.host`**:  
   _Type_: `List of Strings`  
-  _Value_: `[10.0.0.4, 10.0.0.5, 10.0.0.6]`  
-  When deploying EloqKV with Cassandra as the persistent storage engine, the compute and storage components are fully decoupled. In this example, Cassandra is deployed on three separate machines.
+  When deploying EloqKV with Cassandra as the persistent storage engine, the compute and storage components are fully decoupled. In this example, Cassandra is deployed on three separate machines:
+  10.0.0.4, 10.0.0.5, and 10.0.0.6.
 
 - **`monitor`**  
   Prometheus and grafana are installed on a separate host at 10.0.0.7.
 
-## 4. Run the deployment command
+## 5. Run the deployment command
 
 After you modified the `eloqkv_cassandra.yaml`. Use the `eloqctl launch` command to provision an EloqKV cluster
 
