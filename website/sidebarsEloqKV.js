@@ -24,7 +24,7 @@ const sidebars = {
       'upgrade',
       'prerequisite',
     ],
-    Monitor: ['monitor'],
+    Manage: ['monitor', 'configuration'],
     'Redis Comaptibility': ['kvstore_compatibility', 'known-limit'],
     'Command Reference': [
       {
