@@ -86,7 +86,7 @@ const CompanyPage: React.FC = () => {
           <br />
           {/* Office Locations Section */}
           <section className="offices-section">
-            <h2 className="mission-heading">Join Us</h2>
+            <h2 className="mission-heading">Office Locations</h2>
             <br />
             <div className="office-locations">
               <div className="office">
