@@ -1,8 +1,8 @@
 ---
-title: EloqKV Redis Command Compatibility
+title: EloqKV Compatibility with Redis Commands
 ---
 
-# EloqKV Redis Command Compatibility
+# EloqKV Compatibility with Redis Commands
 
 ## Hash
 
