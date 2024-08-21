@@ -25,7 +25,7 @@ const sidebars = {
       'prerequisite',
     ],
     Monitor: ['monitor'],
-    'Redis Comaptibility': ['kvstore_compatibility'],
+    'Redis Comaptibility': ['kvstore_compatibility', 'known-limit'],
     'Command Reference': [
       {
         type: 'category',
