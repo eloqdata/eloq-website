@@ -89,7 +89,7 @@ it in the configuration file.
 ip=127.0.0.1
 port=6379
 
-# It is recommended to set core_number to approximately 70% of the total available
+# It is recommended to set core_number to approximately 80% of the total available
 # cores for optimal performance.
 core_number=3
 
@@ -102,7 +102,7 @@ enable_data_store=none
 # Whether to enable WAL log
 enable_wal=none
 
-# Where to store log data
+# Where to store raft log data
 path=data
 
 # It is recommended to set event_dispatcher_num to one-seventh of core_number
