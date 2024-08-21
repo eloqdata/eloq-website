@@ -129,29 +129,39 @@
 
 .office-locations {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
 }
 
 .office {
-  width: 24%;
-  background-color: #2a2a2a;
+  width: 28%;
+  background-color: #444444;
   padding: 10px;
   border-radius: 8px;
   margin-bottom: 60px;
   margin-bottom: 20px;
-  margin-left: 5%; /* Adds margin to the left of each office box */
-  margin-right: 5%; /* Adds margin to the right of each office box */
+  margin-right: 10%; /* Adds margin to the right of each office box */
+  box-shadow: 0 10px 16px rgba(210, 240, 220, 0.5); /* Stronger shadow with increased blur and opacity */
+  transition: transform 0.3s, background-color 0.3s;
+  color: #ffffff; /* Ensure the text is white */
+  border-radius: 8px;
 }
 
 .office h3 {
   font-size: 1.5rem;
-  color: #f2f2f2;
+  #color: #00bcd4; /* A brighter, contrasting color for headings */
+  color: rgb(120, 200, 244);
 }
 
 .office p {
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: #b3b3b3;
+  line-height: 1.6; /* Increased line height for better text spacing */
+}
+
+.office:hover {
+  background-color: #3a3a3a; /* Slightly different background on hover */
+  transform: translateY(-5px); /* Lift the box slightly on hover */
 }
 
 .join-us-section {
