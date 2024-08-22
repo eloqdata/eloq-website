@@ -1,5 +1,5 @@
 ---
-title: 'Benchmarking: Memory Cache Mode'
+title: 'Benchmarking: Memory Cache Mode I'
 authors: eloq
 date: 2024-08-13
 tags: [Company]
@@ -11,7 +11,7 @@ In this blog, we will benchmark **EloqKV** in its memory cache mode, focusing fi
 
 ## Single Node Performance
 
-In the first scenario, we compare the performance of EloqKV with DragonflyDB. The goal of this comparison is to evaluate the performance of EloqKV in pure memory mode, without enabling persistent storage and transactional features.
+In the first scenario, we compare the performance of EloqKV with Redis and DragonflyDB. The goal of this comparison is to evaluate the performance of EloqKV in pure memory mode, without enabling persistent storage and transactional features.
 
 ### Hardware and Software Specification
 
@@ -57,7 +57,7 @@ Follow link [Install Redis](https://redis.io/docs/latest/operate/oss_and_stack/i
 To assess EloqKV’s write performance, we run memtier_benchmark with ratio of 1:0 (write-only) with the following configuration:
 
 ```
-memtier_benchmark -t $thread_num -c $client_num -s $server_ip -p $server_port --distinct-client-seed --ratio=1:0 --key-prefix="kv_" --key-minimum=1 --key-maximum=50000000 --random-data --data-size=128 --hide-histogram --test-time=300
+memtier_benchmark -t $thread_num -c $client_num -s $server_ip -p $server_port --distinct-client-seed --ratio=1:0 --key-prefix="kv_" --key-minimum=1 --key-maximum=5000000 --random-data --data-size=128 --hide-histogram --test-time=300
 ```
 
 - Thread Number (-t): Specifies the number of threads for parallel execution, which we have set to a fixed value of 32.
@@ -87,7 +87,7 @@ Right Y-axis: Measures the Latency (P999).
 For the read-only workload, we adjusted the ratio to 0:1 (read-only):
 
 ```
-memtier_benchmark -t $thread_num -c $client_num -s $server_ip -p $server_port --distinct-client-seed --ratio=0:1 --key-prefix="kv_" --key-minimum=1 --key-maximum=50000000 --random-data --data-size=128 --hide-histogram --test-time=300
+memtier_benchmark -t $thread_num -c $client_num -s $server_ip -p $server_port --distinct-client-seed --ratio=0:1 --key-prefix="kv_" --key-minimum=1 --key-maximum=5000000 --random-data --data-size=128 --hide-histogram --test-time=300
 ```
 
 - Ratio (--ratio): Set to 0:1 for read-only operations.
@@ -109,7 +109,7 @@ Again, **EloqKV** and DragonflyDB both excel in performance compared to Redis, p
 Finally, the mixed workload with a 1:10 ratio:
 
 ```
-memtier_benchmark -t $thread_num -c $client_num -s $server_ip -p $server_port --distinct-client-seed --ratio=1:10 --key-prefix="kv_" --key-minimum=1 --key-maximum=50000000 --random-data --data-size=128 --hide-histogram --test-time=300
+memtier_benchmark -t $thread_num -c $client_num -s $server_ip -p $server_port --distinct-client-seed --ratio=1:10 --key-prefix="kv_" --key-minimum=1 --key-maximum=5000000 --random-data --data-size=128 --hide-histogram --test-time=300
 ```
 
 - Ratio (--ratio): Set to 1:10 for mixed write-read operations.
