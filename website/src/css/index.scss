@@ -981,9 +981,14 @@ a {
   height: 440px; /* Set a fixed height */
   padding: 20px;
   text-align: center;
-  border: 1px solid #ddd;
+  border: 3px solid #ddd;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: auto; /* Handles overflow if the content is too long */
   box-sizing: border-box;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.feature-card:hover {
+  background-color: #3a3a3a; /* Slightly different background on hover */
+  transform: translateY(-5px); /* Lift the box slightly on hover */
 }
