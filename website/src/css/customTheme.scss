@@ -413,6 +413,10 @@ html[data-theme="dark"] {
     table thead tr {
       background-color: var(--ifm-menu-color-background-active);
     }
+    table thead th {
+      background-color: #708090 !important; /* Change this to your desired color */
+      color: black;
+    }
 
     .prism-code {
       @extend %scrollbar-style-dark;

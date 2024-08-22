@@ -11,7 +11,7 @@ In this blog, we will benchmark **EloqKV** in its memory cache mode, focusing fi
 
 ## Single Node Performance
 
-In the first scenario, we compare the performance of EloqKV with Redis and DragonflyDB. The goal of this comparison is to evaluate the performance of EloqKV in pure memory mode, without enabling persistent storage and transactional features.
+In the first scenario, we compare the performance of **EloqKV** with Redis and DragonflyDB. The goal of this comparison is to evaluate the performance of **EloqKV** in pure memory mode, without enabling persistent storage and transactional features.
 
 ### Hardware and Software Specification
 
@@ -46,7 +46,7 @@ Client Machine:
 
 ### Software Deployment and Configuration
 
-Follow link [Get Started](/eloqkv/install-from-binary) to setup EloqKV.
+Follow link [Get Started](/eloqkv/install-from-binary) to setup **EloqKV**.
 
 Follow link [Install from Binary](https://www.dragonflydb.io/docs/getting-started/binary) to setup Dragonflydb.
 
@@ -54,7 +54,7 @@ Follow link [Install Redis](https://redis.io/docs/latest/operate/oss_and_stack/i
 
 ### Experiment I: Write-Only Workload
 
-To assess EloqKV’s write performance, we run memtier_benchmark with ratio of 1:0 (write-only) with the following configuration:
+To assess **EloqKV**’s write performance, we run memtier_benchmark with ratio of 1:0 (write-only) with the following configuration:
 
 ```
 memtier_benchmark -t $thread_num -c $client_num -s $server_ip -p $server_port --distinct-client-seed --ratio=1:0 --key-prefix="kv_" --key-minimum=1 --key-maximum=5000000 --random-data --data-size=128 --hide-histogram --test-time=300
@@ -66,7 +66,7 @@ memtier_benchmark -t $thread_num -c $client_num -s $server_ip -p $server_port --
 
 #### Results
 
-Below are the results of the write-only workload, presented in a graph that illustrates the Redis, EloqKV & Dragonflydb's throughput and latency across varying thread numbers, simulating different levels of concurrent database access.
+Below are the results of the write-only workload, presented in a graph that illustrates the Redis, **EloqKV** & Dragonflydb's throughput and latency across varying thread numbers, simulating different levels of concurrent database access.
 
 X-axis: Represents the varying thread numbers employed during the benchmark, simulating different levels of concurrent database access.
 
@@ -80,7 +80,7 @@ Right Y-axis: Measures the Latency (P999).
 </div>
 </p>
 
-**EloqKV** and DragonflyDB both outperform Redis due to their support for multiple worker threads. EloqKV delivers higher throughput than DragonflyDB in low-concurrency scenarios. However, as concurrency increases, **EloqKV**'s throughput and latency become comparable to DragonflyDB's. Thus, we can conclude that **EloqKV** is a robust cache solution, particularly well-suited for write-heavy workloads.
+**EloqKV** and DragonflyDB both outperform Redis due to their support for multiple worker threads. **EloqKV** delivers higher throughput than DragonflyDB in low-concurrency scenarios. However, as concurrency increases, **EloqKV**'s throughput and latency become comparable to DragonflyDB's. Thus, we can conclude that **EloqKV** is a robust cache solution, particularly well-suited for write-heavy workloads.
 
 ### Experiment II: Read-Only Workload
 
@@ -124,10 +124,10 @@ The following graph presents the results of the mixed read-write workload, showc
 </div>
 </p>
 
-Even in this balanced scenario, **EloqKV** and DragonflyDB both outperform Redis, largely due to their capacity to utilize multiple worker threads. In low-concurrency scenarios, **EloqKV** delivers superior throughput. However, as concurrency increases, its performance in terms of both throughput and latency becomes comparable to that of DragonflyDB. Similar to other workloads, EloqKV proves to be an effective solution, particularly for mixed read-write workloads.
+Even in this balanced scenario, **EloqKV** and DragonflyDB both outperform Redis, largely due to their capacity to utilize multiple worker threads. In low-concurrency scenarios, **EloqKV** delivers superior throughput. However, as concurrency increases, its performance in terms of both throughput and latency becomes comparable to that of DragonflyDB. Similar to other workloads, **EloqKV** proves to be an effective solution, particularly for mixed read-write workloads.
 
 ## Scaling to Cluster Mode
 
-While this blog focuses on single-node performance, the next post will delve into the scalability of EloqKV when deployed in cluster mode. We will explore how it handles distributed workloads, providing insights into its capability to maintain performance as it scales horizontally.
+While this blog focuses on single-node performance, the next post will delve into the scalability of **EloqKV** when deployed in cluster mode. We will explore how it handles distributed workloads, providing insights into its capability to maintain performance as it scales horizontally.
 
-Stay tuned for our upcoming benchmarks on EloqKV's cluster mode performance!
+Stay tuned for our upcoming benchmarks on **EloqKV**'s cluster mode performance!
