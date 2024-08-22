@@ -97,8 +97,8 @@ Below is a detailed description of each configuration variable:
 ### `rocksdb_storage_path`
 
 - Description: The directory where RocksDB stores its data when used as the persistent storage engine. For improved performance during checkpoints and cache miss reads, RocksDB can be configured to store data on a separate disk."
-- Category: [storage]
-- Commandline: --storage_rocksdb_storage_path=value
+- Category: [store]
+- Commandline: --rocksdb_storage_path=value
 - Scope: Global
 - Data Type: String
 - Default Value: rocksdb_data
