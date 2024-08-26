@@ -42,7 +42,7 @@ Client Machine:
 - OS version: Ubuntu 22.04
 - Redis version: 6.0.16
 - DragonflyDB version: 1.21.2
-- EloqKV version: 0.6.6
+- EloqKV version: 0.6.9
 
 ### Software Deployment and Configuration
 
@@ -76,11 +76,11 @@ Right Y-axis: Measures the Latency (P999).
 
 <p align="center">
 <div style={{ width: '640px', textAlign: 'center'}}>
-![](img/eloqkv_dragon_redis_set.png)
+![](img/eloqkv_dragon_redis_set_new.png)
 </div>
 </p>
 
-**EloqKV** and DragonflyDB both outperform Redis due to their support for multiple worker threads. **EloqKV** delivers higher throughput than DragonflyDB in low-concurrency scenarios. However, as concurrency increases, **EloqKV**'s throughput and latency become comparable to DragonflyDB's. Thus, we can conclude that **EloqKV** is a robust cache solution, particularly well-suited for write-heavy workloads.
+**EloqKV** and DragonflyDB both outperform Redis due to their support for multiple worker threads. **EloqKV** delivers the same high throughput and low latency as DragonflyDB across various concurrency scenarios. Thus, we can conclude that **EloqKV** is a robust cache solution, particularly well-suited for write-heavy workloads.
 
 ### Experiment II: Read-Only Workload
 
@@ -98,11 +98,11 @@ The following graph displays the results of the read-only workload, highlighting
 
 <p align="center">
 <div style={{ width: '640px', textAlign: 'center'}}>
-![](img/eloqkv_dragon_redis_get.png)
+![](img/eloqkv_dragon_redis_get_new.png)
 </div>
 </p>
 
-Again, **EloqKV** and DragonflyDB both excel in performance compared to Redis, primarily due to their ability to leverage multiple worker threads. In scenarios with low concurrency, **EloqKV** demonstrates superior throughput. However, as concurrency levels rise, its performance, in terms of throughput, aligns closely with that of DragonflyDB. **EloqKV** exhibits slightly higher latency compared to DragonflyDB, primarily because it has not yet implemented io_uring for enhanced network I/O, a feature currently under development.
+Again, **EloqKV** and DragonflyDB both excel in performance compared to Redis, primarily due to their ability to leverage multiple worker threads. **EloqKV** offers similar throughput to DragonflyDB. While **EloqKV** exhibits slightly higher latency compared to DragonflyDB, primarily because it has not yet implemented io_uring for enhanced network I/O, a feature currently under development.
 
 ### Experiment III: Mixed Write-Read Workload
 
@@ -120,11 +120,11 @@ The following graph presents the results of the mixed read-write workload, showc
 
 <p align="center">
 <div style={{ width: '640px', textAlign: 'center'}}>
-![](img/eloqkv_dragon_redis_setget.png)
+![](img/eloqkv_dragon_redis_setget_new.png)
 </div>
 </p>
 
-Even in this balanced scenario, **EloqKV** and DragonflyDB both outperform Redis, largely due to their capacity to utilize multiple worker threads. In low-concurrency scenarios, **EloqKV** delivers superior throughput. However, as concurrency increases, its performance in terms of both throughput and latency becomes comparable to that of DragonflyDB. Similar to other workloads, **EloqKV** proves to be an effective solution, particularly for mixed read-write workloads.
+Even in this balanced scenario, **EloqKV** and DragonflyDB both outperform Redis, largely due to their capacity to utilize multiple worker threads. **EloqKV** exhibits similar throughput to DragonflyDB. As concurrency increases, **EloqKV** shows a slightly higher P999 latency than DragonflyDB, but it remains under 4ms even at 1024 concurrent connections. Similar to other workloads, **EloqKV** proves to be an effective solution, particularly for mixed read-write workloads.
 
 ## Scaling to Cluster Mode
 
