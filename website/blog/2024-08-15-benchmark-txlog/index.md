@@ -7,7 +7,7 @@ tags: [Company]
 
 **EloqKV** is a Redis API-compatible, transactional, distributed key-value database designed for scalability, high througput and low latency.
 
-In our previous blog, we benchmarked **EloqKV** in memory cache mode, discussing both single-node and cluster performance. In this post, we delve into its write performance in transaction mode. The benchmarks were conducted using the memtier-benchmark tool, evaluating write-only, read-only, and mixed read-write workloads.
+In our previous blog, we benchmarked **EloqKV** in memory cache mode, discussing both single-node and cluster performance. In this post, we delve into its write performance in transaction mode. The benchmarks were conducted using the memtier-benchmark tool.
 
 ### Hardware and Software Specification
 
