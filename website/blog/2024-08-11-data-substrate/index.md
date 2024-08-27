@@ -99,7 +99,7 @@ Modularity also changes how a database scales. Conventionally, a database either
 
 While we believe ACID transactions are essential to applications, we also believe that ACID transactions should be optional such that applications that do not need them shall not pay the cost. In Data Substrate, this is achieved by disabling some modules or bypass ACID transaction logics. For example, by disabling the log, the database drops durability and becomes a cache system.
 
-## Incarnation
+## EloqKV and Beyond
 
 Data Substrate opens the door to many opportunities. Regardless of whether you are building a cache, an in-memory DB, or a cloud-native DB for a certain data model, you just need to place a query parser and an execution engine on top of the Data Substrate, and you are all set. You get an elastic, performant and fault tolerant operational database.
 

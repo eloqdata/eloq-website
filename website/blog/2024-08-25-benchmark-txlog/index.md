@@ -1,13 +1,13 @@
 ---
-title: 'Benchmarking: Transaction Mode'
+title: 'Benchmark EloqKV as ACID Data Store'
 authors: eloq
-date: 2024-08-15
+date: 2024-08-25
 tags: [Company]
 ---
 
-**EloqKV** is a Redis API-compatible, transactional, distributed key-value database designed for scalability, high througput and low latency.
-
 In our previous blog, we benchmarked **EloqKV** in memory cache mode, discussing both single-node and cluster performance. In this post, we delve into its write performance in transaction mode. The benchmarks were conducted using the memtier-benchmark tool.
+
+<!--truncate-->
 
 ### Hardware and Software Specification
 
@@ -15,23 +15,12 @@ The benchmark was conducted on AWS (region: us-east-1) EC2 instances with the fo
 
 **Server Machine:**
 
-| Service type | Node type   | Node count | Gp3 EBS disk count |
-| ------------ | ----------- | ---------- | ------------------ |
-| EloqKV TX 8x | c7g.8xlarge | 1          | 1                  |
-
-| Service type  | Node type    | Node count | Gp3 EBS disk count |
-| ------------- | ------------ | ---------- | ------------------ |
-| EloqKV TX 12x | c7g.12xlarge | 1          | 1                  |
-
-| Service type | Node type    | Node count | Gp3 EBS disk count |
-| ------------ | ------------ | ---------- | ------------------ |
-| EloqKV Log   | c7g.12xlarge | 1          | up to 10 WAL disks |
-
-**Client Machine:**
-
-| Service type | Node type    | Node count |
-| ------------ | ------------ | ---------- |
-| Memtier      | c6gn.8xlarge | 1          |
+| Service type     | Node type    | Node count | Gp3 EBS disk count |
+| ---------------- | ------------ | ---------- | ------------------ |
+| EloqKV TX 8x     | c7g.8xlarge  | 1          | 1                  |
+| EloqKV TX 12x    | c7g.12xlarge | 1          | 1                  |
+| EloqKV Log       | c7g.12xlarge | 1          | up to 10 WAL disks |
+| client - Memtier | c6gn.8xlarge | 1          | 0                  |
 
 **Software version:**
 

@@ -1,7 +1,7 @@
 ---
 title: Announcing EloqKV
 authors: eloq
-date: 2024-08-12
+date: 2024-08-16
 tags: [Company]
 ---
 

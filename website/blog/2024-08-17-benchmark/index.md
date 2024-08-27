@@ -1,17 +1,19 @@
 ---
-title: 'Benchmarking: Memory Cache Mode I'
+title: 'Benchmark EloqKV as Memory Cache'
 authors: eloq
-date: 2024-08-13
+date: 2024-08-17
 tags: [Company]
 ---
 
-**EloqKV** is a Redis API-compatible, transactional, distributed key-value database designed for scalability, high througput and low latency.
+In this blog, we benchmark **EloqKV** to evaluate it as an in-memory cache, focusing first on single-node performance and later discussing its scalability in cluster mode.
 
-In this blog, we will benchmark **EloqKV** in its memory cache mode, focusing first on single-node performance and later discussing its scalability in cluster mode. The benchmarks are conducted using the memtier-benchmark tool, evaluating write-only, read-only, and mixed read-write workloads.
+<!--truncate-->
+
+The benchmarks are conducted using the [memtier-benchmark](https://github.com/RedisLabs/memtier_benchmark) tool, evaluating write-only, read-only, and mixed read-write workloads.
 
 ## Single Node Performance
 
-In the first scenario, we compare the performance of **EloqKV** with Redis and DragonflyDB. The goal of this comparison is to evaluate the performance of **EloqKV** in pure memory mode, without enabling persistent storage and transactional features.
+We compare the performance of **EloqKV** with Redis and DragonflyDB. The goal of this comparison is to evaluate the performance of **EloqKV** in memory-only mode, without enabling persistent storage and transactional features.
 
 ### Hardware and Software Specification
 
@@ -19,30 +21,16 @@ The benchmark was conducted on AWS (region: us-east-1) EC2 instances with the fo
 
 Server Machine:
 
-| Service type | Node type   | Node count |
-| ------------ | ----------- | ---------- |
-| Redis        | c7g.8xlarge | 1          |
-
-| Service type | Node type   | Node count |
-| ------------ | ----------- | ---------- |
-| DragonflyDB  | c7g.8xlarge | 1          |
-
-| Service type | Node type   | Node count |
-| ------------ | ----------- | ---------- |
-| EloqKV       | c7g.8xlarge | 1          |
-
-Client Machine:
-
-| Service type | Node type    | Node count |
-| ------------ | ------------ | ---------- |
-| Memtier      | c6gn.8xlarge | 1          |
+| Service            | Node type    | Node count |
+| ------------------ | ------------ | ---------- |
+| Redis 6.0.16       | c7g.8xlarge  | 1          |
+| DragonflyDB 1.21.2 | c7g.8xlarge  | 1          |
+| EloqKV 0.6.9       | c7g.8xlarge  | 1          |
+| Client - Memtier   | c6gn.8xlarge | 1          |
 
 **Software version:**
 
 - OS version: Ubuntu 22.04
-- Redis version: 6.0.16
-- DragonflyDB version: 1.21.2
-- EloqKV version: 0.6.9
 
 ### Software Deployment and Configuration
 
@@ -128,6 +116,68 @@ Even in this balanced scenario, **EloqKV** and DragonflyDB both outperform Redis
 
 ## Scaling to Cluster Mode
 
-While this blog focuses on single-node performance, the next post will delve into the scalability of **EloqKV** when deployed in cluster mode. We will explore how it handles distributed workloads, providing insights into its capability to maintain performance as it scales horizontally.
+We compare the performance of a single-node **EloqKV** instance with that of an **EloqKV** cluster to evaluate its linear scalability. In this assessment, **EloqKV** operates in pure memory mode, with persistent storage and transactional features disabled."
 
-Stay tuned for our upcoming benchmarks on **EloqKV**'s cluster mode performance!
+### Hardware and Software Specification
+
+The benchmark was conducted on AWS (region: us-east-1) EC2 instances with the following deployment details:
+
+**Server Machine:**
+
+| Service type         | Node type    | Node count |
+| -------------------- | ------------ | ---------- |
+| EloqKV 0.6.9         | c7g.8xlarge  | 1          |
+| EloqKV 0.6.9 Cluster | c7g.8xlarge  | 3          |
+| Client - Memtier     | c6gn.8xlarge | 3          |
+
+**Software version:**
+
+- OS version: Ubuntu 22.04
+
+### Software Deployment and Configuration
+
+Follow link [Deploy Cluster](/eloqkv/install-from-binary) to setup **EloqKV** cluster.
+
+Note: To enable pure memory mode, please disable persistent storage and turn off WAL (Write-Ahead Logging).
+
+```
+# set it to none to turn off persistent storage for all databases
+enable_data_store=none
+# set it to none to turn off WAL for all databases
+enable_wal=none
+```
+
+### Experiment:
+
+We benchmarked a single-node **EloqKV** with different read-write ratios using the following command:
+
+```
+memtier_benchmark -t 32 -c 20 -s $server_ip -p $server_port --distinct-client-seed --ratio=$ratio --key-prefix="kv_" --key-minimum=1 --key-maximum=5000000 --random-data --data-size=128 --hide-histogram --test-time=300
+```
+
+To assess **EloqKV**’s scalability under different workloads, we ran memtier_benchmark in cluster mode with varying read-write ratios using the following configuration:
+
+```
+memtier_benchmark -t 32 -c 20 --cluster-mode -s $server_ip1 -p $server_port1 -s $server_ip2 -p $server_port2 -s $server_ip3 -p $server_port3 --distinct-client-seed --ratio=$ratio --key-prefix="kv_" --key-minimum=1 --key-maximum=5000000 --random-data --data-size=128 --hide-histogram --test-time=300
+```
+
+- Thread Number (-t): Specifies the number of threads for parallel execution, which we have set to a fixed value of 32.
+- Client Number (-c): Represents the number of clients per thread, which is set to a fixed value of 20. In our experiment, this resulted in a total concurrency of 640, calculated as `thread_num` × `client_num`.
+- Ratio (--ratio): Specifies the write:read ratio of the workload. We tested different workloads with ratios of 1:0, 0:1, and 1:10.
+- Cluster Mode (--cluster-mode): Enables the smart client feature when cluster mode is activated. This allows memtier_benchmark to be aware of the key's mapping to **EloqKV** shards.
+
+#### Results
+
+Below are the results of **EloqKV**'s scalability benchmark, comparing the throughput between a single-node **EloqKV** and a three-node **EloqKV** cluster across various workloads.
+
+X-axis: Represents the different workload types (read/write/mixed) used in the benchmark, simulating a range of real-world scenarios.
+
+Y-axis: Measures the QPS (Queries Per Second).
+
+<p align="center">
+<div style={{ width: '640px', textAlign: 'center'}}>
+![](img/eloqkv_scale.png)
+</div>
+</p>
+
+As we can see, **EloqKV** three nodes cluster's throughput is almost three times higher than the single node **EloqKV** among different types of workload. It verify **EloqKV**'s capability to maintain performance as it scales horizontally. We can conclude that **EloqKV** is a robust cache solution, particularly well-suited for all kinds of workloads.
