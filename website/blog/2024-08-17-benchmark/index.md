@@ -64,7 +64,7 @@ Left Y-axis: Measures the QPS (Queries Per Second).
 Right Y-axis: Measures the Latency (P999).
 
 <p align="center">
-<div style={{ width: '640px', textAlign: 'center'}}>
+<div style={{ width: '720px', textAlign: 'center'}}>
 ![](img/eloqkv_dragon_redis_set_new.png)
 </div>
 </p>
@@ -86,7 +86,7 @@ memtier_benchmark -t $thread_num -c $client_num -s $server_ip -p $server_port --
 The following graph displays the results of the read-only workload, highlighting the throughput and latency of **EloqKV**, Redis, and DragonflyDB across different thread counts, effectively simulating various levels of concurrent database access.
 
 <p align="center">
-<div style={{ width: '640px', textAlign: 'center'}}>
+<div style={{ width: '720px', textAlign: 'center'}}>
 ![](img/eloqkv_dragon_redis_get_new.png)
 </div>
 </p>
@@ -108,7 +108,7 @@ memtier_benchmark -t $thread_num -c $client_num -s $server_ip -p $server_port --
 The following graph presents the results of the mixed read-write workload, showcasing the throughput and latency of **EloqKV**, Redis, and DragonflyDB across varying thread counts, effectively simulating different levels of concurrent database access.
 
 <p align="center">
-<div style={{ width: '640px', textAlign: 'center'}}>
+<div style={{ width: '720px', textAlign: 'center'}}>
 ![](img/eloqkv_dragon_redis_setget_new.png)
 </div>
 </p>
@@ -163,7 +163,7 @@ X-axis: Represents the different workload types (read/write/mixed) used in the b
 Y-axis: Measures the QPS (Queries Per Second).
 
 <p align="center">
-<div style={{ width: '640px', textAlign: 'center'}}>
+<div style={{ width: '720px', textAlign: 'center'}}>
 ![](img/eloqkv_scale.png)
 </div>
 </p>
