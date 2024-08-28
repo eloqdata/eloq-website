@@ -142,6 +142,9 @@ const ContactPage: React.FC = () => {
                   Operating System:
                 </label>
                 <select id="os_type" name="os_type" required>
+                  <option value="" disabled selected>
+                    Please Choose OS Type
+                  </option>
                   <option value="rhel8">RHEL 8</option>
                   <option value="rhel9">RHEL 9</option>
                   <option value="ubuntu20">Ubuntu 20.04</option>
