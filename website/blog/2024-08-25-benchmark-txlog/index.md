@@ -15,15 +15,10 @@ The benchmark was conducted on AWS (region: us-east-1) EC2 instances, with Ubunt
 
 **Server Machine:**
 
-| Service type     | Node type    | Node count | Gp3 EBS disk count |
-| ---------------- | ------------ | ---------- | ------------------ |
-| Kvrocks          | c7gi.8xlarge | 1          | 1                  |
-| EloqKV TX 8x     | c7gi.8xlarge | 1          | 1                  |
-| EloqKV TX 12x    | c7g.12xlarge | 1          | 1                  |
-| EloqKV Log       | c7g.12xlarge | 1          | up to 10 WAL disks |
-| client - Memtier | c6gn.8xlarge | 1          | 0                  |
-
-Node that `EloqKV Log` node and `EloqKV TX 12x` node are only utilized in the disk scaling and CPU scaling experiments.
+| Service type | Node type    | Node count | Local SSD       | Gp3 EBS disk count |
+| ------------ | ------------ | ---------- | --------------- | ------------------ |
+| Kvrocks      | c7gd.8xlarge | 1          | 1 x 1900GB NVME | 1                  |
+| EloqKV       | c7gd.8xlarge | 1          | 1 x 1900GB NVME | 1                  |
 
 EloqKV version 0.6.9 is used for the tests.
 
@@ -87,6 +82,13 @@ memtier_benchmark -t $thread_num -c $client_num -s $server_ip -p $server_port --
 - Thread Number (-t): Specifies the number of threads for parallel execution, which we have set to a fixed value of 80.
 - Client Number (-c): Represents the number of clients per thread. We configured it to 40, 60 and 80 to evaluate different concurrency levels. In our experiment, this resulted in total concurrency values of 3200, 4800 and 6400, calculated as `thread_num` × `client_num`.
 
+**Server Machine:**
+
+| Service type     | Node type    | Node count | Gp3 EBS disk count |
+| ---------------- | ------------ | ---------- | ------------------ |
+| EloqKV Log       | c7g.12xlarge | 1          | up to 10 WAL disks |
+| client - Memtier | c6gn.8xlarge | 1          | 0                  |
+
 #### Results
 
 Below are the results of the write-only workload, which illustrates **EloqKV**'s throughput and latency with different disk across varying thread numbers, simulating different levels of concurrent database access. The following graph shows how disk count impacts the performance of **EloqKV**.
@@ -108,6 +110,13 @@ From the results above, we can observe that as the number of disks increases, th
 ### Experiment III: Scaling CPU
 
 As observed in the experiment above, throughput does not increase further when the number of disks exceeds six. This indicates that the disk is no longer the bottleneck; to achieve higher throughput, scaling the CPU should be the next step. We run the same `memtier-benchmark` workload as in the disk scaling experiment.
+
+**Server Machine:**
+
+| Service type  | Node type    | Node count | Gp3 EBS disk count |
+| ------------- | ------------ | ---------- | ------------------ |
+| EloqKV TX 8x  | c7gi.8xlarge | 1          | 1                  |
+| EloqKV TX 12x | c7g.12xlarge | 1          | 1                  |
 
 #### Result
 
