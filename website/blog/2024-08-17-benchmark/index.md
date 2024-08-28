@@ -17,7 +17,7 @@ We compare the performance of **EloqKV** with Redis and DragonflyDB. The goal of
 
 ### Hardware and Software Specification
 
-The benchmark was conducted on AWS (region: us-east-1) EC2 instances with the following deployment details:
+The benchmark was conducted on AWS (region: us-east-1) EC2 instances with Ubuntu 22.04.
 
 Server Machine:
 
@@ -28,17 +28,18 @@ Server Machine:
 | EloqKV 0.6.9       | c7g.8xlarge  | 1          |
 | Client - Memtier   | c6gn.8xlarge | 1          |
 
-**Software version:**
-
-- OS version: Ubuntu 22.04
-
 ### Software Deployment and Configuration
 
-Follow link [Get Started](/eloqkv/install-from-binary) to setup **EloqKV**.
+We follow the official instructions to setup [**EloqKV**](<(/eloqkv/install-from-binary)>), [DragonflyDB](https://www.dragonflydb.io/docs/getting-started/binary) and [Redis](https://redis.io/docs/latest/operate/oss_and_stack/install/install-redis/).
 
-Follow link [Install from Binary](https://www.dragonflydb.io/docs/getting-started/binary) to setup Dragonflydb.
+For EloqKV, we disable persistent storage and turn off WAL (Write-Ahead Logging) in its `config.ini` file.
 
-Follow link [Install Redis](https://redis.io/docs/latest/operate/oss_and_stack/install/install-redis/) to setup Redis.
+```
+# set it to none to turn off persistent storage for all databases
+enable_data_store=none
+# set it to none to turn off WAL for all databases
+enable_wal=none
+```
 
 ### Experiment I: Write-Only Workload
 
@@ -54,7 +55,7 @@ memtier_benchmark -t $thread_num -c $client_num -s $server_ip -p $server_port --
 
 #### Results
 
-Below are the results of the write-only workload, presented in a graph that illustrates the Redis, **EloqKV** & Dragonflydb's throughput and latency across varying thread numbers, simulating different levels of concurrent database access.
+Below are the results of the write-only workload, presented in a graph that illustrates the Redis, **EloqKV** & DragonflyDB's throughput and latency across varying thread numbers, simulating different levels of concurrent database access.
 
 X-axis: Represents the varying thread numbers employed during the benchmark, simulating different levels of concurrent database access.
 
@@ -120,7 +121,7 @@ We compare the performance of a single-node **EloqKV** instance with that of an 
 
 ### Hardware and Software Specification
 
-The benchmark was conducted on AWS (region: us-east-1) EC2 instances with the following deployment details:
+The benchmark was conducted on AWS (region: us-east-1) EC2 instances with Ubuntu22.04.
 
 **Server Machine:**
 
@@ -130,22 +131,9 @@ The benchmark was conducted on AWS (region: us-east-1) EC2 instances with the fo
 | EloqKV 0.6.9 Cluster | c7g.8xlarge  | 3          |
 | Client - Memtier     | c6gn.8xlarge | 3          |
 
-**Software version:**
-
-- OS version: Ubuntu 22.04
-
 ### Software Deployment and Configuration
 
-Follow link [Deploy Cluster](/eloqkv/install-from-binary) to setup **EloqKV** cluster.
-
-Note: To enable pure memory mode, please disable persistent storage and turn off WAL (Write-Ahead Logging).
-
-```
-# set it to none to turn off persistent storage for all databases
-enable_data_store=none
-# set it to none to turn off WAL for all databases
-enable_wal=none
-```
+Follow link [Deploy Cluster](/eloqkv/install-from-binary) to setup **EloqKV** cluster. We also disable Logging and Persistant Store in all **EloqKV** instances.
 
 ### Experiment:
 

@@ -11,7 +11,7 @@ In our previous blog, we benchmarked **EloqKV** in memory cache mode, discussing
 
 ### Hardware and Software Specification
 
-The benchmark was conducted on AWS (region: us-east-1) EC2 instances with the following deployment details:
+The benchmark was conducted on AWS (region: us-east-1) EC2 instances, with Ubuntu 22.04.
 
 **Server Machine:**
 
@@ -22,10 +22,7 @@ The benchmark was conducted on AWS (region: us-east-1) EC2 instances with the fo
 | EloqKV Log       | c7g.12xlarge | 1          | up to 10 WAL disks |
 | client - Memtier | c6gn.8xlarge | 1          | 0                  |
 
-**Software version:**
-
-- OS version: Ubuntu 22.04
-- EloqKV version: 0.6.9
+EloqKV version 0.6.9 is used for the tests.
 
 ### Software Deployment and Configuration
 
