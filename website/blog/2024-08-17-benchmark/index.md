@@ -5,7 +5,7 @@ date: 2024-08-17
 tags: [Company]
 ---
 
-In this blog, we benchmark **EloqKV** to evaluate it as an in-memory cache, focusing first on single-node performance and later discussing its scalability in cluster mode.
+In this blog, we benchmark **EloqKV** to evaluate it as an in-memory cache, focusing first on single-node performance and later discussing its scalability in cluster mode. In the single node case, we benchmark **EloqKV** against the popular in-memory data structure store [Redis](https://github.com/redis/redis) as well as a new contender [DragonflyDB](https://www.dragonflydb.io), which claims to achieve high performance due to its multi-threaded architecture.
 
 <!--truncate-->
 
