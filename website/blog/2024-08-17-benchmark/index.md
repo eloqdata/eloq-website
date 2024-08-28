@@ -30,7 +30,7 @@ Server Machine:
 
 ### Software Deployment and Configuration
 
-We follow the official instructions to setup [**EloqKV**](<(/eloqkv/install-from-binary)>), [DragonflyDB](https://www.dragonflydb.io/docs/getting-started/binary) and [Redis](https://redis.io/docs/latest/operate/oss_and_stack/install/install-redis/).
+We follow the official instructions to setup [**EloqKV**](/eloqkv/install-from-binary), [DragonflyDB](https://www.dragonflydb.io/docs/getting-started/binary) and [Redis](https://redis.io/docs/latest/operate/oss_and_stack/install/install-redis/).
 
 For EloqKV, we disable persistent storage and turn off WAL (Write-Ahead Logging) in its `config.ini` file.
 

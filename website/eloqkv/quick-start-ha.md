@@ -81,7 +81,7 @@ deployment:
     cassandra:
       host: [10.0.0.4, 10.0.0.5, 10.0.0.6]
       kind: !Internal
-        mirror: "https://dlcdn.apache.org"
+        mirror: "https://download.eloqdata.com"
         version: "4.1.3"
   monitor:
     data_dir: ""
@@ -89,18 +89,18 @@ deployment:
       path: "/mono_metrics"
       port: 18081
     prometheus:
-      download_url: "https://download.eloqdata.com/others/prometheus-2.42.0.linux-amd64.tar.gz"
+      download_url: "https://github.com/prometheus/prometheus/releases/download/v2.42.0/prometheus-2.42.0.linux-amd64.tar.gz"
       port: 9500
       host: 10.0.0.7
     grafana:
-      download_url: "https://download.eloqdata.com/others/grafana-9.3.6.linux-amd64.tar.gz"
+      download_url: "https://dl.grafana.com/oss/release/grafana-9.3.6.linux-amd64.tar.gz"
       port: 3301
       host: 10.0.0.7
     node_exporter:
-      url: "https://download.eloqdata.com/others/node_exporter-1.5.0.linux-amd64.tar.gz"
+      url: "https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_exporter-1.5.0.linux-amd64.tar.gz"
       port: 9200
     cassandra_collector:
-      mcac_agent: "https://download.eloqdata.com/others/datastax-mcac-agent-0.3.4-4.1-beta1.tar.gz"
+      mcac_agent: "https://github.com/datastax/metric-collector-for-apache-cassandra/releases/download/v0.3.4/datastax-mcac-agent-0.3.4-4.1-beta1.tar.gz"
       mcac_port: 9103
 ```
 
