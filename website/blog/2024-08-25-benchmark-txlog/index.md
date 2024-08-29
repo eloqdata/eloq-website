@@ -5,7 +5,7 @@ date: 2024-08-25
 tags: [Company]
 ---
 
-In our previous blog, we benchmarked **EloqKV** in memory cache mode, discussing both single-node and cluster performance. In this post, we delve into its write performance in transaction mode.
+In our previous blog, we benchmarked **EloqKV** in memory cache mode, discussing both single-node and cluster performance. In this post, we delve into its write performance in transaction mode. We first benchmark **EloqKV** when durability is enforced, and then we benchmark it with distributed atomic operations with the Redis _WATCH / MULTI / EXEC_ commands.
 
 <!--truncate-->
 
@@ -13,7 +13,7 @@ All benchmarks were conducted on AWS (region: us-east-1) EC2 instances, with Ubu
 
 ### Comparing with Kvrocks
 
-In the first experiment, we compare EloqKV with Apache [Kvrocks](https://kvrocks.apache.org/), a Redis-compatible NoSQL database that supports persistence. We evaluate the performance of EloqKV and Kvrocks under write-intensive workloads. To ensure data integrity, we enable both Write-Ahead Logging (WAL) and the fsync feature for both databases. For EloqKV, both the transaction service and log service are deployed on the same node (c7gi.8xlarge), utilizing two log workers to write WAL logs.
+In the first experiment, we compare EloqKV with Apache [Kvrocks](https://kvrocks.apache.org/), a Redis-compatible NoSQL database that supports persistence. We evaluate the performance of EloqKV and Kvrocks under write-intensive workloads. To ensure data durability, we enable fsync Write-Ahead Logging (WAL) for both databases. For EloqKV, both the transaction service and log service are deployed on the same node (c7gi.8xlarge). To fully utilize available disk IO, we start two LogService processes to write WAL logs in EloqKV.
 
 ### Hardware and Software Specification
 

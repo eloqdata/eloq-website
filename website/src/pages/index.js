@@ -589,7 +589,7 @@ const features = [
     icon: faExpandArrowsAlt,
     title: 'Scalable and Elastic',
     details: [
-      'Scale-up with multi-core, and scale-out to multiple nodes in a cluster',
+      'Scale-up with multicore, and scale-out to multiple nodes in a cluster',
       'Support dynamic scaling as workload changes, without service disruption (currently in Beta)',
     ],
   },
@@ -671,7 +671,7 @@ const Index = () => {
             <h3>{feature.title}</h3>
             <ul>
               {feature.details.map((detail, i) => (
-                <li key={i}>{detail}</li>
+                <p>{detail}</p>
               ))}
             </ul>
           </div>
