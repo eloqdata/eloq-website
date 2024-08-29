@@ -19,10 +19,10 @@ In the first experiment, we compare EloqKV with Apache [Kvrocks](https://kvrocks
 
 **Server Machine:**
 
-| Service type | Node type    | Node count | Local SSD       | EBS gp3 volume count |
-| ------------ | ------------ | ---------- | --------------- | -------------------- |
-| Kvrocks      | c7gd.8xlarge | 1          | 1 x 1900GB NVME | 1                    |
-| EloqKV       | c7gd.8xlarge | 1          | 1 x 1900GB NVME | 1                    |
+| Service type | Node type    | Node count | Local SSD       | EBS gp3 volume |
+| ------------ | ------------ | ---------- | --------------- | -------------- |
+| Kvrocks      | c7gd.8xlarge | 1          | 1 x 1900GB NVME | 1              |
+| EloqKV       | c7gd.8xlarge | 1          | 1 x 1900GB NVME | 1              |
 
 For EloqKV, to enable transaction mode, we enable persistent storage and turn on WAL (Write-Ahead Logging).
 
@@ -72,10 +72,10 @@ Kvrocks does not support writing redo logs across multiple disks, so this experi
 
 **Server Machine:**
 
-| Service type     | Node type    | Node count | EBS gp3 volume count |
-| ---------------- | ------------ | ---------- | -------------------- |
-| EloqKV Log       | c7g.12xlarge | 1          | up to 10             |
-| client - Memtier | c6gn.8xlarge | 1          | 0                    |
+| Service type     | Node type    | Node count | EBS gp3 volume |
+| ---------------- | ------------ | ---------- | -------------- |
+| EloqKV Log       | c7g.12xlarge | 1          | up to 10       |
+| client - Memtier | c6gn.8xlarge | 1          | 0              |
 
 Workload is driven by memtier_benchmark.
 
@@ -112,10 +112,10 @@ As observed in the experiment above, throughput does not increase further when t
 
 **Server Machine:**
 
-| Service type  | Node type    | Node count | EBS gp3 volume count |
-| ------------- | ------------ | ---------- | -------------------- |
-| EloqKV TX 8x  | c7gi.8xlarge | 1          | 1                    |
-| EloqKV TX 12x | c7g.12xlarge | 1          | 1                    |
+| Service type  | Node type    | Node count | EBS gp3 volume |
+| ------------- | ------------ | ---------- | -------------- |
+| EloqKV TX 8x  | c7gi.8xlarge | 1          | 1              |
+| EloqKV TX 12x | c7g.12xlarge | 1          | 1              |
 
 #### Result
 
