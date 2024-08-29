@@ -5,19 +5,17 @@ date: 2024-08-17
 tags: [Company]
 ---
 
-In this blog, we benchmark **EloqKV** to evaluate it as an in-memory cache, focusing first on single-node performance and later discussing its scalability in cluster mode. In the single node case, we benchmark **EloqKV** against the popular in-memory data structure store [Redis](https://github.com/redis/redis) as well as a new contender [DragonflyDB](https://www.dragonflydb.io), which claims to achieve high performance due to its multi-threaded architecture.
+In this blog, we benchmark **EloqKV** to evaluate it as an in-memory cache, focusing first on single-node performance and later discussing its scalability in cluster mode. In the single node case, we benchmark **EloqKV** against the popular in-memory data structure store [Redis](https://github.com/redis/redis) as well as a recent contender [DragonflyDB](https://www.dragonflydb.io), which claims to achieve high performance due to its multi-threaded worker architecture and a highly optimized implementation leveraging modern innovations such as [io_uring](https://en.wikipedia.org/wiki/Io_uring).
 
 <!--truncate-->
 
-The benchmarks are conducted using the [memtier-benchmark](https://github.com/RedisLabs/memtier_benchmark) tool, evaluating write-only, read-only, and mixed read-write workloads.
+All benchmarks were conducted on AWS (region: us-east-1) EC2 instances, with Ubuntu 22.04. Workloads were generated using the [memtier-benchmark](https://github.com/RedisLabs/memtier_benchmark) tool.
 
 ## Single Node Performance
 
-We compare the performance of **EloqKV** with Redis and DragonflyDB. The goal of this comparison is to evaluate the performance of **EloqKV** in memory-only mode, without enabling persistent storage and transactional features.
+We compare the performance of **EloqKV** with Redis and DragonflyDB. The goal of this comparison is to evaluate the performance of **EloqKV** in memory-only mode, without persistent storage and transactional features enabled. Both Redis and DragonflyDB have limited [persistency capabilities](https://redis.io/docs/latest/operate/oss_and_stack/management/persistence/). Redis offers two mechanisms for persistency: logging (AOF) and checkpointing (RDB). However, AOF is not a proper implementation of [Write-Ahead-Log (WAL)](https://en.wikipedia.org/wiki/Write-ahead_logging), as data is written to disk asynchronously. RDB periodically saves in-memory state as checkpoints. Therefore, Redis can lose committed data if a node crashes. DragonflyDB currently only supports checkpointing and does not offer AOF. As Redis and DragonflyDB are typically used as pure in-memory caches, we benchmarked EloqKV against them under this configuration.
 
-### Hardware and Software Specification
-
-The benchmark was conducted on AWS (region: us-east-1) EC2 instances with Ubuntu 22.04.
+### Hardware and Software Configurations
 
 Server Machine:
 
@@ -28,9 +26,19 @@ Server Machine:
 | EloqKV 0.6.9       | c7g.8xlarge  | 1          |
 | Client - Memtier   | c6gn.8xlarge | 1          |
 
-### Software Deployment and Configuration
-
 We follow the official instructions to setup [**EloqKV**](/eloqkv/install-from-binary), [DragonflyDB](https://www.dragonflydb.io/docs/getting-started/binary) and [Redis](https://redis.io/docs/latest/operate/oss_and_stack/install/install-redis/).
+
+For Redis, we disable AOF and RDB persistency.
+
+```
+redis-server --save "" --appendonly no
+```
+
+For DragonflyDB, we only need to disable checkpointing since it does not yet support logging.
+
+```
+dragonfly --dbfilename=
+```
 
 For EloqKV, we disable persistent storage and turn off WAL (Write-Ahead Logging) in its `config.ini` file.
 
@@ -41,7 +49,7 @@ enable_data_store=none
 enable_wal=none
 ```
 
-### Experiment I: Write-Only Workload
+### Write-Only Workload
 
 To assess **EloqKV**’s write performance, we run memtier_benchmark with ratio of 1:0 (write-only) with the following configuration:
 
@@ -49,19 +57,19 @@ To assess **EloqKV**’s write performance, we run memtier_benchmark with ratio 
 memtier_benchmark -t $thread_num -c $client_num -s $server_ip -p $server_port --distinct-client-seed --ratio=1:0 --key-prefix="kv_" --key-minimum=1 --key-maximum=5000000 --random-data --data-size=128 --hide-histogram --test-time=300
 ```
 
-- Thread Number (-t): Specifies the number of threads for parallel execution, which we have set to a fixed value of 32.
-- Client Number (-c): Represents the number of clients per thread. We configured it to 4, 8, and 20 to evaluate different concurrency levels. In our experiment, this resulted in total concurrency values of 128, 256, and 640, calculated as `thread_num` × `client_num`.
-- Ratio (--ratio): 1:0 for write-only workload.
+- `-t`: Number of threads, which was set to a fixed value of 32.
+- `-c`: Number of clients per thread. We configured it to 4, 8, 16 and 32 to evaluate different concurrency levels. This resulted in total concurrency of 128, 256, 512 and 1024, calculated as `thread_num × client_num`.
+- `--ratio`: Set\:Get ratio, 1:0 for write-only workload.
 
 #### Results
 
-Below are the results of the write-only workload, presented in a graph that illustrates the Redis, **EloqKV** & DragonflyDB's throughput and latency across varying thread numbers, simulating different levels of concurrent database access.
+Below are the results of the write-only workload.
 
-X-axis: Represents the varying thread numbers employed during the benchmark, simulating different levels of concurrent database access.
+X-axis: Represents the varying concurrencies (`thread_num × client_num`), simulating different levels of concurrent database access.
 
-Left Y-axis: Measures the QPS (Queries Per Second).
+Left Y-axis: Throughput in QPS (Queries Per Second).
 
-Right Y-axis: Measures the Latency (P999).
+Right Y-axis: 99.9 Percentile latency in micro seconds (us).
 
 <p align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
@@ -69,21 +77,19 @@ Right Y-axis: Measures the Latency (P999).
 </div>
 </p>
 
-**EloqKV** and DragonflyDB both outperform Redis due to their support for multiple worker threads. **EloqKV** delivers the same high throughput and low latency as DragonflyDB across various concurrency scenarios. Thus, we can conclude that **EloqKV** is a robust cache solution, particularly well-suited for write-heavy workloads.
+**EloqKV** and DragonflyDB both outperform Redis due to their support for multiple worker threads. **EloqKV** delivers the same high throughput and low latency as DragonflyDB across various concurrency scenarios.
 
-### Experiment II: Read-Only Workload
+### Read-Only Workload
 
-For the read-only workload, we adjusted the ratio to 0:1 (read-only):
+For the read-only workload, we adjusted the Set\:Put ratio to 0:1 (read-only):
 
 ```
 memtier_benchmark -t $thread_num -c $client_num -s $server_ip -p $server_port --distinct-client-seed --ratio=0:1 --key-prefix="kv_" --key-minimum=1 --key-maximum=5000000 --random-data --data-size=128 --hide-histogram --test-time=300
 ```
 
-- Ratio (--ratio): Set to 0:1 for read-only operations.
+- `--ratio`: Set to 0:1 for read-only operations.
 
 #### Results
-
-The following graph displays the results of the read-only workload, highlighting the throughput and latency of **EloqKV**, Redis, and DragonflyDB across different thread counts, effectively simulating various levels of concurrent database access.
 
 <p align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
@@ -91,9 +97,9 @@ The following graph displays the results of the read-only workload, highlighting
 </div>
 </p>
 
-Again, **EloqKV** and DragonflyDB both excel in performance compared to Redis, primarily due to their ability to leverage multiple worker threads. **EloqKV** offers similar throughput to DragonflyDB. While **EloqKV** exhibits slightly higher latency compared to DragonflyDB, primarily because it has not yet implemented io_uring for enhanced network I/O, a feature currently under development.
+Again, **EloqKV** offers similar throughput, while exhibits slightly higher but still very respectable latency compared to DragonflyDB. Both **EloqKV** and DragonflyDB significantly outperform Redis, both in throughput and in latency.
 
-### Experiment III: Mixed Write-Read Workload
+### Mixed Write-Read Workload
 
 Finally, the mixed workload with a 1:10 ratio:
 
@@ -101,11 +107,7 @@ Finally, the mixed workload with a 1:10 ratio:
 memtier_benchmark -t $thread_num -c $client_num -s $server_ip -p $server_port --distinct-client-seed --ratio=1:10 --key-prefix="kv_" --key-minimum=1 --key-maximum=5000000 --random-data --data-size=128 --hide-histogram --test-time=300
 ```
 
-- Ratio (--ratio): Set to 1:10 for mixed write-read operations.
-
-#### Results
-
-The following graph presents the results of the mixed read-write workload, showcasing the throughput and latency of **EloqKV**, Redis, and DragonflyDB across varying thread counts, effectively simulating different levels of concurrent database access.
+- `--ratio`: Set to 1:10 for mixed write-read operations.
 
 <p align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
@@ -113,15 +115,41 @@ The following graph presents the results of the mixed read-write workload, showc
 </div>
 </p>
 
-Even in this balanced scenario, **EloqKV** and DragonflyDB both outperform Redis, largely due to their capacity to utilize multiple worker threads. **EloqKV** exhibits similar throughput to DragonflyDB. As concurrency increases, **EloqKV** shows a slightly higher P999 latency than DragonflyDB, but it remains under 4ms even at 1024 concurrent connections. Similar to other workloads, **EloqKV** proves to be an effective solution, particularly for mixed read-write workloads.
+**EloqKV** exhibits similar throughput to DragonflyDB. As concurrency increases, **EloqKV** shows a slightly higher P999 latency than DragonflyDB, but remains under 4ms even with over a thousand concurrent connections.
 
-## Scaling to Cluster Mode
+### Analysis and Conclusion
 
-We compare the performance of a single-node **EloqKV** instance with that of an **EloqKV** cluster to evaluate its linear scalability. In this assessment, **EloqKV** operates in pure memory mode, with persistent storage and transactional features disabled."
+Based on the previous experiments, we can obtain some interesting observations. In this section, we will give some ( opinionated ) analysis.
+
+#### Single Worker vs Multiple Workers vs Cluster
+
+We can observe that for in-memory caching applications, **EloqKV** and DragonflyDB can significantly outperform _single process_ Redis on a modern multi-core server. The difference is a result of a fundamental [design philosophy](https://redis.io/blog/redis-architecture-13-years-later/) took by Redis. Redis restricts internal in-memory data structure operations to a single worker thread, while multiple IO threads handle networking and persistency. In comparison both **EloqKV** and DragonflyDB allow multiple workers.
+
+There is already plenty of debate on whether the performance comparison is fair, given that Redis is supposed to scale horizontally even on a single server node through deployment as a cluster with multiple instances/shards. However, a cluster and a single server behaves differently. For example, one cannot perform transactional "MULTI" operations cross servers.
+
+Though DragonflyDB avoids the issue of horizontal scaling on a single server node, it was still designed as a _single node server_, not a distributed system. DragonflyDB is not cluster aware, and requires external mechanisms to scale out. Moreover, it also cannot perform "MULTI" operations cross servers. **EloqKV** fully eliminates these issues as **EloqKV** is a full blown distributed transactional database.
+
+#### Do We Really Need to Specialize?
+
+Currently, **EloqKV** lacks a few optimizations such as io_uring based networking support. Due to these limitations, our profiling shows that **EloqKV** is bound by the networking stack when serving the workloads in previous experiments.
+
+Even so, as the experiments demonstrated, **EloqKV** works **almost** as well as DragonflyDB on a workload that DragonflyDB was specifically designed and optimized for. This begs the question of whether designing special database software for limited use cases is profitable. Notice that unlike Redis and DragonflyDB, **EloqKV** is much more than a single node memory cache. Indeed, experiments in the next section and our follow up blog posts will show that **EloqKV** performs very well as a clustered system, as a durable data store, or even as a fully ACID transactional store.
+
+**EloqKV** is based on our [Data Substrate](/blog/2024/08/11/data-substrate) technology. We believe that with this revolutionary technology, users can greatly reduce the complexity of their data management infrastructures by eliminatating many specialized databases for their data management needs.
+
+## Scaling in Cluster Mode
+
+Most key-value caches support horizontal scaling and can operate in a cluster mode. They partition data into multiple slots and distribute the slots to each shards. In a horizontally scaled cluster, KV caches pretty much scales linearly, modulo load imbalances and failure cases. To achieve such scalability, application developers need to understand the concept of "slots" and "shards" and "tags". And so called "cluster-aware" clients need to know the topology of the cluster and direct requests to the proper server where data reside.
+
+Unfortunately, nodes in a cluster may fail. Sometimes external tools (such as [Sentinel](https://redis.io/docs/latest/operate/oss_and_stack/management/sentinel/), [Twemproxy](https://github.com/twitter/twemproxy), [Dragonfly Cloud services](https://www.dragonflydb.io/docs/managing-dragonfly/cluster-mode)) are used to monitor the health and perform fail-over for the cluster. How these tools interact with the clients are never well specified. Clustering for KV cache is notoriously full of pitfalls, and the fundmental reason is that all the KV caches are first designed as a single node process, while clustering is often an afterthought.
+
+**EloqKV** can work as a single node server while leveraging various clustering tools to provide horizontal scalability. In this mode, it can work with all the "smart Redis clients" and provide the same scalability as other caching solutions. However, as a general purpose distributed database, a **EloqKV** cluster can also work as a whole, without exposing cluster details to the clients. A client can just interact with any node in an **EloqKV** cluster without worrying about whether the key is local to the server, how many servers are in the cluster, how data are shareded among the servers, whether there is a failure happening in the cluster, or whether the cluster is reconfiging to dynamically increase or reduce capacity.
+
+Obviously, shielding cluster details has cost. In particular, a node redirecting requests will cause an extra network round trip. In this section, we compare the performance of a single-node **EloqKV** instance with that of an **EloqKV** cluster to evaluate the scalability.
+
+In this assessment, **EloqKV** operates in pure memory mode, with persistent storage and transactional features disabled."
 
 ### Hardware and Software Specification
-
-The benchmark was conducted on AWS (region: us-east-1) EC2 instances with Ubuntu22.04.
 
 **Server Machine:**
 
@@ -130,10 +158,6 @@ The benchmark was conducted on AWS (region: us-east-1) EC2 instances with Ubuntu
 | EloqKV 0.6.9         | c7g.8xlarge  | 1          |
 | EloqKV 0.6.9 Cluster | c7g.8xlarge  | 3          |
 | Client - Memtier     | c6gn.8xlarge | 3          |
-
-### Software Deployment and Configuration
-
-Follow link [Deploy Cluster](/eloqkv/install-from-binary) to setup **EloqKV** cluster. We also disable Logging and Persistant Store in all **EloqKV** instances.
 
 ### Experiment:
 
@@ -148,11 +172,6 @@ To assess **EloqKV**’s scalability under different workloads, we ran memtier_b
 ```
 memtier_benchmark -t 32 -c 20 --cluster-mode -s $server_ip1 -p $server_port1 -s $server_ip2 -p $server_port2 -s $server_ip3 -p $server_port3 --distinct-client-seed --ratio=$ratio --key-prefix="kv_" --key-minimum=1 --key-maximum=5000000 --random-data --data-size=128 --hide-histogram --test-time=300
 ```
-
-- Thread Number (-t): Specifies the number of threads for parallel execution, which we have set to a fixed value of 32.
-- Client Number (-c): Represents the number of clients per thread, which is set to a fixed value of 20. In our experiment, this resulted in a total concurrency of 640, calculated as `thread_num` × `client_num`.
-- Ratio (--ratio): Specifies the write:read ratio of the workload. We tested different workloads with ratios of 1:0, 0:1, and 1:10.
-- Cluster Mode (--cluster-mode): Enables the smart client feature when cluster mode is activated. This allows memtier_benchmark to be aware of the key's mapping to **EloqKV** shards.
 
 #### Results
 
