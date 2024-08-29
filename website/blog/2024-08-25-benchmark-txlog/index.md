@@ -19,10 +19,10 @@ In the first experiment, we compare EloqKV with Apache [Kvrocks](https://kvrocks
 
 **Server Machine:**
 
-| Service type | Node type    | Node count | Local SSD       | Gp3 EBS Volume |
-| ------------ | ------------ | ---------- | --------------- | -------------- |
-| Kvrocks      | c7gd.8xlarge | 1          | 1 x 1900GB NVME | 1              |
-| EloqKV       | c7gd.8xlarge | 1          | 1 x 1900GB NVME | 1              |
+| Service type | Node type    | Node count | Local SSD       | EBS gp3 volume count |
+| ------------ | ------------ | ---------- | --------------- | -------------------- |
+| Kvrocks      | c7gd.8xlarge | 1          | 1 x 1900GB NVME | 1                    |
+| EloqKV       | c7gd.8xlarge | 1          | 1 x 1900GB NVME | 1                    |
 
 For EloqKV, to enable transaction mode, we enable persistent storage and turn on WAL (Write-Ahead Logging).
 
@@ -33,7 +33,7 @@ enable_data_store=all
 enable_wal=all
 ```
 
-Disk performance plays a critical role in write-intensive workloads. Therefore, we conduct benchmarks using both local SSDs and Elastic Block Store (EBS), which are commonly used as WAL log disks in cloud environments. Local SSDs offer low latency and high IOPS, making them ideal for high-performance needs. However, in a cloud setup local data will be lost if the virtual machine (VM) is stopped. On the other hand, EBS provides high availability, allowing the volume to be attached to a new VM if the original VM fails. Moreover, EBS is elastic, enabling precise control over disk size and number to better suit specific requirements. In our case, a 50GB EBS [GP3](https://aws.amazon.com/ebs/volume-types/) volume is plenty for our WAL needs. Such a volume only cost $4 per month while providing 3000 IOPS and 125 MB/s throughput. Given the distinct advantages and limitations of local SSDs and EBS, we conduct our experiments using both types of disks.
+Disk performance plays a critical role in write-intensive workloads. Therefore, we conduct benchmarks using both local SSDs and Elastic Block Store (EBS), which are commonly used as WAL log disks in cloud environments. Local SSDs offer low latency and high IOPS, making them ideal for high-performance needs. However, in a cloud setup local data will be lost if the virtual machine (VM) is stopped. On the other hand, EBS provides high availability, allowing the volume to be attached to a new VM if the original VM fails. Moreover, EBS is elastic, enabling precise control over disk size and number to better suit specific requirements. In our case, a 50GB [EBS gp3](https://aws.amazon.com/ebs/volume-types/) volume is plenty for our WAL needs. Such a volume only cost $4 per month while providing 3000 IOPS and 125 MB/s throughput. Given the distinct advantages and limitations of local SSDs and EBS, we conduct our experiments using both types of disks.
 
 We run `memtier_benchmark` with the following configuration:
 
@@ -72,10 +72,10 @@ Kvrocks does not support writing redo logs across multiple disks, so this experi
 
 **Server Machine:**
 
-| Service type     | Node type    | Node count | Gp3 EBS disk count       |
-| ---------------- | ------------ | ---------- | ------------------------ |
-| EloqKV Log       | c7g.12xlarge | 1          | up to 10 EBS GP3 Volumes |
-| client - Memtier | c6gn.8xlarge | 1          | 0                        |
+| Service type     | Node type    | Node count | EBS gp3 volume count |
+| ---------------- | ------------ | ---------- | -------------------- |
+| EloqKV Log       | c7g.12xlarge | 1          | up to 10             |
+| client - Memtier | c6gn.8xlarge | 1          | 0                    |
 
 Workload is driven by memtier_benchmark.
 
@@ -112,10 +112,10 @@ As observed in the experiment above, throughput does not increase further when t
 
 **Server Machine:**
 
-| Service type  | Node type    | Node count | Gp3 EBS disk count |
-| ------------- | ------------ | ---------- | ------------------ |
-| EloqKV TX 8x  | c7gi.8xlarge | 1          | 1                  |
-| EloqKV TX 12x | c7g.12xlarge | 1          | 1                  |
+| Service type  | Node type    | Node count | EBS gp3 volume count |
+| ------------- | ------------ | ---------- | -------------------- |
+| EloqKV TX 8x  | c7gi.8xlarge | 1          | 1                    |
+| EloqKV TX 12x | c7g.12xlarge | 1          | 1                    |
 
 #### Result
 
