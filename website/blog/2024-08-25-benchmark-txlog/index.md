@@ -33,6 +33,26 @@ enable_data_store=all
 enable_wal=all
 ```
 
+For Kvrocks, we mainly changed two configuration options.
+
+```
+# If yes, the write will be flushed from the operating system
+# buffer cache before the write is considered complete.
+# If this flag is enabled, writes will be slower.
+# If this flag is disabled, and the machine crashes, some recent
+# writes may be lost.  Note that if it is just the process that
+# crashes (i.e., the machine does not reboot), no writes will be
+# lost even if sync==false.
+#
+# Default: no
+# rocksdb.write_options.sync no
+rocksdb.write_options.sync yes
+
+# The number of worker's threads, increase or decrease would affect the performance.
+# workers 8
+workers 24
+```
+
 Disk performance plays a critical role in write-intensive workloads. Therefore, we conduct benchmarks using both local SSDs and Elastic Block Store (EBS), which are commonly used as WAL log disks in cloud environments. Local SSDs offer low latency and high IOPS, making them ideal for high-performance needs. However, in a cloud setup local data will be lost if the virtual machine (VM) is stopped. On the other hand, EBS provides high availability, allowing the volume to be attached to a new VM if the original VM fails. Moreover, EBS is elastic, enabling precise control over disk size and number to better suit specific requirements. In our case, a 50GB [EBS gp3](https://aws.amazon.com/ebs/volume-types/) volume is plenty for our WAL needs. Such a volume only cost $4 per month while providing 3000 IOPS and 125 MB/s throughput. Given the distinct advantages and limitations of local SSDs and EBS, we conduct our experiments using both types of disks.
 
 We run `memtier_benchmark` with the following configuration:
