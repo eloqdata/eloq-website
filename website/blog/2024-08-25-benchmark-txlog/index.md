@@ -5,7 +5,7 @@ date: 2024-08-25
 tags: [Company]
 ---
 
-In our previous blog, we benchmarked **EloqKV** in memory cache mode, discussing both single-node and cluster performance. In this post, we delve into its write performance in transaction mode. We first benchmark **EloqKV** when durability is enforced, and then we benchmark it with distributed atomic operations with the Redis _WATCH / MULTI / EXEC_ commands.
+In our previous blogs, we benchmarked **EloqKV** in memory cache mode, discussing both [single node](/blog/2024/08/22/benchmark-single-node) and [cluster](/blog/2024/08/25/benchmark-cluster) performance. In this post, we delve into its write performance in transaction mode. In this blog, we first benchmark **EloqKV** when durability is enforced. In the next blog, we will benchmark it with distributed atomic operations with the Redis _WATCH / MULTI / EXEC_ commands.
 
 <!--truncate-->
 
@@ -126,9 +126,9 @@ Right Y-axis: The average Latency in ms.
 
 From the results above, we can observe that as the number of disks increases, the throughput scales near linearly when the disk count is 1, 2, and 4, with a corresponding decrease in latency. Adding even more disks continues to boost throughput, but at a slower rate. For 6 and 8 disks, the throughput levels off and remains nearly the same even under high concurrency. This indicates that the disk is no longer the bottleneck.
 
-### Experiment III: Scaling CPU
+### Experiment III: Scaling Up TxServer
 
-As observed in the experiment above, throughput does not increase further when the number of disks exceeds six. This indicates that the disk is no longer the bottleneck; to achieve higher throughput, scaling the CPU should be the next step. We run the same `memtier-benchmark` workload as in the disk scaling experiment.
+As observed in the experiment above, throughput does not increase further when the number of disks exceeds six. This indicates that logging is no longer the bottleneck; to achieve even higher throughput, scaling up the CPU in TxServer could be the next step. Obviously, scaling-out could be another option, but we will leave that to another blog.
 
 **Server Machine:**
 
@@ -147,7 +147,7 @@ The following graph shows how the number of CPU cores affects the performance of
 </div>
 </p>
 
-Adding more disks beyond 8 on a 32-vcore CPU does not significantly increase throughput. By scaling the CPU from 32 to 48 vcores, we can achieve a notable increase in throughput and a decrease in latency. Under heavy concurrency, latency decreases significantly from 10ms to under 8ms when more CPU cores are added.
+Adding more disks beyond 8 on a 32-vcore CPU does not significantly increase throughput. By scaling up the CPU of TxServer from 32 to 48 vcores, we can achieve a notable increase in throughput and a decrease in latency. Under heavy concurrency, latency decreases significantly from 10ms to under 8ms when more CPU cores are added.
 
 ### Analysis and Conclusion
 

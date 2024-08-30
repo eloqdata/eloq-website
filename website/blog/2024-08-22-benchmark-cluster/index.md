@@ -5,7 +5,7 @@ date: 2024-08-22
 tags: [Company]
 ---
 
-In previous blog, we benchmarked **EloqKV** to evaluate it as an in-memory cache, focusing on single-node performance. In this blog, we focus on a cluster of **Eloq** servers.
+In our [previous blog](/blog/2024/08/22/benchmark-single-node), we benchmarked **EloqKV** to evaluate it as an in-memory cache, focusing on single-node performance. In this blog, we focus on a cluster of **Eloq** servers and discuss why **EloqKV** clustering is a fundmentally better solution.
 
 <!--truncate-->
 

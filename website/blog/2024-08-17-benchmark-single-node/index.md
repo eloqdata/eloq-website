@@ -119,7 +119,7 @@ memtier_benchmark -t $thread_num -c $client_num -s $server_ip -p $server_port --
 
 ### Analysis and Conclusion
 
-Based on the previous experiments, we can obtain some interesting observations. In this section, we will give some ( opinionated ) analysis.
+Based on the previous experiments, we can obtain some interesting observations. In this section, we will give some (opinionated) analysis.
 
 #### Single Worker vs Multiple Workers
 
@@ -131,7 +131,7 @@ We do believe that a single threaded design will eventually hit its limitations 
 
 #### Do We Really Need to Specialize?
 
-Compared with DragonflyDB, **EloqKV** currently lacks a few optimizations such as [io_uring](https://en.wikipedia.org/wiki/Io_uring) based networking support. Due to these limitations, our profiling shows that **EloqKV** is bound by the networking stack when serving the workloads in previous experiments.
+Compared with DragonflyDB, **EloqKV** currently lacks a few optimizations such as [io_uring](https://en.wikipedia.org/wiki/Io_uring) based networking support. Due to these limitations, our profiling shows that **EloqKV** is bound by the networking stack when serving the workloads in the experiments.
 
 Even so, as the experiments demonstrated, **EloqKV** works _almost_ as well as DragonflyDB on a workload that DragonflyDB was specifically designed and optimized for. This begs the question of whether designing special database software for limited use cases is profitable. Notice that unlike Redis and DragonflyDB, **EloqKV** is much more than a single node memory cache. Indeed, experiments in the next section and our follow up blog posts will show that **EloqKV** performs very well as a clustered system, as a durable data store, or even as a fully ACID transactional store.
 
