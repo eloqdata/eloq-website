@@ -1,5 +1,5 @@
 ---
-title: 'Benchmark EloqKV as ACID Data Store'
+title: 'EloqKV as Durable Data Store'
 authors: eloq
 date: 2024-08-25
 tags: [Company]
@@ -161,6 +161,6 @@ Adding more disks beyond 8 on a 32-vcore CPU does not significantly increase thr
 
 ### Analysis and Conclusion
 
-In this blog, we evaluate **EloqKV** and show its performance when data durability is strongly enforced. With reasonable hardware, **EloqKV** can sustain over 100,000 writes per second with acceptable latency. While this is lower than the pure in-memory cache performance highlighted in our [previous blog](/blog/2024/08/17/benchmark-single-node), it remains quite suitable for many real-world applications. In fact, when **EloqKV** is used as a durable data store, its performance is comparable to Redis in pure memory mode on similar hardware.
+In this blog, we evaluate **EloqKV** and show its performance when data durability is strongly enforced. On a plain low end server, **EloqKV** can easily sustain over 200,000 writes per second with acceptable latency. While this is lower than the pure in-memory cache performance highlighted in our [previous blog](/blog/2024/08/17/benchmark-single-node), it is still quite suitable for many real-world applications. Notice that this performance number is not much different from what a _single-process_ Redis server can achieve on the same hardware in pure memory mode.
 
-Additionally, we showcase **EloqKV**'s architectural advantage by scaling the LogService to enhance write throughput while maintaining resources used by the TxService. This capability is made possible by our revolutionary [Data Substrate](/blog/2024/08/11/data-substrate) architecture. Imaging scenarios where, despite high volume of updates, the total data volume can easily fit on a single server's memory. **EloqKV**'s full scalability is crucial to support such applications without wasting valuable resources.
+Additionally, we showcase **EloqKV**'s architectural advantage by scaling the LogService to enhance write throughput while maintaining resources used by the TxService. This capability is made possible by our revolutionary [Data Substrate](/blog/2024/08/11/data-substrate) architecture. Considering a scenario where, despite high volume of updates, the total data volume can easily fit on a single server's memory (an example is high-frequency trading). **EloqKV**'s full scalability is crucial to support such applications without wasting valuable resources.
