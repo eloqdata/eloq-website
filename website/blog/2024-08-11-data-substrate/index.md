@@ -30,10 +30,18 @@ At EloqData, our answer to this grand question is **Data Substrate**.
 Data substrate draws inspirations from the canonical design of single-node relational database management systems (RDBMS). To understand where Data Substrate originates, let us revisit what RDBMS does. In a simplified form, a RDBMS kernel contains 4 modules: (1) a disk-resident B+-tree to store data items, (2) a write-ahead log to persist data changes, (3) a buffer pool to cache B+-tree pages in memory, and (4) a lock table to coordinate reads and writes for concurrency control.
 
 <p align="center">
+<div style={{ width: '720px', textAlign: 'center'}}>
+import EnlargeableImage from '@site/src/pages/enlarge_pic';
+
+<EnlargeableImage src={require('./img/blog_ds_1.png').default} alt="Data Substrate Architecture" />
+
+</div></p>
+
+<!-- <p align="center">
 <div style={{ width: '600px', textAlign: 'center'}}>
 ![](img/blog_ds_1.png)
 </div>
-</p>
+</p> -->
 
 Considering a transaction T that reads and updates a data item x. T traverses the B+-tree and searches the buffer pool for each page (①). If there is is a cache miss, T locates the disk-resident page (②) and loads it into the buffer pool (③). T then pins the page containing x in the buffer pool, adds a read lock on x in the lock table (④), reads x (⑤) and unpins the page.
 
@@ -60,34 +68,63 @@ The values of the design principles go beyond RDBMS. Whether the data item is a 
 - _Cache and concurrency control_. Data substrate uses a distributed, in-memory map for cache and concurrency control. We call this map the "TxMap". The map key identifies a data item, and the payload includes the value and meta-data for concurrency control. Accessing a map entry reads/writes the cached value and performs concurrency control. Concurrency control is optional: if the operation is non-transactional or does not require locks, the access does not change the meta-data.
 
 <p align="center">
+<div style={{ width: '720px', textAlign: 'center'}}>
+
+<EnlargeableImage src={require('./img/blog_ds_2.png').default} alt="Data Substrate Architecture 2" />
+
+</div></p>
+
+<!-- <p align="center">
 <div style={{ width: '600px', textAlign: 'center' }}>
 ![](img/blog_ds_2.png)
 </div>
-</p>
+</p> -->
 
 - _Asynchrony_. Changed data items are first flushed to the log and then updated in the TxMap. Updated data items are asynchronously flushed to a persistent store. The persistent store plays the same role as a B+-tree and stores data items in stable storage. The persistent store exposes Get(), Put() APIs for reading and writing data items.
 
 <p align="center">
+<div style={{ width: '720px', textAlign: 'center'}}>
+
+<EnlargeableImage src={require('./img/blog_ds_3.png').default} alt="Data Substrate Architecture 3" />
+
+</div></p>
+
+<!-- <p align="center">
 <div style={{ width: '600px', textAlign: 'center' }}>
 ![](img/blog_ds_3.png)
 </div>
-</p>
+</p> -->
 
 - _Consistency and fault tolerance_. Data substrate maintains the same invariant as RDBMS: (1) a changed data item cannot be evicted from the TxMap until it is flushed to the persistent store, and (2) A fail-over node of the TxMap cannot start serving unless unflushed data items are recovered in the TxMap from the log.
 
 <p align="center">
+<div style={{ width: '720px', textAlign: 'center'}}>
+
+<EnlargeableImage src={require('./img/blog_ds_4.png').default} alt="Data Substrate Architecture 3" />
+
+</div></p>
+
+<!-- <p align="center">
 <div style={{ width: '600px', textAlign: 'center' }}>
 ![](img/blog_ds_4.png)
 </div>
-</p>
+</p> -->
 
 ## Modularity
 
 <p align="center">
+<div style={{ width: '720px', textAlign: 'center'}}>
+
+<EnlargeableImage src={require('./img/substrate_arch.png').default} alt="Data Substrate Architecture 4" />
+
+</div></p>
+
+<!-- <p align="center">
 <div style={{ width: '600px', textAlign: 'center' }}>
 ![](img/substrate_arch.png)
 </div>
-</p>
+</p> -->
+
 What makes Data Substrate unique is modularity. The TxMap exposes APIs for runtime to access data and manage concurrency control. The persistent storage exposes APIs for the TxMap to flush changed data and to retrieve data that have been evicted. The log provides APIs to persist data changes and to ship unflushed data to the TxMap for recovery. Modules communicate with each other via carefully designed APIs, with no assumption about where the other modules are located, how they are implemented, or what hardware resources they use.
 
 Data Substrate and the persistent store is agnostic to the data types. Concurrency control and cache replacement algorithms would not change if a data item represents a row or a JSON document. Log entries contain serialized changes to data items, which are also agnostic to data types. The persistent store indexes data items by identifiers and use the same index structures. In essence, data of different types face the same system challenges and Data Substrate solves them once for all. Building an operational database of a certain data model is greatly simplified by porting a specific query engine on top.

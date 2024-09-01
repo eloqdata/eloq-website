@@ -78,9 +78,17 @@ Right Y-axis: Average latency in milli seconds (ms).
 
 <p align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
+import EnlargeableImage from '@site/src/pages/enlarge_pic';
+
+<EnlargeableImage src={require('./img/eloqkv_kvrocks_set.png').default} alt="EloqKV vs Kvrocks Set" />
+
+</div></p>
+<!-- 
+<p align="center">
+<div style={{ width: '720px', textAlign: 'center'}}>
 ![](img/eloqkv_kvrocks_set.png)
 </div>
-</p>
+</p> -->
 
 The results show that **EloqKV** significantly outperforms Kvrocks on both EBS and local SSD. On EBS, **EloqKV** achieves a write throughput that is 10 times higher than Kvrocks, while on local SSD, it is 2-4 times faster. This performance improvement is due to **EloqKV**'s architecture, which decouples transaction and log services, allowing multiple log workers to write Write-Ahead Logs (WAL) and perform fsync operations in parallel, thereby enhancing overall throughput. Additionally, **EloqKV** maintains significantly lower latency compared to Kvrocks, even under high concurrency.
 
@@ -88,9 +96,16 @@ Below are the results of the mixed workload.
 
 <p align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
+
+<EnlargeableImage src={require('./img/eloqkv_kvrocks_setget.png').default} alt="EloqKV vs Kvrocks SetGet" />
+
+</div></p>
+
+<!-- <p align="center">
+<div style={{ width: '720px', textAlign: 'center'}}>
 ![](img/eloqkv_kvrocks_setget.png)
 </div>
-</p>
+</p> -->
 
 As observed in the benchmark results, **EloqKV** outperforms Kvrocks on mixed workloads as well. **EloqKV** maintains a read latency of less than 1 ms even under a heavy mixed workload with nearly 900K OPS. In contrast, Kvrocks on EBS exhibits significantly higher latencies, with both read and write latencies exceeding 10 ms even at relatively low concurrency, and rising to over 50 ms as concurrency increases. Even on local SSDs, Kvrocks' read latency remains much higher than that of **EloqKV**. This demonstrates that \*\*EloqKV\*\* can sustain low read latency even when the cluster is under a heavy write workload.
 
@@ -130,9 +145,16 @@ Right Y-axis: The average Latency in ms.
 
 <p align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
+
+<EnlargeableImage src={require('./img/eloqkv_scale_disk_set.png').default} alt="EloqKV Disk Scale Set" />
+
+</div></p>
+
+<!-- <p align="center">
+<div style={{ width: '720px', textAlign: 'center'}}>
 ![](img/eloqkv_scale_disk_set.png)
 </div>
-</p>
+</p> -->
 
 From the results above, we can observe that as the number of disks increases, the throughput scales near linearly when the disk count is 1, 2, and 4, with a corresponding decrease in latency. Adding even more disks continues to boost throughput, but at a slower rate. For 6 and 8 disks, the throughput levels off and remains nearly the same even under high concurrency. This indicates that the disk is no longer the bottleneck.
 
@@ -153,9 +175,16 @@ The following graph shows how the number of CPU cores affects the performance of
 
 <p align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
+
+<EnlargeableImage src={require('./img/eloqkv_scale_cpu_set.png').default} alt="EloqKV CPU Scale Set" />
+
+</div></p>
+
+<!-- <p align="center">
+<div style={{ width: '720px', textAlign: 'center'}}>
 ![](img/eloqkv_scale_cpu_set.png)
 </div>
-</p>
+</p> -->
 
 Adding more disks beyond 8 on a 32-vcore CPU does not significantly increase throughput. By scaling up the CPU of TxServer from 32 to 48 vcores, we can achieve a notable increase in throughput and a decrease in latency. Under heavy concurrency, latency decreases significantly from 10ms to under 8ms when more CPU cores are added.
 

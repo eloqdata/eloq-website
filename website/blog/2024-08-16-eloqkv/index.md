@@ -51,12 +51,19 @@ One thing we'd like to highlight is that some of EloqKV's advanced features—su
 
 Today, we are releasing EloqKV for preview by the general public. This EloqKV release supports two persistent stores: Apache Cassandra and RocksDB. Cassandra is a disaggregated store and may run in a different set of nodes from the EloqKV servers for high availability, while RocksDB is an embedded store. Deployment of the persistent store is automatic when EloqKV is started.
 
-<!--truncate-->
 <p align="center">
+<div style={{ width: '720px', textAlign: 'center'}}>
+import EnlargeableImage from '@site/src/pages/enlarge_pic';
+
+<EnlargeableImage src={require('./img/eloq_arch_new2.png').default} alt="EloqKV Architecture" />
+
+</div></p>
+
+<!-- <p align="center">
 <div style={{ width: '600px', textAlign: 'center'}}>
 ![](img/eloq_arch_new2.png)
 </div>
-</p>
+</p> -->
 
 EloqKV can be deployed as
 
