@@ -613,7 +613,7 @@ const features = [
     icon: faRedoAlt,
     title: 'Redis Compatible API',
     details: [
-      'Implement the popular Redis API, support most populars data structures',
+      'Implement the popular Redis API, support most popular data structures',
       'No code modification needed for applications to enjoy the rich features and cost benefits of EloqKV',
     ],
   },
