@@ -63,9 +63,11 @@ Y-axis: Measures the QPS (Queries Per Second).
 
 <p align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
-![](img/eloqkv_scale.png)
-</div>
-</p>
+import EnlargeableImage from '@site/src/pages/enlarge_pic';
+
+<EnlargeableImage src={require('./img/eloqkv_scale.png').default} alt="EloqKV Scale" />
+
+</div></p>
 
 As shown in the results, when using the regular client, the throughput of the three-node **EloqKV** cluster is slightly lower than that of the single-node **EloqKV**. This slight decrease is due to the additional network round trips and scheduling overhead introduced by the automatic request redirection. Despite this, the performance remains robust, with throughput exceeding **one million operations per second (OPS)**. Importantly, the **EloqKV** cluster with a regular client requires no changes to application code, behaving just like a single-node **EloqKV** instance. This allows developers to overcome memory capacity limits without modifying their code or relying on smart clients and "hash tags," as discussed earlier.
 
