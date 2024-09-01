@@ -5,7 +5,7 @@ date: 2024-08-22
 tags: [Company]
 ---
 
-In our [previous blog](/blog/2024/08/22/benchmark-single-node), we benchmarked **EloqKV** to evaluate it as an in-memory cache, focusing on single-node performance. In this blog, we focus on a cluster of **Eloq** servers and discuss why **EloqKV** clustering is a fundmentally better solution.
+In our [previous blog](/blog/2024/08/17/benchmark-single-node), we benchmarked **EloqKV** to evaluate it as an in-memory cache, focusing on single-node performance. In this blog, we focus on a cluster of **Eloq** servers and discuss why **EloqKV** clustering is a fundmentally better solution.
 
 <!--truncate-->
 
@@ -55,7 +55,9 @@ memtier_benchmark -t 32 -c 20 --cluster-mode -s $server_ip1 -p $server_port1 -s 
 
 #### Results
 
-Below are the results of **EloqKV**'s scalability benchmark, comparing the throughput between a single-node **EloqKV** and a three-node **EloqKV** cluster across various workloads.
+Below are the results of **EloqKV**'s scalability benchmark, comparing the throughput between a single-node **EloqKV** and a three-node **EloqKV** cluster across various workloads. For three-node cluster, we benchmark using both regular client and smart client. When using Regular client, the EloqKV cluster behave the same as single-node EloqKV, EloqKV will automatically redirect the request to other nodes when request key is not local.
+
+Below are the results of the **EloqKV** scalability benchmark, which compares the throughput of a single-node **EloqKV** instance with that of a three-node **EloqKV** cluster across various workloads. For the three-node cluster, we conducted benchmarks using both a regular client and a smart client. When using the regular client, the **EloqKV** cluster behaves similarly to a single-node instance; **EloqKV** automatically redirects requests to other nodes if the requested key is not stored locally. In contrast, with the smart client, all requests are sent directly to the node that holds the key, based on the cached cluster topology within the smart client.
 
 X-axis: Represents the different workload types (read/write/mixed) used in the benchmark, simulating a range of real-world scenarios.
 
@@ -67,4 +69,6 @@ Y-axis: Measures the QPS (Queries Per Second).
 </div>
 </p>
 
-As we can see, **EloqKV** three nodes cluster's throughput is almost three times higher than the single node **EloqKV** among different types of workload. It verify **EloqKV**'s capability to maintain performance as it scales horizontally. We can conclude that **EloqKV** is a robust cache solution, particularly well-suited for all kinds of workloads.
+As observed in the benchmark results, when using the regular client, the throughput of the three-node **EloqKV** cluster is slightly lower than that of the single-node **EloqKV**. This slight decrease is due to the additional network round trips and scheduling overhead introduced by the automatic request redirection. Despite this, the performance remains robust, with throughput exceeding one million operations per second (OPS). Importantly, the **EloqKV** cluster with a regular client requires no changes to application code, behaving just like a single-node **EloqKV** instance. This allows developers to overcome memory capacity limits without modifying their code or relying on smart clients and "hash tags," as discussed earlier.
+
+In contrast, when utilizing a smart client, the three-node **EloqKV** cluster demonstrates nearly three times the throughput of a single-node **EloqKV** across various workloads. This significant performance boost highlights **EloqKV**'s compatibility with smart clients, enabling it to achieve linear scalability similar to other caching solutions by directing requests to the appropriate nodes based on the cached cluster topology.\*\*

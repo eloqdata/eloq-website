@@ -5,15 +5,15 @@ date: 2024-08-25
 tags: [Company]
 ---
 
-In our previous blogs, we benchmarked **EloqKV** in memory cache mode, discussing both [single node](/blog/2024/08/22/benchmark-single-node) and [cluster](/blog/2024/08/25/benchmark-cluster) performance. In this post, we delve into its write performance in transaction mode. In this blog, we first benchmark **EloqKV** when durability is enforced. In the next blog, we will benchmark it with distributed atomic operations with the Redis _WATCH / MULTI / EXEC_ commands.
+In our previous blogs, we benchmarked **EloqKV** in memory cache mode, discussing both [single node](/blog/2024/08/17/benchmark-single-node) and [cluster](/blog/2024/08/22/benchmark-cluster) performance. In this post, we delve into its write performance in transaction mode. In this blog, we first benchmark **EloqKV** when durability is enforced. In the next blog, we will benchmark it with distributed atomic operations with the Redis _WATCH / MULTI / EXEC_ commands.
 
 <!--truncate-->
 
-All benchmarks were conducted on AWS (region: us-east-1) EC2 instances, with Ubuntu 22.04. Workloads were generated using the [memtier-benchmark](https://github.com/RedisLabs/memtier_benchmark) tool. In all tests, we use EloqKV version 0.6.9.
+All benchmarks were conducted on AWS (region: us-east-1) EC2 instances, with Ubuntu 22.04. Workloads were generated using the [memtier-benchmark](https://github.com/RedisLabs/memtier_benchmark) tool. In all tests, we use **EloqKV** version 0.6.9.
 
 ### Comparing with Kvrocks
 
-In the first experiment, we compare EloqKV with Apache [Kvrocks](https://kvrocks.apache.org/), a Redis-compatible NoSQL database that supports persistence. We evaluate the performance of EloqKV and Kvrocks under write-intensive workloads. To ensure data durability, we enable fsync Write-Ahead Logging (WAL) for both databases. For EloqKV, both the transaction service and log service are deployed on the same node (c7gi.8xlarge). To fully utilize available disk IO, we start two LogService processes to write WAL logs in EloqKV.
+In the first experiment, we compare **EloqKV** with Apache [Kvrocks](https://kvrocks.apache.org/), a Redis-compatible NoSQL database that supports persistence. We evaluate the performance of **EloqKV** and Kvrocks under write-intensive and mixed workloads. To ensure data durability, we enable fsync Write-Ahead Logging (WAL) for both databases. For **EloqKV**, both the transaction service and log service are deployed on the same node (c7gi.8xlarge). To fully utilize available disk IO, we start two LogService processes to write WAL logs in **EloqKV**.
 
 ### Hardware and Software Specification
 
@@ -64,7 +64,7 @@ memtier_benchmark -t $thread_num -c $client_num -s $server_ip -p $server_port --
 - `-t`: Number of threads for parallel execution, which we set to 80.
 
 - `-c`: Number of clients per thread. We set it to 5, 10, 20, 40 to evaluate different concurrency levels. This resulted in total concurrency values of 400, 800, 1600, and 3200, calculated as `thread_num × client_num`.
-- `--ratio`: Put\:Get ratio is set to 1:0 for write-only workload.
+- `--ratio`: Set\:Get ratio is set to 1:0 for write-only workload, and 1:10 for mixed workload.
 
 #### Results
 
@@ -72,9 +72,9 @@ Below are the results of the write-only workload.
 
 X-axis: Represents the varying concurrencies (`thread_num × client_num`), simulating different levels of concurrent database access.
 
-Left Y-axis: Throughput in Thousand QPS (Queries Per Second).
+Left Y-axis: Throughput in Thousand OPS (Operations Per Second).
 
-Right Y-axis: 99.9 Percentile latency in milli seconds (ms).
+Right Y-axis: Average latency in milli seconds (ms).
 
 <p align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
@@ -82,13 +82,23 @@ Right Y-axis: 99.9 Percentile latency in milli seconds (ms).
 </div>
 </p>
 
-The results show that EloqKV significantly outperforms Kvrocks on both EBS and local SSD. On EBS, EloqKV achieves a write throughput that is 10 times higher than Kvrocks, while on local SSD, it is 2-4 times faster. This performance improvement is due to EloqKV's architecture, which decouples transaction and log services, allowing multiple log workers to write Write-Ahead Logs (WAL) and perform fsync operations in parallel, thereby enhancing overall throughput. Additionally, EloqKV maintains significantly lower latency compared to Kvrocks, even under high concurrency.
+The results show that **EloqKV** significantly outperforms Kvrocks on both EBS and local SSD. On EBS, **EloqKV** achieves a write throughput that is 10 times higher than Kvrocks, while on local SSD, it is 2-4 times faster. This performance improvement is due to **EloqKV**'s architecture, which decouples transaction and log services, allowing multiple log workers to write Write-Ahead Logs (WAL) and perform fsync operations in parallel, thereby enhancing overall throughput. Additionally, **EloqKV** maintains significantly lower latency compared to Kvrocks, even under high concurrency.
+
+Below are the results of the mixed workload.
+
+<p align="center">
+<div style={{ width: '720px', textAlign: 'center'}}>
+![](img/eloqkv_kvrocks_setget.png)
+</div>
+</p>
+
+As observed in the benchmark results, **EloqKV** outperforms Kvrocks on mixed workloads as well. **EloqKV** maintains a read latency of less than 1 ms even under a heavy mixed workload with nearly 900K OPS. In contrast, Kvrocks on EBS exhibits significantly higher latencies, with both read and write latencies exceeding 10 ms even at relatively low concurrency, and rising to over 50 ms as concurrency increases. Even on local SSDs, Kvrocks' read latency remains much higher than that of **EloqKV**. This demonstrates that \*\*EloqKV\*\* can sustain low read latency even when the cluster is under a heavy write workload.
 
 ### Experiment II: Scaling Disks of WAL
 
-EloqKV's decoupled WAL log service can deploy multiple log workers writing WAL logs to multiple disks. Since WAL logs can be truncated once a checkpoint is completed, the required disk size is often quite small.
+**EloqKV**'s decoupled WAL log service can deploy multiple log workers writing WAL logs to multiple disks. Since WAL logs can be truncated once a checkpoint is completed, the required disk size is often quite small.
 
-Kvrocks does not support writing redo logs across multiple disks, so this experiment is conducted with **EloqKV** only. We benchmarked EloqKV with different numbers of WAL disks and varying thread counts using the following command:
+Kvrocks does not support writing redo logs across multiple disks, so this experiment is conducted with **EloqKV** only. We benchmarked **EloqKV** with different numbers of WAL disks and varying thread counts using the following command:
 
 **Server Machine:**
 
@@ -114,7 +124,7 @@ Below are the results illustrates **EloqKV**'s throughput and latency with diffe
 
 X-axis: Represents the varying thread numbers employed during the benchmark, simulating different levels of concurrent database access.
 
-Left Y-axis: The throughput in Thousand Queries Per Second (KQPS)
+Left Y-axis: The throughput in Thousand Operations Per Second (KOPS)
 
 Right Y-axis: The average Latency in ms.
 
@@ -151,6 +161,6 @@ Adding more disks beyond 8 on a 32-vcore CPU does not significantly increase thr
 
 ### Analysis and Conclusion
 
-In this blog, we evaluate **EloqKV** and show its performance when data durability is strongly enforced. With reasonable hardware, **EloqKV** can sustain over 100,000 writes per second with acceptable latency. While this is lower than the pure in-memory cache performance highlighted in our [previous blog](/blog/2024/08/17/benchmark), it remains quite suitable for many real-world applications. In fact, when **EloqKV** is used as a durable data store, its performance is comparable to Redis in pure memory mode on similar hardware.
+In this blog, we evaluate **EloqKV** and show its performance when data durability is strongly enforced. With reasonable hardware, **EloqKV** can sustain over 100,000 writes per second with acceptable latency. While this is lower than the pure in-memory cache performance highlighted in our [previous blog](/blog/2024/08/17/benchmark-single-node), it remains quite suitable for many real-world applications. In fact, when **EloqKV** is used as a durable data store, its performance is comparable to Redis in pure memory mode on similar hardware.
 
 Additionally, we showcase **EloqKV**'s architectural advantage by scaling the LogService to enhance write throughput while maintaining resources used by the TxService. This capability is made possible by our revolutionary [Data Substrate](/blog/2024/08/11/data-substrate) architecture. Imaging scenarios where, despite high volume of updates, the total data volume can easily fit on a single server's memory. **EloqKV**'s full scalability is crucial to support such applications without wasting valuable resources.

@@ -69,7 +69,7 @@ X-axis: Represents the varying concurrencies (`thread_num × client_num`), simul
 
 Left Y-axis: Throughput in QPS (Queries Per Second).
 
-Right Y-axis: 99.9 Percentile latency in micro seconds (us).
+Right Y-axis: 99.9 Percentile latency in milli seconds (ms).
 
 <p align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
@@ -81,7 +81,7 @@ Right Y-axis: 99.9 Percentile latency in micro seconds (us).
 
 ### Read-Only Workload
 
-For the read-only workload, we adjusted the Set\:Put ratio to 0:1 (read-only):
+For the read-only workload, we adjusted the Set\:Get ratio to 0:1 (read-only):
 
 ```
 memtier_benchmark -t $thread_num -c $client_num -s $server_ip -p $server_port --distinct-client-seed --ratio=0:1 --key-prefix="kv_" --key-minimum=1 --key-maximum=5000000 --random-data --data-size=128 --hide-histogram --test-time=300

@@ -49,34 +49,34 @@ ax1.set_facecolor('#2e2e2e')  # Axes background color
 bar_width = 0.2
 index_read = np.arange(len(read_concurrency_levels))
 
-bar1_read = ax1.bar(index_read - 1.5*bar_width, kvrocks_ebs, bar_width, alpha=0.8, color='#008080', label='Kvrocks EBS')
-bar2_read = ax1.bar(index_read - 0.5*bar_width, kvrocks_ssd, bar_width, alpha=0.8, color='#6A5ACD', label='Kvrocks Local SSD')
-bar3_read = ax1.bar(index_read + 0.5*bar_width, eloqkv_ebs, bar_width, alpha=0.8, color='#FFA500', label='EloqKV EBS')
-bar4_read = ax1.bar(index_read+ 1.5*bar_width, eloqkv_ssd, bar_width, alpha=0.8, color='#FF4500', label='EloqKV Local SSD')
+bar1_read = ax1.bar(index_read - 1.5*bar_width, kvrocks_ebs, bar_width, alpha=0.8, color='#1A6B3D', label='Kvrocks EBS')
+bar2_read = ax1.bar(index_read - 0.5*bar_width, kvrocks_ssd, bar_width, alpha=0.8, color='#1A4D6B', label='Kvrocks Local SSD')
+bar3_read = ax1.bar(index_read + 0.5*bar_width, eloqkv_ebs, bar_width, alpha=0.8, color='#E07D28', label='EloqKV EBS')
+bar4_read = ax1.bar(index_read+ 1.5*bar_width, eloqkv_ssd, bar_width, alpha=0.8, color='#D64326', label='EloqKV Local SSD')
 
-ax1.set_xlabel('Concurrency Levels', color='white', fontsize=14)
-ax1.set_ylabel('Throughput ($\mathbf{K}$)', color='white', fontsize=14)
-ax1.set_title('EloqKV & Kvrocks Write Workload Comparison', color='white', fontsize=16)
+ax1.set_xlabel('Concurrent Connections', color='white', fontsize=16)
+ax1.set_ylabel('Throughput ($\mathbf{KOps}$)', color='white', fontsize=16)
+ax1.set_title('EloqKV & Kvrocks Mix Workload Comparison', color='white', fontsize=18)
 ax1.set_xticks(index_read)
-ax1.set_xticklabels(read_concurrency_levels, color='white')
+ax1.set_xticklabels(read_concurrency_levels, color='white',fontsize=12)
 ax1.tick_params(axis='y', colors='white')
 ax1.set_ylim(0, 1400)  # Adjust this value to leave more space at the top
 #ax1.set_xlim(0, 800)  # Adjust this value to leave more space at the top
 
 # Latency data (line graph)
 ax2 = ax1.twinx()
-line1_read = ax2.plot(index_read, kvrocks_ebs_w_lat, ':', marker='o', color='#008080', label='Kvrocks EBS Write Latency', linewidth=2)
-line2_read = ax2.plot(index_read, kvrocks_ssd_w_lat, ':', marker='o', color='#6A5ACD', label='Kvrocks Local SSD Write Latency', linewidth=2)
-line3_read = ax2.plot(index_read, eloqkv_ebs_w_lat, ':', marker='o', color='#FFA500', label='EloqKV EBS Write Latency', linewidth=2)
-line4_read = ax2.plot(index_read, eloqkv_ssd_w_lat, ':', marker='o', color='#FF4500', label='EloqKV Local SSD Write Latency', linewidth=2)
-line5_read = ax2.plot(index_read, kvrocks_ebs_r_lat, '-.', marker='*', color='#008080', label='Kvrocks EBS Read Latency', linewidth=2)
-line6_read = ax2.plot(index_read, kvrocks_ssd_r_lat, '-.', marker='*', color='#6A5ACD', label='Kvrocks Local SSD Read Latency', linewidth=2)
-line7_read = ax2.plot(index_read, eloqkv_ebs_r_lat, '-.', marker='*', color='#FFA500', label='EloqKV EBS Read Latency', linewidth=2)
-line8_read = ax2.plot(index_read, eloqkv_ssd_r_lat, '-.', marker='*', color='#FF4500', label='EloqKV Local SSD Read Latency', linewidth=2)
+line1_read = ax2.plot(index_read, kvrocks_ebs_w_lat, ':', marker='o', color='#1A6B3D', label='Kvrocks EBS W-Lat', linewidth=2.5)
+line2_read = ax2.plot(index_read, kvrocks_ssd_w_lat, ':', marker='o', color='#1A4D6B', label='Kvrocks Local SSD W-Lat', linewidth=2.5)
+line3_read = ax2.plot(index_read, eloqkv_ebs_w_lat, ':', marker='o', color='#E07D28', label='EloqKV EBS W-Lat', linewidth=2.5)
+line4_read = ax2.plot(index_read, eloqkv_ssd_w_lat, ':', marker='o', color='#D64326', label='EloqKV Local SSD W-Lat', linewidth=2.5)
+line5_read = ax2.plot(index_read, kvrocks_ebs_r_lat, '-.', marker='*', color='#1A6B3D', label='Kvrocks EBS R-Lat', linewidth=2.5)
+line6_read = ax2.plot(index_read, kvrocks_ssd_r_lat, '-.', marker='*', color='#1A4D6B', label='Kvrocks Local SSD R-Lat', linewidth=2.5)
+line7_read = ax2.plot(index_read, eloqkv_ebs_r_lat, '-.', marker='*', color='#E07D28', label='EloqKV EBS R-Lat', linewidth=2.5)
+line8_read = ax2.plot(index_read, eloqkv_ssd_r_lat, '-.', marker='*', color='#D64326', label='EloqKV Local SSD R-Lat', linewidth=2.5)
 
-ax2.set_ylabel('Avg Latency ($\mathbf{ms}$)', color='white', fontsize=14)
+ax2.set_ylabel('Avg Latency ($\mathbf{ms}$)', color='white', fontsize=16)
 ax2.tick_params(axis='y', colors='white')
-ax2.set_ylim(0, 70)  # Adjust this value to leave more space at the top
+ax2.set_ylim(0, 80)  # Adjust this value to leave more space at the top
 
 # Combine legends from both axes
 lines, labels = ax1.get_legend_handles_labels()

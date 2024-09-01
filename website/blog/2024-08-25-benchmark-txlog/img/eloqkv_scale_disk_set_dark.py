@@ -46,37 +46,37 @@ ax1.set_facecolor('#2e2e2e')  # Axes background color
 bar_width = 0.15
 index_read = np.arange(len(read_concurrency_levels))
 
-bar1_read = ax1.bar(index_read - 2*bar_width, eloqkv_d1, bar_width, alpha=0.8, color='#008080', label='EloqKV Core32 Disk1')
-bar2_read = ax1.bar(index_read - 1*bar_width, eloqkv_d2, bar_width, alpha=0.8, color='#6A5ACD', label='EloqKV Core32 Disk2')
-bar3_read = ax1.bar(index_read, eloqkv_d4, bar_width, alpha=0.8, color='#32CD32', label='EloqKV Core32 Disk4')
-bar4_read = ax1.bar(index_read+ bar_width, eloqkv_d6, bar_width, alpha=0.8, color='#FFA500', label='EloqKV Core32 Disk6')
-bar5_read = ax1.bar(index_read + 2*bar_width, eloqkv_d8, bar_width, alpha=0.8, color='#FF4500', label='EloqKV Core32 Disk8')
+bar1_read = ax1.bar(index_read - 2*bar_width, eloqkv_d1, bar_width, alpha=0.8, color='#208B8E', label='EloqKV Core32 Disk1')
+bar2_read = ax1.bar(index_read - 1*bar_width, eloqkv_d2, bar_width, alpha=0.8, color='#229443', label='EloqKV Core32 Disk2')
+bar3_read = ax1.bar(index_read, eloqkv_d4, bar_width, alpha=0.8, color='#739C23', label='EloqKV Core32 Disk4')
+bar4_read = ax1.bar(index_read+ bar_width, eloqkv_d6, bar_width, alpha=0.8, color='#E07D28', label='EloqKV Core32 Disk6')
+bar5_read = ax1.bar(index_read + 2*bar_width, eloqkv_d8, bar_width, alpha=0.8, color='#D64326', label='EloqKV Core32 Disk8')
 
-ax1.set_xlabel('Concurrency Levels', color='white', fontsize=14)
-ax1.set_ylabel('Throughput ($\mathbf{K}$)', color='white', fontsize=14)
-ax1.set_title('Scale Disk Write Workload Comparison', color='white', fontsize=16)
+ax1.set_xlabel('Concurrent Connections', color='white', fontsize=16)
+ax1.set_ylabel('Throughput ($\mathbf{KOps}$)', color='white', fontsize=16)
+ax1.set_title('Scale Disk Write Workload Comparison', color='white', fontsize=18)
 ax1.set_xticks(index_read)
-ax1.set_xticklabels(read_concurrency_levels, color='white')
+ax1.set_xticklabels(read_concurrency_levels, color='white', fontsize=12)
 ax1.tick_params(axis='y', colors='white')
-ax1.set_ylim(0, 800)  # Adjust this value to leave more space at the top
+ax1.set_ylim(0, 1000)  # Adjust this value to leave more space at the top
 #ax1.set_xlim(0, 800)  # Adjust this value to leave more space at the top
 
 # Latency data (line graph)
 ax2 = ax1.twinx()
-line1_read = ax2.plot(index_read, eloqkv_d1_lat, 'b--', marker='o', color='#008080', label='EloqKV 32C 1D Latency', linewidth=3)
-line2_read = ax2.plot(index_read, eloqkv_d2_lat, 'g--', marker='o', color='#6A5ACD', label='EloqKV 32C 2D Latency', linewidth=3)
-line3_read = ax2.plot(index_read, eloqkv_d4_lat, 'r--', marker='o', color='#32CD32', label='EloqKV 32C 4D Latency', linewidth=3)
-line3_read = ax2.plot(index_read, eloqkv_d6_lat, 'r--', marker='o', color='#FFA500', label='EloqKV 32C 6D Latency', linewidth=3)
-line3_read = ax2.plot(index_read, eloqkv_d8_lat, 'r--', marker='o', color='#FF4500', label='EloqKV 32C 8D Latency')
+line1_read = ax2.plot(index_read, eloqkv_d1_lat, 'b--', marker='o', color='#208B8E', label='EloqKV 32C 1D Latency', linewidth=3)
+line2_read = ax2.plot(index_read, eloqkv_d2_lat, 'g--', marker='o', color='#229443', label='EloqKV 32C 2D Latency', linewidth=3)
+line3_read = ax2.plot(index_read, eloqkv_d4_lat, 'r--', marker='o', color='#739C23', label='EloqKV 32C 4D Latency', linewidth=3)
+line3_read = ax2.plot(index_read, eloqkv_d6_lat, 'r--', marker='o', color='#E07D28', label='EloqKV 32C 6D Latency', linewidth=3)
+line3_read = ax2.plot(index_read, eloqkv_d8_lat, 'r--', marker='o', color='#D64326', label='EloqKV 32C 8D Latency')
 
-ax2.set_ylabel('Avg Latency ($\mathbf{ms}$)', color='white', fontsize=14)
+ax2.set_ylabel('Avg Latency ($\mathbf{ms}$)', color='white', fontsize=16)
 ax2.tick_params(axis='y', colors='white')
-ax2.set_ylim(0, 70)  # Adjust this value to leave more space at the top
+ax2.set_ylim(0, 80)  # Adjust this value to leave more space at the top
 
 # Combine legends from both axes
 lines, labels = ax1.get_legend_handles_labels()
 lines2, labels2 = ax2.get_legend_handles_labels()
-legend = ax2.legend(lines, labels, loc='upper left', facecolor='#2e2e2e',fontsize=14, ncol=2)
+legend = ax2.legend(lines, labels, loc='upper left', facecolor='#2e2e2e',fontsize=16, ncol=2)
 #ax2.legend(ncol=2)  # Legend with two columns
 
 # Set legend text color to white
