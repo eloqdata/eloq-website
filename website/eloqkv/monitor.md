@@ -35,6 +35,16 @@ Features of Grafana in EloqKV Monitoring
 
 Here's what the EloqKV Grafana interface looks like:
 
-![](./media/grafana1.png)
+<p align="center">
+<div style={{ width: '720px', textAlign: 'center'}}>
+import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
-![](./media/grafana2.png)
+<EnlargeableImage src={require('./media/grafana1.png').default} alt="EloqKV Grafana 1" />
+
+<EnlargeableImage src={require('./media/grafana2.png').default} alt="EloqKV Grafana 2" />
+
+</div></p>
+
+<!-- ![](./media/grafana1.png)
+
+![](./media/grafana2.png) -->
