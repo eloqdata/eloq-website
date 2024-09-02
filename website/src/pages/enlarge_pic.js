@@ -41,7 +41,7 @@ const EnlargeableImage = ({src, alt}) => {
               src={src}
               alt={alt}
               style={{
-                maxWidth: '100%',
+                width: '1200px',
                 maxHeight: '100%',
                 objectFit: 'contain',
               }}
