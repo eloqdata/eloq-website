@@ -1,11 +1,11 @@
 ---
-title: 'Benchmark EloqKV as ACID Data Store II'
+title: 'EloqKV as transaction store'
 authors: eloq
 date: 2024-09-01
 tags: [Company]
 ---
 
-In the previous blogs, we discussed the [ACID feature](/blog/2024/08/25/benchmark-txlog) of **EloqKV** and benchmarked the write performance of **EloqKV** with the Write-Ahead-Log enabled. In this blog, we will continue to explore the transaction capabilities of **EloqKV** and demonstrate the performance of distributed atomic operations using the Redis _WATCH / MULTI / EXEC_ commands.
+In the previous blogs, we discussed the [durable feature](/blog/2024/08/25/benchmark-txlog) of **EloqKV** and benchmarked the write performance of **EloqKV** with the Write-Ahead-Log enabled. In this blog, we will continue to explore the transaction capabilities of **EloqKV** and demonstrate the performance of distributed atomic operations using the Redis _WATCH / MULTI / EXEC_ commands.
 
 <!--truncate-->
 
