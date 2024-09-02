@@ -1,5 +1,5 @@
 ---
-title: 'EloqKV as transaction store'
+title: 'EloqKV as Transactional Store'
 authors: eloq
 date: 2024-09-01
 tags: [Company]
