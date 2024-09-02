@@ -59,7 +59,7 @@ Below are the results of the **EloqKV** scalability benchmark, comparing the thr
 
 X-axis: Represents the different workload types (read/write/mixed) used in the benchmark, simulating a range of real-world scenarios.
 
-Y-axis: Measures the QPS (Queries Per Second).
+Y-axis: Measures the OPS (Operations Per Second).
 
 <p align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
