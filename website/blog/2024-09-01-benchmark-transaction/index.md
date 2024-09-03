@@ -11,10 +11,6 @@ In the previous blog, we discussed the [durable feature](/blog/2024/08/25/benchm
 
 All benchmarks were conducted on AWS (region: us-east-1) EC2 instances, with Ubuntu 22.04. In all tests, we use **EloqKV** version 0.6.9.
 
-### Distributed Atomic Operations
-
-All benchmarks were conducted on AWS (region: us-east-1) EC2 instances, with Ubuntu 22.04.
-
 ### Transaction in EloqKV
 
 Fifteen years ago, the esteemed database expert Mike Stonebraker famously wrote an [article](https://cacm.acm.org/blogcacm/stonebraker-on-nosql-and-enterprises/) in _Communications of the ACM_ declaring, "No ACID Equals No Interest" for enterprise users. Unfortunately, due to the high costs associated with distributed transactions, many distributed databases avoid full transaction support in favor of better performance. For example, while Redis supports limited transaction operations in single-node mode, it does not support transactions across servers in a cluster.
