@@ -1,5 +1,5 @@
 ---
-title: 'EloqKV as Durable Data Store'
+title: 'EloqKV as Transactional Store (Durability)'
 authors: eloq
 date: 2024-08-25
 tags: [Company]
@@ -10,6 +10,16 @@ In our previous blogs, we benchmarked **EloqKV** in memory cache mode, discussin
 <!--truncate-->
 
 All benchmarks were conducted on AWS (region: us-east-1) EC2 instances, with Ubuntu 22.04. Workloads were generated using the [memtier-benchmark](https://github.com/RedisLabs/memtier_benchmark) tool. In all tests, we use **EloqKV** version 0.6.9.
+
+### Durability
+
+Durability is a critical consideration for many data stores, especially in applications where data loss during server failures is unacceptable. Most persistent data stores achieve durability through [Write-ahead Logging (WAL)](https://en.wikipedia.org/wiki/Write-ahead_logging), ensuring that data is written to disk before responding to users. Additionally, many stores periodically _checkpoint_ the data into a more compact form, allowing the log to be truncated, preventing it from growing indefinitely.
+
+However, many KV caches prioritize performance over durability. For example, Redis uses an [Append Only File (AOF)](https://redis.io/docs/latest/operate/oss_and_stack/management/persistence/) to achieve _some_ level of durability by fsyncing data to a log file either periodically or after each write command. Strictly speaking, AOF does not provide complete durability because the data is written to the log in a separate thread, and the main thread does not wait for data persistence before returning. As a result, a small amount of data may be lost if a server crashes. In practice, AOF can only reduce data loss, not prevent it entirely. Consequently, [DragonflyDB](https://www.dragonflydb.io/docs/managing-dragonfly/aof) forgoes AOF altogether due to a lack of demand and instead offers periodic checkpointing, similar to [Redis's RDB](https://redis.io/docs/latest/operate/oss_and_stack/management/persistence/).
+
+**EloqKV** is a fully ACID-compliant database, offering full data durability through WAL. Moreover, leveraging our decoupled [Data Substrate](/blog/2024/08/11/data-substrate) architecture, the WAL for an EloqKV server can either be embedded within the same process or run as a separate LogService. The log can be replicated across multiple machines or Availability Zones, can scale using multiple disk devices, and can utilize tiered storage to archive older data on more cost-effective storage.
+
+However, we recognize that durability may not always be necessary for all applications. In **EloqKV**, durability can be enabled on a per-database basis. Similar to Redis, EloqKV supports 16 databases per server by default, though this number can be increased. When durability is disabled, EloqKV avoids the overhead associated with durability, delivering uncompromised performance, as demonstrated in a [previous blog post](/blog/2024/08/17/benchmark-single-node). In this blog, we evaluate **EloqKV** with durability enabled.
 
 ### Comparing with Kvrocks
 
