@@ -9,7 +9,7 @@ In the previous blog, we discussed the [durable feature](/blog/2024/08/25/benchm
 
 <!--truncate-->
 
-All benchmarks were conducted on AWS (region: us-east-1) EC2 instances, with Ubuntu 22.04. Workloads were generated using the [eloq-bench](https://github.com/RedisLabs/memtier_benchmark) tool. In all tests, we use **EloqKV** version 0.6.9.
+All benchmarks were conducted on AWS (region: us-east-1) EC2 instances, with Ubuntu 22.04. In all tests, we use **EloqKV** version 0.6.9.
 
 ### Distributed Atomic Operations
 
@@ -46,7 +46,7 @@ In the following experiment, **EloqKV** operates in pure memory mode, with persi
 | EloqKV 0.6.9         | c7g.8xlarge  | 1          |
 | EloqKV 0.6.9 Cluster | c7g.8xlarge  | 3          |
 | Redis 7.2.5          | c7g.8xlarge  | 1          |
-| Client eloq-bench    | c6gn.8xlarge | 3          |
+| Client eloq-bench    | c6gn.8xlarge | 1          |
 
 ### Experiment:
 
@@ -78,9 +78,17 @@ Y-axis: Throughput in Thousand OPS (Operations Per Second).
 
 <p align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
+import EnlargeableImage from '@site/src/pages/enlarge_pic';
+
+<EnlargeableImage src={require('./img/eloqkv_redis_batch.png').default} alt="EloqKV vs Redis Transaction" />
+
+</div></p>
+<!-- 
+<p align="center">
+<div style={{ width: '720px', textAlign: 'center'}}>
 ![](img/eloqkv_redis_batch.png)
 </div>
-</p>
+</p> -->
 
 The results demonstrate that EloqKV significantly outperforms Redis in both pipeline and MultiExec atomic modes on a single node. In this comparison, a fixed batch size of 6 keys was used, with EloqKV achieving a throughput exceeding 100 million operations per key in atomic mode. Although this throughput is lower than that in pipeline mode, it is sufficient for most workloads while preserving atomic se
 However, memory capacity can become a bottleneck, necessitating a cluster solution for handling larger datasets. Notably, Redis `MultiExec` is not supported in cluster mode if keys in a single batch are distributed across different shards. To work around this, users must use key `hashtags` to ensure all keys in a batch are located on the same shard, which can be cumbersome. EloqKV, on the other hand, does not have this limitation. It allows you to scale memory capacity seamlessly and maintain transactional integrity across a cluster, just as if you were operating on a single node.
