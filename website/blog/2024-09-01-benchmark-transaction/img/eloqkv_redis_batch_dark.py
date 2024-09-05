@@ -5,24 +5,24 @@ import numpy as np
 #plt.style.use('dark_background')
 
 # Data for read workload
-read_concurrency_levels = ['write', 'read', 'mixed']
+read_concurrency_levels = ['write', 'mixed', 'read']
 
 #redis_read_throughput = [223.579,212.677,203.522,189.701]  # converted to K
 #dragonfly_read_throughput = [992.120,1529.612,1750.050, 1750.024]  # converted to K
 #eloqkv_read_throughput = [959.015,1405.901,1697.739,1593.660]
 #kvrocks_d1=[7.188,7.482,7.532]
-redis_pipe=[108.692,119.911,112.243 ]
-redis_pipe_lat=[2.354,2.134,2.280 ]
-redis_tx=[53.695,56.990,54.756 ]
-redis_tx_lat=[4.766,4.492, 4.674]
-eloqkv1_pipe=[414.863,457.557,407.488 ]
-eloqkv1_pipe_lat=[0.601, 0.557,0.62]
-eloqkv1_tx=[201.723, 213.788,202.409]
-eloqkv1_tx_lat=[1.257, 1.19,1.258]
-eloqkv3_pipe=[165.015,154.532,153.943 ]
-eloqkv3_pipe_lat=[ ]
-eloqkv3_tx=[75.329, 74.701,64.307]
-eloqkv3_tx_lat=[ ]
+redis_pipe=[103.329, 110.537, 117.767]
+redis_pipe_lat=[2.477, 2.316,2.172]
+redis_tx=[94.031,98.660,104.051]
+redis_tx_lat=[2.722,2.594,2.46]
+eloqkv1_rc_pipe=[401.930, 402.386,433.997 ]
+eloqkv1_rc_pipe_lat=[0.633, 0.634,0.588]
+eloqkv1_rc_tx=[364.017,379.812,460.216]
+eloqkv1_rc_tx_lat=[0.701,0.673, 0.554]
+eloqkv3_rc_pipe=[183.335, 188.668,190.550]
+eloqkv3_rc_pipe_lat=[]
+eloqkv3_rc_tx=[132.487,154.795,193.388]
+eloqkv3_rc_tx_lat=[]
 
 #redis_read_latency = [0.786,1.983,4.788,11.412]
 #dragonfly_read_latency = [0.252,0.444,0.956,2.191]
@@ -39,15 +39,15 @@ fig.patch.set_facecolor('#2e2e2e')  # Figure background color
 ax1.set_facecolor('#2e2e2e')  # Axes background color
 
 # Bar plots for read throughput
-bar_width = 0.15
+bar_width = 0.11
 index_read = np.arange(len(read_concurrency_levels))
 
-bar1_read = ax1.bar(index_read - 2.5*bar_width, redis_pipe, bar_width, alpha=0.8, color='#1A6B3D', label='Redis Pipeline')
-bar1_read = ax1.bar(index_read - 1.5*bar_width, redis_tx, bar_width, alpha=0.8, color='#1A4D6B', label='Redis MultiExec')
-bar2_read = ax1.bar(index_read - 0.5*bar_width, eloqkv1_pipe, bar_width, alpha=0.8, color='#9CC725', label='EloqKV*1 Pipeline')
-bar3_read = ax1.bar(index_read + 0.5*bar_width, eloqkv1_tx, bar_width, alpha=0.8, color='#E0BD28', label='EloqKV*1 MultiExec')
-bar4_read = ax1.bar(index_read+ 1.5*bar_width, eloqkv3_pipe, bar_width, alpha=0.8, color='#E07D28', label='EloqKV*3 Pipeline')
-bar4_read = ax1.bar(index_read+ 2.5*bar_width, eloqkv3_tx, bar_width, alpha=0.8, color='#D64326', label='EloqKV*3 MultiExec')
+bar1_read = ax1.bar(index_read - 2.9*bar_width, redis_pipe, bar_width, alpha=0.8, color='#1A6B3D', label='Redis Pipeline')
+bar1_read = ax1.bar(index_read - 1.9*bar_width, redis_tx, bar_width, alpha=0.8, color='#1A4D6B', label='Redis MultiExec')
+bar2_read = ax1.bar(index_read - 0.5*bar_width, eloqkv1_rc_pipe, bar_width, alpha=0.8, color='#9CC725', label='EloqKV*1 Pipeline')
+bar3_read = ax1.bar(index_read + 0.5*bar_width, eloqkv1_rc_tx, bar_width, alpha=0.8, color='#E0BD28', label='EloqKV*1 MultiExec')
+bar4_read = ax1.bar(index_read+ 1.9*bar_width, eloqkv3_rc_pipe, bar_width, alpha=0.8, color='#E07D28', label='EloqKV*3 Pipeline')
+bar4_read = ax1.bar(index_read+ 2.9*bar_width, eloqkv3_rc_tx, bar_width, alpha=0.8, color='#D64326', label='EloqKV*3 MultiExec')
 
 ax1.set_xlabel('Workload Type', color='white', fontsize=16)
 ax1.set_ylabel('Throughput ($\mathbf{KOps}$)', color='white', fontsize=16)
