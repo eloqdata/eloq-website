@@ -21,7 +21,7 @@ Server Machine:
 
 | Service            | Node type    | Node count |
 | ------------------ | ------------ | ---------- |
-| Redis 6.0.16       | c7g.8xlarge  | 1          |
+| Redis 7.2.5        | c7g.8xlarge  | 1          |
 | DragonflyDB 1.21.2 | c7g.8xlarge  | 1          |
 | EloqKV 0.6.9       | c7g.8xlarge  | 1          |
 | Client - Memtier   | c6gn.8xlarge | 1          |
