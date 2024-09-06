@@ -15,14 +15,14 @@ redis_pipe=[103.329, 110.537, 117.767]
 redis_pipe_lat=[2.477, 2.316,2.172]
 redis_tx=[94.031,98.660,104.051]
 redis_tx_lat=[2.722,2.594,2.46]
-eloqkv1_rc_pipe=[401.930, 402.386,433.997 ]
-eloqkv1_rc_pipe_lat=[0.633, 0.634,0.588]
-eloqkv1_rc_tx=[364.017,379.812,460.216]
-eloqkv1_rc_tx_lat=[0.701,0.673, 0.554]
-eloqkv3_rc_pipe=[183.335, 188.668,190.550]
-eloqkv3_rc_pipe_lat=[]
-eloqkv3_rc_tx=[132.487,154.795,193.388]
-eloqkv3_rc_tx_lat=[]
+eloqkv1_rr_pipe=[410.322,392.491,419.997]
+eloqkv1_rr_pipe_lat=[]
+eloqkv1_rr_tx=[363.602,350.274,369.583]
+eloqkv1_rr_tx_lat=[]
+eloqkv3_rr_pipe=[173.894,162.583,206.246]
+eloqkv3_rr_pipe_lat=[]
+eloqkv3_rr_tx=[125.364,114.587,128.157]
+eloqkv3_rr_tx_lat=[]
 
 #redis_read_latency = [0.786,1.983,4.788,11.412]
 #dragonfly_read_latency = [0.252,0.444,0.956,2.191]
@@ -44,10 +44,10 @@ index_read = np.arange(len(read_concurrency_levels))
 
 bar1_read = ax1.bar(index_read - 2.9*bar_width, redis_pipe, bar_width, alpha=0.8, color='#1A6B3D', label='Redis Pipeline')
 bar1_read = ax1.bar(index_read - 1.9*bar_width, redis_tx, bar_width, alpha=0.8, color='#1A4D6B', label='Redis MultiExec')
-bar2_read = ax1.bar(index_read - 0.5*bar_width, eloqkv1_rc_pipe, bar_width, alpha=0.8, color='#9CC725', label='EloqKV*1 Pipeline')
-bar3_read = ax1.bar(index_read + 0.5*bar_width, eloqkv1_rc_tx, bar_width, alpha=0.8, color='#E0BD28', label='EloqKV*1 MultiExec')
-bar4_read = ax1.bar(index_read+ 1.9*bar_width, eloqkv3_rc_pipe, bar_width, alpha=0.8, color='#E07D28', label='EloqKV*3 Pipeline')
-bar4_read = ax1.bar(index_read+ 2.9*bar_width, eloqkv3_rc_tx, bar_width, alpha=0.8, color='#D64326', label='EloqKV*3 MultiExec')
+bar2_read = ax1.bar(index_read - 0.5*bar_width, eloqkv1_rr_pipe, bar_width, alpha=0.8, color='#9CC725', label='EloqKV*1 Pipeline')
+bar3_read = ax1.bar(index_read + 0.5*bar_width, eloqkv1_rr_tx, bar_width, alpha=0.8, color='#E0BD28', label='EloqKV*1 MultiExec')
+bar4_read = ax1.bar(index_read+ 1.9*bar_width, eloqkv3_rr_pipe, bar_width, alpha=0.8, color='#E07D28', label='EloqKV*3 Pipeline')
+bar4_read = ax1.bar(index_read+ 2.9*bar_width, eloqkv3_rr_tx, bar_width, alpha=0.8, color='#D64326', label='EloqKV*3 MultiExec')
 
 ax1.set_xlabel('Workload Type', color='white', fontsize=16)
 ax1.set_ylabel('Throughput ($\mathbf{KOps}$)', color='white', fontsize=16)
@@ -84,5 +84,5 @@ fig.tight_layout()
 # Show plot
 #plt.show()
 
-plt.savefig('eloqkv_redis_batch.png')  # Saves the plot as 'my_plot.png' in the current directory
+plt.savefig('eloqkv_redis_batch_rr.png')  # Saves the plot as 'my_plot.png' in the current directory
 plt.close()
