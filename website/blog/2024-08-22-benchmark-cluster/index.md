@@ -5,21 +5,23 @@ date: 2024-08-22
 tags: [Company]
 ---
 
-In our [previous blog](/blog/2024/08/17/benchmark-single-node), we benchmarked **EloqKV** to evaluate it as an in-memory cache, focusing on single-node performance. In this blog, we focus on a cluster of **Eloq** servers and discuss why **EloqKV** clustering is a fundmentally better solution.
+In our [previous blog](/blog/2024/08/17/benchmark-single-node), we benchmarked **EloqKV** to evaluate it as an in-memory cache, focusing on single-node performance. In this blog, we shift our attention to **Eloq** clustering and discuss why it provides a fundmentally better solution.
 
 <!--truncate-->
 
-All benchmarks were conducted on AWS (region: us-east-1) EC2 instances, with Ubuntu 22.04. Workloads were generated using the [memtier-benchmark](https://github.com/RedisLabs/memtier_benchmark) tool.
+All benchmarks were conducted on AWS (region: us-east-1) EC2 instances running Ubuntu 22.04. Workloads were generated using the [memtier-benchmark](https://github.com/RedisLabs/memtier_benchmark) tool.
 
-## EloqKV Cluster
+## KV Store Clustering
 
-For most real world applications that only needs KV cache, even single-threaded Redis is already [plenty fast](https://medium.com/hprog99/why-is-redis-incredibly-fast-unpacking-the-secrets-of-its-speed-f10f051b3f23). Indeed, more often than not, the limiting factor is actually memory capacity. In this case, KV caches have to be deployed as a _cluster_.
+For most real-world applications that require a key-value (KV) cache, even single-threaded Redis is often [sufficiently fast](https://medium.com/hprog99/why-is-redis-incredibly-fast-unpacking-the-secrets-of-its-speed-f10f051b3f23). In fact, the limiting factor is usually memory capacity. As a result, KV caches are commonly deployed in _cluster mode_.
 
-Most key-value caches support horizontal scaling and can operate in a _cluster mode_. They partition data into multiple slots and distribute the slots to each shards. In a horizontally scaled cluster, KV caches pretty much scales linearly, modulo load imbalances and failure cases. To achieve such scalability, application developers need to understand the concept of _"slots"_ and _"shards"_ and _"tags"_. And the so called _cluster-aware_ clients need to know the topology of the cluster and direct requests to the proper server where data reside.
+Most KV caches support horizontal scaling and operate in cluster mode by partitioning data into slots and distributing them across shards. In a horizontally scaled cluster, performance scales almost linearly, though load imbalances and failure cases can introduce challenges. To achieve this scalability, developers must understand the concepts of _slots_, _shards_, and _tags_. And the so called _cluster-aware_ clients need to know the cluster topology to direct requests to the correct server.
 
-Clustering for KV cache is notoriously full of pitfalls, not least because nodes in a cluster may fail. Sometimes external tools (such as [Sentinel](https://redis.io/docs/latest/operate/oss_and_stack/management/sentinel/), [Twemproxy](https://github.com/twitter/twemproxy), [Dragonfly Cloud services](https://www.dragonflydb.io/docs/managing-dragonfly/cluster-mode)) are used to monitor the health and perform fail-over for the cluster. How these tools' interact with the clients are often not well specified. Moreover, a cluster of kv cache nodes behaves differently from a single node kv cache server. For example, the "MULTI / EXEC" commands do not work in a KV cache cluster environment.
+Clustering for KV cache is notoriously full of pitfalls, not least because nodes in a cluster may fail. External tools such as [Sentinel](https://redis.io/docs/latest/operate/oss_and_stack/management/sentinel/), [Twemproxy](https://github.com/twitter/twemproxy), [Dragonfly Cloud services](https://www.dragonflydb.io/docs/managing-dragonfly/cluster-mode) are often required to monitor cluster health and handle failovers. How these tools interact with clients are often not well specified. Additionally, a KV cache cluster behaves differently than a single node server. For instance, the "MULTI / EXEC" commands do not work in a clustered environment.
 
-The fundmental reason is that many of the KV caches were first designed as a single node server, while clustering is often an afterthought and a bolt-on feature. For example, [Redis](https://en.wikipedia.org/wiki/Redis) was released on May, 2009, while Sentinel was officially supported in Redis 2.8 in December 2013. Redis Cluster was not a stable feature until Redis 3.0, released in April, 2015. Though [DragonflyDB](https://github.com/dragonflydb/dragonfly) was a re-thinking of the in-memory data store architecture not started till 2022, it was still designed as a _single node server_, not a distributed system. It is not cluster aware, and requires external mechinanary to scale out. The same can be said for many other similar kv stores.
+The fundmental issue is that many KV caches were initially designed as single-node servers, wtih clustering added later as a bolt-on feature. For example, [Redis](https://en.wikipedia.org/wiki/Redis) was released on May, 2009, while Sentinel support arrived in Redis 2.8 in December 2013. Redis Cluster became a stable feature only with Redis 3.0 in April 2015. Similarly, [DragonflyDB](https://github.com/dragonflydb/dragonfly), while offering a reimagined in-memory data store only a couple of years ago, it was also designed primarily as a _single node server_ and requires external mechinanary to scale out. The same can be said for many other KV stores.
+
+## Why EloqKV Clustering is Different
 
 **EloqKV** fully eliminates these issues as it was designed as a full blown distributed transactional database. **EloqKV** can work as a single node server while leveraging various clustering tools to provide horizontal scalability. In this mode, it can work with all the _"smart Redis clients"_ and provide the same scalability as other caching solutions. However, as a general purpose distributed database, a **EloqKV** cluster can also work as a whole, without exposing cluster details to the clients. A client can just interact with any node in an **EloqKV** cluster without worrying about whether the key is local to the server, how many servers are in the cluster, how data are sharded among the servers, whether there is a failure happening in the cluster, or whether the cluster is reconfiging to dynamically increase or reduce capacity.
 
@@ -29,7 +31,7 @@ However, in the general case, any node in a **EloqKV** cluster can serve as an e
 
 In this assessment, **EloqKV** operates in pure memory mode, with persistent storage and transactional features disabled.
 
-### Hardware and Software Specification
+## Hardware and Software Specification
 
 **Server Machine:**
 
@@ -39,7 +41,7 @@ In this assessment, **EloqKV** operates in pure memory mode, with persistent sto
 | EloqKV 0.6.9 Cluster | c7g.8xlarge  | 3          |
 | Client - Memtier     | c6gn.8xlarge | 3          |
 
-### Experiment:
+## Experiment:
 
 We benchmarked a single-node **EloqKV** with different read-write ratios using the following command:
 
@@ -53,7 +55,7 @@ To assess **EloqKV**’s scalability under different workloads, we ran memtier_b
 memtier_benchmark -t 32 -c 20 --cluster-mode -s $server_ip1 -p $server_port1 -s $server_ip2 -p $server_port2 -s $server_ip3 -p $server_port3 --distinct-client-seed --ratio=$ratio --key-prefix="kv_" --key-minimum=1 --key-maximum=5000000 --random-data --data-size=128 --hide-histogram --test-time=300
 ```
 
-#### Results
+### Results
 
 Below are the results of the **EloqKV** scalability benchmark, comparing the throughput of a single-node **EloqKV** instance with that of a three-node **EloqKV** cluster across various workloads. For the three-node cluster, we conducted benchmarks using both a regular client and a smart client. When using the regular client, **EloqKV** automatically redirects requests to other nodes if the requested key is not stored locally. In contrast, with the smart client, all requests are sent directly to the node that holds the key, based on the cached cluster topology within the smart client.
 

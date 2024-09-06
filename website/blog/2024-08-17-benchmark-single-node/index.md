@@ -5,15 +5,15 @@ date: 2024-08-17
 tags: [Company]
 ---
 
-In this blog, we benchmark **EloqKV** to evaluate it as an in-memory cache, focusing on single-node performance. We benchmark **EloqKV** against the popular in-memory data structure store [Redis](https://github.com/redis/redis) as well as a recent contender [DragonflyDB](https://www.dragonflydb.io), which claims to achieve high performance due to its multi-threaded worker architecture and a highly optimized implementation leveraging some [modern innovations](https://github.com/dragonflydb/dragonfly?tab=readme-ov-file#background).
+In this blog, we evaluate EloqKV as an in-memory cache, focusing on its single-node performance. We compare EloqKV with [Redis](https://github.com/redis/redis), a widely used in-memory data store, and [DragonflyDB](https://www.dragonflydb.io), a newer option boasting high performance due to its multi-threaded architecture and optimized implementation leveraging [modern innovations](https://github.com/dragonflydb/dragonfly?tab=readme-ov-file#background).
 
 <!--truncate-->
 
-All benchmarks were conducted on AWS (region: us-east-1) EC2 instances, with Ubuntu 22.04. Workloads were generated using the [memtier-benchmark](https://github.com/RedisLabs/memtier_benchmark) tool.
+All benchmarks were conducted on AWS (region: us-east-1) EC2 instances with Ubuntu 22.04. The [memtier-benchmark](https://github.com/RedisLabs/memtier_benchmark) tool was used to generate workloads..
 
 ## Single Node Performance
 
-We compare the performance of **EloqKV** with Redis and DragonflyDB. The goal of this comparison is to evaluate the performance of **EloqKV** in memory-only mode, without persistent storage and transactional features enabled. Both Redis and DragonflyDB have limited [persistency capabilities](https://redis.io/docs/latest/operate/oss_and_stack/management/persistence/). Redis offers two mechanisms for persistency: logging (AOF) and checkpointing (RDB). However, AOF is not a proper implementation of [Write-Ahead-Log (WAL)](https://en.wikipedia.org/wiki/Write-ahead_logging), as data is written to disk asynchronously. RDB periodically saves in-memory state as checkpoints. Therefore, Redis can lose committed data if a node crashes. DragonflyDB currently only supports checkpointing and does not offer AOF. As Redis and DragonflyDB are typically used as pure in-memory caches, we benchmarked EloqKV against them under this configuration.
+We compare EloqKV with Redis and DragonflyDB in memory-only mode, without enabling persistent storage or transactional features. Both Redis and DragonflyDB have limited [persistency capabilities](https://redis.io/docs/latest/operate/oss_and_stack/management/persistence/). Redis offers logging (AOF) and checkpointing (RDB), but AOF isn't a true [Write-Ahead-Log (WAL)](https://en.wikipedia.org/wiki/Write-ahead_logging) since data is written asynchronously. RDB only periodically saves in-memory state, meaning Redis can lose committed data if a node crashes. DragonflyDB supports only checkpointing, not AOF. Since Redis and DragonflyDB are typically used as in-memory caches, we benchmarked EloqKV in the same configuration.
 
 ### Hardware and Software Configurations
 
@@ -51,7 +51,7 @@ enable_wal=none
 
 ### Write-Only Workload
 
-To assess **EloqKV**’s write performance, we run memtier_benchmark with ratio of 1:0 (write-only) with the following configuration:
+To evaluate **EloqKV**’s write performance, we run `memtier_benchmark` with ratio of 1:0 (write-only) with the following configuration:
 
 ```
 memtier_benchmark -t $thread_num -c $client_num -s $server_ip -p $server_port --distinct-client-seed --ratio=1:0 --key-prefix="kv_" --key-minimum=1 --key-maximum=5000000 --random-data --data-size=128 --hide-histogram --test-time=300
@@ -78,14 +78,8 @@ import EnlargeableImage from '@site/src/pages/enlarge_pic';
 <EnlargeableImage src={require('./img/eloqkv_dragon_redis_set_new.png').default} alt="EloqKV vs DragonflyDB vs Redis Set" />
 
 </div></p>
-<!-- 
-<p align="center">
-<div style={{ width: '720px', textAlign: 'center'}}>
-![](img/eloqkv_dragon_redis_set_new.png)
-</div>
-</p> -->
 
-**EloqKV** and DragonflyDB both outperform Redis due to their support for multiple worker threads. **EloqKV** delivers the same high throughput and low latency as DragonflyDB across various concurrency scenarios.
+**EloqKV** and DragonflyDB both outperform Redis due to their support for multiple worker threads. **EloqKV** delivers almost the same high throughput and low latency as DragonflyDB across various concurrency scenarios.
 
 ### Read-Only Workload
 
@@ -106,17 +100,11 @@ memtier_benchmark -t $thread_num -c $client_num -s $server_ip -p $server_port --
 
 </div></p>
 
-<!-- <p align="center">
-<div style={{ width: '720px', textAlign: 'center'}}>
-![](img/eloqkv_dragon_redis_get_new.png)
-</div>
-</p> -->
-
-Again, **EloqKV** offers similar throughput, while exhibits slightly higher but still very respectable latency compared to DragonflyDB. Both **EloqKV** and DragonflyDB significantly outperform Redis, both in throughput and in latency.
+Again, **EloqKV** offers slightly lower throughput, and slightly higher but still very respectable latency compared to DragonflyDB. Both **EloqKV** and DragonflyDB significantly outperform Redis, both in throughput and in latency.
 
 ### Mixed Write-Read Workload
 
-Finally, the mixed workload with a 1:10 ratio:
+Finally, the mixed workload with a 1:10 ratio of Put\:Get:
 
 ```
 memtier_benchmark -t $thread_num -c $client_num -s $server_ip -p $server_port --distinct-client-seed --ratio=1:10 --key-prefix="kv_" --key-minimum=1 --key-maximum=5000000 --random-data --data-size=128 --hide-histogram --test-time=300
@@ -131,12 +119,6 @@ memtier_benchmark -t $thread_num -c $client_num -s $server_ip -p $server_port --
 
 </div></p>
 
-<!-- <p align="center">
-<div style={{ width: '720px', textAlign: 'center'}}>
-![](img/eloqkv_dragon_redis_setget_new.png)
-</div>
-</p> -->
-
 **EloqKV** exhibits similar throughput to DragonflyDB. As concurrency increases, **EloqKV** shows a slightly higher P999 latency than DragonflyDB, but remains under 4ms even with over a thousand concurrent connections.
 
 ### Analysis and Conclusion
@@ -145,16 +127,16 @@ Based on the previous experiments, we can obtain some interesting observations. 
 
 #### Single Worker vs Multiple Workers
 
-We can observe that for in-memory caching applications, **EloqKV** and DragonflyDB can significantly outperform _single process_ Redis on a modern multi-core server. The difference is a result of a fundamental [design philosophy](https://medium.com/@yashpaliwal42/redis-single-threaded-and-still-fast-89625094048b) took by Redis. Redis restricts internal in-memory data structure operations to a single worker thread, while multiple IO threads handle networking and persistency. In comparison both **EloqKV** and DragonflyDB allow multiple workers.
+**EloqKV** and DragonflyDB can significantly outperform _single process_ Redis on a modern multi-core server. The difference is the result of a fundamental [design philosophy](https://medium.com/@yashpaliwal42/redis-single-threaded-and-still-fast-89625094048b) took by Redis. Redis restricts internal in-memory data structure operations to a single worker thread, while multiple IO threads handle networking and persistency. This choice, though greatly simplifies Redis's design, naturally limits performance on multi-core systems. In comparison both **EloqKV** and DragonflyDB allow multiple workers.
 
-There is already plenty of [debate](https://redis.io/blog/redis-architecture-13-years-later/) on whether the performance comparison is fair. Redis is supposed to scale horizontally even on a single server node, by being deployed as a _cluster_ with multiple instances/shards. Moreover, even for single worker architecture, there is still space for optimization. For example, the good folks at [Valkey](https://valkey.io/) have done nice work [pushing the performance](https://valkey.io/blog/unlock-one-million-rps/) of kv store based on the Redis architecture.
+There is plenty of [debate](https://redis.io/blog/redis-architecture-13-years-later/) about whether the performance comparison is fair. Redis is supposed to scale horizontally even on a single server node, by being deployed as a _cluster_ with multiple instances/shards. Even for single worker architecture, there is still space for optimization, as demonstrated by [Valkey](https://valkey.io/) that have been [pushing the performance](https://valkey.io/blog/unlock-one-million-rps/) of Redis-like KV store.
 
-Still, we believe that a single threaded design will eventually hit its limitations as CPU cores keep increasing and the computation performed for each query becomes more complex. Even the people at Redis have done some work to multithreading at least [certain queries](https://redis.io/blog/announcing-faster-redis-query-engine-and-our-vector-database-leads-benchmarks/).
+Nonetheless, with increasing CPU cores and more complex query workloads, we believe that single threaded designs face fundamental limitations. Even Redis is exploring multithreading for [certain queries](https://redis.io/blog/announcing-faster-redis-query-engine-and-our-vector-database-leads-benchmarks/).
 
 #### Do We Really Need to Specialize?
 
 Compared with DragonflyDB, **EloqKV** currently lacks a few optimizations such as [io_uring](https://en.wikipedia.org/wiki/Io_uring) based networking. Due to these limitations, our profiling shows that **EloqKV** is bound by the networking stack when serving the workloads in the experiments.
 
-Even so, as the experiments demonstrated, **EloqKV** works _almost_ as well as DragonflyDB on a workload that DragonflyDB was specifically designed and optimized for. This begs the question of whether designing special database software for limited use cases is profitable. Notice that unlike Redis and DragonflyDB, **EloqKV** is much more than a single node memory cache. Indeed, experiments in the next section and our follow up blog posts will show that **EloqKV** performs very well as a clustered system, as a durable data store, or even as a fully ACID transactional store.
+Even so, as the experiments demonstrated, **EloqKV** works _almost_ as well as DragonflyDB on a workload that DragonflyDB was specifically designed and optimized for. This begs the question of whether designing special database software for limited use cases is profitable. Unlike Redis and DragonflyDB, **EloqKV** is much more than a single node memory cache. It excels in clustered, durable, and fully ACID-compliant transactional setups. Future blog posts will explore these capabilities in greater detail.
 
-**EloqKV** is based on our [Data Substrate](/blog/2024/08/11/data-substrate) technology. We believe that with this revolutionary technology, users can greatly reduce the complexity of their data infrastructures by eliminatating many specialized databases for their data management needs.
+**EloqKV** is based on our [Data Substrate](/blog/2024/08/11/data-substrate) technology. We believe that with this revolutionary technology, users can greatly simplify their data infrastructures by reducing the need for many specialized databases.
