@@ -51,18 +51,18 @@ We developed a new benchmarking tool, `eloq_benchmark`, specifically to test the
 We run `eloq_benchmark` with the following configuration:
 
 ```
-eloq_benchmark --NumConnections=$conn -h $server_ip -p $server_port --GetRatio=$ratio --OpType=$optype --BatchSize=$batchsize --NumKeys=$keynum
+eloq_benchmark --h $server_ip --p $server_port --numKVPairEntries=$keynum --numConnections=$conn --getRatio=$ratio --opType=$optype --batchSize=$batchsize
 ```
 
-- `--NumConnections`: Number of concurrent connnections, which is set to 256 for single-node and 768 for three-node cluster.
+- `--numKVPairEntries`: Number of entries, which is set to 1000000.
 
-- `--GetRatio`: Set it to 0 for write-only workload, 0.5 for mixed workload and 1 for read-only workload.
+- `--numConnections`: Number of concurrent connnections, which is set to 256 for single-node and 768 for three-node cluster.
 
-- `--OpType`: Set batch mode, set it to `pipeline` for pipeline mode, set it to `tx` for `MutilExec` atomic mode.
+- `--getRatio`: Set it to 0 for write-only workload, 0.5 for mixed workload and 1 for read-only workload.
 
-- `--BatchSize`: Number of keys in a batch command, which we set to 6.
+- `--opType`: Set batch mode, set it to `pipeline` for pipeline mode, set it to `tx` for `MutilExec` atomic mode.
 
-- `--NumKeys`: Number of keys, which is set to 1000000.
+- `--batchSize`: Number of keys in a batch command, which we set to 6.
 
 #### Results
 
