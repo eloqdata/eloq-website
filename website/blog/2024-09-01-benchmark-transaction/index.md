@@ -1,5 +1,5 @@
 ---
-title: 'EloqKV as Transactional Store (Atomic Operations)'
+title: 'ACID in EloqKV : Distributed Transaction'
 authors: eloq
 date: 2024-09-01
 tags: [Company]

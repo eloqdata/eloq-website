@@ -1,5 +1,5 @@
 ---
-title: 'EloqKV as Transactional Store (Durability)'
+title: 'ACID in EloqKV : Durability'
 authors: eloq
 date: 2024-08-25
 tags: [Company]
