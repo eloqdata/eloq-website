@@ -51,10 +51,10 @@ We developed a new benchmarking tool, `eloq_benchmark`, specifically to test the
 We run `eloq_benchmark` with the following configuration:
 
 ```
-eloq_benchmark --h $server_ip --p $server_port --numKVPairEntries=$keynum --numConnections=$conn --getRatio=$ratio --opType=$optype --batchSize=$batchsize
+eloq_benchmark --h $server_ip --p $server_port --numKeys=$keynum --numConnections=$conn --getRatio=$ratio --opType=$optype --batchSize=$batchsize
 ```
 
-- `--numKVPairEntries`: Number of entries, which is set to 1000000.
+- `--numKeys`: Number of entries, which is set to 1000000.
 
 - `--numConnections`: Number of concurrent connnections, which is set to 256 for single-node and 768 for three-node cluster.
 
