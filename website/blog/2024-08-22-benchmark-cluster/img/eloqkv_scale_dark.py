@@ -44,12 +44,12 @@ bar3_read = ax1.bar(index_read - 1 *bar_width, eloqkv_read_throughput, bar_width
 bar3_read = ax1.bar(index_read - 0 * bar_width, eloqkv_3_3_throughput, bar_width, alpha=0.8, color=globals.eloqkv3n_color_1, label='EloqKV*3 With Regular Client')
 bar3_read = ax1.bar(index_read + 1 * bar_width, eloqkv_cluster_read_throughput, bar_width, alpha=0.8, color=globals.eloqkv3n_color_2, label='EloqKV*3 With Smart Client')
 
-ax1.set_xlabel('Workload Type', color='white', fontsize=16)
-ax1.set_ylabel('Throughput ($\mathbf{KOps}$)', color='white', fontsize=16)
-ax1.set_title('Cluster Mode Throught Comparison', color='white', pad=10,  fontsize=18)
+ax1.set_xlabel('Workload Type', color='white', fontsize=globals.axis_label_size)
+ax1.set_ylabel('Throughput ($\mathbf{KOps}$)', color='white', fontsize=globals.axis_label_size)
+ax1.set_title('Cluster Mode Throught Comparison', color='white', pad=10,  fontsize=globals.title_size)
 ax1.set_xticks(index_read)
-ax1.set_xticklabels(read_concurrency_levels, color='white',fontsize=12)
-ax1.tick_params(axis='y', colors='white')
+ax1.set_xticklabels(read_concurrency_levels, color='white',fontsize=globals.axis_value_size)
+ax1.tick_params(axis='y',labelsize=globals.axis_value_size, colors='white')
 ax1.set_ylim(0, 7000)  # Adjust this value to leave more space at the top
 
 
@@ -66,10 +66,10 @@ ax1.set_ylim(0, 7000)  # Adjust this value to leave more space at the top
 lines, labels = ax1.get_legend_handles_labels()
 #lines2, labels2 = ax2.get_legend_handles_labels()
 #legend = ax2.legend(lines + lines2, labels + labels2, loc='upper left', facecolor='#2e2e2e',fontsize=12)
-legend = ax1.legend(lines, labels, loc='upper left', facecolor='#2e2e2e',fontsize=14)
+legend = ax1.legend(lines, labels, loc='upper left', facecolor='#2e2e2e',fontsize=globals.legend_size)
 
 # Set legend text color to white
-plt.setp(legend.get_texts(), color='white', fontsize=14)
+plt.setp(legend.get_texts(), color='white')
 
 # Adjust layout to prevent clipping
 fig.tight_layout()

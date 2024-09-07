@@ -1,3 +1,9 @@
+# font size
+axis_value_size=14
+axis_label_size=16
+title_size=18
+legend_size=14
+
 # pick color from https://htmlcolorcodes.com/color-chart/
 
 # color of a group of items with different size. e.g. batch size/disk number/cpu number

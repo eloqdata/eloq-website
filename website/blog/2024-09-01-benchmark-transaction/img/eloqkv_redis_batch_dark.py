@@ -97,14 +97,13 @@ bar4_read = ax1.bar(
     label="EloqKV*3 MultiExec",
 )
 
-ax1.set_xlabel("Workload Type", color="white", fontsize=16)
-ax1.set_ylabel("Throughput ($\mathbf{KOps}$)", color="white", fontsize=16)
-ax1.set_title("EloqKV & Redis Batch Operation Comparison", color="white", fontsize=18)
+ax1.set_xlabel("Workload Type", color="white", fontsize=globals.axis_label_size)
+ax1.set_ylabel("Throughput ($\mathbf{KOps}$)", color="white", fontsize=globals.axis_label_size)
+ax1.set_title("EloqKV & Redis Batch Operation Comparison", color="white", fontsize=globals.title_size)
 ax1.set_xticks(index_read)
-ax1.set_xticklabels(read_concurrency_levels, color="white", fontsize=14)
-ax1.tick_params(axis="y", colors="white")
+ax1.set_xticklabels(read_concurrency_levels, color="white", fontsize=globals.axis_value_size)
 ax1.set_ylim(0, 600)  # Adjust this value to leave more space at the top
-# ax1.set_xlim(0, 800)  # Adjust this value to leave more space at the top
+ax1.tick_params(axis='y',labelsize=globals.axis_value_size, colors='white')
 
 # Latency data (line graph)
 # ax2 = ax1.twinx()
@@ -121,12 +120,12 @@ ax1.set_ylim(0, 600)  # Adjust this value to leave more space at the top
 lines, labels = ax1.get_legend_handles_labels()
 # lines2, labels2 = ax2.get_legend_handles_labels()
 legend = ax1.legend(
-    lines, labels, loc="upper left", facecolor="#2e2e2e", fontsize=14, ncol=2
+    lines, labels, loc="upper left", facecolor="#2e2e2e", fontsize=globals.legend_size, ncol=2
 )
 # ax2.legend(ncol=2)  # Legend with two columns
 
 # Set legend text color to white
-plt.setp(legend.get_texts(), color="white", fontsize=14)
+plt.setp(legend.get_texts(), color="white")
 
 # Adjust layout to prevent clipping
 fig.tight_layout()

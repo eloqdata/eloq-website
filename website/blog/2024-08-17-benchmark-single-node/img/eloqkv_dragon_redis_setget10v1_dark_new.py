@@ -39,12 +39,13 @@ bar1_read = ax1.bar(index_read - bar_width, redis_read_throughput, bar_width, al
 bar2_read = ax1.bar(index_read, dragonfly_read_throughput, bar_width, alpha=0.8, color=globals.dragon1n_color, label='Dragonfly Throughput')
 bar3_read = ax1.bar(index_read + bar_width, eloqkv_read_throughput, bar_width, alpha=0.8, color=globals.eloqkv1n_color_1, label='EloqKV Throughput')
 
-ax1.set_xlabel('Concurrent Connections', color='white',fontsize=16)
-ax1.set_ylabel('Throughput ($\mathbf{KOps}$)', color='white',fontsize=16)
-ax1.set_title('Read Write Mixed Workload Comparison', color='white',fontsize=18)
+ax1.set_xlabel('Concurrent Connections', color='white',fontsize=globals.axis_label_size)
+ax1.set_ylabel('Throughput ($\mathbf{KOps}$)', color='white',fontsize=globals.axis_label_size)
+ax1.set_title('Read Write Mixed Workload Comparison', color='white',fontsize=globals.title_size)
 ax1.set_xticks(index_read)
-ax1.set_xticklabels(read_concurrency_levels, color='white',fontsize=12)
-ax1.tick_params(axis='y', colors='white')
+ax1.set_xticklabels(read_concurrency_levels, color='white',fontsize=globals.axis_value_size)
+ax1.tick_params(axis='y',labelsize=globals.axis_value_size, colors='white')
+
 
 # Latency data (line graph)
 ax2 = ax1.twinx()
@@ -52,16 +53,17 @@ line1_read = ax2.plot(index_read, redis_read_latency_ms, '--', marker='o', color
 line2_read = ax2.plot(index_read, dragonfly_read_latency_ms, '--', marker='o', color=globals.dragon1n_color, label='Dragonfly P999 Latency', linewidth=2)
 line3_read = ax2.plot(index_read, eloqkv_read_latency_ms, '--', marker='o', color=globals.eloqkv1n_color_1, label='EloqKV P999 Latency', linewidth=2)
 
-ax2.set_ylabel('P999 Latency ($\mathbf{ms}$)', color='white',fontsize=16)
-ax2.tick_params(axis='y', colors='white')
+ax2.set_ylabel('P999 Latency ($\mathbf{ms}$)', color='white',fontsize=globals.axis_label_size)
+ax2.tick_params(axis='y',labelsize=globals.axis_value_size, colors='white')
+
 
 # Combine legends from both axes
 lines, labels = ax1.get_legend_handles_labels()
 lines2, labels2 = ax2.get_legend_handles_labels()
-legend = ax2.legend(lines + lines2, labels + labels2, loc='upper left', facecolor='#2e2e2e',fontsize=14, ncol=2)
+legend = ax2.legend(lines + lines2, labels + labels2, loc='upper left', facecolor='#2e2e2e',fontsize=globals.legend_size, ncol=2)
 
 # Set legend text color to white
-plt.setp(legend.get_texts(), color='white',fontsize=14)
+plt.setp(legend.get_texts(), color='white')
 
 # Adjust layout to prevent clipping
 fig.tight_layout()

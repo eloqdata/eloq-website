@@ -56,14 +56,13 @@ bar3_read = ax1.bar(index_read + 0.5*bar_width, eloqkv_b4, bar_width, alpha=0.8,
 bar4_read = ax1.bar(index_read+ 1.5*bar_width, eloqkv_b5, bar_width, alpha=0.8, color=globals.group_5, label='Batch Size: 5')
 bar4_read = ax1.bar(index_read+ 2.5*bar_width, eloqkv_b6, bar_width, alpha=0.8, color=globals.group_6, label='Batch Size: 6')
 
-ax1.set_xlabel('Workload Type', color='white', fontsize=16)
-ax1.set_ylabel('Throughput ($\mathbf{KOps}$)', color='white', fontsize=16)
-ax1.set_title('EloqKV Throughput Analysis with Varying Batch Sizes', color='white', fontsize=18)
+ax1.set_xlabel('Workload Type', color='white', fontsize=globals.axis_label_size)
+ax1.set_ylabel('Throughput ($\mathbf{KOps}$)', color='white', fontsize=globals.axis_label_size)
+ax1.set_title('EloqKV Throughput Analysis with Varying Batch Sizes', color='white', fontsize=globals.title_size)
 ax1.set_xticks(index_read)
-ax1.set_xticklabels(read_concurrency_levels, color='white', fontsize=14)
-ax1.tick_params(axis='y', colors='white')
+ax1.set_xticklabels(read_concurrency_levels, color='white', fontsize=globals.axis_value_size)
 ax1.set_ylim(0, 1000)  # Adjust this value to leave more space at the top
-#ax1.set_xlim(0, 800)  # Adjust this value to leave more space at the top
+ax1.tick_params(axis='y',labelsize=globals.axis_value_size, colors='white')
 
 # Latency data (line graph)
 #ax2 = ax1.twinx()
@@ -79,11 +78,11 @@ ax1.set_ylim(0, 1000)  # Adjust this value to leave more space at the top
 # Combine legends from both axes
 lines, labels = ax1.get_legend_handles_labels()
 #lines2, labels2 = ax2.get_legend_handles_labels()
-legend = ax1.legend(lines, labels, loc='upper left', facecolor='#2e2e2e',fontsize=14, ncol=2)
+legend = ax1.legend(lines, labels, loc='upper left', facecolor='#2e2e2e',fontsize=globals.legend_size, ncol=2)
 #ax2.legend(ncol=2)  # Legend with two columns
 
 # Set legend text color to white
-plt.setp(legend.get_texts(), color='white', fontsize=14)
+plt.setp(legend.get_texts(), color='white')
 
 # Adjust layout to prevent clipping
 fig.tight_layout()
