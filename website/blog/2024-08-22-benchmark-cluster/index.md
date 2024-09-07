@@ -41,16 +41,18 @@ We compare the performance of a single-node **EloqKV** instance with that of an 
 
 ## Experiment:
 
-We benchmarked a single-node **EloqKV** with different read-write ratios using the following command:
+We conducted performance benchmarks on a single-node **EloqKV** database under varying read-write ratios, utilizing a single `memtier-benchmark` client. The command used for this benchmarking is as follows:
 
 ```
-memtier_benchmark -t 32 -c 20 -s $server_ip -p $server_port --distinct-client-seed --ratio=$ratio --key-prefix="kv_" --key-minimum=1 --key-maximum=5000000 --random-data --data-size=128 --hide-histogram --test-time=300
+memtier_benchmark -t 32 -c 16 -s $server_ip -p $server_port --distinct-client-seed --ratio=$ratio --key-prefix="kv_" --key-minimum=1 --key-maximum=5000000 --random-data --data-size=128 --hide-histogram --test-time=300
 ```
 
-To assess **EloqKV**’s scalability under different workloads, we ran memtier_benchmark in cluster mode with varying read-write ratios using the following configuration:
+To assess the performance of a three-node **EloqKV** cluster, we utilized three memtier-benchmark clients in both regular and smart client modes. In regular client mode, users interact with the EloqKV cluster as if it were a single node without needing to consider where the keys are stored. The same `memtier-benchmark` command used for a single-node setup is applied to each regular client, with each client connecting to a different EloqKV node in the cluster.
+
+For smart client mode, we ran memtier-benchmark in cluster mode with varying read-write ratios, using the following configuration:
 
 ```
-memtier_benchmark -t 32 -c 20 --cluster-mode -s $server_ip1 -p $server_port1 -s $server_ip2 -p $server_port2 -s $server_ip3 -p $server_port3 --distinct-client-seed --ratio=$ratio --key-prefix="kv_" --key-minimum=1 --key-maximum=5000000 --random-data --data-size=128 --hide-histogram --test-time=300
+memtier_benchmark -t 32 -c 16 --cluster-mode -s $server_ip1 -p $server_port1 -s $server_ip2 -p $server_port2 -s $server_ip3 -p $server_port3 --distinct-client-seed --ratio=$ratio --key-prefix="kv_" --key-minimum=1 --key-maximum=5000000 --random-data --data-size=128 --hide-histogram --test-time=300
 ```
 
 ### Results
