@@ -1,5 +1,5 @@
 ---
-title: 'ACID in EloqKV : Distributed Transaction'
+title: 'ACID in EloqKV : Atomic Operations'
 authors: eloq
 date: 2024-09-01
 tags: [Company]
