@@ -5,7 +5,7 @@ date: 2024-09-01
 tags: [Company]
 ---
 
-In the previous blog, we discussed the [durable feature](/blog/2024/08/25/benchmark-txlog) of **EloqKV** and benchmarked the write performance of **EloqKV** with the Write-Ahead-Log enabled. In this blog, we will continue to explore the transaction capabilities of **EloqKV** and benchmark the performance of distributed atomic operations using the Redis _WATCH / MULTI / EXEC_ commands.
+In the previous blog, we discussed the [durable feature](/blog/2024/08/25/benchmark-txlog) of **EloqKV** and benchmarked the write performance of **EloqKV** with the Write-Ahead-Log enabled. In this blog, we will continue to explore the transaction capabilities of **EloqKV** and benchmark the performance of distributed atomic operations using the Redis `MULTI EXEC` commands.
 
 <!--truncate-->
 
@@ -29,7 +29,7 @@ In the first experiment, we compare **EloqKV** and Redis in batch mode across di
 
 2. **MULTI / EXEC**: This mode ensures that a group of commands is executed as a single atomic operation, meaning either all commands are executed or none are. Please [note](/eloqkv/known-limit) that the Redis `MULTI/EXEC` command without `WATCH` normally does not fail because Redis execute this commands in a single thread on a single server, whereas **EloqKV** can roll back and fail a transaction due to concurrent transaction conflicts.
 
-Redis does not support `MultiExec` in cluster mode if keys in a single batch do not fall on to the same shard. To work around this, users must use `hashtags` to ensure certain keys are located on the same shard. This can be cumbersome and often cause load imbalance. For Redis, `Pipeline` support is client dependent. It is not a feature supported on all Redis clients. **EloqKV**, on the other hand, does not have these limitations. Transactions and Pipelines work on a cluster of nodes just as on a single node. Though **EloqKV** does support `hashtags` to colocate keys and can reduce network overhead.
+Redis does not support `Multi Exec` in cluster mode if keys in a single batch do not fall on to the same shard. To work around this, users must use `hashtags` to ensure certain keys are located on the same shard. This can be cumbersome and often cause load imbalance. For Redis, `Pipeline` support is client dependent. It is not a feature supported on all Redis clients. **EloqKV**, on the other hand, does not have these limitations. Transactions and Pipelines work on a cluster of nodes just as on a single node. Though **EloqKV** does support `hashtags` to colocate keys and can reduce network overhead.
 
 In the following experiment, **EloqKV** operates in pure memory mode, with persistent storage and WAL disabled.
 
@@ -80,9 +80,9 @@ import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
 `Y-axis`: Throughput in Thousand OPS (Operations Per Second) for the batches. This number should be multiplied by 6 (batch size) to obtain the total KV operations.
 
-On a single node, **EloqKV** significantly outperforms Redis in both pipeline and `MultiExec` modes. With a fixed batch size of 6 keys, **EloqKV** achieves a throughput exceeding 200 million KV operations per second (KPS) in both modes on a single server. `MultiExec` is slower than `Pipeline` due to additional book-keeping needed for atomic operations.
+On a single node, **EloqKV** significantly outperforms Redis in both pipeline and `Multi Exec` modes. With a fixed batch size of 6 keys, **EloqKV** achieves a throughput exceeding 200 million KV operations per second (KPS) in both modes on a single server. `Multi Exec` is slower than `Pipeline` due to additional book-keeping needed for atomic operations.
 
-The throughput of a three-node **EloqKV** cluster is lower than that of a single-node **EloqKV**. In Pipeline mode, this is because of the additional network round trips. For `MultiExec`, additional operations are needed for lock acquisition and releasing. Even so, the performance is quite respectable.
+The throughput of a three-node **EloqKV** cluster is lower than that of a single-node **EloqKV**. In Pipeline mode, this is because of the additional network round trips. For `Multi Exec`, additional operations are needed for lock acquisition and releasing. Even so, the performance is quite respectable.
 
 ### Evaluate the Impact of Batch Size
 
@@ -90,7 +90,7 @@ Transaction size affects the efficiency of distributed transactions. In this exp
 
 #### Result
 
-Below are the performance results of **EloqKV** `MultiExec` command with different batch size among various workload.
+Below are the performance results of **EloqKV** `Multi Exec` command with different batch size among various workload.
 
 <p align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
@@ -103,4 +103,4 @@ Below are the performance results of **EloqKV** `MultiExec` command with differe
 
 `Y-axis`: Throughput in Thousand OPS (Operations Per Second).
 
-The results show that **EloqKV**’s throughput decreases as the batch size increases. This is because larger batch sizes introduce additional transaction overhead. For read requests, each key must be read and then validated during the transaction commit phase to ensure that RepeatableRead isolation is maintained. For write requests, a write lock must be acquired for each key and then released, along with updating the value during the transaction commit phase. Although the throughput per `MultiExec` command declines with larger batch sizes, the total KV ops processed per second (KPS) increases. For instance, with a batch size of 1, the KPS is 700,000, while with a batch size of 6, it rises to 2 million.
+The results show that **EloqKV**’s throughput decreases as the batch size increases. This is because larger batch sizes introduce additional transaction overhead. For read requests, each key must be read and then validated during the transaction commit phase to ensure that RepeatableRead isolation is maintained. For write requests, a write lock must be acquired for each key and then released, along with updating the value during the transaction commit phase. Although the throughput per `Multi Exec` command declines with larger batch sizes, the total KV ops processed per second (KPS) increases. For instance, with a batch size of 1, the KPS is 700,000, while with a batch size of 6, it rises to 2 million.
