@@ -27,7 +27,7 @@ In the first experiment, we compare EloqKV and Redis in batch mode across differ
 
 1. Pipeline Mode: In this mode, the client sends multiple commands to the server without waiting for responses to previous commands. The server processes these commands sequentially and returns all the responses at once. This batching approach significantly reduces network communication overhead, especially when executing many commands. Notice that each command in the pipeline is executed independently, with potentially other commands executed in between. However, we do enforce that the commands for any given key is executed in the order they appear in pipeline.
 
-2. WATCH / MULTI / EXEC Command Mode: This mode ensures that a group of commands is executed as a single atomic operation, meaning either all commands are executed or none are.
+2. WATCH / MULTI / EXEC Command Mode: This mode ensures that a group of commands is executed as a single atomic operation, meaning either all commands are executed or none are. Please note that the Redis `MULTI/EXEC` command does not support rollback semantics, whereas EloqKV provides this feature.
 
 Typically, pipeline mode offers higher performance compared to MULTI / EXEC due to the absence of isolation overhead. However, our experiment demonstrates that while MULTI / EXEC is slower than pipeline mode, it can still perform a few million kv operations per second, which is more than sufficient for most workloads.
 

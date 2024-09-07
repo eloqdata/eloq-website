@@ -103,6 +103,14 @@ Below is a detailed description of each configuration variable:
 - Data Type: String
 - Default Value: rocksdb_data
 
+### `requirepass`
+
+- Description: The `requirepass` setting is used to enforce authentication. When enabled, EloqKV will not process any commands from clients that are not authenticated. `requirepass` is only supported in config file.
+- Category: [local]
+- Scope: Global
+- Data Type: String
+- Default Value: Empty
+
 ### Log Configuration
 
 EloqKV uses GLOG to manage logging with various log levels. You can modify GLOG's behavior by exporting environment variables prefixed with GLOG\_. For more information, refer to the [GLOG FLAGS documentation](https://github.com/google/glog/blob/master/docs/flags.md).
