@@ -67,6 +67,6 @@ EloqKV can be deployed in various configurations:
 
 - **As a full blown transactional distributed database**: When deployed in the cloud, EloqKV can be configured as a fully scalable, highly available, and ACID-capable database that can be used as the main store to host primary data. Traditionally this is a postition often taken by expensive RMDBS.
 
-We foresee many scenarios that EloqKV can be valuable due to its unique features and capabilities, and we love to hear from you on your use cases and pain points that EloqKV may be able to help. We are working hard to improve the product and adding more capabilities. If you have any questions or suggestions, or want to have an in-person demonstration, please [contact us](/contact).
+We foresee many scenarios that EloqKV can be valuable due to its unique features and capabilities, and we love to hear from you on your use cases and pain points that EloqKV may be able to help. We are working hard to improve the product and add more capabilities. If you have any questions or suggestions, or want to have an in-person demonstration, please [contact us](/contact).
 
 In the next few blog posts, we will share some performance benchmarks of EloqKV in different scenarios.
