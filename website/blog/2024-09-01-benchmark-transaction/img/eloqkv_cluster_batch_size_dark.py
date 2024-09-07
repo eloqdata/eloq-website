@@ -1,5 +1,11 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import sys
+import os
+
+sys.path.append(os.path.abspath('../../'))
+import globals
+
 
 # Set the dark background style
 # plt.style.use('dark_background')
@@ -41,7 +47,7 @@ bar1_read = ax1.bar(
     eloqkv_b1,
     bar_width,
     alpha=0.8,
-    color="#208B8E",
+    color=globals.group_1,
     label="Batch Size: 1",
 )
 bar1_read = ax1.bar(
@@ -49,7 +55,7 @@ bar1_read = ax1.bar(
     eloqkv_b2,
     bar_width,
     alpha=0.8,
-    color="#229443",
+    color=globals.group_2,
     label="Batch Size: 2",
 )
 bar2_read = ax1.bar(
@@ -57,7 +63,7 @@ bar2_read = ax1.bar(
     eloqkv_b3,
     bar_width,
     alpha=0.8,
-    color="#739C23",
+    color=globals.group_3,
     label="Batch Size: 3",
 )
 bar3_read = ax1.bar(
@@ -65,7 +71,7 @@ bar3_read = ax1.bar(
     eloqkv_b4,
     bar_width,
     alpha=0.8,
-    color="#E0BD28",
+    color=globals.group_4,
     label="Batch Size: 4",
 )
 bar4_read = ax1.bar(
@@ -73,7 +79,7 @@ bar4_read = ax1.bar(
     eloqkv_b5,
     bar_width,
     alpha=0.8,
-    color="#E07D28",
+    color=globals.group_5,
     label="Batch Size: 5",
 )
 bar4_read = ax1.bar(
@@ -81,7 +87,7 @@ bar4_read = ax1.bar(
     eloqkv_b6,
     bar_width,
     alpha=0.8,
-    color="#D64326",
+    color=globals.group_6,
     label="Batch Size: 6",
 )
 

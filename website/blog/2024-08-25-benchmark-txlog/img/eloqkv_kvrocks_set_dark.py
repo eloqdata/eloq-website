@@ -1,5 +1,10 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import sys
+import os
+
+sys.path.append(os.path.abspath('../../'))
+import globals
 
 # Set the dark background style
 #plt.style.use('dark_background')
@@ -45,10 +50,10 @@ ax1.set_facecolor('#2e2e2e')  # Axes background color
 bar_width = 0.2
 index_read = np.arange(len(read_concurrency_levels))
 
-bar1_read = ax1.bar(index_read - 1.5*bar_width, kvrocks_ebs, bar_width, alpha=0.8, color='#1A6B3D', label='Kvrocks EBS')
-bar2_read = ax1.bar(index_read - 0.5*bar_width, kvrocks_ssd, bar_width, alpha=0.8, color='#1A4D6B', label='Kvrocks Local SSD')
-bar3_read = ax1.bar(index_read + 0.5*bar_width, eloqkv_ebs, bar_width, alpha=0.8, color='#E07D28', label='EloqKV EBS')
-bar4_read = ax1.bar(index_read+ 1.5*bar_width, eloqkv_ssd, bar_width, alpha=0.8, color='#D64326', label='EloqKV Local SSD')
+bar1_read = ax1.bar(index_read - 1.5*bar_width, kvrocks_ebs, bar_width, alpha=0.8, color=globals.kvrocks1n_color_1, label='Kvrocks EBS')
+bar2_read = ax1.bar(index_read - 0.5*bar_width, kvrocks_ssd, bar_width, alpha=0.8, color=globals.kvrocks1n_color_2, label='Kvrocks Local SSD')
+bar3_read = ax1.bar(index_read + 0.5*bar_width, eloqkv_ebs, bar_width, alpha=0.8, color=globals.eloqkv1n_color_1, label='EloqKV EBS')
+bar4_read = ax1.bar(index_read+ 1.5*bar_width, eloqkv_ssd, bar_width, alpha=0.8, color=globals.eloqkv1n_color_2, label='EloqKV Local SSD')
 
 ax1.set_xlabel('Concurrent Connections', color='white', fontsize=16)
 ax1.set_ylabel('Throughput ($\mathbf{KOps}$)', color='white', fontsize=16)
@@ -61,13 +66,13 @@ ax1.set_ylim(0, 400)  # Adjust this value to leave more space at the top
 
 # Latency data (line graph)
 ax2 = ax1.twinx()
-line1_read = ax2.plot(index_read, kvrocks_ebs_lat, 'b--', marker='o', color='#1A6B3D', label='EloqKV 32C 1D Latency', linewidth=2.5)
-line2_read = ax2.plot(index_read, kvrocks_ssd_lat, 'g--', marker='o', color='#1A4D6B', label='EloqKV 32C 2D Latency', linewidth=2.5)
-line3_read = ax2.plot(index_read, eloqkv_ebs_lat, 'r--', marker='o', color='#E07D28', label='EloqKV 32C 4D Latency', linewidth=2.5)
-line3_read = ax2.plot(index_read, eloqkv_ssd_lat, 'r--', marker='o', color='#D64326', label='EloqKV 32C 6D Latency', linewidth=2.5)
+line1_read = ax2.plot(index_read, kvrocks_ebs_lat, '--', marker='o', color=globals.kvrocks1n_color_1, label='EloqKV 32C 1D Latency', linewidth=2.5)
+line2_read = ax2.plot(index_read, kvrocks_ssd_lat, '--', marker='o', color=globals.kvrocks1n_color_2, label='EloqKV 32C 2D Latency', linewidth=2.5)
+line3_read = ax2.plot(index_read, eloqkv_ebs_lat, '--', marker='o', color=globals.eloqkv1n_color_1, label='EloqKV 32C 4D Latency', linewidth=2.5)
+line3_read = ax2.plot(index_read, eloqkv_ssd_lat, '--', marker='o', color=globals.eloqkv1n_color_2, label='EloqKV 32C 6D Latency', linewidth=2.5)
 
 ax2.set_ylabel('Avg Latency ($\mathbf{ms}$)', color='white', fontsize=16)
-ax2.tick_params(axis='y', colors='white', fontsize=14)
+ax2.tick_params(axis='y', colors='white', labelsize=14)
 ax2.set_ylim(0, 300)  # Adjust this value to leave more space at the top
 
 # Combine legends from both axes

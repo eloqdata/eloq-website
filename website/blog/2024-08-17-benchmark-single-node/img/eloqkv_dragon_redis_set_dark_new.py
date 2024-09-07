@@ -1,5 +1,10 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import sys
+import os
+
+sys.path.append(os.path.abspath('../../'))
+import globals
 
 # Set the dark background style
 #plt.style.use('dark_background')
@@ -30,9 +35,9 @@ ax1.set_ylim(0, 2500)  # Adjust this value to leave more space at the top
 bar_width = 0.2
 index_read = np.arange(len(read_concurrency_levels))
 
-bar1_read = ax1.bar(index_read - bar_width, redis_read_throughput, bar_width, alpha=0.8, color='#1A6B3D', label='Redis Throughput')
-bar2_read = ax1.bar(index_read, dragonfly_read_throughput, bar_width, alpha=0.8, color='#1A4D6B', label='Dragonfly Throughput')
-bar3_read = ax1.bar(index_read + bar_width, eloqkv_read_throughput, bar_width, alpha=0.8, color='#D64326', label='EloqKV Throughput')
+bar1_read = ax1.bar(index_read - bar_width, redis_read_throughput, bar_width, alpha=0.8, color=globals.redis1n_color_2, label='Redis Throughput')
+bar2_read = ax1.bar(index_read, dragonfly_read_throughput, bar_width, alpha=0.8, color=globals.dragon1n_color, label='Dragonfly Throughput')
+bar3_read = ax1.bar(index_read + bar_width, eloqkv_read_throughput, bar_width, alpha=0.8, color=globals.eloqkv1n_color_1, label='EloqKV Throughput')
 
 ax1.set_xlabel('Concurrent Connections', color='white',fontsize=16)
 ax1.set_ylabel('Throughput ($\mathbf{KOps}$)', color='white',fontsize=16)
@@ -43,9 +48,9 @@ ax1.tick_params(axis='y', colors='white')
 
 # Latency data (line graph)
 ax2 = ax1.twinx()
-line1_read = ax2.plot(index_read, redis_read_latency_ms, 'b--', marker='o', color='#1A6B3D', label='Redis P999 Latency', linewidth=2)
-line2_read = ax2.plot(index_read, dragonfly_read_latency_ms, 'g--', marker='o', color='#1A4D6B', label='Dragonfly P999 Latency', linewidth=2)
-line3_read = ax2.plot(index_read, eloqkv_read_latency_ms, 'r--', marker='o', color='#D64326', label='EloqKV P999 Latency', linewidth=2)
+line1_read = ax2.plot(index_read, redis_read_latency_ms, '--', marker='o', color=globals.redis1n_color_2, label='Redis P999 Latency', linewidth=2)
+line2_read = ax2.plot(index_read, dragonfly_read_latency_ms, '--', marker='o', color=globals.dragon1n_color, label='Dragonfly P999 Latency', linewidth=2)
+line3_read = ax2.plot(index_read, eloqkv_read_latency_ms, '--', marker='o', color=globals.eloqkv1n_color_1, label='EloqKV P999 Latency', linewidth=2)
 
 ax2.set_ylabel('P999 Latency ($\mathbf{ms}$)', color='white', fontsize=16)
 ax2.tick_params(axis='y', colors='white')

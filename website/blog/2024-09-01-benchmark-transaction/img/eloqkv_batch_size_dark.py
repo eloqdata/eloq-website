@@ -1,5 +1,11 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import sys
+import os
+
+sys.path.append(os.path.abspath('../../'))
+import globals
+
 
 # Set the dark background style
 #plt.style.use('dark_background')
@@ -17,6 +23,13 @@ eloqkv_b3=[531.852,518.649,541.366]
 eloqkv_b4=[464.404,450.643,482.582]
 eloqkv_b5=[411.768,389.826,411.803]
 eloqkv_b6=[369.556,345.931,373.184]
+
+eloqkv_b1_retry=[314,243,0]
+eloqkv_b2_retry=[1421,1102,0]
+eloqkv_b3_retry=[3320,2802,0]
+eloqkv_b4_retry=[6349,5189,0]
+eloqkv_b5_retry=[9972,7961,0]
+eloqkv_b6_retry=[14784,12168,0]
 
 #redis_read_latency = [0.786,1.983,4.788,11.412]
 #dragonfly_read_latency = [0.252,0.444,0.956,2.191]
@@ -36,12 +49,12 @@ ax1.set_facecolor('#2e2e2e')  # Axes background color
 bar_width = 0.13
 index_read = np.arange(len(read_concurrency_levels))
 
-bar1_read = ax1.bar(index_read - 2.5*bar_width, eloqkv_b1, bar_width, alpha=0.8, color='#208B8E', label='Batch Size: 1')
-bar1_read = ax1.bar(index_read - 1.5*bar_width, eloqkv_b2, bar_width, alpha=0.8, color='#229443', label='Batch Size: 2')
-bar2_read = ax1.bar(index_read - 0.5*bar_width, eloqkv_b3, bar_width, alpha=0.8, color='#739C23', label='Batch Size: 3')
-bar3_read = ax1.bar(index_read + 0.5*bar_width, eloqkv_b4, bar_width, alpha=0.8, color='#E0BD28', label='Batch Size: 4')
-bar4_read = ax1.bar(index_read+ 1.5*bar_width, eloqkv_b5, bar_width, alpha=0.8, color='#E07D28', label='Batch Size: 5')
-bar4_read = ax1.bar(index_read+ 2.5*bar_width, eloqkv_b6, bar_width, alpha=0.8, color='#D64326', label='Batch Size: 6')
+bar1_read = ax1.bar(index_read - 2.5*bar_width, eloqkv_b1, bar_width, alpha=0.8, color=globals.group_1, label='Batch Size: 1')
+bar1_read = ax1.bar(index_read - 1.5*bar_width, eloqkv_b2, bar_width, alpha=0.8, color=globals.group_2, label='Batch Size: 2')
+bar2_read = ax1.bar(index_read - 0.5*bar_width, eloqkv_b3, bar_width, alpha=0.8, color=globals.group_3, label='Batch Size: 3')
+bar3_read = ax1.bar(index_read + 0.5*bar_width, eloqkv_b4, bar_width, alpha=0.8, color=globals.group_4, label='Batch Size: 4')
+bar4_read = ax1.bar(index_read+ 1.5*bar_width, eloqkv_b5, bar_width, alpha=0.8, color=globals.group_5, label='Batch Size: 5')
+bar4_read = ax1.bar(index_read+ 2.5*bar_width, eloqkv_b6, bar_width, alpha=0.8, color=globals.group_6, label='Batch Size: 6')
 
 ax1.set_xlabel('Workload Type', color='white', fontsize=16)
 ax1.set_ylabel('Throughput ($\mathbf{KOps}$)', color='white', fontsize=16)

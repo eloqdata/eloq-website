@@ -1,8 +1,13 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import sys
+import os
 
+sys.path.append(os.path.abspath('../../'))
 # Set the dark background style
 # plt.style.use('dark_background')
+
+import globals
 
 # Data for read workload
 read_concurrency_levels = ["write", "mixed", "read"]
@@ -47,7 +52,7 @@ bar1_read = ax1.bar(
     redis_pipe,
     bar_width,
     alpha=0.8,
-    color="#1A6B3D",
+    color=globals.redis1n_color_1,
     label="Redis Pipeline",
 )
 bar1_read = ax1.bar(
@@ -55,7 +60,7 @@ bar1_read = ax1.bar(
     redis_tx,
     bar_width,
     alpha=0.8,
-    color="#1A4D6B",
+    color=globals.redis1n_color_2,
     label="Redis MultiExec",
 )
 bar2_read = ax1.bar(
@@ -63,7 +68,7 @@ bar2_read = ax1.bar(
     eloqkv1_rr_pipe,
     bar_width,
     alpha=0.8,
-    color="#9CC725",
+    color=globals.eloqkv1n_color_1,
     label="EloqKV*1 Pipeline",
 )
 bar3_read = ax1.bar(
@@ -71,7 +76,7 @@ bar3_read = ax1.bar(
     eloqkv1_rr_tx,
     bar_width,
     alpha=0.8,
-    color="#E0BD28",
+    color=globals.eloqkv1n_color_2,
     label="EloqKV*1 MultiExec",
 )
 bar4_read = ax1.bar(
@@ -79,7 +84,7 @@ bar4_read = ax1.bar(
     eloqkv3_rr_pipe,
     bar_width,
     alpha=0.8,
-    color="#E07D28",
+    color=globals.eloqkv3n_color_1,
     label="EloqKV*3 Pipeline",
 )
 bar4_read = ax1.bar(
@@ -87,7 +92,7 @@ bar4_read = ax1.bar(
     eloqkv3_rr_tx,
     bar_width,
     alpha=0.8,
-    color="#D64326",
+    color=globals.eloqkv3n_color_2,
     label="EloqKV*3 MultiExec",
 )
 

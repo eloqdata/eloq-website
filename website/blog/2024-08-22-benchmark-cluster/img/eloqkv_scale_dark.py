@@ -1,5 +1,10 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import sys
+import os
+
+sys.path.append(os.path.abspath('../../'))
+import globals
 
 # Set the dark background style
 #plt.style.use('dark_background')
@@ -35,9 +40,9 @@ index_read = np.arange(len(read_concurrency_levels))
 #bar1_read = ax1.bar(index_read - bar_width, redis_read_throughput, bar_width, alpha=0.8, color='#1f77b4', label='Redis Throughput')
 #bar2_read = ax1.bar(index_read, dragonfly_read_throughput, bar_width, alpha=0.8, color='#ff7f0e', label='Dragonfly Throughput')
 #bar3_read = ax1.bar(index_read + bar_width, eloqkv_read_throughput, bar_width, alpha=0.8, color='#2ca02c', label='EloqKV Throughput')
-bar3_read = ax1.bar(index_read - 1 *bar_width, eloqkv_read_throughput, bar_width, alpha=0.8, color='#969425', label='EloqKV*1 With Regular Client')
-bar3_read = ax1.bar(index_read - 0 * bar_width, eloqkv_3_3_throughput, bar_width, alpha=0.8, color='#259641', label='EloqKV*3 With Regular Client')
-bar3_read = ax1.bar(index_read + 1 * bar_width, eloqkv_cluster_read_throughput, bar_width, alpha=0.8, color='#255896', label='EloqKV*3 With Smart Client')
+bar3_read = ax1.bar(index_read - 1 *bar_width, eloqkv_read_throughput, bar_width, alpha=0.8, color=globals.eloqkv1n_color_1, label='EloqKV*1 With Regular Client')
+bar3_read = ax1.bar(index_read - 0 * bar_width, eloqkv_3_3_throughput, bar_width, alpha=0.8, color=globals.eloqkv3n_color_1, label='EloqKV*3 With Regular Client')
+bar3_read = ax1.bar(index_read + 1 * bar_width, eloqkv_cluster_read_throughput, bar_width, alpha=0.8, color=globals.eloqkv3n_color_2, label='EloqKV*3 With Smart Client')
 
 ax1.set_xlabel('Workload Type', color='white', fontsize=16)
 ax1.set_ylabel('Throughput ($\mathbf{KOps}$)', color='white', fontsize=16)
