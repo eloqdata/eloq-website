@@ -5,7 +5,7 @@ date: 2024-08-17
 tags: [Company]
 ---
 
-In this blog, we evaluate EloqKV as an in-memory cache, focusing on its single-node performance. We compare EloqKV with [Redis](https://github.com/redis/redis), a widely used in-memory data store, and [DragonflyDB](https://www.dragonflydb.io), a newer option boasting high performance due to its multi-threaded architecture and optimized implementation leveraging [modern innovations](https://github.com/dragonflydb/dragonfly?tab=readme-ov-file#background).
+In this blog, we evaluate **EloqKV** as an in-memory cache, focusing on its single-node performance. We compare **EloqKV** with [Redis](https://github.com/redis/redis), a widely used in-memory data store, and [DragonflyDB](https://www.dragonflydb.io), a newer option boasting high performance due to its multi-threaded architecture and optimized implementation leveraging [modern innovations](https://github.com/dragonflydb/dragonfly?tab=readme-ov-file#background).
 
 <!--truncate-->
 
@@ -13,7 +13,7 @@ All benchmarks were conducted on AWS (region: us-east-1) EC2 instances with Ubun
 
 ## Single Node Performance
 
-We compare EloqKV with Redis and DragonflyDB in memory-only mode, without enabling persistent storage or transactional features. Both Redis and DragonflyDB have limited [persistency capabilities](https://redis.io/docs/latest/operate/oss_and_stack/management/persistence/). Redis offers logging (AOF) and checkpointing (RDB), but AOF isn't a true [Write-Ahead-Log (WAL)](https://en.wikipedia.org/wiki/Write-ahead_logging) since data is written asynchronously. RDB only periodically saves in-memory state, meaning Redis can lose committed data if a node crashes. DragonflyDB supports only checkpointing, not AOF. Since Redis and DragonflyDB are typically used as in-memory caches, we benchmarked EloqKV in the same configuration.
+We compare **EloqKV** with Redis and DragonflyDB in memory-only mode, without enabling persistent storage or transactional features. Both Redis and DragonflyDB have limited [persistency capabilities](https://redis.io/docs/latest/operate/oss_and_stack/management/persistence/). Redis offers logging (AOF) and checkpointing (RDB), but AOF isn't a true [Write-Ahead-Log (WAL)](https://en.wikipedia.org/wiki/Write-ahead_logging) since data is written asynchronously. RDB only periodically saves in-memory state, meaning Redis can lose committed data if a node crashes. DragonflyDB supports only checkpointing, not AOF. Since Redis and DragonflyDB are typically used as in-memory caches, we benchmarked **EloqKV** in the same configuration.
 
 ### Hardware and Software Configurations
 
@@ -23,7 +23,7 @@ Server Machine:
 | ------------------ | ------------ | ---------- |
 | Redis 7.2.5        | c7g.8xlarge  | 1          |
 | DragonflyDB 1.21.2 | c7g.8xlarge  | 1          |
-| EloqKV 0.6.9       | c7g.8xlarge  | 1          |
+| EloqKV 0.7.1       | c7g.8xlarge  | 1          |
 | Client - Memtier   | c6gn.8xlarge | 1          |
 
 We follow the official instructions to setup [**EloqKV**](/eloqkv/install-from-binary), [DragonflyDB](https://www.dragonflydb.io/docs/getting-started/binary) and [Redis](https://redis.io/docs/latest/operate/oss_and_stack/install/install-redis/).
@@ -40,7 +40,7 @@ For DragonflyDB, we only need to disable checkpointing since it does not yet sup
 dragonfly --dbfilename=
 ```
 
-For EloqKV, we disable persistent storage and turn off WAL (Write-Ahead Logging) in its `config.ini` file.
+For **EloqKV**, we disable persistent storage and turn off WAL (Write-Ahead Logging) in its `config.ini` file.
 
 ```
 # set it to none to turn off persistent storage for all databases

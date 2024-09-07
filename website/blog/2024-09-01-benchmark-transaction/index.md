@@ -9,7 +9,7 @@ In the previous blog, we discussed the [durable feature](/blog/2024/08/25/benchm
 
 <!--truncate-->
 
-In this blog, we evaluate _small scale_ clusters to show the behavior of EloqKV accross servers. Scalability in a larger scale cluster with different number of servers will be evaluated at a later blog. All benchmarks were conducted on AWS (region: us-east-1) EC2 instances, with Ubuntu 22.04. In all tests, we use **EloqKV** version 0.6.9.
+In this blog, we evaluate _small scale_ clusters to show the behavior of **EloqKV** accross servers. Scalability in a larger scale cluster with different number of servers will be evaluated at a later blog. All benchmarks were conducted on AWS (region: us-east-1) EC2 instances, with Ubuntu 22.04. In all tests, we use **EloqKV** version 0.7.1.
 
 ### Transaction in EloqKV
 
@@ -23,11 +23,11 @@ In **EloqKV**, the ACI (Atomicity, Consistency, Isolation) part of ACID is alway
 
 ### Experiments
 
-In the first experiment, we compare EloqKV and Redis in batch mode across different workloads. We focus on two batch modes:
+In the first experiment, we compare **EloqKV** and Redis in batch mode across different workloads. We focus on two batch modes:
 
 1. **Pipeline**: In this mode, the client sends multiple commands to the server without waiting for responses to previous commands. The server processes these commands sequentially and returns all the responses at once. This batching approach significantly reduces network communication overhead, especially when executing many commands. Notice that each command in the pipeline is executed independently, with potentially other commands executed in between. However, we do enforce that the commands for any given key is executed in the order they appear in pipeline.
 
-2. **MULTI / EXEC**: This mode ensures that a group of commands is executed as a single atomic operation, meaning either all commands are executed or none are. Please [note](/eloqkv/known-limit) that the Redis `MULTI/EXEC` command without `WATCH` normally does not fail because Redis execute this commands in a single thread on a single server, whereas EloqKV can roll back and fail a transaction due to concurrent transaction conflicts.
+2. **MULTI / EXEC**: This mode ensures that a group of commands is executed as a single atomic operation, meaning either all commands are executed or none are. Please [note](/eloqkv/known-limit) that the Redis `MULTI/EXEC` command without `WATCH` normally does not fail because Redis execute this commands in a single thread on a single server, whereas **EloqKV** can roll back and fail a transaction due to concurrent transaction conflicts.
 
 Redis does not support `MultiExec` in cluster mode if keys in a single batch do not fall on to the same shard. To work around this, users must use `hashtags` to ensure certain keys are located on the same shard. This can be cumbersome and often cause load imbalance. For Redis, `Pipeline` support is client dependent. It is not a feature supported on all Redis clients. **EloqKV**, on the other hand, does not have these limitations. Transactions and Pipelines work on a cluster of nodes just as on a single node. Though **EloqKV** does support `hashtags` to colocate keys and can reduce network overhead.
 
@@ -39,8 +39,8 @@ In the following experiment, **EloqKV** operates in pure memory mode, with persi
 
 | Service type         | Node type    | Node count |
 | -------------------- | ------------ | ---------- |
-| EloqKV 0.6.9         | c7g.8xlarge  | 1          |
-| EloqKV 0.6.9 Cluster | c7g.8xlarge  | 3          |
+| EloqKV 0.7.1         | c7g.8xlarge  | 1          |
+| EloqKV 0.7.1 Cluster | c7g.8xlarge  | 3          |
 | Redis 7.2.5          | c7g.8xlarge  | 1          |
 | Client eloq-bench    | c6gn.8xlarge | 1          |
 

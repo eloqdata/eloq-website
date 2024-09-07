@@ -9,7 +9,7 @@ In our previous blogs, we benchmarked **EloqKV** in memory cache mode, discussin
 
 <!--truncate-->
 
-All benchmarks were conducted on AWS (region: us-east-1) EC2 instances running Ubuntu 22.04. Workloads were generated using the [memtier-benchmark](https://github.com/RedisLabs/memtier_benchmark) tool. In all tests, we use **EloqKV** version 0.6.9.
+All benchmarks were conducted on AWS (region: us-east-1) EC2 instances running Ubuntu 22.04. Workloads were generated using the [memtier-benchmark](https://github.com/RedisLabs/memtier_benchmark) tool. In all tests, we use **EloqKV** version 0.7.1.
 
 ### Understanding Durability
 
@@ -17,9 +17,9 @@ Durability is crucial for data stores, especially in applications where data los
 
 However, many key-value (KV) caches prioritize performance over durability. For example, Redis uses an [Append Only File (AOF)](https://redis.io/docs/latest/operate/oss_and_stack/management/persistence/) to achieve _some_ level of durability by fsyncing data to a log file either periodically or after each write command. Strictly speaking, AOF does not provide complete durability because data is written to the log in a separate thread, and the main thread does not wait for data persistence before returning. As a result, a small amount of data may be lost if a server crashes. AOF can reduce data loss but not entirely prevent it. Consequently, [DragonflyDB](https://www.dragonflydb.io/docs/managing-dragonfly/aof) forgoes AOF altogether due to a lack of demand, instead offering periodic checkpointing similar to [Redis's RDB](https://redis.io/docs/latest/operate/oss_and_stack/management/persistence/).
 
-EloqKV is a fully ACID-compliant database, providing full data durability through WAL. Leveraging our decoupled Data Substrate architecture, the WAL for an EloqKV server can either be embedded within the same process or run as a separate LogService. The log can be replicated across multiple machines or Availability Zones, can scale using multiple disk devices, and can utilize tiered storage to archive older data on more cost-effective storage.
+**EloqKV** is a fully ACID-compliant database, providing full data durability through WAL. Leveraging our decoupled Data Substrate architecture, the WAL for an **EloqKV** server can either be embedded within the same process or run as a separate LogService. The log can be replicated across multiple machines or Availability Zones, can scale using multiple disk devices, and can utilize tiered storage to archive older data on more cost-effective storage.
 
-However, we recognize that durability may not always be necessary for all applications. In **EloqKV**, durability can be enabled on a per-database basis. Similar to Redis, EloqKV supports 16 databases per server by default, though this number can be increased. When durability is disabled, EloqKV avoids the overhead associated with durability, delivering uncompromised performance, as demonstrated in a [previous blog post](/blog/2024/08/17/benchmark-single-node). In this blog, we evaluate **EloqKV** with durability enabled.
+However, we recognize that durability may not always be necessary for all applications. In **EloqKV**, durability can be enabled on a per-database basis. Similar to Redis, **EloqKV** supports 16 databases per server by default, though this number can be increased. When durability is disabled, **EloqKV** avoids the overhead associated with durability, delivering uncompromised performance, as demonstrated in a [previous blog post](/blog/2024/08/17/benchmark-single-node). In this blog, we evaluate **EloqKV** with durability enabled.
 
 ### Comparing with Kvrocks
 
@@ -34,7 +34,7 @@ In the first experiment, we compare **EloqKV** with Apache [Kvrocks](https://kvr
 | Kvrocks      | c7gd.8xlarge | 1          | 1 x 1900GB NVME | 1              |
 | EloqKV       | c7gd.8xlarge | 1          | 1 x 1900GB NVME | 1              |
 
-For EloqKV, to enable transaction mode, we enable persistent storage and turn on WAL (Write-Ahead Logging).
+For **EloqKV**, to enable transaction mode, we enable persistent storage and turn on WAL (Write-Ahead Logging).
 
 ```
 # set it to none to turn off persistent storage for all databases
