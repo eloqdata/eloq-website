@@ -105,7 +105,7 @@ Below are the performance results of **EloqKV** `Multi Exec` command with differ
 
 `Left Y-axis`: Throughput in Thousand OPS (Operations Per Second).
 
-`Right Y-axis`: Transaction Retry Number.
+`Right Y-axis`: Transaction Retry Rate.
 
 The results show that **EloqKV**’s throughput decreases as the batch size increases. This is because larger batch sizes introduce additional transaction overhead. For read requests, each key must be read and then validated during the transaction commit phase to ensure that RepeatableRead isolation is maintained. For write requests, a write lock must be acquired for each key and then released, along with updating the value during the transaction commit phase.
 
