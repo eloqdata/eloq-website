@@ -11,18 +11,39 @@ import globals
 # plt.style.use('dark_background')
 
 # Data for read workload
-read_concurrency_levels = ["write", "mixed", "read"]
+read_concurrency_levels = ["read", "mixed", "write"]
 
 # redis_read_throughput = [223.579,212.677,203.522,189.701]  # converted to K
 # dragonfly_read_throughput = [992.120,1529.612,1750.050, 1750.024]  # converted to K
 # eloqkv_read_throughput = [959.015,1405.901,1697.739,1593.660]
 # kvrocks_d1=[7.188,7.482,7.532]
-eloqkv_b1 = [552.821, 610.495, 637.585]
-eloqkv_b2 = [327.373, 342.626, 383.335]
-eloqkv_b3 = [247.061, 239.161, 261.655]
-eloqkv_b4 = [188.104, 178.573, 192.970]
-eloqkv_b5 = [150.262, 153.487, 153.347]
-eloqkv_b6 = [114.269, 122.170, 132.704]
+#eloqkv_b1 = [552.821, 610.495, 637.585]
+#eloqkv_b2 = [327.373, 342.626, 383.335]
+#eloqkv_b3 = [247.061, 239.161, 261.655]
+#eloqkv_b4 = [188.104, 178.573, 192.970]
+#eloqkv_b5 = [150.262, 153.487, 153.347]
+#eloqkv_b6 = [114.269, 122.170, 132.704]
+
+#eloqkv_b1_retry=[314,243,0]
+#eloqkv_b2_retry=[1421,1102,0]
+#eloqkv_b3_retry=[3320,2802,0]
+#eloqkv_b4_retry=[6349,5189,0]
+#eloqkv_b5_retry=[9972,7961,0]
+#eloqkv_b6_retry=[14784,12168,0]
+
+eloqkv_b1= [637.585, 610.495, 552.821]
+eloqkv_b2= [383.335, 342.626, 327.373]
+eloqkv_b3= [261.655, 239.161, 247.061]
+eloqkv_b4= [192.970, 178.573, 188.104]
+eloqkv_b5= [153.347, 153.487, 150.262]
+eloqkv_b6= [132.704, 122.170, 114.269]
+
+eloqkv_b1_retry= [0, 1271, 1684]
+eloqkv_b2_retry= [0, 5535, 6547]
+eloqkv_b3_retry= [0, 12529, 15255]
+eloqkv_b4_retry= [0, 22144, 27302]
+eloqkv_b5_retry= [0, 34783, 43087]
+eloqkv_b6_retry= [0, 49952, 60674]
 
 # redis_read_latency = [0.786,1.983,4.788,11.412]
 # dragonfly_read_latency = [0.252,0.444,0.956,2.191]
@@ -102,15 +123,17 @@ ax1.set_ylim(0, 1000)  # Adjust this value to leave more space at the top
 ax1.tick_params(axis='y',labelsize=globals.axis_value_size, colors='white')
 
 # Latency data (line graph)
-# ax2 = ax1.twinx()
-# line1_read = ax2.plot(index_read, eloqkv_d8_lat, 'b--', marker='o', color='#208B8E', label='EloqKV 32C 1D Latency', linewidth=3)
-# line2_read = ax2.plot(index_read, eloqkv_d10_lat, 'g--', marker='o', color='#739C23', label='EloqKV 32C 2D Latency', linewidth=3)
-# line3_read = ax2.plot(index_read, eloqkv_d8_48_lat, 'r--', marker='o', color='#E07D28', label='EloqKV 32C 4D Latency', linewidth=3)
-# line3_read = ax2.plot(index_read, eloqkv_d10_48_lat, 'r--', marker='o', color='#D64326', label='EloqKV 32C 6D Latency', linewidth=3)
+ax2 = ax1.twinx()
+line1_read = ax2.plot(index_read, eloqkv_b1_retry, '--', marker='o', color=globals.group_1, linewidth=3)
+line2_read = ax2.plot(index_read, eloqkv_b2_retry, '--', marker='o', color=globals.group_2, linewidth=3)
+line3_read = ax2.plot(index_read, eloqkv_b3_retry, '--', marker='o', color=globals.group_3, linewidth=3)
+line4_read = ax2.plot(index_read, eloqkv_b4_retry, '--', marker='o', color=globals.group_4, linewidth=3)
+line5_read = ax2.plot(index_read, eloqkv_b5_retry, '--', marker='o', color=globals.group_5, linewidth=3)
+line6_read = ax2.plot(index_read, eloqkv_b6_retry, '--', marker='o', color=globals.group_6, linewidth=3)
 
-# ax2.set_ylabel('Avg Latency ($\mathbf{ms}$)', color='white', fontsize=16)
-# ax2.tick_params(axis='y', colors='white')
-# ax2.set_ylim(0, 15)  # Adjust this value to leave more space at the top
+ax2.set_ylabel('TX Retry Number', color='white', fontsize=globals.axis_label_size)
+ax2.set_ylim(0, 64000)  # Adjust this value to leave more space at the top
+ax2.tick_params(axis='y',labelsize=globals.axis_value_size, colors='white')
 
 # Combine legends from both axes
 lines, labels = ax1.get_legend_handles_labels()

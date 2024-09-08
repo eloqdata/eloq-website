@@ -95,12 +95,16 @@ Below are the performance results of **EloqKV** `Multi Exec` command with differ
 <p align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
 
-<EnlargeableImage src={require('./img/eloqkv_batch_size.png').default} alt="EloqKV vs Redis Transaction" />
+<EnlargeableImage src={require('./img/eloqkv_cluster_batch_size.png').default} alt="EloqKV vs Redis Transaction" />
 
 </div></p>
 
 `X-axis`: Represents the different workload types (read/write/mixed) used in the benchmark, simulating a range of real-world scenarios.
 
-`Y-axis`: Throughput in Thousand OPS (Operations Per Second).
+`Left Y-axis`: Throughput in Thousand OPS (Operations Per Second).
 
-The results show that **EloqKV**’s throughput decreases as the batch size increases. This is because larger batch sizes introduce additional transaction overhead. For read requests, each key must be read and then validated during the transaction commit phase to ensure that RepeatableRead isolation is maintained. For write requests, a write lock must be acquired for each key and then released, along with updating the value during the transaction commit phase. Although the throughput per `Multi Exec` command declines with larger batch sizes, the total KV ops processed per second (KPS) increases. For instance, with a batch size of 1, the KPS is 700,000, while with a batch size of 6, it rises to 2 million.
+`Right Y-axis`: Transaction Retry Number.
+
+The results show that **EloqKV**’s throughput decreases as the batch size increases. This is because larger batch sizes introduce additional transaction overhead. For read requests, each key must be read and then validated during the transaction commit phase to ensure that RepeatableRead isolation is maintained. For write requests, a write lock must be acquired for each key and then released, along with updating the value during the transaction commit phase.
+
+Additionally, we observed that the number of transaction retries increases with larger batch sizes in mixed and write-only workloads. This is because larger batch sizes raise the likelihood of transaction conflicts. Notably, for read-only workloads, the transaction retry count is zero, which aligns with expectations.
