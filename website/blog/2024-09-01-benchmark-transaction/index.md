@@ -21,6 +21,8 @@ In this blog, we focus on benchmarking the _MULTI_ and _EXEC_ commands for _PUT/
 
 In **EloqKV**, the ACI (Atomicity, Consistency, Isolation) part of ACID is always enabled. No configuration changes are required to enable _MULTI_ and related commands in a cluster. A single key operation is executed as a transaction with a single command, and will not incur additional overhead. **EloqKV** supports different [levels of isolation](<https://en.wikipedia.org/wiki/Isolation_(database_systems)#Isolation_levels>), with the default being [Repeatable Reads](<https://en.wikipedia.org/wiki/Isolation_(database_systems)#Repeatable_reads>), which is the isolation level used in the experiments discussed in this blog.
 
+In Repeatable Reads isolation level, reads and writes are about the same complexity. For read requests, each key must be read and then validated during the transaction commit phase to ensure that no modification happened in between reading and commiting. For write requests, a write lock must be acquired for each key and then released at the commit phase. Both require extra round-trips to accomplish and thus more expensive than non-transactional operations.
+
 ### Experiments
 
 In the first experiment, we compare **EloqKV** and Redis in batch mode across different workloads. We focus on two batch modes:
@@ -103,10 +105,10 @@ Below are the performance results of **EloqKV** `Multi Exec` command with differ
 
 `X-axis`: Represents the different workload types (read/write/mixed) used in the benchmark, simulating a range of real-world scenarios.
 
-`Left Y-axis`: Throughput in Thousand OPS (Operations Per Second).
+`Left Y-axis`: Throughput in Thousand OPS (Operations Per Second), shown as the bars.
 
-`Right Y-axis`: Transaction Retry Rate.
+`Right Y-axis`: Percentage of Transaction Retries, shown as the dashed lines.
 
-The results show that **EloqKV**’s throughput decreases as the batch size increases. This is because larger batch sizes introduce additional transaction overhead. For read requests, each key must be read and then validated during the transaction commit phase to ensure that RepeatableRead isolation is maintained. For write requests, a write lock must be acquired for each key and then released, along with updating the value during the transaction commit phase.
+As expected, **EloqKV**’s throughput decreases as the batch size increases. This is because larger batch sizes introduce additional overhead. Currently, EloqKV does not perform "query optimization" within a transaction. To guarantee transactional semantics, the operations in a batch are executed sequentially. In the future, we may optimize this by allowing some operations within a batch to be executed in parallel.
 
-Additionally, we observed that the number of transaction retries increases with larger batch sizes in mixed and write-only workloads. This is because larger batch sizes raise the likelihood of transaction conflicts. Notably, for read-only workloads, the transaction retry count is zero, which aligns with expectations.
+In our workload, we selected several random keys from a range to perform `PUT/GET` operations. As mentioned earlier, the key range was set to 1,000,000 in all experiments. We observed that transaction retries increase with larger batch sizes in both mixed and write-only workloads. This is due to the higher likelihood of transaction conflicts as the batch size grows. Reducing the level of concurrency or expanding the key range can help mitigate these conflicts. Additionally, the more concurrent writes, the more likely conflicts will occur. For read-only workloads, no transaction conflicts arise, so no transaction retries occurred.
