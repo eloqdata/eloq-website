@@ -105,7 +105,12 @@ const ContactPage: React.FC = () => {
       <div className="contact-page-container">
         <div className="contact-page">
           <div className="top-description">
-            <h1>DOWNLOAD Eloqctl</h1>
+            <h1>
+              DOWNLOAD Eloqctl
+              <sup style={{ fontSize: "0.3em", verticalAlign: "1.7em" }}>
+                preview
+              </sup>
+            </h1>
             <p>
               Simplifying the Creation and Management of EloqKV Cluster with
               Eloqctl

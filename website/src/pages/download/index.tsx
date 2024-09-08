@@ -118,7 +118,12 @@ const ContactPage: React.FC = () => {
       <div className="contact-page-container">
         <div className="contact-page">
           <div className="top-description">
-            <h1>DOWNLOAD EloqKV</h1>
+            <h1>
+              DOWNLOAD EloqKV
+              <sup style={{ fontSize: "0.3em", verticalAlign: "1.7em" }}>
+                preview
+              </sup>
+            </h1>
             <p>Try EloqKV by Downloading a Binary Tarball for Your OS</p>
           </div>
           <div className="content">
