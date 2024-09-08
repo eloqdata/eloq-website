@@ -33,7 +33,7 @@ const ContactPage: React.FC = () => {
                 <p>
                   Feel free to chat with us on{" "}
                   <a
-                    href="https://discord.gg/6K4sPAaV"
+                    href="https://discord.gg/nmYjBkfak6"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="red-link"
