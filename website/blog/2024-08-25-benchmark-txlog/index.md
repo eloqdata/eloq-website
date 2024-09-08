@@ -5,7 +5,7 @@ date: 2024-08-25
 tags: [Company]
 ---
 
-In our previous blogs, we benchmarked **EloqKV** in memory cache mode, discussing both [single node](/blog/2024/08/17/benchmark-single-node) and [cluster](/blog/2024/08/22/benchmark-cluster) performances. In this post, we we benchmark **EloqKV** with durability enabled. In the next blog, we will benchmark a **EloqKV** cluster with distributed atomic operations using the Redis _WATCH / MULTI / EXEC_ commands.
+In our previous blogs, we benchmarked **EloqKV** in memory cache mode, discussing both [single node](/blog/2024/08/17/benchmark-single-node) and [cluster](/blog/2024/08/22/benchmark-cluster) performances. In this post, we we benchmark **EloqKV** with durability enabled.
 
 <!--truncate-->
 
@@ -13,13 +13,13 @@ All benchmarks were conducted on AWS (region: us-east-1) EC2 instances running U
 
 ### Understanding Durability
 
-Durability is crucial for data stores, especially in applications where data loss during server failures is unacceptable. Most persistent data stores achieve durability through [Write-ahead Logging (WAL)](https://en.wikipedia.org/wiki/Write-ahead_logging), ensuring that data is written to disk before responding to users. Additionally, many stores periodically checkpoint the data into a more compact form, allowing the log to be truncated and preventing it from growing indefinitely.
+Durability is crucial for data stores, especially in applications where data loss during server failures is unacceptable. Most persistent data stores achieve durability through [Write-ahead Logging (WAL)](https://en.wikipedia.org/wiki/Write-ahead_logging), ensuring that data is written to disk before responding to users. Additionally, many stores periodically checkpoint the data into a more compact form, allowing the log to be truncated.
 
-However, many key-value (KV) caches prioritize performance over durability. For example, Redis uses an [Append Only File (AOF)](https://redis.io/docs/latest/operate/oss_and_stack/management/persistence/) to achieve _some_ level of durability by fsyncing data to a log file either periodically or after each write command. Strictly speaking, AOF does not provide complete durability because data is written to the log in a separate thread, and the main thread does not wait for data persistence before returning. As a result, a small amount of data may be lost if a server crashes. AOF can reduce data loss but not entirely prevent it. Consequently, [DragonflyDB](https://www.dragonflydb.io/docs/managing-dragonfly/aof) forgoes AOF altogether due to a lack of demand, instead offering periodic checkpointing similar to [Redis's RDB](https://redis.io/docs/latest/operate/oss_and_stack/management/persistence/).
+However, many key-value (KV) caches prioritize performance over durability. For example, Redis uses an [Append Only File (AOF)](https://redis.io/docs/latest/operate/oss_and_stack/management/persistence/) to achieve _some_ level of durability by fsyncing data to a log file, either periodically or after each write command. Strictly speaking, AOF does not provide complete durability because data is written to the log in a separate thread, and the main thread does not wait for data persistence before returning. As a result, a small amount of data may be lost if a server crashes. Consequently, [DragonflyDB](https://www.dragonflydb.io/docs/managing-dragonfly/aof) forgoes AOF altogether due to lack of demand, instead offering only periodic checkpointing similar to [Redis's RDB](https://redis.io/docs/latest/operate/oss_and_stack/management/persistence/).
 
 **EloqKV** is a fully ACID-compliant database, providing full data durability through WAL. Leveraging our decoupled Data Substrate architecture, the WAL for an **EloqKV** server can either be embedded within the same process or run as a separate LogService. The log can be replicated across multiple machines or Availability Zones, can scale using multiple disk devices, and can utilize tiered storage to archive older data on more cost-effective storage.
 
-However, we recognize that durability may not always be necessary for all applications. In **EloqKV**, durability can be enabled on a per-database basis. Similar to Redis, **EloqKV** supports 16 databases per server by default, though this number can be increased. When durability is disabled, **EloqKV** avoids the overhead associated with durability, delivering uncompromised performance, as demonstrated in a [previous blog post](/blog/2024/08/17/benchmark-single-node). In this blog, we evaluate **EloqKV** with durability enabled.
+However, we recognize that durability may not always be necessary for all applications. In **EloqKV**, durability can be enabled on a per-database basis. Similar to Redis, **EloqKV** supports 16 databases per server by default, though this number can be increased. When durability is disabled, **EloqKV** avoids the overhead associated with durability, delivering uncompromised performance as demonstrated in a [previous blog post](/blog/2024/08/17/benchmark-single-node). In this blog, we evaluate **EloqKV** with durability enabled.
 
 ### Comparing with Kvrocks
 
@@ -63,7 +63,7 @@ rocksdb.write_options.sync yes
 workers 24
 ```
 
-Disk performance plays a critical role in write-intensive workloads. Therefore, we conduct benchmarks using both local SSDs and Elastic Block Store (EBS), which are commonly used as WAL log disks in cloud environments. Local SSDs offer low latency and high IOPS, making them ideal for high-performance needs. However, in a cloud setup local data will be lost if the virtual machine (VM) is stopped. On the other hand, EBS provides high availability, allowing the volume to be attached to a new VM if the original VM fails. Moreover, EBS is elastic, enabling precise control over disk size and number to better suit specific requirements. In our case, a 50GB [EBS gp3](https://aws.amazon.com/ebs/volume-types/) volume is plenty for our WAL needs. Such a volume only cost $4 per month while providing 3000 IOPS and 125 MB/s throughput. Given the distinct advantages and limitations of local SSDs and EBS, we conduct our experiments using both types of disks.
+Disk performance plays a critical role in write-intensive workloads. Therefore, we conducted benchmarks using both local SSDs and Elastic Block Store (EBS). Local SSDs offer low latency and high IOPS, making them ideal for high-performance needs. However, in a cloud setup data on local SSD may get lost if the virtual machine (VM) is stopped. On the other hand, EBS provides high availability, allowing the volume to be attached to a new VM if the original VM fails. Moreover, EBS is elastic, allowing precise control over number of volumes and their sizes. In our case, a 50GB [EBS gp3](https://aws.amazon.com/ebs/volume-types/) volume is plenty for our WAL needs. Such a volume only cost $4 per month while providing 3000 IOPS and 125 MB/s throughput. Given the distinct advantages and limitations of local SSDs and EBS, we conducted our experiments with both.
 
 We run `memtier_benchmark` with the following configuration:
 
@@ -93,14 +93,8 @@ import EnlargeableImage from '@site/src/pages/enlarge_pic';
 <EnlargeableImage src={require('./img/eloqkv_kvrocks_set.png').default} alt="EloqKV vs Kvrocks Set" />
 
 </div></p>
-<!-- 
-<p align="center">
-<div style={{ width: '720px', textAlign: 'center'}}>
-![](img/eloqkv_kvrocks_set.png)
-</div>
-</p> -->
 
-The results show that **EloqKV** significantly outperforms Kvrocks on both EBS and local SSD. On EBS, **EloqKV** achieves a write throughput that is 10 times higher than Kvrocks, while on local SSD, it is 2-4 times faster. This performance improvement is due to **EloqKV**'s architecture, which decouples transaction and log services, allowing multiple log workers to write Write-Ahead Logs (WAL) and perform fsync operations in parallel, thereby enhancing overall throughput. Additionally, **EloqKV** maintains significantly lower latency compared to Kvrocks, even under high concurrency.
+**EloqKV** significantly outperforms Kvrocks on both EBS and local SSD. On EBS, **EloqKV** achieves a write throughput that is 10 times higher than Kvrocks, while on local SSD, it is 2-4 times faster. This performance improvement is due to **EloqKV**'s architecture, which decouples transaction and log services, allowing multiple log workers to write Write-Ahead Logs (WAL) and perform fsync operations in parallel, thereby enhancing overall throughput. Additionally, **EloqKV** maintains significantly lower latency compared to Kvrocks, even under high concurrency.
 
 Below are the results of the mixed workload.
 
@@ -117,13 +111,11 @@ Below are the results of the mixed workload.
 </div>
 </p> -->
 
-As observed in the benchmark results, **EloqKV** outperforms Kvrocks on mixed workloads as well. **EloqKV** maintains a read latency of less than 1 ms even under a heavy mixed workload with nearly 900K OPS. In contrast, Kvrocks on EBS exhibits significantly higher latencies, with both read and write latencies exceeding 10 ms even at relatively low concurrency, and rising to over 50 ms as concurrency increases. Even on local SSDs, Kvrocks' read latency remains much higher than that of **EloqKV**. This demonstrates that **EloqKV** can sustain low read latency even when the cluster is under a heavy write workload.
+Results show that **EloqKV** outperforms Kvrocks on mixed workloads as well. **EloqKV** maintains a read latency of less than 1 ms even under a heavy mixed workload with nearly 900K OPS. In contrast, Kvrocks on EBS exhibits significantly higher latencies, with both read and write latencies exceeding 10 ms even at relatively low concurrency, and rising to over 50 ms as concurrency increases. Even on local SSDs, Kvrocks' read latency remains much higher than that of **EloqKV**. This demonstrates that **EloqKV** can sustain low read latency even when the cluster is under a heavy write workload.
 
 ### Experiment II: Scaling Disks of WAL
 
-**EloqKV**'s decoupled WAL log service can deploy multiple log workers writing WAL logs to multiple disks. Since WAL logs can be truncated once a checkpoint is completed, the required disk size is often quite small.
-
-Kvrocks does not support writing redo logs across multiple disks, so this experiment is conducted with **EloqKV** only. We benchmarked **EloqKV** with different numbers of WAL disks and varying thread counts using the following command:
+**EloqKV**'s decoupled WAL log service can deploy multiple log workers writing WAL logs to multiple disks. Since WAL logs can be truncated once a checkpoint is completed, the required disk size is often quite small. Kvrocks does not support writing redo logs across multiple disks, so this experiment is conducted with **EloqKV** only.
 
 **Server Machine:**
 
@@ -132,7 +124,7 @@ Kvrocks does not support writing redo logs across multiple disks, so this experi
 | EloqKV Log       | c7g.12xlarge | 1          | up to 10       |
 | client - Memtier | c6gn.8xlarge | 1          | 0              |
 
-Workload is driven by memtier_benchmark.
+We benchmarked **EloqKV** with different numbers of WAL disks and varying thread counts using the following command:
 
 ```
 memtier_benchmark -t $thread_num -c $client_num -s $server_ip -p $server_port --distinct-client-seed --ratio=1:0 --key-prefix="kv_" --key-minimum=1 --key-maximum=5000000 --random-data --data-size=128 --hide-histogram --test-time=300
@@ -141,11 +133,11 @@ memtier_benchmark -t $thread_num -c $client_num -s $server_ip -p $server_port --
 - `-t`: Number of threads for parallel execution, which we have set to a fixed value of 80.
 - `-c`: Number of clients per thread. We configured it to 40, 60 and 80, this resulted in total concurrency values of 3200, 4800 and 6400, calculated as `thread_num × client_num`.
 
-Notice that in this experiment, we have a higher concurrency compared with previous experiments, due to increased latency caused by seperating LogService from TxService.
+In this experiment, we have higher concurrency compared with previous experiments due to increased latency caused by seperating LogService from TxService.
 
 #### Results
 
-Below are the results illustrates **EloqKV**'s throughput and latency with different number of disks with varying concurrencies simulating different levels of concurrent database access. The following graph shows how disk count impacts the performance of **EloqKV**.
+The following graph shows how disk count impacts the performance of **EloqKV**.
 
 X-axis: Represents the varying thread numbers employed during the benchmark, simulating different levels of concurrent database access.
 
@@ -166,11 +158,11 @@ Right Y-axis: The average Latency in ms.
 </div>
 </p> -->
 
-From the results above, we can observe that as the number of disks increases, the throughput scales near linearly when the disk count is 1, 2, and 4, with a corresponding decrease in latency. Adding even more disks continues to boost throughput, but at a slower rate. For 6 and 8 disks, the throughput levels off and remains nearly the same even under high concurrency. This indicates that the disk is no longer the bottleneck.
+We can observe that as the number of disks increases, the throughput scales near linearly when the disk count is 1, 2, and 4, with a corresponding decrease in latency. Adding even more disks continues to boost throughput, but at a slower rate. For 6 and 8 disks, the throughput levels off and remains nearly the same even under high concurrency.
 
 ### Experiment III: Scaling Up TxServer
 
-As observed in the experiment above, throughput does not increase further when the number of disks exceeds six. This indicates that logging is no longer the bottleneck; to achieve even higher throughput, scaling up the CPU in TxServer could be the next step. Obviously, scaling-out could be another option, but we will leave that to another blog.
+As observed previously, throughput does not increase further when the number of disks exceeds six. This indicates that logging is no longer the bottleneck; to achieve even higher throughput, scaling up the CPU in TxServer could be the next step. Obviously, scaling-out could be another option, but we will leave that to another blog.
 
 **Server Machine:**
 
