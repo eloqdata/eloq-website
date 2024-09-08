@@ -1,5 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib.ticker import FuncFormatter
+
 import sys
 import os
 
@@ -44,6 +46,25 @@ eloqkv_b3_retry= [0, 12529, 15255]
 eloqkv_b4_retry= [0, 22144, 27302]
 eloqkv_b5_retry= [0, 34783, 43087]
 eloqkv_b6_retry= [0, 49952, 60674]
+
+# Function to calculate the retry rate
+def calculate_retry_rate(retry_list):
+    return [x / 5000000 for x in retry_list]
+
+# Calculating the retry rates
+eloqkv_b1_retry_rate = calculate_retry_rate(eloqkv_b1_retry)
+eloqkv_b2_retry_rate = calculate_retry_rate(eloqkv_b2_retry)
+eloqkv_b3_retry_rate = calculate_retry_rate(eloqkv_b3_retry)
+eloqkv_b4_retry_rate = calculate_retry_rate(eloqkv_b4_retry)
+eloqkv_b5_retry_rate = calculate_retry_rate(eloqkv_b5_retry)
+eloqkv_b6_retry_rate = calculate_retry_rate(eloqkv_b6_retry)
+
+eloqkv_b1_retry_rate = [rate * 100 for rate in eloqkv_b1_retry_rate]
+eloqkv_b2_retry_rate = [rate * 100 for rate in eloqkv_b2_retry_rate]
+eloqkv_b3_retry_rate = [rate * 100 for rate in eloqkv_b3_retry_rate]
+eloqkv_b4_retry_rate = [rate * 100 for rate in eloqkv_b4_retry_rate]
+eloqkv_b5_retry_rate = [rate * 100 for rate in eloqkv_b5_retry_rate]
+eloqkv_b6_retry_rate = [rate * 100 for rate in eloqkv_b6_retry_rate]
 
 # redis_read_latency = [0.786,1.983,4.788,11.412]
 # dragonfly_read_latency = [0.252,0.444,0.956,2.191]
@@ -124,16 +145,22 @@ ax1.tick_params(axis='y',labelsize=globals.axis_value_size, colors='white')
 
 # Latency data (line graph)
 ax2 = ax1.twinx()
-line1_read = ax2.plot(index_read, eloqkv_b1_retry, '--', marker='o', color=globals.group_1, linewidth=3)
-line2_read = ax2.plot(index_read, eloqkv_b2_retry, '--', marker='o', color=globals.group_2, linewidth=3)
-line3_read = ax2.plot(index_read, eloqkv_b3_retry, '--', marker='o', color=globals.group_3, linewidth=3)
-line4_read = ax2.plot(index_read, eloqkv_b4_retry, '--', marker='o', color=globals.group_4, linewidth=3)
-line5_read = ax2.plot(index_read, eloqkv_b5_retry, '--', marker='o', color=globals.group_5, linewidth=3)
-line6_read = ax2.plot(index_read, eloqkv_b6_retry, '--', marker='o', color=globals.group_6, linewidth=3)
+line1_read = ax2.plot(index_read, eloqkv_b1_retry_rate, '--', marker='o', color=globals.group_1, linewidth=3)
+line2_read = ax2.plot(index_read, eloqkv_b2_retry_rate, '--', marker='o', color=globals.group_2, linewidth=3)
+line3_read = ax2.plot(index_read, eloqkv_b3_retry_rate, '--', marker='o', color=globals.group_3, linewidth=3)
+line4_read = ax2.plot(index_read, eloqkv_b4_retry_rate, '--', marker='o', color=globals.group_4, linewidth=3)
+line5_read = ax2.plot(index_read, eloqkv_b5_retry_rate, '--', marker='o', color=globals.group_5, linewidth=3)
+line6_read = ax2.plot(index_read, eloqkv_b6_retry_rate, '--', marker='o', color=globals.group_6, linewidth=3)
 
-ax2.set_ylabel('TX Retry Number', color='white', fontsize=globals.axis_label_size)
-ax2.set_ylim(0, 64000)  # Adjust this value to leave more space at the top
+# Function to format the y-axis labels as percentages
+def percent_formatter(x, pos):
+    return f'{x:.1f}%'
+
+ax2.set_ylabel('TX Retry Rate', color='white', fontsize=globals.axis_label_size)
+ax2.set_ylim(0, 2)  # Adjust this value to leave more space at the top
 ax2.tick_params(axis='y',labelsize=globals.axis_value_size, colors='white')
+ax2.yaxis.set_major_formatter(FuncFormatter(percent_formatter))
+
 
 # Combine legends from both axes
 lines, labels = ax1.get_legend_handles_labels()

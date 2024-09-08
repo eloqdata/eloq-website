@@ -46,17 +46,19 @@ In the following experiment, **EloqKV** operates in pure memory mode, with persi
 
 ### Experiment:
 
-We developed a new benchmarking tool, `eloq_benchmark`, specifically to test the transaction performance of Redis and **EloqKV**, as `memtier_benchmark` does not support `Multi Exec`. You can download `eloq_benchmark` [here](https://github.com/monographdb/redis_bench)
+We developed a new benchmarking tool, `eloq_benchmark`, specifically to test the transaction performance of Redis and **EloqKV**, as `memtier_benchmark` does not support `Multi Exec`. You can download `eloq_benchmark` [here](https://download.eloqdata.com/eloqkv/tools/eloq_benchmark-0.7.1.zip)
 
 We run `eloq_benchmark` with the following configuration:
 
 ```
-eloq_benchmark --h $server_ip --p $server_port --numKeys=$keynum --numConnections=$conn --getRatio=$ratio --opType=$optype --batchSize=$batchsize
+eloq_benchmark --h $server_ip --p $server_port --numKeys=$keynum --numConnections=$conn --getRatio=$ratio --opType=$optype --batchSize=$batchsize --numTestOps=$testops
 ```
 
 - `--numKeys`: Number of entries, which is set to 1000000.
 
 - `--numConnections`: Number of concurrent connnections, which is set to 256 for single-node and 768 for three-node cluster.
+
+- `--numTestOps`: Number of test operations, which is set to 5000000.
 
 - `--getRatio`: Set it to 0 for write-only workload, 0.5 for mixed workload and 1 for read-only workload.
 
