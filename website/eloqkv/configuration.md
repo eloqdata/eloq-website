@@ -94,6 +94,15 @@ Below is a detailed description of each configuration variable:
 - Data Type: String
 - Default Value: ""
 
+### `auto_redirect`
+
+- Description: Indicator to automatically redirect requests to a remote node if the key is not found locally.
+- Category: [cluster]
+- Commandline: --auto_redirect=value
+- Scope: Global
+- Data Type: Boolean
+- Default Value: "true"
+
 ### `rocksdb_storage_path`
 
 - Description: The directory where RocksDB stores its data when used as the persistent storage engine. For improved performance during checkpoints and cache miss reads, RocksDB can be configured to store data on a separate disk."
@@ -110,6 +119,38 @@ Below is a detailed description of each configuration variable:
 - Scope: Global
 - Data Type: String
 - Default Value: Empty
+
+### `txlog_service_list`
+
+- Description: Redo Log group servers configuration when deploying log servers seaprately. The `txlog_service_list` should include all the redo log groups, with each entry formatted as `ip:port` and separated by commas.
+- Category: [local]
+- Scope: Global
+- Data Type: String
+- Default Value: Empty
+
+### `txlog_group_replica_num`
+
+- Description: Number of replicas for a redo log group. The default value is 1, indicating no high availability (HA) support. To enable HA, set this value to 3 or higher.
+- Category: [local]
+- Scope: Global
+- Data Type: Integer
+- Default Value: 1
+
+### `enable_heap_defragment`
+
+- Description: Option to enable heap defragmentation when using the mimalloc allocator. Enabling this feature helps optimize memory usage by reducing fragmentation within the heap, potentially reducing memory overhead.
+- Category: [local]
+- Scope: Global
+- Data Type: Boolean
+- Default Value: false
+
+### `txn_isolation_level`
+
+- Description: Isolation level of MULTI/EXEC transactions. You can set it to `RepeatableRead` or `ReadCommitted`.
+- Category: [local]
+- Scope: Global
+- Data Type: String
+- Default Value: RepeatableRead
 
 ### Log Configuration
 
