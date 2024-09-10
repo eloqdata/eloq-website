@@ -52,12 +52,6 @@ Once installed, you can verify the `eloqctl` version by running:
 eloqctl --version
 ```
 
-Result:
-
-```
-eloqctl 0.6.0
-```
-
 ## 3. Initialize the cluster topology file
 
 Example cluster topology files can be found in the `.eloqctl/config/examples/` directory.
