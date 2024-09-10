@@ -37,10 +37,10 @@ In the first experiment, we compare **EloqKV** with Apache [Kvrocks](https://kvr
 For **EloqKV**, to enable transaction mode, we enable persistent storage and turn on WAL (Write-Ahead Logging).
 
 ```
-# set it to none to turn off persistent storage for all databases
-enable_data_store=all
-# set it to none to turn off WAL for all databases
-enable_wal=all
+# set it to on to turn on persistent storage
+enable_data_store=on
+# set it to on to turn on WAL
+enable_wal=on
 ```
 
 For Kvrocks, we mainly changed two configuration options.

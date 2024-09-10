@@ -85,6 +85,24 @@ Below is a detailed description of each configuration variable:
 - Data Type: Integer
 - Default Value: 10
 
+### `enable_data_store`
+
+- Description: Set it to false/off to turn off persistent storage. Set it to true/on to turn on persistent storage. When enabled, data in memory will be periodically flushed to persistent storage by checkpointer.
+- Category: [cluster]
+- Commandline: --enable_data_store=true|false
+- Scope: Global
+- Data Type: Boolean
+- Default Value: "false"
+
+### `enable_wal`
+
+- Description: Set it to false/off to turn off WAL. Set it to true/on to turn on WAL. When enabled, new data is first written to the log server before updating memory, ensuring durability.
+- Category: [cluster]
+- Commandline: --enable_wal=true|false
+- Scope: Global
+- Data Type: Boolean
+- Default Value: "false"
+
 ### `ip_port_list`
 
 - Description: Describe the EloqKV tx_service cluster topology. The `ip_port_list` should include all EloqKV nodes, with each entry formatted as `ip:port` and separated by commas. For a single-node deployment, set this to match the `ip:port` specified in the [local] section.

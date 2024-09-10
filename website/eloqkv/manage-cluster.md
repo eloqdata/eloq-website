@@ -83,8 +83,8 @@ path=data
 ip=${OVERRIDE}
 port=${OVERRIDE}
 core_number=8
-enable_data_store=all
-enable_wal=all
+enable_data_store=on
+enable_wal=on
 [cluster]
 [store]
 [metrics]

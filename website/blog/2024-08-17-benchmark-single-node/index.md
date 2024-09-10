@@ -43,10 +43,10 @@ dragonfly --dbfilename=
 For **EloqKV**, we disable persistent storage and turn off WAL (Write-Ahead Logging) in its `config.ini` file.
 
 ```
-# set it to none to turn off persistent storage for all databases
-enable_data_store=none
-# set it to none to turn off WAL for all databases
-enable_wal=none
+# set it to off to turn off persistent storage
+enable_data_store=off
+# set it to off to turn off WAL
+enable_wal=off
 ```
 
 ### Write-Only Workload

@@ -40,10 +40,10 @@ ip=172.20.0.1
 port=6379
 
 # Whether enable data store
-enable_data_store=all
+enable_data_store=on
 
 # Whether enable redo log
-enable_wal=none
+enable_wal=off
 
 # Where to store log data
 path=data

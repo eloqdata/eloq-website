@@ -26,10 +26,10 @@ Template EloqKV configuration file `EloqKv.ini` can be found in the `.eloqctl/co
 To deploy a highly available cluster, you need to first enable persistent data dtore and WAL feature in `EloqKv.ini`.
 
 ```
-# set it to all to turn on persistent storage for all databases
-enable_data_store=all
-# set it to all to turn on WAL for all databases
-enable_wal=all
+# set it to `on` to turn on persistent storage
+enable_data_store=on
+# set it to `on` to turn on WAL
+enable_wal=on
 ```
 
 ## 4. Initialize the cluster topology file

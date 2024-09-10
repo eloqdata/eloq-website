@@ -97,10 +97,10 @@ core_number=3
 node_memory_limit_mb=8192
 
 # Whether to enable persistent data store
-enable_data_store=none
+enable_data_store=off
 
 # Whether to enable WAL log
-enable_wal=none
+enable_wal=off
 
 # Where to store raft log data
 path=data
@@ -143,11 +143,8 @@ Current EloqKV release includes a local RocksDB storage engine. You can turn it 
 
 ```shell
 [local]
-# set it to all to turn on persistent storage for all databases, you can also selectively
-# turn on storage for specific databases
-#enable_data_store=5
-#enable_data_store=1,3
-enable_data_store=all
+# set it to `on` to turn on persistent storage
+enable_data_store=on
 
 # Checkpoint_interval determines the period of flushing records into persistent store
 # so that data in persistent store will not lag too much behind
@@ -164,11 +161,8 @@ Edit `eloqkv.ini` and restart EloqKV to enable WAL.
 
 ```shell
 [local]
-# set it to all to turn on WAL for all databases, you can also selectively turn on WAL
-# for specific databases
-#enable_wal=5
-#enable_wal=1,3
-enable_wal=all
+# set it to `on` to turn on WAL
+enable_wal=on
 ```
 
 ## Setting Up a Cluster
