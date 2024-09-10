@@ -9,18 +9,13 @@ Sets the value of a key, with optional parameters for expiration and conditions.
 ## Syntax
 
 ```
-SET key value [EX seconds | PX milliseconds | EXAT timestamp | PXAT timestamp | KEEPTTL] [NX | XX] [GET]
+SET key value [NX | XX] [GET]
 ```
 
 ## Parameters
 
 - **key**: The name of the key to set.
 - **value**: The value to set for the specified key.
-- **EX seconds**: Optional. Set the specified expire time, in seconds.
-- **PX milliseconds**: Optional. Set the specified expire time, in milliseconds.
-- **EXAT timestamp**: Optional. Set the expiration time as a UNIX timestamp, in seconds.
-- **PXAT timestamp**: Optional. Set the expiration time as a UNIX timestamp, in milliseconds.
-- **KEEPTTL**: Optional. Retain the key's time to live (TTL) if it already has an expiration.
 - **NX**: Optional. Set the key only if it does not already exist.
 - **XX**: Optional. Set the key only if it already exists.
 - **GET**: Optional. Return the old value stored at the key, or `nil` if the key did not exist.
@@ -35,11 +30,7 @@ The `SET` command sets the value of a key, with various optional parameters that
 
 ### Expiration Options
 
-- **EX seconds**: Set the key to expire after a specified number of seconds.
-- **PX milliseconds**: Set the key to expire after a specified number of milliseconds.
-- **EXAT timestamp**: Set the expiration time as an exact UNIX timestamp (seconds).
-- **PXAT timestamp**: Set the expiration time as an exact UNIX timestamp (milliseconds).
-- **KEEPTTL**: Retain the current TTL if the key already has one.
+Expiration is not supported yet.
 
 ### Conditional Options
 
@@ -61,14 +52,6 @@ SET mykey "Hello, World!"
 ```
 
 This will set `mykey` to "Hello, World!".
-
-### Setting a Key with Expiration
-
-To set a key that expires after 10 seconds:
-
-```
-SET mykey "Hello, World!" EX 10
-```
 
 ### Conditional Set (NX)
 

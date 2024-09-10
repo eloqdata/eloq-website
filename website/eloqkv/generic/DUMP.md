@@ -52,7 +52,7 @@ To restore a key from a serialized value:
    RESTORE mykey 0 <serialized_value>
    ```
 
-Replace `<serialized_value>` with the binary string obtained from the `DUMP` command. The `0` specifies the TTL (Time To Live) for the restored key. Use `-1` if you do not want to set an expiration.
+Replace `<serialized_value>` with the binary string obtained from the `DUMP` command. Note that TTL (Time To Live) is not supported in `RESTORE` command, key will be not expired.
 
 ## RESP2/RESP3 Reply
 
