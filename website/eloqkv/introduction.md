@@ -52,3 +52,7 @@ EloqKV adapts to your dynamic needs, scaling seamlessly to match your workload:
 - Log Service Optimization: Handle surges in write traffic by scaling the log service.
 - Cloud Storage Growth: As historical data accumulates, seamlessly expand the cloud storage layer to accommodate your evolving needs.
 - On Demand Dynamic Scaling: achieve scaling without service interruptions (current in Beta).
+
+## Read the Blogs
+
+**EloqKV** is a reimagining of the modern Key-Value Store. To learn more about EloqKV and what it can do, you can read our blogs about its [unique features](/blog/2024/08/16/eloqkv) and [underlying technology](/blog/2024/08/11/data-substrate). You can also read benchmark results on its performance in [single-node](/blog/2024/08/17/benchmark-single-node) configurations and [clustering](/blog/2024/08/22/benchmark-cluster) configurations. You can also read about its unique capability to achieve [durability](/blog/2024/08/25/benchmark-txlog) and perform [distributed atomic operations](/blog/2024/09/01/benchmark-transaction). More technical content will be posted on the [blog](/blog) frequently, and we welcome your [feedback](/contact).
