@@ -59,7 +59,7 @@ import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
 **EloqKV** can be deployed in various configurations:
 
-- **As a cache**: When logging and the persistent store are turned off, **EloqKV** functions as a high-performance in-memory cache, similar to mainstream cache solutions.
+- **As a cache**: When logging and the persistent store are turned off, **EloqKV** functions as a high-performance in-memory cache, similar to mainstream cache solutions with performance matching the state-of-the-art in-memory cache solutions.
 
 - **As an in-memory database**: By enabling logging and the persistent store, **EloqKV** provides durability while maintaining the same fast read performance as a cache. It flushes writes to the log and applies them to memory-resident data. It also maintains snapshots in stable storage, ensuring full, consistent data recovery after failures or restarts.
 
