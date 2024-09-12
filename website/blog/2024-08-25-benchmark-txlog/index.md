@@ -9,7 +9,7 @@ In our previous blogs, we benchmarked **EloqKV** in memory cache mode, discussin
 
 <!--truncate-->
 
-All benchmarks were conducted on AWS (region: us-east-1) EC2 instances running Ubuntu 22.04. Workloads were generated using the [memtier-benchmark](https://github.com/RedisLabs/memtier_benchmark) tool. In all tests, we use **EloqKV** version 0.7.1.
+All benchmarks were conducted on AWS (region: us-east-1) EC2 instances running Ubuntu 22.04. Workloads were generated using the [memtier-benchmark](https://github.com/RedisLabs/memtier_benchmark) tool. In all tests, we use **EloqKV** version 0.7.2.
 
 ### Understanding Durability
 
