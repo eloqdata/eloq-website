@@ -6,6 +6,26 @@ title: Deploy MonoSQL Using Auto Scaling Group
 
 This document describes how to deploy MonoSQL on AWS. For more information about MonoSQL, please refer to the [MonoSQL Introduction](./monosql-introduction.md)
 
+You can install MonoSQL using `monosql_setup.sh` script.
+
+Download the install script.
+
+```
+wget https://download.eloqdata.com/monosql/monosql_setup.sh
+```
+
+Check the usage of `monosql_setup.sh`. User need to suppy a VPC and subnet through command line parameters. MonoSQL will be deployed in the specified VPC.
+
+```
+bash monosql_setup.sh --help
+
+Usage: monosql_setup.sh [--vpc=vpc-xxxxxxxx] [--subnets=subnet-xxxxxxxx,subnet-yyyyyyyy]
+```
+
+You can follow the rest of the guide to install and configure MonoSQL manually.
+
+Advanced features like Auto Scaling based on CPU usage and MonoSQL Monitor are required to be setup manually.
+
 ## Deployment prepare
 
 1. The user needs to be able to access AWS services and select a region, take `ap-northeast-1(Tokyo)` region as example for the subsequent operations and deployments.
@@ -115,8 +135,7 @@ After all settings are completed, you can successfully create an `Auto Scaling G
 
 The MonoSQLMonitor virtual image integrates Prometheus and Grafana monitoring components, which can be used to monitor the Auto Scaling Group. Prometheus is a monitoring tool that can collect and store metric data for distributed databases, and Grafana is a data visualization tool that can display this metric data in charts and other formats, helping users to better understand and analyze the performance and operating status of distributed databases.
 
-1.  Create an EC2 Instance based on MonoSQLMonitor. The process of creating a monitoring instance is basically the same as creating a MonoSQLServer instance, with one important point to note: the corresponding AMI needs to be set to `MonoSQLServer`.
-    ![](./media/dynosql/monitor/AMI_monitor.jpg)
+1.  Create an EC2 Instance based on MonoSQLMonitor. If you are not on region `us-east-1`, you need to login into the monitor instance and manually edit `/home/ubuntu/prometheus-2.45.0-rc.0.linux-amd64/prometheus.yml` to replace `us-east-1` with your region. The next release of MonoSQL monitor and detect region automatically.
 2.  Access the WebUI of Grafana. After creating the MonoSQLMonitor monitor instance, the instance will by default monitor the Auto Scaling Group with the name `MonoSQL`, You can enter `monitor_EC2_instance_IP:3000` in a browser to acces Grafana.
     ![](./media/dynosql/monitor/grafana.jpg)
     The default username and password are both **admin**, Please change it in your first login.
