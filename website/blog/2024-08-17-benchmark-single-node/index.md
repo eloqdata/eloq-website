@@ -23,7 +23,7 @@ Server Machine:
 | ------------------ | ------------ | ---------- |
 | Redis 7.2.5        | c7g.8xlarge  | 1          |
 | DragonflyDB 1.21.2 | c7g.8xlarge  | 1          |
-| EloqKV 0.7.2       | c7g.8xlarge  | 1          |
+| EloqKV 0.7.4       | c7g.8xlarge  | 1          |
 | Client - Memtier   | c6gn.8xlarge | 1          |
 
 We follow the official instructions to setup [**EloqKV**](/eloqkv/install-from-binary), [DragonflyDB](https://www.dragonflydb.io/docs/getting-started/binary) and [Redis](https://redis.io/docs/latest/operate/oss_and_stack/install/install-redis/).

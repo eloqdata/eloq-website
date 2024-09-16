@@ -9,7 +9,7 @@ In the previous blog, we discussed the [durable feature](/blog/2024/08/25/benchm
 
 <!--truncate-->
 
-In this blog, we evaluate _small scale_ clusters to show the behavior of **EloqKV** accross servers. Scalability in a larger scale cluster with different number of servers will be evaluated at a later blog. All benchmarks were conducted on AWS (region: us-east-1) EC2 instances, with Ubuntu 22.04. In all tests, we use **EloqKV** version 0.7.2.
+In this blog, we evaluate _small scale_ clusters to show the behavior of **EloqKV** accross servers. Scalability in a larger scale cluster with different number of servers will be evaluated at a later blog. All benchmarks were conducted on AWS (region: us-east-1) EC2 instances, with Ubuntu 22.04. In all tests, we use **EloqKV** version 0.7.4.
 
 ### Transaction in EloqKV
 
@@ -41,14 +41,14 @@ In the following experiment, **EloqKV** operates in pure memory mode, with persi
 
 | Service type         | Node type    | Node count |
 | -------------------- | ------------ | ---------- |
-| EloqKV 0.7.2         | c7g.8xlarge  | 1          |
-| EloqKV 0.7.2 Cluster | c7g.8xlarge  | 3          |
+| EloqKV 0.7.4         | c7g.8xlarge  | 1          |
+| EloqKV 0.7.4 Cluster | c7g.8xlarge  | 3          |
 | Redis 7.2.5          | c7g.8xlarge  | 1          |
 | Client eloq-bench    | c6gn.8xlarge | 1          |
 
 ### Experiment:
 
-We developed a new benchmarking tool, `eloq_benchmark`, specifically to test the transaction performance of Redis and **EloqKV**, as `memtier_benchmark` does not support `Multi Exec`. You can download `eloq_benchmark` [here](https://download.eloqdata.com/eloqkv/tools/eloq_benchmark-0.7.2.zip)
+We developed a new benchmarking tool, `eloq_benchmark`, specifically to test the transaction performance of Redis and **EloqKV**, as `memtier_benchmark` does not support `Multi Exec`. You can download `eloq_benchmark` [here](https://download.eloqdata.com/eloqkv/tools/eloq_benchmark-0.7.4.zip)
 
 We run `eloq_benchmark` with the following configuration:
 

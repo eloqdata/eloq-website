@@ -23,7 +23,7 @@ The expected output will be:
 +----------------+---------+---------+---------+-------+
 | name           | product | store   | version | user  |
 +----------------+---------+---------+---------+-------+
-| eloqkv-cluster | EloqKV  | rocksdb | 0.7.2   | rocky |
+| eloqkv-cluster | EloqKV  | rocksdb | 0.7.4   | rocky |
 +----------------+---------+---------+---------+-------+
 ```
 
