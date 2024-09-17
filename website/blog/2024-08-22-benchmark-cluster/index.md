@@ -35,8 +35,8 @@ We compare the performance of a single-node **EloqKV** instance with that of an 
 
 | Service type         | Node type    | Node count |
 | -------------------- | ------------ | ---------- |
-| EloqKV 0.7.2         | c7g.8xlarge  | 1          |
-| EloqKV 0.7.2 Cluster | c7g.8xlarge  | 3          |
+| EloqKV 0.7.4         | c7g.8xlarge  | 1          |
+| EloqKV 0.7.4 Cluster | c7g.8xlarge  | 3          |
 | Client - Memtier     | c6gn.8xlarge | 3          |
 
 ## Experiment:

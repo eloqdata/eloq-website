@@ -40,7 +40,7 @@ const ContactPage: React.FC = () => {
       document.getElementById("software_version") as HTMLSelectElement
     ).value;*/
     const kvtype = "rocksdb";
-    const software_version = "0.7.2";
+    const software_version = "0.7.4";
     const os_type = (document.getElementById("os_type") as HTMLSelectElement)
       .value;
 
