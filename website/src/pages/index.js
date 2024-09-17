@@ -159,6 +159,19 @@ function ButtonEloqSQL() {
     </>
   );
 }
+function HomeLearnMore() {
+  return (
+    <>
+      <ActionButton
+        type="primary"
+        href={useBaseUrl('/blog/2024/08/16/eloqkv')}
+        target="_self">
+        Learn more
+      </ActionButton>
+    </>
+  );
+}
+
 function HomeCallToAction() {
   return (
     <>
@@ -574,16 +587,18 @@ const features = [
     title: 'High Performance',
     details: [
       'Match the best in-memory data stores when data fit in memory and persistency is turned off',
-      'Outperform other persistent KV stores when logging is turned on',
+      'Significantly outperform other persistent KV stores when data persistency is enabled',
     ],
+    link: 'blog/2024/08/17/benchmark-single-node',
   },
   {
     icon: faDollarSign,
     title: 'Low Cost',
     details: [
-      'Take advantage of fast SSDs to store data that exceeds memory capacity while still allow fast access',
-      'Leverage tiered-storage in the cloud to further reduce cost of storing large amount of historical data',
+      'Take advantage of fast SSDs to store data that exceeds memory capacity',
+      'Leverage tiered-storage in the cloud to further reduce cost while maintaining sub-second access latency for cold data',
     ],
+    link: 'blog/2024/08/16/eloqkv#performance-and-cost',
   },
   {
     icon: faExpandArrowsAlt,
@@ -592,14 +607,16 @@ const features = [
       'Scale-up with multicore, and scale-out to multiple nodes in a cluster',
       'Support dynamic scaling as workload changes, without service disruption (currently in Beta)',
     ],
+    link: 'blog/2024/08/16/eloqkv#scale-as-you-need-on-what-you-need',
   },
   {
     icon: faExchangeAlt,
     title: 'Fully ACID',
     details: [
-      'Transactional distributed KV store with full ACID properties',
+      'Transactional distributed KV store with full ACID capabilities',
       'Redis transaction commands are supported in either single node mode or cluster mode with the same semantics',
     ],
+    link: 'blog/2024/08/16/eloqkv#full-acid-transactions-when-you-need-them',
   },
   {
     icon: faCheckCircle,
@@ -608,14 +625,16 @@ const features = [
       'Replicate data to multiple servers to provide fault-tolerance',
       'Support hot standbys so that failure can be recovered in sub-seconds (currently in Beta)',
     ],
+    link: 'eloqkv/quick-start-ha',
   },
   {
     icon: faRedoAlt,
     title: 'Redis Compatible API',
     details: [
-      'Implement the popular Redis API, support most popular data structures',
+      'Implement the Redis API, support most popular data structures',
       'No code modification needed for applications to enjoy the rich features and cost benefits of EloqKV',
     ],
+    link: 'eloqkv/kvstore_compatibility',
   },
 ];
 
@@ -650,6 +669,8 @@ const Index = () => {
             <Typed strings={['- Cloud Native']} typeSpeed={3} />
           </p>
           <div className="buttons">
+            <HomeLearnMore />
+            <span style={{width: '40px', display: 'inline-block'}}></span>
             <HomeCallToAction />
           </div>
         </div>
@@ -666,15 +687,17 @@ const Index = () => {
 
       <div className="feature-section">
         {features.map((feature, index) => (
-          <div className="feature-card" key={index}>
-            <FontAwesomeIcon icon={feature.icon} className="feature-icon" />
-            <h3>{feature.title}</h3>
-            <ul>
-              {feature.details.map((detail, i) => (
-                <p>{detail}</p>
-              ))}
-            </ul>
-          </div>
+          <a href={useBaseUrl(feature.link)} key={index}>
+            <div className="feature-card" key={index}>
+              <FontAwesomeIcon icon={feature.icon} className="feature-icon" />
+              <h3>{feature.title}</h3>
+              <ul>
+                {feature.details.map((detail, i) => (
+                  <p>{detail}</p>
+                ))}
+              </ul>
+            </div>
+          </a>
         ))}
       </div>
     </Layout>
