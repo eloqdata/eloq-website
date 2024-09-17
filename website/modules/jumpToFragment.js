@@ -1,20 +1,14 @@
-import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
+// modules/jumpToFragment.js
 
-export default (() => {
-  const isReady =
-    ExecutionEnvironment.canUseDOM && ExecutionEnvironment.canUseEventListeners;
-  if (isReady) {
-    window.addEventListener('load', () => {
-      if (!window.location.hash) {
-        return;
+export function onRouteDidUpdate({location}) {
+  if (location.hash) {
+    setTimeout(() => {
+      const id = decodeURIComponent(location.hash.substring(1));
+      const element = document.getElementById(id);
+      if (element) {
+        // Scroll to the element with smooth behavior
+        element.scrollIntoView({behavior: 'smooth'});
       }
-
-      const ref = document.getElementById(window.location.hash.slice(1));
-      if (!ref) {
-        return;
-      }
-
-      ref.scrollIntoView();
-    });
+    }, 0);
   }
-})();
+}
