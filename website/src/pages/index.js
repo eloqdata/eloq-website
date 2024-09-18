@@ -587,7 +587,7 @@ const features = [
     title: 'High Performance',
     details: [
       'Match the best in-memory data stores when data fit in memory and persistency is turned off',
-      'Significantly outperform other persistent KV stores when data persistency is enabled',
+      'Significantly outperform other durable KV stores with persistency on',
     ],
     link: 'blog/2024/08/17/benchmark-single-node',
   },
