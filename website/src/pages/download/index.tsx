@@ -43,11 +43,14 @@ const ContactPage: React.FC = () => {
     const software_version = "0.7.4";
     const os_type = (document.getElementById("os_type") as HTMLSelectElement)
       .value;
+    const arch_type = (
+      document.getElementById("arch_type") as HTMLSelectElement
+    ).value;
 
     const ip = (document.getElementById("ip_address") as HTMLSelectElement)
       .value;
 
-    const downloadUrl = `https://download.eloqdata.com/eloqkv/${kvtype}/eloqkv-${software_version}-${os_type}-amd64.tar.gz`;
+    const downloadUrl = `https://download.eloqdata.com/eloqkv/${kvtype}/eloqkv-${software_version}-${os_type}-${arch_type}.tar.gz`;
 
     //console.log('Download URL:', downloadUrl); // Debug log to check the URL
 
@@ -55,9 +58,9 @@ const ContactPage: React.FC = () => {
     link.href = downloadUrl;
     link.setAttribute(
       "download",
-      `eloqkv-${software_version}-${os_type}-amd64.tar.gz`
+      `eloqkv-${software_version}-${os_type}-${arch_type}.tar.gz`
     );
-    //link.download = `eloqkv-${software_version}-${os_type}-amd64.tar.gz`;
+    //link.download = `eloqkv-${software_version}-${os_type}-${arch_type}.tar.gz`;
 
     document.body.appendChild(link);
 
@@ -169,6 +172,17 @@ const ContactPage: React.FC = () => {
                   <option value="ubuntu20">Ubuntu 20.04</option>
                   <option value="ubuntu22">Ubuntu 22.04</option>
                   <option value="ubuntu24">Ubuntu 24.04</option>
+                </select>
+
+                <label htmlFor="arch_type" className="required">
+                  CPU Architecture:
+                </label>
+                <select id="arch_type" name="arch_type" required>
+                  <option value="" disabled selected>
+                    Please Choose CPU Arch
+                  </option>
+                  <option value="amd64">AMD64</option>
+                  <option value="arm64">ARM64</option>
                 </select>
 
                 {/*<label htmlFor="software_version" className="required">
