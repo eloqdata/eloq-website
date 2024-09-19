@@ -181,8 +181,8 @@ const ContactPage: React.FC = () => {
                   <option value="" disabled selected>
                     Please Choose CPU Arch
                   </option>
-                  <option value="amd64">AMD64</option>
-                  <option value="arm64">ARM64</option>
+                  <option value="amd64">x86_64</option>
+                  <option value="arm64">arm64</option>
                 </select>
 
                 {/*<label htmlFor="software_version" className="required">

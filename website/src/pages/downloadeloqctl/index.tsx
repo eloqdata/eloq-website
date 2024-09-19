@@ -34,9 +34,6 @@ const ContactPage: React.FC = () => {
   const triggerDownload = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const os_type = (document.getElementById("os_type") as HTMLSelectElement)
-      .value;
-
     const downloadUrl = `https://download.eloqdata.com/eloqctl/eloqctl_installer.sh`;
 
     //console.log('Download URL:', downloadUrl); // Debug log to check the URL
@@ -143,20 +140,6 @@ const ContactPage: React.FC = () => {
                 className="contact-form"
                 onSubmit={triggerDownload}
               >
-                <label htmlFor="os_type" className="required">
-                  Operating System:
-                </label>
-                <select id="os_type" name="os_type" required>
-                  <option value="" disabled selected>
-                    Please Choose OS Type
-                  </option>
-                  <option value="rhel8">RHEL 8</option>
-                  <option value="rhel9">RHEL 9</option>
-                  <option value="ubuntu20">Ubuntu 20.04</option>
-                  <option value="ubuntu22">Ubuntu 22.04</option>
-                  <option value="ubuntu24">Ubuntu 24.04</option>
-                </select>
-
                 <label htmlFor="download-reason">
                   Which feature of EloqKV interests you the most?
                 </label>
