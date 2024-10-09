@@ -4,7 +4,7 @@ title: Introduction to EloqKV
 
 # EloqKV: A Distributed Transactional KV store
 
-## Achitecture
+## Architecture
 
 EloqKV is a decoupled, distributed database built on Data Substrate, the innovative new database foundation developed by EloqData for the cloud era.
 
