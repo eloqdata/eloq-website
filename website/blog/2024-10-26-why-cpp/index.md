@@ -13,7 +13,7 @@ We have recently introduced [EloqKV](/blog/2024/08/16/eloqkv), our distributed d
 <div style={{ width: '720px', textAlign: 'center'}}>
 import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
-<EnlargeableImage src={require('./img/c_old_solid.png').default} alt="EloqKV vs Redis Transaction" />
+<EnlargeableImage src={require('./img/c_old_solid.jpg').default} alt="EloqKV vs Redis Transaction" />
 
 </div></p>
 
