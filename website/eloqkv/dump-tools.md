@@ -22,20 +22,23 @@ Options:
 
 ## Example of Dumping Data from EloqKV and Importing to Other Servers
 
-1. **Stop the EloqKV server** and ensure all data in memory is flushed to storage.
+1. Stop the EloqKV server
+   
+   (Before stopping, please ensure all data in memory is flushed to storage.)
 
-2. **Dump data**:
+2. Dump data:
    ```bash
    ./eloqkv_to_aof --rocksdb_path=/home/workspace/rocksdb_store/db --output_file_dir=/home/workspace/output_aof --thread_count=4 --round_batch_size=10000
    ```
 
-3. **After the dump is complete**, check the files in the output directory `/home/workspace/output_aof`:
+3. After the dump is complete, check the files in the output directory `/home/workspace/output_aof`:
    ```bash
    ls /home/workspace/output_aof
    # Output: 0.aof 1.aof 2.aof 3.aof
    ```
 
-4. **Validate the AOF files** using the `redis-check-aof` tool:
+4. Validate the AOF files using the `redis-check-aof` tool (Notice: this tool is provided by Redis):
+
    ```bash
    redis-check-aof /home/workspace/output_aof/0.aof
    redis-check-aof /home/workspace/output_aof/1.aof
@@ -49,7 +52,7 @@ Options:
    AOF is valid
    ```
 
-5. **Import the AOF files to another server** using `redis-cli`:
+5. Import the AOF files to another server using `redis-cli`:
    ```bash
    redis-cli --pipe < /home/workspace/output_aof/0.aof
    redis-cli --pipe < /home/workspace/output_aof/1.aof
