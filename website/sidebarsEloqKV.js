@@ -14,51 +14,35 @@
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
   // By default, Docusaurus generates a sidebar from the docs folder structure
-  eloqkv: {
-    'EloqKV Introduction': ['introduction'],
-    'Get Started': ['install-from-binary', 'docker-deploy'],
-    Deploy: [
+  eloqkv : {
+    'EloqKV Introduction' : ['introduction'],
+    'Get Started' : [ 'install-from-binary', 'docker-deploy' ],
+    Deploy : [
       'quick-start',
       'quick-start-ha',
       'manage-cluster',
       'upgrade',
       'prerequisite',
     ],
-    Manage: ['monitor', 'configuration'],
-    'Redis Comaptibility': ['kvstore_compatibility', 'known-limit'],
-    'Command Reference': [
+    Manage : [ 'monitor', 'configuration', 'backup&dump tools' ],
+    'Redis Comaptibility' : [ 'kvstore_compatibility', 'known-limit' ],
+    'Command Reference' : [
       {
-        type: 'category',
-        label: 'Lists',
-        items: [
-          'list/BLMOVE',
-          'list/BLMPOP',
-          'list/BLPOP',
-          'list/BRPOP',
-          'list/BRPOPLPUSH',
-          'list/LINDEX',
-          'list/LINSERT',
-          'list/LLEN',
-          'list/LMOVE',
-          'list/LMPOP',
-          'list/LPOP',
-          'list/LPOS',
-          'list/LPUSH',
-          'list/LPUSHX',
-          'list/LRANGE',
-          'list/LREM',
-          'list/LSET',
-          'list/LTRIM',
-          'list/RPOP',
-          'list/RPOPLPUSH',
-          'list/RPUSH',
-          'list/RPUSHX',
+        type : 'category',
+        label : 'Lists',
+        items : [
+          'list/BLMOVE',     'list/BLMPOP', 'list/BLPOP',   'list/BRPOP',
+          'list/BRPOPLPUSH', 'list/LINDEX', 'list/LINSERT', 'list/LLEN',
+          'list/LMOVE',      'list/LMPOP',  'list/LPOP',    'list/LPOS',
+          'list/LPUSH',      'list/LPUSHX', 'list/LRANGE',  'list/LREM',
+          'list/LSET',       'list/LTRIM',  'list/RPOP',    'list/RPOPLPUSH',
+          'list/RPUSH',      'list/RPUSHX',
         ],
       },
       {
-        type: 'category',
-        label: 'Hashes',
-        items: [
+        type : 'category',
+        label : 'Hashes',
+        items : [
           'hash/HDEL',
           'hash/HEXISTS',
           'hash/HGET',
@@ -78,9 +62,9 @@ const sidebars = {
         ],
       },
       {
-        type: 'category',
-        label: 'Sets',
-        items: [
+        type : 'category',
+        label : 'Sets',
+        items : [
           'set/SADD',
           'set/SCARD',
           'set/SDIFF',
@@ -100,9 +84,9 @@ const sidebars = {
         ],
       },
       {
-        type: 'category',
-        label: 'Zsets',
-        items: [
+        type : 'category',
+        label : 'Zsets',
+        items : [
           'zset/ZADD',
           'zset/ZCARD',
           'zset/ZCOUNT',
@@ -137,9 +121,9 @@ const sidebars = {
         ],
       },
       {
-        type: 'category',
-        label: 'String',
-        items: [
+        type : 'category',
+        label : 'String',
+        items : [
           'string/APPEND',
           'string/DECR',
           'string/DECRBY',
@@ -160,9 +144,9 @@ const sidebars = {
         ],
       },
       {
-        type: 'category',
-        label: 'Bitmap',
-        items: [
+        type : 'category',
+        label : 'Bitmap',
+        items : [
           'bitmap/BITCOUNT',
           'bitmap/BITFIELD',
           'bitmap/BITFIELD_RO',
@@ -173,9 +157,9 @@ const sidebars = {
         ],
       },
       {
-        type: 'category',
-        label: 'PubSub',
-        items: [
+        type : 'category',
+        label : 'PubSub',
+        items : [
           'pubsub/PSUBSCRIBE',
           'pubsub/PUBLISH',
           'pubsub/PUBSUB',
@@ -185,9 +169,9 @@ const sidebars = {
         ],
       },
       {
-        type: 'category',
-        label: 'Transaction',
-        items: [
+        type : 'category',
+        label : 'Transaction',
+        items : [
           'transaction/DISCARD',
           'transaction/EXEC',
           'transaction/MULTI',
@@ -196,9 +180,9 @@ const sidebars = {
         ],
       },
       {
-        type: 'category',
-        label: 'Scripting',
-        items: [
+        type : 'category',
+        label : 'Scripting',
+        items : [
           'scripting/EVAL',
           'scripting/EVALSHA',
           'scripting/SCRIPTEXISTS',
@@ -207,9 +191,9 @@ const sidebars = {
         ],
       },
       {
-        type: 'category',
-        label: 'Generic',
-        items: [
+        type : 'category',
+        label : 'Generic',
+        items : [
           'generic/DEL',
           'generic/DUMP',
           'generic/EXISTS',
