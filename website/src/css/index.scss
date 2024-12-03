@@ -346,6 +346,32 @@
   //margin-bottom: 60px;
 }
 
+.HeaderHero .taglinebig {
+  font-size: 48px;
+  line-height: 1.3;
+  color: white;
+  font-weight: 500;
+  color: var(--brand);
+  padding-top: 5px;
+  padding-bottom: 20px;
+  margin: 0;
+  //transition: opacity 10s ease-in-out;
+  /* Delay for opacity changes */
+  //margin-bottom: 60px;
+}
+
+.HeaderHero .taglinesmall {
+  font-size: 21px;
+  line-height: 1.3;
+  //color: white;
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 250;
+  font-family: "Arial", sans-serif;
+  //transition: opacity 10s ease-in-out;
+  /* Delay for opacity changes */
+  //margin-bottom: 60px;
+}
+
 .HeaderHero .taglinecolor {
   font-size: 36px;
   line-height: 1.3;
@@ -841,6 +867,7 @@ html[data-theme="dark"] .Section p a {
 
 .container1 {
   display: flex;
+  flex-direction: column; /* Ensure the banner is at the top */
   margin-top: 0px;
   padding-left: 80px;
   padding-right: 100px;
@@ -863,6 +890,10 @@ html[data-theme="dark"] .Section p a {
   //padding: 20px;
 }
 
+.product-columns {
+  display: flex; /* Restore column layout for left and right sections */
+}
+
 .product-left-column {
   text-align: left;
   flex: 0 0 50%;
@@ -870,6 +901,24 @@ html[data-theme="dark"] .Section p a {
   //max-width: 100%;
   /* Set width to 60% and prevent shrinking */
   /*position: relative;*/
+}
+
+.product-mid-column {
+  text-align: left;
+  margin-bottom: 20px; /* Space between the banner and columns */
+  //flex: 0 0 100%;
+  //max-width: 100%
+  //padding-right: 50px;
+  //max-width: 100%;
+  /* Set width to 60% and prevent shrinking */
+  /*position: relative;*/
+}
+
+.product-mid-column img {
+  max-width: 100%; /* Adjust the size of the image */
+  height: auto; /* Maintain aspect ratio */
+  width: 90%;
+  flex-shrink: 1; /* Ensure it shrinks when the page width reduces */
 }
 
 .product-right-column img {
@@ -907,8 +956,8 @@ html[data-theme="dark"] .Section p a {
   font-size: 84px;
   color: var(--brand);
   line-height: 1;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 0px; //20px
+  padding-bottom: 20px; //20px
   margin: 0;
   font-weight: 500;
   //font-family: Optima;
@@ -950,6 +999,30 @@ html[data-theme="dark"] .Section p a {
   padding-bottom: 40px;
   //font-family: "Akzidenz-Grotesk BQ";
   margin: 0;
+}
+
+.product-left-column .taglinebig {
+  font-size: 64px;
+  line-height: 1.3;
+  color: white;
+  font-weight: 500;
+  color: var(--brand);
+  padding-top: 5px;
+  padding-bottom: 20px;
+  margin: 0;
+  //transition: opacity 10s ease-in-out;
+  /* Delay for opacity changes */
+  //margin-bottom: 60px;
+}
+
+.product-left-column .taglinesmall {
+  font-size: 20px;
+  line-height: 1.3;
+  color: white;
+  font-weight: 500;
+  //transition: opacity 10s ease-in-out;
+  /* Delay for opacity changes */
+  //margin-bottom: 60px;
 }
 
 .product-left-column .taglinecolor {

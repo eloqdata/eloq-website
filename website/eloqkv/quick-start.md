@@ -77,8 +77,7 @@ deployment:
   version: "latest"
   install_dir: "/home/${USER}"
   tx_service:
-    host: [127.0.0.1]
-    client_port: 6389
+    tx_host_ports: [127.0.0.1:6389]
   log_service:
     nodes:
       - host: 127.0.0.1
@@ -132,15 +131,10 @@ The `deployment` section covers the configurations for deploying cluster metadat
   _Default_: `'/home/${USER}'`  
   Specifies the directory where the product will be installed. The `${USER}` placeholder dynamically references the current user's home directory.
 
-- **`tx_service.host`**:  
+- **`tx_service.tx_host_ports`**:  
   _Type_: `List of Strings`  
-  _Default_: `[127.0.0.1]`  
-  The list of IP addresses for the transaction service hosts. The transaction service handles Redis client requests and is compatible with the Redis Protocol. Note that each IP address can only be listed once.
-
-- **`tx_service.client_port`**:  
-  _Type_: `Integer`  
-  _Default_: `6389`  
-  Specifies the port on which the transaction service listens. Redis clients connect to this port, and all transaction service hosts will use the same `client_port`.
+  _Default_: `[127.0.0.1:6389]`  
+  The list of IP:PORT addresses for the transaction service hosts. The transaction service handles Redis client requests and is compatible with the Redis Protocol. Note that each IP address can only be listed once.
 
 - **`log_service.nodes`**:  
   _Type_: `Composite`  

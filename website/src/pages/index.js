@@ -641,47 +641,65 @@ const features = [
 const Index = () => {
   return (
     <Layout
-      description="A framework for building native apps using React"
+      description="Build the Next Generation of Databases the Right Way"
       wrapperClassName="homepage">
       <Head>
-        <title>EloqData · Modular Database</title>
-        <meta property="og:title" content="EloqDB · Modular Database" />
-        <meta property="twitter:title" content="EloqDB · Modular Database" />
+        <title>EloqData: Next Generation of Databases</title>
+        <meta
+          property="og:title"
+          content="EloqData: Next Generation of Databases"
+        />
+        <meta
+          property="twitter:title"
+          content="EloqData: Next Generation of Databases"
+        />
       </Head>
 
       <div class="container1">
-        <div class="product-left-column">
-          <h1 className="title">EloqKV</h1>
-          <p className="tagline">
-            The <span style={{color: '#f75b0c'}}>Revolutionary</span>{' '}
-            Distributed Key-Value Database.
-          </p>
-          <p className="taglinecolor">
-            <Typed strings={['- High Performance']} typeSpeed={5} />
-          </p>
-          <p className="taglinecolor">
-            <Typed strings={['- Full ACID Support']} typeSpeed={10} />
-          </p>
-          <p className="taglinecolor">
-            <Typed strings={['- Scalable and Elastic']} typeSpeed={8} />
-          </p>
-          <p className="taglinecolor">
-            <Typed strings={['- Cloud Native']} typeSpeed={3} />
-          </p>
-          <div className="buttons">
-            <HomeLearnMore />
-            <span style={{width: '40px', display: 'inline-block'}}></span>
-            <HomeCallToAction />
-          </div>
-        </div>
-        <div class="product-right-column">
+        <div class="product-mid-column">
           <img
             alt=""
-            src={useBaseUrl('img/websitehero202404.svg')}
+            src={useBaseUrl('img/eloqbanner.jpg')}
             type="image/svg+xml"
             width="800"
             heigh="auto"
           />
+        </div>
+        <div class="product-columns">
+          <div class="product-left-column">
+            <p className="taglinesmall">Introducing Our First Product:</p>
+            <h1 className="title"> EloqKV</h1>
+            <p className="tagline">
+              The <span style={{color: '#f75b0c'}}>Revolutionary</span>{' '}
+              Distributed Key-Value Database.
+            </p>
+            <p className="taglinecolor">
+              <Typed strings={['- High Performance']} typeSpeed={5} />
+            </p>
+            <p className="taglinecolor">
+              <Typed strings={['- Full ACID Support']} typeSpeed={10} />
+            </p>
+            <p className="taglinecolor">
+              <Typed strings={['- Scalable and Elastic']} typeSpeed={8} />
+            </p>
+            <p className="taglinecolor">
+              <Typed strings={['- Cloud Native']} typeSpeed={3} />
+            </p>
+            <div className="buttons">
+              <HomeLearnMore />
+              <span style={{width: '40px', display: 'inline-block'}}></span>
+              <HomeCallToAction />
+            </div>
+          </div>
+          <div class="product-right-column">
+            <img
+              alt=""
+              src={useBaseUrl('img/monograph_website_hero.svg')}
+              type="image/svg+xml"
+              width="800"
+              heigh="auto"
+            />
+          </div>
         </div>
       </div>
 

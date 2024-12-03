@@ -70,11 +70,19 @@ sudo systemctl restart ssh
 </TabItem>
 </Tabs>
 
-4. Log in to the control machine as the `eloq` user, generate an SSH key, and configure SSH mutual trust between the control machine and itself.
+4. Log in to the control machine as the `eloq` user, generate an SSH key, and configure SSH mutual trust between the control machine and itself. Note that password should be skipped when running `ssk-keygen`.
 
 ```
 ssh-keygen -t rsa
 cat .ssh/id_rsa.pub >> .ssh/authorized_keys
+```
+
+Please check permissions on .ssh directory.
+
+```
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/authorized_keys
+
 ```
 
 5. Configure SSH mutual trust between the control machine and the server machines. Replace 10.0.0.1 with the IP address of your target machine, and enter the `eloq` user password for the target machine when prompted. Once the command is executed, SSH mutual trust will be established. Repeat this process for each EloqKV machine.

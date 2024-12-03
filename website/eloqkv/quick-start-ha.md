@@ -1,5 +1,5 @@
 ---
-title: Deploy High Available Cluster
+title: Deploy High Available Cluster on Shared Storage
 summary: Learn how to quickly get started with the EloqKV database.
 ---
 
@@ -60,8 +60,7 @@ deployment:
   version: "latest"
   install_dir: "/home/${USER}"
   tx_service:
-    host: [10.0.0.1, 10.0.0.2, 10.0.0.3]
-    client_port: 6379
+    tx_host_ports: [10.0.0.1:6379, 10.0.0.2:6379, 10.0.0.3:6379]
   log_service:
     nodes:
       - host: 10.0.0.1
@@ -106,9 +105,9 @@ deployment:
 
 For detailed explanations for each configuration option in the YAML file, please refer to the previous document [Deploy Single Node Cluster](./quick-start). In this document, we will focus specifically on the high availability aspects of the configuration file.
 
-- **`tx_service.host`**:  
+- **`tx_service.tx_host_ports`**:  
   _Type_: `List of Strings`  
-  The transaction cluster is deployed across three nodes: 10.0.0.1, 10.0.0.2, and 10.0.0.3. Data is sharded among these nodes, with each node responsible for a portion of the data. If one node fails, the remaining nodes will take over the data from the failed node and continue to serve client requests seamlessly.
+  The transaction cluster is deployed across three nodes: 10.0.0.1:6379, 10.0.0.2:6379, and 10.0.0.3:6379. Data is sharded among these nodes, with each node responsible for a portion of the data. If one node fails, the remaining nodes will take over the data from the failed node and continue to serve client requests seamlessly.
 
 - **`log_service.nodes`**:  
   _Type_: `Composite`  

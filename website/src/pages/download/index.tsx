@@ -40,7 +40,7 @@ const ContactPage: React.FC = () => {
       document.getElementById("software_version") as HTMLSelectElement
     ).value;*/
     const kvtype = "rocksdb";
-    const software_version = "0.7.8";
+    const software_version = "0.8.6";
     const os_type = (document.getElementById("os_type") as HTMLSelectElement)
       .value;
     const arch_type = (
@@ -167,6 +167,7 @@ const ContactPage: React.FC = () => {
                   <option value="" disabled selected>
                     Please Choose OS Type
                   </option>
+                  <option value="rhel7">RHEL 7</option>
                   <option value="rhel8">RHEL 8</option>
                   <option value="rhel9">RHEL 9</option>
                   <option value="ubuntu20">Ubuntu 20.04</option>

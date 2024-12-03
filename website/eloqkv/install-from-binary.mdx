@@ -16,6 +16,7 @@ After successfully downloading the proper binary, untar it in a directory.
   groupId="language"
   defaultValue="centos8"
   values={[
+    { label: 'Rhel7', value: 'centos7', },
     { label: 'Rhel8', value: 'centos8', },
     { label: 'Rhel9', value: 'centos9', },
     { label: 'Ubuntu20.04', value: 'ubuntu2004', },
@@ -24,11 +25,20 @@ After successfully downloading the proper binary, untar it in a directory.
   ]
 }>
 
+<TabItem value="centos7">
+
+```shell
+cd ${HOME}
+tar -zxvf eloqkv-0.8.6-rhel7-amd64.tar.gz
+```
+
+</TabItem>
+
 <TabItem value="centos8">
 
 ```shell
 cd ${HOME}
-tar -zxvf eloqkv-0.7.8-rhel8-amd64.tar.gz
+tar -zxvf eloqkv-0.8.6-rhel8-amd64.tar.gz
 ```
 
 </TabItem>
@@ -37,7 +47,7 @@ tar -zxvf eloqkv-0.7.8-rhel8-amd64.tar.gz
 
 ```shell
 cd ${HOME}
-tar -zxvf eloqkv-0.7.8-rhel9-amd64.tar.gz
+tar -zxvf eloqkv-0.8.6-rhel9-amd64.tar.gz
 ```
 
 </TabItem>
@@ -46,7 +56,7 @@ tar -zxvf eloqkv-0.7.8-rhel9-amd64.tar.gz
 
 ```shell
 cd ${HOME}
-tar -zxvf eloqkv-0.7.8-ubuntu20-amd64.tar.gz
+tar -zxvf eloqkv-0.8.6-ubuntu20-amd64.tar.gz
 ```
 
 </TabItem>
@@ -55,7 +65,7 @@ tar -zxvf eloqkv-0.7.8-ubuntu20-amd64.tar.gz
 
 ```shell
 cd ${HOME}
-tar -zxvf eloqkv-0.7.8-ubuntu22-amd64.tar.gz
+tar -zxvf eloqkv-0.8.6-ubuntu22-amd64.tar.gz
 ```
 
 </TabItem>
@@ -64,7 +74,7 @@ tar -zxvf eloqkv-0.7.8-ubuntu22-amd64.tar.gz
 
 ```shell
 cd ${HOME}
-tar -zxvf eloqkv-0.7.8-ubuntu24-amd64.tar.gz
+tar -zxvf eloqkv-0.8.6-ubuntu24-amd64.tar.gz
 ```
 
 </TabItem>

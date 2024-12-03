@@ -11,8 +11,8 @@ EloqKV Proxy is a high-performance proxy server written in Go, designed to manag
 
 ### Key Features:
 
-- \*_Multi-Tenancy Support:_ Route client connections to different EloqKV clusters based on tokens.
-- \*_Dynamic Cluster Management:_ Add, remove, and check clusters on-the-fly using a RESTful web service.
+- **\_Multi-Tenancy Support:** Route client connections to different EloqKV clusters based on tokens.
+- **\_Dynamic Cluster Management:** Add, remove, and check clusters on-the-fly using a RESTful web service.
 - **Configurable:** Configure the proxy via a configuration file or command-line arguments.
 - **Standard Redis Compatibility:** Supports standard Redis commands and authentication mechanisms.
 
@@ -55,13 +55,13 @@ eloqkv_cluster_password=xxxxxxxx
 2. Run the Proxy:
 
 ```
-./redis-cluster-proxy --config=eloqproxy.ini
+./eloqkv-proxy --config=eloqproxy.ini
 ```
 
 **Option 2: Using Command-Line Arguments**
 
 ```
-./redis-cluster-proxy \
+./eloqkv-proxy \
   --eloqkv_cluster_addr=127.0.0.1:6379,127.0.0.1:6389 \
   --eloqkv_cluster_token=aaaaaaaa \
   --eloqkv_cluster_password=aaaaaaaa \
@@ -109,7 +109,7 @@ You can add a new EloqKV cluster to the proxy without restarting it.
 **HTTP Request:**
 
 - **Method:** POST
-- **URL:** http://<web_service_addr>/cluster
+- **URL:** http://web_service_addr/cluster
 - **Request Body (JSON):**
 
 ```
@@ -143,7 +143,7 @@ Cluster cluster2 added successfully
 **HTTP Request:**
 
 - **Method:** GET
-- **URL:** http://<web_service_addr>/cluster/{token}
+- **URL:** http://web_service_addr/cluster/token
 
 Example using curl:
 
@@ -162,7 +162,7 @@ Cluster with token bbbbbbbb exists
 **HTTP Request:**
 
 - **Method:** DELETE
-- **URL:** http://<web_service_addr>/cluster/{token}
+- **URL:** http://web_service_addr/cluster/token
 
 Example using curl:
 

@@ -21,7 +21,7 @@ const CompanyPage: React.FC = () => {
             </div>
 
             <p className="company-tagline">
-              Build the Next Generation of Databases the Right Way
+              Build the Next Generation of AI Native Databases
             </p>
           </header>
 
@@ -32,14 +32,13 @@ const CompanyPage: React.FC = () => {
               <div className="columna">
                 <h2 className="mission-heading">Our Vision</h2>
                 <p className="large-text">
-                  Data is driving the world towards a better future. At
-                  EloqData, we see data not just as a resource, but as the key
-                  to unlocking limitless possibilities. Our vision is to empower
-                  society to harness this power, letting data tell its story
-                  with clarity and purpose. We are dedicated to creating the
-                  tools that enable people to fully realize the potential of
-                  their data, shaping a world where information flows eloquently
-                  and transforms lives.{" "}
+                  We envision a future where managing data for AI applications
+                  is seamless, efficient, and innovative. EloqData aims to
+                  eliminate the complexity of fragmented data systems by
+                  unifying multi-data-model access into a one-stop solution. By
+                  delivering unmatched performance, scalability, and full ACID
+                  transaction, we aspire to be the foundational data layer that
+                  drives the next wave of AI innovation.{" "}
                 </p>
               </div>
               <div className="columna">
@@ -62,12 +61,14 @@ const CompanyPage: React.FC = () => {
               <div className="columna">
                 <h2 className="mission-heading">Our Mission</h2>
                 <p className="large-text">
-                  We are redefining how databases are designed. At EloqData, we
-                  are committed to creating a next-generation distributed
-                  database that challenges the status quo. Our innovative Data
-                  Substrate technology is crafted to support a variety of
-                  compute engines, addressing the diverse needs of real-world
-                  applications.
+                  Our mission is to revolutionize data management for modern AI
+                  applications by addressing inefficiencies and inconsistencies
+                  in traditional multi-database setups. With our groundbreaking
+                  "data substrate" architecture, we are committed to providing a
+                  one-stop solution that delivers over 10x performance gains and
+                  cost savings. By combining cutting-edge technology, EloqData
+                  strives to build the ideal data infrastructure for the
+                  AI-driven world.
                 </p>
               </div>
             </div>

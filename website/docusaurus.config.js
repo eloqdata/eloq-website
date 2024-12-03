@@ -276,7 +276,7 @@ module.exports = {
           },
         ],
       },
-      image: 'img/logo-og.png',
+      image: 'img/eloqdata_logo.png',
       footer: {
         style: 'dark',
         links: [
@@ -322,12 +322,12 @@ module.exports = {
       metadata: [
         {
           property: 'og:image',
-          content: 'https://reactnative.dev/img/logo-og.png',
+          content: 'https://www.eloqdata.com/eloqdata_logo.png',
         },
         {name: 'twitter:card', content: 'summary_large_image'},
         {
           name: 'twitter:image',
-          content: 'https://reactnative.dev/img/logo-og.png',
+          content: 'https://www.eloqdata.com/eloqdata_logo.png',
         },
         {name: 'twitter:site', content: '@reactnative'},
       ],
