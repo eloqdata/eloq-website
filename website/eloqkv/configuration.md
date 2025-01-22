@@ -162,6 +162,14 @@ Below is a detailed description of each configuration variable:
 - Data Type: Boolean
 - Default Value: false
 
+### `enable_cache_replacement`
+
+- Description: Option to allow evicting persisted data when memory is full. Enabling this feature allows EloqKV to store more data, but will lead to performance degradation when a cache miss happens. If this option is disabled, less data can be stored since all data must fit in memory.
+- Category: [local]
+- Scope: Global
+- Data Type: Boolean
+- Default Value: true
+
 ### `txn_isolation_level`
 
 - Description: Isolation level of MULTI/EXEC transactions. You can set it to `RepeatableRead` or `ReadCommitted`.

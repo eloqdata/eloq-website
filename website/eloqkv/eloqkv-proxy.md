@@ -11,69 +11,73 @@ EloqKV Proxy is a high-performance proxy server written in Go, designed to manag
 
 ### Key Features:
 
-- **\_Multi-Tenancy Support:** Route client connections to different EloqKV clusters based on tokens.
-- **\_Dynamic Cluster Management:** Add, remove, and check clusters on-the-fly using a RESTful web service.
+- **Multi-Tenancy Support:** Route client connections to different EloqKV clusters based on tokens.
+- **Dynamic Cluster Management:** Add, remove, and check clusters on-the-fly using a RESTful web service.
+- **High Available:** Proxy is stateless and is a High Available solution when configure with Load Balancer.
 - **Configurable:** Configure the proxy via a configuration file or command-line arguments.
 - **Standard Redis Compatibility:** Supports standard Redis commands and authentication mechanisms.
 
 ## Quick Start
 
-### Download Proxy
+EloqKV proxy can be installed using `eloqctl`.
 
-```shell
-wget https://download.eloqdata.com/eloqkv/tools/amd64/eloqkv-proxy
-chmod +x eloqkv-proxy
-```
+### Initialize proxy topology file
 
-### Prerequiste
-
-EloqKV must be configured with password
+Example proxy topology template files can be found in the .eloqctl/config/examples directory.
 
 ```
-#eloqkv.ini
-requirepass=aaaaaaaa
+# example yaml file
+.eloqctl/config/examples/eloqkv_proxy.yaml
 ```
+
+To deploy proxy, edit the eloqkv_proxy.yaml file
+
+```
+connection:
+  username: "${USER}"
+  auth_type: "keypair"
+  auth:
+    keypair: "/home/${USER}/.ssh/id_rsa"
+proxy_service:
+  proxy_name: "proxy-1"
+  proxy_host_ports: [10.0.0.5:6380,10.0.0.6:6380]
+  web_service_ports: [8080, 8080]
+  install_dir: "/home/${USER}"
+  eloqkv_cluster_addr: [10.0.0.1:6379]
+  eloqkv_cluster_token: ["xxxxxxxx"]
+  eloqkv_cluster_password: ["xxxxxxxx"]
+```
+
+Next, we'll provide detailed explanations for each configuration option available in the YAML file.
+
+The `connection` section includes settings for connecting to EloqKV nodes from the control machine. If you followed the steps in the [Prerequisite Document](./prerequisite), you can leave the connection section unchanged.
+
+The `proxy_service` section covers the configurations for proxy topology and config parameter.
+
+- **`proxy_name`**:  
+  _Type_: `String`  
+  The name of the proxy cluster being deployed serves as an identifier for the cluster. With `eloqctl`, you can deploy and manage multiple proxy clusters, each distinguished by its unique name.
+- **`eloqkv_cluster_addr`**:  
+   _Type_: `List of Strings`  
+  Address of the EloqKV cluster. If there are multiple nodes in EloqKV cluster, you only need to put 1 node address here.
+- **`eloqkv_cluster_token`**:
+  _Type_: `String`  
+  Token to indicate which cluster should be routed to. Token need to be the same as password in alpha version. If cluster does not have any password, leave it empty.
+- **`eloqkv_cluster_password`**:
+  _Type_: `String`  
+  Password the proxy uses to authenticate with the EloqKV cluster. If cluster does not have any password, leave it empty.
+- **`proxy_host_ports`**:
+  _Type_: `List of Strings`  
+  Address that each proxy node listens on.
+- **`web_service_ports`**:
+  _Type_: `List of Integers`  
+  Port where the management web service listens on each proxy node.
 
 ### Running the Proxy
 
-You can run the proxy using a configuration file or command-line arguments.
-
-**Option 1: Using a Configuration File**
-
-1. Create a Configuration File (eloqproxy.ini). Note that token and password need to be the same in EloqKV proxy alpha version.
-
+```shell
+eloqctl proxy start --config .eloqctl/config/examples/eloqkv_proxy.yaml
 ```
-eloqkv_cluster_addr=127.0.0.1:6379,127.0.0.1:6380
-eloqkv_cluster_token=xxxxxxxx
-eloqkv_cluster_password=xxxxxxxx
-```
-
-- **eloqkv_cluster_addr:** Comma-separated list of EloqKV cluster node addresses.
-- **eloqkv_cluster_token:** Token to indicate which cluster should be routed to. Token need to be the same as password in alpha version.
-- **eloqkv_cluster_password:** Password the proxy uses to authenticate with the EloqKV cluster.
-
-2. Run the Proxy:
-
-```
-./eloqkv-proxy --config=eloqproxy.ini
-```
-
-**Option 2: Using Command-Line Arguments**
-
-```
-./eloqkv-proxy \
-  --eloqkv_cluster_addr=127.0.0.1:6379,127.0.0.1:6389 \
-  --eloqkv_cluster_token=aaaaaaaa \
-  --eloqkv_cluster_password=aaaaaaaa \
-  --proxy_addr=:6380 \
-  --web_service_addr=:8080
-```
-
-- **--eloqkv_cluster_addr:** Comma-separated list of EloqKV cluster addresses.
-- **--eloqkv_cluster_token:** Token to indicate which cluster should be routed to. Token need to be the same as password in alpha version.
-- **--eloqkv_cluster_password:** Password the proxy uses to authenticate with the EloqKV cluster.
-- **--proxy_addr:** Address and port where the proxy listens for client connections (default :6380).
-- **--web_service_addr:** Address and port where the management web service listens (default :8080).
 
 ### Connecting Clients
 
@@ -101,6 +105,18 @@ GET key1
 ## Management
 
 The proxy includes a RESTful web service for managing EloqKV clusters dynamically.
+
+### Stop the proxy
+
+```shell
+eloqctl proxy stop --proxy-name ${proxy_name}
+```
+
+### List current proxies
+
+```shell
+eloqctl proxy list
+```
 
 ### Adding a New Cluster
 

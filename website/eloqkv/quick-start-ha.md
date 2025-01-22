@@ -130,7 +130,7 @@ For detailed explanations for each configuration option in the YAML file, please
 After you modified the `eloqkv_cassandra.yaml`. Use the `eloqctl launch` command to provision an EloqKV cluster
 
 ```shell
-eloqctl launch ${HOME}/.eloqctl/config/examples/eloqkv_cassandra.yaml
+eloqctl launch ${HOME}/.eloqctl/config/examples/eloqkv_cassandra.yaml -s
 ```
 
 The command will installed the EloqKV componnets in the specified cluster.

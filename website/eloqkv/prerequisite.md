@@ -46,6 +46,22 @@ PubkeyAuthentication yes
 AuthorizedKeysFile .ssh/authorized_keys
 ```
 
+If you see the following line in `/etc/ssh/sshd_config`
+
+```
+Include /etc/ssh/sshd_config.d/*.conf
+```
+
+Make sure that all config files under `/etc/ssh/sshd_config.d/` do not have the previous settings set.
+
+```
+grep -ri PasswordAuthentication /etc/ssh/sshd_config.d/
+grep -ri PubkeyAuthentication /etc/ssh/sshd_config.d/
+grep -ri AuthorizedKeysFile /etc/ssh/sshd_config.d/
+```
+
+Comment out these lines so that they won't override the settings in `/etc/ssh/sshd_config`.
+
 Restart the SSH service to apply the changes:
 
 <Tabs

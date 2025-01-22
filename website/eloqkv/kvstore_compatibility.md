@@ -119,9 +119,9 @@ title: EloqKV Compatibility with Redis Commands
 - [✅] MGET
 - [✅] MSET
 - [✅] MSETNX
-- [✖] PSETEX //ttl is not supported yet.
+- [✅] PSETEX
 - [✅] SET
-- [✖] SETEX //ttl is not supported yet.
+- [✅] SETEX
 - [✅] SETNX
 - [✅] SETRANGE
 - [✅] STRLEN
@@ -190,17 +190,17 @@ title: EloqKV Compatibility with Redis Commands
 - [✅] DEL
 - [✅] DUMP
 - [✅] EXISTS
-- [✖] EXPIRE
-- [✖] EXPIREAT
-- [✖] INFO
+- [✅] EXPIRE
+- [✅] EXPIREAT
+- [✅] INFO
 - [✅] KEYS
 - [✖] MIGRATE
 - [✖] MOVE
 - [✖] OBJECT
-- [✖] PERSIST
-- [✖] PEXPIRE
-- [✖] PEXPIREAT
-- [✖] PTTL
+- [✅] PERSIST
+- [✅] PEXPIRE
+- [✅] PEXPIREAT
+- [✅] PTTL
 - [✖] RANDOMKEY
 - [✖] RENAME
 - [✖] RENAMENX
@@ -209,7 +209,7 @@ title: EloqKV Compatibility with Redis Commands
 - [✅] SELECT
 - [✅] SORT
 - [✖] TOUCH
-- [✖] TTL
+- [✅] TTL
 - [✅] TYPE
 - [✖] UNLINK
 - [✖] WAIT

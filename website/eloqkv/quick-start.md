@@ -1,9 +1,9 @@
 ---
-title: Deploy Single Node Cluster
+title: Deploy Single Node Instance
 summary: Learn how to quickly get started with the EloqKV database.
 ---
 
-# Deploy a Single Node EloqKV Cluster Using Eloqctl
+# Deploy a Single Node EloqKV Instance Using Eloqctl
 
 `eloqctl` is a powerful tool designed for the operation and maintenance of EloqKV clusters. With Eloqctl, you can effortlessly manage daily database tasks, such as deploying, starting, stopping, upgrading, and decommissioning EloqKV clusters, as well as configuring cluster parameters.
 
@@ -78,13 +78,15 @@ deployment:
   install_dir: "/home/${USER}"
   tx_service:
     tx_host_ports: [127.0.0.1:6389]
-  log_service:
-    nodes:
-      - host: 127.0.0.1
-        port: 9000
-        data_dir:
-          - "/home/${USER}/eloqkv-cluster/wal_eloqkv"
-    replica: 1
+    enable_cache_replacement: on
+  # If you want to write wal log in your cluster, uncomment log_service section
+  #log_service:
+  #  nodes:
+  #    - host: 127.0.0.1
+  #      port: 9000
+  #      data_dir:
+  #        - "/home/${USER}/eloqkv-cluster/wal_eloqkv"
+  #  replica: 1
   storage_service:
     rocksdb: Local
   monitor:
@@ -135,6 +137,11 @@ The `deployment` section covers the configurations for deploying cluster metadat
   _Type_: `List of Strings`  
   _Default_: `[127.0.0.1:6389]`  
   The list of IP:PORT addresses for the transaction service hosts. The transaction service handles Redis client requests and is compatible with the Redis Protocol. Note that each IP address can only be listed once.
+
+- **`tx_service.enable_cache_replacement`**:  
+  _Type_: `Boolean`  
+  _Default_: `on`  
+  If persisted cold data can be evicted out of memory cache. If set to false, all data will be cached in memory and new data insertion will fail if memory is full. Less data can be stored in this mode, but all requests is handled in memory. If set to false, cold data will be evicted out of memory so that new write request can succeed. More data can be stored in this mode but a cache miss request will result in a disk read.
 
 - **`log_service.nodes`**:  
   _Type_: `Composite`  
@@ -187,7 +194,7 @@ The `monitor` section contains configurations for deploying a Prometheus and Gra
 After you modified the `eloqkv_rocksdb.yaml`. Use the `eloqctl launch` command to provision an EloqKV cluster
 
 ```shell
-eloqctl launch ${HOME}/.eloqctl/config/examples/eloqkv_rocksdb.yaml
+eloqctl launch ${HOME}/.eloqctl/config/examples/eloqkv_rocksdb.yaml -s
 ```
 
 The command will install the EloqKV components in the specified cluster.

@@ -1,49 +1,119 @@
 ---
 title: Backup&Dump Tools
-summary: Learn how to dump data from eloqkv.
+summary: Learn how to create backup and convert it to rdb / aof file.
 ---
 
-# Dump data from EloqKV to AOF files.
+# Backup management
 
-We provide a tool called `eloqkv_to_aof` to dump data from **EloqKV** storage into files in Redis AOF format.
+You can use `eloqctl` to create and manage backup of current EloqKV cluster.
 
-## How to use?
+### Create backup
 
-Usage: eloqkv_to_aof [options]
+Create a cluster backup and save it at given path on a specified node.
+
+```
+eloqctl backup ${cluster_name} start [OPTIONS] --path /path/to/backup
+```
 
 Options:
 
-- **rocksdb_path**: The full path to the RocksDB storage data. _(no default)_
-- **output_file_dir**: The full path to the directory for storing output AOF files. Ensure the directory is empty. The number of generated AOF files will match the `thread_count`, and they will be named as "\{0-N\}.aof". _(no default)_
-- **thread_count**: The number of parsing worker threads. _(default: 1)_
-- **round_batch_size**: The number of records to parse in one batch. _(default: 10,000)_
+- **--path**:  
+  The full path to where the backup is stored. _(required)_
+- **--dest-user**:  
+  User of the destination node where the backup is stored. _(default: current user)_
+- **--dest-node**:  
+  Node address where the backup is stored. If you want to convert backups to AOF or RDB later, this node must be on of the tx server nodes. _(default: current node)_
+- **--password**:  
+  Cluster password if set _(default: "")_
+
+### List backup of a cluster
+
+List current available backups of a cluster.
+
+```
+eloqctl backup ${cluster_name} list
+```
+
+### Cleanup backup of a cluster
+
+```
+eloqctl backup ${cluster_name} remove [OPTIONS]
+```
+
+If no option is provided, remove will delete all backups of the current cluster.  
+Options:
+
+- **--until \<PERIOD\>**:  
+  Deletes all snapshots older than the specified period.
+  Accepted formats: - '2 days' - '15h' - '1 week' - '3 months' - '1y 6mo 2w 4d 3h 5m 7s'
+  See https://docs.rs/humantime/latest/humantime/fn.parse_duration.html for more details.
+- **--before\>TIMESTAMP\>**:
+  Deletes all snapshots created before this timestamp.
+  Accepted formats: - RFC 3339: '2024-11-14T15:01:00Z' - 'YYYY-MM-DD HH:MM:SS' (assumed local time zone) - 'YYYY-MM-DDTHH:MM:SS' (assumed local time zone)
+
+### Convert existing backup to AOF file.
+
+```
+eloqctl backup ${cluster_name} dump-aof [OPTIONS] --rocksdb-path <ROCKSDB_PATH> --output-file-dir <OUTPUT_FILE_DIR>
+```
+
+eloqctl will convert a previous backup in this cluster to AOF files. AOF files will be written to the same node where the backup is stored.  
+Options:  
+-**--rocksdb-path**:  
+Path to the backup location. Must match one of the backup path returned in `eloqctl backup list`.  
+-**--output-file-dir**:  
+Path where the AOF files will be written to.  
+-**--thread-count**:  
+Worker thread count for converting backup to AOF. Each worker will consume 1 vcpu on the target node. _(default:1)_
+
+### Convert existing backup to RDB file.
+
+```
+eloqctl backup ${cluster_name} dump-rdb [OPTIONS] --rocksdb-path <ROCKSDB_PATH> --output-file-dir <OUTPUT_FILE_DIR>
+```
+
+eloqctl will convert a previous backup in this cluster to RDB files. RDB file will be written to the same node where the backup is stored.  
+Options:  
+-**--rocksdb-path**:  
+Path to the backup location. Must match one of the backup path returned in `eloqctl backup list`.  
+-**--output-file-dir**:  
+Path where the RDB file will be written to.  
+-**--thread-count**:  
+Worker thread count for converting backup to RDB. Each worker will consume 1 vcpu on the target node. _(default:1)_
 
 ## Example of Dumping Data from EloqKV and Importing to Other Servers
 
-1. Stop the EloqKV server
-
-   (Before stopping, please ensure all data in memory is flushed to storage.)
-
-2. Dump data:
+1. Dump data:
 
    ```bash
-   ./eloqkv_to_aof --rocksdb_path=/home/workspace/rocksdb_store/db --output_file_dir=/home/workspace/output_aof --thread_count=4 --round_batch_size=10000
+   eloqctl backup eloqkv-cluster start --path /data/backup
    ```
 
-3. After the dump is complete, check the files in the output directory `/home/workspace/output_aof`:
+2. After the backup is created, check available backups.
 
    ```bash
-   ls /home/workspace/output_aof
-   # Output: 0.aof 1.aof 2.aof 3.aof
+    eloqctl backup eloqkv-cluster list
+   available snapshots: [
+    (
+        "eloqkv-cluster",
+        2024-12-04T10:02:36.165807800Z,
+        "/data/backup/eloqkv-cluster/2024-12-04-10-02-36",
+        "172.31.42.205",
+        "ubuntu",
+    ),
+   ]
    ```
 
-4. Validate the AOF files using the `redis-check-aof` tool (Notice: this tool is provided by Redis):
+3. Convert backup to AOF file.
+
+   ```bash
+   eloqctl backup eloqkv-cluster dump-aof --rocksdb-path /data/backup/eloqkv-cluster/2024-12-04-10-02-36 --output-file-dir /home/workspace/output_aof
+   ```
+
+4. Check AOF files
 
    ```bash
    redis-check-aof /home/workspace/output_aof/0.aof
-   redis-check-aof /home/workspace/output_aof/1.aof
-   redis-check-aof /home/workspace/output_aof/2.aof
-   redis-check-aof /home/workspace/output_aof/3.aof
    ```
 
    The output will look like:
@@ -57,9 +127,6 @@ Options:
 
    ```bash
    redis-cli --pipe < /home/workspace/output_aof/0.aof
-   redis-cli --pipe < /home/workspace/output_aof/1.aof
-   redis-cli --pipe < /home/workspace/output_aof/2.aof
-   redis-cli --pipe < /home/workspace/output_aof/3.aof
    ```
 
    After importing, the output will look like this:
@@ -69,3 +136,9 @@ Options:
    Last reply received from server.
    errors: 0, replies: 6567541
    ```
+
+6. Remove previous snapshot
+
+```
+ eloqctl backup eloqkv-cluster remove --until 1min
+```
