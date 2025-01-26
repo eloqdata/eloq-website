@@ -1,0 +1,218 @@
+.blogContainer {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.sectionTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: var(--ifm-heading-color);
+}
+
+.featuredSection {
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+}
+
+.featuredGrid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 2rem;
+}
+
+.featuredMainPost {
+  height: 100%;
+}
+
+.featuredMainPost .blogCard {
+  height: 100%;
+}
+
+.featuredMainPost .blogCardImage {
+  height: 300px;
+}
+
+.featuredSidePosts {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.featuredSidePosts .blogCard {
+  height: calc(50% - 1rem);
+}
+
+.featuredSidePosts .blogCardImage {
+  height: 150px;
+}
+
+.blogGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.blogCard {
+  background: var(--ifm-card-background-color);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.blogCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.blogCardImage {
+  display: block;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.blogCardImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.blogCard:hover .blogCardImage img {
+  transform: scale(1.05);
+}
+
+.blogCardContent {
+  padding: 1.25rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.blogCardTitle {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+}
+
+.featuredMainPost .blogCardTitle {
+  font-size: 1.5rem;
+}
+
+.blogCardTitle a {
+  color: var(--ifm-heading-color);
+  text-decoration: none;
+}
+
+.blogCardDescription {
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 0;
+  flex: 1;
+}
+
+.blogCardMeta {
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-600);
+}
+
+/* Responsive Design */
+@media (min-width: 997px) {
+  .blogContainer {
+    max-width: var(--ifm-container-width-xl);
+    width: 100%;
+  }
+}
+
+@media (max-width: 996px) {
+  .featuredGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .featuredMainPost .blogCardImage {
+    height: 250px;
+  }
+
+  .blogGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  :global(.navbar__inner),
+  :global(.container) {
+    padding: 0 1.5rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .blogGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .blogCardImage {
+    height: 180px;
+  }
+
+  .sectionTitle {
+    font-size: 2rem;
+  }
+
+  :global(.navbar__inner),
+  :global(.container) {
+    padding: 0 1rem !important;
+  }
+}
+
+/* Remove all the global overrides since we're using Docusaurus variables now */
+:global(.blog-layout-page),
+:global(.blog-layout-page > main) {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+/* Add a wrapper div that matches navbar container */
+:global(.navbar__inner) {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--ifm-navbar-padding-horizontal);
+  max-width: var(--ifm-container-width-xl);
+}
+
+/* Add the same container class as navbar */
+:global(.container) {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--ifm-navbar-padding-horizontal);
+  max-width: var(--ifm-container-width-xl);
+}
+
+/* Override Docusaurus default layout styles */
+:global(.blog-wrapper) {
+  display: block !important;
+  /* Override grid layout */
+}
+
+:global(.blog-wrapper > main) {
+  padding: 0 !important;
+  max-width: none !important;
+}
+
+:global(.main-wrapper) {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+/* Match navbar width exactly */
+:global(.container) {
+  width: 100% !important;
+  max-width: var(--ifm-container-width) !important;
+  padding-left: var(--ifm-navbar-padding-horizontal) !important;
+  padding-right: var(--ifm-navbar-padding-horizontal) !important;
+  margin: 0 auto !important;
+}

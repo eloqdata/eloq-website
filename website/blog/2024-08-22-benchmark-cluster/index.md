@@ -2,7 +2,9 @@
 title: 'EloqKV Clustering'
 authors: eloq
 date: 2024-08-22
-tags: [Company]
+tags: [Benchmark]
+image: /img/blog/cluster.jpg
+description: EloqKV cluster performance benchmarks...
 ---
 
 In our [previous blog](/blog/2024/08/17/benchmark-single-node), we benchmarked **EloqKV** to evaluate it as an in-memory cache, focusing on single-node performance. In this blog, we shift our attention to **Eloq** clustering and discuss why it provides a fundmentally better solution.

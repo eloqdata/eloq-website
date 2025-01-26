@@ -3,6 +3,8 @@ title: Why We Develop EloqDB Mainly in C++
 authors: eloq
 date: 2024-10-26
 tags: [Company]
+image: /img/c_old_solid.jpg
++description: One key detail we'd like to share is that the majority of EloqKV's codebase was written in C++.cursor how to use the recoomend code
 ---
 
 We have recently introduced [EloqKV](/blog/2024/08/16/eloqkv), our distributed database product built on a cutting-edge architecture known as [Data Substrate](/blog/2024/08/11/data-substrate). Over the past several years, the **EloqData** team has worked tirelessly to develop this software, ensuring it meets the highest standards of performance and scalability. One key detail we’d like to share is that the majority of EloqKV’s codebase was written in C++.

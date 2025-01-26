@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  dir="ltr"
+  class="plugin-pages plugin-id-default"
+  data-has-hydrated="false"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="generator" content="Docusaurus v3.0.0-beta.0" />
+    <title data-rh="true">EloqData · Modular Database</title>
+    <meta
+      data-rh="true"
+      name="viewport"
+      content="width=device-width,initial-scale=1"
+    />
+    <meta
+      data-rh="true"
+      property="og:url"
+      content="http://www.eloqdata.com/preview/"
+    />
+    <meta data-rh="true" property="og:locale" content="en" />
+    <meta data-rh="true" name="docusaurus_locale" content="en" />
+    <meta data-rh="true" name="docusaurus_tag" content="default" />
+    <meta data-rh="true" name="docsearch:language" content="en" />
+    <meta data-rh="true" name="docsearch:docusaurus_tag" content="default" />
+    <meta
+      data-rh="true"
+      property="og:image"
+      content="https://reactnative.dev/img/logo-og.png"
+    />
+    <meta data-rh="true" name="twitter:card" content="summary_large_image" />
+    <meta
+      data-rh="true"
+      name="twitter:image"
+      content="https://reactnative.dev/img/logo-og.png"
+    />
+    <meta data-rh="true" name="twitter:site" content="@reactnative" />
+    <meta
+      data-rh="true"
+      name="description"
+      content="A framework for building native apps using React"
+    />
+    <meta
+      data-rh="true"
+      property="og:description"
+      content="A framework for building native apps using React"
+    />
+    <meta
+      data-rh="true"
+      property="og:title"
+      content="EloqDB · Modular Database"
+    />
+    <meta
+      data-rh="true"
+      property="twitter:title"
+      content="EloqDB · Modular Database"
+    />
+    <link data-rh="true" rel="icon" href="/preview/img/eloqdata_logo.png" />
+    <link
+      data-rh="true"
+      rel="canonical"
+      href="http://www.eloqdata.com/preview/"
+    />
+    <link
+      data-rh="true"
+      rel="alternate"
+      href="http://www.eloqdata.com/preview/"
+      hreflang="en"
+    />
+    <link
+      data-rh="true"
+      rel="alternate"
+      href="http://www.eloqdata.com/preview/"
+      hreflang="x-default"
+    />
+    <link
+      data-rh="true"
+      rel="preconnect"
+      href="https://8TDSE0OHGQ-dsn.algolia.net"
+      crossorigin="anonymous"
+    />
+    <script data-rh="true">
+      function insertBanner() {
+        var n = document.createElement("div");
+        n.id = "__docusaurus-base-url-issue-banner-container";
+        (n.innerHTML =
+          '\n<div id="__docusaurus-base-url-issue-banner" style="border: thick solid red; background-color: rgb(255, 230, 179); margin: 20px; padding: 20px; font-size: 20px;">\n   <p style="font-weight: bold; font-size: 30px;">Your Docusaurus site did not load properly.</p>\n   <p>A very common reason is a wrong site <a href="https://docusaurus.io/docs/docusaurus.config.js/#baseUrl" style="font-weight: bold;">baseUrl configuration</a>.</p>\n   <p>Current configured baseUrl = <span style="font-weight: bold; color: red;">/preview/</span> </p>\n   <p>We suggest trying baseUrl = <span id="__docusaurus-base-url-issue-banner-suggestion-container" style="font-weight: bold; color: green;"></span></p>\n</div>\n'),
+          document.body.prepend(n);
+        var e = document.getElementById(
+            "__docusaurus-base-url-issue-banner-suggestion-container"
+          ),
+          s = window.location.pathname,
+          o = "/" === s.substr(-1) ? s : s + "/";
+        e.innerHTML = o;
+      }
+      document.addEventListener("DOMContentLoaded", function () {
+        void 0 === window.docusaurus && insertBanner();
+      });
+    </script>
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      href="/preview/blog/rss.xml"
+      title="EloqData: Next Generation Multi-model Database RSS Feed"
+    />
+    <link
+      rel="alternate"
+      type="application/atom+xml"
+      href="/preview/blog/atom.xml"
+      title="EloqData: Next Generation Multi-model Database Atom Feed"
+    />
+    <link
+      rel="alternate"
+      type="application/json"
+      href="/preview/blog/feed.json"
+      title="EloqData: Next Generation Multi-model Database JSON Feed"
+    />
+
+    <link rel="preconnect" href="https://www.google-analytics.com" />
+    <script>
+      (window.ga =
+        window.ga ||
+        function () {
+          (ga.q = ga.q || []).push(arguments);
+        }),
+        (ga.l = +new Date()),
+        ga("create", "UA-41298772-2", "auto"),
+        ga("send", "pageview");
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+    <link rel="preconnect" href="https://www.google-analytics.com" />
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-58L13S6BDP"
+    ></script>
+    <script>
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      (window.dataLayer = window.dataLayer || []),
+        gtag("js", new Date()),
+        gtag("config", "G-58L13S6BDP", {});
+    </script>
+
+    <link
+      rel="search"
+      type="application/opensearchdescription+xml"
+      title="EloqData: Next Generation Multi-model Database"
+      href="/preview/opensearch.xml"
+    />
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/focus-visible@5.2.0/dist/focus-visible.min.js"
+      defer="defer"
+    ></script>
+    <script
+      src="https://widget.surveymonkey.com/collect/website/js/tRaiETqnLgj758hTBazgd8ryO5qrZo8Exadq9qmt1wtm4_2FdZGEAKHDFEt_2BBlwwM4.js"
+      defer="defer"
+    ></script>
+    <script src="https://snack.expo.dev/embed.js" defer="defer"></script>
+    <link rel="stylesheet" href="/preview/assets/css/styles.09682f3b.css" />
+    <script
+      src="/preview/assets/js/runtime~main.7850abf2.js"
+      defer="defer"
+    ></script>
+    <script src="/preview/assets/js/main.6ffaed94.js" defer="defer"></script>
+  </head>
+  <body class="navigation-with-keyboard">
+    <script>
+      !(function () {
+        function t(t) {
+          document.documentElement.setAttribute("data-theme", t);
+        }
+        var e =
+          (function () {
+            try {
+              return new URLSearchParams(window.location.search).get(
+                "docusaurus-theme"
+              );
+            } catch (t) {}
+          })() ||
+          (function () {
+            try {
+              return localStorage.getItem("theme");
+            } catch (t) {}
+          })();
+        t(null !== e ? e : "dark");
+      })(),
+        (function () {
+          try {
+            const c = new URLSearchParams(window.location.search).entries();
+            for (var [t, e] of c)
+              if (t.startsWith("docusaurus-data-")) {
+                var a = t.replace("docusaurus-data-", "data-");
+                document.documentElement.setAttribute(a, e);
+              }
+          } catch (t) {}
+        })();
+    </script>
+    <div id="__docusaurus">
+      <div role="region" aria-label="Skip to main content">
+        <a
+          class="skipToContent_oPtH"
+          href="#__docusaurus_skipToContent_fallback"
+          >Skip to main content</a
+        >
+      </div>
+      <nav aria-label="Main" class="navbar navbar--fixed-top navbar--dark">
+        <div class="navbar__inner">
+          <div class="navbar__items">
+            <button
+              aria-label="Toggle navigation bar"
+              aria-expanded="false"
+              class="navbar__toggle clean-btn"
+              type="button"
+            >
+              <svg
+                width="30"
+                height="30"
+                viewBox="0 0 30 30"
+                aria-hidden="true"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-miterlimit="10"
+                  stroke-width="2"
+                  d="M4 7h22M4 15h22M4 23h22"
+                ></path>
+              </svg></button
+            ><a class="navbar__brand" href="/preview/"
+              ><div class="navbar__logo">
+                <img
+                  src="/preview/img/eloqdata_logo.png"
+                  alt="EloqData"
+                  class="themedComponent_siVc themedComponent--light_hHel"
+                  style="width: 150px; height: auto"
+                /><img
+                  src="/preview/img/eloqdata_logo.png"
+                  alt="EloqData"
+                  class="themedComponent_siVc themedComponent--dark_yETr"
+                  style="width: 150px; height: auto"
+                />
+              </div>
+              <b class="navbar__title text--truncate">EloqData</b></a
+            >
+          </div>
+          <div class="navbar__items navbar__items--right">
+            <div
+              class="navbar__item dropdown dropdown--hoverable dropdown--right"
+            >
+              <a
+                href="#"
+                aria-haspopup="true"
+                aria-expanded="false"
+                role="button"
+                class="navbar__link"
+                >Documentation</a
+              >
+              <ul class="dropdown__menu">
+                <li>
+                  <a
+                    class="dropdown__link"
+                    href="/preview/eloqkv/install-from-binary"
+                    >Get Started</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown__link" href="/preview/eloqkv/quick-start"
+                    >Deploy Cluster</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown__link" href="/preview/eloqkv/list/LINDEX"
+                    >Command Reference</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <a class="navbar__item navbar__link" href="/preview/blog">Blog</a>
+            <div
+              class="navbar__item dropdown dropdown--hoverable dropdown--right"
+            >
+              <a
+                href="#"
+                aria-haspopup="true"
+                aria-expanded="false"
+                role="button"
+                class="navbar__link"
+                >Download</a
+              >
+              <ul class="dropdown__menu">
+                <li>
+                  <a class="dropdown__link" href="/preview/download">EloqKV</a>
+                </li>
+                <li>
+                  <a class="dropdown__link" href="/preview/downloadeloqctl"
+                    >EloqCtl</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <a class="navbar__item navbar__link" href="/preview/contact"
+              >Contact Us</a
+            >
+            <div class="searchBox_WqAV">
+              <button
+                type="button"
+                class="DocSearch DocSearch-Button"
+                aria-label="Search"
+              >
+                <span class="DocSearch-Button-Container"
+                  ><svg
+                    width="20"
+                    height="20"
+                    class="DocSearch-Search-Icon"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      d="M14.386 14.386l4.0877 4.0877-4.0877-4.0877c-2.9418 2.9419-7.7115 2.9419-10.6533 0-2.9419-2.9418-2.9419-7.7115 0-10.6533 2.9418-2.9419 7.7115-2.9419 10.6533 0 2.9419 2.9418 2.9419 7.7115 0 10.6533z"
+                      stroke="currentColor"
+                      fill="none"
+                      fill-rule="evenodd"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path></svg
+                  ><span class="DocSearch-Button-Placeholder"
+                    >Search</span
+                  ></span
+                ><span class="DocSearch-Button-Keys"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div role="presentation" class="navbar-sidebar__backdrop"></div>
+      </nav>
+      <div
+        id="__docusaurus_skipToContent_fallback"
+        class="main-wrapper mainWrapper_MB5r homepage"
+      >
+        <div class="container1">
+          <div class="product-left-column">
+            <h1 class="title">EloqKV</h1>
+            <p class="tagline">
+              The Revolutionary Distributed Key-Value Database.
+            </p>
+            <p class="taglinecolor"><span></span></p>
+            <p class="taglinecolor"><span></span></p>
+            <p class="taglinecolor"><span></span></p>
+            <p class="taglinecolor"><span></span></p>
+            <div class="buttons">
+              <a
+                class="ActionButton primary"
+                href="/preview/eloqkv/quick-start.html"
+                target="_self"
+                >Get started</a
+              >
+            </div>
+          </div>
+          <div class="product-right-column">
+            <img
+              alt=""
+              src="/preview/img/websitehero202404.svg"
+              type="image/svg+xml"
+              width="800"
+              heigh="auto"
+            />
+          </div>
+        </div>
+        <section class="Section GetStarted black">
+          <div class="content">
+            <h2 class="Heading">Try Our Cutting-Edge Products</h2>
+          </div>
+        </section>
+        <div class="feature-section">
+          <div class="feature-card">
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              data-prefix="fas"
+              data-icon="bolt"
+              class="svg-inline--fa fa-bolt feature-icon"
+              role="img"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 320 512"
+            >
+              <path
+                fill="currentColor"
+                d="M296 160H180.6l42.6-129.8C227.2 15 215.7 0 200 0H56C44 0 33.8 8.9 32.2 20.8l-32 240C-1.7 275.2 9.5 288 24 288h118.7L96.6 482.5c-3.6 15.2 8 29.5 23.3 29.5 8.4 0 16.4-4.4 20.8-12l176-304c9.3-15.9-2.2-36-20.7-36z"
+              ></path>
+            </svg>
+            <h3>High Performance</h3>
+            <ul>
+              <li>
+                Match the best in-memory data stores when data fit in memory and
+                persistency is turned off
+              </li>
+              <li>
+                Outperform other persistent KV stores when logging is turned on
+              </li>
+            </ul>
+          </div>
+          <div class="feature-card">
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              data-prefix="fas"
+              data-icon="dollar-sign"
+              class="svg-inline--fa fa-dollar-sign feature-icon"
+              role="img"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 288 512"
+            >
+              <path
+                fill="currentColor"
+                d="M209.2 233.4l-108-31.6C88.7 198.2 80 186.5 80 173.5c0-16.3 13.2-29.5 29.5-29.5h66.3c12.2 0 24.2 3.7 34.2 10.5 6.1 4.1 14.3 3.1 19.5-2l34.8-34c7.1-6.9 6.1-18.4-1.8-24.5C238 74.8 207.4 64.1 176 64V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48h-2.5C45.8 64-5.4 118.7.5 183.6c4.2 46.1 39.4 83.6 83.8 96.6l102.5 30c12.5 3.7 21.2 15.3 21.2 28.3 0 16.3-13.2 29.5-29.5 29.5h-66.3C100 368 88 364.3 78 357.5c-6.1-4.1-14.3-3.1-19.5 2l-34.8 34c-7.1 6.9-6.1 18.4 1.8 24.5 24.5 19.2 55.1 29.9 86.5 30v48c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-48.2c46.6-.9 90.3-28.6 105.7-72.7 21.5-61.6-14.6-124.8-72.5-141.7z"
+              ></path>
+            </svg>
+            <h3>Low Cost</h3>
+            <ul>
+              <li>
+                Take advantage of fast SSDs to store data that exceeds memory
+                capacity while still allow fast access
+              </li>
+              <li>
+                Leverage tiered-storage in the cloud to further reduce cost of
+                storing large amount of historical data
+              </li>
+            </ul>
+          </div>
+          <div class="feature-card">
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              data-prefix="fas"
+              data-icon="expand-arrows-alt"
+              class="svg-inline--fa fa-expand-arrows-alt feature-icon"
+              role="img"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 448 512"
+            >
+              <path
+                fill="currentColor"
+                d="M448 344v112a23.94 23.94 0 0 1-24 24H312c-21.39 0-32.09-25.9-17-41l36.2-36.2L224 295.6 116.77 402.9 153 439c15.09 15.1 4.39 41-17 41H24a23.94 23.94 0 0 1-24-24V344c0-21.4 25.89-32.1 41-17l36.19 36.2L184.46 256 77.18 148.7 41 185c-15.1 15.1-41 4.4-41-17V56a23.94 23.94 0 0 1 24-24h112c21.39 0 32.09 25.9 17 41l-36.2 36.2L224 216.4l107.23-107.3L295 73c-15.09-15.1-4.39-41 17-41h112a23.94 23.94 0 0 1 24 24v112c0 21.4-25.89 32.1-41 17l-36.19-36.2L263.54 256l107.28 107.3L407 327.1c15.1-15.2 41-4.5 41 16.9z"
+              ></path>
+            </svg>
+            <h3>Scalable and Elastic</h3>
+            <ul>
+              <li>
+                Scale-up with multi-core and multi-socket servers, and scale-out
+                to multiple nodes in a cluster
+              </li>
+              <li>
+                Support dynamic scaling as workload changes, without service
+                disruption (currently in Beta)
+              </li>
+            </ul>
+          </div>
+          <div class="feature-card">
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              data-prefix="fas"
+              data-icon="exchange-alt"
+              class="svg-inline--fa fa-exchange-alt feature-icon"
+              role="img"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+            >
+              <path
+                fill="currentColor"
+                d="M0 168v-16c0-13.255 10.745-24 24-24h360V80c0-21.367 25.899-32.042 40.971-16.971l80 80c9.372 9.373 9.372 24.569 0 33.941l-80 80C409.956 271.982 384 261.456 384 240v-48H24c-13.255 0-24-10.745-24-24zm488 152H128v-48c0-21.314-25.862-32.08-40.971-16.971l-80 80c-9.372 9.373-9.372 24.569 0 33.941l80 80C102.057 463.997 128 453.437 128 432v-48h360c13.255 0 24-10.745 24-24v-16c0-13.255-10.745-24-24-24z"
+              ></path>
+            </svg>
+            <h3>Fully ACID</h3>
+            <ul>
+              <li>
+                Transactional distributed KV store with full ACID properties
+              </li>
+              <li>
+                Redis transaction commands are supported in either single node
+                mode or cluster mode with the same semantics
+              </li>
+            </ul>
+          </div>
+          <div class="feature-card">
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              data-prefix="fas"
+              data-icon="check-circle"
+              class="svg-inline--fa fa-check-circle feature-icon"
+              role="img"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+            >
+              <path
+                fill="currentColor"
+                d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"
+              ></path>
+            </svg>
+            <h3>Highly Available</h3>
+            <ul>
+              <li>
+                Replicate data to multiple servers to provide fault-tolerance
+              </li>
+              <li>
+                Support hot standbys so that failure can be recovered in
+                sub-seconds (currently in Beta)
+              </li>
+            </ul>
+          </div>
+          <div class="feature-card">
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              data-prefix="fas"
+              data-icon="redo-alt"
+              class="svg-inline--fa fa-redo-alt feature-icon"
+              role="img"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+            >
+              <path
+                fill="currentColor"
+                d="M256.455 8c66.269.119 126.437 26.233 170.859 68.685l35.715-35.715C478.149 25.851 504 36.559 504 57.941V192c0 13.255-10.745 24-24 24H345.941c-21.382 0-32.09-25.851-16.971-40.971l41.75-41.75c-30.864-28.899-70.801-44.907-113.23-45.273-92.398-.798-170.283 73.977-169.484 169.442C88.764 348.009 162.184 424 256 424c41.127 0 79.997-14.678 110.629-41.556 4.743-4.161 11.906-3.908 16.368.553l39.662 39.662c4.872 4.872 4.631 12.815-.482 17.433C378.202 479.813 319.926 504 256 504 119.034 504 8.001 392.967 8 256.002 7.999 119.193 119.646 7.755 256.455 8z"
+              ></path>
+            </svg>
+            <h3>Redis Compatible API</h3>
+            <ul>
+              <li>
+                Implement the popular Redis API, support most populars data
+                structures
+              </li>
+              <li>
+                No code modification needed for applications to enjoy the rich
+                features and cost benefits of EloqKV
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <footer class="footer footer--dark">
+        <div class="container-fluid container">
+          <div class="row footer__links">
+            <div class="col footer__col">
+              <div class="footer__title">Docs</div>
+              <ul class="footer__items clean-list">
+                <li class="footer__item">
+                  <a
+                    class="footer__link-item"
+                    href="/preview/docs/monosql-introduction"
+                    >Document</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="col footer__col">
+              <div class="footer__title">Community</div>
+              <ul class="footer__items clean-list">
+                <li class="footer__item">
+                  <a
+                    href="https://stackoverflow.com/questions/tagged/eloqdb"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="footer__link-item"
+                    >Stack Overflow<svg
+                      width="13.5"
+                      height="13.5"
+                      aria-hidden="true"
+                      viewBox="0 0 24 24"
+                      class="iconExternalLink_2l9O"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"
+                      ></path></svg
+                  ></a>
+                </li>
+              </ul>
+            </div>
+            <div class="col footer__col">
+              <div class="footer__title">More</div>
+              <ul class="footer__items clean-list">
+                <li class="footer__item">
+                  <a class="footer__link-item" href="/preview/blog">Blog</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer__bottom text--center">
+            <div class="margin-bottom--sm">
+              <a
+                href="https://www.eloqdata.com/"
+                rel="noopener noreferrer"
+                class="footerLogoLink_tutC"
+                ><img
+                  src="/preview/img/eloqdata_logo.png"
+                  alt="EloqData Logo"
+                  class="footer__logo themedComponent_siVc themedComponent--light_hHel" /><img
+                  src="/preview/img/eloqdata_logo.png"
+                  alt="EloqData Logo"
+                  class="footer__logo themedComponent_siVc themedComponent--dark_yETr"
+              /></a>
+            </div>
+            <div class="footer__copyright">Copyright © 2024 Eloqdata, Inc.</div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

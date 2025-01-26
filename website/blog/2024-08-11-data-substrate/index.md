@@ -3,6 +3,8 @@ title: Introduction to Data Substrate
 authors: eloq
 date: 2024-08-11
 tags: [Company]
+image: /img/blog/substrate.jpg
+description: Data Substrate is a transformative concept that abstracts core functionality in online transactional databases (OLTP) and provides a unified layer for CRUD operations of any data models.
 ---
 
 In this blog post, we introduce our transformative concept **Data Substrate**. Data Substrate abstracts core functionality in online transactional databases (OLTP) and provides a unified layer for [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) operations of any data models. A database built on this unified layer is modular: a database module is optional, can be replaced and can scale up/out independently of other modules.

@@ -2,7 +2,9 @@
 title: 'ACID in EloqKV : Durability'
 authors: eloq
 date: 2024-08-25
-tags: [Company]
+tags: [Benchmark]
+image: /img/blog/durability.jpg
+description: EloqKV durability performance analysis...
 ---
 
 In our previous blogs, we benchmarked **EloqKV** in memory cache mode, discussing both [single node](/blog/2024/08/17/benchmark-single-node) and [cluster](/blog/2024/08/22/benchmark-cluster) performances. In this post, we we benchmark **EloqKV** with durability enabled.

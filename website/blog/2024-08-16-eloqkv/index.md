@@ -2,7 +2,9 @@
 title: Announcing EloqKV
 authors: eloq
 date: 2024-08-16
-tags: [Company]
+tags: [Product]
+image: /img/blog/eloqkv_launch.jpg
+description: Introducing EloqKV...
 ---
 
 We’re thrilled to introduce **EloqKV**, a _high performance Redis API-compatible, ACID transactional, scalable, distributed_ key-value database. You might be thinking, “Really? Another key-value database?” In this post, we’ll explain what makes **EloqKV** stand out and the unique values **EloqKV** offers.
