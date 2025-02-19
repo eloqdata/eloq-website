@@ -121,51 +121,43 @@ const ContactPage: React.FC = () => {
       <div className="contact-page-container">
         <div className="contact-page">
           <div className="top-description">
-            <h1>
-              DOWNLOAD EloqKV
-              <sup style={{ fontSize: "0.3em", verticalAlign: "1.7em" }}>
-                preview
-              </sup>
-            </h1>
-            <p>Try EloqKV by Downloading a Binary Tarball for Your OS</p>
+            <h1>下载 EloqKV</h1>
+            <p>下载适用于您操作系统的二进制压缩包，开始试用 EloqKV</p>
           </div>
           <div className="content">
             <div className="info-panel">
               <div className="info-section">
-                <h2>Discover EloqKV</h2>
+                <h2>探索 EloqKV</h2>
                 <p>
-                  Download a binary tarball to easily explore our groundbreaking
-                  KV database. To get started, follow the{" "}
-                  <a href="/eloqkv/install-from-binary"> Quick Start </a>
-                  guide.
+                  下载一个二进制压缩包，轻松探索我们突破性的 KV
+                  数据库。要开始，请遵循
+                  <a href="/eloqkv/install-from-binary">快速开始</a>指南。
                   <br />
                   <br />
-                  If you're interested in a more in-depth experience, we
-                  recommend trying our
-                  <a href="/downloadeloqctl"> Eloqctl </a> tool to deploy a
-                  cluster and take EloqKV for a more serious test drive.
+                  如果您对更深入的体验感兴趣，我们建议尝试我们的
+                  <a href="/downloadeloqctl">Eloqctl</a> 工具来部署集群，并对
+                  EloqKV 进行更深入的测试。
                   <br />
                   <br />
-                  If you'd like to stay informed about the exciting developments
-                  of EloqKV, you can provide your email and contact information.
-                  However, if you prefer not to receive updates, feel free to
-                  continue without any obligations.
+                  如果您想了解 EloqKV
+                  的最新发展，可以提供您的电子邮件和联系信息。
+                  如果您不想接收更新，也可以继续操作，无需任何义务。
                 </p>
               </div>
             </div>
             <div className="form-panel">
-              <h2>Download Form</h2>
+              <h2>下载表单</h2>
               <form
                 id="downloadForm"
                 className="contact-form"
                 onSubmit={triggerDownload}
               >
                 <label htmlFor="os_type" className="required">
-                  Operating System:
+                  操作系统：
                 </label>
                 <select id="os_type" name="os_type" required>
                   <option value="" disabled selected>
-                    Please Choose OS Type
+                    请选择操作系统类型
                   </option>
                   <option value="rhel7">RHEL 7</option>
                   <option value="rhel8">RHEL 8</option>
@@ -176,46 +168,18 @@ const ContactPage: React.FC = () => {
                 </select>
 
                 <label htmlFor="arch_type" className="required">
-                  CPU Architecture:
+                  CPU 架构：
                 </label>
                 <select id="arch_type" name="arch_type" required>
                   <option value="" disabled selected>
-                    Please Choose CPU Arch
+                    请选择 CPU 架构
                   </option>
                   <option value="amd64">x86_64</option>
                   <option value="arm64">arm64</option>
                 </select>
 
-                {/*<label htmlFor="software_version" className="required">
-                  Software Version:
-                </label>
-                <select id="software_version" name="software_version" required>
-                  <option value="0.6.3">0.6.3</option>
-                </select>
-
-                <div className="form-group">
-                  <label htmlFor="kvtype" className="required">
-                    Persistent Storage:
-                    <span className="help-icon" aria-label="Help">
-                      ?
-                    </span>
-                  </label>
-                  <select id="kvtype" name="kvtype" required>
-                    <option value="rocksdb">RocksDB</option>
-                  </select>
-                  <div className="help-message">
-                    EloqKV can store data in a persistent data storage.
-                    Currently, local RocksDB and distributed Cassandra storage
-                    engines are supported.
-                    <br />
-                    <br />
-                    Additional persistent storage engines will be supported in
-                    the future.
-                  </div>
-                </div>*/}
-
                 <label htmlFor="download-reason">
-                  Which feature of EloqKV interests you the most?
+                  EloqKV 的哪些特性最吸引您？
                 </label>
                 <div id="download-reason">
                   <div className="checkbox-option">
@@ -224,7 +188,7 @@ const ContactPage: React.FC = () => {
                       name="download-reason"
                       value="pure-cache"
                     />
-                    High Performance Distributed Cache
+                    高性能分布式缓存
                   </div>
                   <div className="checkbox-option">
                     <input
@@ -232,7 +196,7 @@ const ContactPage: React.FC = () => {
                       name="download-reason"
                       value="persistent-cache"
                     />
-                    Cache with Persistent Storage
+                    持久化存储缓存
                   </div>
                   <div className="checkbox-option">
                     <input
@@ -240,20 +204,20 @@ const ContactPage: React.FC = () => {
                       name="download-reason"
                       value="transactional-db"
                     />
-                    Transactional Key Value Database
+                    事务性键值数据库
                   </div>
                 </div>
 
-                <label htmlFor="company">Company:</label>
+                <label htmlFor="company">公司：</label>
                 <input type="text" id="company" name="company" />
 
-                <label htmlFor="email">Email:</label>
+                <label htmlFor="email">电子邮件：</label>
                 <input type="email" id="email" name="email" />
 
                 {/* Hidden input field to store IP address */}
                 <input type="hidden" id="ip_address" name="ip_address" />
 
-                <button type="submit">Download</button>
+                <button type="submit">下载</button>
               </form>
             </div>
           </div>

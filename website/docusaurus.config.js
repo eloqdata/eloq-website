@@ -209,30 +209,30 @@ module.exports = {
         style: 'dark',
         items: [
           {
-            label: 'Documentation',
+            label: '文档',
             position: 'right',
             href: '#',
             items: [
               {
-                label: 'Introduction',
+                label: '简介',
                 type: 'doc',
                 docsPluginId: 'eloqkv',
                 docId: 'introduction',
               },
               {
-                label: 'Get Started',
+                label: '快速入门',
                 type: 'doc',
                 docsPluginId: 'eloqkv',
                 docId: 'install-from-binary',
               },
               {
-                label: 'Deploy Cluster',
+                label: '部署集群',
                 type: 'doc',
                 docsPluginId: 'eloqkv',
                 docId: 'quick-start',
               },
               {
-                label: 'Command Reference',
+                label: '命令参考',
                 type: 'doc',
                 docsPluginId: 'eloqkv',
                 docId: 'list/LINDEX',
@@ -241,11 +241,16 @@ module.exports = {
           },
           {
             to: '/blog',
-            label: 'Blog',
+            label: '博客',
             position: 'right',
           },
           {
-            label: 'Download',
+            to: '/community',
+            label: '社区',
+            position: 'right',
+          },
+          {
+            label: '下载',
             type: 'dropdown',
             position: 'right',
             items: [
@@ -260,16 +265,16 @@ module.exports = {
             ],
           },
           {
-            label: 'Company',
+            label: '公司',
             type: 'dropdown',
             position: 'right',
             items: [
               {
-                label: 'About Us',
+                label: '关于我们',
                 to: '/aboutus',
               },
               {
-                label: 'Contact Us',
+                label: '联系我们',
                 to: '/contact',
               },
             ],
@@ -284,13 +289,13 @@ module.exports = {
             title: 'Docs',
             items: [
               {
-                label: 'Document',
+                label: '文档',
                 to: '/eloqkv/introduction',
               },
             ],
           },
           {
-            title: 'Community',
+            title: '社区',
             items: [
               {
                 label: 'Stack Overflow',
@@ -303,10 +308,10 @@ module.exports = {
             ],
           },
           {
-            title: 'More',
+            title: '更多',
             items: [
               {
-                label: 'Blog',
+                label: '博客',
                 to: '/blog',
               },
             ],

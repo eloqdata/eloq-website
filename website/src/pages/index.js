@@ -89,7 +89,7 @@ const WelcomeScreen = () => (
     <Text style={heading}>See Your Changes</Text>
     <Text>
       Press Cmd + R inside the simulator to reload
-      your app’s code.
+      your app's code.
     </Text>
     <Text style={heading}>Debug</Text>
     <Text>
@@ -106,11 +106,11 @@ const WelcomeScreen = () => (
   forEveryone: `
 React Native lets you create truly native apps and doesn't compromise your users' experiences.
 It provides a core set of platform agnostic native components like <code>View</code>, <code>Text</code>, and <code>Image</code>
-that map directly to the platform’s native UI building blocks.
+that map directly to the platform's native UI building blocks.
   `,
   crossPlatform: `
 React components wrap existing native code and interact with native APIs via
-React’s declarative UI paradigm and JavaScript. This enables native app development
+React's declarative UI paradigm and JavaScript. This enables native app development
 for whole new teams of developers, and can let existing native teams work much faster.
   `,
   fastRefresh: `
@@ -166,7 +166,7 @@ function HomeLearnMore() {
         type="primary"
         href={useBaseUrl('/blog/2024/08/16/eloqkv')}
         target="_self">
-        Learn more
+        了解更多
       </ActionButton>
     </>
   );
@@ -179,7 +179,7 @@ function HomeCallToAction() {
         type="primary"
         href={useBaseUrl('eloqkv/quick-start.html')}
         target="_self">
-        Get started
+        快速开始
       </ActionButton>
     </>
   );
@@ -191,7 +191,7 @@ function TwitterButton({accountName}) {
       href={`https://twitter.com/intent/follow?screen_name=${accountName}&region=follow_link`}
       className="twitter-follow-button">
       <div className="icon" />
-      Follow @{accountName}
+      关注 @{accountName}
     </a>
   );
 }
@@ -204,7 +204,7 @@ function GitHubStarButton() {
         data-icon="octicon-star"
         data-size="large"
         aria-label="Star facebook/react-native on GitHub">
-        Star
+        星标
       </GitHubButton>
     </div>
   );
@@ -570,7 +570,7 @@ function GetStarted() {
     <Section className="GetStarted" background="black">
       <div className="content">
         {/*<h2 className="Heading">Coming Soon</h2>*/}
-        <h2 className="Heading">Try Our Cutting-Edge Products</h2>
+        <h2 className="Heading">体验我们的尖端产品</h2>
       </div>
     </Section>
   );
@@ -584,46 +584,46 @@ const useHomePageAnimations = () => {
 const features = [
   {
     icon: faBolt,
-    title: 'High Performance',
+    title: '高性能',
     details: [
-      'Match the best in-memory data stores when data fit in memory and persistency is turned off',
-      'Significantly outperform other durable KV stores with persistency on',
+      '当数据适合内存且关闭持久性时，性能可媲美最佳内存数据存储',
+      '开启持久性时，性能显著优于其他持久化键值存储',
     ],
     link: 'blog/2024/08/17/benchmark-single-node',
   },
   {
     icon: faDollarSign,
-    title: 'Low Cost',
+    title: '低成本',
     details: [
-      'Take advantage of fast SSDs to store data that exceeds memory capacity',
-      'Leverage tiered-storage in the cloud to further reduce cost while maintaining sub-second access latency for cold data',
+      '利用快速 SSD 存储超出内存容量的数据',
+      '在云中利用分层存储进一步降低成本，同时保持冷数据的亚秒级访问延迟',
     ],
     link: 'blog/2024/08/16/eloqkv#performance-and-cost',
   },
   {
     icon: faExpandArrowsAlt,
-    title: 'Scalable and Elastic',
+    title: '可扩展且弹性',
     details: [
-      'Scale-up with multicore, and scale-out to multiple nodes in a cluster',
-      'Support dynamic scaling as workload changes, without service disruption (currently in Beta)',
+      '利用多核处理实现纵向扩展，并通过集群中多个节点实现横向扩展',
+      '根据工作负载变化支持动态扩展，而不会中断服务（目前处于 Beta 测试阶段）',
     ],
     link: 'blog/2024/08/16/eloqkv#scale-as-you-need-on-what-you-need',
   },
   {
     icon: faExchangeAlt,
-    title: 'Fully ACID',
+    title: '完整 ACID',
     details: [
-      'Transactional distributed KV store with full ACID capabilities',
-      'Redis transaction commands are supported in either single node mode or cluster mode with the same semantics',
+      '具备完整 ACID 特性的分布式事务键值存储',
+      'Redis 事务命令在单节点和集群模式下均支持相同的语义',
     ],
     link: 'blog/2024/08/16/eloqkv#full-acid-transactions-when-you-need-them',
   },
   {
     icon: faCheckCircle,
-    title: 'Highly Available',
+    title: '高可用性',
     details: [
-      'Replicate data to multiple servers to provide fault-tolerance',
-      'Support hot standbys so that failure can be recovered in sub-seconds (currently in Beta)',
+      '将数据复制到多个服务器以提供容错能力',
+      '支持热备份，以便在几秒内恢复故障（目前处于 Beta 测试阶段）',
     ],
     link: 'eloqkv/quick-start-ha',
   },
@@ -631,8 +631,8 @@ const features = [
     icon: faRedoAlt,
     title: 'Redis Compatible API',
     details: [
-      'Implement the Redis API, support most popular data structures',
-      'No code modification needed for applications to enjoy the rich features and cost benefits of EloqKV',
+      '实现 Redis API，支持大多数流行的数据结构',
+      '无需修改代码，应用程序即可享受 EloqKV 丰富的功能和降低成本的优势',
     ],
     link: 'eloqkv/kvstore_compatibility',
   },
@@ -656,34 +656,21 @@ const Index = () => {
       </Head>
 
       <div class="container1">
-        <div class="product-mid-column">
-          <img
-            alt=""
-            src={useBaseUrl('img/eloqbanner.jpg')}
-            type="image/svg+xml"
-            width="800"
-            heigh="auto"
-          />
-        </div>
         <div class="product-columns">
           <div class="product-left-column">
-            <p className="taglinesmall">Introducing Our First Product:</p>
-            <h1 className="title"> EloqKV</h1>
-            <p className="tagline">
-              The <span style={{color: '#f75b0c'}}>Revolutionary</span>{' '}
-              Distributed Key-Value Database.
+            <h1 className="title">EloqKV</h1>
+            <p className="tagline">革命性的分布式键值数据库</p>
+            <p className="taglinecolor">
+              <Typed strings={['- 高性能']} typeSpeed={5} />
             </p>
             <p className="taglinecolor">
-              <Typed strings={['- High Performance']} typeSpeed={5} />
+              <Typed strings={['- 完整 ACID 支持']} typeSpeed={10} />
             </p>
             <p className="taglinecolor">
-              <Typed strings={['- Full ACID Support']} typeSpeed={10} />
+              <Typed strings={['- 可扩展且弹性']} typeSpeed={8} />
             </p>
             <p className="taglinecolor">
-              <Typed strings={['- Scalable and Elastic']} typeSpeed={8} />
-            </p>
-            <p className="taglinecolor">
-              <Typed strings={['- Cloud Native']} typeSpeed={3} />
+              <Typed strings={['- 云原生']} typeSpeed={3} />
             </p>
             <div className="buttons">
               <HomeLearnMore />
