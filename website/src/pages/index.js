@@ -659,7 +659,7 @@ const Index = () => {
         <div class="product-columns">
           <div class="product-left-column">
             <h1 className="title">EloqKV</h1>
-            <p className="tagline">革命性的分布式键值数据库</p>
+            <p className="tagline">新一代分布式键值数据库</p>
             <p className="taglinecolor">
               <Typed strings={['- 高性能']} typeSpeed={5} />
             </p>
