@@ -1,58 +1,51 @@
 ---
-title: Introduction to EloqKV
+title: EloqKV 简介
 ---
 
-# EloqKV: A Distributed Transactional KV store
+# EloqKV：分布式事务性键值存储
 
-## Architecture
+## 架构
 
-EloqKV is a decoupled, distributed database built on Data Substrate, the innovative new database foundation developed by EloqData for the cloud era.
+EloqKV 是一个基于 Data Substrate 构建的解耦、分布式数据库，Data Substrate 是 EloqData 为云时代开发的创新数据库基础。
 
-Each EloqKV instance includes a frontend, compatible with the Redis protocol, deployed together with the core TxService to handle data operations. A logically independent LogService handles Write Ahead Logging (WAL) to ensure persistence, while a Persistent Storage Service manages memory state checkpoints and cold data storage.
+每个 EloqKV 实例包括一个与 Redis 协议兼容的前端，与核心 TxService 一起部署以处理数据操作。逻辑上独立的 LogService 处理预写日志(WAL)以确保持久性，而持久化存储服务管理内存状态检查点和冷数据存储。
 
-In EloqKV, the TxService is responsible for concurrency control, ensuring that transactional operations are consistent. The Log Service can replicate logs and distributes them across different availability zones (AZs) to provide resilience against AZ-level failures. The storage service supports various persistent storage engines, including local options like RocksDB, remote clusters like Cassandra, and cloud storage solutions such as AWS DynamoDB. This persistent storage store cold data for cache misses and provide high availability, even during node failures.
+在 EloqKV 中，TxService 负责并发控制，确保事务操作的一致性。日志服务可以复制日志并将其分布在不同的可用区(AZ)中，以提供对 AZ 级故障的弹性。存储服务支持各种持久化存储引擎，包括本地选项如 RocksDB、远程集群如 Cassandra，以及云存储解决方案如 AWS DynamoDB。这个持久化存储存储冷数据以应对缓存未命中，并在节点故障时提供高可用性。
 
 <p align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
 import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
-<EnlargeableImage src={require('./media/eloq_arch_new2.png').default} alt="EloqKV Architecture" />
+<EnlargeableImage src={require('./media/eloq_arch_new2.png').default} alt="EloqKV 架构" />
 
 </div></p>
 
-<!--
-<p align="center">
-<div style={{ width: '600px', textAlign: 'center', display: 'block' }}>
-![](./media/eloq_arch_new2.png)
-</div>
-</p> -->
+## 超越缓存，拥抱事务
 
-## Beyond Caching, Embracing Transactions
+与许多分布式键值存储不同，EloqKV 完全支持 ACID(原子性、一致性、隔离性、持久性)特性。它支持分布式事务。这解锁了前所未有的功能，使你能够：
 
-Unlike many distributed KV stores, EloqKV is full ACID (Atomicity, Consistency, Isolation, Durability) capable. It supports distributed transactions. This unlocks unprecedented functionality, empowering you to:
+- 摒弃双系统：告别繁琐的 MySQL + Redis 组合。EloqKV 完全消除了缓存一致性问题，简化你的架构并提升效率。
+- 事务可靠性：即使在复杂的分布式环境中，也能确保读写操作的数据完整性。
+- 开启新的应用场景：超越传统缓存的使用场景，进入事务性微服务和有状态数据管理的领域。
 
-- Ditch the Duo: Say goodbye to the cumbersome MySQL + Redis combo. EloqKV eliminates cache coherence issues entirely, simplifying your architecture and boosting efficiency.
-- Transactional Confidence: Ensure data integrity across reads and writes, even in complex distributed environments.
-- Unlock New Application Scenarios: Tackle use cases beyond traditional caching, venturing into the realm of transactional microservices and stateful data management.
+## 兼顾成本的简单性能
 
-## Cost-Conscious Performance Made Simple
+EloqKV 利用 Data Substrate 的创新架构，完美平衡性能和成本效益：
 
-EloqKV leverages Data Substrate's innovative architecture to deliver performance and cost-effectiveness in perfect harmony:
+- 内存速度：频繁访问的数据缓存在内存中，通过并行日志记录保证极快的读写性能。
+- 冷数据云存储：随着数据冷却，优雅地迁移到成本效益高的云键值存储，释放宝贵的内存资源。
+- 异步检查点：最小化 IOPS 需求并优化性能，同时保持事务读取随时可用。
+- 运维效率：通过云存储降低运营成本，得益于 Data Substrate 的模块化设计享受简化的维护。
 
-- Memory for Speed: Frequently accessed data are cached in-memory, guaranteeing lightning-fast reads and blazing-fast write performance through parallel logging.
-- Cloud for Cold Data: As data cools, it gracefully migrates to cost-effective cloud key-value stores, freeing up precious DRAM resources.
-- Asynchronous Checkpoints: Minimize IOPS requirements and optimize performance while keeping transactional reads readily available.
-- Operational Efficiency: Slash operational costs with cloud storage and enjoy streamlined maintenance thanks to Data Substrate's modular design.
+## 按需扩展，实时优化
 
-## Scale on Demand, Optimize on the Fly
+EloqKV 能够适应你的动态需求，无缝扩展以匹配工作负载：
 
-EloqKV adapts to your dynamic needs, scaling seamlessly to match your workload:
+- 内存扩展：当热数据需求增长时，可以增加内存容量以提升性能。
+- 日志服务优化：通过扩展日志服务处理写入流量的突增。
+- 云存储增长：随着历史数据积累，无缝扩展云存储层以适应不断发展的需求。
+- 按需动态扩展：实现无服务中断的扩展(目前处于 Beta 阶段)。
 
-- Memory Scaling: When hot data demands grow, memory capacity can be increased for better performance.
-- Log Service Optimization: Handle surges in write traffic by scaling the log service.
-- Cloud Storage Growth: As historical data accumulates, seamlessly expand the cloud storage layer to accommodate your evolving needs.
-- On Demand Dynamic Scaling: achieve scaling without service interruptions (current in Beta).
+## 阅读博客
 
-## Read the Blogs
-
-**EloqKV** is a reimagining of the modern Key-Value Store. To learn more about EloqKV and what it can do, you can read our blogs about its [unique features](/blog/2024/08/16/eloqkv) and [underlying technology](/blog/2024/08/11/data-substrate). You can also read benchmark results on its performance in [single-node](/blog/2024/08/17/benchmark-single-node) configurations and [clustering](/blog/2024/08/22/benchmark-cluster) configurations. You can also read about its unique capability to achieve [durability](/blog/2024/08/25/benchmark-txlog) and perform [distributed atomic operations](/blog/2024/09/01/benchmark-transaction). More technical content will be posted on the [blog](/blog) frequently, and we welcome your [feedback](/contact).
+**EloqKV** 重新构想了现代键值存储。要了解更多关于 EloqKV 及其功能，你可以阅读我们关于其[独特特性](/blog/2024/08/16/eloqkv)和[底层技术](/blog/2024/08/11/data-substrate)的博客。你还可以阅读其在[单节点](/blog/2024/08/17/benchmark-single-node)配置和[集群](/blog/2024/08/22/benchmark-cluster)配置下的性能基准测试结果。你也可以了解其实现[持久性](/blog/2024/08/25/benchmark-txlog)和执行[分布式原子操作](/blog/2024/09/01/benchmark-transaction)的独特能力。更多技术内容将定期发布在[博客](/blog)上，我们欢迎你的[反馈](/contact)。

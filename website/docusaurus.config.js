@@ -298,12 +298,8 @@ module.exports = {
             title: '社区',
             items: [
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/eloqdb',
-              },
-              {
-                label: 'Discord',
-                href: 'https://discord.gg/nmYjBkfak6',
+                label: '微信群',
+                href: '/wechat',
               },
             ],
           },

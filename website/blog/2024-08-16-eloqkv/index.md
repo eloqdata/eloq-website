@@ -1,53 +1,53 @@
 ---
-title: Announcing EloqKV
+title: EloqKV正式发布
 authors: eloq
 date: 2024-08-16
 tags: [Company]
 ---
 
-We’re thrilled to introduce **EloqKV**, a _high performance Redis API-compatible, ACID transactional, scalable, distributed_ key-value database. You might be thinking, “Really? Another key-value database?” In this post, we’ll explain what makes **EloqKV** stand out and the unique values **EloqKV** offers.
+我们很高兴地介绍 **EloqKV**，这是一个*高性能的 Redis API 兼容、ACID 事务性、可扩展、分布式*键值数据库。你可能会想，"真的吗？又一个键值数据库？"在这篇文章中，我们将解释是什么让 **EloqKV** 与众不同，以及 **EloqKV** 提供的独特价值。
 
 <!--truncate-->
 
-**EloqKV** is the first product built on our groundbreaking Data Substrate technology, an innovative architecture designed to create high-performance, modular, scalable, and transactional databases for the cloud era. We introduced Data Substrate in a [previous blog post](/blog/2024/08/11/data-substrate).
+**EloqKV** 是我们基于突破性数据基底技术构建的第一个产品，这是一个创新架构，旨在为云时代创建高性能、模块化、可扩展和事务性的数据库。我们在[之前的博客文章](/blog/2024/08/11/data-substrate)中介绍了数据基底。
 
-Like many key-value stores, **EloqKV** delivers exceptional performance, handling [millions of operations per second](/blog/2024/08/17/benchmark-single-node) on a _single server_ with sub-millisecond latencies. But with its revolutionary architecture, **EloqKV** offers unique features that distinguishes it from other key-value databases.
+像许多键值存储一样，**EloqKV** 提供卓越的性能，在*单个服务器*上可以处理[每秒数百万次操作](/blog/2024/08/17/benchmark-single-node)，延迟低于毫秒级。但凭借其革命性的架构，**EloqKV** 提供了独特的功能，使其区别于其他键值数据库。
 
-## Full ACID Transactions when You Need Them
+## 在需要时提供完整的 ACID 事务
 
-Many key-value stores keep all data in memory to achieve low latency. However, this approach significantly increases costs, as even infrequently accessed (cold) data takes up valuable memory. Additionally, durability is often sacrificed for performance, though on modern SSDs optimized [Write-Ahead Logs (WAL)](https://en.wikipedia.org/wiki/Write-ahead_logging) can often help reduce the impact to acceptable levels. Moreover, due to the high cost of distributed transactions, most distributed key-value stores either forgo transaction support or offer only limited, partial transactions.
+许多键值存储将所有数据保存在内存中以实现低延迟。然而，这种方法显著增加了成本，因为即使是不经常访问的（冷）数据也会占用宝贵的内存。此外，为了追求性能，持久性通常被牺牲，尽管在现代 SSD 上优化的[预写日志（WAL）](https://en.wikipedia.org/wiki/Write-ahead_logging)通常可以帮助将影响降低到可接受的水平。此外，由于分布式事务的高成本，大多数分布式键值存储要么放弃事务支持，要么只提供有限的部分事务。
 
-**EloqKV** takes a different approach, embracing the philosophy that [ACID](https://en.wikipedia.org/wiki/ACID) (Atomicity, Consistency, Isolation, Durability) transactions are important but should not add extra costs when they’re not needed. **EloqKV** lets you enable ACID as a configuration flag. When ACID is disabled, **EloqKV** incurs no additional overhead, offering performance comparable to that of non-transactional key-value databases. Currently in Beta and available in a future release, **EloqKV** will allow ACID support to be turned on and off on a per-database basis, further avoiding unnecessary overhead and simplifying management.
+**EloqKV** 采用了不同的方法，拥抱 [ACID](https://en.wikipedia.org/wiki/ACID)（原子性、一致性、隔离性、持久性）事务很重要但不应在不需要时增加额外成本的理念。**EloqKV** 让你可以通过配置标志启用 ACID。当 ACID 被禁用时，**EloqKV** 不会产生任何额外开销，提供与非事务性键值数据库相当的性能。目前处于 Beta 版本，在未来版本中，**EloqKV** 将允许在每个数据库的基础上打开和关闭 ACID 支持，进一步避免不必要的开销并简化管理。
 
-Even with full ACID compliance, **EloqKV** incorporates several innovations to minimize overhead. For example, the latency of WAL logging is typically dominated by synchronous writes to stable storage. In **EloqKV**, logging can scale horizontally and independently, reducing logging latency when more storage devices are added. Moreover, in **EloqKV**, single-key read transactions do not incur extra overheads. This makes **EloqKV** blazingly fast for many common workloads. We’ll dive deeper into these technologies in future blog posts or academic papers.
+即使完全符合 ACID，**EloqKV** 也包含了几项创新来最小化开销。例如，WAL 日志的延迟通常由同步写入稳定存储所主导。在 **EloqKV** 中，日志可以水平扩展和独立扩展，当添加更多存储设备时可以减少日志延迟。此外，在 **EloqKV** 中，单键读取事务不会产生额外开销。这使得 **EloqKV** 对许多常见工作负载来说都非常快。我们将在未来的博客文章或学术论文中深入探讨这些技术。
 
-## Scale as You Need, on What You Need
+## 按需扩展，扩展所需资源
 
-**EloqKV** is designed for scalability from the ground up. Each resource type — memory, CPU cores, logging SSDs, and persistent storage — can be scaled independently. This level of flexibility is super valuable in the cloud era, where resources can be easily provisioned from cloud providers.
+**EloqKV** 从一开始就设计为可扩展的。每种资源类型 —— 内存、CPU 核心、日志 SSD 和持久存储 —— 都可以独立扩展。这种级别的灵活性在云时代非常有价值，因为可以轻松地从云提供商那里配置资源。
 
-If your workload is latency-sensitive and requires all data to be stored in memory, you can reserve virtual machines with large memory capacities. Need to handle a high volume of updates that must be persisted? Simply add a few extra EBS volumes as logging devices. If your data is large, you can use cloud storage options like DynamoDB or S3 to cost-effectively store infrequently accessed data.
+如果你的工作负载对延迟敏感并且需要将所有数据存储在内存中，你可以预留具有大内存容量的虚拟机。需要处理必须持久化的大量更新？只需添加几个额外的 EBS 卷作为日志设备。如果你的数据量很大，你可以使用像 DynamoDB 或 S3 这样的云存储选项来经济高效地存储不经常访问的数据。
 
-We’re also developing transparent, dynamic scaling, which will allow you to add and remove resources dynamically as your workload changes. This feature will be available in a public preview soon, so stay tuned.
+我们还在开发透明、动态扩展，这将允许你根据工作负载的变化动态添加和删除资源。这个功能很快将在公开预览版中提供，敬请关注。
 
-## You Want Ease of Use? You Get Ease of Use
+## 你想要易用性？你就能得到易用性
 
-**EloqKV** is compatible with the [Redis API](/eloqkv/kvstore_compatibility) and supports most of Redis’s essential data structures. This means that most existing applications can easily take advantage of **EloqKV**’s advanced features with minimal effort.
+**EloqKV** 兼容 [Redis API](/eloqkv/kvstore_compatibility)，支持 Redis 的大多数基本数据结构。这意味着大多数现有应用程序只需很少的努力就可以轻松利用 **EloqKV** 的高级功能。
 
-But **EloqKV**’s ease of use goes beyond API compatibility. The true user-friendliness of **EloqKV** lies in the fundamental architectural design choices we’ve made.
+但 **EloqKV** 的易用性不仅仅在于 API 兼容性。**EloqKV** 真正的用户友好性在于我们做出的基本架构设计选择。
 
-**EloqKV** can be deployed as a single-node key-value store, similar to [Redis](https://redis.io/) and [Memcached](https://memcached.org/). However, **EloqKV** is inherently designed as a distributed system. It can be deployed in a cluster with ease, instantly benefiting from the high availability and scalability of a true distributed system — no need for a [sentinel](https://redis.io/docs/latest/operate/oss_and_stack/management/sentinel/) or special [cluster mode](https://redis.io/docs/latest/operate/oss_and_stack/management/scaling/).
+**EloqKV** 可以部署为单节点键值存储，类似于 [Redis](https://redis.io/) 和 [Memcached](https://memcached.org/)。然而，**EloqKV** 本质上是作为分布式系统设计的。它可以轻松部署在集群中，立即受益于真正分布式系统的高可用性和可扩展性 —— 无需 [sentinel](https://redis.io/docs/latest/operate/oss_and_stack/management/sentinel/) 或特殊的[集群模式](https://redis.io/docs/latest/operate/oss_and_stack/management/scaling/)。
 
-Thanks to its built-in cluster awareness and ACID support, an **EloqKV** cluster behaves almost identically to a single-node server. When connected to one of the nodes, a Redis-compatible client can access and modify data across all nodes in the cluster, potentially with an extra network hop (because physics applies), even if the client is not cluster-aware, and even when the cluster is recovering from failures or changing configuration to add/remove capacity. Additionally, _WATCH/MULTI/EXEC_ commands (i.e., Redis transactions) and _Lua scripts_ can run in the cluster just as they would on a single-node database, eliminating issues like SLOTS and "CROSSSLOT Keys" errors.
+得益于其内置的集群感知和 ACID 支持，**EloqKV** 集群的行为几乎与单节点服务器相同。当连接到集群中的一个节点时，Redis 兼容客户端可以访问和修改整个集群中的数据，可能会有额外的网络跳转（因为物理定律适用），即使客户端不是集群感知的，即使当集群正在从故障中恢复或更改配置以添加/删除容量。此外，_WATCH/MULTI/EXEC_ 命令（即 Redis 事务）和 *Lua 脚本*可以在集群中运行，就像在单节点数据库上一样，消除了 SLOTS 和"CROSSSLOT Keys"错误等问题。
 
-## Performance and Cost
+## 性能和成本
 
-Performance and cost are always critical factors when evaluating database systems. [Numerous](https://www.scylladb.com/compare/) [database](https://aerospike.com/resources/benchmarks/) [vendors](https://www.dragonflydb.io/blog/scaling-performance-redis-vs-dragonfly) publish articles or white papers claiming performance superiority. It is sufficient to say that we've put a great deal of thought into performance optimizations. We strive to make **EloqKV** achieve _best-in-class performance_ when features are _fairly matched_, and we are glad to report that we largely achieved the goal. We encourage you to read our follow up blogs, or [try out](/eloqkv/install-from-binary) **EloqKV** and assess it with your own workloads.
+性能和成本始终是评估数据库系统的关键因素。[众多](https://www.scylladb.com/compare/)[数据库](https://aerospike.com/resources/benchmarks/)[供应商](https://www.dragonflydb.io/blog/scaling-performance-redis-vs-dragonfly)发布文章或白皮书声称性能优势。可以说，我们在性能优化方面投入了大量思考。我们努力使 **EloqKV** 在*功能公平匹配*时实现*同类最佳性能*，我们很高兴地报告我们在很大程度上实现了这个目标。我们鼓励你阅读我们的后续博客，或[尝试](/eloqkv/install-from-binary) **EloqKV** 并用你自己的工作负载评估它。
 
-One key point to note is that some of **EloqKV**'s advanced features — such as enabling logging for durability, performing atomic `MULTI` operations across multiple nodes, and using SSDs to store cold data to reduce memory usage — might be more cost-effective than you expect. Again, we encourage you to test it with your workloads.
+需要注意的一个关键点是，**EloqKV** 的一些高级功能 —— 比如启用日志以实现持久性、在多个节点之间执行原子 `MULTI` 操作，以及使用 SSD 存储冷数据以减少内存使用 —— 可能比你预期的更具成本效益。同样，我们鼓励你用你的工作负载测试它。
 
-## Introducing **EloqKV** for Public Preview
+## 发布 **EloqKV** 公开预览版
 
-Today, we are releasing **EloqKV** for public preview. This release supports two persistent stores: Apache Cassandra and RocksDB. Cassandra is a disaggregated store that can run on a different set of nodes from **EloqKV** servers for high availability, while RocksDB is an embedded store. You can learn about how to set up a [single node](/eloqkv/quick-start) test server or a [cluster](/eloqkv/quick-start-ha) following our documents.
+今天，我们发布 **EloqKV** 公开预览版。此版本支持两个持久存储：Apache Cassandra 和 RocksDB。Cassandra 是一个分离的存储，可以在与 **EloqKV** 服务器不同的节点集上运行以实现高可用性，而 RocksDB 是一个嵌入式存储。你可以按照我们的文档学习如何设置[单节点](/eloqkv/quick-start)测试服务器或[集群](/eloqkv/quick-start-ha)。
 
 <p align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
@@ -57,16 +57,16 @@ import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
 </div></p>
 
-**EloqKV** can be deployed in various configurations:
+**EloqKV** 可以在各种配置中部署：
 
-- **As a cache**: When logging and the persistent store are turned off, **EloqKV** functions as a high-performance in-memory cache, similar to mainstream cache solutions with performance matching the state-of-the-art in-memory cache servers.
+- **作为缓存**：当关闭日志和持久存储时，**EloqKV** 作为高性能内存缓存运行，性能与主流缓存解决方案相当，匹配最先进的内存缓存服务器。
 
-- **As an in-memory database**: By enabling logging and the persistent store, **EloqKV** provides durability while maintaining the same fast read performance as a cache. It flushes writes to the log and applies them to memory-resident data. It also maintains snapshots in stable storage, ensuring full, consistent data recovery after failures or restarts.
+- **作为内存数据库**：通过启用日志和持久存储，**EloqKV** 提供持久性，同时保持与缓存相同的快速读取性能。它将写入刷新到日志并应用到内存中的数据。它还在稳定存储中维护快照，确保在故障或重启后完整、一致的数据恢复。
 
-- **As a larger-than-memory database**: When the allocated memory is insufficient to store all data, **EloqKV** evicts data to stable storage and retrieves it as needed. In this mode, **EloqKV** serves as a strong alternative to many NoSQL databases.
+- **作为大于内存的数据库**：当分配的内存不足以存储所有数据时，**EloqKV** 将数据驱逐到稳定存储并根据需要检索。在这种模式下，**EloqKV** 作为许多 NoSQL 数据库的强大替代方案。
 
-- **As a full blown transactional distributed database**: When deployed in the cloud, **EloqKV** can be configured as a fully scalable, highly available, and ACID-capable database that can be used as the main store to host primary data. Traditionally this is a postition often taken by expensive RMDBS.
+- **作为完整的事务性分布式数据库**：在云中部署时，**EloqKV** 可以配置为完全可扩展、高可用性和 ACID 兼容的数据库，可以用作主存储来托管主要数据。这传统上是昂贵的 RMDBS 所占据的位置。
 
-We foresee many scenarios where **EloqKV** can be valuable due to its unique features and capabilities, and we love to hear from you on your use cases and pain points that **EloqKV** may be able to address. We are working hard to improve the product and add more capabilities. If you have any questions or suggestions, or want to have an in-person demonstration, please [contact us](/contact).
+我们预见到由于 **EloqKV** 的独特功能和能力，它在许多场景中都能发挥价值，我们很想听听你的使用案例和 **EloqKV** 可能解决的痛点。我们正在努力改进产品并添加更多功能。如果你有任何问题或建议，或想要进行面对面演示，请[联系我们](/contact)。
 
-In the next few blog posts, we will share some performance benchmarks of **EloqKV** in different scenarios.
+在接下来的几篇博客文章中，我们将分享 **EloqKV** 在不同场景下的一些性能基准测试。

@@ -58,7 +58,7 @@ const CommunityPage: React.FC = () => {
                   在这里就 EloqKV 的使用提出问题参与讨论，搜索所有历史讨论。
                 </p>
                 <a
-                  href="https://github.com/eloqdata/eloqkv/discussions"
+                  href="https://github.com/monographdb/eloqkv/issues"
                   className="channel-link"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -75,7 +75,7 @@ const CommunityPage: React.FC = () => {
                 <p>
                   如果你对产品使用有任何问题，或者是想和其他使用者交流，请加入我们的微信用户群。
                 </p>
-                <a href="/contact" className="channel-link">
+                <a href="/wechat" className="channel-link">
                   加入微信群 →
                 </a>
               </div>

@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "@theme/Layout";
 import FormField from "@site/src/components/FormField";
 import "./ContactPage.css"; // Create and import your CSS file
-import React, { useState } from "react";
 
 const ContactPage: React.FC = () => {
   const [name, setName] = useState<string>("");
@@ -13,7 +12,7 @@ const ContactPage: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission logic here, e.g., send data to an API
-    console.log({ name, email, message, message });
+    console.log({ name, email, company, message });
   };
 
   return (
@@ -31,12 +30,12 @@ const ContactPage: React.FC = () => {
                 <p>
                   欢迎在{" "}
                   <a
-                    href="https://discord.gg/nmYjBkfak6"
+                    href="/wechat"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="red-link"
                   >
-                    Discord
+                    微信群
                   </a>{" "}
                   上与我们交流
                 </p>

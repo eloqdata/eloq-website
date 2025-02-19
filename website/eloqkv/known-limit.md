@@ -1,10 +1,9 @@
 ---
-title: Known Limitations
+title: 已知限制
 ---
 
-Known Limitations of EloqKV:
+EloqKV 的已知限制:
 
-1. The value associated with each key is limited to a maximum size of 256MB.
-2. The RocksDB persistent storage engine does not currently support replication, thus data may no-longer be available when node fails. For high availability, consider using Cassandra or DynamoDB instead.
-3. Redis, which runs data operations in a single thread, executes transactions enclosed in _MULTI/EXEC_ in a serial manner. EloqKV supports concurrent transactions, therefore in EloqKV transactions may be aborted (i.e. fail) due to conflicts. Users cannot assume all _MULTI/EXEC_ transactions will always return success even in single node situation.
-4. Set command doesn't support expiration options.
+1. 每个键关联的值大小限制为最大 256MB。
+2. RocksDB 持久化存储引擎目前不支持复制,因此当节点发生故障时数据可能不再可用。为了实现高可用性,建议使用 Cassandra 或 DynamoDB。
+3. Redis 在单线程中执行数据操作,因此在 _MULTI/EXEC_ 中的事务是串行执行的。EloqKV 支持并发事务,因此在 EloqKV 中事务可能会因为冲突而中止(即失败)。用户不能假设所有 _MULTI/EXEC_ 事务在单节点情况下都会成功。

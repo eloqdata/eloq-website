@@ -1,57 +1,53 @@
 ---
-title: Server Configuration
+title: 服务器配置
 ---
 
-EloqKV offers configuration variables that can be adjusted to meet your specific requirements. You have two options for tuning these variables:
+EloqKV 提供了可以根据你的具体需求调整的配置变量。你有两种方式来调整这些变量：
 
-1. Command Line Arguments: For example, ./bin/eloqkv --core_number=3.
-2. Configuration File: Specify the configuration file using --config=path_to_config_file.
+1. 命令行参数：例如，./bin/eloqkv --core_number=3。
+2. 配置文件：使用 --config=path_to_config_file 指定配置文件。
 
-Please note that command line arguments will override values specified in the configuration file. If a value is not set through either method, the default value will be applied.
+请注意，命令行参数会覆盖配置文件中指定的值。如果某个值没有通过这两种方式设置，将使用默认值。
 
-Below is a detailed description of each configuration variable:
+以下是每个配置变量的详细说明：
 
 ### `ip`
 
-- Description: Local IP address of the EloqKV node. This value is recorded in the EloqKV catalog and cannot be changed once the server has been launched. It is strongly recommended to set this to the actual IP address of the node, rather than the default `127.0.0.1`, which will prevent external nodes from accessing this EloqKV instance. If you mistakenly set it to `127.0.0.1` and need to change it to the correct IP, you must clear the raft data directory and the associated persistent storage, such as RocksDB. Check `path` and `rocksdb_storage_path` parameters to obtain the location of raft data and RocksDB.
-- Category: [local]
-- Commandline: --ip=value
-- Scope: Global
-- Data Type: String
-- Default Value: 127.0.0.1
+- 描述：EloqKV 节点的本地 IP 地址。此值记录在 EloqKV 目录中，一旦服务器启动就不能更改。强烈建议将其设置为节点的实际 IP 地址，而不是默认的 `127.0.0.1`，后者会阻止外部节点访问此 EloqKV 实例。如果你错误地将其设置为 `127.0.0.1` 并需要更改为正确的 IP，你必须清除 raft 数据目录和相关的持久化存储，如 RocksDB。查看 `path` 和 `rocksdb_storage_path` 参数以获取 raft 数据和 RocksDB 的位置。
+- 类别：[local]
+- 命令行：--ip=value
+- 作用域：全局
+- 数据类型：字符串
+- 默认值：127.0.0.1
 
 ### `port`
 
-- Description: Listening port for the EloqKV node. Similar to the `ip` parameter, the `port` cannot be changed once the server has been launched.
-- Category: [local]
-- Commandline: --port=value
-- Scope: Global
-- Data Type: Integer
-- Default Value: 6379
+- 描述：EloqKV 节点的监听端口。与 `ip` 参数类似，`port` 一旦服务器启动就不能更改。
+- 类别：[local]
+- 命令行：--port=value
+- 作用域：全局
+- 数据类型：整数
+- 默认值：6379
 
 ### `path`
 
-- Description: The directory for storing Raft data, which contains two subdirectories:  
-  **cc_ng:** Stores Raft logs for the tx_service cluster.  
-  **tx_log:** Stores Raft logs for the redo log_service cluster.
-- Category: [local]
-- Commandline: --path=value
-- Scope: Global
-- Data Type: String
-- Default Value: redis_raft_data
+- 描述：存储 Raft 数据的目录，包含两个子目录：  
+  **cc_ng:** 存储 tx_service 集群的 Raft 日志。  
+  **log_ng:** 存储 log_service 集群的 Raft 日志。
+- 类别：[local]
+- 命令行：--path=value
+- 作用域：全局
+- 数据类型：字符串
+- 默认值：data
 
 ### `core_number`
 
-- Description: Number of worker threads for an EloqKV node. EloqKV uses a one-thread-per-core model with coroutines for handling concurrency. The core_number represents the actual number of worker threads, which typically run in a busy loop to fetch and execute tasks.  
-  Since worker threads operate in a busy loop, the number of threads should not exceed the number of CPU cores. A recommended setting is 80% of the available CPU cores in a CPU-intensive mode.  
-  **If using local persistent storage like RocksDB:** Set core_number to 70% of CPU cores.  
-  **If WAL (Write-Ahead Logging) is enabled:** Reserve 2 cores for each log instance.  
-  These recommendations help optimize performance based on your workload and storage configuration.
-- Category: [local]
-- Commandline: --core_number=value
-- Scope: Global
-- Data Type: Integer
-- Default Value: CPU_CORE_NUM \* 80%
+- 描述：用于处理客户端请求的工作线程数。建议将其设置为 CPU 核心数的一半。
+- 类别：[local]
+- 命令行：--core_number=value
+- 作用域：全局
+- 数据类型：整数
+- 默认值：1
 
 ### `event_dispatcher_num`
 
@@ -156,33 +152,33 @@ Below is a detailed description of each configuration variable:
 
 ### `enable_heap_defragment`
 
-- Description: Option to enable heap defragmentation when using the mimalloc allocator. Enabling this feature helps optimize memory usage by reducing fragmentation within the heap, potentially reducing memory overhead.
-- Category: [local]
-- Scope: Global
-- Data Type: Boolean
-- Default Value: false
+- 描述：使用 mimalloc 分配器时是否启用堆碎片整理。启用此功能有助于通过减少堆内的碎片来优化内存使用，可能减少内存开销。
+- 类别：[local]
+- 作用域：全局
+- 数据类型：布尔值
+- 默认值：false
 
 ### `enable_cache_replacement`
 
-- Description: Option to allow evicting persisted data when memory is full. Enabling this feature allows EloqKV to store more data, but will lead to performance degradation when a cache miss happens. If this option is disabled, less data can be stored since all data must fit in memory.
-- Category: [local]
-- Scope: Global
-- Data Type: Boolean
-- Default Value: true
+- 描述：是否允许在内存已满时驱逐已持久化的数据。启用此功能允许 EloqKV 存储更多数据，但当缓存未命中时会导致性能下降。如果禁用此选项，由于所有数据都必须适合内存，可以存储的数据会更少。
+- 类别：[local]
+- 作用域：全局
+- 数据类型：布尔值
+- 默认值：true
 
 ### `txn_isolation_level`
 
-- Description: Isolation level of MULTI/EXEC transactions. You can set it to `RepeatableRead` or `ReadCommitted`.
-- Category: [local]
-- Scope: Global
-- Data Type: String
-- Default Value: RepeatableRead
+- 描述：MULTI/EXEC 事务的隔离级别。你可以设置为 `RepeatableRead` 或 `ReadCommitted`。
+- 类别：[local]
+- 作用域：全局
+- 数据类型：字符串
+- 默认值：RepeatableRead
 
-### Log Configuration
+### 日志配置
 
-EloqKV uses GLOG to manage logging with various log levels. You can modify GLOG's behavior by exporting environment variables prefixed with GLOG\_. For more information, refer to the [GLOG FLAGS documentation](https://github.com/google/glog/blob/master/docs/flags.md).
+EloqKV 使用 GLOG 来管理具有各种日志级别的日志。你可以通过导出以 GLOG\_ 为前缀的环境变量来修改 GLOG 的行为。更多信息，请参考 [GLOG FLAGS 文档](https://github.com/google/glog/blob/master/docs/flags.md)。
 
-Here are two commonly used environment variables:
+以下是两个常用的环境变量：
 
-1. GLOG_log_dir: Specifies the directory where log files are stored.
-2. GLOG_max_log_size: Defines the maximum size (in MB) for each log file.
+1. GLOG_log_dir：指定存储日志文件的目录。
+2. GLOG_max_log_size：定义每个日志文件的最大大小(以 MB 为单位)。

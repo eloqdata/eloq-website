@@ -77,32 +77,6 @@ const CompanyPage: React.FC = () => {
           </section>
           <br />
           <br />
-          {/* Office Locations Section */}
-          <section className="offices-section">
-            <h2 className="mission-heading">办公地点</h2>
-            <br />
-            <div className="office-locations">
-              <div className="office">
-                <h3>北美</h3>
-                <p>
-                  EloqData Inc. <br></br>
-                  10268 Parkwood Drive 5 <br></br>
-                  Cupertino, CA 94301<br></br>
-                  USA
-                </p>
-              </div>
-              <div className="office">
-                <h3>亚太地区</h3>
-                <p>
-                  EloqData PTE.Ltd. <br></br>
-                  160 Robinson Road<br></br>
-                  #14-04 SBF Center<br></br>
-                  Singapore 068914
-                </p>
-                {/* Example address */}
-              </div>
-            </div>
-          </section>
         </div>
       </div>
     </Layout>

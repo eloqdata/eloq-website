@@ -1,64 +1,64 @@
 ---
-title: Deploy High Available Cluster on Shared Storage
-summary: Learn how to quickly get started with the EloqKV database.
+title: 在共享存储上部署高可用集群
+summary: 学习如何快速开始使用 EloqKV 数据库。
 ---
 
-# Deploy a High Available Cluster Using Eloqctl
+# 使用 Eloqctl 部署高可用集群
 
-[Previously](./quick-start), we covered how to deploy a single node EloqKV cluster using `eloqctl`. In this document, we will focus on deploying a highly available cluster.
+在[之前的文档](./quick-start)中,我们介绍了如何使用 `eloqctl` 部署单节点 EloqKV 集群。在本文档中,我们将重点介绍如何部署高可用集群。
 
-## 1. Prerequisites
+## 1. 前置条件
 
-Please ensure you've reviewed the following document:
+请确保你已经阅读以下文档:
 
-- [Configuration Checklist](./prerequisite)
+- [配置检查清单](./prerequisite)
 
-## 2. Deploy Eloqctl on the control machine
+## 2. 在控制机器上部署 Eloqctl
 
-For step-by-step guidance, please check out the previous document:
+有关分步指导,请查看之前的文档:
 
-- [Deploy Single Node Cluster](./quick-start)
+- [部署单节点集群](./quick-start)
 
-## 3. Enable Persistent Data Store and WAL for Durability
+## 3. 启用持久化数据存储和 WAL 以实现持久性
 
-Template EloqKV configuration file `EloqKv.ini` can be found in the `.eloqctl/config/` directory.
+模板 EloqKV 配置文件 `EloqKv.ini` 可以在 `.eloqctl/config/` 目录中找到。
 
-To deploy a highly available cluster, you need to first enable persistent data dtore and WAL feature in `EloqKv.ini`.
+要部署高可用集群,你需要首先在 `EloqKv.ini` 中启用持久化数据存储和 WAL 功能。
 
 ```
-# set it to `on` to turn on persistent storage
+# 设置为 `on` 以启用持久化存储
 enable_data_store=on
-# set it to `on` to turn on WAL
+# 设置为 `on` 以启用 WAL
 enable_wal=on
 ```
 
-## 4. Initialize the cluster topology file
+## 4. 初始化集群拓扑文件
 
-Example cluster topology files can be found in the `.eloqctl/config/examples/` directory.
+示例集群拓扑文件可以在 `.eloqctl/config/examples/` 目录中找到。
 
-To deploy a highly available cluster, use `eloqkv_cassandra.yaml` as the default configuration template.
+要部署高可用集群,使用 `eloqkv_cassandra.yaml` 作为默认配置模板。
 
 ```
-# example yaml file
+# 示例 yaml 文件
 .eloqctl/config/examples/eloqkv_cassandra.yaml
 ```
 
-To enable high availability, edit the `eloqkv_cassandra.yaml` file. High availability is achieved through two key configurations:
+要启用高可用性,编辑 `eloqkv_cassandra.yaml` 文件。高可用性通过两个关键配置实现:
 
-1. The log cluster must be distributed and replicated.
-2. The Cassandra cluster must be distributed and replicated.
+1. 日志集群必须是分布式的且有副本
+2. Cassandra 集群必须是分布式的且有副本
 
-```
+```yaml
 connection:
-  username: "${USER}"
-  auth_type: "keypair"
+  username: '${USER}'
+  auth_type: 'keypair'
   auth:
-    keypair: "/home/${USER}/.ssh/id_rsa"
+    keypair: '/home/${USER}/.ssh/id_rsa'
 deployment:
-  cluster_name: "eloqkv-cluster"
-  product: "EloqKV"
-  version: "latest"
-  install_dir: "/home/${USER}"
+  cluster_name: 'eloqkv-cluster'
+  product: 'EloqKV'
+  version: 'latest'
+  install_dir: '/home/${USER}'
   tx_service:
     tx_host_ports: [10.0.0.1:6379, 10.0.0.2:6379, 10.0.0.3:6379]
   log_service:
@@ -66,79 +66,43 @@ deployment:
       - host: 10.0.0.1
         port: 9000
         data_dir:
-          - "/home/${USER}/eloqkv-cluster/wal_eloqkv"
+          - '/home/${USER}/eloqkv-cluster/wal_eloqkv'
       - host: 10.0.0.2
         port: 9000
         data_dir:
-          - "/home/${USER}/eloqkv-cluster/wal_eloqkv"
+          - '/home/${USER}/eloqkv-cluster/wal_eloqkv'
       - host: 10.0.0.3
         port: 9000
         data_dir:
-          - "/home/${USER}/eloqkv-cluster/wal_eloqkv"
+          - '/home/${USER}/eloqkv-cluster/wal_eloqkv'
     replica: 3
   storage_service:
     cassandra:
       host: [10.0.0.4, 10.0.0.5, 10.0.0.6]
       kind: !Internal
-        mirror: "https://download.eloqdata.com"
-        version: "4.1.3"
+        mirror: 'https://download.eloqdata.com'
+        version: '4.1.3'
   monitor:
-    data_dir: ""
+    data_dir: ''
     monograph_metrics:
-      path: "/mono_metrics"
+      path: '/mono_metrics'
       port: 18081
     prometheus:
-      download_url: "https://github.com/prometheus/prometheus/releases/download/v2.42.0/prometheus-2.42.0.linux-amd64.tar.gz"
+      download_url: 'https://github.com/prometheus/prometheus/releases/download/v2.42.0/prometheus-2.42.0.linux-amd64.tar.gz'
       port: 9500
       host: 10.0.0.7
     grafana:
-      download_url: "https://dl.grafana.com/oss/release/grafana-9.3.6.linux-amd64.tar.gz"
+      download_url: 'https://dl.grafana.com/oss/release/grafana-9.3.6.linux-amd64.tar.gz'
       port: 3301
       host: 10.0.0.7
     node_exporter:
-      url: "https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_exporter-1.5.0.linux-amd64.tar.gz"
+      url: 'https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_exporter-1.5.0.linux-amd64.tar.gz'
       port: 9200
     cassandra_collector:
-      mcac_agent: "https://github.com/datastax/metric-collector-for-apache-cassandra/releases/download/v0.3.4/datastax-mcac-agent-0.3.4-4.1-beta1.tar.gz"
+      mcac_agent: 'https://github.com/datastax/metric-collector-for-apache-cassandra/releases/download/v0.3.4/datastax-mcac-agent-0.3.4-4.1-beta1.tar.gz'
       mcac_port: 9103
 ```
 
-For detailed explanations for each configuration option in the YAML file, please refer to the previous document [Deploy Single Node Cluster](./quick-start). In this document, we will focus specifically on the high availability aspects of the configuration file.
+关于 YAML 文件中每个配置选项的详细解释,请参考之前的文档[部署单节点集群](./quick-start)。在本文档中,我们将重点关注高可用性方面的配置。
 
-- **`tx_service.tx_host_ports`**:  
-  _Type_: `List of Strings`  
-  The transaction cluster is deployed across three nodes: 10.0.0.1:6379, 10.0.0.2:6379, and 10.0.0.3:6379. Data is sharded among these nodes, with each node responsible for a portion of the data. If one node fails, the remaining nodes will take over the data from the failed node and continue to serve client requests seamlessly.
-
-- **`log_service.nodes`**:  
-  _Type_: `Composite`  
-  Here, we specify three nodes for the log service cluster, which are co-located with the transaction cluster. Alternatively, you can deploy the log service on separate machines if preferred.
-
-- **`log_service.replica`**:  
-  _Type_: `Integer`  
-  Set the number of replicas for the log service to 3. This ensures that each WAL log record is replicated across three log nodes. With this setup, the logs will be preserved even in the event of a node failure or disk crash.
-
-- **`storage_service.cassandra.host`**:  
-  _Type_: `List of Strings`  
-  When deploying EloqKV with Cassandra as the persistent storage engine, the compute and storage components are fully decoupled. In this example, Cassandra is deployed on three separate machines:
-  10.0.0.4, 10.0.0.5, and 10.0.0.6.
-
-- **`monitor`**  
-  Prometheus and grafana are installed on a separate host at 10.0.0.7.
-
-## 5. Run the deployment command
-
-After you modified the `eloqkv_cassandra.yaml`. Use the `eloqctl launch` command to provision an EloqKV cluster
-
-```shell
-eloqctl launch ${HOME}/.eloqctl/config/examples/eloqkv_cassandra.yaml -s
-```
-
-The command will installed the EloqKV componnets in the specified cluster.
-
-If you see the following message, the EloqKV cluster has been successfully provisioned:
-
-```
-Launch cluster finished, Enjoy!
-```
-
-Feel free to use `eloqkv-cli` or any other Redis client to connect to EloqKV and enjoy exploring its features.
+- \*\*`tx_service.tx_host_ports`

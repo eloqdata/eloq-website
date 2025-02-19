@@ -1,33 +1,33 @@
 ---
-title: Introduction to Data Substrate
+title: 数据基底简介
 authors: eloq
 date: 2024-08-11
 tags: [Company]
 ---
 
-In this blog post, we introduce our transformative concept **Data Substrate**. Data Substrate abstracts core functionality in online transactional databases (OLTP) and provides a unified layer for [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) operations of any data models. A database built on this unified layer is modular: a database module is optional, can be replaced and can scale up/out independently of other modules.
+在这篇博客中，我们介绍我们的变革性概念**数据基底**。数据基底抽象了在线事务数据库（OLTP）中的核心功能，为任何数据模型的 [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) 操作提供统一层。基于这个统一层构建的数据库是模块化的：数据库模块是可选的，可以替换，并且可以独立于其他模块进行扩展。
 
 <!--truncate-->
 
-## Motivation
+## 动机
 
-In the early days of computing, data were stored in plain files and processed using custom programs. [Relational database management systems (RDBMS)](https://en.wikipedia.org/wiki/Relational_database) emerged in the 1970s to model data as tables, store it on disk with consistency and integrity and provide [SQL](https://en.wikipedia.org/wiki/SQL) to access them. RDBMS has been the _de facto_ solution for data management for more than two decade.
+在计算机发展的早期，数据存储在普通文件中并由自定义程序处理。[关系型数据库管理系统（RDBMS）](https://en.wikipedia.org/wiki/Relational_database)在 20 世纪 70 年代出现，将数据建模为表格，在磁盘上以一致性和完整性存储，并提供 [SQL](https://en.wikipedia.org/wiki/SQL) 来访问它们。RDBMS 在二十多年里一直是数据管理的*事实标准*解决方案。
 
-But that changed in the early 2000s with the meteoric rise of the Internet. Internet applications, such as search engines, social networks and e-commerce websites, generated large volumes of data and redefined data-intensive workloads. ["One Size Does Not Fit All"](https://cs.brown.edu/~ugur/fits_all.pdf) was the catching phrase that defined the next couple of decades in database systems. Since then, the database landscape has evolved in two directions: scalability and data models.
+但这在 2000 年代初期随着互联网的迅猛发展而改变。互联网应用程序，如搜索引擎、社交网络和电子商务网站，产生了大量数据并重新定义了数据密集型工作负载。["一刀切方案不适合所有情况"](https://cs.brown.edu/~ugur/fits_all.pdf)成为定义数据库系统未来几十年的口号。从那时起，数据库领域在两个方向上发展：可扩展性和数据模型。
 
-Making a database scale is hard. Doing so while maintaining [ACID](https://en.wikipedia.org/wiki/ACID) properties and minimizing performance impact is even harder. The NoSQL trend, epitomized by Google BigTable and Amazon Dynamo, became known for trading ACID for scalability. NewSQL and distributed SQL databases, such as [CockroachDB](https://www.cockroachlabs.com/), later brought back transactions, but often at a hefty cost to efficiency. Most recently, cloud-native databases such as Amazon [Aurora](https://aws.amazon.com/rds/aurora/) decouple compute and storage to allow storage to scale and avoid the more difficult task of scaling transactions.
+让数据库具有可扩展性很难。在保持 [ACID](https://en.wikipedia.org/wiki/ACID) 属性并最小化性能影响的同时做到这一点更难。NoSQL 趋势，以 Google BigTable 和 Amazon Dynamo 为代表，因为用可扩展性换取 ACID 而闻名。NewSQL 和分布式 SQL 数据库，如 [CockroachDB](https://www.cockroachlabs.com/)，后来重新引入了事务，但通常以效率为代价。最近，云原生数据库如 Amazon [Aurora](https://aws.amazon.com/rds/aurora/) 通过解耦计算和存储来实现存储的可扩展性，避免了扩展事务这个更困难的任务。
 
-The second trend was the emergence of diverse data models. Simple key-value pairs are sufficient for caching purposes, graphs become important for modeling relationships, and streams and time series are ideal for modeling continously changing data. It was increasingly clear that the relational model can not support all applications well. With the advent of diverse data types and structures, databases for these new data models emerged, along with new languages to query them.
+第二个趋势是多样化的数据模型的出现。简单的键值对对于缓存目的来说已经足够，图形对于建模关系很重要，而流和时间序列对于建模持续变化的数据是理想的。关系模型无法很好地支持所有应用程序变得越来越清晰。随着多样化数据类型和结构的出现，为这些新数据模型开发的数据库也随之出现，同时还有新的查询语言。
 
-The database evolution in past twenty-plus years leads to a database landscape that is extremely complex. Now, we have a myriad of databases for different data models, further fragmented by scale (single-node, distributed storage, shared-nothing-distributed), environment (on-premises, cloud) and storage device (in-memory, SSD, non-volatile memory). This fragmentation presents daunting challenges for users. As [illustrated](https://a16z.com/wp-content/uploads/2023/04/Unified-Data-Infrastructure-2.0-1.png) in [an article](https://a16z.com/emerging-architectures-for-modern-data-infrastructure/) from Andreessen Horowitz, the modern data pipeline now consists of numerous specialized components, each designed to handle specific tasks, creating a maze of tools and systems that users must navigate to manage their data. If cloud providers need [multiple](https://docs.aws.amazon.com/whitepapers/latest/choosing-an-aws-nosql-database/decision-making.html) [articles](https://docs.aws.amazon.com/decision-guides/latest/databases-on-aws-how-to-choose/databases-on-aws-how-to-choose.html) and [decision diagrams](https://docs.aws.amazon.com/images/whitepapers/latest/choosing-an-aws-nosql-database/images/decision-tree2.png) to explain how to choose the right database, many would agree that we might have gone a little [too far](https://medium.com/koalabs/one-size-does-not-fit-all-in-database-systems-true-in-early-2000s-now-we-have-the-opposite-d41146bc6693).
+过去二十多年的数据库演进导致了一个极其复杂的数据库格局。现在，我们有大量针对不同数据模型的数据库，进一步按规模（单节点、分布式存储、完全分布式）、环境（本地、云）和存储设备（内存、SSD、非易失性内存）分类。这种分散化给用户带来了巨大的挑战。正如 Andreessen Horowitz 的[一篇文章](https://a16z.com/emerging-architectures-for-modern-data-infrastructure/)中[所示](https://a16z.com/wp-content/uploads/2023/04/Unified-Data-Infrastructure-2.0-1.png)，现代数据管道现在由众多专门组件组成，每个组件都设计用于处理特定任务，形成了一个用户必须导航的工具和系统迷宫。如果云提供商需要[多篇](https://docs.aws.amazon.com/whitepapers/latest/choosing-an-aws-nosql-database/decision-making.html)[文章](https://docs.aws.amazon.com/decision-guides/latest/databases-on-aws-how-to-choose/databases-on-aws-how-to-choose.html)和[决策图](https://docs.aws.amazon.com/images/whitepapers/latest/choosing-an-aws-nosql-database/images/decision-tree2.png)来解释如何选择正确的数据库，许多人会同意我们可能[走得太远了](https://medium.com/koalabs/one-size-does-not-fit-all-in-database-systems-true-in-early-2000s-now-we-have-the-opposite-d41146bc6693)。
 
-Do we have to build a new database all over again for every new type of data model/ environment/ hardware? If we examine a new database and compare it with an existing one, it is evident that the vast majority of functionality is the same. A new database has to re-implement many features that have been developed many times before offering some new value. We should, and we believe that we can, do better.
+我们是否必须为每种新的数据模型/环境/硬件类型从头开始构建一个新的数据库？如果我们检查一个新数据库并将其与现有数据库进行比较，很明显大多数功能是相同的。新数据库必须重新实现许多之前已经开发过多次的功能才能提供一些新价值。我们应该，而且我们相信我们可以，做得更好。
 
-At EloqData, our answer to this grand question is **Data Substrate**.
+在 EloqData，我们对这个宏大问题的答案是**数据基底**。
 
-## Inspiration: Single-Node RDBMS
+## 灵感：单节点 RDBMS
 
-Data substrate draws inspirations from the canonical design of single-node relational database management systems (RDBMS). To understand where Data Substrate originates, let us revisit what RDBMS does. In a simplified form, a RDBMS kernel contains 4 modules: (1) a disk-resident B+-tree to store data items, (2) a write-ahead log to persist data changes, (3) a buffer pool to cache B+-tree pages in memory, and (4) a lock table to coordinate reads and writes for concurrency control.
+数据基底的灵感来自单节点关系型数据库管理系统（RDBMS）的规范设计。要理解数据基底的起源，让我们回顾一下 RDBMS 的功能。简化来说，RDBMS 内核包含 4 个模块：(1) 一个用于存储数据项的磁盘驻留 B+ 树，(2) 一个用于持久化数据更改的预写日志，(3) 一个用于在内存中缓存 B+ 树页面的缓冲池，以及 (4) 一个用于协调并发控制的读写的锁表。
 
 <p align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
@@ -37,35 +37,29 @@ import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
 </div></p>
 
-<!-- <p align="center">
-<div style={{ width: '600px', textAlign: 'center'}}>
-![](img/blog_ds_1.png)
-</div>
-</p> -->
+考虑一个读取和更新数据项 x 的事务 T。T 遍历 B+ 树并在缓冲池中搜索每个页面（①）。如果发生缓存未命中，T 定位磁盘驻留页面（②）并将其加载到缓冲池中（③）。然后 T 在缓冲池中固定包含 x 的页面，在锁表中为 x 添加读锁（④），读取 x（⑤）并取消固定页面。
 
-Considering a transaction T that reads and updates a data item x. T traverses the B+-tree and searches the buffer pool for each page (①). If there is is a cache miss, T locates the disk-resident page (②) and loads it into the buffer pool (③). T then pins the page containing x in the buffer pool, adds a read lock on x in the lock table (④), reads x (⑤) and unpins the page.
+要更新 x，T 将 x 的锁升级为写锁（⑥），更新缓冲池中 x 的页面（⑦）并将重做/撤销操作追加到日志（⑧）。T 通过同步刷新提交记录到日志来提交，这也强制之前的重做/撤销日志条目持久化。
 
-To update x, T upgrades the lock on x to a write lock (⑥), updates the page of x in the buffer pool (⑦) and appends redo/undo operations to the log (⑧). T commits by synchronously flushing a commit record to the log, which also forces the persistence of the prior redo/undo log entries.
+当 T 提交时，x 的更改记录在日志中和缓冲池中的内存页面中，但尚未记录在磁盘驻留的 B+ 树中。一个称为检查点的后台进程定期将脏页面刷新到磁盘（⑨）。
 
-By the time T commits, the change on x is recorded in the log and the in-memory page in the buffer pool, but not yet in the disk-resident B+-tree. A background process called checkpointing periodically flushes dirty pages to disk (⑨).
+虽然最初是为表格数据的事务处理而设计，但这些设计原则对于支持 CRUD 操作是最优的。这个过程中最重要的四个支柱是：
 
-Although originally designed for transaction processing of tabular data, the design priniciples are optimal for supporting CRUD operations. The four most important pillars of this process are:
+- _持久性_。为确保数据持久性，系统使用追加式日志来持久化更改。顺序写入提供了从稳定存储可实现的最高写入吞吐量。在关键路径中只有一次同步写入，没有任何设计能提供更高的吞吐量和更低的延迟。日志对于数据安全也至关重要，因为大多数存储设备在断电期间无法避免部分写入。
 
-- _Durability_. To ensure data durability, the system uses an append-only log to persist changes. Sequential writes offer the highest write throughput achievable from stable storage. With only one synchronous write in the critical path, no design provides higher throughput and lower latency than using the log to achieve durability. The log is also crucial for data safety, as most storage devices cannot avoid partial writes during power failures.
+- _缓存_。有了日志提供持久性，数据更改就保留在内存中。这减少了写入路径中的 IO，并防止后续操作读取到过时的数据。在内存中缓存也优化了未来读取的性能。
 
-- _Cache_. With the log providing durability, data changes are retained in memory. This reduces IO in the write path and prevents stale reads in subsequent operations. Caching in memory also optimizes performance for future reads.
+- _异步性_。缓存的数据更改异步刷新到稳定存储，这通过两种方式减少了写入稳定存储的成本。首先，对同一数据项的多次更改被合并。其次，可以累积一批更改并重组以优化顺序写入。
 
-- _Asynchrony_. Cached data changes are asynchronously flushed to stable storage, which reduces the cost of writing to stable storage in two ways. First, multiple changes on the same data item are coalesced. Second, a batch of changes can be accumulated and reorgnized to optimize sequential writes.
+- _一致性和容错_。异步性在数据更改在缓存中可见和刷新到稳定存储之间创建了一个窗口。为了处理故障，系统维护一个不变量：数据更改必须存在于缓存、稳定存储或两者中。这个不变量确保 (1) 在缓存替换期间，除非已经刷新，否则不能驱逐脏页面，以及 (2) 在故障转移期间，未刷新的更改必须从日志恢复到缓存或稳定存储中。
 
-- _Consistency and fault tolerance_. Asynchrony creates in a window between when the data change becomes visible in cache and when it is flushed to stable storage. To handle failures, the system maintains an invariant: the data change must reside in either cache, stable storage, or both. This invariant ensures that (1) during cache replacement, a dirty page cannot be evicted unless it has been flushed, and (2) during failover, unflushed changes must be recovered in either stable storage or the cache.
+## 数据基底
 
-## Data Substrate
+这些设计原则的价值超越了 RDBMS。无论数据项是表中的一行、一个数据结构还是一个 JSON 文档，只要我们想要安全地将其存储在稳定存储中，持久性原则就适用。无论数据库在单个节点上运行还是在分布式环境中，内存都是快速但稀缺的，存储是丰富但慢的，所以我们需要缓存和异步原则来平衡两者以服务读写操作。在数据基底中，我们将这些原则扩展到任何数据模型在分布式环境中的（非事务性）CRUD 操作。
 
-The values of the design principles go beyond RDBMS. Whether the data item is a row in a table, a data structure or a JSON document, the durability principle applies as long as we want to store it safely in stable storage. Regardless of whether the database runs in a single node or a distributed environment, memory is fast but scarce, storage is abundant but slow, so we need the cache and asynchrony principles to balance the two to serve reads and writes. In Data Substrate, we extend these principles to (non-transactional) CRUD operations of any data models in distributed environments.
+- _持久性_。数据基底使用分布式、复制的日志来持久化数据更改。每个日志记录器都进行复制以实现高可用性。拥有多个日志记录器提供了写入吞吐量的可扩展性。
 
-- _Durability_. Data substrate uses a distributed, replicated log for persisting data changes. Each logger is replicated for high availability. Having multiple loggers provides scalability for write throughput.
-
-- _Cache and concurrency control_. Data substrate uses a distributed, in-memory map for cache and concurrency control. We call this map the "TxMap". The map key identifies a data item, and the payload includes the value and meta-data for concurrency control. Accessing a map entry reads/writes the cached value and performs concurrency control. Concurrency control is optional: if the operation is non-transactional or does not require locks, the access does not change the meta-data.
+- _缓存和并发控制_。数据基底使用分布式、内存中的映射进行缓存和并发控制。我们称这个映射为"TxMap"。映射键标识一个数据项，有效负载包括值和用于并发控制的元数据。访问映射条目读取/写入缓存的值并执行并发控制。并发控制是可选的：如果操作是非事务性的或不需要锁，访问不会更改元数据。
 
 <p align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
@@ -74,13 +68,7 @@ The values of the design principles go beyond RDBMS. Whether the data item is a 
 
 </div></p>
 
-<!-- <p align="center">
-<div style={{ width: '600px', textAlign: 'center' }}>
-![](img/blog_ds_2.png)
-</div>
-</p> -->
-
-- _Asynchrony_. Changed data items are first flushed to the log and then updated in the TxMap. Updated data items are asynchronously flushed to a persistent store. The persistent store plays the same role as a B+-tree and stores data items in stable storage. The persistent store exposes Get(), Put() APIs for reading and writing data items.
+- _异步性_。更改的数据项首先刷新到日志，然后更新在 TxMap 中。更新的数据项异步刷新到持久存储。持久存储扮演与 B+ 树相同的角色，在稳定存储中存储数据项。持久存储暴露 Get()、Put() API 用于读取和写入数据项。
 
 <p align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
@@ -89,13 +77,7 @@ The values of the design principles go beyond RDBMS. Whether the data item is a 
 
 </div></p>
 
-<!-- <p align="center">
-<div style={{ width: '600px', textAlign: 'center' }}>
-![](img/blog_ds_3.png)
-</div>
-</p> -->
-
-- _Consistency and fault tolerance_. Data substrate maintains the same invariant as RDBMS: (1) a changed data item cannot be evicted from the TxMap until it is flushed to the persistent store, and (2) A fail-over node of the TxMap cannot start serving unless unflushed data items are recovered in the TxMap from the log.
+- _一致性和容错_。数据基底维护与 RDBMS 相同的不变量：(1) 更改的数据项在从 TxMap 驱逐之前必须刷新到持久存储，以及 (2) TxMap 的故障转移节点在开始服务之前必须从日志中恢复未刷新的数据项到 TxMap 中。
 
 <p align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
@@ -104,13 +86,7 @@ The values of the design principles go beyond RDBMS. Whether the data item is a 
 
 </div></p>
 
-<!-- <p align="center">
-<div style={{ width: '600px', textAlign: 'center' }}>
-![](img/blog_ds_4.png)
-</div>
-</p> -->
-
-## Modularity
+## 模块化
 
 <p align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
@@ -119,25 +95,19 @@ The values of the design principles go beyond RDBMS. Whether the data item is a 
 
 </div></p>
 
-<!-- <p align="center">
-<div style={{ width: '600px', textAlign: 'center' }}>
-![](img/substrate_arch.png)
-</div>
-</p> -->
+数据基底的独特之处在于模块化。TxMap 暴露 API 供运行时访问数据和管理并发控制。持久存储暴露 API 供 TxMap 刷新更改的数据和检索已驱逐的数据。日志提供 API 用于持久化数据更改并将未刷新的数据发送到 TxMap 以进行恢复。模块通过精心设计的 API 相互通信，不假设其他模块的位置、实现方式或使用的硬件资源。
 
-What makes Data Substrate unique is modularity. The TxMap exposes APIs for runtime to access data and manage concurrency control. The persistent storage exposes APIs for the TxMap to flush changed data and to retrieve data that have been evicted. The log provides APIs to persist data changes and to ship unflushed data to the TxMap for recovery. Modules communicate with each other via carefully designed APIs, with no assumption about where the other modules are located, how they are implemented, or what hardware resources they use.
+数据基底和持久存储对数据类型是不可知的。无论数据项代表一行还是一个 JSON 文档，并发控制和缓存替换算法都不会改变。日志条目包含序列化的数据项更改，这也与数据类型无关。持久存储通过标识符索引数据项，使用相同的索引结构。本质上，不同类型的数据面临相同的系统挑战，数据基底一次性解决它们。构建特定数据模型的操作数据库大大简化，只需在顶部放置特定的查询引擎即可。
 
-Data Substrate and the persistent store is agnostic to the data types. Concurrency control and cache replacement algorithms would not change if a data item represents a row or a JSON document. Log entries contain serialized changes to data items, which are also agnostic to data types. The persistent store indexes data items by identifiers and use the same index structures. In essence, data of different types face the same system challenges and Data Substrate solves them once for all. Building an operational database of a certain data model is greatly simplified by porting a specific query engine on top.
+模块化也改变了数据库的扩展方式。传统上，数据库要么垂直扩展，要么水平扩展。最近云原生数据库解耦计算和存储的趋势允许 CPU 和存储独立扩展。数据基底的模块化更进一步，以最细粒度扩展数据库：CPU、缓存（内存）、日志（存储）和持久存储（存储）。这种扩展灵活性允许数据库使用最少的资源满足应用程序的性能要求。
 
-Modularity also changes how a database scales. Conventionally, a database either scales vertically or horizontally. The recent trend of disaggregating compute and storage in cloud-native databases allows CPU and storage to scale separately. Data Substrate’s modularity goes a step further and scales the database at the finest granularity: CPU, cache (memory), the log (storage) and the persistent store (storage). This scaling flexibility allows the database to use minimal resources to meet applications’ performance requirements.
+- 对于读密集型、延迟敏感的应用（如社交网络信息流），数据库缓存热数据在内存中，只在工作负载激增时扩展缓存。如今，单个虚拟机的内存从 4 GB 到超过 256 GB。因此，扩展数据库缓存首先是垂直扩展，超过某个点后才水平扩展。日志规模很小，因为工作负载主要是读取。
+- 对于写密集型应用（如高频交易），数据库水平扩展日志到多个存储设备以快速持久化更改。水平扩展确保写入吞吐量高，同时保持写入延迟低。日志独立于缓存大小和数据量，后者可能很小并且适合单机内存和磁盘。
 
-- For a read-intensive, latency-sensitive application (such as social network feeds), the database caches hot data in memory and only scales the cache when the workload surges. Today, a single VM's memory goes from 4 GB to over 256 GB. Thus, scaling the database cache first scales up, and beyond a certain point scales out. The log scale is small, as the workload is mostly-read.
-- For a write-heavy application (such as hi-frequency trading), the database scales the log horizontally to many storage devices to persist changes quickly. Horizontal scaling ensures the write throughput is high, while keeping write latency low. Logging is independent of the cache size and data volume, which may be small and can fit into a single machine’s memory and a disk.
+虽然我们相信 ACID 事务对应用程序至关重要，但我们也相信 ACID 事务应该是可选的，这样不需要它们的应用程序就不必付出代价。在数据基底中，这是通过禁用某些模块或绕过 ACID 事务逻辑来实现的。例如，通过禁用日志，数据库放弃持久性并成为缓存系统。
 
-While we believe ACID transactions are essential to applications, we also believe that ACID transactions should be optional such that applications that do not need them shall not pay the cost. In Data Substrate, this is achieved by disabling some modules or bypass ACID transaction logics. For example, by disabling the log, the database drops durability and becomes a cache system.
+## EloqKV 及其他
 
-## EloqKV and Beyond
+数据基底开启了许多机会。无论你是构建缓存、内存数据库，还是针对某个数据模型的云原生数据库，你只需在数据基底之上放置查询解析器和执行引擎，就万事俱备了。你获得了一个弹性、高性能和容错的操作数据库。
 
-Data Substrate opens the door to many opportunities. Regardless of whether you are building a cache, an in-memory DB, or a cloud-native DB for a certain data model, you just need to place a query parser and an execution engine on top of the Data Substrate, and you are all set. You get an elastic, performant and fault tolerant operational database.
-
-We are working on the first incarnation of Data Substrate, a key-value database. What is your favorite data model? What are the capabilities you expect most from databases? [Drop us a note](/contact). We will keep you posted as we make progress on the next generation of databases.
+我们正在开发数据基底的第一个实例，一个键值数据库。你最喜欢的数据模型是什么？你最期待数据库具备哪些能力？[给我们留言](/contact)。我们会在下一代数据库取得进展时随时通知你。

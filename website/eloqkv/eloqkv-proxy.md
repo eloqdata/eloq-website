@@ -1,192 +1,116 @@
 ---
-title: EloqKV Proxy
-summary: EloqKV Proxy
+title: EloqKV 代理
+summary: EloqKV 代理
 ---
 
-# EloqKV Proxy
+# EloqKV 代理
 
-## Introduction
+## 简介
 
-EloqKV Proxy is a high-performance proxy server written in Go, designed to manage multiple EloqKV clusters seamlessly. It allows clients to connect to different EloqKV clusters using tokens (passwords), enabling a multi-tenant environment. The proxy supports dynamic addition and removal of clusters via a RESTful web service, making it ideal for production environments where scalability and flexibility are essential.
+EloqKV 代理是一个用 Go 编写的高性能代理服务器,旨在无缝管理多个 EloqKV 集群。它允许客户端使用令牌(密码)连接到不同的 EloqKV 集群,实现多租户环境。代理支持通过 RESTful Web 服务动态添加和删除集群,这使其非常适合需要可扩展性和灵活性的生产环境。
 
-### Key Features:
+### 主要特性:
 
-- **Multi-Tenancy Support:** Route client connections to different EloqKV clusters based on tokens.
-- **Dynamic Cluster Management:** Add, remove, and check clusters on-the-fly using a RESTful web service.
-- **High Available:** Proxy is stateless and is a High Available solution when configure with Load Balancer.
-- **Configurable:** Configure the proxy via a configuration file or command-line arguments.
-- **Standard Redis Compatibility:** Supports standard Redis commands and authentication mechanisms.
+- **多租户支持:** 基于令牌将客户端连接路由到不同的 EloqKV 集群。
+- **动态集群管理:** 通过 RESTful Web 服务添加、删除和检查集群。
+- **高可用性:** 代理是无状态的,当配置负载均衡器时可以实现高可用。
+- **可配置:** 通过配置文件或命令行参数配置代理。
+- **标准 Redis 兼容性:** 支持标准 Redis 命令和认证机制。
 
-## Quick Start
+## 快速开始
 
-EloqKV proxy can be installed using `eloqctl`.
+EloqKV 代理可以使用 `eloqctl` 安装。
 
-### Initialize proxy topology file
+### 初始化代理拓扑文件
 
-Example proxy topology template files can be found in the .eloqctl/config/examples directory.
+示例代理拓扑模板文件可以在 .eloqctl/config/examples 目录中找到。
 
 ```
-# example yaml file
+# 示例 yaml 文件
 .eloqctl/config/examples/eloqkv_proxy.yaml
 ```
 
-To deploy proxy, edit the eloqkv_proxy.yaml file
+要部署代理,编辑 eloqkv_proxy.yaml 文件
 
-```
+```yaml
 connection:
-  username: "${USER}"
-  auth_type: "keypair"
+  username: '${USER}'
+  auth_type: 'keypair'
   auth:
-    keypair: "/home/${USER}/.ssh/id_rsa"
-proxy_service:
-  proxy_name: "proxy-1"
-  proxy_host_ports: [10.0.0.5:6380,10.0.0.6:6380]
-  web_service_ports: [8080, 8080]
-  install_dir: "/home/${USER}"
-  eloqkv_cluster_addr: [10.0.0.1:6379]
-  eloqkv_cluster_token: ["xxxxxxxx"]
-  eloqkv_cluster_password: ["xxxxxxxx"]
+    keypair: '/home/${USER}/.ssh/id_rsa'
+deployment:
+  cluster_name: 'eloqkv-proxy'
+  product: 'EloqKV'
+  version: 'latest'
+  install_dir: '/home/${USER}'
+  proxy:
+    host: 10.0.0.1
+    port: 6379
+    web_service_addr: '10.0.0.1:8080'
 ```
 
-Next, we'll provide detailed explanations for each configuration option available in the YAML file.
+### 运行部署命令
 
-The `connection` section includes settings for connecting to EloqKV nodes from the control machine. If you followed the steps in the [Prerequisite Document](./prerequisite), you can leave the connection section unchanged.
-
-The `proxy_service` section covers the configurations for proxy topology and config parameter.
-
-- **`proxy_name`**:  
-  _Type_: `String`  
-  The name of the proxy cluster being deployed serves as an identifier for the cluster. With `eloqctl`, you can deploy and manage multiple proxy clusters, each distinguished by its unique name.
-- **`eloqkv_cluster_addr`**:  
-   _Type_: `List of Strings`  
-  Address of the EloqKV cluster. If there are multiple nodes in EloqKV cluster, you only need to put 1 node address here.
-- **`eloqkv_cluster_token`**:
-  _Type_: `String`  
-  Token to indicate which cluster should be routed to. Token need to be the same as password in alpha version. If cluster does not have any password, leave it empty.
-- **`eloqkv_cluster_password`**:
-  _Type_: `String`  
-  Password the proxy uses to authenticate with the EloqKV cluster. If cluster does not have any password, leave it empty.
-- **`proxy_host_ports`**:
-  _Type_: `List of Strings`  
-  Address that each proxy node listens on.
-- **`web_service_ports`**:
-  _Type_: `List of Integers`  
-  Port where the management web service listens on each proxy node.
-
-### Running the Proxy
+修改完 `eloqkv_proxy.yaml` 后,使用 `eloqctl launch` 命令配置 EloqKV 代理:
 
 ```shell
-eloqctl proxy start --config .eloqctl/config/examples/eloqkv_proxy.yaml
+eloqctl launch ${HOME}/.eloqctl/config/examples/eloqkv_proxy.yaml -s
 ```
 
-### Connecting Clients
+该命令将在指定的主机上安装 EloqKV 代理。
 
-Clients can connect to the proxy as they would to a regular EloqKV server.
+### 添加集群
 
-- With Token Authentication:
+**HTTP 请求:**
 
-```
-redis-cli -p 6380 -a aaaaaaaa
-```
-
-- Without Token (if only one cluster and no token is set):
-
-```
-redis-cli -p 6380
-```
-
-Once connected, clients can execute standard Redis commands:
-
-```
-SET key1 "Hello, Redis!"
-GET key1
-```
-
-## Management
-
-The proxy includes a RESTful web service for managing EloqKV clusters dynamically.
-
-### Stop the proxy
-
-```shell
-eloqctl proxy stop --proxy-name ${proxy_name}
-```
-
-### List current proxies
-
-```shell
-eloqctl proxy list
-```
-
-### Adding a New Cluster
-
-You can add a new EloqKV cluster to the proxy without restarting it.
-
-**HTTP Request:**
-
-- **Method:** POST
-- **URL:** http://web_service_addr/cluster
-- **Request Body (JSON):**
-
-```
-{
-  "cluster_id": "cluster2",
-  "addrs": ["127.0.0.1:6399"],
-  "token": "bbbbbbbb",
-  "password": "bbbbbbbb"
-}
-```
-
-Example using curl:
-
-```
-curl -X POST -H "Content-Type: application/json" -d '{
-  "cluster_id": "cluster2",
-  "addrs": ["127.0.0.1:6399"],
-  "token": "bbbbbbbb",
-  "password": "bbbbbbbb"
-}' http://localhost:8080/cluster
-```
-
-Response:
-
-```
-Cluster cluster2 added successfully
-```
-
-### Checking if a Cluster Exists
-
-**HTTP Request:**
-
-- **Method:** GET
+- **方法:** POST
 - **URL:** http://web_service_addr/cluster/token
 
-Example using curl:
+使用 curl 示例:
+
+```
+curl -X POST http://localhost:8080/cluster/bbbbbbbb -d '{"nodes": ["10.0.0.2:6379", "10.0.0.3:6379", "10.0.0.4:6379"]}'
+```
+
+响应:
+
+```
+Cluster with token bbbbbbbb added successfully
+```
+
+### 检查集群
+
+**HTTP 请求:**
+
+- **方法:** GET
+- **URL:** http://web_service_addr/cluster/token
+
+使用 curl 示例:
 
 ```
 curl http://localhost:8080/cluster/bbbbbbbb
 ```
 
-Response:
+响应:
 
 ```
 Cluster with token bbbbbbbb exists
 ```
 
-### Removing a Cluster
+### 删除集群
 
-**HTTP Request:**
+**HTTP 请求:**
 
-- **Method:** DELETE
+- **方法:** DELETE
 - **URL:** http://web_service_addr/cluster/token
 
-Example using curl:
+使用 curl 示例:
 
 ```
 curl -X DELETE http://localhost:8080/cluster/bbbbbbbb
 ```
 
-Response:
+响应:
 
 ```
 Cluster with token bbbbbbbb removed successfully
