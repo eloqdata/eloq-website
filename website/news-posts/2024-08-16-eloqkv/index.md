@@ -4,11 +4,9 @@ authors: eloq
 date: 2024-08-16
 tags: [Product]
 news: true
-blog: true
 image: /img/blog/eloqkv_launch.jpg
 description: EloqKV is a cutting-edge key-value database offering high performance, scalability, and full ACID compliance. Learn how it revolutionizes data management with its innovative architecture and advanced features.
-featured: true
-featuredMain: true
+newsFeatured: true
 ---
 
 We're thrilled to introduce **EloqKV**, a _high performance Redis API-compatible, ACID transactional, scalable, distributed_ key-value database. You might be thinking, "Really? Another key-value database?" In this post, we'll explain what makes **EloqKV** stand out and the unique values **EloqKV** offers.

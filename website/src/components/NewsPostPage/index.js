@@ -2,7 +2,7 @@ import React from 'react';
 import BlogPostPage from '@theme/BlogPostPage';
 
 export default function NewsPostPage(props) {
-  // Only render if the post has news tag
+  // Only render if the post has news: true
   if (!props.content.frontMatter.news) {
     return null;
   }

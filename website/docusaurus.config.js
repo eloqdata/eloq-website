@@ -116,7 +116,7 @@ module.exports = {
       '@docusaurus/plugin-content-blog',
       {
         id: 'news',
-        path: 'blog',
+        path: 'news-posts',
         routeBasePath: 'news',
         blogTitle: 'News',
         blogDescription: 'Latest news and announcements from EloqData',
