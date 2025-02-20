@@ -66,7 +66,7 @@ eloqctl stop ${cluster_name} -a
 4. Stop Monitor. Prometheus and grafana will be stopped by the following command:
 
 ```
-eloqctl monitor ${cluster_name} stop
+eloqctl monitor stop ${cluster_name}
 ```
 
 5. If cluster is deployed with a password, all of the above commands needs to add `--password` option

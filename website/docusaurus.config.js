@@ -83,10 +83,6 @@ module.exports = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          //         editUrl:
-          //           'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         blog: {
           path: 'blog',
@@ -105,7 +101,6 @@ module.exports = {
             require.resolve('./src/css/versions.scss'),
           ],
         },
-        // TODO: GA is deprecated, remove once we're sure data is streaming in GA4 via gtag.
         googleAnalytics: {
           trackingID: 'UA-41298772-2',
         },
@@ -117,6 +112,26 @@ module.exports = {
   ],
   plugins: [
     'docusaurus-plugin-sass',
+    [
+      '@docusaurus/plugin-content-blog',
+      {
+        id: 'news',
+        path: 'blog',
+        routeBasePath: 'news',
+        blogTitle: 'News',
+        blogDescription: 'Latest news and announcements from EloqData',
+        blogSidebarTitle: 'Recent News',
+        blogSidebarCount: 5,
+        postsPerPage: 10,
+        showReadingTime: true,
+        blogListComponent: require.resolve(
+          './src/components/NewsListPage/index.js'
+        ),
+        blogPostComponent: require.resolve(
+          './src/components/NewsPostPage/index.js'
+        ),
+      },
+    ],
     [
       '@docusaurus/plugin-content-docs',
       {
@@ -247,9 +262,22 @@ module.exports = {
             ],
           },
           {
-            to: '/blog',
-            label: 'Blog',
+            label: 'Learn',
             position: 'right',
+            items: [
+              {
+                label: 'Blog',
+                to: '/blog',
+              },
+              {
+                label: 'News',
+                to: '/news',
+              },
+              {
+                label: 'Forum',
+                href: 'https://eloqdata.discourse.group/',
+              },
+            ],
           },
           {
             label: 'Download',
