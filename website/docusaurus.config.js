@@ -154,6 +154,13 @@ module.exports = {
         path: 'eloqkv',
         routeBasePath: 'eloqkv',
         sidebarPath: require.resolve('./sidebarsEloqKV.js'),
+        versions: {
+          current: {
+            label: 'Current',
+            path: '',
+          },
+        },
+        lastVersion: 'current',
         // ... other options
       },
     ],
