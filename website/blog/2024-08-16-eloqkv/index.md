@@ -4,10 +4,12 @@ authors: eloq
 date: 2024-08-16
 tags: [Product]
 image: /img/blog/eloqkv_launch.jpg
-description: Introducing EloqKV...
+description: EloqKV is a cutting-edge key-value database offering high performance, scalability, and full ACID compliance. Learn how it revolutionizes data management with its innovative architecture and advanced features.
+featured: true
+featuredMain: true
 ---
 
-We’re thrilled to introduce **EloqKV**, a _high performance Redis API-compatible, ACID transactional, scalable, distributed_ key-value database. You might be thinking, “Really? Another key-value database?” In this post, we’ll explain what makes **EloqKV** stand out and the unique values **EloqKV** offers.
+We're thrilled to introduce **EloqKV**, a _high performance Redis API-compatible, ACID transactional, scalable, distributed_ key-value database. You might be thinking, "Really? Another key-value database?" In this post, we'll explain what makes **EloqKV** stand out and the unique values **EloqKV** offers.
 
 <!--truncate-->
 
@@ -19,9 +21,9 @@ Like many key-value stores, **EloqKV** delivers exceptional performance, handlin
 
 Many key-value stores keep all data in memory to achieve low latency. However, this approach significantly increases costs, as even infrequently accessed (cold) data takes up valuable memory. Additionally, durability is often sacrificed for performance, though on modern SSDs optimized [Write-Ahead Logs (WAL)](https://en.wikipedia.org/wiki/Write-ahead_logging) can often help reduce the impact to acceptable levels. Moreover, due to the high cost of distributed transactions, most distributed key-value stores either forgo transaction support or offer only limited, partial transactions.
 
-**EloqKV** takes a different approach, embracing the philosophy that [ACID](https://en.wikipedia.org/wiki/ACID) (Atomicity, Consistency, Isolation, Durability) transactions are important but should not add extra costs when they’re not needed. **EloqKV** lets you enable ACID as a configuration flag. When ACID is disabled, **EloqKV** incurs no additional overhead, offering performance comparable to that of non-transactional key-value databases. Currently in Beta and available in a future release, **EloqKV** will allow ACID support to be turned on and off on a per-database basis, further avoiding unnecessary overhead and simplifying management.
+**EloqKV** takes a different approach, embracing the philosophy that [ACID](https://en.wikipedia.org/wiki/ACID) (Atomicity, Consistency, Isolation, Durability) transactions are important but should not add extra costs when they're not needed. **EloqKV** lets you enable ACID as a configuration flag. When ACID is disabled, **EloqKV** incurs no additional overhead, offering performance comparable to that of non-transactional key-value databases. Currently in Beta and available in a future release, **EloqKV** will allow ACID support to be turned on and off on a per-database basis, further avoiding unnecessary overhead and simplifying management.
 
-Even with full ACID compliance, **EloqKV** incorporates several innovations to minimize overhead. For example, the latency of WAL logging is typically dominated by synchronous writes to stable storage. In **EloqKV**, logging can scale horizontally and independently, reducing logging latency when more storage devices are added. Moreover, in **EloqKV**, single-key read transactions do not incur extra overheads. This makes **EloqKV** blazingly fast for many common workloads. We’ll dive deeper into these technologies in future blog posts or academic papers.
+Even with full ACID compliance, **EloqKV** incorporates several innovations to minimize overhead. For example, the latency of WAL logging is typically dominated by synchronous writes to stable storage. In **EloqKV**, logging can scale horizontally and independently, reducing logging latency when more storage devices are added. Moreover, in **EloqKV**, single-key read transactions do not incur extra overheads. This makes **EloqKV** blazingly fast for many common workloads. We'll dive deeper into these technologies in future blog posts or academic papers.
 
 ## Scale as You Need, on What You Need
 
@@ -29,13 +31,13 @@ Even with full ACID compliance, **EloqKV** incorporates several innovations to m
 
 If your workload is latency-sensitive and requires all data to be stored in memory, you can reserve virtual machines with large memory capacities. Need to handle a high volume of updates that must be persisted? Simply add a few extra EBS volumes as logging devices. If your data is large, you can use cloud storage options like DynamoDB or S3 to cost-effectively store infrequently accessed data.
 
-We’re also developing transparent, dynamic scaling, which will allow you to add and remove resources dynamically as your workload changes. This feature will be available in a public preview soon, so stay tuned.
+We're also developing transparent, dynamic scaling, which will allow you to add and remove resources dynamically as your workload changes. This feature will be available in a public preview soon, so stay tuned.
 
 ## You Want Ease of Use? You Get Ease of Use
 
-**EloqKV** is compatible with the [Redis API](/eloqkv/kvstore_compatibility) and supports most of Redis’s essential data structures. This means that most existing applications can easily take advantage of **EloqKV**’s advanced features with minimal effort.
+**EloqKV** is compatible with the [Redis API](/eloqkv/kvstore_compatibility) and supports most of Redis's essential data structures. This means that most existing applications can easily take advantage of **EloqKV**'s advanced features with minimal effort.
 
-But **EloqKV**’s ease of use goes beyond API compatibility. The true user-friendliness of **EloqKV** lies in the fundamental architectural design choices we’ve made.
+But **EloqKV**'s ease of use goes beyond API compatibility. The true user-friendliness of **EloqKV** lies in the fundamental architectural design choices we've made.
 
 **EloqKV** can be deployed as a single-node key-value store, similar to [Redis](https://redis.io/) and [Memcached](https://memcached.org/). However, **EloqKV** is inherently designed as a distributed system. It can be deployed in a cluster with ease, instantly benefiting from the high availability and scalability of a true distributed system — no need for a [sentinel](https://redis.io/docs/latest/operate/oss_and_stack/management/sentinel/) or special [cluster mode](https://redis.io/docs/latest/operate/oss_and_stack/management/scaling/).
 

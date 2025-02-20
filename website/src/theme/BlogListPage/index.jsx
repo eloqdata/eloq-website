@@ -31,10 +31,16 @@ function BlogListPageMetadata(props) {
 function BlogPostCard({ post, isFeaturedMain = false }) {
   const {
     content: {
-      metadata: { permalink, title, description },
+      metadata: { permalink, title, description, date },
       frontMatter,
     },
   } = post;
+
+  const formattedDate = new Date(date).toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
 
   return (
     <article
@@ -49,10 +55,17 @@ function BlogPostCard({ post, isFeaturedMain = false }) {
         </Link>
       )}
       <div className={styles.blogCardContent}>
+        {isFeaturedMain && frontMatter.tags && (
+          <div className={styles.blogCardMeta}>
+            {frontMatter.tags[0]} • {formattedDate}
+          </div>
+        )}
         <h2 className={styles.blogCardTitle}>
           <Link to={permalink}>{title}</Link>
         </h2>
-        <p className={styles.blogCardDescription}>{description}</p>
+        {isFeaturedMain && (
+          <p className={styles.blogCardDescription}>{description}</p>
+        )}
       </div>
     </article>
   );
@@ -60,26 +73,47 @@ function BlogPostCard({ post, isFeaturedMain = false }) {
 
 function BlogListPageContent(props) {
   const { items, metadata } = props;
-  const [mainFeatured, ...otherFeatured] = items.slice(0, 3);
-  const regularPosts = items.slice(3);
+
+  // Filter featured and non-featured posts
+  const featuredPosts = items.filter(
+    (post) => post.content.frontMatter.featured
+  );
+  const regularPosts = items.filter(
+    (post) => !post.content.frontMatter.featured
+  );
+
+  // Get main featured post and other featured posts
+  const mainFeaturedPost = featuredPosts.find(
+    (post) => post.content.frontMatter.featuredMain
+  );
+  const otherFeaturedPosts = featuredPosts.filter(
+    (post) => !post.content.frontMatter.featuredMain
+  );
 
   return (
-    <BlogLayout>
+    <BlogLayout isBlogListPage={true}>
       <div className={styles.blogContainer}>
         <div className="container">
-          <section className={styles.featuredSection}>
-            <h1 className={styles.sectionTitle}>Featured</h1>
-            <div className={styles.featuredGrid}>
-              <div className={styles.featuredMainPost}>
-                <BlogPostCard post={mainFeatured} isFeaturedMain={true} />
+          {(mainFeaturedPost || otherFeaturedPosts.length > 0) && (
+            <section className={styles.featuredSection}>
+              <h1 className={styles.sectionTitle}>Featured</h1>
+              <div className={styles.featuredGrid}>
+                {mainFeaturedPost && (
+                  <div className={styles.featuredMainPost}>
+                    <BlogPostCard
+                      post={mainFeaturedPost}
+                      isFeaturedMain={true}
+                    />
+                  </div>
+                )}
+                <div className={styles.featuredSidePosts}>
+                  {otherFeaturedPosts.slice(0, 2).map((post, idx) => (
+                    <BlogPostCard key={idx} post={post} />
+                  ))}
+                </div>
               </div>
-              <div className={styles.featuredSidePosts}>
-                {otherFeatured.map((post, idx) => (
-                  <BlogPostCard key={idx} post={post} />
-                ))}
-              </div>
-            </div>
-          </section>
+            </section>
+          )}
 
           <section className={styles.allPostsSection}>
             <h1 className={styles.sectionTitle}>All Posts</h1>

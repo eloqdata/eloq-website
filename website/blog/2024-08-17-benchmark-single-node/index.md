@@ -4,7 +4,8 @@ authors: eloq
 date: 2024-08-17
 tags: [Benchmark]
 image: /img/blog/single.jpg
-description: EloqKV single node cache mode performance benchmarks...
+description: Comprehensive performance benchmarks of EloqKV in single-node cache mode, comparing it with Redis and DragonflyDB.
+featured: true
 ---
 
 In this blog, we evaluate **EloqKV** as an in-memory cache, focusing on its single-node performance. We compare **EloqKV** with [Redis](https://github.com/redis/redis), a widely used in-memory data store, and [DragonflyDB](https://www.dragonflydb.io), a newer option boasting high performance due to its multi-threaded architecture and optimized implementation leveraging [modern innovations](https://github.com/dragonflydb/dragonfly?tab=readme-ov-file#background).

@@ -4,7 +4,7 @@ authors: eloq
 date: 2024-09-01
 tags: [Company]
 image: /img/blog/atomic.jpg
-description: In this blog, we evaluate **EloqKV** as an in-memory cache, focusing on its single-node performance.
+description: In this blog, we evaluate EloqKV as an in-memory cache, focusing on its single-node performance.
 ---
 
 In the previous blog, we discussed the [durable feature](/blog/2024/08/25/benchmark-txlog) of **EloqKV** and benchmarked the write performance of **EloqKV** with the Write-Ahead-Log enabled. In this blog, we will continue to explore the transaction capabilities of **EloqKV** and benchmark the performance of distributed atomic operations using the Redis `MULTI EXEC` commands.
