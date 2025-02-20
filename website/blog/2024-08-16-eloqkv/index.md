@@ -4,6 +4,7 @@ authors: eloq
 date: 2024-08-16
 tags: [Product]
 news: true
+blog: true
 image: /img/blog/eloqkv_launch.jpg
 description: EloqKV is a cutting-edge key-value database offering high performance, scalability, and full ACID compliance. Learn how it revolutionizes data management with its innovative architecture and advanced features.
 featured: true

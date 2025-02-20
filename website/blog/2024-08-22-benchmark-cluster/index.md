@@ -4,6 +4,7 @@ authors: eloq
 date: 2024-08-22
 tags: [Benchmark]
 image: /img/blog/cluster.jpg
+blog: true
 description: Benchmarking EloqKV cluster performance and scalability.
 ---
 

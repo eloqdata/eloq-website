@@ -74,11 +74,16 @@ function BlogPostCard({ post, isFeaturedMain = false }) {
 function BlogListPageContent(props) {
   const { items, metadata } = props;
 
-  // Filter featured and non-featured posts
-  const featuredPosts = items.filter(
+  // Filter for blog posts only (has blog: true tag)
+  const blogPosts = items.filter(
+    (post) => post.content.frontMatter.blog === true
+  );
+
+  // Filter featured and non-featured posts from blog posts
+  const featuredPosts = blogPosts.filter(
     (post) => post.content.frontMatter.featured
   );
-  const regularPosts = items.filter(
+  const regularPosts = blogPosts.filter(
     (post) => !post.content.frontMatter.featured
   );
 
@@ -116,7 +121,9 @@ function BlogListPageContent(props) {
           )}
 
           <section className={styles.allPostsSection}>
-            <h1 className={styles.sectionTitle}>All Posts</h1>
+            <h1 className={styles.sectionTitle}>
+              {metadata.allBlogText || "All Posts"}
+            </h1>
             <div className={styles.blogGrid}>
               {regularPosts.map((post, idx) => (
                 <BlogPostCard key={idx} post={post} />
