@@ -2,11 +2,6 @@ import React from 'react';
 import BlogPostPage from '@theme/BlogPostPage';
 
 export default function NewsPostPage(props) {
-  // Only render if the post has news: true
-  if (!props.content.frontMatter.news) {
-    return null;
-  }
-
-  // Remove BlogPostProvider as it's handled by BlogPostPage
+  // Remove the filter and just render all posts
   return <BlogPostPage {...props} />;
 }

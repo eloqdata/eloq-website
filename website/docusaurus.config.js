@@ -116,7 +116,7 @@ module.exports = {
       '@docusaurus/plugin-content-blog',
       {
         id: 'news',
-        path: 'news-posts',
+        path: 'newsposts',
         routeBasePath: 'news',
         blogTitle: 'News',
         blogDescription: 'Latest news and announcements from EloqData',
@@ -124,6 +124,10 @@ module.exports = {
         blogSidebarCount: 5,
         postsPerPage: 10,
         showReadingTime: true,
+        feedOptions: {
+          type: 'all',
+          copyright,
+        },
         blogListComponent: require.resolve(
           './src/components/NewsListPage/index.js'
         ),

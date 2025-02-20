@@ -4,6 +4,7 @@ authors: eloq
 date: 2024-09-01
 tags: [Company]
 image: /img/blog/atomic.jpg
+blog: true
 description: In this blog, we evaluate EloqKV as an in-memory cache, focusing on its single-node performance.
 ---
 
