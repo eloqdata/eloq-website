@@ -21,19 +21,20 @@ Today, we're taking a major step by making our database solutions available to t
 
 A high-performance distributed transactional database with Redis API compatibility. EloqKV offers:
 
-- Full ACID transaction support
-- Horizontal scalability
 - Redis API compatibility
-- Multi-model support
+- Full ACID transaction support
+- Vertical & Horizontal scalability
+- Cross Node Lua Scripting
+- Auto-tiering between memory and storage
 
 ### EloqSQL
 
 A MySQL-compatible distributed SQL database that provides:
 
 - Distributed SQL processing
-- MySQL wire protocol compatibility
+- MySQL/MariaDB wire protocol compatibility
 - Strong consistency
-- Horizontal scalability
+- Horizontal scalability with multiple writer
 
 ### EloqDoc
 
@@ -41,16 +42,16 @@ A MongoDB-compatible document store featuring:
 
 - Document-oriented storage
 - MongoDB query language support
-- Distributed architecture
+- Decoupled storage and compute architecture
 - Flexible schema design
 
 ## Getting Started
 
-All our products are now available on GitHub under the Apache 2.0 license. You can find our repositories at:
+All our products are now available on GitHub. You can find our repositories at:
 
 - EloqKV: [https://github.com/eloqdata/eloqkv](https://github.com/eloqdata/eloqkv)
-- EloqSQL: Coming soon
-- EloqDoc: Coming soon
+- EloqSQL: [https://github.com/eloqdata/eloqsql](https://github.com/eloqdata/eloqsql)
+- EloqDoc: [https://github.com/eloqdata/eloqdoc](https://github.com/eloqdata/eloqdoc)
 
 ## Join Our Community
 
