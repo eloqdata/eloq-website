@@ -44,6 +44,12 @@
   padding: 0.8rem 2rem;
   font-size: 1.1rem;
   border-radius: 8px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.heroButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(167, 181, 255, 0.3);
 }
 
 .codeComparison {
@@ -118,4 +124,188 @@
   color: #8b8b9c;
   font-size: 1.1rem;
   line-height: 1.6;
+}
+
+.costSection {
+  padding: 6rem 0;
+  background-color: #0a0a14;
+  color: white;
+}
+
+.costInner {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0 1rem;
+}
+
+.costContent {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.costCards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.costCard {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.costAmount {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+  min-width: 5ch;
+  line-height: 1;
+  transition: all 0.3s ease;
+}
+
+.costPeriod {
+  color: #8b8b9c;
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+.costProvider {
+  margin-left: auto;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* Add new style for EloqKV provider */
+.costProvider[data-provider="eloqkv"] {
+  background: linear-gradient(120deg, #a7b5ff, #a263ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
+}
+
+.costInfo {
+  padding-right: 2rem;
+}
+
+.costTitle {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  background: linear-gradient(120deg, #a7b5ff, #a263ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.costDescription {
+  font-size: 1.15rem;
+  color: #8b8b9c;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.costNote {
+  margin-bottom: 1.5rem;
+}
+
+.costButtons {
+  display: flex;
+  gap: 1rem;
+}
+
+.costButton {
+  padding: 0.8rem 2rem;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.costButton:hover {
+  transform: translateY(-2px);
+}
+
+/* Specific hover effects for primary and secondary buttons */
+.costButtons a:first-child:hover {
+  box-shadow: 0 4px 12px rgba(167, 181, 255, 0.3);
+}
+
+.costButtons a:last-child:hover {
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+  opacity: 0.9;
+}
+
+.workloadTabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.5rem;
+  border-radius: 8px;
+}
+
+.workloadTab {
+  flex: 1;
+  background: none;
+  border: none;
+  color: #8b8b9c;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.workloadTab:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+.workloadTabActive {
+  background: linear-gradient(120deg, #a7b5ff, #a263ff);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(167, 181, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.workloadDescription {
+  text-align: center;
+  color: #8b8b9c;
+  font-size: 0.75rem;
+  margin-top: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .costContent {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .costInfo {
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .costTitle {
+    font-size: 2.5rem;
+  }
+
+  .costDescription {
+    font-size: 1.1rem;
+  }
 }
