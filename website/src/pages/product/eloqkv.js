@@ -24,7 +24,7 @@ const WORKLOAD_PRICES = {
   },
 };
 
-const SHOW_TESTIMONIALS = true; // Set to true to show the testimonials section
+const SHOW_TESTIMONIALS = false; // Set to true to show the testimonials section
 
 const testimonials = [
   {
