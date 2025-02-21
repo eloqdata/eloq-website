@@ -245,7 +245,7 @@ module.exports = {
             ],
           },
           {
-            label: 'Documentation',
+            label: 'Docs',
             position: 'right',
             href: '#',
             items: [
