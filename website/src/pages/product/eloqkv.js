@@ -24,9 +24,36 @@ const WORKLOAD_PRICES = {
   },
 };
 
+const SHOW_TESTIMONIALS = true; // Set to true to show the testimonials section
+
+const testimonials = [
+  {
+    quote:
+      'EloqKV enables us to develop faster than ever before, while its tiered storage significantly reduces costs',
+    name: 'Rocky Shi',
+    title: 'Director of Engineering',
+    company: 'Transsion',
+  },
+  {
+    quote:
+      'EloqKV provides us with a unified caching solution for hybrid cloud environments, making it a perfect fit for our business',
+    name: 'Jack Wang',
+    title: 'DBA Manager',
+    company: 'Inke',
+  },
+  {
+    quote:
+      'We are a startup in need of a database that is both easy to use and scalable. EloqKV seamlessly integrates caching and database capabilities into a single solution',
+    name: 'Liang Liang',
+    title: 'Developer',
+    company: 'SeeCube',
+  },
+];
+
 export default function EloqKV() {
   const [workload, setWorkload] = useState('small');
   const [isAutoSwitching, setIsAutoSwitching] = useState(true);
+  const [activeTestimonial, setActiveTestimonial] = useState(0);
 
   useEffect(() => {
     if (!isAutoSwitching) return;
@@ -42,6 +69,33 @@ export default function EloqKV() {
 
     return () => clearInterval(interval);
   }, [isAutoSwitching]);
+
+  useEffect(() => {
+    const options = {
+      root: null,
+      rootMargin: '-50% 0px -50% 0px', // Trigger when testimonial is in center
+      threshold: 0,
+    };
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const index = parseInt(entry.target.dataset.index);
+          setActiveTestimonial(index);
+        }
+      });
+    }, options);
+
+    // Observe all testimonial items
+    document
+      .querySelectorAll(`.${styles.testimonialItem}`)
+      .forEach((el, index) => {
+        el.dataset.index = index;
+        observer.observe(el);
+      });
+
+    return () => observer.disconnect();
+  }, []);
 
   const handleTabClick = size => {
     setIsAutoSwitching(false);
@@ -209,6 +263,48 @@ COMMIT`}
             </div>
           </div>
         </div>
+
+        {/* Industry Leaders Section */}
+        {SHOW_TESTIMONIALS && (
+          <div className={styles.leadersSection}>
+            <div className={styles.leadersInner}>
+              <h2 className={styles.leadersTitle}>
+                EloqKV is loved by developers
+              </h2>
+              <Link to="/customers" className={styles.leadersCTA}>
+                Dive into success stories →
+              </Link>
+              <div className={styles.leadersContent}>
+                {testimonials.map((testimonial, index) => (
+                  <div key={index} className={styles.testimonialGroup}>
+                    <div
+                      className={`${styles.logo} ${
+                        activeTestimonial === index ? styles.logoActive : ''
+                      }`}>
+                      <span>{testimonial.company}</span>
+                    </div>
+                    <div
+                      className={`${styles.testimonialItem} ${
+                        activeTestimonial === index ? styles.active : ''
+                      }`}>
+                      <p className={styles.quote}>{testimonial.quote}</p>
+                      <div className={styles.testimonialAuthor}>
+                        <div>
+                          <div className={styles.authorName}>
+                            {testimonial.name}
+                          </div>
+                          <div className={styles.authorTitle}>
+                            {testimonial.title} at {testimonial.company}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
       </main>
     </Layout>
   );
