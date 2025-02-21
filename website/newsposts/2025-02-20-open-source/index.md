@@ -79,5 +79,5 @@ Stay tuned for more updates, and don't forget to star our repositories on GitHub
 ## Resources
 
 - [GitHub Repository](https://github.com/eloqdata/eloqkv)
-- [Documentation](/docs)
+- [Documentation](https://www.eloqdata.com/eloqkv/introduction)
 - [Community Forum](https://eloqdata.discourse.group/)

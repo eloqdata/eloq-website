@@ -235,6 +235,16 @@ module.exports = {
         style: 'dark',
         items: [
           {
+            label: 'Product',
+            position: 'right',
+            items: [
+              {
+                label: 'EloqKV',
+                to: '/product/eloqkv',
+              },
+            ],
+          },
+          {
             label: 'Documentation',
             position: 'right',
             href: '#',
