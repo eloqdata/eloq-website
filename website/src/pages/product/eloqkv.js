@@ -66,7 +66,7 @@ export default function EloqKV() {
                 className={`button button--primary button--lg ${styles.heroButton}`}
                 to="/eloqkv/introduction"
                 style={{
-                  background: 'linear-gradient(120deg, #a7b5ff, #a263ff)',
+                  background: 'linear-gradient(120deg, #ff7b2d, #ff9f4a)',
                   border: 'none',
                 }}>
                 Get Started
@@ -189,7 +189,7 @@ COMMIT`}
                     className={`button button--primary ${styles.costButton}`}
                     to="/contact"
                     style={{
-                      background: 'linear-gradient(120deg, #a7b5ff, #a263ff)',
+                      background: 'linear-gradient(120deg, #ff7b2d, #ff9f4a)',
                       border: 'none',
                     }}>
                     Try Cloud Free
