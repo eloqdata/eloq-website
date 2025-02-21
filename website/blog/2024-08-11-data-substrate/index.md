@@ -5,23 +5,23 @@ date: 2024-08-11
 tags: [Company]
 ---
 
-In this blog post, we introduce our transformative concept **Data Substrate**. Data Substrate abstracts core functionality in online transactional databases (OLTP) and provides a unified layer for [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) operations of any data models. A database built on this unified layer is modular: a database module is optional, can be replaced and can scale up/out independently of other modules.
+In this blog post, we introduce our transformative concept **Data Substrate**. Data Substrate abstracts core functionality in online transactional databases (OLTP) by providing a unified layer for [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) operations. A database built on this unified layer is modular: a database module is optional, can be replaced and can scale up/out independently of other modules.
 
 <!--truncate-->
 
 ## Motivation
 
-In the early days of computing, data were stored in plain files and processed using custom programs. [Relational database management systems (RDBMS)](https://en.wikipedia.org/wiki/Relational_database) emerged in the 1970s to model data as tables, store it on disk with consistency and integrity and provide [SQL](https://en.wikipedia.org/wiki/SQL) to access them. RDBMS has been the _de facto_ solution for data management for more than two decade.
+In the early days of computing, data were stored in plain files and processed using custom programs. [Relational database management systems (RDBMS)](https://en.wikipedia.org/wiki/Relational_database) emerged in the 1970s to model data as tables, store them on disk with consistency and integrity and provide [SQL](https://en.wikipedia.org/wiki/SQL) as a standard API 　 to access them. RDBMS has been the _de facto_ solution for data management for more than two decades.
 
-But that changed in the early 2000s with the meteoric rise of the Internet. Internet applications, such as search engines, social networks and e-commerce websites, generated large volumes of data and redefined data-intensive workloads. ["One Size Does Not Fit All"](https://cs.brown.edu/~ugur/fits_all.pdf) was the catching phrase that defined the next couple of decades in database systems. Since then, the database landscape has evolved in two directions: scalability and data models.
+However, this changed in the early 2000s with the rapid growth of the Internet. Internet applications, such as search engines, social networks and e-commerce websites, generates large volumes of data and redefined data-intensive workloads. ["One Size Does Not Fit All"](https://cs.brown.edu/~ugur/fits_all.pdf) was the catching phrase that defined the next couple of decades in database systems. Over the last two decades, the database landscape evolved mainly in two directions: scalability and data models.
 
 Making a database scale is hard. Doing so while maintaining [ACID](https://en.wikipedia.org/wiki/ACID) properties and minimizing performance impact is even harder. The NoSQL trend, epitomized by Google BigTable and Amazon Dynamo, became known for trading ACID for scalability. NewSQL and distributed SQL databases, such as [CockroachDB](https://www.cockroachlabs.com/), later brought back transactions, but often at a hefty cost to efficiency. Most recently, cloud-native databases such as Amazon [Aurora](https://aws.amazon.com/rds/aurora/) decouple compute and storage to allow storage to scale and avoid the more difficult task of scaling transactions.
 
-The second trend was the emergence of diverse data models. Simple key-value pairs are sufficient for caching purposes, graphs become important for modeling relationships, and streams and time series are ideal for modeling continously changing data. It was increasingly clear that the relational model can not support all applications well. With the advent of diverse data types and structures, databases for these new data models emerged, along with new languages to query them.
+The second trend was the emergence of diverse data models. Simple key-value pairs are sufficient for caching purposes, graphs become important for modeling relationships, and streams and time series are ideal for modeling continuously changing data. It was increasingly clear that the relational model can not support all applications well. With the rise of diverse data types and structures, specialized databases for these new data models emerged, accompanied by new query languages.
 
 The database evolution in past twenty-plus years leads to a database landscape that is extremely complex. Now, we have a myriad of databases for different data models, further fragmented by scale (single-node, distributed storage, shared-nothing-distributed), environment (on-premises, cloud) and storage device (in-memory, SSD, non-volatile memory). This fragmentation presents daunting challenges for users. As [illustrated](https://a16z.com/wp-content/uploads/2023/04/Unified-Data-Infrastructure-2.0-1.png) in [an article](https://a16z.com/emerging-architectures-for-modern-data-infrastructure/) from Andreessen Horowitz, the modern data pipeline now consists of numerous specialized components, each designed to handle specific tasks, creating a maze of tools and systems that users must navigate to manage their data. If cloud providers need [multiple](https://docs.aws.amazon.com/whitepapers/latest/choosing-an-aws-nosql-database/decision-making.html) [articles](https://docs.aws.amazon.com/decision-guides/latest/databases-on-aws-how-to-choose/databases-on-aws-how-to-choose.html) and [decision diagrams](https://docs.aws.amazon.com/images/whitepapers/latest/choosing-an-aws-nosql-database/images/decision-tree2.png) to explain how to choose the right database, many would agree that we might have gone a little [too far](https://medium.com/koalabs/one-size-does-not-fit-all-in-database-systems-true-in-early-2000s-now-we-have-the-opposite-d41146bc6693).
 
-Do we have to build a new database all over again for every new type of data model/ environment/ hardware? If we examine a new database and compare it with an existing one, it is evident that the vast majority of functionality is the same. A new database has to re-implement many features that have been developed many times before offering some new value. We should, and we believe that we can, do better.
+Must we build a new database for every type of data model, environment or hardware? If we examine a new database and compare it with an existing one, it is evident that the vast majority of functionality is the same. A new database has to re-implement many features that have been developed many times before offering some new value. We should, and we believe that we can, do better.
 
 At EloqData, our answer to this grand question is **Data Substrate**.
 
@@ -45,7 +45,7 @@ import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
 Considering a transaction T that reads and updates a data item x. T traverses the B+-tree and searches the buffer pool for each page (①). If there is is a cache miss, T locates the disk-resident page (②) and loads it into the buffer pool (③). T then pins the page containing x in the buffer pool, adds a read lock on x in the lock table (④), reads x (⑤) and unpins the page.
 
-To update x, T upgrades the lock on x to a write lock (⑥), updates the page of x in the buffer pool (⑦) and appends redo/undo operations to the log (⑧). T commits by synchronously flushing a commit record to the log, which also forces the persistence of the prior redo/undo log entries.
+To update x, T upgrades the lock on x to a write lock (⑥), modifies the page of x in the buffer pool (⑦) and appends redo/undo operations to the log (⑧). T commits by synchronously flushing a commit record to the log, which also forces the persistence of the prior redo/undo log entries.
 
 By the time T commits, the change on x is recorded in the log and the in-memory page in the buffer pool, but not yet in the disk-resident B+-tree. A background process called checkpointing periodically flushes dirty pages to disk (⑨).
 
@@ -80,7 +80,7 @@ The values of the design principles go beyond RDBMS. Whether the data item is a 
 </div>
 </p> -->
 
-- _Asynchrony_. Changed data items are first flushed to the log and then updated in the TxMap. Updated data items are asynchronously flushed to a persistent store. The persistent store plays the same role as a B+-tree and stores data items in stable storage. The persistent store exposes Get(), Put() APIs for reading and writing data items.
+- _Asynchrony_. Changed data items are first flushed to the log and then updated in the TxMap. Modified data items are asynchronously written to a persistent data store. The data store plays the same role as a B+-tree and stores data items in stable storage. The data store exposes Get(), Put() APIs for reading and writing data items.
 
 <p align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
@@ -138,6 +138,6 @@ While we believe ACID transactions are essential to applications, we also believ
 
 ## EloqKV and Beyond
 
-Data Substrate opens the door to many opportunities. Regardless of whether you are building a cache, an in-memory DB, or a cloud-native DB for a certain data model, you just need to place a query parser and an execution engine on top of the Data Substrate, and you are all set. You get an elastic, performant and fault tolerant operational database.
+Data Substrate opens the door to many opportunities. Regardless of whether building a kv cache, an in-memory graph db, or a relational database, a developer just needs to put a query parser and an execution engine on top of the Data Substrate, and we are all set. You get an elastic, performant and fault tolerant operational database.
 
-We are working on the first incarnation of Data Substrate, a key-value database. What is your favorite data model? What are the capabilities you expect most from databases? [Drop us a note](/contact). We will keep you posted as we make progress on the next generation of databases.
+We are working on the first database based on the Data Substrate technology, a key-value database called **EloqKV**, stay tuned. Do you have a favorite data model or specific database capabilities you value most? [Reach out to us](/contact)—we’d love to hear from you! We invite you to share your database challenges. Your feedback will help shape the next-generation solutions powered by Data Substrate.
