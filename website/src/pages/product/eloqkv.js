@@ -168,19 +168,23 @@ COMMIT`}
         </div>
 
         {/* Features Section */}
-        <div className={styles.features}>
-          <div className={styles.featuresInner}>
-            <div className={styles.feature}>
-              <h3>ACID Transactions</h3>
-              <p>Full ACID compliance with distributed transactions support</p>
-            </div>
-            <div className={styles.feature}>
-              <h3>Redis Compatible</h3>
-              <p>Drop-in replacement for Redis with enhanced capabilities</p>
-            </div>
-            <div className={styles.feature}>
-              <h3>Scalable Storage</h3>
-              <p>Horizontal & vertical scaling with auto-tiering</p>
+        <div className={styles.kvFeatures}>
+          <div className={styles.kvFeaturesInner}>
+            <div className={styles.kvFeatureCards}>
+              <div className={styles.kvFeature}>
+                <h3>ACID Transactions</h3>
+                <p>
+                  Full ACID compliance with distributed transactions support
+                </p>
+              </div>
+              <div className={styles.kvFeature}>
+                <h3>Redis Compatible</h3>
+                <p>Drop-in replacement for Redis with enhanced capabilities</p>
+              </div>
+              <div className={styles.kvFeature}>
+                <h3>Scalable Storage</h3>
+                <p>Horizontal & vertical scaling with auto-tiering</p>
+              </div>
             </div>
           </div>
         </div>

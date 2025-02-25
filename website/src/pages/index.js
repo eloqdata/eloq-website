@@ -164,7 +164,7 @@ function HomeLearnMore() {
     <>
       <ActionButton
         type="primary"
-        href={useBaseUrl('/blog/2024/08/16/eloqkv')}
+        href={useBaseUrl('/blog/2024/08/11/data-substrate')}
         target="_self">
         Learn more
       </ActionButton>
@@ -667,11 +667,10 @@ const Index = () => {
         </div>
         <div class="product-columns">
           <div class="product-left-column">
-            <p className="taglinesmall">Introducing Our First Product:</p>
-            <h1 className="title"> EloqKV</h1>
+            <h1 className="title"> EloqDB</h1>
             <p className="tagline">
               The <span style={{color: '#f75b0c'}}>Revolutionary</span>{' '}
-              Distributed Key-Value Database.
+              Distributed Modular Database.
             </p>
             <p className="taglinecolor">
               <Typed strings={['- High Performance']} typeSpeed={5} />
@@ -683,7 +682,7 @@ const Index = () => {
               <Typed strings={['- Scalable and Elastic']} typeSpeed={8} />
             </p>
             <p className="taglinecolor">
-              <Typed strings={['- Cloud Native']} typeSpeed={3} />
+              <Typed strings={['- AI Native']} typeSpeed={3} />
             </p>
             <div className="buttons">
               <HomeLearnMore />

@@ -186,6 +186,16 @@ module.exports = {
     [
       '@docusaurus/plugin-content-docs',
       {
+        id: 'eloqdoc',
+        path: 'eloqdoc',
+        routeBasePath: 'eloqdoc',
+        sidebarPath: require.resolve('./sidebarsEloqDoc.js'),
+        // ... other options
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
         id: 'monosqlcn',
         path: 'monosqlcn',
         routeBasePath: 'monosqlcn',
@@ -242,6 +252,14 @@ module.exports = {
                 label: 'EloqKV',
                 to: '/product/eloqkv',
               },
+              {
+                label: 'EloqSQL',
+                to: '/product/eloqsql',
+              },
+              {
+                label: 'EloqDoc',
+                to: '/product/eloqdoc',
+              },
             ],
           },
           {
@@ -250,28 +268,22 @@ module.exports = {
             href: '#',
             items: [
               {
-                label: 'Introduction',
+                label: 'EloqKV',
                 type: 'doc',
                 docsPluginId: 'eloqkv',
                 docId: 'introduction',
               },
               {
-                label: 'Get Started',
+                label: 'EloqSQL',
                 type: 'doc',
-                docsPluginId: 'eloqkv',
-                docId: 'install-from-binary',
+                docsPluginId: 'eloqsql',
+                docId: 'introduction',
               },
               {
-                label: 'Deploy Cluster',
+                label: 'EloqDoc',
                 type: 'doc',
-                docsPluginId: 'eloqkv',
-                docId: 'quick-start',
-              },
-              {
-                label: 'Command Reference',
-                type: 'doc',
-                docsPluginId: 'eloqkv',
-                docId: 'list/LINDEX',
+                docsPluginId: 'eloqdoc',
+                docId: 'introduction',
               },
             ],
           },
