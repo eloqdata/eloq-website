@@ -545,3 +545,247 @@
     font-size: 1.125rem;
   }
 }
+
+/* Community Section */
+.communitySection {
+  padding: 6rem 0;
+  background-color: #0a0a14;
+  color: white;
+}
+
+.communityInner {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.communityTitle {
+  font-size: 3.2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  background: linear-gradient(120deg, #ff7b2d, #ff9f4a);
+  /* Orange gradient */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.communitySubtitle {
+  font-size: 1.25rem;
+  color: #8b8b9c;
+  margin-bottom: 4rem;
+}
+
+.communityGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.communityCard {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: left;
+  transition: all 0.3s ease;
+  color: white;
+  text-decoration: none;
+}
+
+.communityCard:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.communityIcon {
+  margin-bottom: 1.5rem;
+  color: #8b8b9c;
+}
+
+.communityCard:hover .communityIcon {
+  color: #ff7b2d;
+}
+
+.communityCard h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: white;
+}
+
+.communityCard p {
+  color: #8b8b9c;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .communityGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .communityGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .communityTitle {
+    font-size: 2.5rem;
+  }
+
+  .communitySubtitle {
+    font-size: 1.1rem;
+  }
+}
+
+/* ACID Transaction Section */
+.acidSection {
+  padding: 6rem 0;
+  background-color: #0a0a14;
+  color: white;
+}
+
+.acidInner {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0 1rem;
+}
+
+.acidContent {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.acidInfo {
+  padding-right: 2rem;
+}
+
+.acidTitle {
+  font-size: 3.2rem;
+  font-weight: 700;
+  margin-bottom: 1.4rem;
+  background: linear-gradient(120deg, #ff7b2d, #ff9f4a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.2;
+}
+
+.acidDescription {
+  font-size: 1.2rem;
+  color: #8b8b9c;
+  margin-bottom: 1.5rem;
+  line-height: 1.7;
+}
+
+.acidImageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.acidImage {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .acidContent {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .acidInfo {
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .acidTitle {
+    font-size: 2.5rem;
+  }
+
+  .acidDescription {
+    font-size: 1.1rem;
+  }
+}
+
+/* Tiered Storage Section */
+.tieredSection {
+  padding: 6rem 0;
+  background-color: #0a0a14;
+  color: white;
+}
+
+.tieredInner {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0 1rem;
+}
+
+.tieredContent {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.tieredInfo {
+  padding-left: 2rem;
+}
+
+.tieredTitle {
+  font-size: 3.2rem;
+  font-weight: 700;
+  margin-bottom: 1.4rem;
+  background: linear-gradient(120deg, #ff7b2d, #ff9f4a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.2;
+}
+
+.tieredDescription {
+  font-size: 1.2rem;
+  color: #8b8b9c;
+  margin-bottom: 1.5rem;
+  line-height: 1.7;
+}
+
+.tieredImageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tieredImage {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .tieredContent {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .tieredInfo {
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .tieredTitle {
+    font-size: 2.5rem;
+  }
+
+  .tieredDescription {
+    font-size: 1.1rem;
+  }
+}
