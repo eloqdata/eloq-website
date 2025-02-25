@@ -586,8 +586,8 @@ const features = [
     icon: faBolt,
     title: 'High Performance',
     details: [
-      'Match the best in-memory data stores when data fit in memory and persistency is turned off',
-      'Significantly outperform other durable KV stores with persistency on',
+      'Match or exceed the best-in-class solutions',
+      'Blazing-fast distributed transactions powered by the 1PC protocol',
     ],
     link: 'blog/2024/08/17/benchmark-single-node',
   },
@@ -595,8 +595,7 @@ const features = [
     icon: faDollarSign,
     title: 'Low Cost',
     details: [
-      'Take advantage of fast SSDs to store data that exceeds memory capacity',
-      'Leverage tiered-storage in the cloud to further reduce cost while maintaining sub-second access latency for cold data',
+      'Achieve the perfect balance of speed and cost with tiered storage across memory, local disk, and object storage',
     ],
     link: 'blog/2024/08/16/eloqkv#performance-and-cost',
   },
@@ -605,7 +604,7 @@ const features = [
     title: 'Scalable and Elastic',
     details: [
       'Scale-up with multicore, and scale-out to multiple nodes in a cluster',
-      'Support dynamic scaling as workload changes, without service disruption (currently in Beta)',
+      'Support dynamic scaling as workload changes, without service disruption',
     ],
     link: 'blog/2024/08/16/eloqkv#scale-as-you-need-on-what-you-need',
   },
@@ -613,8 +612,8 @@ const features = [
     icon: faExchangeAlt,
     title: 'Fully ACID',
     details: [
-      'Transactional distributed KV store with full ACID capabilities',
-      'Redis transaction commands are supported in either single node mode or cluster mode with the same semantics',
+      'Fuly ACID Transaction with configurable isolation level',
+      'Support cross-model transactions from multiple APIs',
     ],
     link: 'blog/2024/08/16/eloqkv#full-acid-transactions-when-you-need-them',
   },
@@ -623,16 +622,16 @@ const features = [
     title: 'Highly Available',
     details: [
       'Replicate data to multiple servers to provide fault-tolerance',
-      'Support hot standbys so that failure can be recovered in sub-seconds (currently in Beta)',
+      'Support hot standbys so that failure can be recovered in sub-seconds',
     ],
     link: 'eloqkv/quick-start-ha',
   },
   {
     icon: faRedoAlt,
-    title: 'Redis Compatible API',
+    title: 'Standard API',
     details: [
-      'Implement the Redis API, support most popular data structures',
-      'No code modification needed for applications to enjoy the rich features and cost benefits of EloqKV',
+      'EloqDB supports standard APIs, including Redis, SQL, and Mongo',
+      'Enable seamless migration of existing applications with minimal effort',
     ],
     link: 'eloqkv/kvstore_compatibility',
   },
