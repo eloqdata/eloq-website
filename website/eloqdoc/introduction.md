@@ -2,15 +2,15 @@
 title: Introduction to EloqDoc
 ---
 
-# EloqKV: A Distributed Transactional KV store
+# EloqDoc: A Distributed Transactional Document Database
 
 ## Architecture
 
-EloqKV is a decoupled, distributed database built on Data Substrate, the innovative new database foundation developed by EloqData for the cloud era.
+EloqDoc is a decoupled, distributed database built on Data Substrate, the innovative new database foundation developed by EloqData for the cloud era.
 
-Each EloqKV instance includes a frontend, compatible with the Redis protocol, deployed together with the core TxService to handle data operations. A logically independent LogService handles Write Ahead Logging (WAL) to ensure persistence, while a Persistent Storage Service manages memory state checkpoints and cold data storage.
+Each EloqDoc instance includes a frontend, compatible with the MongoDB protocol, deployed together with the core TxService to handle data operations. A logically independent LogService handles Write Ahead Logging (WAL) to ensure persistence, while a Persistent Storage Service manages memory state checkpoints and cold data storage.
 
-In EloqKV, the TxService is responsible for concurrency control, ensuring that transactional operations are consistent. The Log Service can replicate logs and distributes them across different availability zones (AZs) to provide resilience against AZ-level failures. The storage service supports various persistent storage engines, including local options like RocksDB, remote clusters like Cassandra, and cloud storage solutions such as AWS DynamoDB. This persistent storage store cold data for cache misses and provide high availability, even during node failures.
+In EloqDoc, the TxService is responsible for concurrency control, ensuring that transactional operations are consistent. The Log Service can replicate logs and distributes them across different availability zones (AZs) to provide resilience against AZ-level failures. The storage service supports various persistent storage engines, including Cassandra, ScyllaDB and cloud storage solutions such as AWS DynamoDB. This persistent storage store cold data for cache misses and provide high availability, even during node failures.
 
 <p align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>

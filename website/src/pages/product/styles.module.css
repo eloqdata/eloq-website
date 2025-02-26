@@ -882,3 +882,103 @@
   font-size: 1.15rem;
   line-height: 1.7;
 }
+
+/* Products Section */
+.productsSection {
+  padding: 6rem 0;
+  background-color: #0a0a14;
+  color: white;
+}
+
+.productsInner {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.productsTitle {
+  font-size: 3.2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  background: linear-gradient(120deg, #ff7b2d, #ff9f4a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.productsSubtitle {
+  font-size: 1.25rem;
+  color: #8b8b9c;
+  margin-bottom: 4rem;
+}
+
+.productCards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.productCard {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.productCard:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.productCard h3 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  background: linear-gradient(120deg, #ff7b2d, #ff9f4a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.productCard p {
+  color: #8b8b9c;
+  font-size: 1.15rem;
+  line-height: 1.7;
+}
+
+/* Architecture Section */
+.architectureSection {
+  padding: 6rem 0;
+  background-color: #0a0a14;
+  color: white;
+}
+
+.architectureInner {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0 1rem;
+}
+
+.architectureContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.architectureTitle {
+  font-size: 3.2rem;
+  font-weight: 700;
+  margin-bottom: 1.4rem;
+  background: linear-gradient(120deg, #ff7b2d, #ff9f4a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.architectureDescription {
+  font-size: 1.2rem;
+  color: #8b8b9c;
+  line-height: 1.7;
+}

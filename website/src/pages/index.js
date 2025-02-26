@@ -24,6 +24,8 @@ import {
   faExchangeAlt,
   faRedoAlt,
 } from '@fortawesome/free-solid-svg-icons';
+import Link from '@docusaurus/Link';
+import styles from './styles.module.css';
 
 const textContent = {
   intro: `
@@ -89,7 +91,7 @@ const WelcomeScreen = () => (
     <Text style={heading}>See Your Changes</Text>
     <Text>
       Press Cmd + R inside the simulator to reload
-      your app’s code.
+      your app's code.
     </Text>
     <Text style={heading}>Debug</Text>
     <Text>
@@ -106,11 +108,11 @@ const WelcomeScreen = () => (
   forEveryone: `
 React Native lets you create truly native apps and doesn't compromise your users' experiences.
 It provides a core set of platform agnostic native components like <code>View</code>, <code>Text</code>, and <code>Image</code>
-that map directly to the platform’s native UI building blocks.
+that map directly to the platform's native UI building blocks.
   `,
   crossPlatform: `
 React components wrap existing native code and interact with native APIs via
-React’s declarative UI paradigm and JavaScript. This enables native app development
+React's declarative UI paradigm and JavaScript. This enables native app development
 for whole new teams of developers, and can let existing native teams work much faster.
   `,
   fastRefresh: `
@@ -637,87 +639,240 @@ const features = [
   },
 ];
 
-const Index = () => {
+function HomePage() {
   return (
     <Layout
       description="Build the Next Generation of Databases the Right Way"
       wrapperClassName="homepage">
-      <Head>
-        <title>EloqData: Next Generation of Databases</title>
-        <meta
-          property="og:title"
-          content="EloqData: Next Generation of Databases"
-        />
-        <meta
-          property="twitter:title"
-          content="EloqData: Next Generation of Databases"
-        />
-      </Head>
+      <main>
+        <div className="container1">
+          <div className="product-columns">
+            <div className="product-left-column">
+              <h1 className="title">
+                Revolutionary Databases Powered by Data Substrate
+              </h1>
+              <p className="tagline">
+                One database for all AI needs—multi-model, transactional,
+                elastic and API-compatible{' '}
+              </p>
 
-      <div class="container1">
-        <div class="product-mid-column">
-          <img
-            alt=""
-            src={useBaseUrl('img/eloqbanner.jpg')}
-            type="image/svg+xml"
-            width="800"
-            heigh="auto"
-          />
-        </div>
-        <div class="product-columns">
-          <div class="product-left-column">
-            <h1 className="title"> EloqDB</h1>
-            <p className="tagline">
-              The <span style={{color: '#f75b0c'}}>Revolutionary</span>{' '}
-              Distributed Modular Database.
-            </p>
-            <p className="taglinecolor">
-              <Typed strings={['- High Performance']} typeSpeed={5} />
-            </p>
-            <p className="taglinecolor">
-              <Typed strings={['- Full ACID Support']} typeSpeed={10} />
-            </p>
-            <p className="taglinecolor">
-              <Typed strings={['- Scalable and Elastic']} typeSpeed={8} />
-            </p>
-            <p className="taglinecolor">
-              <Typed strings={['- AI Native']} typeSpeed={3} />
-            </p>
-            <div className="buttons">
-              <HomeLearnMore />
-              <span style={{width: '40px', display: 'inline-block'}}></span>
-              <HomeCallToAction />
+              {/* Add product shortcuts */}
+              <div className="product-shortcuts">
+                <Link to="/product/eloqkv" className="product-shortcut">
+                  <div className="shortcut-icon redis">
+                    <svg viewBox="0 0 32 32" fill="none">
+                      <rect width="32" height="32" rx="6" fill="#DC382D" />
+                      <path d="M7 8h18v16H7z" fill="#DC382D" />
+                      <path
+                        d="M24 16.5l-8 4.5-8-4.5L16 12l8 4.5z"
+                        fill="white"
+                      />
+                    </svg>
+                  </div>
+                  <span>EloqKV</span>
+                </Link>
+
+                <Link to="/product/eloqsql" className="product-shortcut">
+                  <div className="shortcut-icon vector">
+                    <svg viewBox="0 0 32 32" fill="none">
+                      <rect width="32" height="32" rx="6" fill="#007ACC" />
+                      <ellipse cx="16" cy="10" rx="8" ry="3" fill="white" />
+                      <path
+                        d="M8 10v8c0 1.5 3.5 3 8 3s8-1.5 8-3v-8"
+                        stroke="white"
+                        strokeWidth="2"
+                        fill="none"
+                      />
+                      <path
+                        d="M8 18v4c0 1.5 3.5 3 8 3s8-1.5 8-3v-4"
+                        stroke="white"
+                        strokeWidth="2"
+                        fill="none"
+                      />
+                      <text
+                        x="10"
+                        y="18"
+                        fontSize="6"
+                        fill="white"
+                        fontWeight="bold">
+                        SQL
+                      </text>
+                    </svg>
+                  </div>
+                  <span>EloqSQL</span>
+                </Link>
+
+                <Link to="/product/eloqdoc" className="product-shortcut">
+                  <div className="shortcut-icon qstash">
+                    <svg viewBox="0 0 32 32" fill="none">
+                      <rect width="32" height="32" rx="6" fill="#4CAF50" />
+                      <path
+                        d="M10 8h8l4 4v12H10V8z"
+                        stroke="white"
+                        strokeWidth="2"
+                        fill="none"
+                      />
+                      <path
+                        d="M18 8v4h4"
+                        stroke="white"
+                        strokeWidth="2"
+                        fill="none"
+                      />
+                      <path
+                        d="M12 14h8M12 18h8M12 22h5"
+                        stroke="white"
+                        strokeWidth="2"
+                      />
+                    </svg>
+                  </div>
+                  <span>EloqDoc</span>
+                </Link>
+              </div>
+
+              <p className="taglinecolor">
+                <Typed
+                  strings={['<strong>High Performance</strong>']}
+                  typeSpeed={40}
+                />
+              </p>
+              <p className="taglinecolor">
+                <Typed
+                  strings={['<strong>Full ACID Support</strong>']}
+                  typeSpeed={40}
+                />
+              </p>
+              <p className="taglinecolor">
+                <Typed
+                  strings={['<strong>Scalable and Elastic</strong>']}
+                  typeSpeed={40}
+                />
+              </p>
+              <p className="taglinecolor">
+                <Typed
+                  strings={['<strong>AI Native</strong>']}
+                  typeSpeed={40}
+                />
+              </p>
+              <div className="buttons">
+                <HomeLearnMore />
+                <HomeCallToAction />
+              </div>
+            </div>
+            <div className="product-right-column">
+              <img alt="" src={useBaseUrl('img/architecture.svg')} />
             </div>
           </div>
-          <div class="product-right-column">
-            <img
-              alt=""
-              src={useBaseUrl('img/monograph_website_hero.svg')}
-              type="image/svg+xml"
-              width="800"
-              heigh="auto"
-            />
-          </div>
         </div>
-      </div>
 
-      <div className="feature-section">
-        {features.map((feature, index) => (
-          <a href={useBaseUrl(feature.link)} key={index}>
-            <div className="feature-card" key={index}>
-              <FontAwesomeIcon icon={feature.icon} className="feature-icon" />
-              <h3>{feature.title}</h3>
-              <ul>
+        {/* Features Section */}
+        <div className="section-container">
+          <h2 className="section-title">Features</h2>
+          <p className="section-subtitle">
+            Everything your AI application needs, all in one database
+          </p>
+          <div className="feature-section">
+            {features.map((feature, index) => (
+              <a
+                href={useBaseUrl(feature.link)}
+                key={index}
+                className="feature-card">
+                <FontAwesomeIcon icon={feature.icon} className="feature-icon" />
+                <h3>{feature.title}</h3>
                 {feature.details.map((detail, i) => (
-                  <p>{detail}</p>
+                  <p key={i}>{detail}</p>
                 ))}
-              </ul>
-            </div>
-          </a>
-        ))}
-      </div>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        {/* Products Section */}
+        <div className="section-container">
+          <h2 className="section-title">Products</h2>
+          <p className="section-subtitle">
+            Flexibility at its best—choose your standard API
+          </p>
+          <div className="product-cards">
+            <Link to="/product/eloqkv" className="product-card">
+              <h3>EloqKV</h3>
+              <p>Redis Compatible Database</p>
+            </Link>
+            <Link to="/product/eloqsql" className="product-card">
+              <h3>EloqSQL</h3>
+              <p>MySQL Compatible Database</p>
+            </Link>
+            <Link to="/product/eloqdoc" className="product-card">
+              <h3>EloqDoc</h3>
+              <p>Mongo Compatible Database</p>
+            </Link>
+          </div>
+        </div>
+
+        {/* Community Section */}
+        <div className="section-container">
+          <h2 className="section-title">Community</h2>
+          <p className="section-subtitle">
+            Let's build the next generation of AI native databases together
+          </p>
+          <div className="community-grid">
+            <Link to="/blog" className="community-card">
+              <div className="community-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M19 5v14H5V5h14zm0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
+                    fill="currentColor"
+                  />
+                  <path
+                    d="M14 17H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+              <h3>Blog</h3>
+              <p>
+                Explore technical insights on database innovations in the AI
+                era.
+              </p>
+            </Link>
+
+            <Link to="/docs/introduction" className="community-card">
+              <div className="community-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zM6 20V4h7v5h5v11H6z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+              <h3>Documentation</h3>
+              <p>
+                Learn how to use EloqDB with our comprehensive guides and API
+                references.
+              </p>
+            </Link>
+
+            <Link
+              href="https://discord.gg/nmYjBkfak6"
+              className="community-card">
+              <div className="community-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M19.27 5.33C17.94 4.71 16.5 4.26 15 4a.09.09 0 0 0-.07.03c-.18.33-.39.76-.53 1.09a16.09 16.09 0 0 0-4.8 0c-.14-.34-.35-.76-.54-1.09c-.01-.02-.04-.03-.07-.03c-1.5.26-2.93.71-4.27 1.33c-.01 0-.02.01-.03.02c-2.72 4.07-3.47 8.03-3.1 11.95c0 .02.01.04.03.05c1.8 1.32 3.53 2.12 5.24 2.65c.03.01.06 0 .07-.02c.4-.55.76-1.13 1.07-1.74c.02-.04 0-.08-.04-.09c-.57-.22-1.11-.48-1.64-.78c-.04-.02-.04-.08-.01-.11c.11-.08.22-.17.33-.25c.02-.02.05-.02.07-.01c3.44 1.57 7.15 1.57 10.55 0c.02-.01.05-.01.07.01c.11.09.22.17.33.26c.04.03.04.09-.01.11c-.52.31-1.07.56-1.64.78c-.04.01-.05.06-.04.09c.32.61.68 1.19 1.07 1.74c.03.01.06.02.09.01c1.72-.53 3.45-1.33 5.25-2.65c.02-.01.03-.03.03-.05c.44-4.53-.73-8.46-3.1-11.95c-.01-.01-.02-.02-.04-.02zM8.52 14.91c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.84 2.12-1.89 2.12zm6.97 0c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.83 2.12-1.89 2.12z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+              <h3>Discord</h3>
+              <p>
+                Join our community to discuss ideas, ask questions, and get
+                help.
+              </p>
+            </Link>
+          </div>
+        </div>
+      </main>
     </Layout>
   );
-};
+}
 
-export default Index;
+export default HomePage;
