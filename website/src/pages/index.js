@@ -728,35 +728,6 @@ function HomePage() {
                   <span>EloqDoc</span>
                 </Link>
               </div>
-
-              <p className="taglinecolor">
-                <Typed
-                  strings={['<strong>High Performance</strong>']}
-                  typeSpeed={40}
-                />
-              </p>
-              <p className="taglinecolor">
-                <Typed
-                  strings={['<strong>Full ACID Support</strong>']}
-                  typeSpeed={40}
-                />
-              </p>
-              <p className="taglinecolor">
-                <Typed
-                  strings={['<strong>Scalable and Elastic</strong>']}
-                  typeSpeed={40}
-                />
-              </p>
-              <p className="taglinecolor">
-                <Typed
-                  strings={['<strong>AI Native</strong>']}
-                  typeSpeed={40}
-                />
-              </p>
-              <div className="buttons">
-                <HomeLearnMore />
-                <HomeCallToAction />
-              </div>
             </div>
             <div className="product-right-column">
               <img alt="" src={useBaseUrl('img/architecture.svg')} />
