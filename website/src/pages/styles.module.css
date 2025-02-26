@@ -1,0 +1,110 @@
+/* ACID Transaction Section */
+.acidSection {
+  background-color: #0a0a14;
+  padding: 6rem 0;
+}
+
+.acidInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.acidContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.acidInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.acidTitle {
+  font-size: 3.2rem;
+  font-weight: 700;
+  background: linear-gradient(120deg, #ff7b2d, #ff9f4a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.acidDescription {
+  font-size: 1.25rem;
+  color: #8b8b9c;
+  line-height: 1.7;
+}
+
+.acidImageContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.acidImage {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Tiered Storage Section */
+.tieredSection {
+  background-color: #0a0a14;
+  padding: 6rem 0;
+}
+
+.tieredInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.tieredContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.tieredInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.tieredTitle {
+  font-size: 3.2rem;
+  font-weight: 700;
+  background: linear-gradient(120deg, #ff7b2d, #ff9f4a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.tieredDescription {
+  font-size: 1.25rem;
+  color: #8b8b9c;
+  line-height: 1.7;
+}
+
+.tieredImageContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.tieredImage {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 1024px) {
+  .acidContent,
+  .tieredContent {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .acidSection,
+  .tieredSection {
+    padding: 4rem 0;
+  }
+}

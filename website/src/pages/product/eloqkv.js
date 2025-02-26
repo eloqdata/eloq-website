@@ -310,57 +310,6 @@ COMMIT`}
           </div>
         )}
 
-        {/* Fully ACID Transaction Section */}
-        <div className={styles.acidSection}>
-          <div className={styles.acidInner}>
-            <div className={styles.acidContent}>
-              <div className={styles.acidInfo}>
-                <h2 className={styles.acidTitle}>Fully ACID Transaction</h2>
-                <p className={styles.acidDescription}>
-                  EloqKV is more than just an in-memory cache—it's a fully
-                  featured, distributed ACID-compliant transactional database.
-                  Eliminate the need for a separate SQL + Redis setup and say
-                  goodbye to cache coherence challenges.
-                </p>
-              </div>
-              <div className={styles.acidImageContainer}>
-                <img
-                  src="/img/acid-transaction.jpg"
-                  alt="ACID Transaction Diagram"
-                  className={styles.acidImage}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Tiered Storage Section */}
-        <div className={styles.tieredSection}>
-          <div className={styles.tieredInner}>
-            <div className={styles.tieredContent}>
-              <div className={styles.tieredImageContainer}>
-                <img
-                  src="/img/tiered-storage.jpg"
-                  alt="Tiered Storage Architecture"
-                  className={styles.tieredImage}
-                />
-              </div>
-              <div className={styles.tieredInfo}>
-                <h2 className={styles.tieredTitle}>Tiered Storage</h2>
-                <p className={styles.tieredDescription}>
-                  EloqKV intelligently manages your data across multiple storage
-                  tiers, optimizing both performance and cost. Hot data stays in
-                  memory for lightning-fast access, warm data moves to SSD for
-                  balanced performance, and cold data is persisted to object
-                  storage—all while maintaining seamless access. This
-                  multi-tiered approach dramatically reduces TCO (Total Cost of
-                  Ownership).
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
         {/* Community Section */}
         <div className={styles.communitySection}>
           <div className={styles.communityInner}>
