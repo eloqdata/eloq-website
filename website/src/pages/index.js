@@ -649,11 +649,11 @@ function HomePage() {
           <div className="product-columns">
             <div className="product-left-column">
               <h1 className="title">
-                Revolutionary Databases Powered by Data Substrate
+                Revolutionary Databases Powering the AI Age
               </h1>
               <p className="tagline">
-                One database for all AI needs—multi-model, transactional,
-                elastic and API-compatible{' '}
+                Databases for all your AI app needs—multi-model, transactional,
+                elastic and standard API-compatible{' '}
               </p>
 
               {/* Add product shortcuts */}
@@ -739,7 +739,8 @@ function HomePage() {
         <div className="section-container">
           <h2 className="section-title">Features</h2>
           <p className="section-subtitle">
-            Everything your AI application needs, all in one database
+            All the database features you need for your next blockbuster AI
+            application
           </p>
           <div className="feature-section">
             {features.map((feature, index) => (
@@ -757,12 +758,12 @@ function HomePage() {
           </div>
         </div>
 
-        {/* Fully ACID Transaction Section */}
+        {/* Full ACID Transaction Section */}
         <div className={styles.acidSection}>
           <div className={styles.acidInner}>
             <div className={styles.acidContent}>
               <div className={styles.acidInfo}>
-                <h2 className={styles.acidTitle}>Fully ACID Transaction</h2>
+                <h2 className={styles.acidTitle}>ACID Transaction Support</h2>
                 <p className={styles.acidDescription}>
                   EloqKV is more than just an in-memory cache—it's a fully
                   featured, distributed ACID-compliant transactional database.
