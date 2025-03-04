@@ -1,28 +1,27 @@
 ---
-title: Configuration Checklist
-summary: Learn how to quickly get started with the EloqSQL database.
+title: 配置检查清单
+summary: 学习如何快速开始使用 EloqKV 数据库。
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Prerequisite of Installing EloqKV
+# EloqKV 安装前置条件
 
-The `eloqctl` utility is installed and operated on a control node, it manages several EloqKV server nodes. We discuss how to establish trust between control node and the server nodes,
-and some system setting adjustments on the server nodes to make them run EloqKV better.
+`eloqctl` 工具安装和运行在控制节点上,它管理多个 EloqKV 服务器节点。我们将讨论如何在控制节点和服务器节点之间建立信任关系,以及如何调整服务器节点上的一些系统设置以使其更好地运行 EloqKV。
 
-## Establish Passwordless SSH and Sudo
+## 建立免密 SSH 和 Sudo
 
-Before proceeding, please manually configure SSH mutual trust and passwordless sudo between the control node and the server nodes:
+在继续之前,请手动配置控制节点和服务器节点之间的 SSH 互信和免密 sudo:
 
-1. Log in on control machine and each server machine as the root user. Create the `eloq` user account on each machine and set a login password:
+1. 以 root 用户身份登录控制机器和每台服务器机器。在每台机器上创建 `eloq` 用户账户并设置登录密码:
 
 ```
 useradd -m eloq && \
 passwd eloq
 ```
 
-2. To configure passwordless sudo, run the following command and append the line `eloq ALL=(ALL) NOPASSWD: ALL` to the end of the file on each machine:
+2. 要配置免密 sudo,运行以下命令并在每台机器上将 `eloq ALL=(ALL) NOPASSWD: ALL` 行追加到文件末尾:
 
 ```
 visudo
@@ -32,137 +31,83 @@ visudo
 eloq ALL=(ALL) NOPASSWD: ALL
 ```
 
-3. Please ensure that both password authentication and public key authentication are enabled on each machine. Password authentication is necessary for the control machine to copy the public key to the `authorized_keys` file of the EloqKV nodes. Public key authentication, on the other hand, is used by the `eloqctl` tool to deploy EloqKV clusters. You can verify and configure these settings in the SSH configuration file as follows:
+3. 请确保每台机器上都启用了密码认证和公钥认证。密码认证对于控制机器将公钥复制到 EloqKV 节点的 `authorized_keys` 文件是必需的。而公钥认证则用于 `eloqctl` 在部署过程中执行命令。
+
+要启用这两种认证方式,请编辑 `/etc/ssh/sshd_config` 文件:
 
 ```
 sudo vi /etc/ssh/sshd_config
 ```
 
-Ensure the following line is set (uncomment if necessary):
+确保以下两行存在且未被注释:
 
 ```
 PasswordAuthentication yes
 PubkeyAuthentication yes
-AuthorizedKeysFile .ssh/authorized_keys
 ```
 
-If you see the following line in `/etc/ssh/sshd_config`
+如果你修改了配置,需要重启 sshd 服务:
 
 ```
-Include /etc/ssh/sshd_config.d/*.conf
-```
-
-Make sure that all config files under `/etc/ssh/sshd_config.d/` do not have the previous settings set.
-
-```
-grep -ri PasswordAuthentication /etc/ssh/sshd_config.d/
-grep -ri PubkeyAuthentication /etc/ssh/sshd_config.d/
-grep -ri AuthorizedKeysFile /etc/ssh/sshd_config.d/
-```
-
-Comment out these lines so that they won't override the settings in `/etc/ssh/sshd_config`.
-
-Restart the SSH service to apply the changes:
-
-<Tabs
-groupId="language"
-defaultValue="rhel"
-values={[
-{ label: 'Rhel', value: 'rhel', },
-{ label: 'Ubuntu', value: 'ubuntu', }
-]
-}>
-
-<TabItem value="rhel">
-```shell
 sudo systemctl restart sshd
 ```
-</TabItem>
 
-<TabItem value="ubuntu">
-```shell
-sudo systemctl restart ssh
-```
-</TabItem>
-</Tabs>
-
-4. Log in to the control machine as the `eloq` user, generate an SSH key, and configure SSH mutual trust between the control machine and itself. Note that password should be skipped when running `ssk-keygen`.
+4. 在控制机器上生成 SSH 密钥对:
 
 ```
 ssh-keygen -t rsa
-cat .ssh/id_rsa.pub >> .ssh/authorized_keys
 ```
 
-Please check permissions on .ssh directory.
+5. 将公钥复制到每个 EloqKV 节点:
 
 ```
-chmod 700 ~/.ssh
-chmod 600 ~/.ssh/authorized_keys
-
+ssh-copy-id -i ~/.ssh/id_rsa.pub eloq@node1
+ssh-copy-id -i ~/.ssh/id_rsa.pub eloq@node2
+ssh-copy-id -i ~/.ssh/id_rsa.pub eloq@node3
 ```
 
-5. Configure SSH mutual trust between the control machine and the server machines. Replace 10.0.0.1 with the IP address of your target machine, and enter the `eloq` user password for the target machine when prompted. Once the command is executed, SSH mutual trust will be established. Repeat this process for each EloqKV machine.
+6. 验证免密 SSH 是否工作:
 
 ```
-ssh-copy-id -i ~/.ssh/id_rsa.pub 10.0.0.1
+ssh eloq@node1 "hostname"
+ssh eloq@node2 "hostname"
+ssh eloq@node3 "hostname"
 ```
 
-6. Log in to the control machine using the `eloq` user account, and then attempt to log in to the target machine's IP address using SSH. If you can log in without entering a password, SSH mutual trust has been successfully configured.
+## 系统设置
 
-```
-ssh 10.0.0.1
-```
+在每个 EloqKV 节点上,需要进行以下系统设置:
 
-```
-eloq@10.0.0.1:~$
-```
-
-## System configuration for EloqKV Server Nodes
-
-Below are some necessary configurations to be made before installing EloqKV
-
-- Ensure your system is connected to the network and can update its package repositories using `yum update` or `apt update`.
-- Edit the system configuration file `/etc/security/limits.conf or /etc/security/limits.d/20-nproc.conf` using the following command
-  ```shell
-  sudo vi /etc/security/limits.conf
-  ```
-  Add the following resource limit parameters at the end of the corresponding file
-  ```shell
-  * soft nofile 524288
-  * hard nofile 524288
-  * hard core unlimited
-  * soft core unlimited
-  ```
-- Ensure DNS server is configured in `/etc/resolv.conf`.
-- Ensure hostname is configured.
+- 确保 `/etc/resolv.conf` 中配置了 DNS 服务器。
+- 确保配置了主机名。
   ```shell
   sudo hostnamectl set-hostname my_hostname
   ```
-  Edit /etc/hosts
+  编辑 /etc/hosts
   ```shell
   my_ip my_hostname
   ```
-- Use the following command to edit the configuration file `/etc/sysctl.conf`
+- 使用以下命令编辑配置文件 `/etc/sysctl.conf`
   ```shell
   sudo vi /etc/sysctl.conf
   ```
-  Add the following configuration parameters at the end of the corresponding file
+  在相应文件末尾添加以下配置参数
   ```shell
   kernel.core_pattern=/var/crash/core-%e-%s-%u-%g-%p-%t
   ```
-- Execute the following command to load the above parameter modification.
+- 执行以下命令加载上述参数修改。
   ```shell
   sudo sysctl -p
   ```
-- In order to display all limit resource information of the current system, modify the bash configuration file
+- 为了显示当前系统的所有限制资源信息,修改 bash 配置文件
   ```shell
   sudo vi ~/.bashrc
   ```
-  Add at the end of the corresponding file
+  在相应文件末尾添加
   ```
   ulimit -c unlimited
   ```
-- Add current user and group ownership to `/var/crash` folder
+- 添加当前用户和组对 `/var/crash` 文件夹的所有权
   ```shell
   sudo chown -R $USER:$USER /var/crash
   ```

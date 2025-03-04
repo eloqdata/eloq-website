@@ -1,8 +1,8 @@
 ---
-title: EloqKV Compatibility with Redis Commands
+title: EloqKV 与 Redis 命令的兼容性
 ---
 
-# EloqKV Compatibility with Redis Commands
+# EloqKV 与 Redis 命令的兼容性
 
 ## Hash
 

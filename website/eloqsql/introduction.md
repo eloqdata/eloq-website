@@ -1,66 +1,66 @@
 ---
-title: Introduction to EloqSQL
+title: EloqSQL 简介
 ---
 
-# EloqSQL: A Distributed NewSQL Database for Elastic Performance at Any Scale
+# EloqSQL：一个面向任意规模弹性性能的分布式 NewSQL 数据库
 
-## Introduction
+## 简介
 
-In today's data-driven world, organizations face the challenge of managing ever-increasing volumes of data while ensuring high performance, scalability, and cost-effectiveness. Traditional database systems often struggle to meet these demands, leading to bottlenecks and performance limitations.
+在当今数据驱动的世界中，组织面临着管理不断增长的数据量的挑战，同时还要确保高性能、可扩展性和成本效益。传统数据库系统往往难以满足这些需求，导致性能瓶颈和限制。
 
-EloqSQL is a revolutionary distributed NewSQL database that addresses these challenges head-on. Powered by its innovative Data Substrate, EloqSQL delivers exceptional elasticity, scalability, and performance for latency-sensitive workloads, making it an ideal choice for modern enterprises.
+EloqSQL 是一个革命性的分布式 NewSQL 数据库，直面这些挑战。在其创新的数据基底的支持下，EloqSQL 为延迟敏感的工作负载提供卓越的弹性、可扩展性和性能，使其成为现代企业的理想选择。
 
-## Achitecture
+## 架构
 
-EloqSQL is a decoupled distributed database powered by Data Substrate. Its architecture includes a frontend compute engine compatible with the MySQL protocol. Within Data Substrate, the TxService is responsible for caching hot data and managing transaction processing, while the LogService handles data persistence. LogService replicas are distributed across different availability zones (AZs) to ensure tolerance to AZ-level failures. The underlying storage layer supports pluggable key-value (KV) storages, such as AWS DynamoDB, Google Bigtable, and Cassandra. These cloud storage services store cold data for cache misses and provide high availability for baseline data.
+EloqSQL 是一个由数据基底驱动的解耦分布式数据库。其架构包括一个兼容 MySQL 协议的前端计算引擎。在数据基底内部，TxService 负责缓存热数据和管理事务处理，而 LogService 处理数据持久化。LogService 副本分布在不同的可用区（AZ）中，以确保对 AZ 级故障的容错能力。底层存储层支持可插拔的键值（KV）存储，如 AWS DynamoDB、Google Bigtable 和 Cassandra。这些云存储服务存储冷数据以处理缓存未命中，并为基线数据提供高可用性。
 
 ![](./media/eloqsql_wp.png)
 
-## Key Features
+## 主要特性
 
-### MySQL Compatibility:
+### MySQL 兼容性：
 
-- Seamless integration with existing MySQL applications
-- Leverages familiar MySQL protocol and syntax
+- 与现有 MySQL 应用程序无缝集成
+- 利用熟悉的 MySQL 协议和语法
 
-### Elastic Parallel Logging:
+### 弹性并行日志：
 
-- Patented one-phase commit technique for distributed transaction performance
-- 4x improvement in transactions per second in single node mode compared to MySQL
-- Eliminates logging bottlenecks for write-intensive workloads
+- 专利的一阶段提交技术，提升分布式事务性能
+- 单节点模式下事务每秒处理量比 MySQL 提高 4 倍
+- 消除写密集型工作负载的日志瓶颈
 
-### Elastic Memory Cache:
+### 弹性内存缓存：
 
-- Minimizes read latency with highly scalable in-memory data storage
-- Supports hash and range partitioning for efficient data distribution
-- Automatic scaling and rebalancing for optimal performance
-- Cold data checkpointed to cloud storage for efficient cache miss read
+- 通过高度可扩展的内存数据存储最小化读取延迟
+- 支持哈希和范围分区以实现高效的数据分布
+- 自动扩展和重新平衡以实现最佳性能
+- 将冷数据检查点存储到云存储以高效处理缓存未命中
 
-### Decoupled Cloud Storage:
+### 解耦云存储：
 
-- Independent scaling of storage and compute resources
-- Cost-effective management of large datasets
-- Optimized resource utilization for cold data
-- Avoid cloud vendor lock-in and future-proof your data ecosystem with EloqSQL's seamless hybrid cloud storage
+- 存储和计算资源独立扩展
+- 大型数据集的成本效益管理
+- 针对冷数据优化资源利用
+- 通过 EloqSQL 的无缝混合云存储避免云厂商锁定，确保数据生态系统的未来发展
 
-## Use Cases
+## 使用场景
 
-EloqSQL's unique blend of performance, elasticity, and cost-effectiveness makes it ideal for a wide range of use cases across industries. Here are just a few examples:
+EloqSQL 独特的性能、弹性和成本效益组合使其适用于各行业的广泛用例。以下是一些示例：
 
-- **FinTech**: Payment Processing: Handle high-volume transactions with blazing-fast speed and rock-solid reliability. Guarantee data consistency while keeping the latency of complex transactions low.
+- **金融科技**：支付处理：以闪电般的速度和坚如磐石的可靠性处理高容量交易。在保持复杂交易延迟低的同时保证数据一致性。
 
-- **Gaming**: Game Persistence: Deliver seamless gameplay experiences with reliable transaction handling and consistent game state management. Ensure players never lose progress or encounter disruptions.
+- **游戏**：游戏持久化：通过可靠的事务处理和一致的游戏状态管理提供无缝的游戏体验。确保玩家永远不会失去进度或遇到中断。
 
-- **E-Commerce**: Order Management: Process orders quickly and efficiently with elastic scalability that handles peak traffic without delays. Ensure data accuracy and prevent order fulfillment errors.
+- **电子商务**：订单管理：通过弹性扩展快速高效地处理订单，无延迟地处理峰值流量。确保数据准确性并防止订单履行错误。
 
-- **Saas**: Metadata Management: Manage huge amount of metadata of your SaaS platform efficiently with EloqSQL's distributed architecture. Scale seamlessly to accommodate growing metadata volumes without compromising performance or availability.
+- **SaaS**：元数据管理：通过 EloqSQL 的分布式架构高效管理您的 SaaS 平台的海量元数据。无需牺牲性能或可用性即可无缝扩展以适应不断增长的元数据量。
 
-## EloqSQL: Embrace the Future of Distributed SQL:
+## EloqSQL：拥抱分布式 SQL 的未来：
 
-Gone are the days of performance trade-offs and inflexible scalability in distributed SQL. EloqSQL rewrites the rules with:
+分布式 SQL 中性能权衡和僵化的可扩展性的时代已经过去。EloqSQL 用以下特性重写了规则：
 
-- Elastic Scaling on Demand: Scale seamlessly to match your workload. Need blazing-fast queries? Scale up the compute engine. Facing write-heavy traffic? Scale out the log service. EloqSQL adapts precisely, ensuring optimal performance without overpaying.
-- Cost-Effective Efficiency: Leave expensive two-phase commit behind. EloqSQL's innovative architecture delivers exceptional performance without unnecessary bloat, significantly reducing operational costs compared to traditional NewSQL systems.
-- Ditch the Clunky Workarounds: Forget about complex sharding and cumbersome data management. EloqSQL simplifies your infrastructure, empowering you to focus on building great applications, not battling database overhead.
+- 按需弹性扩展：无缝匹配您的工作负载。需要闪电般快速的查询？扩展计算引擎。面对写密集型流量？扩展日志服务。EloqSQL 精确适应，确保最佳性能而不会过度支付。
+- 成本效益：告别昂贵的两阶段提交。EloqSQL 的创新架构在不增加不必要开销的情况下提供卓越性能，与传统 NewSQL 系统相比显著降低运营成本。
+- 摆脱笨重的变通方案：忘记复杂的分片和繁琐的数据管理。EloqSQL 简化了您的基础设施，使您能够专注于构建出色的应用程序，而不是与数据库开销作斗争。
 
-EloqSQL is the future of distributed SQL. Are you ready to break free?
+EloqSQL 是分布式 SQL 的未来。您准备好突破限制了吗？

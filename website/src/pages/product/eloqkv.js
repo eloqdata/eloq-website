@@ -3,24 +3,36 @@ import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import styles from './styles.module.css';
 
+// WeChat Icon Component
+const WechatIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width="24"
+    height="24"
+    fill="currentColor">
+    <path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 01.213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 00.167-.054l1.903-1.114a.864.864 0 01.717-.098c.93.265 1.93.411 2.977.411 4.8 0 8.691-3.288 8.691-7.342 0-4.053-3.89-7.343-8.691-7.343zm12.31 11.312c1.833-1.347 3-3.338 3-5.55 0-4.054-3.89-7.343-8.691-7.343-4.8 0-8.691 3.289-8.691 7.343 0 4.054 3.89 7.342 8.691 7.342 1.047 0 2.047-.146 2.977-.411a.864.864 0 01.717.098l1.903 1.114a.326.326 0 00.167.054c.16 0 .29-.132.29-.295 0-.072-.029-.143-.048-.213l-.39-1.48a.59.59 0 01.213-.665" />
+  </svg>
+);
+
 const WORKLOAD_PRICES = {
   small: {
-    eloqkv: 10.5,
-    redis: 220,
-    elasticache: 120,
-    description: 'Based on workload of 10GB with 1M OPs per day, 90% idle time',
+    eloqkv: 29,
+    redis: 80,
+    elasticache: 65,
+    description: '2GB内存，每秒5,000次操作',
   },
   medium: {
-    eloqkv: 42.5,
-    redis: 1700,
-    elasticache: 1200,
-    description: 'Based on workload of 100GB with 100K peak QPS, 50% idle time',
+    eloqkv: 99,
+    redis: 250,
+    elasticache: 180,
+    description: '8GB内存，每秒25,000次操作',
   },
   large: {
-    eloqkv: 1025,
-    redis: 17000,
-    elasticache: 3630,
-    description: 'Based on workload of 1TB (100GB hot) with 1M peak QPS',
+    eloqkv: 299,
+    redis: 750,
+    elasticache: 550,
+    description: '32GB内存，每秒100,000次操作',
   },
 };
 
@@ -51,7 +63,7 @@ const testimonials = [
 ];
 
 export default function EloqKV() {
-  const [workload, setWorkload] = useState('small');
+  const [workload, setWorkload] = useState('medium');
   const [isAutoSwitching, setIsAutoSwitching] = useState(true);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
 
@@ -104,16 +116,17 @@ export default function EloqKV() {
 
   return (
     <Layout
-      title="EloqKV - Redis Compatible Database"
-      description="The Redis Compatible Database for Production - ACID Transaction, Scalable Storage & SQL Style Syntax">
+      title="EloqKV - 分布式键值数据库"
+      description="完全弹性、Redis兼容的分布式数据库，具有计算存储分离和强大的ACID事务">
       <main>
         {/* Hero Section */}
         <div className={styles.hero}>
           <div className={styles.heroInner}>
-            <h1 className={styles.heroTitle}>Redis's API, Database's Power</h1>
+            <h1 className={styles.heroTitle}>
+              下一代分布式键值数据库：弹性且事务性
+            </h1>
             <p className={styles.heroSubtitle}>
-              The Redis Compatible Database for Production - ACID Transaction,
-              Scalable Storage & SQL Style Syntax
+              完全弹性、Redis兼容的分布式数据库，具有计算存储分离和强大的ACID事务
             </p>
             <div className={styles.heroButtons}>
               <Link
@@ -123,7 +136,7 @@ export default function EloqKV() {
                   background: 'linear-gradient(120deg, #ff7b2d, #ff9f4a)',
                   border: 'none',
                 }}>
-                Get Started
+                开始使用
               </Link>
               <Link
                 className={`button button--secondary button--lg ${styles.heroButton}`}
@@ -133,57 +146,45 @@ export default function EloqKV() {
                   border: '1px solid rgba(255, 255, 255, 0.2)',
                   color: '#fff',
                 }}>
-                Star on GitHub ⭐
+                在GitHub上加星 ⭐
               </Link>
             </div>
           </div>
         </div>
 
-        {/* Code Comparison Section */}
-        <div className={styles.codeComparison}>
-          <div className={styles.codeComparisonInner}>
-            <div className={styles.codeBlock}>
-              <h3>Redis</h3>
-              <pre className={styles.codeContent}>
-                <code>
-                  {`MULTI
-SET user:1000:balance 500
-SET user:2000:balance 1500
-EXEC`}
-                </code>
-              </pre>
-            </div>
-            <div className={styles.codeBlock}>
-              <h3>EloqKV</h3>
-              <pre className={styles.codeContent}>
-                <code>
-                  {`BEGIN
-SET user:1000:balance 500
-SET user:2000:balance 1500
-COMMIT`}
-                </code>
-              </pre>
-            </div>
-          </div>
-        </div>
-
         {/* Features Section */}
-        <div className={styles.kvFeatures}>
-          <div className={styles.kvFeaturesInner}>
-            <div className={styles.kvFeatureCards}>
-              <div className={styles.kvFeature}>
-                <h3>ACID Transactions</h3>
+        <div className={styles.features}>
+          <div className={styles.featuresInner}>
+            <h2 className={styles.featuresTitle}>特性</h2>
+            <p className={styles.featuresSubtitle}>
+              探索EloqKV的强大功能：可扩展、弹性且完全符合ACID标准
+            </p>
+            <div className={styles.featureCards}>
+              <div className={styles.feature}>
+                <h3>Redis兼容</h3>
+                <p>Redis的直接替代品，具有增强功能</p>
+              </div>
+              <div className={styles.feature}>
+                <h3>分层存储</h3>
                 <p>
-                  Full ACID compliance with distributed transactions support
+                  通过内存、磁盘和对象存储的分层存储，实现速度和成本的完美平衡
                 </p>
               </div>
-              <div className={styles.kvFeature}>
-                <h3>Redis Compatible</h3>
-                <p>Drop-in replacement for Redis with enhanced capabilities</p>
+              <div className={styles.feature}>
+                <h3>完全弹性</h3>
+                <p>独立扩展计算、内存、日志和存储，以匹配工作负载需求</p>
               </div>
-              <div className={styles.kvFeature}>
-                <h3>Scalable Storage</h3>
-                <p>Horizontal & vertical scaling with auto-tiering</p>
+              <div className={styles.feature}>
+                <h3>简单操作</h3>
+                <p>跨节点操作变得简单——无需手动分片</p>
+              </div>
+              <div className={styles.feature}>
+                <h3>极致压缩</h3>
+                <p>列式存储通过高压缩效率优化空间</p>
+              </div>
+              <div className={styles.feature}>
+                <h3>分布式事务</h3>
+                <p>由1PC协议支持的闪电般快速的分布式事务</p>
               </div>
             </div>
           </div>
@@ -203,7 +204,11 @@ COMMIT`}
                           workload === size ? styles.workloadTabActive : ''
                         }`}
                         onClick={() => handleTabClick(size)}>
-                        {size.charAt(0).toUpperCase() + size.slice(1)}
+                        {size === 'small'
+                          ? '小型'
+                          : size === 'medium'
+                          ? '中型'
+                          : '大型'}
                       </button>
                     ))}
                   </div>
@@ -211,7 +216,7 @@ COMMIT`}
                     <div className={styles.costAmount}>
                       ${WORKLOAD_PRICES[workload].eloqkv}
                     </div>
-                    <div className={styles.costPeriod}>/month</div>
+                    <div className={styles.costPeriod}>/月</div>
                     <div className={styles.costProvider} data-provider="eloqkv">
                       EloqKV
                     </div>
@@ -220,14 +225,14 @@ COMMIT`}
                     <div className={styles.costAmount}>
                       ${WORKLOAD_PRICES[workload].redis}
                     </div>
-                    <div className={styles.costPeriod}>/month</div>
-                    <div className={styles.costProvider}>Redis Enterprise</div>
+                    <div className={styles.costPeriod}>/月</div>
+                    <div className={styles.costProvider}>Redis企业版</div>
                   </div>
                   <div className={styles.costCard}>
                     <div className={styles.costAmount}>
                       ${WORKLOAD_PRICES[workload].elasticache}
                     </div>
-                    <div className={styles.costPeriod}>/month</div>
+                    <div className={styles.costPeriod}>/月</div>
                     <div className={styles.costProvider}>ElastiCache</div>
                   </div>
                   <div className={styles.workloadDescription}>
@@ -235,13 +240,11 @@ COMMIT`}
                   </div>
                 </div>
                 <div className={styles.costInfo}>
-                  <h2 className={styles.costTitle}>Cost Effective</h2>
+                  <h2 className={styles.costTitle}>成本效益高</h2>
                   <p className={styles.costDescription}>
-                    EloqKV is built for efficiency, leveraging a thread-per-core
-                    model for maximum performance at the best cost. With
-                    Scale-to-Zero support, it eliminates idle-time expenses,
-                    making it a cost-effective choice. Optimize your Redis-like
-                    workloads and reduce TCO with EloqKV.
+                    EloqKV专为效率而设计，采用每核一线程模型，以最佳成本提供最大性能。
+                    通过支持缩放到零，它消除了空闲时间的费用，使其成为一个具有成本效益的选择。
+                    使用EloqKV优化您的Redis类工作负载并降低总拥有成本。
                   </p>
                   <div className={styles.costButtons}>
                     <Link
@@ -251,7 +254,7 @@ COMMIT`}
                         background: 'linear-gradient(120deg, #ff7b2d, #ff9f4a)',
                         border: 'none',
                       }}>
-                      Try Cloud Free
+                      免费试用云服务
                     </Link>
                     <Link
                       className={`button button--secondary ${styles.costButton}`}
@@ -261,7 +264,7 @@ COMMIT`}
                         border: '1px solid rgba(255, 255, 255, 0.2)',
                         color: '#fff',
                       }}>
-                      Pricing
+                      定价
                     </Link>
                   </div>
                 </div>
@@ -274,13 +277,11 @@ COMMIT`}
         {SHOW_TESTIMONIALS && (
           <div className={styles.leadersSection}>
             <div className={styles.leadersInner}>
-              <h2 className={styles.leadersTitle}>
-                EloqKV is loved by developers
-              </h2>
+              <h2 className={styles.leadersTitle}>开发者喜爱EloqKV</h2>
               <Link to="/customers" className={styles.leadersCTA}>
-                Dive into success stories →
+                深入了解成功案例 →
               </Link>
-              <div className={styles.leadersContent}>
+              <div className={styles.testimonials}>
                 {testimonials.map((testimonial, index) => (
                   <div key={index} className={styles.testimonialGroup}>
                     <div
@@ -315,9 +316,9 @@ COMMIT`}
         {/* Community Section */}
         <div className={styles.communitySection}>
           <div className={styles.communityInner}>
-            <h2 className={styles.communityTitle}>Community</h2>
+            <h2 className={styles.communityTitle}>社区</h2>
             <p className={styles.communitySubtitle}>
-              Let's build the next generation of AI native databases together
+              让我们一起构建下一代AI原生数据库
             </p>
             <div className={styles.communityGrid}>
               <Link to="/blog" className={styles.communityCard}>
@@ -333,11 +334,8 @@ COMMIT`}
                     />
                   </svg>
                 </div>
-                <h3>Blog</h3>
-                <p>
-                  Explore technical insights on database innovations in the AI
-                  era.
-                </p>
+                <h3>博客</h3>
+                <p>探索AI时代数据库创新的技术见解。</p>
               </Link>
 
               <Link
@@ -352,26 +350,16 @@ COMMIT`}
                   </svg>
                 </div>
                 <h3>Discord</h3>
-                <p>
-                  Join our Discord community to discuss ideas with developers.
-                </p>
+                <p>加入我们的Discord社区，与开发者讨论想法。</p>
               </Link>
 
-              <Link
-                href="https://x.com/EloqData"
-                className={styles.communityCard}>
+              <Link href="/wechat" className={styles.communityCard}>
                 <div className={styles.communityIcon}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path
-                      d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
-                      fill="currentColor"
-                    />
-                  </svg>
+                  <WechatIcon />
                 </div>
-                <h3>X</h3>
+                <h3>微信用户群</h3>
                 <p>
-                  Follow us on X for the latest insights and updates from
-                  EloqKV.
+                  如果你对产品使用有任何问题，或者是想和其他使用者交流，请加入我们的微信用户群。
                 </p>
               </Link>
 
@@ -387,9 +375,7 @@ COMMIT`}
                   </svg>
                 </div>
                 <h3>Github</h3>
-                <p>
-                  Explore our open source projects on our GitHub repository.
-                </p>
+                <p>在我们的GitHub仓库中探索我们的开源项目。</p>
               </Link>
             </div>
           </div>

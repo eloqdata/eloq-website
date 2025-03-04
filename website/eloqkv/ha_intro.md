@@ -1,40 +1,40 @@
 ---
-title: EloqKV High Availability
+title: EloqKV 高可用性
 ---
 
-# EloqKV High Availability
+# EloqKV 高可用性
 
-## Local Storage
+## 本地存储
 
-EloqKV achieve high avaiabllity by using hot standy nodes when deployed with local storage like RocksDB. Any new changes at primary node will be shipped to standy node continuously. When Primary node fails, hot standy nodes can be elected as new primary node automatically. Next we will dive into how standby node works and how failover works.
+EloqKV 在使用 RocksDB 等本地存储时,通过热备用节点实现高可用性。主节点的任何新变更都会持续同步到备用节点。当主节点发生故障时,热备用节点可以自动被选举为新的主节点。接下来我们将深入了解备用节点的工作原理和故障转移的过程。
 
-How standby node joins the replication group:
+备用节点如何加入复制组:
 
-1. Hot standby node started and send `Join` message to primary node.
-2. Primary node begin the track all the new changes in local command cache.
-3. Primary node execute checkpoint and ensure all the old data are flushed to RocksDB.
-4. Primary node take snaphot for RocksDB and sent it to stanby node.
-5. Once standby node finished the load of remote RocksDB snapshot, Primary node begin to send the new commands in command cache to standby node continuously by a separate sync worker.
-6. Standy receives and execute the commands from primary. If command seqnumber is not continuous, standby will fetch the missing command with seqnumber from primary. If the missing command is also cleared in command cache of primary node, the standby node need to rejoin the replication group.
+1. 热备用节点启动并向主节点发送 `Join` 消息。
+2. 主节点开始在本地命令缓存中跟踪所有新的变更。
+3. 主节点执行检查点并确保所有旧数据都已刷新到 RocksDB。
+4. 主节点为 RocksDB 创建快照并发送给备用节点。
+5. 一旦备用节点完成远程 RocksDB 快照的加载,主节点就开始通过单独的同步工作线程持续发送命令缓存中的新命令给备用节点。
+6. 备用节点接收并执行来自主节点的命令。如果命令序号不连续,备用节点将从主节点获取缺失的命令。如果缺失的命令在主节点的命令缓存中也已被清除,备用节点需要重新加入复制组。
 
-When primary node fails, failover will be triggered and one of the standby will be elected as the new primary node to server the write request. EloqKV uses Raft consensus group to implement auto failover. In EloqKV, there are three roles in Raft group: Leader, Follower and Voter. Leader is the
+当主节点发生故障时,将触发故障转移,其中一个备用节点将被选举为新的主节点来处理写请求。EloqKV 使用 Raft 共识组来实现自动故障转移。在 EloqKV 中,Raft 组中有三种角色:领导者、跟随者和投票者。领导者是
 
-Below are the cluster topology when deploy 3-shard cluster with one standy for each primary. Different colors indicated different replication groups. Each replication group contain one primary node, one standby node and one voter, Since voter only paticapate consensus election process and comsume little resource, we deploy the voter and primary node one the same machine, but for a specific replication group, the voter primary and standy will be deployed separately to ensure EloqKV can tolerate node failure.
+以下是部署 3 分片集群时的集群拓扑,每个主节点有一个备用节点。不同的颜色表示不同的复制组。每个复制组包含一个主节点、一个备用节点和一个投票者。由于投票者只参与共识选举过程且消耗资源很少,我们将投票者和主节点部署在同一台机器上,但对于特定的复制组,投票者、主节点和备用节点将分别部署以确保 EloqKV 可以容忍节点故障。
 
 <p align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
 
-<EnlargeableImage src={require('./media/redis_standby_voter.png').default} alt="EloqKV Architecture" />
+<EnlargeableImage src={require('./media/redis_standby_voter.png').default} alt="EloqKV 架构" />
 
 </div></p>
 
-## Shared Storage
+## 共享存储
 
-EloqKV is a decoupled, distributed database built on Data Substrate, the innovative new database foundation developed by EloqData for the cloud era.
+EloqKV 是一个基于 Data Substrate 构建的解耦、分布式数据库,Data Substrate 是 EloqData 为云时代开发的创新数据库基础。
 
-Each EloqKV instance includes a frontend, compatible with the Redis protocol, deployed together with the core TxService to handle data operations. A logically independent LogService handles Write Ahead Logging (WAL) to ensure persistence, while a Persistent Storage Service manages memory state checkpoints and cold data storage.
+每个 EloqKV 实例包括一个与 Redis 协议兼容的前端,与核心 TxService 一起部署以处理数据操作。逻辑上独立的 LogService 处理预写日志(WAL)以确保持久性,而持久化存储服务管理内存状态检查点和冷数据存储。
 
-In EloqKV, the TxService is responsible for concurrency control, ensuring that transactional operations are consistent. The Log Service can replicate logs and distributes them across different availability zones (AZs) to provide resilience against AZ-level failures. The storage service supports various persistent storage engines, including local options like RocksDB, remote clusters like Cassandra, and cloud storage solutions such as AWS DynamoDB. This persistent storage store cold data for cache misses and provide high availability, even during node failures.
+在 EloqKV 中,TxService 负责并发控制,确保事务操作的一致性。日志服务可以复制日志并将其分布在不同的可用区(AZ)中,以提供对 AZ 级故障的弹性。存储服务支持各种持久化存储引擎,包括本地选项如 RocksDB、远程集群如 Cassandra,以及云存储解决方案如 AWS DynamoDB。这个持久化存储存储冷数据以应对缓存未命中,并在节点故障时提供高可用性。
 
 <p align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
@@ -79,4 +79,4 @@ EloqKV adapts to your dynamic needs, scaling seamlessly to match your workload:
 
 ## Read the Blogs
 
-**EloqKV** is a reimagining of the modern Key-Value Store. To learn more about EloqKV and what it can do, you can read our blogs about its [unique features](/news/2024/08/16/eloqkv) and [underlying technology](/blog/2024/08/11/data-substrate). You can also read benchmark results on its performance in [single-node](/blog/2024/08/17/benchmark-single-node) configurations and [clustering](/blog/2024/08/22/benchmark-cluster) configurations. You can also read about its unique capability to achieve [durability](/blog/2024/08/25/benchmark-txlog) and perform [distributed atomic operations](/blog/2024/09/01/benchmark-transaction). More technical content will be posted on the [blog](/blog) frequently, and we welcome your [feedback](/contact).
+**EloqKV** is a reimagining of the modern Key-Value Store. To learn more about EloqKV and what it can do, you can read our blogs about its [unique features](/blog/2024/08/16/eloqkv) and [underlying technology](/blog/2024/08/11/data-substrate). You can also read benchmark results on its performance in [single-node](/blog/2024/08/17/benchmark-single-node) configurations and [clustering](/blog/2024/08/22/benchmark-cluster) configurations. You can also read about its unique capability to achieve [durability](/blog/2024/08/25/benchmark-txlog) and perform [distributed atomic operations](/blog/2024/09/01/benchmark-transaction). More technical content will be posted on the [blog](/blog) frequently, and we welcome your [feedback](/contact).

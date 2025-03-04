@@ -248,7 +248,7 @@ module.exports = {
           // Product Navbar
           {
             type: 'dropdown',
-            label: 'Product',
+            label: '产品',
             position: 'right',
             items: [
               {
@@ -262,7 +262,7 @@ module.exports = {
                       </svg>
                       <div style="display: flex; flex-direction: column;">
                         <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqKV</span>
-                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Redis compatible</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Redis 兼容</span>
                       </div>
                     </div>
                   </a>
@@ -281,7 +281,7 @@ module.exports = {
                       </svg>
                       <div style="display: flex; flex-direction: column;">
                         <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqSQL</span>
-                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">MySQL compatible</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">MySQL 兼容</span>
                       </div>
                     </div>
                   </a>
@@ -300,7 +300,7 @@ module.exports = {
                       </svg>
                       <div style="display: flex; flex-direction: column;">
                         <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqDoc</span>
-                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">MongoDB compatible</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">MongoDB 兼容</span>
                       </div>
                     </div>
                   </a>
@@ -312,7 +312,7 @@ module.exports = {
           // Docs Navbar
           {
             type: 'dropdown',
-            label: 'Docs',
+            label: '文档',
             position: 'right',
             items: [
               {
@@ -326,7 +326,7 @@ module.exports = {
                       </svg>
                       <div style="display: flex; flex-direction: column;">
                         <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqKV</span>
-                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Redis compatible</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Redis 兼容</span>
                       </div>
                     </div>
                   </a>
@@ -345,7 +345,7 @@ module.exports = {
                       </svg>
                       <div style="display: flex; flex-direction: column;">
                         <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqSQL</span>
-                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">MySQL compatible</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">MySQL 兼容</span>
                       </div>
                     </div>
                   </a>
@@ -364,7 +364,7 @@ module.exports = {
                       </svg>
                       <div style="display: flex; flex-direction: column;">
                         <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqDoc</span>
-                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">MongoDB compatible</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">MongoDB 兼容</span>
                       </div>
                     </div>
                   </a>
@@ -376,7 +376,7 @@ module.exports = {
           // Learn Navbar
           {
             type: 'dropdown',
-            label: 'Learn',
+            label: '探索',
             position: 'right',
             items: [
               {
@@ -389,8 +389,8 @@ module.exports = {
                         <path d="M8 8h16v4H8zM8 14h16v2H8zM8 18h12v2H8z" fill="#FFFFFF" />
                       </svg>
                       <div style="display: flex; flex-direction: column;">
-                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">Blog</span>
-                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Insights from EloqData</span>
+                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">博客</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">深入行业洞察</span>
                       </div>
                     </div>
                   </a>
@@ -407,8 +407,8 @@ module.exports = {
                         <path d="M12 12h8M12 16h8M12 20h4" stroke="#FFFFFF" stroke-width="2" />
                       </svg>
                       <div style="display: flex; flex-direction: column;">
-                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">News</span>
-                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Get latest updates</span>
+                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">新闻</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">获取最新资讯</span>
                       </div>
                     </div>
                   </a>
@@ -425,8 +425,8 @@ module.exports = {
                         <path d="M11 16h2M15 16h2M19 16h2" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
                       </svg>
                       <div style="display: flex; flex-direction: column;">
-                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">Forum</span>
-                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Discuss with community</span>
+                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">论坛</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">参与社区讨论</span>
                       </div>
                     </div>
                   </a>
@@ -438,7 +438,7 @@ module.exports = {
           // Download Navbar
           {
             type: 'dropdown',
-            label: 'Download',
+            label: '下载',
             position: 'right',
             items: [
               {
@@ -452,7 +452,7 @@ module.exports = {
                       </svg>
                       <div style="display: flex; flex-direction: column;">
                         <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqKV</span>
-                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Redis compatible</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Redis 兼容</span>
                       </div>
                     </div>
                   </a>
@@ -471,7 +471,7 @@ module.exports = {
                       </svg>
                       <div style="display: flex; flex-direction: column;">
                         <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqSQL</span>
-                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">MySQL compatible</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">MySQL 兼容</span>
                       </div>
                     </div>
                   </a>
@@ -490,7 +490,7 @@ module.exports = {
                       </svg>
                       <div style="display: flex; flex-direction: column;">
                         <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqDoc</span>
-                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">MongoDB compatible</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">MongoDB 兼容</span>
                       </div>
                     </div>
                   </a>
@@ -508,7 +508,7 @@ module.exports = {
                       </svg>
                       <div style="display: flex; flex-direction: column;">
                         <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqCtl</span>
-                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Cluster management tool</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">集群管理工具</span>
                       </div>
                     </div>
                   </a>
@@ -520,7 +520,7 @@ module.exports = {
           // Company Navbar - Fixed size
           {
             type: 'dropdown',
-            label: 'Company',
+            label: '公司',
             position: 'right',
             items: [
               {
@@ -533,7 +533,7 @@ module.exports = {
                         <path d="M16 8c-4.4 0-8 3.6-8 8v8h16v-8c0-4.4-3.6-8-8-8z" stroke="#FFFFFF" stroke-width="2" fill="none" />
                         <circle cx="16" cy="12" r="2" fill="#FFFFFF" />
                       </svg>
-                      <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0;">About Us</span>
+                      <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0;">关于我们</span>
                     </div>
                   </a>
                 `,
@@ -548,7 +548,7 @@ module.exports = {
                         <path d="M8 10h16v12H8z" stroke="#FFFFFF" stroke-width="2" fill="none" />
                         <path d="M8 10l8 6 8-6" stroke="#FFFFFF" stroke-width="2" fill="none" />
                       </svg>
-                      <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0;">Contact Us</span>
+                      <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0;">联系我们</span>
                     </div>
                   </a>
                 `,
@@ -562,20 +562,20 @@ module.exports = {
         style: 'dark',
         links: [
           {
-            title: 'Docs',
+            title: '资料',
             items: [
               {
-                label: 'Document',
+                label: '官方文档',
                 to: '/eloqkv/introduction',
               },
             ],
           },
           {
-            title: 'Community',
+            title: '社区',
             items: [
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/eloqdb',
+                label: '微信',
+                href: '/wechat',
               },
               {
                 label: 'Discord',
@@ -584,10 +584,10 @@ module.exports = {
             ],
           },
           {
-            title: 'More',
+            title: '更多',
             items: [
               {
-                label: 'Blog',
+                label: '博客',
                 to: '/blog',
               },
             ],

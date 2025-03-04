@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "@theme/Layout";
 import FormField from "@site/src/components/FormField";
-import "./DownloadPage.css"; // Create and import your CSS file
-import React, { useState, useEffect } from "react";
+import "./DownloadPage.css";
 
 const ContactPage: React.FC = () => {
   const [name, setName] = useState<string>("");
@@ -11,7 +10,6 @@ const ContactPage: React.FC = () => {
   const [message, setMessage] = useState<string>("");
 
   useEffect(() => {
-    // Fetch the IP address and set it in the hidden input field
     fetch("https://api.ipify.org?format=json")
       .then((response) => response.json())
       .then((data) => {
@@ -22,12 +20,11 @@ const ContactPage: React.FC = () => {
           ipInput.value = data.ip;
         }
       })
-      .catch((error) => console.error("Error fetching IP address:", error));
+      .catch((error) => console.error("获取 IP 地址时出错:", error));
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission logic here, e.g., send data to an API
     console.log({ name, email, message, message });
   };
 
@@ -36,33 +33,22 @@ const ContactPage: React.FC = () => {
 
     const downloadUrl = `https://download.eloqdata.com/eloqctl/eloqctl_installer.sh`;
 
-    //console.log('Download URL:', downloadUrl); // Debug log to check the URL
-
     const link = document.createElement("a");
     link.href = downloadUrl;
     link.setAttribute("download", `install.sh`);
-    //link.download = `eloqkv-${software_version}-${os_type}-amd64.tar.gz`;
-
     document.body.appendChild(link);
-
     link.click();
-
     document.body.removeChild(link);
 
-    console.log("Form submission initiated");
+    console.log("表单提交已启动");
 
-    //(document.getElementById('downloadForm') as HTMLFormElement).submit();
-    // Collect form data
     const formData = new FormData(event.currentTarget);
-
     formData.append("access_key", "aabaace1-59e8-471d-9dbe-352665e8efcd");
 
-    // Collect checked checkbox values
     const selectedFeatures = Array.from(
       document.querySelectorAll('input[name="download-reason"]:checked')
-    ).map((checkbox) => checkbox.value);
+    ).map((checkbox) => (checkbox as HTMLInputElement).value);
 
-    // Append the selected features to the form data
     if (selectedFeatures.length > 0) {
       formData.append("selected_features", selectedFeatures.join(","));
     }
@@ -73,75 +59,52 @@ const ContactPage: React.FC = () => {
     });
 
     const data = await response.json();
-
     if (data.success) {
-      console.log("Form submission successful");
+      console.log("表单提交成功");
     } else {
-      console.log("Error", data);
+      console.log("错误", data);
     }
-
-    /* getform API
-    try {
-      const response = await fetch('https://getform.io/f/bmdpkgja', {
-        method: 'POST',
-        body: formData
-      });
-
-      if (response.ok) {
-        console.log('Form submission successful');
-      } else {
-        console.error('Form submission failed');
-      }
-    } catch (error) {
-      console.error('Error during form submission:', error);
-    }*/
   };
 
   return (
-    <Layout title="Contact Us">
+    <Layout title="联系我们">
       <div className="contact-page-container">
         <div className="contact-page">
           <div className="top-description">
             <h1>
-              DOWNLOAD Eloqctl
+              下载 Eloqctl
               <sup style={{ fontSize: "0.3em", verticalAlign: "1.7em" }}>
-                preview
+                预览版
               </sup>
             </h1>
-            <p>
-              Simplifying the Creation and Management of EloqKV Cluster with
-              Eloqctl
-            </p>
+            <p>使用 Eloqctl 简化 EloqKV 集群的创建和管理</p>
           </div>
           <div className="content">
             <div className="info-panel">
               <div className="info-section">
-                <h2>Discover Eloqctl</h2>
+                <h2>探索 Eloqctl</h2>
                 <p>
-                  Eloqctl is a cluster management tool for EloqKV. You can use
-                  it to create and manage EloqKV clusters without the need to
-                  download the
-                  <a href="/download"> tarball </a> separately. Just follow the
-                  instructions
-                  <a href="/eloqkv/quick-start"> here</a>.
+                  Eloqctl 是 EloqKV 的集群管理工具。您可以使用它创建和管理
+                  EloqKV 集群，而无需单独下载
+                  <a href="/download"> tarball </a>。 只需按照
+                  <a href="/eloqkv/quick-start"> 此处 </a> 的说明操作。
                   <br />
                   <br />
-                  If you'd like to stay informed about the exciting developments
-                  of EloqKV, you can provide your email and contact information.
-                  However, if you prefer not to receive updates, feel free to
-                  continue without any obligations.
+                  如果您希望了解 EloqKV
+                  的最新动态，可以提供您的电子邮件和联系方式。
+                  如果您不希望接收更新，也可以直接继续下载。
                 </p>
               </div>
             </div>
             <div className="form-panel">
-              <h2>Download Form</h2>
+              <h2>下载表单</h2>
               <form
                 id="downloadForm"
                 className="contact-form"
                 onSubmit={triggerDownload}
               >
                 <label htmlFor="download-reason">
-                  Which feature of EloqKV interests you the most?
+                  您对 EloqKV 的哪些功能最感兴趣？
                 </label>
                 <div id="download-reason">
                   <div className="checkbox-option">
@@ -150,7 +113,7 @@ const ContactPage: React.FC = () => {
                       name="download-reason"
                       value="pure-cache"
                     />
-                    High Performance Distributed Cache
+                    高性能分布式缓存
                   </div>
                   <div className="checkbox-option">
                     <input
@@ -158,7 +121,7 @@ const ContactPage: React.FC = () => {
                       name="download-reason"
                       value="persistent-cache"
                     />
-                    Cache with Persistent Storage
+                    具备持久存储的缓存
                   </div>
                   <div className="checkbox-option">
                     <input
@@ -166,20 +129,19 @@ const ContactPage: React.FC = () => {
                       name="download-reason"
                       value="transactional-db"
                     />
-                    Transactional Key Value Database
+                    事务型键值数据库
                   </div>
                 </div>
 
-                <label htmlFor="company">Company:</label>
+                <label htmlFor="company">公司:</label>
                 <input type="text" id="company" name="company" />
 
-                <label htmlFor="email">Email:</label>
+                <label htmlFor="email">电子邮件:</label>
                 <input type="email" id="email" name="email" />
 
-                {/* Hidden input field to store IP address */}
                 <input type="hidden" id="ip_address" name="ip_address" />
 
-                <button type="submit">Download</button>
+                <button type="submit">下载</button>
               </form>
             </div>
           </div>

@@ -27,7 +27,7 @@ const EloqDocDownloadPage: React.FC = () => {
     link.click();
     document.body.removeChild(link);
 
-    // Collect form data
+    // 收集表单数据
     const formData = new FormData(event.currentTarget);
     formData.append("access_key", "aabaace1-59e8-471d-9dbe-352665e8efcd");
 
@@ -46,71 +46,68 @@ const EloqDocDownloadPage: React.FC = () => {
 
     const data = await response.json();
     if (data.success) {
-      console.log("Form submission successful");
+      console.log("表单提交成功");
     }
   };
 
   return (
-    <Layout title="Download EloqDoc">
+    <Layout title="下载 EloqDoc">
       <div className="contact-page-container">
         <div className="contact-page">
           <div className="top-description">
             <h1>
-              DOWNLOAD EloqDoc
+              下载 EloqDoc
               <sup style={{ fontSize: "0.3em", verticalAlign: "1.7em" }}>
-                preview
+                预览版
               </sup>
             </h1>
-            <p>Try EloqDoc by Downloading a Binary Tarball for Your OS</p>
+            <p>通过下载适用于您的操作系统的二进制 Tarball 来体验 EloqDoc</p>
           </div>
           <div className="content">
             <div className="info-panel">
               <div className="info-section">
-                <h2>Discover EloqDoc</h2>
+                <h2>探索 EloqDoc</h2>
                 <p>
-                  Download a binary tarball to explore our MongoDB-compatible
-                  document database. To get started, follow the{" "}
-                  <a href="/eloqdoc/install-from-binary"> Quick Start </a>
-                  guide.
+                  下载二进制 Tarball 以探索我们兼容 MongoDB 的文档数据库。
+                  开始使用，请参阅
+                  <a href="/eloqdoc/install-from-binary"> 快速入门 </a>
+                  指南。
                   <br />
                   <br />
-                  If you're interested in a more in-depth experience, we
-                  recommend trying our
-                  <a href="/downloadeloqctl"> Eloqctl </a> tool to deploy a
-                  cluster.
+                  如果您想要更深入的体验，我们建议使用
+                  <a href="/downloadeloqctl"> Eloqctl </a> 工具来部署集群。
                   <br />
                   <br />
-                  If you'd like to stay informed about EloqDoc developments, you
-                  can provide your email and contact information. However, if
-                  you prefer not to receive updates, feel free to continue
-                  without any obligations.
+                  如果您希望了解 EloqDoc
+                  的最新动态，可以提供您的电子邮件和联系方式。
+                  如果您不希望接收更新，也可以直接继续下载。
                 </p>
               </div>
             </div>
             <div className="form-panel">
-              <h2>Download Form</h2>
+              <h2>下载表单</h2>
               <form
                 id="downloadForm"
                 className="contact-form"
                 onSubmit={triggerDownload}
               >
                 <label htmlFor="os_type" className="required">
-                  Operating System:
+                  操作系统:
                 </label>
                 <select id="os_type" name="os_type" required>
                   <option value="" disabled selected>
-                    Please Choose OS Type
+                    请选择操作系统类型
                   </option>
                   <option value="ubuntu20">Ubuntu 20.04</option>
                   <option value="ubuntu22">Ubuntu 22.04</option>
                 </select>
 
                 <label htmlFor="arch_type" className="required">
-                  CPU Architecture:
+                  CPU 架构:
                 </label>
                 <select id="arch_type" name="arch_type" required>
                   <option value="" disabled selected>
-                    Please Choose CPU Arch
+                    请选择 CPU 架构
                   </option>
                   <option value="amd64" selected>
                     x86_64
@@ -121,7 +118,7 @@ const EloqDocDownloadPage: React.FC = () => {
                 </select>
 
                 <label htmlFor="download-reason">
-                  Which feature of EloqDoc interests you the most?
+                  您对 EloqDoc 的哪些功能最感兴趣？
                 </label>
                 <div id="download-reason">
                   <div className="checkbox-option">
@@ -130,7 +127,7 @@ const EloqDocDownloadPage: React.FC = () => {
                       name="download-reason"
                       value="mongo-compatible"
                     />
-                    MongoDB Compatible API
+                    MongoDB 兼容 API
                   </div>
                   <div className="checkbox-option">
                     <input
@@ -138,7 +135,7 @@ const EloqDocDownloadPage: React.FC = () => {
                       name="download-reason"
                       value="document-store"
                     />
-                    Elastic and Scalability
+                    弹性与可扩展性
                   </div>
                   <div className="checkbox-option">
                     <input
@@ -146,19 +143,19 @@ const EloqDocDownloadPage: React.FC = () => {
                       name="download-reason"
                       value="acid-transactions"
                     />
-                    ACID Transactions
+                    ACID 事务
                   </div>
                 </div>
 
-                <label htmlFor="company">Company:</label>
+                <label htmlFor="company">公司:</label>
                 <input type="text" id="company" name="company" />
 
-                <label htmlFor="email">Email:</label>
+                <label htmlFor="email">电子邮件:</label>
                 <input type="email" id="email" name="email" />
 
                 <input type="hidden" id="ip_address" name="ip_address" />
 
-                <button type="submit">Download</button>
+                <button type="submit">下载</button>
               </form>
             </div>
           </div>

@@ -12,7 +12,7 @@ const EloqKVDownloadPage: React.FC = () => {
     const arch_type = (
       document.getElementById("arch_type") as HTMLSelectElement
     ).value;
-    const software_version = "0.8.12";
+    const software_version = "0.8.13";
     const kvtype = "rocksdb";
 
     const downloadUrl = `https://download.eloqdata.com/eloqkv/${kvtype}/eloqkv-${software_version}-${os_type}-${arch_type}.tar.gz`;
@@ -27,7 +27,7 @@ const EloqKVDownloadPage: React.FC = () => {
     link.click();
     document.body.removeChild(link);
 
-    // Collect form data
+    // 收集表单数据
     const formData = new FormData(event.currentTarget);
     formData.append("access_key", "aabaace1-59e8-471d-9dbe-352665e8efcd");
 
@@ -46,12 +46,12 @@ const EloqKVDownloadPage: React.FC = () => {
 
     const data = await response.json();
     if (data.success) {
-      console.log("Form submission successful");
+      console.log("表单提交成功");
     }
   };
 
   useEffect(() => {
-    // Fetch the IP address and set it in the hidden input field
+    // 获取 IP 地址并设置到隐藏输入字段
     fetch("https://api.ipify.org?format=json")
       .then((response) => response.json())
       .then((data) => {
@@ -62,54 +62,52 @@ const EloqKVDownloadPage: React.FC = () => {
           ipInput.value = data.ip;
         }
       })
-      .catch((error) => console.error("Error fetching IP address:", error));
+      .catch((error) => console.error("获取 IP 地址时出错:", error));
   }, []);
 
   return (
-    <Layout title="Download EloqKV">
+    <Layout title="下载 EloqKV">
       <div className="contact-page-container">
         <div className="contact-page">
           <div className="top-description">
-            <h1>DOWNLOAD EloqKV</h1>
-            <p>Try EloqKV by Downloading a Binary Tarball for Your OS</p>
+            <h1>下载 EloqKV</h1>
+            <p>通过下载适用于您的操作系统的二进制 Tarball 来体验 EloqKV</p>
           </div>
           <div className="content">
             <div className="info-panel">
               <div className="info-section">
-                <h2>Discover EloqKV</h2>
+                <h2>探索 EloqKV</h2>
                 <p>
-                  Download a binary tarball to easily explore our groundbreaking
-                  KV database. To get started, follow the{" "}
-                  <a href="/eloqkv/install-from-binary"> Quick Start </a>
-                  guide.
+                  下载二进制 Tarball 轻松探索我们创新的 KV
+                  数据库。开始使用，请参阅
+                  <a href="/eloqkv/install-from-binary"> 快速入门 </a>
+                  指南。
                   <br />
                   <br />
-                  If you're interested in a more in-depth experience, we
-                  recommend trying our
-                  <a href="/downloadeloqctl"> Eloqctl </a> tool to deploy a
-                  cluster and take EloqKV for a more serious test drive.
+                  如果您想要更深入的体验，我们建议使用
+                  <a href="/downloadeloqctl"> Eloqctl </a>{" "}
+                  工具来部署集群，并深入测试 EloqKV。
                   <br />
                   <br />
-                  If you'd like to stay informed about the exciting developments
-                  of EloqKV, you can provide your email and contact information.
-                  However, if you prefer not to receive updates, feel free to
-                  continue without any obligations.
+                  如果您想了解 EloqKV
+                  的最新动态，可以提供您的电子邮件和联系方式。
+                  当然，如果您不希望接收更新，也可以直接继续下载。
                 </p>
               </div>
             </div>
             <div className="form-panel">
-              <h2>Download Form</h2>
+              <h2>下载表单</h2>
               <form
                 id="downloadForm"
                 className="contact-form"
                 onSubmit={triggerDownload}
               >
                 <label htmlFor="os_type" className="required">
-                  Operating System:
+                  操作系统:
                 </label>
                 <select id="os_type" name="os_type" required>
                   <option value="" disabled selected>
-                    Please Choose OS Type
+                    请选择操作系统类型
                   </option>
                   <option value="rhel7">RHEL 7</option>
                   <option value="rhel8">RHEL 8</option>
@@ -120,11 +118,11 @@ const EloqKVDownloadPage: React.FC = () => {
                 </select>
 
                 <label htmlFor="arch_type" className="required">
-                  CPU Architecture:
+                  CPU 架构:
                 </label>
                 <select id="arch_type" name="arch_type" required>
                   <option value="" disabled selected>
-                    Please Choose CPU Arch
+                    请选择 CPU 架构
                   </option>
                   <option value="amd64" selected>
                     x86_64
@@ -135,7 +133,7 @@ const EloqKVDownloadPage: React.FC = () => {
                 </select>
 
                 <label htmlFor="download-reason">
-                  Which feature of EloqKV interests you the most?
+                  您对 EloqKV 的哪些功能最感兴趣？
                 </label>
                 <div id="download-reason">
                   <div className="checkbox-option">
@@ -144,7 +142,7 @@ const EloqKVDownloadPage: React.FC = () => {
                       name="download-reason"
                       value="pure-cache"
                     />
-                    High Performance Distributed Cache
+                    高性能分布式缓存
                   </div>
                   <div className="checkbox-option">
                     <input
@@ -152,7 +150,7 @@ const EloqKVDownloadPage: React.FC = () => {
                       name="download-reason"
                       value="persistent-cache"
                     />
-                    Cache with Persistent Storage
+                    具备持久存储的缓存
                   </div>
                   <div className="checkbox-option">
                     <input
@@ -160,19 +158,19 @@ const EloqKVDownloadPage: React.FC = () => {
                       name="download-reason"
                       value="transactional-db"
                     />
-                    Transactional Key Value Database
+                    事务型键值数据库
                   </div>
                 </div>
 
-                <label htmlFor="company">Company:</label>
+                <label htmlFor="company">公司:</label>
                 <input type="text" id="company" name="company" />
 
-                <label htmlFor="email">Email:</label>
+                <label htmlFor="email">电子邮件:</label>
                 <input type="email" id="email" name="email" />
 
                 <input type="hidden" id="ip_address" name="ip_address" />
 
-                <button type="submit">Download</button>
+                <button type="submit">下载</button>
               </form>
             </div>
           </div>

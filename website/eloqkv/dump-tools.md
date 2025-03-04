@@ -1,37 +1,90 @@
 ---
-title: Backup&Dump Tools
-summary: Learn how to create backup and convert it to rdb / aof file.
+title: 备份和导出工具
+summary: 学习如何创建备份并将其转换为 rdb / aof 文件。
 ---
 
-# Backup management
+# 备份管理
 
-You can use `eloqctl` to create and manage backup of current EloqKV cluster.
+你可以使用 `eloqctl` 创建和管理当前 EloqKV 集群的备份。
 
-### Create backup
+### 创建备份
 
-Create a cluster backup and save it at given path on a specified node.
+创建集群备份并将其保存在指定节点的给定路径上。
 
 ```
 eloqctl backup ${cluster_name} start [OPTIONS] --path /path/to/backup
 ```
 
-Options:
+选项：
 
-- **--path**:  
-  The full path to where the backup is stored. _(required)_
-- **--dest-user**:  
-  User of the destination node where the backup is stored. _(default: current user)_
-- **--dest-node**:  
-  Node address where the backup is stored. If you want to convert backups to AOF or RDB later, this node must be on of the tx server nodes. _(default: current node)_
-- **--password**:  
-  Cluster password if set _(default: "")_
+- **--path**：  
+  存储备份的完整路径。_(必需)_
+- **--dest-user**：  
+  存储备份的目标节点的用户。_(默认：当前用户)_
+- **--dest-node**：  
+  存储备份的节点地址。如果你想稍后将备份转换为 AOF 或 RDB，这个节点必须是 tx 服务器节点之一。_(默认：当前节点)_
+- **--password**：  
+  如果设置了集群密码则需要提供 _(默认："")_
 
-### List backup of a cluster
+### 列出集群的备份
 
-List current available backups of a cluster.
+列出集群当前可用的备份。
 
 ```
 eloqctl backup ${cluster_name} list
+```
+
+### 将备份转换为 AOF 文件
+
+1. 创建一个新的备份
+
+   ```bash
+   eloqctl backup eloqkv-cluster start --path /home/workspace/snapshot
+   ```
+
+2. 创建输出目录
+
+   ```bash
+   mkdir -p /home/workspace/output_aof
+   ```
+
+3. 将备份转换为 AOF 文件
+
+   ```bash
+   eloqctl backup eloqkv-cluster convert --path /home/workspace/snapshot --output /home/workspace/output_aof --format aof
+   ```
+
+4. 检查 AOF 文件
+
+   ```bash
+   redis-check-aof /home/workspace/output_aof/0.aof
+   ```
+
+   输出将如下所示：
+
+   ```
+   AOF analyzed: size=411068632, ok_up_to=411068632, diff=0
+   AOF is valid
+   ```
+
+5. 使用 `redis-cli` 将 AOF 文件导入到另一个服务器：
+
+   ```bash
+   redis-cli --pipe < /home/workspace/output_aof/0.aof
+   ```
+
+   导入后，输出将如下所示：
+
+   ```
+   All data transferred. Waiting for the last reply...
+   Last reply received from server.
+   errors: 0, replies: 6567541
+   ```
+
+6. 删除之前的快照
+
+```
+ eloqctl backup eloqkv-cluster remove --until 1min
 ```
 
 ### Cleanup backup of a cluster

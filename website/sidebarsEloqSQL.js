@@ -18,25 +18,10 @@ const sidebars = {
   //monoredisSidebar: ['MonoRedis'],
   //monosqlSidebar: ['MonoSQL'],
   eloqdb: {
-    'Quick Start': [
-      'playground',
-      'introduction',
-      'quick-start',
-      'cluster-deployment',
-    ],
-    'Data Migration': ['data-migration/debezium', 'data-migration/dm'],
-    'Data Query': ['data-query/simple-query', 'data-query/advance-query'],
-    'Mysql Compatibility': ['mysql-compatibility', 'difference_with_mysql'],
-    'SQL Reference': [
-      'sql-reference/account-management/alter-user',
-      'sql-reference/account-management/create-role',
-      'sql-reference/account-management/create-user',
-      'sql-reference/account-management/grant',
-      'sql-reference/account-management/revoke',
-      'sql-reference/data-manipulation/insert-and-load-data/load-data-infile',
-      'sql-reference/data-manipulation/selecting-data/select-into-outfile',
-      'sql-reference/data-manipulation/selecting-data/select-with-rollup',
-    ],
+    EloqSQL简介: ['introduction'],
+    快速开始: ['quick-start', 'cluster-deployment'],
+    数据迁移: ['data-migration/debezium', 'data-migration/dm'],
+    Mysql兼容性: ['mysql-compatibility', 'difference_with_mysql'],
   },
 
   // But you can create a sidebar manually

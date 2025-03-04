@@ -27,191 +27,6 @@ import {
 import Link from '@docusaurus/Link';
 import styles from './styles.module.css';
 
-const textContent = {
-  intro: `
-  Data Substrate is a layer of abstraction that provides core functionalities commonly needed for managing data across various scenarios.<br/><br/>
-  Data Substrate is responsible for managing <strong>Caching</strong>, <strong>Concurrency control</strong>, <strong>Durability</strong>
-  <strong>Consistency</strong> and <strong>Fault tolerance</strong>.<br/><br/>
-  Customized databases can be assembled by compute engine, data substrate and cloud kv store.
-  `,
-  nativeCode: `
-React primitives render to native platform UI, meaning your app uses the
-same native platform APIs other apps do.
-<br/><br/>
-<strong>Many platforms</strong>, one React. Create platform-specific versions of components
-so a single codebase can share code across platforms. With React Native,
-one team can maintain multiple platforms and share a common technology—React.
-  `,
-  whydatasubstrate: `
-  Modern enterprises need versatile data management systems to support complex business needs, but traditional approaches often lead to headaches for system administrators. <br/><br/> These headaches can include long data pipelines, repetitive functionality, complex system management, low resource utilization, and inconsistent synchronizations.
-  `,
-  hybridscaling: `
-  For read-intensive workloads, scale out the data substrate's memory for distributed caching, ensuring fast data retrieval.<br/><br/>
-
-  For write-heavy workloads, scale out the data substrate's log to enable parallel logging alongside our patented one-phase commit protocol, guaranteeing data duration and high availability.<br/><br/>
-
-  For large datasets, scale out the data store to increase storage capacity while minimizing compute costs for less frequently accessed data.
-  `,
-  elasticlog: `
-  Write intensive workload requires the scalability of log service.
-				Traditional databases write and fsync redo logs in the order of log sequence number into
-				a single disk, which becomes the bottleneck of the whole system. EloqSQL's patented
-				1-PC technique enables concurrent transactions to write and fsync redo logs into multiple
-				disks in parallel. Benchmark shows 4X TPS improvement compared with AWS Aurora.
-  `,
-  elasticmem: `
-  Read intensive workload requires the scalability of memory resource.
-				To achieve low read latency, it is important to hold all the hot data into memory.
-				EloqSQL supports hash and range partition, which can store a large amount of hot data
-				across multiple hosts. As the hot data grows, EloqSQL can scale-out the cluster and rebalance
-				the data range automatically. Cold data will be checkpointed into KV stores which can serve cache
-				miss read.
-  `,
-  decouplestore: `
-  Large dataset requires a decouple storage layer which can be individually scaled regardless of
-				read and write traffic. To reserve additional compute and memory for cold data is a waste of
-				resource. Traditional shared-nothing architecture requires to add more compute nodes as the data
-				volumn scales even if the read and write traffic is unchanged. EloqSQL's decoupled cloud
-				storage enable you to only pay for the disk plus the IOPS cost of cold data.
-  `,
-  codeExample: `
-import React from 'react';
-import {Text, View} from 'react-native';
-import {Header} from './Header';
-import {heading} from './Typography';
-
-const WelcomeScreen = () => (
-  <View>
-    <Header title="Welcome to React Native"/>
-    <Text style={heading}>Step One</Text>
-    <Text>
-      Edit App.js to change this screen and turn it
-      into your app.
-    </Text>
-    <Text style={heading}>See Your Changes</Text>
-    <Text>
-      Press Cmd + R inside the simulator to reload
-      your app's code.
-    </Text>
-    <Text style={heading}>Debug</Text>
-    <Text>
-      Press Cmd + M or Shake your device to open the
-      React Native Debug Menu.
-    </Text>
-    <Text style={heading}>Learn</Text>
-    <Text>
-      Read the docs to discover what to do next:
-    </Text>
-   </View>
-);
-  `,
-  forEveryone: `
-React Native lets you create truly native apps and doesn't compromise your users' experiences.
-It provides a core set of platform agnostic native components like <code>View</code>, <code>Text</code>, and <code>Image</code>
-that map directly to the platform's native UI building blocks.
-  `,
-  crossPlatform: `
-React components wrap existing native code and interact with native APIs via
-React's declarative UI paradigm and JavaScript. This enables native app development
-for whole new teams of developers, and can let existing native teams work much faster.
-  `,
-  fastRefresh: `
-<strong>See your changes as soon as you save.</strong> With the power of JavaScript,
-React Native lets you iterate at lightning speed. No more waiting for native builds to finish.
-Save, see, repeat.
-  `,
-  talks: `
-Members of the React Native team frequently speak at various conferences.
-<br/><br/>
-You can follow the latest news from the React Native team on Twitter
-  `,
-};
-
-function Heading({text}) {
-  return <h2 className="Heading">{text}</h2>;
-}
-
-function ActionButton({href, type = 'primary', target, children}) {
-  return (
-    <a className={`ActionButton ${type}`} href={href} target={target}>
-      {children}
-    </a>
-  );
-}
-
-function TextColumn({title, text, moreContent}) {
-  return (
-    <>
-      <Heading text={title} />
-      <div dangerouslySetInnerHTML={{__html: text}} />
-      {moreContent}
-    </>
-  );
-}
-
-function ButtonEloqSQL() {
-  return (
-    <>
-      <ActionButton
-        type="primary"
-        href={useBaseUrl('product_eloqdb.html')}
-        target="_self">
-        View Detail
-      </ActionButton>
-    </>
-  );
-}
-function HomeLearnMore() {
-  return (
-    <>
-      <ActionButton
-        type="primary"
-        href={useBaseUrl('/blog/2024/08/11/data-substrate')}
-        target="_self">
-        Learn more
-      </ActionButton>
-    </>
-  );
-}
-
-function HomeCallToAction() {
-  return (
-    <>
-      <ActionButton
-        type="primary"
-        href={useBaseUrl('eloqkv/quick-start.html')}
-        target="_self">
-        Get started
-      </ActionButton>
-    </>
-  );
-}
-
-function TwitterButton({accountName}) {
-  return (
-    <a
-      href={`https://twitter.com/intent/follow?screen_name=${accountName}&region=follow_link`}
-      className="twitter-follow-button">
-      <div className="icon" />
-      Follow @{accountName}
-    </a>
-  );
-}
-
-function GitHubStarButton() {
-  return (
-    <div className="github-button">
-      <GitHubButton
-        href="https://github.com/facebook/react-native"
-        data-icon="octicon-star"
-        data-size="large"
-        aria-label="Star facebook/react-native on GitHub">
-        Star
-      </GitHubButton>
-    </div>
-  );
-}
-
 export function Section({
   element = 'section',
   children,
@@ -231,353 +46,6 @@ export function Section({
   );
 }
 
-function TwoColumns({columnOne, columnTwo, reverse}) {
-  return (
-    <div className={`TwoColumns ${reverse ? 'reverse' : ''}`}>
-      <div className={`column first ${reverse ? 'right' : 'left'}`}>
-        {columnOne}
-      </div>
-      <div className={`column last ${reverse ? 'left' : 'right'}`}>
-        {columnTwo}
-      </div>
-    </div>
-  );
-}
-
-function ScreenRect({className, fill, stroke}) {
-  return (
-    <rect
-      className={`screen ${className || ''}`}
-      rx="3%"
-      width="180"
-      height="300"
-      x="-90"
-      y="-150"
-      fill={fill}
-      stroke={stroke}
-    />
-  );
-}
-
-function LogoAnimation() {
-  return (
-    <img
-      alt=""
-      width="500"
-      height="800"
-      src={useBaseUrl('img/mono_caotu.png')}
-    />
-  );
-}
-
-function SQLLOGO() {
-  return (
-    <img
-      width="1250"
-      height="50"
-      alt=""
-      src={useBaseUrl('img/eloqdb_wp.png')}
-    />
-  );
-}
-
-function EloqSQL() {
-  return (
-    <Section background="dark" className="HeaderHero2">
-      {/*
-      <div className="socialLinks">
-        <TwitterButton accountName="reactnative" />
-        <GitHubStarButton />
-      </div>*/}
-      <TwoColumns
-        reverse
-        columnOne={<SQLLOGO />}
-        columnTwo={
-          <>
-            <p className="taglineproduct">
-              <a href="https://www.eloquentdb.com">EloqSQL</a>
-            </p>
-            <p className="taglineproductdetail">
-              A distributed SQL database powered by Data Substrate. Elastic at
-              any scale for any workload.
-            </p>
-          </>
-        }
-      />
-    </Section>
-  );
-}
-function EloqKV() {
-  return (
-    <Section background="dark" className="HeaderHero2">
-      {/*
-      <div className="socialLinks">
-        <TwitterButton accountName="reactnative" />
-        <GitHubStarButton />
-      </div>*/}
-      <TwoColumns
-        reverse
-        columnOne={<LogoAnimation />}
-        columnTwo={
-          <>
-            <p className="taglineproduct">
-              <a href="https://www.eloquentdb.com">EloqKV</a>
-            </p>
-            <p className="taglineproductdetail">
-              A distributed transactional cache database powered by Data
-              Substrate. Store data in cache with lower cost and higher
-              availability.
-            </p>
-          </>
-        }
-      />
-    </Section>
-  );
-}
-function EloqSQLWrapper() {
-  return (
-    <Section background="dark" className="HeaderHero2">
-      {/*
-      <div className="socialLinks">
-        <TwitterButton accountName="reactnative" />
-        <GitHubStarButton />
-      </div>*/}
-      <TwoColumns
-        reverse
-        columnOne={<LogoAnimation />}
-        columnTwo={
-          <>
-            <p className="taglineproduct">
-              <a href="https://www.eloquentdb.com">EloqSQLWrapper</a>
-            </p>
-            <p className="taglineproductdetail">
-              A stateless SQL wrapper for Amazon DynamoDB. Customer is enable to
-              migrate from RDS to DynamoDB without modifying their application
-              code.
-            </p>
-          </>
-        }
-      />
-    </Section>
-  );
-}
-function HeaderHero() {
-  return (
-    <Section background="dark" className="HeaderHero">
-      {/*
-      <div className="socialLinks">
-        <TwitterButton accountName="reactnative" />
-        <GitHubStarButton />
-      </div>*/}
-      <TwoColumns
-        reverse
-        columnOne={<LogoAnimation />}
-        columnTwo={
-          <>
-            <h1 className="title">EloqDB</h1>
-            <p className="tagline">
-              Assemble your database according to customized requirement powered
-              by Data&nbsp;Substrate.
-            </p>
-            <p className="taglinecolor">
-              <Typed strings={['- Pluggable Compute Engine']} typeSpeed={75} />
-            </p>
-            <p className="taglinecolor">
-              <Typed strings={['- Hybrid Cloud KV Storage']} typeSpeed={75} />
-            </p>
-            <br />
-            <br />
-            <div className="buttons">
-              <HomeCallToAction />
-            </div>
-          </>
-        }
-      />
-    </Section>
-  );
-}
-
-function NativeApps() {
-  return (
-    <Section className="NativeApps" background="light">
-      <TwoColumns
-        columnOne={
-          <TextColumn title="What is Data Substrate" text={textContent.intro} />
-        }
-        columnTwo={
-          <img alt="" src={useBaseUrl('img/homepage/datasubstrate.png')} />
-        }
-      />
-    </Section>
-  );
-}
-
-function ElasticLogging() {
-  return (
-    <Section className="NativeApps" background="tint">
-      <TwoColumns
-        reverse
-        columnOne={
-          <TextColumn
-            title="Why Data Substrate"
-            text={textContent.whydatasubstrate}
-          />
-        }
-        columnTwo={
-          <img alt="" src={useBaseUrl('img/homepage/datasubstratewhy.png')} />
-        }
-      />
-    </Section>
-  );
-}
-function ElasticMemory() {
-  return (
-    <Section className="NativeApps" background="light">
-      <TwoColumns
-        columnOne={
-          <TextColumn
-            title="Elastic at any scale for any workloads"
-            text={textContent.hybridscaling}
-          />
-        }
-        columnTwo={
-          <img
-            alt=""
-            src={useBaseUrl('img/homepage/datasubstratehybridscale.png')}
-          />
-        }
-      />
-    </Section>
-  );
-}
-function DecoupleStore() {
-  return (
-    <Section className="NativeApps" background="tint">
-      <TwoColumns
-        columnOne={
-          <a href="https://www.eloquentdb.com/product_eloqsql">EloqSQL</a>
-        }
-        columnTwo={
-          <img alt="" src={useBaseUrl('img/homepage/decoupledstorage2.png')} />
-        }
-      />
-    </Section>
-  );
-}
-
-/* Community */
-
-function AppList() {
-  const {siteConfig} = useDocusaurusContext();
-  const apps = Object.values(siteConfig.customFields.users)
-    .flat()
-    .filter(app => app.pinned);
-
-  return (
-    <ul className="AppList">
-      {apps.map((app, i) => {
-        const imgSource = !app.icon.startsWith('http')
-          ? useBaseUrl('img/showcase/' + app.icon)
-          : app.icon;
-        return (
-          <li key={i} className="item">
-            {app.infoLink ? (
-              <a href={app.infoLink}>
-                <img src={imgSource} alt={app.name} />
-              </a>
-            ) : (
-              <img src={imgSource} alt={app.name} />
-            )}
-          </li>
-        );
-      })}
-    </ul>
-  );
-}
-
-function Community() {
-  return (
-    <Section className="Community" background="light">
-      <div className="content">
-        <Heading text="Facebook Supported, Community Driven" />
-        <TwoColumns
-          columnOne={
-            <>
-              <p className="firstP">
-                <img src={useBaseUrl(`img/homepage/fb-logo.svg`)} alt="" />
-                <span>
-                  Facebook released React Native in 2015 and has been
-                  maintaining it ever since.
-                </span>
-              </p>
-              <p>
-                In 2018, React Native had the{' '}
-                <a href="https://octoverse.github.com/2018/projects#repositories">
-                  2nd highest
-                </a>{' '}
-                number of contributors for any repository in GitHub. Today,
-                React Native is supported by contributions from individuals and
-                companies around the world including{' '}
-                <span>
-                  <a href="https://callstack.com/">Callstack</a>
-                </span>
-                ,{' '}
-                <span>
-                  <a href="https://expo.io/">Expo</a>
-                </span>
-                , <a href="https://infinite.red/">Infinite Red</a>,{' '}
-                <a href="https://www.microsoft.com/">Microsoft</a> and{' '}
-                <a href="https://swmansion.com/">Software Mansion</a>.
-              </p>
-              <p>
-                Our community is always shipping exciting new projects and
-                exploring platforms beyond Android and iOS with repos like{' '}
-                <span>
-                  <a href="https://github.com/microsoft/react-native-windows#readme">
-                    React Native Windows
-                  </a>
-                </span>
-                ,{' '}
-                <a href="https://github.com/microsoft/react-native-macos#readme">
-                  React Native macOS
-                </a>{' '}
-                and{' '}
-                <a href="https://github.com/necolas/react-native-web#readme">
-                  React Native Web
-                </a>
-                .
-              </p>
-            </>
-          }
-          columnTwo={
-            <>
-              <p>
-                React Native is being used in thousands of apps, but it's likely
-                you've already used it in one of these apps:
-              </p>
-              <AppList />
-              <p>
-                and <a href={useBaseUrl(`showcase`)}>many more</a>.
-              </p>
-            </>
-          }
-        />
-      </div>
-    </Section>
-  );
-}
-
-function GetStarted() {
-  return (
-    <Section className="GetStarted" background="black">
-      <div className="content">
-        {/*<h2 className="Heading">Coming Soon</h2>*/}
-        <h2 className="Heading">Try Our Cutting-Edge Products</h2>
-      </div>
-    </Section>
-  );
-}
-
 const useHomePageAnimations = () => {
   useEffect(() => setupHeaderAnimations(), []);
   useEffect(() => setupDissectionAnimation(), []);
@@ -586,54 +54,54 @@ const useHomePageAnimations = () => {
 const features = [
   {
     icon: faBolt,
-    title: 'High Performance',
+    title: '高性能',
     details: [
-      'Match or exceed the best-in-class solutions',
-      'Blazing-fast distributed transactions powered by the 1PC protocol',
+      '匹配或超越同类最佳解决方案',
+      '由1PC协议支持的闪电般快速的分布式事务',
     ],
     link: 'blog/2024/08/17/benchmark-single-node',
   },
   {
     icon: faDollarSign,
-    title: 'Low Cost',
+    title: '低成本',
     details: [
-      'Achieve the perfect balance of speed and cost with tiered storage across memory, local disk, and object storage',
+      '通过内存、本地磁盘和对象存储的分层存储，实现速度和成本的完美平衡',
     ],
     link: 'blog/2024/08/16/eloqkv#performance-and-cost',
   },
   {
     icon: faExpandArrowsAlt,
-    title: 'Scalable and Elastic',
+    title: '可扩展且弹性',
     details: [
-      'Scale-up with multicore, and scale-out to multiple nodes in a cluster',
-      'Support dynamic scaling as workload changes, without service disruption',
+      '通过多核心实现纵向扩展，并扩展到集群中的多个节点',
+      '支持工作负载变化时的动态扩展，无服务中断',
     ],
     link: 'blog/2024/08/16/eloqkv#scale-as-you-need-on-what-you-need',
   },
   {
     icon: faExchangeAlt,
-    title: 'Fully ACID',
+    title: '完全ACID',
     details: [
-      'Fuly ACID Transaction with configurable isolation level',
-      'Support cross-model transactions from multiple APIs',
+      '具有可配置隔离级别的完全ACID事务',
+      '支持来自多个API的跨模型事务',
     ],
     link: 'blog/2024/08/16/eloqkv#full-acid-transactions-when-you-need-them',
   },
   {
     icon: faCheckCircle,
-    title: 'Highly Available',
+    title: '高可用性',
     details: [
-      'Replicate data to multiple servers to provide fault-tolerance',
-      'Support hot standbys so that failure can be recovered in sub-seconds',
+      '将数据复制到多个服务器以提供容错能力',
+      '支持热备用，故障恢复可在亚秒级完成',
     ],
     link: 'eloqkv/quick-start-ha',
   },
   {
     icon: faRedoAlt,
-    title: 'Standard API',
+    title: '标准API',
     details: [
-      'EloqDB supports standard APIs, including Redis, SQL, and Mongo',
-      'Enable seamless migration of existing applications with minimal effort',
+      'EloqDB支持标准API，包括Redis、SQL和Mongo',
+      '实现现有应用程序的无缝迁移，只需最少的努力',
     ],
     link: 'eloqkv/kvstore_compatibility',
   },
@@ -642,18 +110,15 @@ const features = [
 function HomePage() {
   return (
     <Layout
-      description="Build the Next Generation of Databases the Right Way"
+      description="以正确的方式构建下一代数据库"
       wrapperClassName="homepage">
       <main>
         <div className="container1">
           <div className="product-columns">
             <div className="product-left-column">
-              <h1 className="title">
-                Revolutionary Databases Powering the AI Age
-              </h1>
+              <h1 className="title">专为AI时代设计的新一代数据库</h1>
               <p className="tagline">
-                Databases for all your AI app needs—multi-model, transactional,
-                elastic and standard API-compatible{' '}
+                满足所有AI应用需求的数据库——多模型、事务性、 弹性且标准API兼容{' '}
               </p>
 
               {/* Add product shortcuts */}
@@ -737,10 +202,9 @@ function HomePage() {
 
         {/* Features Section */}
         <div className="section-container">
-          <h2 className="section-title">Features</h2>
+          <h2 className="section-title">特性</h2>
           <p className="section-subtitle">
-            All the database features you need for your next blockbuster AI
-            application
+            为您的下一个爆款AI应用提供所需的所有数据库功能
           </p>
           <div className="feature-section">
             {features.map((feature, index) => (
@@ -763,18 +227,16 @@ function HomePage() {
           <div className={styles.acidInner}>
             <div className={styles.acidContent}>
               <div className={styles.acidInfo}>
-                <h2 className={styles.acidTitle}>ACID Transaction Support</h2>
+                <h2 className={styles.acidTitle}>ACID事务支持</h2>
                 <p className={styles.acidDescription}>
-                  EloqKV is more than just an in-memory cache—it's a fully
-                  featured, distributed ACID-compliant transactional database.
-                  Eliminate the need for a separate SQL + Redis setup and say
-                  goodbye to cache coherence challenges.
+                  EloqKV不仅仅是内存缓存——它是一个功能齐全的分布式ACID兼容事务数据库。
+                  消除对单独的SQL + Redis设置的需求，告别缓存一致性挑战。
                 </p>
               </div>
               <div className={styles.acidImageContainer}>
                 <img
                   src="/img/acid-transaction.jpg"
-                  alt="ACID Transaction Diagram"
+                  alt="ACID事务图"
                   className={styles.acidImage}
                 />
               </div>
@@ -789,20 +251,16 @@ function HomePage() {
               <div className={styles.tieredImageContainer}>
                 <img
                   src="/img/tiered-storage.jpg"
-                  alt="Tiered Storage Architecture"
+                  alt="分层存储架构"
                   className={styles.tieredImage}
                 />
               </div>
               <div className={styles.tieredInfo}>
-                <h2 className={styles.tieredTitle}>Tiered Storage</h2>
+                <h2 className={styles.tieredTitle}>分层存储</h2>
                 <p className={styles.tieredDescription}>
-                  EloqKV intelligently manages your data across multiple storage
-                  tiers, optimizing both performance and cost. Hot data stays in
-                  memory for lightning-fast access, warm data moves to SSD for
-                  balanced performance, and cold data is persisted to object
-                  storage—all while maintaining seamless access. This
-                  multi-tiered approach dramatically reduces TCO (Total Cost of
-                  Ownership).
+                  EloqKV智能地管理跨多个存储层的数据，优化性能和成本。热数据保留在内存中以实现闪电般的访问速度，
+                  温数据移至SSD以获得平衡的性能，冷数据持久化到对象存储——同时保持无缝访问。
+                  这种多层方法显著降低了TCO（总拥有成本）。
                 </p>
               </div>
             </div>
@@ -811,72 +269,59 @@ function HomePage() {
 
         {/* Products Section */}
         <div className="section-container">
-          <h2 className="section-title">Products</h2>
-          <p className="section-subtitle">
-            Flexibility at its best—choose your standard API
-          </p>
+          <h2 className="section-title">产品</h2>
+          <p className="section-subtitle">灵活至上——选择您的标准API</p>
           <div className="product-cards">
             <Link to="/product/eloqkv" className="product-card">
               <h3>EloqKV</h3>
-              <p>Redis Compatible Database</p>
+              <p>Redis兼容数据库</p>
             </Link>
             <Link to="/product/eloqsql" className="product-card">
               <h3>EloqSQL</h3>
-              <p>MySQL Compatible Database</p>
+              <p>MySQL兼容数据库</p>
             </Link>
             <Link to="/product/eloqdoc" className="product-card">
               <h3>EloqDoc</h3>
-              <p>Mongo Compatible Database</p>
+              <p>Mongo兼容数据库</p>
             </Link>
           </div>
         </div>
-
         {/* Community Section */}
         <div className="section-container">
-          <h2 className="section-title">Community</h2>
-          <p className="section-subtitle">
-            Let's build the next generation of AI native databases together
-          </p>
+          <h2 className="section-title">社区</h2>
+          <p className="section-subtitle">让我们一起构建下一代AI原生数据库</p>
           <div className="community-grid">
-            <Link to="/blog" className="community-card">
-              <div className="community-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M19 5v14H5V5h14zm0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
-                    fill="currentColor"
-                  />
-                  <path
-                    d="M14 17H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </div>
-              <h3>Blog</h3>
-              <p>
-                Explore technical insights on database innovations in the AI
-                era.
-              </p>
-            </Link>
-
-            <Link to="/docs/introduction" className="community-card">
-              <div className="community-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zM6 20V4h7v5h5v11H6z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </div>
-              <h3>Documentation</h3>
-              <p>
-                Learn how to use EloqDB with our comprehensive guides and API
-                references.
-              </p>
-            </Link>
-
-            <Link
-              href="https://discord.gg/nmYjBkfak6"
+            <a
+              href="https://github.com/eloqdata/eloqkv"
               className="community-card">
+              <div className="community-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.341-3.369-1.341-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+              <h3>GitHub</h3>
+              <p>在我们的GitHub仓库中探索我们的开源项目。</p>
+            </a>
+
+            <a href="/wechat" className="community-card">
+              <div className="community-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  height="24"
+                  fill="currentColor">
+                  <path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 01.213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 00.167-.054l1.903-1.114a.864.864 0 01.717-.098c.93.265 1.93.411 2.977.411 4.8 0 8.691-3.288 8.691-7.342 0-4.053-3.89-7.343-8.691-7.343zm12.31 11.312c1.833-1.347 3-3.338 3-5.55 0-4.054-3.89-7.343-8.691-7.343-4.8 0-8.691 3.289-8.691 7.343 0 4.054 3.89 7.342 8.691 7.342 1.047 0 2.047-.146 2.977-.411a.864.864 0 01.717.098l1.903 1.114a.326.326 0 00.167.054c.16 0 .29-.132.29-.295 0-.072-.029-.143-.048-.213l-.39-1.48a.59.59 0 01.213-.665" />
+                </svg>
+              </div>
+              <h3>微信</h3>
+              <p>关注我们的微信公众号获取最新更新和资讯。</p>
+            </a>
+
+            <a href="https://discord.gg/nmYjBkfak6" className="community-card">
               <div className="community-icon">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                   <path
@@ -886,11 +331,8 @@ function HomePage() {
                 </svg>
               </div>
               <h3>Discord</h3>
-              <p>
-                Join our community to discuss ideas, ask questions, and get
-                help.
-              </p>
-            </Link>
+              <p>加入我们的Discord社区，与开发者讨论想法。</p>
+            </a>
           </div>
         </div>
       </main>

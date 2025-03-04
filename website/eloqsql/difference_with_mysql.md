@@ -1,43 +1,20 @@
 ---
-title: Difference with MySQL
+title: 与MySQL重要区别
+summary: 本文对 EloqSQL 和 MySQL 的区别详细说明
 ---
 
-# Difference with MySQL
+# 在 eloq 自增字段的使用
 
-## auto-increment ID in EloqSQL
-
-1.  In the eloq engine, all manual input of auto-increment will be ignored.
-    For example, the following SQL statement is used to create a table named `t1`,
-    The table consists of two columns, `i` and `j`, where `i` is the primary key, an integer type, and is set to auto-increment. `j` is also an integer type.
-
-        ```sql
-        create table t1(i int primary key auto_increment, j int)engine=eloq;
-        ```
-
-        * Case 1
-        ```sql
-        insert into t1 values(null, 1);
-        ```
-        * Case 2
-        ```sql
-        insert into t1 values(1, 1);
-        ```
-        * Case 3
-        ```sql
-        insert into t1(j) values(1);
-        ```
-
-    Cases 1-3 produce the same result, the input for field `i` will be ignored.
-
-2.  When each node inserts the table record for the first time after startup, it will apply for a range of `id` for the node's record insertion. Each node applies separately, and the result is only used for this node, so the auto-increment field cannot guarantee that the `id` is strictly incremented, only that it is not repeated. When the `id` of the range is used in this node, it will apply again. If the node is closed halfway, the unused `id` will be discarded.
-
-3.  You can modify the id range of the table with the following statement:
-
-    ```sql
-    set global eloq_auto_increment="table_name=t1;offset=10000;increment=15;range=1024";
-    ```
-
-    `table_name`: table name
-    `offset`: the initial value of the auto-increment id
-    `increment`: the interval between getting id twice
-    `range`: the range in which the node obtains the id at one time
+1. 在 eloq 引擎中，所有该字段的手动输入将会被忽略，例如：
+   create table t1(i int primary key auto_increment, j int)engine=eloq;
+   insert into t1 values(null, 1);
+   insert into t1 values(1, 1);
+   insert into t1(j) values(1);
+   产生的结果是一样的，对于字段 i 的输入将会被忽略。
+2. 每个节点将会在启动后第一次插入该表记录时，将会申请一段范围的 id 用于该节点的记录插入。各节点各自申请，结果只用于本节点，因此自增字段不能保证 id 是严格递增的，只能保证是不重复的。当该 range 的 id 在本节点使用完成后，会再次申请，如果该节点中途关闭，则未使用完的 id 将会抛弃。
+3. 可以通过下面的命令修改该 table 的 id 范围：
+   set global eloq_auto_increment="table_name=t1;offset=10000;increment=15;range=1024";
+   table_name: 表单名名称
+   offset：自增 id 的初始值
+   increment:两次获取 id 的间隔
+   range: 节点一次获取 id 的范围

@@ -1,18 +1,21 @@
 ---
-title: Migrate from MySQL to EloqSQL using Debezium
+title: 使用 Debezium 从 MySQL 迁移到 EloqSQL
 ---
 
-# Table of Contents
+# 目录
 
-1. [Install Debezium](#install-debezium)
-2. [Configure Debezium](#configure-debezium)
-3. [Migrate from MySQL to EloqSQL](#migrate-from-mysql-to-eloqsql)
+- [目录](#目录)
+  - [安装 Debezium](#安装-debezium)
+    - [安装 Kafka](#安装-kafka)
+    - [安装 Debezium](#安装-debezium-1)
+  - [配置 Debezium](#配置-debezium)
+  - [从 MySQL 迁移到 EloqSQL](#从-mysql-迁移到-eloqsql)
 
-## Install Debezium
+## 安装 Debezium
 
-### Install Kafka
+### 安装 Kafka
 
-Download and unzip Kafka tarball.
+下载并解压 Kafka 压缩包。
 
 ```
 wget https://dlcdn.apache.org/kafka/3.7.0/kafka_2.13-3.7.0.tgz
@@ -20,16 +23,16 @@ tar -zxvf kafka_2.13-3.7.0.tgz
 mv kafka_2.13-3.7.0 kafka
 ```
 
-### Install Debezium
+### 安装 Debezium
 
-Install Java 11 and choose Java 11 as default java version.
+安装 Java 11 并将其设置为默认 Java 版本。
 
 ```
 sudo yum install -y java-11-openjdk-devel
 sudo alternatives --config java
 ```
 
-Install Debezium on CentOS 7.
+在 CentOS 7 上安装 Debezium。
 
 ```
 cd kafka
@@ -46,7 +49,7 @@ mv debezium-connector-jdbc-2.7.0-SNAPSHOT.jar plugins/
 cp -p plugins/*.jar libs/
 ```
 
-## Configure Debezium
+## 配置 Debezium
 
 1. kafka/config/connect-standalone.properties
 
@@ -57,19 +60,18 @@ plugin.path=/home/centos/kafka/plugins
 2. kafka/config/server.properties
 
 ```
-# The minimum age of a log file to be eligible for deletion due to age
+# 日志文件可以删除的最小年龄
 log.retention.hours=24
-# A size-based retention policy for logs. Segments are pruned from the log unless the remaining
-# segments drop below log.retention.bytes. Functions independently of log.retention.hours.
+# 基于大小的日志保留策略。除非剩余段低于 log.retention.bytes，否则将从日志中删除段。
+# 独立于 log.retention.hours 运行。
 log.retention.bytes=30000000000
-# A comma separated list of directories under which to store log files
+# 用于存储日志文件的目录列表，以逗号分隔
 log.dirs=/data/kafka-logs
 ```
 
 3. kafka/config/source-mysql.json
 
-MySQL source connector read binlog from MySQL. The MySQL user of source connector requires
-REPLICATION SLAVE, REPLICATION CLIENT privileges.
+MySQL 源连接器从 MySQL 读取 binlog。源连接器的 MySQL 用户需要 REPLICATION SLAVE、REPLICATION CLIENT 权限。
 
 ```
 CREATE USER 'replication_user'@'%' identified by 'replication_user';
@@ -132,9 +134,9 @@ FLUSH PRIVILEGES;
 }
 ```
 
-## Migrate from MySQL to EloqSQL
+## 从 MySQL 迁移到 EloqSQL
 
-1. Enable binlog for MySQL. Edit my.cnf
+1. 为 MySQL 启用 binlog。编辑 my.cnf
 
 ```
 [mysqld]
@@ -144,62 +146,61 @@ binlog-format = ROW
 expire_logs_days  = 1
 ```
 
-2. Create table on EloqSQL
+2. 在 EloqSQL 上创建表
 
-How to setup EloqSQL, please refer to [Deploy EloqSQL](https://www.eloqdata.com/eloqsql/quick-start)
+如何设置 EloqSQL，请参考[部署 EloqSQL](https://www.eloqdata.com/eloqsql/quick-start)
 
 ```
 CREATE TABLE t1(id int primary key, j int) engine monograph;
 ```
 
-3. Start Zookeeper
+3. 启动 Zookeeper
 
 ```
 /home/centos/kafka/bin/zookeeper-server-start.sh /home/centos/kafka/config/zookeeper.properties > logzookeeper 2>&1 &
 ```
 
-4. Start Kafka
+4. 启动 Kafka
 
 ```
 /home/centos/kafka/bin/kafka-server-start.sh /home/centos/kafka/config/server.properties > logkafka 2>&1 &
 ```
 
-5. Start Kafka Connector Service
+5. 启动 Kafka 连接器服务
 
 ```
 /home/centos/kafka/bin/connect-distributed.sh /home/centos/kafka/config/connect-distributed.properties > logconnector 2>&1 &
 ```
 
-6. Start MySQL Connector
+6. 启动 MySQL 连接器
 
 ```
 cd kafka/config
 curl -i -X POST -H "Accept:application/json" -H  "Content-Type:application/json" http://localhost:8083/connectors/ -k -d @source-mysql.json
 ```
 
-7. Verify Source Connector
+7. 验证源连接器
 
-Verify Kafka topic is created.
+验证 Kafka 主题是否已创建。
 
 ```
 /home/centos/kafka/bin/kafka-topics.sh --list --bootstrap-server localhost:9092
 ```
 
-Optional, verify Kafka topic is not empty.
+可选，验证 Kafka 主题是否不为空。
 
 ```
 /home/centos/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic topic_mysql.gamelog.t1 --from-beginning
-
 ```
 
-8. Start JDBC Sink Connector
+8. 启动 JDBC Sink 连接器
 
 ```
 cd kafka/config
 curl -i -X POST -H "Accept:application/json" -H  "Content-Type:application/json" http://localhost:8083/connectors/ -k -d @sink-to-eloqsql.json
 ```
 
-9. Verify Connectors are Setup
+9. 验证连接器是否已设置
 
 ```
 curl  http://localhost:8083/connectors/ -k

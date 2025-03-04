@@ -1,35 +1,35 @@
 ---
-title: Deploy Single Node Instance
-summary: Learn how to quickly get started with the EloqKV database.
+title: 部署单节点实例
+summary: 学习如何快速开始使用 EloqKV 数据库。
 ---
 
-# Deploy a Single Node EloqKV Instance Using Eloqctl
+# 使用 Eloqctl 部署单节点 EloqKV 实例
 
-`eloqctl` is a powerful tool designed for the operation and maintenance of EloqKV clusters. With Eloqctl, you can effortlessly manage daily database tasks, such as deploying, starting, stopping, upgrading, and decommissioning EloqKV clusters, as well as configuring cluster parameters.
+`eloqctl` 是一个为 EloqKV 集群运维设计的强大工具。通过 Eloqctl,你可以轻松管理日常数据库任务,如部署、启动、停止、升级和下线 EloqKV 集群,以及配置集群参数。
 
-`eloqctl` supports the deployment of various cluster types, including EloqKV transactional clusters, EloqKV log clusters, persistent storage clusters like Cassandra, and associated monitoring systems. This document provides guidance on deploying EloqKV cluster on a single node.
+`eloqctl` 支持部署各种类型的集群,包括 EloqKV 事务集群、EloqKV 日志集群、持久化存储集群(如 Cassandra)以及相关的监控系统。本文档提供在单个节点上部署 EloqKV 集群的指导。
 
-## 1. Prerequisites
+## 1. 前置条件
 
-EloqKV is compatible with Red Hat 8/9 and Ubuntu 20.04, 22.04, and 24.04.
+EloqKV 兼容 Red Hat 8/9 和 Ubuntu 20.04、22.04 及 24.04。
 
-Please ensure you've reviewed the following documents:
+请确保你已经阅读以下文档:
 
-- [Configuration Checklist](./prerequisite)
+- [配置检查清单](./prerequisite)
 
-## 2. Deploy eloqctl on the control machine
+## 2. 在控制机器上部署 eloqctl
 
-1. Get your eloqctl installation script here:
+1. 在这里获取 eloqctl 安装脚本:
 
-- [Eloqctl Install Script](../downloadeloqctl)
+- [Eloqctl 安装脚本](../downloadeloqctl)
 
-2. To install eloqctl, simply run the following command:
+2. 要安装 eloqctl,只需运行以下命令:
 
 ```
 bash eloqctl_installer.sh
 ```
 
-If the following message is displayed, you have successfully installed `eloqctl`:
+如果显示以下消息,则表示你已成功安装 `eloqctl`:
 
 ```
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
@@ -42,40 +42,40 @@ source /home/eloq/.bash_profile
 ===============================================
 ```
 
-This command installs eloqctl in the $HOME/.eloqctl directory, where the cluster metadata and downloaded components are also stored.
+该命令将 eloqctl 安装在 $HOME/.eloqctl 目录中,集群元数据和下载的组件也存储在该目录中。
 
-Please run `source $HOME/.bash_profile` to add `$HOME/.eloqctl` to the PATH environment variable, so you can use `eloqctl` directly.
+请运行 `source $HOME/.bash_profile` 将 `$HOME/.eloqctl` 添加到 PATH 环境变量中,这样你就可以直接使用 `eloqctl`。
 
-Once installed, you can verify the `eloqctl` version by running:
+安装完成后,你可以通过运行以下命令验证 `eloqctl` 版本:
 
 ```
 eloqctl --version
 ```
 
-## 3. Initialize the cluster topology file
+## 3. 初始化集群拓扑文件
 
-Example cluster topology files can be found in the `.eloqctl/config/examples/` directory.
+示例集群拓扑文件可以在 `.eloqctl/config/examples/` 目录中找到。
 
-You can select either `eloqkv_rocksdb.yaml` or `eloqkv_cassandra.yaml` to set up your EloqKV cluster. For a detailed comparison between the RocksDB and Cassandra storage engines, please refer to the [EloqKV Introduction](./introduction). In the following example, we will demonstrate how to set up the cluster topology file using RocksDB.
+你可以选择 `eloqkv_rocksdb.yaml` 或 `eloqkv_cassandra.yaml` 来设置 EloqKV 集群。关于 RocksDB 和 Cassandra 存储引擎的详细比较,请参考 [EloqKV 简介](./introduction)。在下面的示例中,我们将演示如何使用 RocksDB 设置集群拓扑文件。
 
 ```
-# example yaml file
+# 示例 yaml 文件
 .eloqctl/config/examples/eloqkv_rocksdb.yaml
 ```
 
-Open the configuration file by running `vi eloqkv_rocksdb.yaml` to view its contents:
+运行 `vi eloqkv_rocksdb.yaml` 打开配置文件查看其内容:
 
-```
+```yaml
 connection:
-  username: "${USER}"
-  auth_type: "keypair"
+  username: '${USER}'
+  auth_type: 'keypair'
   auth:
-    keypair: "/home/${USER}/.ssh/id_rsa"
+    keypair: '/home/${USER}/.ssh/id_rsa'
 deployment:
-  cluster_name: "eloqkv-cluster"
-  product: "EloqKV"
-  version: "latest"
-  install_dir: "/home/${USER}"
+  cluster_name: 'eloqkv-cluster'
+  product: 'EloqKV'
+  version: 'latest'
+  install_dir: '/home/${USER}'
   tx_service:
     tx_host_ports: [127.0.0.1:6389]
     enable_cache_replacement: on
@@ -90,33 +90,33 @@ deployment:
   storage_service:
     rocksdb: Local
   monitor:
-    data_dir: ""
+    data_dir: ''
     monograph_metrics:
-      path: "/mono_metrics"
+      path: '/mono_metrics'
       port: 18081
     prometheus:
-      download_url: "https://github.com/prometheus/prometheus/releases/download/v2.42.0/prometheus-2.42.0.linux-amd64.tar.gz"
+      download_url: 'https://github.com/prometheus/prometheus/releases/download/v2.42.0/prometheus-2.42.0.linux-amd64.tar.gz'
       port: 9500
       host: 127.0.0.1
     grafana:
-      download_url: "https://dl.grafana.com/oss/release/grafana-9.3.6.linux-amd64.tar.gz"
+      download_url: 'https://dl.grafana.com/oss/release/grafana-9.3.6.linux-amd64.tar.gz'
       port: 3301
       host: 127.0.0.1
     node_exporter:
-      url: "https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_exporter-1.5.0.linux-amd64.tar.gz"
+      url: 'https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_exporter-1.5.0.linux-amd64.tar.gz'
       port: 9200
 ```
 
-Next, we'll provide detailed explanations for each configuration option available in the YAML file.
+接下来,我们将详细解释 YAML 文件中每个配置选项的含义。
 
-The `connection` section includes settings for connecting to EloqKV nodes from the control machine. If you followed the steps in the [Prerequisite Document](./prerequisite), you can leave the connection section unchanged.
+`connection` 部分包含从控制机器连接到 EloqKV 节点的设置。如果你按照[前置条件文档](./prerequisite)中的步骤操作,可以保持 connection 部分不变。
 
-The `deployment` section covers the configurations for deploying cluster metadata as well as the three key components: the transaction cluster, log cluster, and persistent storage cluster.
+`deployment` 部分涵盖了部署集群元数据以及三个关键组件的配置:事务集群、日志集群和持久化存储集群。
 
 - **`cluster_name`**:  
-  _Type_: `String`  
-  _Default_: `'eloqkv-cluster'`  
-  The name of the cluster being deployed serves as an identifier for the cluster. With `eloqctl`, you can deploy and manage multiple clusters, each distinguished by its unique name.
+  _类型_: `String`  
+  _默认值_: `'eloqkv-cluster'`  
+  正在部署的集群名称,作为集群的标识符。使用 `eloqctl`,你可以部署和管理多个集群,每个集群都由其唯一的名称区分。
 
 - **`product`**:  
   _Type_: `String`  

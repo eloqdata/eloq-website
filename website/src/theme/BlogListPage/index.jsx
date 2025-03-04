@@ -101,7 +101,7 @@ function BlogListPageContent(props) {
         <div className="container">
           {(mainFeaturedPost || otherFeaturedPosts.length > 0) && (
             <section className={styles.featuredSection}>
-              <h1 className={styles.sectionTitle}>Featured</h1>
+              <h1 className={styles.sectionTitle}>精选文章</h1>
               <div className={styles.featuredGrid}>
                 {mainFeaturedPost && (
                   <div className={styles.featuredMainPost}>
@@ -122,7 +122,7 @@ function BlogListPageContent(props) {
 
           <section className={styles.allPostsSection}>
             <h1 className={styles.sectionTitle}>
-              {metadata.allBlogText || "All Posts"}
+              {metadata.allBlogText || "全部博客"}
             </h1>
             <div className={styles.blogGrid}>
               {regularPosts.map((post, idx) => (

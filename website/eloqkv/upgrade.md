@@ -1,23 +1,23 @@
 ---
-title: Upgrade Using Eloqctl
-summary: Learn how to quickly get started with the EloqKV database.
+title: 使用 Eloqctl 升级
+summary: 学习如何快速开始使用 EloqKV 数据库。
 ---
 
-# Upgrade an EloqKV Cluster Using Eloqctl
+# 使用 Eloqctl 升级 EloqKV 集群
 
-In this document, we will illustrate how to use `eloqctl` to upgrade EloqKV cluster to a newer version.
+本文将说明如何使用 `eloqctl` 将 EloqKV 集群升级到新版本。
 
-Note that this upgrade process is only compatible with minor version upgrades, where a binary swap is sufficient.
+注意此升级过程仅适用于次要版本升级,即只需要替换二进制文件的情况。
 
-## Get Cluster Name
+## 获取集群名称
 
-Cluster name is set in the configuration file when you provision the cluster. The default cluser name is `eloqkv-cluster`. You can also check the cluster name using command below.
+集群名称在配置文件中设置,默认集群名称为 `eloqkv-cluster`。你也可以使用以下命令查看集群名称:
 
 ```
 eloqctl list
 ```
 
-The expected output will be:
+预期输出:
 
 ```
 +----------------+---------+---------+---------+-------+
@@ -27,22 +27,22 @@ The expected output will be:
 +----------------+---------+---------+---------+-------+
 ```
 
-## Upgrade Cluster
+## 升级集群
 
-Use Eloqctl to upgrade EloqKV for minor version change.
+使用 Eloqctl 进行次要版本升级:
 
 ```
 eloqctl update ${cluster_name} ${version}
 ```
 
-The upgrade tool will firstly stop the cluster, then update all the binaries across the cluster and finally start the cluster with the new binaries.
+升级工具会首先停止集群,然后更新集群中所有节点的二进制文件,最后使用新的二进制文件启动集群。
 
-## Upgrade Cassandra
+## 升级 Cassandra
 
-If you deploy EloqKV with Cassandra as perisistent storage engine, you can also use `eloqctl` to upgrade your cassandra cluster.
+如果你使用 Cassandra 作为持久化存储引擎部署 EloqKV,你也可以使用 `eloqctl` 升级 Cassandra 集群。
 
 ```
 eloqctl update ${cluster_name} --cassandra ${version}
 ```
 
-The upgrade tool will firstly stop the cluster with `-a` option, then upgrade Cassandra, move the data directory from old Cassandra cluster to new Cassandra cluster. Finally start the EloqKV cluster again.
+升级工具会首先使用 `-a` 选项停止集群,然后升级 Cassandra,将数据目录从旧的 Cassandra 集群移动到新的 Cassandra 集群。最后重新启动 EloqKV 集群。

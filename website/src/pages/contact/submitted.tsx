@@ -9,11 +9,11 @@ export default function ContactSubmitted() {
       <Head>
         <meta name="robots" content="noindex" />
       </Head>
-      <div className="container margin-vert--lg">
+      <div className="margin-vert--lg container">
         <div className="row">
           <div className="col col--6 col--offset-3">
-            <Heading as="h1">Thanks for your message!</Heading>
-            <p>I've received your message and will be in touch soon.</p>
+            <Heading as="h1">感谢您的留言！</Heading>
+            <p>我们已收到您的消息，将尽快与您联系。</p>
           </div>
         </div>
       </div>

@@ -1,36 +1,37 @@
 ---
-title: Compatibility with MySQL
-summary: This article makes a detailed comparison between EloqSQL and MySQL in terms of syntax and functional characteristics.
+title: 与 MySQL 兼容性比较
+summary: 本文对 EloqSQL 和 MySQL 二者之间从语法和功能特性上做出详细的对比。
 ---
 
-#Comparison with MySQL compatibility
+# 与 MySQL 兼容性对比
 
-EloqSQL is highly compatible with the MySQL 8.0 protocol, common functions and syntax. The system tools in the MySQL 8.0 ecosystem and the clients(PHPMyAdmin, Navicat, MySQL Workbench, mysqldump, Mydumper/Myloader, etc), which are all applicable to EloqSQL.
+EloqSQL 高度兼容 MySQL 8.0 协议、MySQL 8.0 常用的功能及语法。MySQL 8.0 生态中的系统工具（PHPMyAdmin、Navicat、MySQL Workbench、mysqldump、Mydumper/Myloader）、客户端等均适用于 EloqSQL。
 
-But EloqSQL does not yet support some MySQL features, the possible reasons are as follows:
+但 EloqSQL 尚未支持一些 MySQL 功能，可能的原因如下：
 
-- There are better alternatives
-- There is no urgent need for these features, such as stored procedures and functions.
-- The implementation of some functions in a distributed system presents great challenges.
+- 有更优秀的替代方案
+- 目前并不急需这些功能，例如存储过程和函数。
+- 一些功能在分布式系统中的实现存在较大的挑战。
 
-## Unsupported features
+## 不支持的功能
 
-- Triggers
-- Create indexes in databases named not `test`
-- Events
-- Full text syntax and indexes
-- Spatial functions (e.g. `GIS`/`GEOMETRY`), data types, and indexes
-- Special character sets: Character sets other than `ascii`, `latin1`, `binary`, `utf8`, `utf8mb4`, `gbk`
+- 触发器
+- 不支持在非`test`的数据库中创建索引
+- 事件
+- 全文语法与索引
+- 空间类型的函数（例如 `GIS`/`GEOMETRY`）、数据类型和索引
+- 特殊的字符集：非 `ascii`、`latin1`、`binary`、`utf8`、`utf8mb4`、`gbk` 的字符集
 - SYS schema
-- MySQL optimizer trace
-- XML functions
+- MySQL 追踪优化器
+- XML 函数
 - X-Protocol
-- Column-level permissions
-- `CREATE TABLE tblName AS SELECT stmt` syntax
-- `CHECKSUM TABLE` syntax
-- `REPAIR TABLE` syntax
-- `OPTIMIZE TABLE` syntax
-- `HANDLER` statement
-- `CREATE TABLESPACE` statement
-- `ALTER TABLE` syntax
-- `ALTER ROLE` syntax
+- 列级权限
+- `XA` 语法（TiDB 内部使用两阶段提交，但并没有通过 SQL 接口公开）
+- `CREATE TABLE tblName AS SELECT stmt` 语法
+- `CHECKSUM TABLE` 语法
+- `REPAIR TABLE` 语法
+- `OPTIMIZE TABLE` 语法
+- `HANDLER` 语句
+- `CREATE TABLESPACE` 语句
+- `ALTER TABLE`语法
+- `ALTER ROLE`语法

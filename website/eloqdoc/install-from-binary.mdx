@@ -1,16 +1,15 @@
 ---
-title: Install from Binary
+title: 从二进制文件安装
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-## Download and unzip EloqDoc tarball
+## 下载并解压 EloqDoc 压缩包
 
-EloqDoc is compatible Ubuntu 20.04, 22.04. Download
-the proper tarball for your operating system from [here](/download/eloqdoc).
+EloqDoc 兼容 Ubuntu 20.04, 22.04。请从[这里](/download/eloqdoc)下载适合您操作系统的压缩包。
 
-After successfully downloading the proper binary, untar it in a directory.
+成功下载对应的二进制文件后，在目录中解压它。
 
 <Tabs
   groupId="language"
@@ -39,20 +38,19 @@ tar -zxvf eloqdoc-0.1.0-ubuntu22-amd64.tar.gz
 
 </Tabs>
 
-## Start Cassandra server
+## 启动 Cassandra 服务器
 
 ```shell
 wget https://archive.apache.org/dist/cassandra/4.1.8/apache-cassandra-4.1.8-bin.tar.gz
 tar -zxvf apache-cassandra-4.1.8-bin.tar.gz
 ./apache-cassandra-4.1.8/bin/cassandra -f
-# Verify Cassandra is running:
+# 验证 Cassandra 是否正在运行：
 ./apache-cassandra-4.1.8/bin/cqlsh localhost -u cassandra -p cassandra
 ```
 
-## Prepare EloqDoc config file
+## 准备 EloqDoc 配置文件
 
-EloqDoc uses a configuration file to customize settings. An example is provided in `etc/mongod.conf`
-under the installation directory. Below is an example of how to configure EloqDoc to run on a local machine.
+EloqDoc 使用配置文件来自定义设置。在安装目录下的 `etc/mongod.conf` 中提供了一个示例。以下是如何配置 EloqDoc 在本地机器上运行的示例。
 
 ```shell
 systemLog:
@@ -87,17 +85,15 @@ setParameter:
   diagnosticDataCollectionEnabled: false
   disableLogicalSessionCacheRefresh: true
   ttlMonitorEnabled: false
-
-
 ```
 
-## Start EloqDoc server
+## 启动 EloqDoc 服务器
 
 ```shell
 ./bin/mongod --config ./etc/mongod.conf
 ```
 
-## Connect to EloqDoc server
+## 连接到 EloqDoc 服务器
 
 ```shell
 ./mongo --eval "db.t1.save({k: 1}); db.t1.find();"

@@ -1,39 +1,39 @@
 ---
-title: Monitor Overview
-summary: Learn how to quickly get started with the EloqKV database.
+title: 监控概述
+summary: 学习如何快速开始使用 EloqKV 数据库。
 ---
 
-# EloqKV Monitor Overview
+# EloqKV 监控概述
 
-The **EloqKV** monitoring framework is an integral part of maintaining and optimizing the performance and reliability of the EloqKV distributed key-value store. Monitoring is essential for understanding the health of the system, diagnosing issues, and making informed decisions about scaling and optimization. To achieve comprehensive monitoring, EloqKV integrates two widely used open-source projects: **Prometheus** and **Grafana**.
+**EloqKV** 监控框架是维护和优化 EloqKV 分布式键值存储性能和可靠性的重要组成部分。监控对于了解系统健康状况、诊断问题以及做出有关扩展和优化的明智决策至关重要。为了实现全面监控,EloqKV 集成了两个广泛使用的开源项目:**Prometheus** 和 **Grafana**。
 
-**Prometheus** is utilized to collect, store, and query monitoring and performance metrics. It is a robust time-series database that excels at handling high cardinality and dimensional data, making it ideal for a distributed system like EloqKV. **Grafana** is employed to visualize these metrics, providing a powerful and flexible platform for creating dynamic and interactive dashboards.
+**Prometheus** 用于收集、存储和查询监控和性能指标。它是一个强大的时间序列数据库,擅长处理高基数和维度数据,非常适合像 EloqKV 这样的分布式系统。**Grafana** 用于可视化这些指标,提供了一个强大而灵活的平台来创建动态和交互式仪表板。
 
-## Overview of Components
+## 组件概述
 
-### Prometheus: Data Collection and Storage
+### Prometheus: 数据收集和存储
 
-Prometheus plays a critical role in the EloqKV monitoring framework by collecting and storing time-series data related to various aspects of the system’s performance. It is designed to pull metrics at regular intervals from the EloqKV server, which records various performance indicators and system metrics.
+Prometheus 在 EloqKV 监控框架中扮演着关键角色,通过定期从 EloqKV 服务器拉取数据来收集和存储与系统性能各个方面相关的时间序列数据。
 
-**Key Metrics Collected by Prometheus**
+**Prometheus 收集的关键指标**
 
-- Cluster Nodes Information: Prometheus collects information about each node in the EloqKV cluster.
-- Command Operations Per Second (OPS): This metric tracks the number of commands processed by the EloqKV cluster per second, providing insights into the system’s load and responsiveness.
-- Command Latency: Measures the time taken to process concurrent commands, which helps in identifying performance bottlenecks and optimizing system efficiency.
-- Memory Usage: Prometheus monitors the memory consumed by EloqKV on each node.
-- Cache Hit Ratio: This metric shows the percentage of requests served from the cache versus those requiring a persistent data storage lookup.
-- Remote Request Latency: Tracks the time taken to fulfill requests that require communication with remote processes or nodes, i.e. WAL log latency or remote read request.
+- 集群节点信息: Prometheus 收集有关 EloqKV 集群中每个节点的信息。
+- 每秒命令操作数(OPS): 此指标跟踪 EloqKV 集群每秒处理的命令数,提供系统负载和响应能力的洞察。
+- 命令延迟: 测量处理并发命令所需的时间,有助于识别性能瓶颈并优化系统效率。
+- 内存使用: Prometheus 监控每个节点上 EloqKV 消耗的内存。
+- 缓存命中率: 此指标显示从缓存服务的请求与需要持久化数据存储查找的请求的百分比。
+- 远程请求延迟: 跟踪需要与远程进程或节点通信的请求所需的时间,即 WAL 日志延迟或远程读取请求。
 
-### Grafana: Visualization and Dashboards
+### Grafana: 可视化和仪表板
 
-Grafana serves as the visualization layer of the EloqKV monitoring framework. It provides a flexible and powerful interface to create, explore, and share dashboards based on the data collected by Prometheus. Grafana’s rich feature set allows users to transform raw data into meaningful insights through interactive and dynamic visualizations.
+Grafana 作为 EloqKV 监控框架的可视化层。它提供了一个灵活而强大的界面,可以基于 Prometheus 收集的数据创建、探索和共享仪表板。Grafana 丰富的功能集允许用户通过交互式和动态可视化将原始数据转化为有意义的洞察。
 
-Features of Grafana in EloqKV Monitoring
+EloqKV 监控中的 Grafana 功能
 
-- Custom Dashboards: Grafana allows the creation of custom dashboards tailored to specific needs base on the pre-defined dashboards which already includes real-time monitoring of node health, command throughput and latency and the trend of memory usage.
-- Interactive Exploration: Grafana’s dashboard allows users to drill down into metrics, apply filters, and explore data over different time ranges, making it easier to diagnose issues and uncover trends.
+- 自定义仪表板: Grafana 允许基于预定义的仪表板创建定制仪表板,这些预定义仪表板已经包括节点健康状况、命令吞吐量和延迟以及内存使用趋势的实时监控。
+- 交互式探索: Grafana 的仪表板允许用户深入研究指标、应用过滤器并在不同时间范围内探索数据,使诊断问题和发现趋势变得更容易。
 
-Here's what the EloqKV Grafana interface looks like:
+以下是 EloqKV Grafana 界面的示例:
 
 <p align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>

@@ -15,9 +15,9 @@
 const sidebars = {
   // By default, Docusaurus generates a sidebar from the docs folder structure
   eloqkv: {
-    'EloqKV Introduction': ['introduction'],
-    'Get Started': ['install-from-binary', 'docker-deploy'],
-    Deploy: [
+    'EloqKV 简介': ['introduction'],
+    快速开始: ['install-from-binary', 'docker-deploy'],
+    部署: [
       'quick-start',
       'quick-start-ha-local-storage',
       'quick-start-ha',
@@ -25,12 +25,12 @@ const sidebars = {
       'upgrade',
       'prerequisite',
     ],
-    Manage: ['monitor', 'configuration', 'eloqkv-proxy', 'dump-tools'],
-    'Redis Comaptibility': ['kvstore_compatibility', 'known-limit'],
-    'Command Reference': [
+    管理: ['monitor', 'configuration', 'eloqkv-proxy', 'dump-tools'],
+    'Redis 兼容性': ['kvstore_compatibility', 'known-limit'],
+    命令参考: [
       {
         type: 'category',
-        label: 'Lists',
+        label: '列表',
         items: [
           'list/BLMOVE',
           'list/BLMPOP',
@@ -58,7 +58,7 @@ const sidebars = {
       },
       {
         type: 'category',
-        label: 'Hashes',
+        label: '哈希',
         items: [
           'hash/HDEL',
           'hash/HEXISTS',
@@ -80,7 +80,7 @@ const sidebars = {
       },
       {
         type: 'category',
-        label: 'Sets',
+        label: '集合',
         items: [
           'set/SADD',
           'set/SCARD',
@@ -102,7 +102,7 @@ const sidebars = {
       },
       {
         type: 'category',
-        label: 'Zsets',
+        label: '有序集合',
         items: [
           'zset/ZADD',
           'zset/ZCARD',
@@ -139,7 +139,7 @@ const sidebars = {
       },
       {
         type: 'category',
-        label: 'String',
+        label: '字符串',
         items: [
           'string/APPEND',
           'string/DECR',
@@ -162,7 +162,7 @@ const sidebars = {
       },
       {
         type: 'category',
-        label: 'Bitmap',
+        label: '位图',
         items: [
           'bitmap/BITCOUNT',
           'bitmap/BITFIELD',
@@ -175,7 +175,7 @@ const sidebars = {
       },
       {
         type: 'category',
-        label: 'PubSub',
+        label: '发布订阅',
         items: [
           'pubsub/PSUBSCRIBE',
           'pubsub/PUBLISH',
@@ -187,7 +187,7 @@ const sidebars = {
       },
       {
         type: 'category',
-        label: 'Transaction',
+        label: '事务',
         items: [
           'transaction/DISCARD',
           'transaction/EXEC',
@@ -198,7 +198,7 @@ const sidebars = {
       },
       {
         type: 'category',
-        label: 'Scripting',
+        label: '脚本',
         items: [
           'scripting/EVAL',
           'scripting/EVALSHA',
@@ -209,7 +209,7 @@ const sidebars = {
       },
       {
         type: 'category',
-        label: 'Generic',
+        label: '通用',
         items: [
           'generic/DEL',
           'generic/DUMP',

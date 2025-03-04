@@ -20,9 +20,7 @@ const CompanyPage: React.FC = () => {
               <h1 className="company-name">EloqData</h1>
             </div>
 
-            <p className="company-tagline">
-              Build the Next Generation of AI Native Databases
-            </p>
+            <p className="company-tagline">构建下一代 AI 原生数据库</p>
           </header>
 
           {/* Our Mission Section */}
@@ -30,15 +28,12 @@ const CompanyPage: React.FC = () => {
           <section className="mission-section">
             <div className="rowa">
               <div className="columna">
-                <h2 className="mission-heading">Our Vision</h2>
+                <h2 className="mission-heading">我们的愿景</h2>
                 <p className="large-text">
-                  We envision a future where managing data for AI applications
-                  is seamless, efficient, and innovative. EloqData aims to
-                  eliminate the complexity of fragmented data systems by
-                  unifying multi-data-model access into a one-stop solution. By
-                  delivering unmatched performance, scalability, and full ACID
-                  transaction, we aspire to be the foundational data layer that
-                  drives the next wave of AI innovation.{" "}
+                  我们展望一个管理 AI
+                  应用程序数据变得无缝、高效和创新的未来。EloqData
+                  旨在通过将多数据模型访问统一为一站式解决方案，消除分散数据系统的复杂性。通过提供无与伦比的性能、可扩展性和完整的
+                  ACID 事务，我们致力于成为推动下一波 AI 创新的基础数据层。
                 </p>
               </div>
               <div className="columna">
@@ -59,16 +54,14 @@ const CompanyPage: React.FC = () => {
                 />
               </div>
               <div className="columna">
-                <h2 className="mission-heading">Our Mission</h2>
+                <h2 className="mission-heading">我们的使命</h2>
                 <p className="large-text">
-                  Our mission is to revolutionize data management for modern AI
-                  applications by addressing inefficiencies and inconsistencies
-                  in traditional multi-database setups. With our groundbreaking
-                  "data substrate" architecture, we are committed to providing a
-                  one-stop solution that delivers over 10x performance gains and
-                  cost savings. By combining cutting-edge technology, EloqData
-                  strives to build the ideal data infrastructure for the
-                  AI-driven world.
+                  我们的使命是通过解决传统多数据库设置中的低效和不一致问题，彻底改变现代
+                  AI
+                  应用程序的数据管理。凭借我们突破性的"数据基底"架构，我们致力于提供一个可实现超过
+                  10
+                  倍性能提升和成本节省的一站式解决方案。通过结合尖端技术，EloqData
+                  努力为 AI 驱动的世界构建理想的数据基础设施。
                 </p>
               </div>
             </div>
@@ -76,41 +69,14 @@ const CompanyPage: React.FC = () => {
           <section className="mission-section-join">
             <br />
             <br />
-            <h2 className="mission-heading">Join Us</h2>
-            <p class="large-text">
-              We are hiring. If you want to work with a world-class team <br />
-              and help define the future of database systems,{" "}
-              <a href="/contact"> Contact Us</a>.
+            <h2 className="mission-heading">加入我们</h2>
+            <p className="large-text">
+              我们正在招聘。如果您想与世界级团队一起工作，并帮助定义数据库系统的未来，
+              <a href="/contact">请联系我们</a>。
             </p>
           </section>
           <br />
           <br />
-          {/* Office Locations Section */}
-          <section className="offices-section">
-            <h2 className="mission-heading">Office Locations</h2>
-            <br />
-            <div className="office-locations">
-              <div className="office">
-                <h3>North America</h3>
-                <p>
-                  EloqData Inc. <br></br>
-                  10268 Parkwood Drive 5 <br></br>
-                  Cupertino, CA 94301<br></br>
-                  USA
-                </p>
-              </div>
-              <div className="office">
-                <h3>Asia Pacific</h3>
-                <p>
-                  EloqData PTE.Ltd. <br></br>
-                  160 Robinson Road<br></br>
-                  #14-04 SBF Center<br></br>
-                  Singapore 068914
-                </p>
-                {/* Example address */}
-              </div>
-            </div>
-          </section>
         </div>
       </div>
     </Layout>
