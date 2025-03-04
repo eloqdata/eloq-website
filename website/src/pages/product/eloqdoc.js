@@ -159,28 +159,6 @@ export default function EloqDoc() {
             </div>
           </div>
         </div>
-
-        {/* CTA部分 */}
-        <div className={styles.ctaSection}>
-          <div className={styles.ctaInner}>
-            <h2 className={styles.ctaTitle}>准备好开始使用EloqDoc了吗？</h2>
-            <p className={styles.ctaDescription}>
-              立即开始使用EloqDoc，体验MongoDB兼容的无服务器文档数据库的强大功能。
-            </p>
-            <div className={styles.ctaButtons}>
-              <Link
-                className={`button button--primary ${styles.ctaButton}`}
-                to="/eloqdoc/install-from-binary">
-                开始使用
-              </Link>
-              <Link
-                className={`button button--secondary ${styles.ctaButton}`}
-                to="/download/eloqdoc">
-                下载
-              </Link>
-            </div>
-          </div>
-        </div>
       </main>
     </Layout>
   );
