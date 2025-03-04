@@ -190,83 +190,85 @@ COMMIT`}
         </div>
 
         {/* Cost Comparison Section */}
-        <div className={styles.costSection}>
-          <div className={styles.costInner}>
-            <div className={styles.costContent}>
-              <div className={styles.costCards}>
-                <div className={styles.workloadTabs}>
-                  {Object.keys(WORKLOAD_PRICES).map(size => (
-                    <button
-                      key={size}
-                      className={`${styles.workloadTab} ${
-                        workload === size ? styles.workloadTabActive : ''
-                      }`}
-                      onClick={() => handleTabClick(size)}>
-                      {size.charAt(0).toUpperCase() + size.slice(1)}
-                    </button>
-                  ))}
-                </div>
-                <div className={styles.costCard}>
-                  <div className={styles.costAmount}>
-                    ${WORKLOAD_PRICES[workload].eloqkv}
+        {SHOW_TESTIMONIALS && (
+          <div className={styles.costSection}>
+            <div className={styles.costInner}>
+              <div className={styles.costContent}>
+                <div className={styles.costCards}>
+                  <div className={styles.workloadTabs}>
+                    {Object.keys(WORKLOAD_PRICES).map(size => (
+                      <button
+                        key={size}
+                        className={`${styles.workloadTab} ${
+                          workload === size ? styles.workloadTabActive : ''
+                        }`}
+                        onClick={() => handleTabClick(size)}>
+                        {size.charAt(0).toUpperCase() + size.slice(1)}
+                      </button>
+                    ))}
                   </div>
-                  <div className={styles.costPeriod}>/month</div>
-                  <div className={styles.costProvider} data-provider="eloqkv">
-                    EloqKV
+                  <div className={styles.costCard}>
+                    <div className={styles.costAmount}>
+                      ${WORKLOAD_PRICES[workload].eloqkv}
+                    </div>
+                    <div className={styles.costPeriod}>/month</div>
+                    <div className={styles.costProvider} data-provider="eloqkv">
+                      EloqKV
+                    </div>
+                  </div>
+                  <div className={styles.costCard}>
+                    <div className={styles.costAmount}>
+                      ${WORKLOAD_PRICES[workload].redis}
+                    </div>
+                    <div className={styles.costPeriod}>/month</div>
+                    <div className={styles.costProvider}>Redis Enterprise</div>
+                  </div>
+                  <div className={styles.costCard}>
+                    <div className={styles.costAmount}>
+                      ${WORKLOAD_PRICES[workload].elasticache}
+                    </div>
+                    <div className={styles.costPeriod}>/month</div>
+                    <div className={styles.costProvider}>ElastiCache</div>
+                  </div>
+                  <div className={styles.workloadDescription}>
+                    {WORKLOAD_PRICES[workload].description}
                   </div>
                 </div>
-                <div className={styles.costCard}>
-                  <div className={styles.costAmount}>
-                    ${WORKLOAD_PRICES[workload].redis}
+                <div className={styles.costInfo}>
+                  <h2 className={styles.costTitle}>Cost Effective</h2>
+                  <p className={styles.costDescription}>
+                    EloqKV is built for efficiency, leveraging a thread-per-core
+                    model for maximum performance at the best cost. With
+                    Scale-to-Zero support, it eliminates idle-time expenses,
+                    making it a cost-effective choice. Optimize your Redis-like
+                    workloads and reduce TCO with EloqKV.
+                  </p>
+                  <div className={styles.costButtons}>
+                    <Link
+                      className={`button button--primary ${styles.costButton}`}
+                      to="/contact"
+                      style={{
+                        background: 'linear-gradient(120deg, #ff7b2d, #ff9f4a)',
+                        border: 'none',
+                      }}>
+                      Try Cloud Free
+                    </Link>
+                    <Link
+                      className={`button button--secondary ${styles.costButton}`}
+                      to="/pricing"
+                      style={{
+                        background: 'rgba(255, 255, 255, 0.1)',
+                        border: '1px solid rgba(255, 255, 255, 0.2)',
+                        color: '#fff',
+                      }}>
+                      Pricing
+                    </Link>
                   </div>
-                  <div className={styles.costPeriod}>/month</div>
-                  <div className={styles.costProvider}>Redis Enterprise</div>
-                </div>
-                <div className={styles.costCard}>
-                  <div className={styles.costAmount}>
-                    ${WORKLOAD_PRICES[workload].elasticache}
-                  </div>
-                  <div className={styles.costPeriod}>/month</div>
-                  <div className={styles.costProvider}>ElastiCache</div>
-                </div>
-                <div className={styles.workloadDescription}>
-                  {WORKLOAD_PRICES[workload].description}
-                </div>
-              </div>
-              <div className={styles.costInfo}>
-                <h2 className={styles.costTitle}>Cost Effective</h2>
-                <p className={styles.costDescription}>
-                  EloqKV is built for efficiency, leveraging a thread-per-core
-                  model for maximum performance at the best cost. With
-                  Scale-to-Zero support, it eliminates idle-time expenses,
-                  making it a cost-effective choice. Optimize your Redis-like
-                  workloads and reduce TCO with EloqKV.
-                </p>
-                <div className={styles.costButtons}>
-                  <Link
-                    className={`button button--primary ${styles.costButton}`}
-                    to="/contact"
-                    style={{
-                      background: 'linear-gradient(120deg, #ff7b2d, #ff9f4a)',
-                      border: 'none',
-                    }}>
-                    Try Cloud Free
-                  </Link>
-                  <Link
-                    className={`button button--secondary ${styles.costButton}`}
-                    to="/pricing"
-                    style={{
-                      background: 'rgba(255, 255, 255, 0.1)',
-                      border: '1px solid rgba(255, 255, 255, 0.2)',
-                      color: '#fff',
-                    }}>
-                    Pricing
-                  </Link>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* Industry Leaders Section */}
         {SHOW_TESTIMONIALS && (
