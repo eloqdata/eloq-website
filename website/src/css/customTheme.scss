@@ -362,36 +362,55 @@ hr {
 }
 
 .markdown p {
-  line-height: 2; /* Adjust this value as needed */
-  margin-bottom: 1.2em; /* Add some space between paragraphs */
+  line-height: 2;
+  /* Adjust this value as needed */
+  margin-bottom: 1.2em;
+  /* Add some space between paragraphs */
 }
 
 .markdown h2 {
-  font-size: 1.8em; /* Change this value to your preferred size */
-  font-weight: bold; /* Optional: Adjust font weight if needed */
-  margin-top: 2em; /* Optional: Add margin above the heading */
-  margin-bottom: 1em; /* Optional: Add margin below the heading */
+  font-size: 1.8em;
+  /* Change this value to your preferred size */
+  font-weight: bold;
+  /* Optional: Adjust font weight if needed */
+  margin-top: 2em;
+  /* Optional: Add margin above the heading */
+  margin-bottom: 1em;
+  /* Optional: Add margin below the heading */
 }
 
 .markdown h1 {
-  font-size: 2.8em; /* Change this value to your preferred size */
-  font-weight: bold; /* Optional: Adjust font weight if needed */
-  margin-top: 0.2em; /* Optional: Add margin above the heading */
-  margin-bottom: 0.1em; /* Optional: Add margin below the heading */
+  font-size: 2.8em;
+  /* Change this value to your preferred size */
+  font-weight: bold;
+  /* Optional: Adjust font weight if needed */
+  margin-top: 0.2em;
+  /* Optional: Add margin above the heading */
+  margin-bottom: 0.1em;
+  /* Optional: Add margin below the heading */
 }
 
 .markdown a {
-  color: #06bcee; /* Set link color to purple */
-  font-weight: bold; /* Make the link text bold */
-  text-decoration: underline; /* Add an underline to the link */
-  text-decoration-color: #06bcee; /* Ensure the underline is also purple */
-  text-underline-offset: 2px; /* Adjust the distance of the underline from the text */
-  background-color: transparent; /* Remove any background color */
+  color: #06bcee;
+  /* Set link color to purple */
+  font-weight: bold;
+  /* Make the link text bold */
+  text-decoration: underline;
+  /* Add an underline to the link */
+  text-decoration-color: #06bcee;
+  /* Ensure the underline is also purple */
+  text-underline-offset: 2px;
+  /* Adjust the distance of the underline from the text */
+  background-color: transparent;
+  /* Remove any background color */
 }
+
 /* Optional: Change link color on hover */
 .markdown a:hover {
-  color: darkorchid; /* Change to a different shade of purple on hover */
-  background-color: transparent; /* Ensure no background color on hover */
+  color: darkorchid;
+  /* Change to a different shade of purple on hover */
+  background-color: transparent;
+  /* Ensure no background color on hover */
 }
 
 html[data-theme="dark"] {
@@ -413,8 +432,10 @@ html[data-theme="dark"] {
     table thead tr {
       background-color: var(--ifm-menu-color-background-active);
     }
+
     table thead th {
-      background-color: #708090 !important; /* Change this to your desired color */
+      background-color: #708090 !important;
+      /* Change this to your desired color */
       color: black;
     }
 

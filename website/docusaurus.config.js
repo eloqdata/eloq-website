@@ -244,102 +244,313 @@ module.exports = {
         },
         style: 'dark',
         items: [
+          // Product Navbar
           {
+            type: 'dropdown',
             label: 'Product',
             position: 'right',
             items: [
               {
-                label: 'EloqKV',
-                to: '/product/eloqkv',
+                type: 'html',
+                value: `
+                  <a href="/product/eloqkv" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 240px;">
+                    <div style="display: flex; align-items: center;">
+                      <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
+                        <rect width="32" height="32" rx="6" fill="#222" />
+                        <path d="M24 16.5l-8 4.5-8-4.5L16 12l8 4.5z" fill="#FFFFFF" />
+                      </svg>
+                      <div style="display: flex; flex-direction: column;">
+                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqKV</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Redis compatible</span>
+                      </div>
+                    </div>
+                  </a>
+                `,
               },
               {
-                label: 'EloqSQL',
-                to: '/product/eloqsql',
+                type: 'html',
+                value: `
+                  <a href="/product/eloqsql" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 240px;">
+                    <div style="display: flex; align-items: center;">
+                      <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
+                        <rect width="32" height="32" rx="6" fill="#222" />
+                        <ellipse cx="16" cy="10" rx="8" ry="3" fill="#FFFFFF" opacity="0.8" />
+                        <path d="M8 10v8c0 1.5 3.5 3 8 3s8-1.5 8-3v-8" stroke="#FFFFFF" stroke-width="2" fill="none" />
+                        <path d="M8 18v4c0 1.5 3.5 3 8 3s8-1.5 8-3v-4" stroke="#FFFFFF" stroke-width="2" fill="none" />
+                      </svg>
+                      <div style="display: flex; flex-direction: column;">
+                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqSQL</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">MySQL compatible</span>
+                      </div>
+                    </div>
+                  </a>
+                `,
               },
               {
-                label: 'EloqDoc',
-                to: '/product/eloqdoc',
+                type: 'html',
+                value: `
+                  <a href="/product/eloqdoc" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 240px;">
+                    <div style="display: flex; align-items: center;">
+                      <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
+                        <rect width="32" height="32" rx="6" fill="#222" />
+                        <path d="M10 8h8l4 4v12H10V8z" stroke="#FFFFFF" stroke-width="2" fill="none" />
+                        <path d="M18 8v4h4" stroke="#FFFFFF" stroke-width="2" fill="none" />
+                        <path d="M12 14h8M12 18h8M12 22h5" stroke="#FFFFFF" stroke-width="2" />
+                      </svg>
+                      <div style="display: flex; flex-direction: column;">
+                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqDoc</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">MongoDB compatible</span>
+                      </div>
+                    </div>
+                  </a>
+                `,
               },
             ],
           },
+
+          // Docs Navbar
           {
+            type: 'dropdown',
             label: 'Docs',
             position: 'right',
-            href: '#',
             items: [
               {
-                label: 'EloqKV',
-                type: 'doc',
-                docsPluginId: 'eloqkv',
-                docId: 'introduction',
+                type: 'html',
+                value: `
+                  <a href="/eloqkv/introduction" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 240px;">
+                    <div style="display: flex; align-items: center;">
+                      <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
+                        <rect width="32" height="32" rx="6" fill="#222" />
+                        <path d="M24 16.5l-8 4.5-8-4.5L16 12l8 4.5z" fill="#FFFFFF" />
+                      </svg>
+                      <div style="display: flex; flex-direction: column;">
+                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqKV</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Redis compatible</span>
+                      </div>
+                    </div>
+                  </a>
+                `,
               },
               {
-                label: 'EloqSQL',
-                type: 'doc',
-                docsPluginId: 'eloqsql',
-                docId: 'introduction',
+                type: 'html',
+                value: `
+                  <a href="/eloqsql/introduction" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 240px;">
+                    <div style="display: flex; align-items: center;">
+                      <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
+                        <rect width="32" height="32" rx="6" fill="#222" />
+                        <ellipse cx="16" cy="10" rx="8" ry="3" fill="#FFFFFF" opacity="0.8" />
+                        <path d="M8 10v8c0 1.5 3.5 3 8 3s8-1.5 8-3v-8" stroke="#FFFFFF" stroke-width="2" fill="none" />
+                        <path d="M8 18v4c0 1.5 3.5 3 8 3s8-1.5 8-3v-4" stroke="#FFFFFF" stroke-width="2" fill="none" />
+                      </svg>
+                      <div style="display: flex; flex-direction: column;">
+                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqSQL</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">MySQL compatible</span>
+                      </div>
+                    </div>
+                  </a>
+                `,
               },
               {
-                label: 'EloqDoc',
-                type: 'doc',
-                docsPluginId: 'eloqdoc',
-                docId: 'introduction',
+                type: 'html',
+                value: `
+                  <a href="/eloqdoc/install-from-binary" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 240px;">
+                    <div style="display: flex; align-items: center;">
+                      <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
+                        <rect width="32" height="32" rx="6" fill="#222" />
+                        <path d="M10 8h8l4 4v12H10V8z" stroke="#FFFFFF" stroke-width="2" fill="none" />
+                        <path d="M18 8v4h4" stroke="#FFFFFF" stroke-width="2" fill="none" />
+                        <path d="M12 14h8M12 18h8M12 22h5" stroke="#FFFFFF" stroke-width="2" />
+                      </svg>
+                      <div style="display: flex; flex-direction: column;">
+                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqDoc</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">MongoDB compatible</span>
+                      </div>
+                    </div>
+                  </a>
+                `,
               },
             ],
           },
+
+          // Learn Navbar
           {
+            type: 'dropdown',
             label: 'Learn',
             position: 'right',
             items: [
               {
-                label: 'Blog',
-                to: '/blog',
+                type: 'html',
+                value: `
+                  <a href="/blog" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 240px;">
+                    <div style="display: flex; align-items: center;">
+                      <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
+                        <rect width="32" height="32" rx="6" fill="#222" />
+                        <path d="M8 8h16v4H8zM8 14h16v2H8zM8 18h12v2H8z" fill="#FFFFFF" />
+                      </svg>
+                      <div style="display: flex; flex-direction: column;">
+                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">Blog</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Insights from EloqData</span>
+                      </div>
+                    </div>
+                  </a>
+                `,
               },
               {
-                label: 'News',
-                to: '/news',
+                type: 'html',
+                value: `
+                  <a href="/news" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 240px;">
+                    <div style="display: flex; align-items: center;">
+                      <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
+                        <rect width="32" height="32" rx="6" fill="#222" />
+                        <path d="M24 8H8v16h16V8z" stroke="#FFFFFF" stroke-width="2" fill="none" />
+                        <path d="M12 12h8M12 16h8M12 20h4" stroke="#FFFFFF" stroke-width="2" />
+                      </svg>
+                      <div style="display: flex; flex-direction: column;">
+                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">News</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Get latest updates</span>
+                      </div>
+                    </div>
+                  </a>
+                `,
               },
               {
-                label: 'Forum',
-                href: 'https://eloqdata.discourse.group/',
+                type: 'html',
+                value: `
+                  <a href="https://eloqdata.discourse.group/" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 240px;">
+                    <div style="display: flex; align-items: center;">
+                      <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
+                        <rect width="32" height="32" rx="6" fill="#222" />
+                        <path d="M6 10h20v12H16l-6 4v-4H6V10z" stroke="#FFFFFF" stroke-width="2" fill="none" />
+                        <path d="M11 16h2M15 16h2M19 16h2" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+                      </svg>
+                      <div style="display: flex; flex-direction: column;">
+                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">Forum</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Discuss with community</span>
+                      </div>
+                    </div>
+                  </a>
+                `,
               },
             ],
           },
+
+          // Download Navbar
           {
             type: 'dropdown',
             label: 'Download',
             position: 'right',
             items: [
               {
-                label: 'EloqKV',
-                to: '/download/eloqkv',
+                type: 'html',
+                value: `
+                  <a href="/download/eloqkv" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 240px;">
+                    <div style="display: flex; align-items: center;">
+                      <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
+                        <rect width="32" height="32" rx="6" fill="#222" />
+                        <path d="M24 16.5l-8 4.5-8-4.5L16 12l8 4.5z" fill="#FFFFFF" />
+                      </svg>
+                      <div style="display: flex; flex-direction: column;">
+                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqKV</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Redis compatible</span>
+                      </div>
+                    </div>
+                  </a>
+                `,
               },
               {
-                label: 'EloqSQL',
-                to: '/download/eloqsql',
+                type: 'html',
+                value: `
+                  <a href="/download/eloqsql" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 240px;">
+                    <div style="display: flex; align-items: center;">
+                      <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
+                        <rect width="32" height="32" rx="6" fill="#222" />
+                        <ellipse cx="16" cy="10" rx="8" ry="3" fill="#FFFFFF" opacity="0.8" />
+                        <path d="M8 10v8c0 1.5 3.5 3 8 3s8-1.5 8-3v-8" stroke="#FFFFFF" stroke-width="2" fill="none" />
+                        <path d="M8 18v4c0 1.5 3.5 3 8 3s8-1.5 8-3v-4" stroke="#FFFFFF" stroke-width="2" fill="none" />
+                      </svg>
+                      <div style="display: flex; flex-direction: column;">
+                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqSQL</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">MySQL compatible</span>
+                      </div>
+                    </div>
+                  </a>
+                `,
               },
               {
-                label: 'EloqDoc',
-                to: '/download/eloqdoc',
+                type: 'html',
+                value: `
+                  <a href="/download/eloqdoc" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 240px;">
+                    <div style="display: flex; align-items: center;">
+                      <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
+                        <rect width="32" height="32" rx="6" fill="#222" />
+                        <path d="M10 8h8l4 4v12H10V8z" stroke="#FFFFFF" stroke-width="2" fill="none" />
+                        <path d="M18 8v4h4" stroke="#FFFFFF" stroke-width="2" fill="none" />
+                        <path d="M12 14h8M12 18h8M12 22h5" stroke="#FFFFFF" stroke-width="2" />
+                      </svg>
+                      <div style="display: flex; flex-direction: column;">
+                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqDoc</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">MongoDB compatible</span>
+                      </div>
+                    </div>
+                  </a>
+                `,
               },
               {
-                label: 'EloqCtl',
-                to: '/downloadeloqctl',
+                type: 'html',
+                value: `
+                  <a href="/downloadeloqctl" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 240px;">
+                    <div style="display: flex; align-items: center;">
+                      <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
+                        <rect width="32" height="32" rx="6" fill="#222" />
+                        <path d="M8 16a8 8 0 1 1 16 0 8 8 0 0 1-16 0z" stroke="#FFFFFF" stroke-width="2" fill="none" />
+                        <path d="M16 12v8M12 16h8" stroke="#FFFFFF" stroke-width="2" />
+                      </svg>
+                      <div style="display: flex; flex-direction: column;">
+                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqCtl</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Cluster management tool</span>
+                      </div>
+                    </div>
+                  </a>
+                `,
               },
             ],
           },
+
+          // Company Navbar - Fixed size
           {
-            label: 'Company',
             type: 'dropdown',
+            label: 'Company',
             position: 'right',
             items: [
               {
-                label: 'About Us',
-                to: '/aboutus',
+                type: 'html',
+                value: `
+                  <a href="/aboutus" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 240px;">
+                    <div style="display: flex; align-items: center;">
+                      <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
+                        <rect width="32" height="32" rx="6" fill="#222" />
+                        <path d="M16 8c-4.4 0-8 3.6-8 8v8h16v-8c0-4.4-3.6-8-8-8z" stroke="#FFFFFF" stroke-width="2" fill="none" />
+                        <circle cx="16" cy="12" r="2" fill="#FFFFFF" />
+                      </svg>
+                      <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0;">About Us</span>
+                    </div>
+                  </a>
+                `,
               },
               {
-                label: 'Contact Us',
-                to: '/contact',
+                type: 'html',
+                value: `
+                  <a href="/contact" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; min-width: 240px;">
+                    <div style="display: flex; align-items: center;">
+                      <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
+                        <rect width="32" height="32" rx="6" fill="#222" />
+                        <path d="M8 10h16v12H8z" stroke="#FFFFFF" stroke-width="2" fill="none" />
+                        <path d="M8 10l8 6 8-6" stroke="#FFFFFF" stroke-width="2" fill="none" />
+                      </svg>
+                      <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0;">Contact Us</span>
+                    </div>
+                  </a>
+                `,
               },
             ],
           },
