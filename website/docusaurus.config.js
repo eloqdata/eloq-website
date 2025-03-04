@@ -65,7 +65,7 @@ module.exports = {
     defaultLocale: 'en',
     locales: ['en'],
   },
-  onBrokenLinks: 'warning',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   webpack: {
     jsLoader: isServer => ({
