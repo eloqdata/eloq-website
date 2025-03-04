@@ -306,16 +306,24 @@ module.exports = {
             ],
           },
           {
-            label: 'Download',
             type: 'dropdown',
+            label: 'Download',
             position: 'right',
             items: [
               {
                 label: 'EloqKV',
-                to: '/download',
+                to: '/download/eloqkv',
               },
               {
-                label: 'Eloqctl',
+                label: 'EloqSQL',
+                to: '/download/eloqsql',
+              },
+              {
+                label: 'EloqDoc',
+                to: '/download/eloqdoc',
+              },
+              {
+                label: 'EloqCtl',
                 to: '/downloadeloqctl',
               },
             ],
