@@ -1,53 +1,52 @@
 ---
-title: The guide for deploy a EloqSQL Cluster
-summary: Learn how to deploy and use the EloqSQL cluster
+title: EloqSQL 集群部署指南
+summary: 了解如何部署和使用 EloqSQL 集群
 ---
 
-# The guide for deploy a EloqSQL Cluster
+# EloqSQL 集群部署指南
 
-This document describes how to quickly deploy a EloqSQL cluster on multiple Linux servers.
+本文档描述如何在多个 Linux 服务器上快速部署 EloqSQL 集群。
 
-### Deployment prepare
+### 部署准备
 
-Ensure the following requirements:
+确保满足以下要求：
 
-- Recommended hardware of compute node and storage node is 32+ physical CPU, 64GB+ memory. Hardware of log node
-  is 4+ physical CPU, 16GB+ memory and 3 SSD disks. Log node can be deployed with compute node together.
+- 推荐的计算节点和存储节点硬件配置为 32+ 物理 CPU，64GB+ 内存。日志节点硬件配置为 4+ 物理 CPU，16GB+ 内存和 3 块 SSD 磁盘。日志节点可以与计算节点一起部署。
 
-- Recommended os version: Ubuntu 20.04. Supported version: Centos 7, Centos Steam 8.
+- 推荐操作系统版本：Ubuntu 20.04。支持的版本：CentOS 7，CentOS Stream 8。
 
-- The Linux systems need to have access to the Internet, which is required to download EloqSQL and its related dependencies.
+- Linux 系统需要能够访问互联网，这是下载 EloqSQL 及其相关依赖项所必需的。
 
-For the EloqSQL cluster topology, you can configure the required number of clusters on demand by changing the YAML file. In this deployment, the cluster topology is shown in the following table.
+对于 EloqSQL 集群拓扑，您可以通过更改 YAML 文件来按需配置所需的集群数量。在本次部署中，集群拓扑如下表所示。
 
-> **Note**
-> The IP address of the following instances only serves as an example IP. In your actual deployment, you need to replace the IP with your actual IP. Don't use hostname like localhost, please use 127.0.0.1 instead.
+> **注意**
+> 以下实例的 IP 地址仅作为示例 IP。在实际部署中，您需要将 IP 替换为您的实际 IP。不要使用 localhost 这样的主机名，请使用 127.0.0.1 代替。
 
-| Instance        | Count | IP       |
-| :-------------- | :---- | :------- |
-| tx_service      | 1     | 10.0.1.1 |
-| log_service     | 1     | 10.0.1.2 |
-| storage_service | 1     | 10.0.1.3 |
-| monitor         | 1     | 10.0.1.3 |
+| 实例            | 数量 | IP       |
+| :-------------- | :--- | :------- |
+| tx_service      | 1    | 10.0.1.1 |
+| log_service     | 1    | 10.0.1.2 |
+| storage_service | 1    | 10.0.1.3 |
+| monitor         | 1    | 10.0.1.3 |
 
-1. Environment Configuration
-   Each of the multiple machines needs to complete the basic configuration of the system environment. For specific configuration steps, please refer to [Single Node Eloq Deployment Environment Configuration](./quick-start.md)
-2. Cluster network configuration
-   It is necessary to ensure that each server can access other servers in the cluster through ssh. For specific configuration steps, please refer to [Single Node Eloq Deployment Network Configuration](./quick-start.md)
+1. 环境配置
+   每台机器都需要完成系统环境的基本配置。具体配置步骤，请参考[单节点 Eloq 部署环境配置](./quick-start.md)
+2. 集群网络配置
+   需要确保集群中的每台服务器都可以通过 ssh 访问其他服务器。具体配置步骤，请参考[单节点 Eloq 部署网络配置](./quick-start.md)
 
-### Deployment implementation
+### 部署实施
 
-The `Eloq_waiter` tool can realize the installation and deployment on multiple servers by modifying the parameters in deployment YAML files. For the details of `Eloq_waiter `, please refer to [Single Node Eloq Deployment Network Configuration](./quick-start.md)
+`Eloq_waiter` 工具可以通过修改部署 YAML 文件中的参数来实现在多个服务器上的安装和部署。有关 `Eloq_waiter` 的详细信息，请参考[单节点 Eloq 部署网络配置](./quick-start.md)
 
-- Create and start the cluster
-  According to the following configuration template, edit the configuration file deployment.yaml as you need, where:
+- 创建并启动集群
+  根据以下配置模板，按需编辑配置文件 deployment.yaml，其中：
 
-  - `install_dir`: Set to the desired storage location for the user to install the cluster.
-  - `log_service`: Configure log service nodes. You can deploy separate log server per disk.
-  - `tx_service`: Configure tx service nodes.
-  - `storage_service`: Configure the kv storage nodes. Currently we support Apapche Cassandra.
-  - `monitor`: Configure the prometheus and grafana monitor stack.
-    The configuration template is as follows:
+  - `install_dir`：设置为用户希望安装集群的存储位置。
+  - `log_service`：配置日志服务节点。您可以为每个磁盘部署单独的日志服务器。
+  - `tx_service`：配置事务服务节点。
+  - `storage_service`：配置 kv 存储节点。目前我们支持 Apache Cassandra。
+  - `monitor`：配置 prometheus 和 grafana 监控堆栈。
+    配置模板如下：
 
 ```yaml
 connection:
@@ -105,10 +104,10 @@ deployment:
       mcac_port: 9103
 ```
 
-> **Note:**
-> The deployment.yaml file above is the default configuration file, and users can configure the software to be installed as needed. For some software that does not need to be installed, it only needs to be deleted from the configuration file.
+> **注意：**
+> 上述 deployment.yaml 文件是默认配置文件，用户可以根据需要配置要安装的软件。对于不需要安装的软件，只需从配置文件中删除即可。
 
-- Launch cluster
+- 启动集群
 
   ```shell
   cluster_mgr launch .eloqwaiter/config/examples/eloqsql_cassandra.yaml

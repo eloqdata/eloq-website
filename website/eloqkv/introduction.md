@@ -48,4 +48,4 @@ EloqKV 能够适应你的动态需求，无缝扩展以匹配工作负载：
 
 ## 阅读博客
 
-**EloqKV** 重新构想了现代键值存储。要了解更多关于 EloqKV 及其功能，你可以阅读我们关于其[独特特性](/blog/2024/08/16/eloqkv)和[底层技术](/blog/2024/08/11/data-substrate)的博客。你还可以阅读其在[单节点](/blog/2024/08/17/benchmark-single-node)配置和[集群](/blog/2024/08/22/benchmark-cluster)配置下的性能基准测试结果。你也可以了解其实现[持久性](/blog/2024/08/25/benchmark-txlog)和执行[分布式原子操作](/blog/2024/09/01/benchmark-transaction)的独特能力。更多技术内容将定期发布在[博客](/blog)上，我们欢迎你的[反馈](/contact)。
+**EloqKV** 重新构想了现代键值存储。要了解更多关于 EloqKV 及其功能，你可以阅读我们关于其[独特特性](/news/2024/08/16/eloqkv)和[底层技术](/blog/2024/08/11/data-substrate)的博客。你还可以阅读其在[单节点](/blog/2024/08/17/benchmark-single-node)配置和[集群](/blog/2024/08/22/benchmark-cluster)配置下的性能基准测试结果。你也可以了解其实现[持久性](/blog/2024/08/25/benchmark-txlog)和执行[分布式原子操作](/blog/2024/09/01/benchmark-transaction)的独特能力。更多技术内容将定期发布在[博客](/blog)上，我们欢迎你的[反馈](/contact)。

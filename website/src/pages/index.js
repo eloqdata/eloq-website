@@ -67,7 +67,7 @@ const features = [
     details: [
       '通过内存、本地磁盘和对象存储的分层存储，实现速度和成本的完美平衡',
     ],
-    link: 'blog/2024/08/16/eloqkv#performance-and-cost',
+    link: 'news/2024/08/16/eloqkv#性能和成本',
   },
   {
     icon: faExpandArrowsAlt,
@@ -76,7 +76,7 @@ const features = [
       '通过多核心实现纵向扩展，并扩展到集群中的多个节点',
       '支持工作负载变化时的动态扩展，无服务中断',
     ],
-    link: 'blog/2024/08/16/eloqkv#scale-as-you-need-on-what-you-need',
+    link: 'news/2024/08/16/eloqkv#按需扩展扩展所需资源',
   },
   {
     icon: faExchangeAlt,
@@ -85,7 +85,7 @@ const features = [
       '具有可配置隔离级别的完全ACID事务',
       '支持来自多个API的跨模型事务',
     ],
-    link: 'blog/2024/08/16/eloqkv#full-acid-transactions-when-you-need-them',
+    link: 'news/2024/08/16/eloqkv#在需要时提供完整的acid事务',
   },
   {
     icon: faCheckCircle,
