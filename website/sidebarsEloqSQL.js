@@ -19,7 +19,12 @@ const sidebars = {
   //monosqlSidebar: ['MonoSQL'],
   eloqdb: {
     EloqSQL简介: ['introduction'],
-    快速开始: ['install-from-binary', 'quick-start', 'quick-start-ha'],
+    快速开始: [
+      'install-from-binary',
+      'quick-start',
+      'quick-start-ha',
+      'prerequisite',
+    ],
     数据迁移: ['data-migration/debezium', 'data-migration/dm'],
     Mysql兼容性: ['mysql-compatibility', 'difference_with_mysql'],
   },

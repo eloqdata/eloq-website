@@ -116,7 +116,11 @@ function HomePage() {
         <div className="container1">
           <div className="product-columns">
             <div className="product-left-column">
-              <h1 className="title">为AI时代设计的全新一代数据库</h1>
+              <h1 className="title">
+                为AI时代设计的
+                <br />
+                全新一代数据库
+              </h1>
               <p className="tagline">
                 满足所有AI应用需求的数据库——多模型、事务性、 弹性且标准API兼容{' '}
               </p>

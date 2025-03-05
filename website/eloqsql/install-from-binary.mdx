@@ -1,16 +1,15 @@
 ---
-title: Install from Binary
+title: 从二进制文件安装
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-## Download and unzip EloqSQL tarball
+## 下载并解压 EloqSQL 压缩包
 
-EloqSQL is compatible with RHEl 9, Ubuntu 20.04, 22.04 and 24.04. Download
-the proper tarball for your operating system from [here](/download).
+EloqSQL 兼容 RHEL 9、Ubuntu 20.04、22.04 和 24.04。请从[这里](/download)下载适合您操作系统的压缩包。
 
-After successfully downloading the proper binary, untar it in a directory.
+成功下载对应的二进制文件后，在目录中解压它。
 
 <Tabs
   groupId="language"
@@ -61,23 +60,20 @@ tar -zxvf eloqsql-0.4.14-ubuntu24-amd64.tar.gz
 
 </Tabs>
 
-## Prepare EloqSQL config file
+## 准备 EloqSQL 配置文件
 
-EloqSQL uses a configuration file to customize settings. Below is an example of how to configure EloqSQL to run on a local machine.
+EloqSQL 使用配置文件来自定义设置。以下是如何配置 EloqSQL 在本地机器上运行的示例。
 
-Note: set `ip` field to 127.0.0.1 will block external access to EloqSQL. It is recommened to set `ip` to
-the actual IP address of the server if you want to access EloqSQL from another machine.
+注意：将 `ip` 字段设置为 127.0.0.1 将阻止外部访问 EloqSQL。如果您想从其他机器访问 EloqSQL，建议将 `ip` 设置为服务器的实际 IP 地址。
 
-Also note that EloqSQL will automatically set reasonable default values for its parameters if no user specified
-value is provided in the configuration file. So if you have doubt with a certain parameter, just do not specify
-it in the configuration file.
+另外请注意，如果在配置文件中没有指定用户值，EloqSQL 会自动为其参数设置合理的默认值。因此，如果您对某个参数有疑问，可以不在配置文件中指定它。
 
 ```shell
 cd ${HOME}
 touch my-config.cnf
 ```
 
-Edit my-config.cnf with the following example settings:
+使用以下示例设置编辑 my-config.cnf：
 
 ```cnf
 [mariadb]
@@ -97,9 +93,9 @@ eloq_local_ip=127.0.0.1:8000
 eloq_ip_list=127.0.0.1:8000
 ```
 
-## Bootstrap EloqSQL server
+## 引导 EloqSQL 服务器
 
-Initialize the database:
+初始化数据库：
 
 ```shell
 export INSTALL_DIR=${HOME}/install
@@ -110,32 +106,31 @@ ${INSTALL_DIR}/scripts/mysql_install_db --defaults-file=${HOME}/my-config.cnf \
                                        --plugin-dir=${INSTALL_DIR}/lib/plugin
 ```
 
-## Start EloqSQL server
+## 启动 EloqSQL 服务器
 
-The EloqSQL `mysqld` executable binary is installed in the `${INSTALL_DIR}/bin` directory. Start the server on the local machine using the commands below.
+EloqSQL 的 `mysqld` 可执行二进制文件安装在 `${INSTALL_DIR}/bin` 目录中。使用以下命令在本地机器上启动服务器。
 
 ```shell
 ${INSTALL_DIR}/bin/mysqld --defaults-file=${HOME}/my-config.cnf --datadir=${DATA_DIR}
 ```
 
-## Connect to EloqSQL server
+## 连接到 EloqSQL 服务器
 
-EloqSQL is compatible with the Redis protocol. We have included a `mysql` client for your convinence, but any Mariadb/Mysql client can connect to EloqSQL. You can obtain official `mysql-client` by e.g. execute `sudo apt-get install mysql-client` on Ubuntu. Please use the same ip and port in config file `my-config.cnf` to connect to EloqSQL.
+EloqSQL 兼容 Redis 协议。我们已经包含了一个 `mysql` 客户端供您使用，但任何 MariaDB/MySQL 客户端都可以连接到 EloqSQL。您可以通过执行 `sudo apt-get install mysql-client`（在 Ubuntu 上）等命令获取官方的 `mysql-client`。请使用配置文件 `my-config.cnf` 中相同的 IP 和端口连接到 EloqSQL。
 
 ```shell
 sudo ${INSTALL_DIR}/bin/mysql -u root -S /tmp/mysqld3316.sock
 ```
 
-## Setting Up a Cluster
+## 设置集群
 
-It is very simple to set up a cluster of EloqSQL. Just start several EloqSQL instances on different machines, each provided with a configuration file with nodes listed in the cluster section.
+设置 EloqSQL 集群非常简单。只需在不同的机器上启动多个 EloqSQL 实例，每个实例都提供一个在集群部分中列出节点的配置文件。
 
-For example, assuming we are setting up a cluster with 3 servers, on 192.168.1.20, 192.168.1.21 and 192.168.1.22:
+例如，假设我们要在 192.168.1.20、192.168.1.21 和 192.168.1.22 上设置一个 3 台服务器的集群：
 
 ```shell
 [mariadb]
-# eloq_ip_list should include all eloqsql nodes in the cluster.
-# Make sure to set them to match the ip:port specified in the [mariadb]
-# section of the configuration file on each node.
+# eloq_ip_list 应包含集群中的所有 eloqsql 节点。
+# 确保它们与每个节点配置文件的 [mariadb] 部分中指定的 ip:port 匹配。
 eloq_ip_list=192.168.1.20:6379,192.168.1.21:6379,192.168.1.22:6379
 ```

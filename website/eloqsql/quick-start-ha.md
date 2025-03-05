@@ -1,39 +1,39 @@
 ---
-title: Deploy High Available Cluster on Shared Storage
-summary: Learn how to quickly get started with the EloqSQL database.
+title: 在共享存储上部署高可用集群
+summary: 了解如何快速开始使用 EloqSQL 数据库。
 ---
 
-# Deploy a High Available Cluster Using Eloqctl
+# 使用 Eloqctl 部署高可用集群
 
-[Previously](./quick-start), we covered how to deploy a single node EloqSQL cluster using `eloqctl`. In this document, we will focus on deploying a highly available cluster.
+[之前](./quick-start)，我们介绍了如何使用 `eloqctl` 部署单节点 EloqSQL 集群。在本文档中，我们将重点介绍如何部署高可用集群。
 
-## 1. Prerequisites
+## 1. 先决条件
 
-Please ensure you've reviewed the following document:
+请确保您已经查看了以下文档：
 
-- [Configuration Checklist](./prerequisite)
+- [配置检查清单](./prerequisite)
 
-## 2. Deploy Eloqctl on the control machine
+## 2. 在控制机器上部署 Eloqctl
 
-For step-by-step guidance, please check out the previous document:
+有关分步指导，请查看之前的文档：
 
-- [Deploy Single Node Cluster](./quick-start)
+- [部署单节点集群](./quick-start)
 
-## 3. Initialize the cluster topology file
+## 3. 初始化集群拓扑文件
 
-Example cluster topology files can be found in the `.eloqctl/config/examples/` directory.
+示例集群拓扑文件可以在 `.eloqctl/config/examples/` 目录中找到。
 
-To deploy a highly available cluster, use `eloqsql_cassandra.yaml` as the default configuration template.
+要部署高可用集群，请使用 `eloqsql_cassandra.yaml` 作为默认配置模板。
 
 ```
-# example yaml file
+# 示例 yaml 文件
 .eloqctl/config/examples/eloqsql_cassandra.yaml
 ```
 
-To enable high availability, edit the `eloqsql_cassandra.yaml` file. High availability is achieved through two key configurations:
+要启用高可用性，请编辑 `eloqsql_cassandra.yaml` 文件。高可用性通过两个关键配置实现：
 
-1. The log cluster must be distributed and replicated.
-2. The Cassandra cluster must be distributed and replicated.
+1. 日志集群必须分布式且有副本。
+2. Cassandra 集群必须分布式且有副本。
 
 ```
 connection:
@@ -90,42 +90,42 @@ deployment:
       mcac_port: 9103
 ```
 
-For detailed explanations for each configuration option in the YAML file, please refer to the previous document [Deploy Single Node Cluster](./quick-start). In this document, we will focus specifically on the high availability aspects of the configuration file.
+有关 YAML 文件中每个配置选项的详细说明，请参阅之前的文档 [部署单节点集群](./quick-start)。在本文档中，我们将特别关注配置文件的高可用性方面。
 
-- **`tx_service.tx_host_ports`**:  
-  _Type_: `List of Strings`  
-  The transaction cluster is deployed across three nodes: 10.0.0.1:6379, 10.0.0.2:6379, and 10.0.0.3:6379. Data is sharded among these nodes, with each node responsible for a portion of the data. If one node fails, the remaining nodes will take over the data from the failed node and continue to serve client requests seamlessly.
+- **`tx_service.tx_host_ports`**：  
+  _类型_：`字符串列表`  
+  事务集群部署在三个节点上：10.0.0.1:6379、10.0.0.2:6379 和 10.0.0.3:6379。数据在这些节点之间进行分片，每个节点负责一部分数据。如果一个节点发生故障，剩余节点将接管故障节点的数据，并继续无缝地为客户端请求提供服务。
 
-- **`log_service.nodes`**:  
-  _Type_: `Composite`  
-  Here, we specify three nodes for the log service cluster, which are co-located with the transaction cluster. Alternatively, you can deploy the log service on separate machines if preferred.
+- **`log_service.nodes`**：  
+  _类型_：`复合类型`  
+  在这里，我们为日志服务集群指定了三个节点，它们与事务集群位于同一位置。或者，如果您愿意，也可以将日志服务部署在单独的机器上。
 
-- **`log_service.replica`**:  
-  _Type_: `Integer`  
-  Set the number of replicas for the log service to 3. This ensures that each WAL log record is replicated across three log nodes. With this setup, the logs will be preserved even in the event of a node failure or disk crash.
+- **`log_service.replica`**：  
+  _类型_：`整数`  
+  将日志服务的副本数量设置为 3。这确保每个 WAL 日志记录都会在三个日志节点上复制。通过这种设置，即使在节点故障或磁盘崩溃的情况下，日志也会被保留。
 
-- **`storage_service.cassandra.host`**:  
-  _Type_: `List of Strings`  
-  When deploying EloqSQL with Cassandra as the persistent storage engine, the compute and storage components are fully decoupled. In this example, Cassandra is deployed on three separate machines:
-  10.0.0.4, 10.0.0.5, and 10.0.0.6.
+- **`storage_service.cassandra.host`**：  
+  _类型_：`字符串列表`  
+  当使用 Cassandra 作为持久化存储引擎部署 EloqSQL 时，计算和存储组件是完全解耦的。在本例中，Cassandra 部署在三台单独的机器上：
+  10.0.0.4、10.0.0.5 和 10.0.0.6。
 
 - **`monitor`**  
-  Prometheus and grafana are installed on a separate host at 10.0.0.7.
+  Prometheus 和 Grafana 安装在 10.0.0.7 的单独主机上。
 
-## 5. Run the deployment command
+## 5. 运行部署命令
 
-After you modified the `eloqsql_cassandra.yaml`. Use the `eloqctl launch` command to provision an EloqSQL cluster
+修改完 `eloqsql_cassandra.yaml` 后，使用 `eloqctl launch` 命令配置 EloqSQL 集群
 
 ```shell
 eloqctl launch ${HOME}/.eloqctl/config/examples/eloqsql_cassandra.yaml -s
 ```
 
-The command will installed the EloqSQL componnets in the specified cluster.
+该命令将在指定的集群中安装 EloqSQL 组件。
 
-If you see the following message, the EloqSQL cluster has been successfully provisioned:
+如果您看到以下消息，则表示 EloqSQL 集群已成功配置：
 
 ```
 Launch cluster finished, Enjoy!
 ```
 
-Feel free to use `/home/eloq/eloqsql-cluster/EloqSQL/bin/mariadb` or any other Mariadb/Mysql client to connect to EloqSQL and enjoy exploring its features.
+请随时使用 `/home/eloq/eloqsql-cluster/EloqSQL/bin/mariadb` 或任何其他 MariaDB/MySQL 客户端连接到 EloqSQL，并享受探索其功能的乐趣。
