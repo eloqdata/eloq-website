@@ -1,221 +1,229 @@
 ---
-title: Quick Start Guide for the EloqSQL
+title: Deploy Single Node Instance
 summary: Learn how to quickly get started with the EloqSQL database.
 ---
 
-# Quick Start Guide for the EloqSQL Database
+# Deploy a Single Node EloqSQL Instance Using Eloqctl
 
-This guide introduces how to quickly get started with the EloqSQL database, and the steps to quickly deploy and use EloqSQL on `single node`:
+`eloqctl` is a powerful tool designed for the operation and maintenance of EloqSQL clusters. With Eloqctl, you can effortlessly manage daily database tasks, such as deploying, starting, stopping, upgrading, and decommissioning EloqSQL clusters, as well as configuring cluster parameters.
 
-### Deployment prepare
+`eloqctl` supports the deployment of various cluster types, including EloqSQL transactional clusters, EloqSQL log clusters, persistent storage clusters like Cassandra, and associated monitoring systems. This document provides guidance on deploying EloqSQL cluster on a single node.
 
-Prepare a deployment host and ensure its software meets the following requirements.
+## 1. Prerequisites
 
-- Recommended hardware of compute node and storage node is 32+ physical CPU, 64GB+ memory. Hardware of log node is 4+ physical CPU, 16GB+ memory and 3 SSD disks. Log node can be deployed with compute node together.
-- Recommended os version: Ubuntu 20.04. Supported os version: CentOS 7, CentOS Stream 8.
-- The runtime environment needs to have access to the Internet.
-- Regular users must have read, write, and execute permissions for the database package extraction path and installation path, and the installation path must be empty.
+EloqSQL is compatible with Red Hat 9 and Ubuntu 20.04, 22.04, and 24.04.
 
-1. System configuration
+Please ensure you've reviewed the following documents:
 
-Below are some necessary configurations to be made before installing EloqSQL
+- [Configuration Checklist](./prerequisite)
 
-- Edit the system configuration file `/etc/security/limits.conf or /etc/security/limits.d/20-nproc.conf` using the following command
-  ```shell
-  sudo vi /etc/security/limits.conf
-  ```
-  Add the following resource limit parameters at the end of the corresponding file
-  ```shell
-  * soft nofile 524288
-  * hard nofile 524288
-  * hard core unlimited
-  * soft core unlimited
-  ```
-- Use the following command to edit the configuration file `/etc/sysctl.conf`
-  ```shell
-  sudo vi /etc/sysctl.conf
-  ```
-  Add the following configuration parameters at the end of the corresponding file
-  ```shell
-  kernel.core_pattern=/var/crash/core-%e-%s-%u-%g-%p-%t
-  ```
-- Execute the following command to load the above parameter modification.
-  ```shell
-  sudo sysctl -p
-  ```
-- In order to display all limit resource information of the current system, modify the bash configuration file
-  ```shell
-  sudo vi ~/.bashrc
-  ```
-  Add at the end of the corresponding file
-  ```
-  ulimit -c unlimited
-  ```
-- Add current user and group ownership to `/var/crash` folder
-  ```shell
-  sudo chown -R $USER:$USER /var/crash
-  ```
-- login the session for the above changes to take effect, then log in again
+## 2. Deploy eloqctl on the control machine
 
-  ```shell
-  log out
-  ```
+1. Get your eloqctl installation script here:
 
-- Ubuntu18.04 requires gcc11
+- [Eloqctl Install Script](../downloadeloqctl)
 
-  ```shell
-  sudo apt update
-  sudo apt install software-properties-common -y
-  sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-  sudo apt update
-  sudo apt install gcc-11 g++-11 -y
-  ```
+2. To install eloqctl, simply run the following command:
 
-- Centos8 requires openssl10
-  ```shell
-  sudo dnf makecache --refresh
-  sudo dnf -y install compat-openssl10
-  ```
-
-2.  Single Node Network Configuration
-    `ssh` service configuration, users first need to install the corresponding `ssh` service on their own host, `ssh` service needs the support of `ssh` client and `ssh` server.
-
-- Check whether the ssh and sshd clients have been installed
-  ```shell
-  which ssh
-  which sshd
-  ```
-  If the above command has no output, it means that the corresponding service is not installed. The user needs to install the corresponding ssh service and enable the corresponding ssh service.
-- install and enable ssh service on centos
-  ```shell
-  ## Install ssh client and server
-  sudo yum –y install openssh-server openssh-clients
-  ## Open ssh service
-  sudo systemctl start sshd
-  ## Open the ssh service and make the ssh service automatically start after the system restarts
-  sudo systemctl enable sshd
-  ```
-- Install ssh service on ubuntu and start it
-  ```shell
-   ## Install ssh client and server
-   sudo apt-get install openssh-server
-   ## Open ssh service
-   sudo service ssh start
-  ```
-- In order to enable each node to log in to other nodes through the public key, it needs to generate its own public key locally
-
-  ```shell
-  ssh-keygen
-  ```
-
-- add the public key `id_rsa.pub` to the authorized_keys. Please run on all the hosts.
-  ```shell
-  cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
-  ssh-keyscan -H 127.0.0.1 >> ~/.ssh/known_hosts
-  ```
-- Set permissions for the ssh directory
-  ```shell
-   chmod 700 ~/.ssh
-   chmod 600 ~/.ssh/authorized_keys
-  ```
-
-### Install Deployment Tool
-
-Install command line tool `cluster_mgr`
-
-```shell
-curl --proto '=https' --tlsv1.2 -sSf https://www.eloqdata.com/download/mono-waiter/install.sh | sh
+```
+bash eloqctl_installer.sh
 ```
 
-`cluster_mgr` will be installed under `$HOME/.eloqwaiter`
+If the following message is displayed, you have successfully installed `eloqctl`:
 
-The `cluster_mgr` tool can realize the installation and deployment on multiple servers by modifying the parameters in deployment YAML files which are located at `$HOME/.eloqwaiter/config/examples/eloqsql_cassandra.yaml`
+```
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 16.6M  100 16.6M    0     0   203M      0 --:--:-- --:--:-- --:--:--  205M
+/home/eloq/.bash_profile has been modified to add eloqctl to PATH
+===============================================
+To use it, open a new terminal or execute:
+source /home/eloq/.bash_profile
+===============================================
+```
 
-### Deployment EloqSQL Using Config File
+This command installs eloqctl in the $HOME/.eloqctl directory, where the cluster metadata and downloaded components are also stored.
 
-- Modify the cluster configuration file.
+Please run `source $HOME/.bash_profile` to add `$HOME/.eloqctl` to the PATH environment variable, so you can use `eloqctl` directly.
 
-  Edit the configuration file `.eloqwaiter/config/examples/eloqsql_cassandra.yaml` as your need.
+Once installed, you can verify the `eloqctl` version by running:
 
-  - Update 127.0.0.1 with node private ip: `sed -i 's/127.0.0.1/your_private_ip/g' .eloqwaiter/config/examples/eloqsql_cassandra.yaml`. Note that keeping 127.0.0.1 will block external access.
-  - Update product version. For example use version 0.4.1: `version: "0.4.1"`.
-  - Update install path `install_dir`. Set to the desired storage location for the user to install the cluster. This location must be the folder location with read and write permissions for the user specified by `username`.
-  - `storage_service`: Configure the endpoint of kv store cluster.
-  - `monitor`: Configure the prometheus and grafana.
+```
+eloqctl --version
+```
+
+## 3. Initialize the cluster topology file
+
+Example cluster topology files can be found in the `.eloqctl/config/examples/` directory.
+
+You can select `eloqsql_cassandra.yaml` to set up your EloqSQL cluster.
+
+```
+# example yaml file
+.eloqctl/config/examples/eloqsql_cassandra.yaml
+```
+
+Open the configuration file by running `vi eloqsql_cassandra.yaml` to view its contents:
 
 ```
 connection:
-  username: "$USER"
+  username: "${USER}"
   auth_type: "keypair"
   auth:
-    keypair: "/home/$USER/.ssh/id_rsa"
+    keypair: "/home/${USER}/.ssh/id_rsa"
 deployment:
   cluster_name: "eloqsql-cluster"
   product: "EloqSQL"
   version: "latest"
-  install_dir: "/home/$USER/eloq"
+  install_dir: "/home/${USER}"
+  tx_service:
+    tx_host_ports: [127.0.0.1:8000]
+    client_port: 3316
   log_service:
     nodes:
       - host: 127.0.0.1
         port: 9000
         data_dir:
-          - "/home/$USER/eloq/disk_wal_sql"
+          - "/home/${USER}/eloqsql-cluster/wal_eloqsql"
     replica: 1
-  tx_service:
-    host: [127.0.0.1]
-    port: 8000
-    client_port: 3316
   storage_service:
     cassandra:
       host: [127.0.0.1]
       kind: !Internal
-        download_url: "https://d143xau9fe26d8.cloudfront.net/others/apache-cassandra-4.1.3-bin.tar.gz"
-        storage_cluster: "eloqsql-cluster"
+        mirror: "https://download.eloqdata.com"
+        version: "4.1.3"
   monitor:
     data_dir: ""
     monograph_metrics:
-      path: "/mono_metrics"
+      path: "/eloq_metrics"
       port: 18081
     prometheus:
-      download_url: "https://d143xau9fe26d8.cloudfront.net/others/prometheus-2.42.0.linux-amd64.tar.gz"
+      download_url: "https://github.com/prometheus/prometheus/releases/download/v2.42.0/prometheus-2.42.0.linux-amd64.tar.gz"
       port: 9500
       host: 127.0.0.1
     grafana:
-      download_url: "https://d143xau9fe26d8.cloudfront.net/others/grafana-9.3.6.linux-amd64.tar.gz"
+      download_url: "https://dl.grafana.com/oss/release/grafana-9.3.6.linux-amd64.tar.gz"
       port: 3301
       host: 127.0.0.1
     node_exporter:
-      url: "https://d143xau9fe26d8.cloudfront.net/others/node_exporter-1.5.0.linux-amd64.tar.gz"
+      url: "https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_exporter-1.5.0.linux-amd64.tar.gz"
       port: 9200
     mysql_exporter:
-      url: "https://d143xau9fe26d8.cloudfront.net/others/mysqld_exporter-0.14.0.linux-amd64.tar.gz"
+      url: "https://github.com/prometheus/mysqld_exporter/releases/download/v0.14.0/mysqld_exporter-0.14.0.linux-amd64.tar.gz"
       port: 9300
     cassandra_collector:
-      mcac_agent: "https://d143xau9fe26d8.cloudfront.net/others/datastax-mcac-agent-0.3.4-4.1-beta1.tar.gz"
+      mcac_agent: "https://github.com/datastax/metric-collector-for-apache-cassandra/releases/download/v0.3.4/datastax-mcac-agent-0.3.4-4.1-beta1.tar.gz"
       mcac_port: 9103
+
 ```
 
-- Launch cluster
+Next, we'll provide detailed explanations for each configuration option available in the YAML file.
 
-  ```shell
-  cluster_mgr launch .eloqwaiter/config/examples/eloqsql_cassandra.yaml
-  ```
+The `connection` section includes settings for connecting to EloqSQL nodes from the control machine. If you followed the steps in the [Prerequisite Document](./prerequisite), you can leave the connection section unchanged.
 
-- Access the cluster
+The `deployment` section covers the configurations for deploying cluster metadata as well as the three key components: the transaction cluster, log cluster, and persistent storage cluster.
 
-  - Access the EloqSQL database. By default, `mysql` is installed in `/home/$USER/opt/mono-poc/eloqdb-release/install/`, enter this directory, and use the socket method to connect to the database. For more connection methods, please refer to [Client Connection](./connect-to-monodb/connect-by-client.md).
+- **`cluster_name`**:  
+  _Type_: `String`  
+  _Default_: `'eloqsql-cluster'`  
+  The name of the cluster being deployed serves as an identifier for the cluster. With `eloqctl`, you can deploy and manage multiple clusters, each distinguished by its unique name.
 
-    ```shell
-    /home/centos/eloq/eloqsql-cluster/monograph-tx-service-release/install/bin/mariadb --user=centos -S /tmp/mysql3316.sock
-    ```
+- **`product`**:  
+  _Type_: `String`  
+  _Default_: `'EloqSQL'`  
+  The product name being deployed should be set to `'EloqSQL'` for the current deployment. In the future, `eloqctl` will support the deployment of different database products like `EloqSQL` etc..
 
-  - Execute the following command to check the name of installed cluster:
+- **`version`**:  
+  _Type_: `String`  
+  _Default_: `'latest'`  
+  Specifies the version of EloqSQL to be installed. Setting this to `'latest'` ensures that the most recent version is used.
 
-    ```shell
-    cluster_mgr list
-    ```
+- **`install_dir`**:  
+  _Type_: `String`  
+  _Default_: `'/home/${USER}'`  
+  Specifies the directory where the product will be installed. The `${USER}` placeholder dynamically references the current user's home directory.
 
-  - Execute the following command to view the status of the cluster:
-    ```shell
-    cluster_mgr status $CLUSTER_NAME
-    ```
+- **`tx_service.tx_host_ports`**:  
+  _Type_: `List of Strings`  
+  _Default_: `[127.0.0.1:6389]`  
+  The list of IP:PORT addresses for the transaction service hosts. The transaction service handles Mysql client requests and is compatible with the Mysql Protocol. Note that each IP address can only be listed once.
+
+- **`tx_service.client_port`**:  
+  _Type_: `Integer`  
+  _Default_: `3316`  
+  The port that clients should use to connect to the transaction service. The transaction service listens on this port for incoming client connections, processing requests that conform to the Mysql Protocol.
+  
+
+<!-- Q? need this? -->
+- **`tx_service.enable_cache_replacement`**:  
+  _Type_: `Boolean`  
+  _Default_: `on`  
+  If persisted cold data can be evicted out of memory cache. If set to false, all data will be cached in memory and new data insertion will fail if memory is full. Less data can be stored in this mode, but all requests is handled in memory. If set to false, cold data will be evicted out of memory so that new write request can succeed. More data can be stored in this mode but a cache miss request will result in a disk read.
+
+- **`log_service.nodes`**:  
+  _Type_: `Composite`  
+  Specify the log service hosts. You can configure anywhere from zero to multiple log service nodes. Setting this to zero indicates that the Write-Ahead Log (WAL) is coupled with the transaction service, in which case you should remove the log_service section entirely. If you specify a non-zero value, the log service is decoupled from the transaction service, running as a standalone process. This can be deployed in a separate cluster or within the same cluster as the transaction service, depending on your requirements.
+
+- **`log_service.nodes.host`**:  
+  _Type_: `String`  
+  _Default_: `'127.0.0.1'`  
+  The IP address where each log service process is running.
+
+- **`log_service.nodes.port`**:  
+  _Type_: `Integer`  
+  _Default_: `9000`  
+  The port on which each log service process listens.
+
+- **`log_service.nodes.data_dir`**:  
+  _Type_: `Strings`  
+  _Default_: `['/home/${USER}/disk_wal_kv']`  
+  The directory where each log service process stores its WAL logs. You can specify a separate disk for the log service to improve write throughput.
+
+- **`log_service.replica`**:  
+  _Type_: `Integer`  
+  _Default_: `1`  
+  The number of replicas for the log service. A value of 1 means there is only one replica. For high availability, set this to 3 or 5. Note that the number of log service nodes should be greater than the number of replicas.
+
+The `monitor` section contains configurations for deploying a Prometheus and Grafana-based monitoring system for EloqSQL. Monitoring is optional; if you do not wish to include it, simply remove the monitor section. If you choose to enable monitoring, set the prometheus.host and grafana.host fields to specify the locations of Prometheus and Grafana, and leave the other fields unchanged. Note that Prometheus and Grafana cannot be shared with other software, so you must ensure that the ports used by Prometheus and Grafana are not occupied by other processes.
+
+- **`monitor.grafana.host`**:
+  _Type_: `String`  
+  _Default_: `'127.0.0.1'`  
+  The IP address where grafana service is running.
+
+- **`monitor.grafana.port`**:
+  _Type_: `Integer`  
+  _Default_: `'3301'`  
+  The port on which grafana service listens.
+
+- **`monitor.prometheus.host`**:
+  _Type_: `String`  
+  _Default_: `'127.0.0.1'`  
+  The IP address where prometheus service is running.
+
+- **`monitor.prometheus.host`**:
+  _Type_: `Integer`  
+  _Default_: `'9500'`  
+  The port on which prometheus service listens.
+
+## 4. Run the deployment command
+
+After you modified the `eloqsql_cassandra.yaml`. Use the `eloqctl launch` command to provision an EloqSQL cluster
+
+```shell
+eloqctl launch ${HOME}/.eloqctl/config/examples/eloqsql_cassandra.yaml -s
+```
+
+The command will install the EloqSQL components in the specified cluster.
+
+If you see the following message, the EloqSQL cluster has been successfully provisioned:
+
+```
+Launch cluster finished, Enjoy!
+Connect to server:
+        LD_LIBRARY_PATH=/home/eloq/eloqsql-cluster/EloqSQL/lib:$LD_LIBRARY_PATH /home/eloq/eloqsql-cluster/EloqSQL/bin/mariadb --user=eloq -S /tmp/eloqsql3316.sock
+Prometheus: http://127.0.0.1:9500
+Grafana: http://127.0.0.1:3301
+```
+
+Feel free to use `/home/eloq/eloqsql-cluster/EloqSQL/bin/mariadb` or any other Mariadb/Mysql client to connect to EloqSQL and enjoy exploring its features.
