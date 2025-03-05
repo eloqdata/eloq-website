@@ -18,12 +18,8 @@ const sidebars = {
   //monoredisSidebar: ['MonoRedis'],
   //monosqlSidebar: ['MonoSQL'],
   eloqdb: {
-    'Quick Start': [
-      'playground',
-      'introduction',
-      'quick-start',
-      'quick-start-ha',
-    ],
+    'EloqSQL Introduction': ['introduction'],
+    'Get Started': ['install-from-binary', 'quick-start', 'quick-start-ha'],
     'Data Migration': ['data-migration/debezium', 'data-migration/dm'],
     'Data Query': ['data-query/simple-query', 'data-query/advance-query'],
     'Mysql Compatibility': ['mysql-compatibility', 'difference_with_mysql'],
