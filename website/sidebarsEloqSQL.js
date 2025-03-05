@@ -22,7 +22,7 @@ const sidebars = {
       'playground',
       'introduction',
       'quick-start',
-      'cluster-deployment',
+      'quick-start-ha',
     ],
     'Data Migration': ['data-migration/debezium', 'data-migration/dm'],
     'Data Query': ['data-query/simple-query', 'data-query/advance-query'],
