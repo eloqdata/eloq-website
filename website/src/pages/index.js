@@ -858,7 +858,7 @@ function HomePage() {
               </p>
             </Link>
 
-            <Link to="/docs/introduction" className="community-card">
+            <Link to="/eloqkv/introduction" className="community-card">
               <div className="community-icon">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                   <path

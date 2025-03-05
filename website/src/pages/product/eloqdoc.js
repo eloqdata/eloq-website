@@ -22,7 +22,7 @@ export default function EloqDoc() {
             <div className={styles.heroButtons}>
               <Link
                 className={`button button--primary button--lg ${styles.heroButton}`}
-                to="/eloqdoc/introduction"
+                to="/eloqdoc/install-from-binary"
                 style={{
                   background: 'linear-gradient(120deg, #ff7b2d, #ff9f4a)',
                   border: 'none',
