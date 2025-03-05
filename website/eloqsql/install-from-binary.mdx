@@ -1,0 +1,143 @@
+---
+title: Install from Binary
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+## Download and unzip EloqSQL tarball
+
+EloqSQL is compatible with RHEl 9, Ubuntu 20.04, 22.04 and 24.04. Download
+the proper tarball for your operating system from [here](/download).
+
+After successfully downloading the proper binary, untar it in a directory.
+
+<Tabs
+  groupId="language"
+  defaultValue="ubuntu2404"
+  values={[
+    { label: 'Rhel9', value: 'centos9', },
+    { label: 'Ubuntu20.04', value: 'ubuntu2004', },
+    { label: 'Ubuntu22.04', value: 'ubuntu2204', },
+    { label: 'Ubuntu24.04', value: 'ubuntu2404', }
+  ]
+}>
+
+</TabItem>
+
+<TabItem value="centos9">
+
+```shell
+cd ${HOME}
+tar -zxvf eloqsql-0.4.14-rhel9-amd64.tar.gz
+```
+
+</TabItem>
+
+<TabItem value="ubuntu2004">
+
+```shell
+cd ${HOME}
+tar -zxvf eloqsql-0.4.14-ubuntu20-amd64.tar.gz
+```
+
+</TabItem>
+
+<TabItem value="ubuntu2204">
+
+```shell
+cd ${HOME}
+tar -zxvf eloqsql-0.4.14-ubuntu22-amd64.tar.gz
+```
+
+</TabItem>
+
+<TabItem value="ubuntu2404">
+
+```shell
+cd ${HOME}
+tar -zxvf eloqsql-0.4.14-ubuntu24-amd64.tar.gz
+```
+
+</TabItem>
+
+</Tabs>
+
+## Prepare EloqSQL config file
+
+EloqSQL uses a configuration file to customize settings. Below is an example of how to configure EloqSQL to run on a local machine.
+
+Note: set `ip` field to 127.0.0.1 will block external access to EloqSQL. It is recommened to set `ip` to
+the actual IP address of the server if you want to access EloqSQL from another machine.
+
+Also note that EloqSQL will automatically set reasonable default values for its parameters if no user specified
+value is provided in the configuration file. So if you have doubt with a certain parameter, just do not specify
+it in the configuration file.
+
+```shell
+cd ${HOME}
+touch my-config.cnf
+```
+
+Edit my-config.cnf with the following example settings:
+
+```cnf
+[mariadb]
+plugin_maturity=experimental
+max_connections=500
+skip-log-bin
+thread_stack=16M
+port=3316
+socket=/tmp/mysqld3316.sock
+plugin_load_add=ha_eloq
+eloq
+eloq_kv_storage=cass
+eloq_cass_hosts=127.0.0.1
+eloq_cass_user=cassandra
+eloq_cass_password=cassandra
+eloq_local_ip=127.0.0.1:8000
+eloq_ip_list=127.0.0.1:8000
+```
+
+## Bootstrap EloqSQL server
+
+Initialize the database:
+
+```shell
+export INSTALL_DIR=${HOME}/install
+export DATA_DIR=${HOME}/eloqdata
+${INSTALL_DIR}/scripts/mysql_install_db --defaults-file=${HOME}/my-config.cnf \
+                                       --basedir=${INSTALL_DIR} \
+                                       --datadir=${DATA_DIR} \
+                                       --plugin-dir=${INSTALL_DIR}/lib/plugin
+```
+
+## Start EloqSQL server
+
+The EloqSQL `mysqld` executable binary is installed in the `${INSTALL_DIR}/bin` directory. Start the server on the local machine using the commands below.
+
+```shell
+${INSTALL_DIR}/bin/mysqld --defaults-file=${HOME}/my-config.cnf --datadir=${DATA_DIR}
+```
+
+## Connect to EloqSQL server
+
+EloqSQL is compatible with the Redis protocol. We have included a `mysql` client for your convinence, but any Mariadb/Mysql client can connect to EloqSQL. You can obtain official `mysql-client` by e.g. execute `sudo apt-get install mysql-client` on Ubuntu. Please use the same ip and port in config file `my-config.cnf` to connect to EloqSQL.
+
+```shell
+sudo ${INSTALL_DIR}/bin/mysql -u root -S /tmp/mysqld3316.sock
+```
+
+## Setting Up a Cluster
+
+It is very simple to set up a cluster of EloqSQL. Just start several EloqSQL instances on different machines, each provided with a configuration file with nodes listed in the cluster section.
+
+For example, assuming we are setting up a cluster with 3 servers, on 192.168.1.20, 192.168.1.21 and 192.168.1.22:
+
+```shell
+[mariadb]
+# eloq_ip_list should include all eloqsql nodes in the cluster.
+# Make sure to set them to match the ip:port specified in the [mariadb]
+# section of the configuration file on each node.
+eloq_ip_list=192.168.1.20:6379,192.168.1.21:6379,192.168.1.22:6379
+```
