@@ -143,7 +143,7 @@ export default function EloqSQL() {
               </Link>
 
               <Link
-                href="https://github.com/eloqdata/eloqkv"
+                href="https://github.com/eloqdata/eloqsql"
                 className={styles.communityCard}>
                 <div className={styles.communityIcon}>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">

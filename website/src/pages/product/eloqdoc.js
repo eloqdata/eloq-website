@@ -143,7 +143,7 @@ export default function EloqDoc() {
               </Link>
 
               <Link
-                href="https://github.com/eloqdata"
+                href="https://github.com/eloqdata/eloqdoc"
                 className={styles.communityCard}>
                 <div className={styles.communityIcon}>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
