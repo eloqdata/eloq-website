@@ -657,76 +657,131 @@ function HomePage() {
               </p>
 
               {/* Add product shortcuts */}
-              <div className="product-shortcuts">
-                <Link to="/product/eloqkv" className="product-shortcut">
-                  <div className="shortcut-icon redis">
-                    <svg viewBox="0 0 32 32" fill="none">
-                      <rect width="32" height="32" rx="6" fill="#DC382D" />
-                      <path d="M7 8h18v16H7z" fill="#DC382D" />
-                      <path
-                        d="M24 16.5l-8 4.5-8-4.5L16 12l8 4.5z"
-                        fill="white"
-                      />
-                    </svg>
+              <div className="product-shortcuts-container">
+                <div className="product-shortcuts">
+                  {/* EloqKV */}
+                  <div className="product-shortcut-wrapper">
+                    <Link to="/product/eloqkv" className="product-shortcut">
+                      <div className="shortcut-icon redis">
+                        <svg viewBox="0 0 32 32" fill="none">
+                          <rect width="32" height="32" rx="6" fill="#DC382D" />
+                          <path d="M7 8h18v16H7z" fill="#DC382D" />
+                          <path
+                            d="M24 16.5l-8 4.5-8-4.5L16 12l8 4.5z"
+                            fill="white"
+                          />
+                        </svg>
+                      </div>
+                      <span>EloqKV</span>
+                    </Link>
+                    <a
+                      href="https://github.com/eloqdata/eloqkv"
+                      className="github-icon"
+                      target="_blank"
+                      rel="noopener noreferrer">
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none">
+                        <path
+                          d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.167 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"
+                          fill="rgba(255, 120, 20, 1)"
+                        />
+                      </svg>
+                    </a>
                   </div>
-                  <span>EloqKV</span>
-                </Link>
 
-                <Link to="/product/eloqsql" className="product-shortcut">
-                  <div className="shortcut-icon vector">
-                    <svg viewBox="0 0 32 32" fill="none">
-                      <rect width="32" height="32" rx="6" fill="#007ACC" />
-                      <ellipse cx="16" cy="10" rx="8" ry="3" fill="white" />
-                      <path
-                        d="M8 10v8c0 1.5 3.5 3 8 3s8-1.5 8-3v-8"
-                        stroke="white"
-                        strokeWidth="2"
-                        fill="none"
-                      />
-                      <path
-                        d="M8 18v4c0 1.5 3.5 3 8 3s8-1.5 8-3v-4"
-                        stroke="white"
-                        strokeWidth="2"
-                        fill="none"
-                      />
-                      <text
-                        x="10"
-                        y="18"
-                        fontSize="6"
-                        fill="white"
-                        fontWeight="bold">
-                        SQL
-                      </text>
-                    </svg>
+                  {/* EloqSQL */}
+                  <div className="product-shortcut-wrapper">
+                    <Link to="/product/eloqsql" className="product-shortcut">
+                      <div className="shortcut-icon vector">
+                        <svg viewBox="0 0 32 32" fill="none">
+                          <rect width="32" height="32" rx="6" fill="#007ACC" />
+                          <ellipse cx="16" cy="10" rx="8" ry="3" fill="white" />
+                          <path
+                            d="M8 10v8c0 1.5 3.5 3 8 3s8-1.5 8-3v-8"
+                            stroke="white"
+                            strokeWidth="2"
+                            fill="none"
+                          />
+                          <path
+                            d="M8 18v4c0 1.5 3.5 3 8 3s8-1.5 8-3v-4"
+                            stroke="white"
+                            strokeWidth="2"
+                            fill="none"
+                          />
+                          <text
+                            x="10"
+                            y="18"
+                            fontSize="6"
+                            fill="white"
+                            fontWeight="bold">
+                            SQL
+                          </text>
+                        </svg>
+                      </div>
+                      <span>EloqSQL</span>
+                    </Link>
+                    <a
+                      href="https://github.com/eloqdata/eloqsql"
+                      className="github-icon"
+                      target="_blank"
+                      rel="noopener noreferrer">
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none">
+                        <path
+                          d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.167 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"
+                          fill="rgba(255, 120, 20, 1)"
+                        />
+                      </svg>
+                    </a>
                   </div>
-                  <span>EloqSQL</span>
-                </Link>
 
-                <Link to="/product/eloqdoc" className="product-shortcut">
-                  <div className="shortcut-icon qstash">
-                    <svg viewBox="0 0 32 32" fill="none">
-                      <rect width="32" height="32" rx="6" fill="#4CAF50" />
-                      <path
-                        d="M10 8h8l4 4v12H10V8z"
-                        stroke="white"
-                        strokeWidth="2"
-                        fill="none"
-                      />
-                      <path
-                        d="M18 8v4h4"
-                        stroke="white"
-                        strokeWidth="2"
-                        fill="none"
-                      />
-                      <path
-                        d="M12 14h8M12 18h8M12 22h5"
-                        stroke="white"
-                        strokeWidth="2"
-                      />
-                    </svg>
+                  {/* EloqDoc */}
+                  <div className="product-shortcut-wrapper">
+                    <Link to="/product/eloqdoc" className="product-shortcut">
+                      <div className="shortcut-icon mongo">
+                        <svg viewBox="0 0 32 32" fill="none">
+                          <rect width="32" height="32" rx="6" fill="#13AA52" />
+                          <path d="M16 6v20" stroke="white" strokeWidth="2" />
+                          <path d="M16 26l4-4" stroke="white" strokeWidth="2" />
+                          <path
+                            d="M16 26l-4-4"
+                            stroke="white"
+                            strokeWidth="2"
+                          />
+                          <path
+                            d="M16 6c2.5 0 4.5 2 4.5 4.5S18.5 15 16 15s-4.5-2-4.5-4.5S13.5 6 16 6z"
+                            stroke="white"
+                            strokeWidth="2"
+                            fill="none"
+                          />
+                        </svg>
+                      </div>
+                      <span>EloqDoc</span>
+                    </Link>
+                    <a
+                      href="https://github.com/eloqdata/eloqdoc"
+                      className="github-icon"
+                      target="_blank"
+                      rel="noopener noreferrer">
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none">
+                        <path
+                          d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.167 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"
+                          fill="rgba(255, 120, 20, 1)"
+                        />
+                      </svg>
+                    </a>
                   </div>
-                  <span>EloqDoc</span>
-                </Link>
+                </div>
               </div>
             </div>
             <div className="product-right-column">
@@ -858,19 +913,21 @@ function HomePage() {
               </p>
             </Link>
 
-            <Link to="/eloqkv/introduction" className="community-card">
+            <Link
+              to="https://github.com/eloqdata/eloqkv"
+              className="community-card">
               <div className="community-icon">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                   <path
-                    d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zM6 20V4h7v5h5v11H6z"
+                    d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.167 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"
                     fill="currentColor"
                   />
                 </svg>
               </div>
-              <h3>Documentation</h3>
+              <h3>GitHub</h3>
               <p>
-                Learn how to use EloqDB with our comprehensive guides and API
-                references.
+                Star our repository, report issues, and contribute to the
+                development
               </p>
             </Link>
 
