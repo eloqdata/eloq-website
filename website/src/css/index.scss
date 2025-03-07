@@ -892,18 +892,18 @@ html[data-theme="dark"] .Section p a {
 .product-columns {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  gap: 2rem;
   align-items: start;
-  padding: 0 2rem;
+  padding: 0 1rem;
   max-width: 1200px;
   margin: 0 auto;
 }
 
 .product-left-column {
   .title {
-    font-size: 3.6rem;
-    font-weight: 700;
-    margin-bottom: 1.2rem;
+    font-size: 2.75rem;
+    font-weight: 1000;
+    margin-bottom: 1rem;
     background: linear-gradient(
       120deg,
       #ff7b2d 0%,
@@ -912,16 +912,16 @@ html[data-theme="dark"] .Section p a {
       #ff9f4a 75%,
       #ff7b2d 100%
     );
-    background-size: 200% auto;
+    background-size: 100% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    line-height: 1.1;
+    line-height: 1.2;
     animation: gradientShift 3s ease infinite;
   }
 
   .tagline {
     font-size: 1.2rem;
-    margin-bottom: 2.4rem;
+    margin-bottom: 5.6rem;
     color: #8b8b9c;
     line-height: 1.5;
   }
@@ -952,12 +952,12 @@ html[data-theme="dark"] .Section p a {
 }
 
 .product-right-column {
-  margin-top: -3rem;
+  margin-top: -1rem;
 
   img {
-    width: 100%;
+    width: 90%;
     height: auto;
-    border-radius: 12px;
+    border-radius: 5px;
   }
 }
 
@@ -1016,7 +1016,7 @@ html[data-theme="dark"] .Section p a {
 }
 
 .section-container {
-  padding: 3rem 0;
+  padding: 2rem 0;
   width: 100%;
   background-color: #0a0a14;
   text-align: center;
@@ -1026,7 +1026,7 @@ html[data-theme="dark"] .Section p a {
   .community-grid {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 1rem;
   }
 
   /* Title container */

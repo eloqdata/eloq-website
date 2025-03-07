@@ -161,7 +161,7 @@
   transition: all 0.2s ease !important;
   position: absolute !important;
   top: 5px !important;
-  right: 5px !important;
+  right: -10px !important;
   z-index: 100 !important;
 }
 
@@ -201,4 +201,29 @@
 .product-shortcut:hover {
   background: rgba(255, 255, 255, 0.1);
   transform: translateY(-4px);
+}
+
+/* Make "Revolutionary Databases" appear on one line with smaller font size */
+.hero__title,
+.hero-title,
+h1.header-title {
+  white-space: nowrap !important;
+  font-size: 4vw !important;
+  /* Reduced from 5vw to 4vw */
+  max-width: 100% !important;
+  overflow: visible !important;
+  letter-spacing: -0.03em !important;
+  /* Add slight letter spacing reduction */
+}
+
+/* For smaller screens, adjust the font size */
+@media (max-width: 768px) {
+  .hero__title,
+  .hero-title,
+  h1.header-title {
+    font-size: 7vw !important;
+    /* Reduced from 8vw to 7vw */
+    white-space: normal !important;
+    /* Allow wrapping on very small screens */
+  }
 }
