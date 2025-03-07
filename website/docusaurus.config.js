@@ -254,7 +254,7 @@ module.exports = {
               {
                 type: 'html',
                 value: `
-                  <a href="/product/eloqkv" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 240px;">
+                  <a href="/product/eloqkv" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 420px;">
                     <div style="display: flex; align-items: center;">
                       <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
                         <rect width="32" height="32" rx="6" fill="#222" />
@@ -262,7 +262,7 @@ module.exports = {
                       </svg>
                       <div style="display: flex; flex-direction: column;">
                         <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqKV</span>
-                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Redis compatible</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Redis compatible, transactional, auto tiering</span>
                       </div>
                     </div>
                   </a>
@@ -281,7 +281,7 @@ module.exports = {
                       </svg>
                       <div style="display: flex; flex-direction: column;">
                         <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqSQL</span>
-                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">MySQL compatible</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">MySQL compatible, high perfromance, elastic</span>
                       </div>
                     </div>
                   </a>
@@ -300,7 +300,7 @@ module.exports = {
                       </svg>
                       <div style="display: flex; flex-direction: column;">
                         <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqDoc</span>
-                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">MongoDB compatible</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">MongoDB compatible, decouple compute & storage</span>
                       </div>
                     </div>
                   </a>
@@ -318,7 +318,7 @@ module.exports = {
               {
                 type: 'html',
                 value: `
-                  <a href="/eloqkv/introduction" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 240px;">
+                  <a href="/eloqkv/introduction" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 320px;">
                     <div style="display: flex; align-items: center;">
                       <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
                         <rect width="32" height="32" rx="6" fill="#222" />
@@ -326,7 +326,7 @@ module.exports = {
                       </svg>
                       <div style="display: flex; flex-direction: column;">
                         <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqKV</span>
-                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Redis compatible</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Introduction, quick start</span>
                       </div>
                     </div>
                   </a>
@@ -345,7 +345,7 @@ module.exports = {
                       </svg>
                       <div style="display: flex; flex-direction: column;">
                         <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqSQL</span>
-                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">MySQL compatible</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Deploy cluster, data migration</span>
                       </div>
                     </div>
                   </a>
@@ -364,7 +364,7 @@ module.exports = {
                       </svg>
                       <div style="display: flex; flex-direction: column;">
                         <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqDoc</span>
-                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">MongoDB compatible</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Quick start</span>
                       </div>
                     </div>
                   </a>
