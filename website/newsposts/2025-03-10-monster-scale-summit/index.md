@@ -15,7 +15,11 @@ Redis is widely used for caching and real-time data processing, but its scalabil
 
 ## Introduction
 
-At **Monster Scale Summit 2025**, we had the opportunity to share how [**EloqKV**](https://www.eloqdata.com/product/eloqkv), our high-performance, distributed transactional database, tackles Redis scaling bottlenecks by leveraging **ScyllaDB**. This talk focused on the challenges of Redis at scale and how EloqKV is revolutionizing the industry.
+At **Monster Scale Summit 2025**, Eloqdata is honored to be the featured speaker, presenting how [**EloqKV**](https://www.eloqdata.com/product/eloqkv) on ScyllaDB, our high-performance, distributed transactional database, tackles Redis scaling bottlenecks. Hosted by [ScyllaDB](https://www.scylladb.com/), a distributed low-latency NoSQL database, the summit showcases cutting-edge solutions for extreme-scale engineering.
+
+Watch the [video](https://www.youtube.com/watch?v=XSuwjiNt0N4)
+
+Visit the official Monster Scale Summit [website](https://www.scylladb.com/monster-scale-summit)
 
 ## The Redis Scaling Challenge
 
