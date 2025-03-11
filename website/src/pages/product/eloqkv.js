@@ -105,15 +105,15 @@ export default function EloqKV() {
   return (
     <Layout
       title="EloqKV - Redis Compatible Database"
-      description="The Redis Compatible Database for Production - ACID Transaction, Scalable Storage & SQL Style Syntax">
+      description="The Redis API Compatible Distributed Database for Production - Scalable Storage and ACID with Session Style Transactions">
       <main>
         {/* Hero Section */}
         <div className={styles.hero}>
           <div className={styles.heroInner}>
             <h1 className={styles.heroTitle}>Redis's API, Database's Power</h1>
             <p className={styles.heroSubtitle}>
-              The Redis Compatible Database for Production - ACID Transaction,
-              Scalable Storage & SQL Style Syntax
+              The Redis-API Compatible Distributed Database for Production,
+              Scalable Storage and ACID with Session Style Transactions
             </p>
             <div className={styles.heroButtons}>
               <Link
@@ -159,11 +159,16 @@ EXEC`}
                 <code>
                   {`BEGIN
 SET user:1000:balance 500
+-- Perform Other Operations In-Between
 SET user:2000:balance 1500
 COMMIT`}
                 </code>
               </pre>
             </div>
+            <p style={{color: 'grey', fontSize: 'smaller'}}>
+              *EloqKV also support MULTI/EXEC style Redis atomic transactions,
+              even in distributed setting.
+            </p>
           </div>
         </div>
 

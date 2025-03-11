@@ -652,7 +652,7 @@ function HomePage() {
                 Revolutionary Databases Powering the AI Age
               </h1>
               <p className="tagline">
-                Databases for all your AI app needs—multi-model, transactional,
+                Databases for all your AI app needs—multimodal, transactional,
                 elastic and standard API-compatible{' '}
               </p>
 
