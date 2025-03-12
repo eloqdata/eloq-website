@@ -91,8 +91,8 @@ deployment:
     rocksdb: Local
   monitor:
     data_dir: ''
-    monograph_metrics:
-      path: '/mono_metrics'
+    eloq_metrics:
+      path: '/eloq_metrics'
       port: 18081
     prometheus:
       download_url: 'https://github.com/prometheus/prometheus/releases/download/v2.42.0/prometheus-2.42.0.linux-amd64.tar.gz'

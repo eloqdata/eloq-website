@@ -82,8 +82,8 @@ deployment:
         storage_cluster: 'eloqsql-cluster'
   monitor:
     data_dir: ''
-    monograph_metrics:
-      path: '/mono_metrics'
+    eloq_metrics:
+      path: '/eloq_metrics'
       port: 18081
     prometheus:
       download_url: 'https://d143xau9fe26d8.cloudfront.net/others/prometheus-2.42.0.linux-amd64.tar.gz'

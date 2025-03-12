@@ -94,7 +94,7 @@ deployment:
         version: "4.1.3"
   monitor:
     data_dir: ""
-    monograph_metrics:
+    eloq_metrics:
       path: "/eloq_metrics"
       port: 18081
     prometheus:

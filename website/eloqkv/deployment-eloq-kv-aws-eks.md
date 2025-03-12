@@ -357,13 +357,13 @@ spec:
   store:
     storageType: cass
     properties:
-      - name: monograph_cass_hosts
+      - name: eloq_cass_hosts
         value: your-cassandra-host
-      - name: monograph_cass_port
+      - name: eloq_cass_port
         value: your-cassandra-port
-      - name: monograph_cass_user
+      - name: eloq_cass_user
         value: your-cassandra-user
-      - name: monograph_cass_password
+      - name: eloq_cass_password
         value: your-cassandra-password
 ```
 
