@@ -67,9 +67,9 @@ REVOKE has two main functions:
   ```
 - Delete all permissions in all tables in all databases of user `'lilly'@'%'`
   `sql
-  REVOKE ALL PRIVILEGES ON *.* FROM 'lilly'@'%';
-  Query OK, 0 rows affected (0.016 sec)
-  `
+REVOKE ALL PRIVILEGES ON *.* FROM 'lilly'@'%';
+Query OK, 0 rows affected (0.016 sec)
+`
 
   > **Note**
   > After deleting all permissions of a user, the user's permission to add, delete, check and modify all tables does not exist
@@ -93,15 +93,15 @@ REVOKE has two main functions:
 1. Remove user authorization role
    Log in to EloqSQL as user `'root'@'localhost'`
    `sql
- REVOKE monorole1 from 'lilly'@'%';
- Query OK, 0 rows affected (0.008 sec)
- `
+REVOKE eloqrole1 from 'lilly'@'%';
+Query OK, 0 rows affected (0.008 sec)
+`
    > **Note**
-   > The prerequisite for the successful execution of the above statement is that the ownership user of the role monorole1 is `'root'@localhost'`.
+   > The prerequisite for the successful execution of the above statement is that the ownership user of the role eloqrole1 is `'root'@localhost'`.
 
-- Assume that the user `'lilly'@'%'` has administrator privileges for the role `monorole`, and now to remove the user's administrator privileges for the role, you can use the following statement:
+- Assume that the user `'lilly'@'%'` has administrator privileges for the role `eloqrole`, and now to remove the user's administrator privileges for the role, you can use the following statement:
   ```sql
-  REVOKE ADMIN OPTION FOR monorole FROM 'lilly'@'%';
+  REVOKE ADMIN OPTION FOR eloqrole FROM 'lilly'@'%';
   Query OK, 0 rows affected (0.005 sec)
   ```
 

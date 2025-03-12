@@ -24,9 +24,9 @@ If you already have an EKS cluster, we still recommend checking [Deploy EKS Clus
 ## Deploy eloq-operator
 
 ```bash
-helm repo add eloqdata https://monographdb.github.io/monograph-charts/
+helm repo add eloqdata https://eloqdb.github.io/eloq-charts/
 helm repo update
-helm install eloq-operator  monographdb/eloq-operator --namespace eloq-operator-system
+helm install eloq-operator  eloqdb/eloq-operator --namespace eloq-operator-system
 ```
 
 ## Deploy the monitoring components for `EloqDBCluster`
@@ -139,7 +139,7 @@ aws s3 mb s3://${LOKI_BUCKET} --region ${AWS_REGION}
 - `S3_ENDPOINT="s3.ap-northeast-1.amazonaws.com`
 
 ```bash
-helm install eloqdata-monitor-infra -n monographdb/eloq-monitoring --namespace eloq-monitoring-ns \
+helm install eloqdata-monitor-infra -n eloqdb/eloq-monitoring --namespace eloq-monitoring-ns \
   --set global.namespace=eloq-monitoring-ns \
   --set global.serviceAccount.name=monitoring-sa \
   --set aws.region=${AWS_REGION} \
@@ -183,7 +183,7 @@ spec:
         operator: In
   podMetricsEndpoints:
     - port: 'metric-port'
-      path: '/mono_metrics'
+      path: '/eloq_metrics'
       relabelings:
         - targetLabel: instance
           sourceLabels:
@@ -357,13 +357,13 @@ spec:
   store:
     storageType: cass
     properties:
-      - name: monograph_cass_hosts
+      - name: eloq_cass_hosts
         value: your-cassandra-host
-      - name: monograph_cass_port
+      - name: eloq_cass_port
         value: your-cassandra-port
-      - name: monograph_cass_user
+      - name: eloq_cass_user
         value: your-cassandra-user
-      - name: monograph_cass_password
+      - name: eloq_cass_password
         value: your-cassandra-password
 ```
 

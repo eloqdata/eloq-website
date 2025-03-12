@@ -31,37 +31,37 @@ ALTER USER [IF EXISTS]
 
 ## Examples
 
-- Modify the password of the created user `'mono'@'%'` to 'monopd'
+- Modify the password of the created user `'eloq'@'%'` to 'eloqpd'
 
   ```sql
-  ALTER USER IF EXISTS 'mono'@'%' IDENTIFIED BY 'monopd';
+  ALTER USER IF EXISTS 'eloq'@'%' IDENTIFIED BY 'eloqpd';
   ```
 
-- Change the current user's password to 'monopd'
+- Change the current user's password to 'eloqpd'
 
   ```sql
-  ALTER USER CURRENT_USER() IDENTIFIED BY 'monopd';
+  ALTER USER CURRENT_USER() IDENTIFIED BY 'eloqpd';
   ```
 
-- Set user `'mono'@'%'` password expiration time to 10 days/permanent/default
+- Set user `'eloq'@'%'` password expiration time to 10 days/permanent/default
 
   ```sql
-  ALTER USER 'mono'@'%' PASSWORD EXPIRE INTERVAL 10 DAY;
-  ALTER USER 'mono'@'%' PASSWORD EXPIRE NEVER;
-  ALTER USER 'mono'@'%' PASSWORD EXPIRE DEFAULT;
+  ALTER USER 'eloq'@'%' PASSWORD EXPIRE INTERVAL 10 DAY;
+  ALTER USER 'eloq'@'%' PASSWORD EXPIRE NEVER;
+  ALTER USER 'eloq'@'%' PASSWORD EXPIRE DEFAULT;
   ```
 
-- Lock/unlock user `'mono'@'%'`
+- Lock/unlock user `'eloq'@'%'`
 
   ```sql
-  ALTER USER 'mono'@'%' ACCOUNT LOCK;
-  ALTER USER 'mono'@'%' ACCOUNT UNLOCK;
+  ALTER USER 'eloq'@'%' ACCOUNT LOCK;
+  ALTER USER 'eloq'@'%' ACCOUNT UNLOCK;
   ```
 
-- Set the acceptable number of real-time connections (MAX_USER_CONNECTIONS) of user `'mono'@'%'` to 5, the number of SQL statements that can be executed per hour to 400, and the timeout (MAX_STATEMENT_TIME) of executed statements to 100
+- Set the acceptable number of real-time connections (MAX_USER_CONNECTIONS) of user `'eloq'@'%'` to 5, the number of SQL statements that can be executed per hour to 400, and the timeout (MAX_STATEMENT_TIME) of executed statements to 100
 
   ```sql
-  ALTER USER 'mono'@'%' WITH
+  ALTER USER 'eloq'@'%' WITH
       MAX_USER_CONNECTIONS 5
       MAX_QUERIES_PER_HOUR 200
       MAX_STATEMENT_TIME 100;

@@ -8,8 +8,8 @@ summary: Eloq test database, test data table creation
 We provide database initialization scripts for users to test, users can run the following SQL statements
 
 ```sql
-CREATE DATABASE mono;
-USE `mono`;
+CREATE DATABASE eloq;
+USE `eloq`;
 DROP TABLE IF EXISTS `countries`;
 
 CREATE TABLE `countries` (

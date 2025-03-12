@@ -94,7 +94,7 @@ deployment:
         version: "4.1.3"
   monitor:
     data_dir: ""
-    monograph_metrics:
+    eloq_metrics:
       path: "/eloq_metrics"
       port: 18081
     prometheus:
@@ -152,9 +152,9 @@ The `deployment` section covers the configurations for deploying cluster metadat
   _Type_: `Integer`  
   _Default_: `3316`  
   The port that clients should use to connect to the transaction service. The transaction service listens on this port for incoming client connections, processing requests that conform to the Mysql Protocol.
-  
 
 <!-- Q? need this? -->
+
 - **`tx_service.enable_cache_replacement`**:  
   _Type_: `Boolean`  
   _Default_: `on`  

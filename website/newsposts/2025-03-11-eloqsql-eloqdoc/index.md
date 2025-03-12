@@ -4,7 +4,7 @@ authors: eloq
 date: 2025-03-11
 tags: [Product]
 news: true
-image: /img/blog/img.png
+image: /img/blog/eloqsql_announce.png
 description: Announcing two new products - MySQL compatible relational database EloqSQL and MongoDB compatible JSON document database EloqDoC.
 newsFeatured: true
 ---

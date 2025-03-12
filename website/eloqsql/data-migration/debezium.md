@@ -149,7 +149,7 @@ expire_logs_days  = 1
 How to setup EloqSQL, please refer to [Deploy EloqSQL](https://www.eloqdata.com/eloqsql/quick-start)
 
 ```
-CREATE TABLE t1(id int primary key, j int) engine monograph;
+CREATE TABLE t1(id int primary key, j int) engine eloq;
 ```
 
 3. Start Zookeeper
