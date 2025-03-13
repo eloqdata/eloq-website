@@ -107,7 +107,7 @@ For detailed explanations for each configuration option in the YAML file, please
 
 - **`tx_service.standby_host_ports`**:  
   _Type_: `List of Strings`  
-  List of hot standby nodes. Each standby node handles read operations and automatically takes over as the primary node in case of a primary node failure. Use `,` to separate standby nodes for the same primary node and use `|` to separate standby nodes for different primary nodes. For example, `[10.0.0.2:6379, 10.0.0.3:6379| 10.0.0.4:6379, 10.0.0.5:6379]` means 2 standby nodes for the first primary node in tx_host_ports, and 2 standby nodes for the second primary node in tx_host_ports.
+  List of hot standby nodes. Each standby node handles read operations and automatically takes over as the primary node in case of a primary node failure. Use `|` to separate standby nodes for the same primary node and use `,` to separate standby nodes for different primary nodes. For example, `[10.0.0.2:6379| 10.0.0.3:6379, 10.0.0.4:6379| 10.0.0.5:6379]` means 2 standby nodes for the first primary node in tx_host_ports, and 2 standby nodes for the second primary node in tx_host_ports.
 
 - **`tx_service.voter_host_ports`**:  
   _Type_: `Integer`  
@@ -144,7 +144,7 @@ Feel free to use `eloqkv-cli` or any other Redis client to connect to EloqKV and
 
 EloqKV can auto failover when primary node fails and the standby node will be elected as the new leader node to receive the write workload.
 
-To make client transparent to primary failover, Proxy should be deployed in front of EloqKV cluster.
+To make client transparent to primary failover, either deploy a proxy in front of EloqKV cluster or connect to EloqKV with a Redis Cluster SDK.
 
 EloqKV Proxy is a high-performance proxy server written in Go, designed to manage multiple EloqKV clusters seamlessly. It allows clients to connect to different EloqKV clusters using tokens (passwords), enabling a multi-tenant environment. The proxy supports dynamic addition and removal of clusters via a RESTful web service, making it ideal for production environments where scalability and flexibility are essential.
 
