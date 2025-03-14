@@ -2,8 +2,10 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
+  padding: 2rem 2rem;
   background-color: #0a0a14;
-  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .feature-card {
@@ -18,10 +20,33 @@
 }
 
 .feature-card:hover {
-  background-color: #3a3a3a;
-  /* Slightly different background on hover */
   transform: translateY(-5px);
-  /* Lift the box slightly on hover */
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.feature-icon {
+  font-size: 2.5em;
+  color: #ff7b2d;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(120deg, #ff7b2d, #ff9f4a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.feature-card h3 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+  background: linear-gradient(120deg, #ff7b2d, #ff9f4a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.feature-card p {
+  color: #8b8b9c;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  margin-bottom: 0.8rem;
 }
 
 .section-container {
@@ -246,7 +271,7 @@
   width: 100% !important;
   height: auto !important;
   z-index: 2 !important;
-  animation: floatUpDown1 4s ease-in-out infinite !important;
+  animation: floatUpDown1 6s ease-in-out infinite !important;
 }
 
 /* Keyframes for the floating animation */
@@ -256,7 +281,7 @@
   }
 
   50% {
-    transform: translateY(-60px);
+    transform: translateY(-3px);
   }
 
   100% {
