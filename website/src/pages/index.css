@@ -1,295 +1,3 @@
-/* ACID Transaction Section */
-.acidSection {
-  background-color: #0a0a14;
-  padding: 6rem 0;
-}
-
-.acidInner {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-.acidContent {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center;
-}
-
-.acidInfo {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.acidTitle {
-  font-size: 3.2rem;
-  font-weight: 700;
-  background: linear-gradient(120deg, #ff7b2d, #ff9f4a);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.acidDescription {
-  font-size: 1.25rem;
-  color: #8b8b9c;
-  line-height: 1.7;
-}
-
-.acidImageContainer {
-  display: flex;
-  justify-content: center;
-}
-
-.acidImage {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Tiered Storage Section */
-.tieredSection {
-  background-color: #0a0a14;
-  padding: 6rem 0;
-}
-
-.tieredInner {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-.tieredContent {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center;
-}
-
-.tieredInfo {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.tieredTitle {
-  font-size: 3.2rem;
-  font-weight: 700;
-  background: linear-gradient(120deg, #ff7b2d, #ff9f4a);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.tieredDescription {
-  font-size: 1.25rem;
-  color: #8b8b9c;
-  line-height: 1.7;
-}
-
-.tieredImageContainer {
-  display: flex;
-  justify-content: center;
-}
-
-.tieredImage {
-  max-width: 100%;
-  height: auto;
-}
-
-@media (max-width: 1024px) {
-  .acidContent,
-  .tieredContent {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-
-  .acidSection,
-  .tieredSection {
-    padding: 4rem 0;
-  }
-}
-
-.feature-section {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  padding: 2rem 2rem;
-  background-color: #0a0a14;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.feature-card {
-  text-align: center;
-  padding: 2.5rem 2rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease;
-  text-decoration: none;
-  color: white;
-}
-
-.feature-card:hover {
-  transform: translateY(-5px);
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.feature-icon {
-  font-size: 2.5em;
-  color: #ff7b2d;
-  margin-bottom: 1.5rem;
-  background: linear-gradient(120deg, #ff7b2d, #ff9f4a);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.feature-card h3 {
-  font-size: 1.6rem;
-  font-weight: 600;
-  margin-bottom: 1.2rem;
-  background: linear-gradient(120deg, #ff7b2d, #ff9f4a);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.feature-card p {
-  color: #8b8b9c;
-  font-size: 1.15rem;
-  line-height: 1.7;
-  margin-bottom: 0.8rem;
-}
-
-@media (max-width: 1024px) {
-  .feature-section {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 640px) {
-  .feature-section {
-    grid-template-columns: 1fr;
-  }
-}
-
-.container1 {
-  padding: 4rem 0;
-  width: 100%;
-  background-image: url("../../static/img/eloqsql_website_bg.jpg");
-  background-size: cover;
-  background-position: center;
-}
-
-.product-mid-column {
-  text-align: center;
-  margin-bottom: 2rem;
-
-  img {
-    max-width: 90%;
-    height: auto;
-  }
-}
-
-.product-columns {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  align-items: start;
-  padding: 0 1rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.product-left-column {
-  .title {
-    font-size: 2.75rem;
-    font-weight: 1000;
-    margin-bottom: 1rem;
-    background: linear-gradient(
-      120deg,
-      #ff7b2d 0%,
-      #ff9f4a 25%,
-      #ff7b2d 50%,
-      #ff9f4a 75%,
-      #ff7b2d 100%
-    );
-    background-size: 100% auto;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    line-height: 1.2;
-    animation: gradientShift 3s ease infinite;
-  }
-
-  .tagline {
-    font-size: 1.2rem;
-    margin-bottom: 5.6rem;
-    color: #8b8b9c;
-    line-height: 1.5;
-  }
-
-  .taglinecolor {
-    font-size: 1.1rem;
-    color: #ff7b2d;
-    margin-bottom: 0.8rem;
-    display: flex;
-    align-items: center;
-    font-weight: 600;
-
-    &::before {
-      content: "";
-      display: inline-block;
-      width: 20px;
-      height: 2px;
-      background: linear-gradient(120deg, #ff7b2d, #ff9f4a);
-      margin-right: 0.8rem;
-    }
-  }
-
-  .buttons {
-    display: flex;
-    gap: 0.8rem;
-    margin-top: 1.6rem;
-  }
-}
-
-.product-right-column {
-  margin-top: -1rem;
-
-  img {
-    width: 90%;
-    height: auto;
-    border-radius: 5px;
-  }
-}
-
-/* Responsive styles */
-@media (max-width: 1024px) {
-  .product-columns {
-    grid-template-columns: 1fr;
-    text-align: center;
-    gap: 2rem;
-  }
-
-  .product-right-column {
-    margin-top: 0;
-    /* Reset margin for mobile */
-  }
-
-  .product-left-column {
-    .title {
-      font-size: 3.2rem;
-    }
-
-    .taglinecolor {
-      justify-content: center;
-    }
-
-    .buttons {
-      justify-content: center;
-    }
-  }
-}
-
 .feature-section {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -554,4 +262,38 @@
   100% {
     transform: translateY(30px);
   }
+}
+
+/* Position product name for superscript */
+.product-name {
+  position: relative;
+  padding-right: 5px;
+}
+
+/* Style the GitHub superscript icon */
+.github-superscript {
+  position: absolute;
+  top: -10px;
+  right: -14px;
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 102, 0, 0.9);
+  border-radius: 50%;
+  padding: 3px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.github-superscript:hover {
+  transform: scale(1.2);
+  background: rgba(255, 120, 20, 1);
+}
+
+.github-superscript svg {
+  width: 14px;
+  height: 14px;
 }
