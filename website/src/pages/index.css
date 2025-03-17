@@ -89,7 +89,6 @@
 
 .product-cards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
   background-color: #0a0a14;
   width: 100%;
