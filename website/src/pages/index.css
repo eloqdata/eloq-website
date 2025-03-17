@@ -322,3 +322,93 @@
   width: 14px;
   height: 14px;
 }
+
+.container1 {
+  padding: 2rem 0;
+  width: 100%;
+  background-image: url("../../static/img/eloqsql_website_bg.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.product-mid-column {
+  text-align: center;
+  margin-bottom: 2rem;
+
+  img {
+    max-width: 90%;
+    height: auto;
+  }
+}
+
+.product-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  align-items: start;
+  padding: 0 0rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.product-left-column {
+  .title {
+    font-size: 2.75rem;
+    font-weight: 1000;
+    margin-bottom: 1rem;
+    background: linear-gradient(
+      120deg,
+      #ff7b2d 0%,
+      #ff9f4a 25%,
+      #ff7b2d 50%,
+      #ff9f4a 75%,
+      #ff7b2d 100%
+    );
+    background-size: 100% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1.2;
+    animation: gradientShift 3s ease infinite;
+  }
+
+  .tagline {
+    font-size: 1.2rem;
+    margin-bottom: 5.6rem;
+    color: #8b8b9c;
+    line-height: 1.5;
+  }
+
+  .taglinecolor {
+    font-size: 1.1rem;
+    color: #ff7b2d;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+
+    &::before {
+      content: "";
+      display: inline-block;
+      width: 20px;
+      height: 2px;
+      background: linear-gradient(120deg, #ff7b2d, #ff9f4a);
+      margin-right: 0.8rem;
+    }
+  }
+
+  .buttons {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 1.6rem;
+  }
+}
+
+.product-right-column {
+  margin-top: -4rem;
+
+  img {
+    width: 90%;
+    height: auto;
+    border-radius: 5px;
+  }
+}
