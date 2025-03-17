@@ -785,7 +785,21 @@ function HomePage() {
               </div>
             </div>
             <div className="product-right-column">
-              <img alt="" src={useBaseUrl('img/architecture.svg')} />
+              <div className="animation-container1">
+                {/* Static base image */}
+                <img
+                  className="static-image1"
+                  alt="Static base"
+                  src={useBaseUrl('img/eloqhomepage1.svg')}
+                />
+
+                {/* Dynamic floating image */}
+                <img
+                  className="floating-image1"
+                  alt="Dynamic element"
+                  src={useBaseUrl('img/eloqhomepage2.svg')}
+                />
+              </div>
             </div>
           </div>
         </div>
