@@ -7,7 +7,6 @@ image: /img/c_old_solid.jpg
 description: 了解我们为何选择 C++ 作为 EloqKV 的开发语言，重点关注其在可扩展性、高效性和持久性方面相较于 Rust 和 Go 的优势。
 featured: true
 blog: true
-featuredMain: true
 ---
 
 我们最近推出了 [EloqKV](/news/2024/08/16/eloqkv)，这是一个基于创新性 [数据基底](/blog/2024/08/11/data-substrate) 架构构建的分布式数据库产品。在过去几年中，**EloqData** 团队一直在不懈努力开发这款软件，确保它能够满足最高的性能和可扩展性标准。这里我们想分享一个关键细节：EloqKV 的大部分代码是用 C++ 编写的。

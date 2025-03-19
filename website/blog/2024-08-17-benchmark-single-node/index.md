@@ -5,7 +5,6 @@ date: 2024-08-17
 tags: [Benchmark]
 image: /img/blog/single.jpg
 description: Comprehensive performance benchmarks of EloqKV in single-node cache mode, comparing it with Redis and DragonflyDB.
-featured: true
 blog: true
 ---
 
