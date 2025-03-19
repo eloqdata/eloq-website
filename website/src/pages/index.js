@@ -734,7 +734,7 @@ function HomePage() {
                     <Link to="/product/eloqdoc" className="product-shortcut">
                       <div className="shortcut-icon mongo">
                         <img
-                          src={useBaseUrl('img/EloqCloud-icon.svg')}
+                          src={useBaseUrl('img/EloqDoc-icon.svg')}
                           alt="EloqDoc"
                           width="32"
                           height="32"
