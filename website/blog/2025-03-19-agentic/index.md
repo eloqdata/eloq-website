@@ -1,50 +1,48 @@
 ---
-title: Building a Data Foundation for Agentic AI Applications
+title: 为智能代理 AI 应用程序构建数据基础
 authors: eloq
 date: 2025-03-19
 tags: [Company]
 image: /img/agentic.png
-description: We are rapidly entering the Agentic Application Age. However, the backbone of these applications—the data infrastructure—faces immense challenges in scalability, consistency, and performance.
+description: 我们正在迅速进入智能代理应用时代。然而，这些应用程序的支柱——数据基础设施——在可扩展性、一致性和性能方面面临着巨大挑战。
 featured: true
 blog: true
 featuredMain: true
 ---
 
-LLM-powered Artificial Intelligence (AI) applications are driving transformative changes across industries, from healthcare to finance and beyond. We are rapidly entering the Agentic Application Age, an era where autonomous, AI-driven agents not only assist but actively make decisions, manage tasks, and optimize outcomes independently.
-
-However, the backbone of these applications—the data infrastructure—faces immense challenges in scalability, consistency, and performance. In this post, we explore the critical limitations of current solutions and introduce EloqData’s innovative approach specifically designed to address these challenges. We also share our vision for an AI-native database, purpose-built to empower the Agentic Application Age, paving the way for smarter, more autonomous, and responsive AI applications in the future.
+大语言模型驱动的 AI 应用程序正在各行各业推动变革性变化。我们正在迅速进入智能代理应用时代。然而，这些应用程序的支柱——数据基础设施——在可扩展性、一致性和性能方面面临着巨大挑战。在这篇文章中，我们探讨了当前解决方案的关键局限性，并介绍了 EloqData 专门设计用于解决这些挑战的创新方法。我们还分享了我们对 AI 原生数据库的愿景，该数据库专为赋能智能代理应用时代而构建，为未来更智能、更自主和响应更快的 AI 应用铺平了道路。
 
 <!--truncate-->
 
-## Why We Need New Data Infra in the AI Age
+## 为什么我们在 AI 时代需要新的数据基础设施
 
-AI applications are inherently data-intensive. To build such an application, developers must design a system capable of storing, processing, and retrieving diverse data types to fuel machine learning models, ensure real-time decision-making, and support continuous improvement.
-A typical AI application integrates several components:
+AI 应用本质上是数据密集型的。要构建这样的应用程序，开发人员必须设计一个能够存储、处理和检索各种数据类型的系统，以驱动机器学习模型、确保实时决策并支持持续改进。
+典型的 AI 应用集成了几个组件：
 
-- Data Ingestion and Preprocessing: Collect raw data from various sources and transform it into formats suitable for analysis.
-- Model Training and Fine-Tuning: Train AI models on structured and unstructured data to improve performance on specific tasks.
-- Inference and Deployment: Use trained models to make predictions or automate workflows.
-- Feedback Loops: Capture user interactions and outcomes to retrain models for improved accuracy and adaptability.
+- 数据摄取和预处理：从各种来源收集原始数据并将其转换为适合分析的格式。
+- 模型训练和微调：在结构化和非结构化数据上训练 AI 模型，以提高特定任务的性能。
+- 推理和部署：使用训练好的模型进行预测或自动化工作流程。
+- 反馈循环：捕获用户交互和结果，以重新训练模型，提高准确性和适应性。
 
-AI applications deal with diverse data types, each with specific storage and retrieval requirements:
+AI 应用处理各种数据类型，每种类型都有特定的存储和检索要求：
 
-- Structured Data: Typically stored in relational databases for tasks requiring tabular representations (e.g., user profiles, transaction histories).
-- Unstructured Data: Includes text, images, and videos, stored in document databases or object storage systems.
-- Embeddings: Vector representations of unstructured data for similarity search, often stored in vector databases.
-- Graphs: Relationships between entities (e.g., social networks, knowledge graphs), stored in graph databases.
-- Metadata: Information about data objects, stored in SQL or document databases for indexing and retrieval.
+- 结构化数据：通常存储在关系数据库中，用于需要表格表示的任务（例如，用户资料、交易历史）。
+- 非结构化数据：包括文本、图像和视频，存储在文档数据库或对象存储系统中。
+- 嵌入向量：非结构化数据的向量表示，用于相似性搜索，通常存储在向量数据库中。
+- 图：实体之间的关系（例如，社交网络、知识图谱），存储在图数据库中。
+- 元数据：关于数据对象的信息，存储在 SQL 或文档数据库中，用于索引和检索。
 
-### Challenges
+### 挑战
 
-With platforms like LangChain and LlamaIndex, developers can seamlessly integrate multiple databases into AI workflows, enabling efficient storage and retrieval of multi-modal data. However, this approach often causes several challenges.
+借助 LangChain 和 LlamaIndex 等平台，开发人员可以将多个数据库无缝集成到 AI 工作流中，实现多模态数据的高效存储和检索。然而，这种方法通常会导致几个挑战。
 
-The first challenge is management complexity. AI applications typically need to deal with multiple data models. As it stands now, we typically need multiple databases to deal with the different data types. This causes tremendous complexity as each of the databases is provided by different vendors, managing each database requires specialized skill sets, and understanding the nuances of multiple databases is a daunting task for most AI application developers.
+第一个挑战是管理复杂性。AI 应用通常需要处理多种数据模型。目前，我们通常需要多个数据库来处理不同的数据类型。这造成了巨大的复杂性，因为每个数据库都由不同的供应商提供，管理每个数据库需要专业技能，而且对于大多数 AI 应用开发人员来说，理解多个数据库的细微差别是一项艰巨的任务。
 
-The second challenge is related to flexibility and agility. Modern databases are often designed to handle a specific type of workload under a specific range of performance envelopes. For example, Redis is designed to address latency issues, by sacrificing persistency, while PostgreSQL guarantees durability by trading-off scalability. Unfortunately, the landscape of AI applications is still rapidly changing. There is simply no “standard architecture” to handle typical AI application needs. Choosing a simple data architecture might involve a total revamp of the entire data pipeline as the application evolves.
+第二个挑战与灵活性和敏捷性有关。现代数据库通常设计用于在特定性能范围内处理特定类型的工作负载。例如，Redis 通过牺牲持久性来解决延迟问题，而 PostgreSQL 通过牺牲可扩展性来保证持久性。不幸的是，AI 应用的格局仍在迅速变化。目前还没有"标准架构"来处理典型的 AI 应用需求。选择简单的数据架构可能会随着应用程序的发展而需要对整个数据管道进行彻底改造。
 
-The third challenge, which might be much more fundamental, is the difficulty of ensuring data consistency across multiple databases. AI applications often require combining data from diverse sources, which introduces transactional challenges. Databases traditionally provides ACID transactional semantics to ease the complexity of application development. This valuable property is lost when a query needs to be carried out by multiple databases. Without the ACID property, application developers are left to deal with the data consistency issues in application code, which is often error prone.
+第三个挑战可能更为根本，那就是确保跨多个数据库的数据一致性的困难。AI 应用通常需要结合来自不同来源的数据，这带来了事务性挑战。数据库传统上提供 ACID 事务语义，以简化应用程序开发的复杂性。当查询需要由多个数据库执行时，这一宝贵特性就会丧失。没有 ACID 属性，应用程序开发人员只能在应用程序代码中处理数据一致性问题，这通常容易出错。
 
-Consider building a simple Retrieval-Augmented Generation (RAG) application to handle, say, financial reports of the public companies. RAG requires a document to be chunked and vectors of each chunk to be added to a vector database, while the document itself stored in a document DB. If the document is added while the insertion of the vectors failed, we may not be able to retrieve the document. On the other hand, if the vectors are added while the document failed to be inserted, we may get “broken links”. After a while, the developers may feel that knowledge graph of the companies might be a helpful source of information, and GraphRAG might increase the recall quality. Therefore, we may need to add a graph database to the pipeline. Soon, real-time news and social media might be interesting data sources, so we need to quickly ingest these feeds. Shall we use a streaming platform? As one can imagine, the data pipeline quickly grows out of hand. How to guarantee consistent user experience when data is constantly being added to multiple complicated and independent database systems? How to make joint queries when the databases are constantly out of sync?
+考虑构建一个简单的检索增强生成 (RAG) 应用程序来处理，比如说，公共公司的财务报告。RAG 要求将文档分块，并将每个块的向量添加到向量数据库中，同时将文档本身存储在文档数据库中。如果在向量插入失败的情况下添加了文档，我们可能无法检索该文档。另一方面，如果添加了向量而文档插入失败，我们可能会得到"断开的链接"。一段时间后，开发人员可能会觉得公司的知识图谱可能是有用的信息来源，GraphRAG 可能会提高召回质量。因此，我们可能需要将图数据库添加到管道中。很快，实时新闻和社交媒体可能成为有趣的数据来源，所以我们需要快速摄取这些信息流。我们应该使用流平台吗？可以想象，数据管道很快就会失控。当数据不断被添加到多个复杂且独立的数据库系统时，如何保证一致的用户体验？当数据库不断失去同步时，如何进行联合查询？
 
 <p align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
@@ -54,18 +52,18 @@ import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
 </div></p>
 
-## How EloqData can Help
+## EloqData 如何提供帮助
 
-Some argue that eventual consistency is sufficient for AI applications. While this is true in certain scenarios, we believe a one-stop solution with full ACID transactions and lower costs is not only desirable but essential.
+有些人认为，对于 AI 应用程序来说，最终一致性就足够了。虽然在某些情况下确实如此，但我们相信，具有完整 ACID 事务和更低成本的一站式解决方案不仅是理想的，而且是必不可少的。
 
-Why Eventual Consistency Falls Short
+为什么最终一致性不足
 
-- Operational Complexity: Managing retries, failures, and inconsistencies in an eventual consistency model adds significant development and maintenance burden.
-- Scalability Risks: As AI applications grow, maintaining consistency across multiple databases becomes increasingly challenging.
+- 操作复杂性：在最终一致性模型中管理重试、失败和不一致性会增加显著的开发和维护负担。
+- 可扩展性风险：随着 AI 应用的增长，维护多个数据库之间的一致性变得越来越具有挑战性。
 
-### The Promise of a Unified Solution
+### 统一解决方案的承诺
 
-EloqData is redefining data infrastructure for AI applications with a one-stop solution ConvergedDB, that offers high performance, scalability, and full ACID transactions. This breakthrough eliminates the need for complex middleware like Kafka and allows developers to focus on building applications rather than managing infrastructure. At the heart of this solution is our innovative Data Substrate architecture.
+EloqData 正在通过一站式解决方案 ConvergedDB 重新定义 AI 应用的数据基础设施，该解决方案提供高性能、可扩展性和完整的 ACID 事务。这一突破消除了对 Kafka 等复杂中间件的需求，使开发人员能够专注于构建应用程序，而不是管理基础设施。这一解决方案的核心是我们创新的[数据基层](/blog/2024/08/11/data-substrate)架构。
 
 <p align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
@@ -74,18 +72,18 @@ EloqData is redefining data infrastructure for AI applications with a one-stop s
 
 </div></p>
 
-## Looking into the Future
+## 展望未来
 
-While current RAG implementations may not demand strong ACID guarantees, the future of AI applications points toward more complex, collaborative agent architectures. Imagine a network of AI agents collaborating on tasks ranging from financial transactions to regulatory compliance. These scenarios will undoubtedly require strong ACID properties to ensure consistency and reliability.
+虽然当前的 RAG 实现可能不需要强大的 ACID 保证，但 AI 应用的未来指向更复杂的协作代理架构。想象一个 AI 代理网络，协作处理从金融交易到监管合规的各种任务。这些场景无疑将需要强大的 ACID 属性来确保一致性和可靠性。
 
-### Future-Proof Your Infrastructure with EloqData
+### 使用 EloqData 为您的基础设施做好未来准备
 
-By choosing EloqData from day one, organizations can:
+通过从一开始就选择 EloqData，组织可以：
 
-- Eliminate Scalability Concerns: EloqData’s architecture ensures seamless scalability, whether your business grows vertically or horizontally.
-- Ensure Consistency: As multi-agent architectures become the norm, EloqData’s cross-model transactional guarantees will prove invaluable.
-- Maintain High Performance: With no performance degradation, EloqData delivers a robust solution for the most demanding AI applications.
+- 消除可扩展性担忧：EloqData 的架构确保无缝扩展，无论您的业务是垂直增长还是水平扩展。
+- 确保一致性：随着多代理架构成为常态，EloqData 的跨模型事务保证将变得非常宝贵。
+- 保持高性能：EloqData 在不降低性能的情况下，为最苛刻的 AI 应用提供强大的解决方案。
 
-The future of AI applications requires data infrastructure that is scalable, consistent, and performant. EloqData’s one-stop multi-model database ConvergedDB, powered by its Data Substrate architecture, delivers on all three fronts, enabling developers to focus on innovation rather than infrastructure.
+AI 应用的未来需要可扩展、一致且高性能的数据基础设施。EloqData 的一站式多模型数据库 ConvergedDB，由其数据基底架构提供支持，在所有三个方面都有出色表现，使开发人员能够专注于创新而非基础设施。
 
-ConvergedDB is launching soon! Your feedback is greatly appreciated—stay tuned!
+ConvergedDB 即将推出！非常感谢您的反馈——敬请期待！
