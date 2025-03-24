@@ -43,6 +43,11 @@ Use the following
 eloqctl start ${cluster_name}
 ```
 
+To start specified nodes, use the following
+```
+eloqctl start --nodes node1_ip:node1_port,node2_ip:node2_port ${cluster_name}
+```
+
 ## Stop Cluster
 
 1. Graceful Shutdown. The following command will stop the transaction cluster and log cluster gracefully which means that all the data in memory will be flushed to persistent storage before the processes exit. In this case, the next launch of cluster is fast since there is no redo logs to be replayed.
@@ -81,20 +86,20 @@ EloqKV offers various configurations, some of which enable features. For example
 
 You can easily adjust these settings using eloqctl. The process is as follows:
 
-1. Edit the configuration file located at `$HOME/.eloqctl/upload/${cluster_name}/EloqKv.ini`. In the example below, core_number is set to 8, and both the persistent data store and Write-Ahead Log are enabled."
+1. Edit the configuration file located at `$HOME/.eloqctl/upload/${cluster_name}/{node_ip}/EloqKv-tx-{port}.ini` to update config for corresponding node. In the example below, core_number is set to 8, and both the persistent data store and Write-Ahead Log are enabled."
 
 ```
 [local]
 path=data
-ip=${OVERRIDE}
-port=${OVERRIDE}
+ip=127.0.0.1
+port=6379
 core_number=8
 enable_data_store=on
 enable_wal=on
 [cluster]
 [store]
 [metrics]
-enable_metrics=${OVERRIDE}
+enable_metrics=on
 ```
 
 2. Use `eloqctl update-conf` to update the configuration file across the cluster and restart it with a single command.
