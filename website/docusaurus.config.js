@@ -453,6 +453,11 @@ module.exports = {
               },
             ],
           },
+          {
+            to: '/community',
+            label: '社区',
+            position: 'right',
+          },
 
           // Download Navbar
           {
