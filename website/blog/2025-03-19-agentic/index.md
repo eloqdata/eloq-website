@@ -7,7 +7,7 @@ image: /img/agentic.png
 description: We are rapidly entering the Agentic Application Age. However, the backbone of these applications—the data infrastructure—faces immense challenges in scalability, consistency, and performance.
 featured: true
 blog: true
-featuredMain: true
+featuredMain: false
 ---
 
 We have recently open sourced our three products: [EloqKV](https://github.com/eloqdata/eloqkv), [EloqSQL](https://github.com/eloqdata/eloqsql), and [EloqDoc](https://github.com/eloqdata/eloqdoc). These offerings reflect our commitment to addressing the evolving demands of modern data infrastructure, particularly as we enter an era dominated by powerful, autonomous AI systems.
