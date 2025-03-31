@@ -6,7 +6,7 @@ tags: [Company]
 image: /img/blog/substrate.jpg
 description: Discover how Data Substrate enhances transactional databases with integrated functions and efficient CRUD operations.
 blog: true
-featured: true
+featured: false
 ---
 
 在这篇博客中，我们介绍我们的变革性概念**数据基层**。数据基层抽象了在线事务数据库（OLTP）中的核心功能，为任何数据模型的 [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) 操作提供统一层。基于这个统一层构建的数据库是模块化的：数据库模块是可选的，可以替换，并且可以独立于其他模块进行扩展。
