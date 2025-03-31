@@ -245,6 +245,12 @@ module.exports = {
         },
         style: 'dark',
         items: [
+          {
+            href: 'https://github.com/eloqdata',
+            position: 'right',
+            className: 'header-github-link',
+            'aria-label': 'GitHub repository',
+          },
           // Product Navbar
           {
             type: 'dropdown',

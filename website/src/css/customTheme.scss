@@ -1941,3 +1941,123 @@ Prevent useless bottom margin for multiline <figcaption> tags in MDX:
 figcaption > p:last-child {
   margin-bottom: 0;
 }
+
+/* Blog and News section styling improvements */
+.blog-wrapper,
+.blog-list-page,
+.blog-post-page,
+.blog-container,
+article,
+.markdown {
+  background-color: #212128 !important;
+  /* Dark gray with slight blue tint like code editors */
+  color: #e4e4e7 !important;
+  /* Slightly off-white for better readability */
+}
+
+/* Adjust heading colors */
+.blog-wrapper h1,
+.blog-post-page h1,
+.blog-container h1,
+.blog-list-page h1,
+article h1,
+.markdown h1,
+.blog-wrapper h2,
+.blog-post-page h2,
+.blog-container h2,
+article h2,
+.markdown h2,
+.blog-wrapper h3,
+.blog-post-page h3,
+.blog-container h3,
+article h3,
+.markdown h3 {
+  color: #ff7b2d !important;
+  /* Slightly brighter for headings */
+}
+
+.blog-list-page h2,
+.blog-list-page h3 {
+  color: white !important;
+}
+
+/* Adjust paragraph and list text */
+.blog-wrapper p,
+.blog-list-page p,
+.blog-post-page p,
+.blog-container p,
+article p,
+.markdown p,
+.blog-wrapper li,
+.blog-list-page li,
+.blog-post-page li,
+.blog-container li,
+article li,
+.markdown li {
+  color: #d4d4d8 !important;
+  /* Softer white for better contrast */
+}
+
+.blog-wrapper a:hover,
+.blog-list-page a:hover,
+.blog-post-page a:hover,
+.blog-container a:hover,
+article a:hover,
+.markdown a:hover {
+  color: #93c5fd !important;
+  /* Lighter blue on hover */
+}
+
+/* Code blocks */
+.blog-wrapper pre,
+.blog-list-page pre,
+.blog-post-page pre,
+.blog-container pre,
+article pre,
+.markdown pre {
+  background-color: #282c34 !important;
+  /* Darker background for code blocks */
+}
+
+/* Inline code */
+.blog-wrapper code,
+.blog-list-page code,
+.blog-post-page code,
+.blog-container code,
+article code,
+.markdown code {
+  background-color: #2d3748 !important;
+  color: #e2e8f0 !important;
+}
+
+/* Blog post cards */
+.blog-list-page article {
+  background-color: #252535 !important;
+  /* Slightly lighter than the main background */
+  border: 1px solid #383854 !important;
+  border-radius: 8px !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.blog-list-page article:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2) !important;
+}
+
+.header-github-link:hover {
+  opacity: 0.6;
+}
+
+.header-github-link::before {
+  content: "";
+  width: 24px;
+  height: 24px;
+  display: flex;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='white' d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/%3E%3C/svg%3E")
+    no-repeat;
+}
+
+[data-theme="dark"] .header-github-link::before {
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='white' d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/%3E%3C/svg%3E")
+    no-repeat;
+}
