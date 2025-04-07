@@ -241,21 +241,36 @@ module.exports = {
         logo: {
           src: 'img/eloqdata_logo.png',
           alt: 'EloqData',
-          style: {width: '150px', height: 'auto'}, // Adjust width as needed
+          style: {width: '150px', height: 'auto'},
         },
         style: 'dark',
         items: [
+          // GitHub icon
           {
             href: 'https://github.com/eloqdata',
             position: 'right',
             className: 'header-github-link',
             'aria-label': 'GitHub repository',
           },
-          // Product Navbar
+          // Log In link
+          {
+            href: 'https://cloud.eloqdata.com/join-waitlist',
+            position: 'right',
+            className: 'header-login-link',
+            label: 'Log In',
+          },
+          // Sign Up button with orange background
+          {
+            href: 'https://cloud.eloqdata.com/join-waitlist',
+            position: 'right',
+            className: 'header-signup-link',
+            label: 'Sign Up',
+          },
+          // Main navigation items
           {
             type: 'dropdown',
             label: '产品',
-            position: 'right',
+            position: 'left',
             items: [
               {
                 type: 'html',
@@ -334,7 +349,7 @@ module.exports = {
               {
                 type: 'html',
                 value: `
-                  <a href="/contact" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 340px;">
+                  <a href="https://cloud.eloqdata.com/join-waitlist" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 340px;">
                     <div style="display: flex; align-items: center;">
                       <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
                         <rect width="32" height="32" rx="6" fill="#222" />
@@ -352,12 +367,10 @@ module.exports = {
               },
             ],
           },
-
-          // Docs Navbar
           {
             type: 'dropdown',
             label: '文档',
-            position: 'right',
+            position: 'left',
             items: [
               {
                 type: 'html',
@@ -416,12 +429,10 @@ module.exports = {
               },
             ],
           },
-
-          // Learn Navbar
           {
             type: 'dropdown',
             label: '探索',
-            position: 'right',
+            position: 'left',
             items: [
               {
                 type: 'html',
@@ -481,14 +492,14 @@ module.exports = {
           {
             to: '/community',
             label: '社区',
-            position: 'right',
+            position: 'left',
           },
 
           // Download Navbar
           {
             type: 'dropdown',
             label: '下载',
-            position: 'right',
+            position: 'left',
             items: [
               {
                 type: 'html',
@@ -565,12 +576,10 @@ module.exports = {
               },
             ],
           },
-
-          // Company Navbar - Fixed size
           {
             type: 'dropdown',
             label: '公司',
-            position: 'right',
+            position: 'left',
             items: [
               {
                 type: 'html',
