@@ -312,6 +312,25 @@ module.exports = {
                   </a>
                 `,
               },
+              {
+                type: 'html',
+                value: `
+                  <a href="/contact" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 340px;">
+                    <div style="display: flex; align-items: center;">
+                      <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
+                        <rect width="32" height="32" rx="6" fill="#222" />
+                        <path d="M8 20c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="#FFFFFF" stroke-width="2" fill="none" />
+                        <path d="M10 24l6-6 6 6" stroke="#FFFFFF" stroke-width="2" fill="none" />
+                        <path d="M16 8v10" stroke="#FFFFFF" stroke-width="2" />
+                      </svg>
+                      <div style="display: flex; flex-direction: column;">
+                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqCloud</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Apply to Join</span>
+                      </div>
+                    </div>
+                  </a>
+                `,
+              },
             ],
           },
 
