@@ -44,6 +44,7 @@ eloqctl start ${cluster_name}
 ```
 
 To start specified nodes, use the following
+
 ```
 eloqctl start --nodes node1_ip:node1_port,node2_ip:node2_port ${cluster_name}
 ```
@@ -86,7 +87,7 @@ EloqKV offers various configurations, some of which enable features. For example
 
 You can easily adjust these settings using eloqctl. The process is as follows:
 
-1. Edit the configuration file located at `$HOME/.eloqctl/upload/${cluster_name}/{node_ip}/EloqKv-tx-{port}.ini` to update config for corresponding node. In the example below, core_number is set to 8, and both the persistent data store and Write-Ahead Log are enabled."
+1. Edit the configuration file located at `$HOME/.eloqctl/upload/${cluster_name}/{node_ip}/EloqKv-tx-{port}.ini` to update config for corresponding node. In the example below, core_number is set to 8, and both the persistent data store and Write-Ahead Log are enabled.
 
 ```
 [local]
