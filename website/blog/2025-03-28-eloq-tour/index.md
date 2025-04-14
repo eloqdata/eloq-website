@@ -16,7 +16,7 @@ featuredMain: true
 
 ## 开始旅行
 
-想象一下，你正在构建一个[Agentic AI 应用程序](https://nvidianews.nvidia.com/news/nvidia-alphabet-and-google-collaborate-on-the-future-of-agentic-and-physical-ai)——一个能在数字世界中自主漫游的聊天助手，帮助用户处理从旅行建议到生活咨询的各种事务。你的智能助手很聪明，很主动，由大型语言模型（[LLM](https://chat.openai.com/)）驱动，但有一个问题：它需要记住*所有事情*。每一个机智的回应，每一个用户请求，每一个"啊哈！"时刻——这些都需要被可靠地存储在某个地方。这就是 EloqKV 发挥作用的地方，今天，我将带你参观这个解耦架构是如何在我的 AI 助手从一个简单的原型发展成一个繁忙的、可扩展的强大系统的过程中拯救了它（以及我的理智）。
+想象一下，你正在构建一个[Agentic AI 应用程序](https://nvidianews.nvidia.com/news/nvidia-alphabet-and-google-collaborate-on-the-future-of-agentic-and-physical-ai)——一个能在数字世界中自主漫游的聊天助手，帮助用户处理从旅行建议到生活咨询的各种事务。你的智能助手很聪明，很主动，由大型语言模型（[LLM](https://chat.openai.com/)）驱动，但有一个问题：它需要记住*所有事情*。每一个机智的回应，每一个用户请求，每一个"啊哈！"时刻——这些都需要被可靠地存储在某个地方。这就是 EloqKV 发挥作用的地方。今天我将向你展示，这套解耦架构是如何在我的 AI 助手从一个简单原型演变为高负载、可扩展系统的过程中，起到的关键作用。
 
 <p align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
