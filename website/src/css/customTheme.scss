@@ -620,14 +620,14 @@ a[class*="tagRegular"] {
 
   .navbar__item {
     &.navbar__link {
-      font-weight: 400;
+      font-weight: 600;
       font-size: 14px;
       user-select: none;
     }
 
     &.dropdown:not(.dropdown--right) {
       a {
-        font-weight: 400;
+        font-weight: 600;
         font-size: 14px;
       }
 

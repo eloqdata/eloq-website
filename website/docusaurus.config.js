@@ -257,14 +257,14 @@ module.exports = {
             href: 'https://cloud.eloqdata.com/join-waitlist',
             position: 'right',
             className: 'header-login-link',
-            label: 'Log In',
+            label: '登陆',
           },
           // Sign Up button with orange background
           {
             href: 'https://cloud.eloqdata.com/join-waitlist',
             position: 'right',
             className: 'header-signup-link',
-            label: 'Sign Up',
+            label: '注册',
           },
           // Main navigation items
           {
