@@ -25,7 +25,13 @@ const sidebars = {
       'upgrade',
       'prerequisite',
     ],
-    Manage: ['monitor', 'configuration', 'eloqkv-proxy', 'dump-tools'],
+    Manage: [
+      'monitor',
+      'configuration',
+      'eloqkv-proxy',
+      'dump-tools',
+      'failover',
+    ],
     'Redis Comaptibility': ['kvstore_compatibility', 'known-limit'],
     'Command Reference': [
       {
