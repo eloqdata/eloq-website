@@ -81,6 +81,12 @@ eloqctl monitor stop ${cluster_name}
 eloqctl stop ${cluster_name} --password xxxxx
 ```
 
+6. To stop specified nodes, use the following
+
+```
+eloqctl stop --nodes node1_ip:node1_port,node2_ip:node2_port ${cluster_name}
+```
+
 ## Update Cluster Configuration
 
 EloqKV offers various configurations, some of which enable features. For example, `enable_data_store` activates persistent data storage, and `enable_wal` enables the Write-Ahead Log for durability. Other configurations are performance-related, such as `core_number` for specifying the number of worker threads, and `node_memory_limit_mb` to set the memory limit.
