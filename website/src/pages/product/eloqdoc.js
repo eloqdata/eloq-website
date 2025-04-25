@@ -50,12 +50,6 @@ const PRODUCT_COMPARISON = [
     enterprise: true,
     cloudSaas: true,
   },
-  {
-    feature: 'Change Streams',
-    openSource: true,
-    enterprise: true,
-    cloudSaas: true,
-  },
   {feature: 'Scale-Up', openSource: true, enterprise: true, cloudSaas: true},
   {feature: 'Scale-Out', openSource: false, enterprise: true, cloudSaas: true},
   {
