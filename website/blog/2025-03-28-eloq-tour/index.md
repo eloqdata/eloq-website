@@ -1,7 +1,7 @@
 ---
 title: '从旅游类 Agentic AI 应用出发，探索 EloqKV 的解耦式架构'
 authors: eloq
-date: 2025-03-19
+date: 2025-03-28
 tags: [Company]
 image: /img/tourbuddy.png
 description: 探索EloqKV的解耦架构如何为TourBuddy提供支持，从快速缓存到持久、弹性存储的平滑扩展——在每个成长阶段保持AI应用的快速、弹性和成本效益。
@@ -47,7 +47,7 @@ services:
         ipv4_address: 172.20.0.4
     ports:
       - '6379:6379'
-    command: /EloqKVRocksDB/bin/eloqkv --config /EloqKVRocksDB/conf/eloqkv.ini --ip=172.22.0.4 --port=6379 --ip_port_list=172.22.0.4:6379
+    command: /EloqKVRocksDB/bin/eloqkv --config /EloqKVRocksDB/conf/eloqkv.ini --ip=172.20.0.4 --port=6379 --ip_port_list=172.20.0.4:6379
     working_dir: /EloqKVRocksDB
     tty: true
     stdin_open: true
@@ -76,7 +76,7 @@ services:
         ipv4_address: 172.20.0.4
     ports:
       - '6379:6379'
-    command: /EloqKVRocksDB/bin/eloqkv --config /EloqKVRocksDB/conf/eloqkv.ini --enable_data_store=true --ip=172.22.0.4 --port=6379 --ip_port_list=172.22.0.4:6379
+    command: /EloqKVRocksDB/bin/eloqkv --config /EloqKVRocksDB/conf/eloqkv.ini --enable_data_store=true --ip=172.20.0.4 --port=6379 --ip_port_list=172.20.0.4:6379
     working_dir: /EloqKVRocksDB
     tty: true
     stdin_open: true
@@ -105,7 +105,7 @@ services:
         ipv4_address: 172.20.0.4
     ports:
       - '6379:6379'
-    command: /EloqKVRocksDB/bin/eloqkv --config /EloqKVRocksDB/conf/eloqkv.ini --enable_data_store=true --enable_wal=true --ip=172.22.0.4 --port=6379 --ip_port_list=172.22.0.4:6379
+    command: /EloqKVRocksDB/bin/eloqkv --config /EloqKVRocksDB/conf/eloqkv.ini --enable_data_store=true --enable_wal=true --ip=172.20.0.4 --port=6379 --ip_port_list=172.20.0.4:6379
     working_dir: /EloqKVRocksDB
     tty: true
     stdin_open: true
