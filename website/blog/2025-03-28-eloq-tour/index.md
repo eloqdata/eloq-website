@@ -1,7 +1,7 @@
 ---
 title: 'Exploring EloqKV Decoupled Architecture: A Tour with an Agentic AI Case Study'
 authors: eloq
-date: 2025-03-19
+date: 2025-03-28
 tags: [Company]
 image: /img/tourbuddy.png
 description: Explore EloqKV’s decoupled architecture powering TourBuddy, scaling smoothly from fast cache to durable, elastic storage—keeping your AI apps quick, resilient, and cost-effective at every growth stage.
@@ -47,7 +47,7 @@ services:
         ipv4_address: 172.20.0.4
     ports:
       - '6379:6379'
-    command: /EloqKVRocksDB/bin/eloqkv --config /EloqKVRocksDB/conf/eloqkv.ini --ip=172.22.0.4 --port=6379 --ip_port_list=172.22.0.4:6379
+    command: /EloqKVRocksDB/bin/eloqkv --config /EloqKVRocksDB/conf/eloqkv.ini --ip=172.20.0.4 --port=6379 --ip_port_list=172.20.0.4:6379
     working_dir: /EloqKVRocksDB
     tty: true
     stdin_open: true
@@ -76,7 +76,7 @@ services:
         ipv4_address: 172.20.0.4
     ports:
       - '6379:6379'
-    command: /EloqKVRocksDB/bin/eloqkv --config /EloqKVRocksDB/conf/eloqkv.ini --enable_data_store=true --ip=172.22.0.4 --port=6379 --ip_port_list=172.22.0.4:6379
+    command: /EloqKVRocksDB/bin/eloqkv --config /EloqKVRocksDB/conf/eloqkv.ini --enable_data_store=true --ip=172.20.0.4 --port=6379 --ip_port_list=172.20.0.4:6379
     working_dir: /EloqKVRocksDB
     tty: true
     stdin_open: true
@@ -105,7 +105,7 @@ services:
         ipv4_address: 172.20.0.4
     ports:
       - '6379:6379'
-    command: /EloqKVRocksDB/bin/eloqkv --config /EloqKVRocksDB/conf/eloqkv.ini --enable_data_store=true --enable_wal=true --ip=172.22.0.4 --port=6379 --ip_port_list=172.22.0.4:6379
+    command: /EloqKVRocksDB/bin/eloqkv --config /EloqKVRocksDB/conf/eloqkv.ini --enable_data_store=true --enable_wal=true --ip=172.20.0.4 --port=6379 --ip_port_list=172.20.0.4:6379
     working_dir: /EloqKVRocksDB
     tty: true
     stdin_open: true
