@@ -6,61 +6,61 @@ import {CheckIcon, XIcon, InfoIcon} from '@heroicons/react/solid';
 
 const PRODUCT_COMPARISON = [
   {
-    feature: 'Supported Cloud Platform',
+    feature: '支持的云平台',
     openSource: 'ALL',
     enterprise: 'ALL',
     cloudSaas: 'AWS',
   },
-  {feature: 'On Premise', openSource: true, enterprise: true, cloudSaas: false},
-  {feature: 'Persistence', openSource: true, enterprise: true, cloudSaas: true},
+  {feature: '本地部署', openSource: true, enterprise: true, cloudSaas: false},
+  {feature: '数据持久化', openSource: true, enterprise: true, cloudSaas: true},
   {
-    feature: 'Object Storage',
+    feature: '对象存储',
     openSource: false,
     enterprise: true,
     cloudSaas: true,
   },
   {
-    feature: 'Multiple Writer',
+    feature: '多写入者',
     openSource: true,
     enterprise: true,
     cloudSaas: true,
   },
   {
-    feature: 'Distributed Transaction',
+    feature: '分布式事务',
     openSource: true,
     enterprise: true,
     cloudSaas: true,
   },
   {
-    feature: 'WAL Multiple Replicas',
+    feature: 'WAL多副本',
     openSource: false,
     enterprise: true,
     cloudSaas: true,
   },
   {
-    feature: 'Auto Failover',
+    feature: '自动故障转移',
     openSource: false,
     enterprise: true,
     cloudSaas: true,
   },
-  {feature: 'Hot Backup', openSource: true, enterprise: true, cloudSaas: true},
+  {feature: '热备份', openSource: true, enterprise: true, cloudSaas: true},
   {
-    feature: 'TLS Encryption',
+    feature: 'TLS加密',
     openSource: true,
     enterprise: true,
     cloudSaas: true,
   },
-  {feature: 'Monitor', openSource: true, enterprise: true, cloudSaas: true},
-  {feature: 'Scale-Up', openSource: true, enterprise: true, cloudSaas: true},
-  {feature: 'Scale-Out', openSource: true, enterprise: true, cloudSaas: true},
+  {feature: '监控', openSource: true, enterprise: true, cloudSaas: true},
+  {feature: '纵向扩展', openSource: true, enterprise: true, cloudSaas: true},
+  {feature: '横向扩展', openSource: true, enterprise: true, cloudSaas: true},
   {
-    feature: 'Community Support',
+    feature: '社区支持',
     openSource: true,
     enterprise: true,
     cloudSaas: true,
   },
   {
-    feature: 'Enterprise Support',
+    feature: '企业支持',
     openSource: false,
     enterprise: true,
     cloudSaas: true,
@@ -75,7 +75,7 @@ const WechatIcon = () => (
     width="24"
     height="24"
     fill="currentColor">
-    <path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 01.213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 00.167-.054l1.903-1.114a.864.864 0 01.717-.098c.93.265 1.93.411 2.977.411 4.8 0 8.691-3.288 8.691-7.342 0-4.053-3.89-7.343-8.691-7.343zm12.31 11.312c1.833-1.347 3-3.338 3-5.55 0-4.054-3.89-7.343-8.691-7.343-4.8 0-8.691 3.289-8.691 7.343 0 4.054 3.89 7.342 8.691 7.342 1.047 0 2.047-.146 2.977-.411a.864.864 0 01.717.098l1.903 1.114a.326.326 0 00.167.054c.16 0 .29-.132.29-.295 0-.072-.029-.143-.048-.213l-.39-1.48a.59.59 0 01.213-.665" />
+    <path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 01.213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.295.295a.326.326 0 00.167-.054l1.903-1.114a.864.864 0 01.717-.098c.93.265 1.93.411 2.977.411 4.8 0 8.691-3.288 8.691-7.342 0-4.053-3.89-7.343-8.691-7.343zm12.31 11.312c1.833-1.347 3-3.338 3-5.55 0-4.054-3.89-7.343-8.691-7.343-4.8 0-8.691 3.289-8.691 7.343 0 4.054 3.89 7.342 8.691 7.342 1.047 0 2.047-.146 2.977-.411a.864.864 0 01.717.098l1.903 1.114a.326.326 0 00.167.054c.16 0 .29-.132.29-.295 0-.072-.029-.143-.048-.213l-.39-1.48a.59.59 0 01.213-.665" />
   </svg>
 );
 
@@ -159,26 +159,24 @@ export default function EloqSQL() {
         {/* Product Comparison Section */}
         <div className={styles.comparisonSection}>
           <div className={styles.comparisonInner}>
-            <h2 className={styles.comparisonTitle}>
-              Product Editions Overview
-            </h2>
+            <h2 className={styles.comparisonTitle}>产品版本概览</h2>
             <p className={styles.comparisonSubtitle}>
-              Choose the EloqSQL offering that suits your needs
+              选择适合您需求的EloqSQL版本
             </p>
 
             <div className={styles.comparisonTable}>
               <div className={styles.comparisonHeader}>
                 <div className={styles.featureColumn}>
-                  <h3>Features</h3>
+                  <h3>功能特性</h3>
                 </div>
                 <div className={styles.comparisonColumn}>
-                  <h3>Community Edition</h3>
+                  <h3>社区版</h3>
                 </div>
                 <div className={styles.comparisonColumn}>
-                  <h3>Enterprise Edition</h3>
+                  <h3>企业版</h3>
                 </div>
                 <div className={styles.comparisonColumn}>
-                  <h3>Cloud Edition</h3>
+                  <h3>云服务版</h3>
                 </div>
               </div>
 
@@ -285,12 +283,12 @@ export default function EloqSQL() {
               <Link
                 className={`button button--primary ${styles.ctaButton}`}
                 to="/eloqsql/introduction">
-                Learn More
+                了解更多
               </Link>
               <Link
                 className={`button button--secondary ${styles.ctaButton}`}
                 href="https://github.com/eloqdata/eloqsql">
-                View on GitHub
+                查看GitHub
               </Link>
             </div>
           </div>
