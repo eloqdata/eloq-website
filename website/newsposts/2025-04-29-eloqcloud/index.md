@@ -1,5 +1,5 @@
 ---
-title: 'Announcing General Availability: EloqCloud for Redis'
+title: 'EloqCloud for Redis: Public Access Now Open'
 authors: eloq
 date: 2025-04-29
 tags: [Product]
@@ -9,7 +9,7 @@ description: Announcing our first cloud native offering EloqCloud for Redis - a 
 newsFeatured: true
 ---
 
-We’re excited to announce the **General Availability (GA)** of **EloqCloud for Redis**, the first product in the EloqCloud family!
+We’re excited to announce the **Public Access** of **EloqCloud for Redis**, the first product in the EloqCloud family!
 
 <!--truncate-->
 
