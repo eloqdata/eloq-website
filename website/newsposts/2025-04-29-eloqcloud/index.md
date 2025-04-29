@@ -88,3 +88,5 @@ import EnlargeableImage from '@site/src/pages/enlarge_pic';
   <video controls src="/video/eloqcloud.mp4" width="800" />
 
 </div></p>
+
+We'll be sharing detailed benchmark results and comparisons with other key-value stores in upcoming posts — stay tuned!
