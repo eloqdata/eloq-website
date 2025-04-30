@@ -281,7 +281,7 @@ export default function EloqDoc() {
             <div className={styles.comparisonCTA}>
               <Link
                 className={`button button--primary ${styles.ctaButton}`}
-                to="/eloqdoc/introduction">
+                to="/eloqdoc/install-from-binary">
                 了解更多
               </Link>
               <Link
