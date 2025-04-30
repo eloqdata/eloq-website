@@ -71,7 +71,7 @@ Auto-scaling is on our roadmap to make dynamic scaling effortless.
 ## Get Started
 
 Ready to experience the future of cloud databases?  
-[Join the EloqCloud Waitlist](https://cloud.eloqdata.com/join-waitlist) today — and receive an exclusive invitation to try EloqCloud for free.
+[Apply For Access](https://cloud.eloqdata.com/join-waitlist) today — and receive an exclusive invitation to try EloqCloud for free.
 
 <p align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
