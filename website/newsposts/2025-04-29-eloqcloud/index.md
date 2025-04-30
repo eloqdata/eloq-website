@@ -1,5 +1,5 @@
 ---
-title: 'EloqCloud: Public Access Now Open'
+title: 'EloqCloud for EloqKV: Public Access Now Open'
 authors: eloq
 date: 2025-04-29
 tags: [Product]
