@@ -1,5 +1,5 @@
 ---
-title: 'EloqCloud: 正式开放访问'
+title: 'EloqCloud for EloqKV: 正式开放访问'
 authors: eloq
 date: 2025-04-29
 tags: [Product]
