@@ -2,10 +2,14 @@
 title: Announcing EloqKV
 authors: eloq
 date: 2024-08-16
-tags: [Company]
+tags: [Product]
+news: true
+image: /img/blog/eloqkv_launch.jpg
+description: EloqKV is a cutting-edge key-value database offering high performance, scalability, and full ACID compliance. Learn how it revolutionizes data management with its innovative architecture and advanced features.
+newsFeatured: true
 ---
 
-We’re thrilled to introduce **EloqKV**, a _high performance Redis API-compatible, ACID transactional, scalable, distributed_ key-value database. You might be thinking, “Really? Another key-value database?” In this post, we’ll explain what makes **EloqKV** stand out and the unique values **EloqKV** offers.
+We're thrilled to introduce **EloqKV**, a _high performance Redis API-compatible, ACID transactional, scalable, distributed_ key-value database. You might be thinking, "Really? Another key-value database?" In this post, we'll explain what makes **EloqKV** stand out and the unique values **EloqKV** offers.
 
 <!--truncate-->
 
@@ -27,13 +31,13 @@ Even with full ACID, **EloqKV** incorporates several innovations to minimize ove
 
 If your workload is latency-sensitive and requires all data to be stored in memory, you can reserve virtual machines with large memory capacities. Need to handle a high volume of updates that must be persisted? Simply add a few extra EBS volumes as logging devices. If your data is large, you can use cloud storage options like DynamoDB or S3 to cost-effectively store infrequently accessed data.
 
-We’re also developing transparent, dynamic scaling, which will allow you to add and remove resources dynamically as your workload changes. This feature will be available in a public preview soon, so stay tuned.
+We're also developing transparent, dynamic scaling, which will allow you to add and remove resources dynamically as your workload changes. This feature will be available in a public preview soon, so stay tuned.
 
 ## You Want Ease of Use? You Get Ease of Use
 
-**EloqKV** is compatible with the [Redis API](/eloqkv/kvstore_compatibility) and supports most of Redis’s essential data structures. This means that most existing applications can easily take advantage of **EloqKV**’s advanced features with minimal effort.
+**EloqKV** is compatible with the [Redis API](/eloqkv/kvstore_compatibility) and supports most of Redis's essential data structures. This means that most existing applications can easily take advantage of **EloqKV**'s advanced features with minimal effort.
 
-But **EloqKV**’s ease of use goes beyond API compatibility. The true user-friendliness of **EloqKV** lies in the fundamental architectural design choices we’ve made.
+But **EloqKV**'s ease of use goes beyond API compatibility. The true user-friendliness of **EloqKV** lies in the fundamental architectural design choices we've made.
 
 **EloqKV** can be deployed as a single-node key-value store, similar to [Redis](https://redis.io/) and [Memcached](https://memcached.org/). However, **EloqKV** is inherently designed as a distributed system. It can be deployed in a cluster with ease, instantly benefiting from the high availability and scalability of a true distributed system — no need for a [sentinel](https://redis.io/docs/latest/operate/oss_and_stack/management/sentinel/) or special [cluster mode](https://redis.io/docs/latest/operate/oss_and_stack/management/scaling/).
 

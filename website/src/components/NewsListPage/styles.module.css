@@ -1,0 +1,24 @@
+.newsContainer {
+  margin-top: 2rem;
+}
+
+.newsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.newsCard {
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: var(--ifm-card-border-radius);
+  padding: 1rem;
+}
+
+.newsTitle {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.newsDescription {
+  color: var(--ifm-color-emphasis-700);
+}

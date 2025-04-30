@@ -43,6 +43,12 @@ Use the following
 eloqctl start ${cluster_name}
 ```
 
+To start specified nodes, use the following
+
+```
+eloqctl start --nodes node1_ip:node1_port,node2_ip:node2_port ${cluster_name}
+```
+
 ## Stop Cluster
 
 1. Graceful Shutdown. The following command will stop the transaction cluster and log cluster gracefully which means that all the data in memory will be flushed to persistent storage before the processes exit. In this case, the next launch of cluster is fast since there is no redo logs to be replayed.
@@ -66,7 +72,7 @@ eloqctl stop ${cluster_name} -a
 4. Stop Monitor. Prometheus and grafana will be stopped by the following command:
 
 ```
-eloqctl monitor ${cluster_name} stop
+eloqctl monitor stop ${cluster_name}
 ```
 
 5. If cluster is deployed with a password, all of the above commands needs to add `--password` option
@@ -75,26 +81,32 @@ eloqctl monitor ${cluster_name} stop
 eloqctl stop ${cluster_name} --password xxxxx
 ```
 
+6. To stop specified nodes, use the following
+
+```
+eloqctl stop --nodes node1_ip:node1_port,node2_ip:node2_port ${cluster_name}
+```
+
 ## Update Cluster Configuration
 
 EloqKV offers various configurations, some of which enable features. For example, `enable_data_store` activates persistent data storage, and `enable_wal` enables the Write-Ahead Log for durability. Other configurations are performance-related, such as `core_number` for specifying the number of worker threads, and `node_memory_limit_mb` to set the memory limit.
 
 You can easily adjust these settings using eloqctl. The process is as follows:
 
-1. Edit the configuration file located at `$HOME/.eloqctl/upload/${cluster_name}/EloqKv.ini`. In the example below, core_number is set to 8, and both the persistent data store and Write-Ahead Log are enabled."
+1. Edit the configuration file located at `$HOME/.eloqctl/upload/${cluster_name}/{node_ip}/EloqKv-tx-{port}.ini` to update config for corresponding node. In the example below, core_number is set to 8, and both the persistent data store and Write-Ahead Log are enabled.
 
 ```
 [local]
 path=data
-ip=${OVERRIDE}
-port=${OVERRIDE}
+ip=127.0.0.1
+port=6379
 core_number=8
 enable_data_store=on
 enable_wal=on
 [cluster]
 [store]
 [metrics]
-enable_metrics=${OVERRIDE}
+enable_metrics=on
 ```
 
 2. Use `eloqctl update-conf` to update the configuration file across the cluster and restart it with a single command.

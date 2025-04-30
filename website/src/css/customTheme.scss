@@ -12,10 +12,10 @@
   //--brand: rgb(120, 209, 247);
   //--brand: rgb(74, 119, 236);
   --brand: rgb(120, 200, 244);
-  --dark: #282c34;
+  --dark: #212128;
   //--dark: black;
   // --deepdark: #20232a;
-  --deepdark: black;
+  --deepdark: #212128;
   --light: #373940;
   --text: #1a1a1a;
   --subtle: #767676;
@@ -182,7 +182,7 @@ hr {
     padding: 15px 30px 15px 15px;
 
     code {
-      background-color: rgba(0, 0, 0, 0.07);
+      background-color: #212128;
     }
 
     a code {
@@ -362,36 +362,55 @@ hr {
 }
 
 .markdown p {
-  line-height: 2; /* Adjust this value as needed */
-  margin-bottom: 1.2em; /* Add some space between paragraphs */
+  line-height: 2;
+  /* Adjust this value as needed */
+  margin-bottom: 1.2em;
+  /* Add some space between paragraphs */
 }
 
 .markdown h2 {
-  font-size: 1.8em; /* Change this value to your preferred size */
-  font-weight: bold; /* Optional: Adjust font weight if needed */
-  margin-top: 2em; /* Optional: Add margin above the heading */
-  margin-bottom: 1em; /* Optional: Add margin below the heading */
+  font-size: 1.8em;
+  /* Change this value to your preferred size */
+  font-weight: bold;
+  /* Optional: Adjust font weight if needed */
+  margin-top: 2em;
+  /* Optional: Add margin above the heading */
+  margin-bottom: 1em;
+  /* Optional: Add margin below the heading */
 }
 
 .markdown h1 {
-  font-size: 2.8em; /* Change this value to your preferred size */
-  font-weight: bold; /* Optional: Adjust font weight if needed */
-  margin-top: 0.2em; /* Optional: Add margin above the heading */
-  margin-bottom: 0.1em; /* Optional: Add margin below the heading */
+  font-size: 2.8em;
+  /* Change this value to your preferred size */
+  font-weight: bold;
+  /* Optional: Adjust font weight if needed */
+  margin-top: 0.2em;
+  /* Optional: Add margin above the heading */
+  margin-bottom: 0.1em;
+  /* Optional: Add margin below the heading */
 }
 
 .markdown a {
-  color: #06bcee; /* Set link color to purple */
-  font-weight: bold; /* Make the link text bold */
-  text-decoration: underline; /* Add an underline to the link */
-  text-decoration-color: #06bcee; /* Ensure the underline is also purple */
-  text-underline-offset: 2px; /* Adjust the distance of the underline from the text */
-  background-color: transparent; /* Remove any background color */
+  color: #06bcee;
+  /* Set link color to purple */
+  font-weight: bold;
+  /* Make the link text bold */
+  text-decoration: underline;
+  /* Add an underline to the link */
+  text-decoration-color: #06bcee;
+  /* Ensure the underline is also purple */
+  text-underline-offset: 2px;
+  /* Adjust the distance of the underline from the text */
+  background-color: transparent;
+  /* Remove any background color */
 }
+
 /* Optional: Change link color on hover */
 .markdown a:hover {
-  color: darkorchid; /* Change to a different shade of purple on hover */
-  background-color: transparent; /* Ensure no background color on hover */
+  color: darkorchid;
+  /* Change to a different shade of purple on hover */
+  background-color: transparent;
+  /* Ensure no background color on hover */
 }
 
 html[data-theme="dark"] {
@@ -413,9 +432,11 @@ html[data-theme="dark"] {
     table thead tr {
       background-color: var(--ifm-menu-color-background-active);
     }
+
     table thead th {
-      background-color: #708090 !important; /* Change this to your desired color */
-      color: black;
+      background-color: #708090 !important;
+      /* Change this to your desired color */
+      color: #212128;
     }
 
     .prism-code {
@@ -584,6 +605,8 @@ a[class*="tagRegular"] {
   .navbar__inner {
     max-width: 1360px;
     margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
   }
 
   .navbar__title {
@@ -1919,4 +1942,293 @@ Prevent useless bottom margin for multiline <figcaption> tags in MDX:
  */
 figcaption > p:last-child {
   margin-bottom: 0;
+}
+
+/* Blog and News section styling improvements */
+.blog-wrapper,
+.blog-list-page,
+.blog-post-page,
+.blog-container,
+article,
+.markdown {
+  background-color: #212128 !important;
+  /* Dark gray with slight blue tint like code editors */
+  color: #e4e4e7 !important;
+  /* Slightly off-white for better readability */
+}
+
+/* Adjust heading colors */
+.blog-wrapper h1,
+.blog-post-page h1,
+.blog-container h1,
+.blog-list-page h1,
+article h1,
+.markdown h1,
+.blog-wrapper h2,
+.blog-post-page h2,
+.blog-container h2,
+article h2,
+.markdown h2,
+.blog-wrapper h3,
+.blog-post-page h3,
+.blog-container h3,
+article h3,
+.markdown h3 {
+  color: #ff7b2d !important;
+  /* Slightly brighter for headings */
+}
+
+.blog-list-page h2,
+.blog-list-page h3 {
+  color: white !important;
+}
+
+/* Adjust paragraph and list text */
+.blog-wrapper p,
+.blog-list-page p,
+.blog-post-page p,
+.blog-container p,
+article p,
+.markdown p,
+.blog-wrapper li,
+.blog-list-page li,
+.blog-post-page li,
+.blog-container li,
+article li,
+.markdown li {
+  color: #d4d4d8 !important;
+  /* Softer white for better contrast */
+}
+
+.blog-wrapper a:hover,
+.blog-list-page a:hover,
+.blog-post-page a:hover,
+.blog-container a:hover,
+article a:hover,
+.markdown a:hover {
+  color: #93c5fd !important;
+  /* Lighter blue on hover */
+}
+
+/* Code blocks */
+.blog-wrapper pre,
+.blog-list-page pre,
+.blog-post-page pre,
+.blog-container pre,
+article pre,
+.markdown pre {
+  background-color: #282c34 !important;
+  /* Darker background for code blocks */
+}
+
+/* Inline code */
+.blog-wrapper code,
+.blog-list-page code,
+.blog-post-page code,
+.blog-container code,
+article code,
+.markdown code {
+  background-color: #2d3748 !important;
+  color: #e2e8f0 !important;
+}
+
+/* Blog post cards */
+.blog-list-page article {
+  background-color: #252535 !important;
+  /* Slightly lighter than the main background */
+  border: 1px solid #383854 !important;
+  border-radius: 8px !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.blog-list-page article:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2) !important;
+}
+
+.header-github-link:hover {
+  opacity: 0.6;
+}
+
+.header-github-link::before {
+  content: "";
+  width: 24px;
+  height: 24px;
+  display: flex;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='white' d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/%3E%3C/svg%3E")
+    no-repeat;
+}
+
+[data-theme="dark"] .header-github-link::before {
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='white' d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/%3E%3C/svg%3E")
+    no-repeat;
+}
+
+/* Add these new styles */
+
+/* Discord icon */
+.header-discord-link:hover {
+  opacity: 0.6;
+}
+
+.header-discord-link::before {
+  content: "";
+  width: 24px;
+  height: 24px;
+  display: flex;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 127.14 96.36'%3E%3Cpath fill='white' d='M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z'/%3E%3C/svg%3E")
+    no-repeat;
+}
+
+/* Login link */
+.header-login-link {
+  padding: 0.5rem 1rem !important;
+  font-weight: 600 !important;
+  font-size: 0.875rem !important;
+  color: var(--ifm-color-white) !important;
+  transition: color 0.2s ease-in-out !important;
+}
+
+.header-login-link:hover {
+  color: var(--ifm-color-primary) !important;
+  text-decoration: none !important;
+}
+
+/* Sign Up button */
+.header-signup-link {
+  padding: 0.5rem 1.5rem !important;
+  font-weight: 600 !important;
+  font-size: 0.875rem !important;
+  color: var(--ifm-color-white) !important;
+  background: linear-gradient(90deg, #ff7b2d 0%, #ff5c00 100%) !important;
+  border-radius: 24px !important;
+  transition: opacity 0.2s ease-in-out !important;
+}
+
+.header-signup-link:hover {
+  opacity: 0.9 !important;
+  text-decoration: none !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 996px) {
+  .header-discord-link::before {
+    margin-right: 0.5rem;
+  }
+
+  .header-login-link,
+  .header-signup-link {
+    display: block;
+    text-align: center;
+    margin: 0.5rem 1rem !important;
+  }
+}
+
+/* Center navbar items */
+.navbar__items--center {
+  flex: 1;
+  justify-content: center;
+}
+
+.navbar__items--center .navbar__item {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+/* Right navbar items spacing */
+.navbar__items--right {
+  gap: 0.5rem;
+}
+
+/* Improve responsive behavior */
+@media (max-width: 996px) {
+  .navbar__items--center {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .navbar__items--center .navbar__item {
+    padding: 0.75rem 1rem;
+  }
+
+  /* Adjust dropdown menu positioning in mobile view */
+  .navbar-sidebar .navbar__items {
+    padding: 0.5rem 0;
+  }
+}
+
+/* Navbar layout customization */
+.navbar__inner {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Center the main navigation items */
+.navbar__items--left:not(.navbar__items--primary) {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  margin-left: 80px;
+  /* Adjust as needed to center properly */
+}
+
+/* Control spacing between dropdown items */
+.navbar__items--left:not(.navbar__items--primary) .navbar__item {
+  margin: 0 12px;
+}
+
+/* Discord icon */
+.header-discord-link::before {
+  content: "";
+  width: 24px;
+  height: 24px;
+  display: flex;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 127.14 96.36'%3E%3Cpath fill='white' d='M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z'/%3E%3C/svg%3E")
+    no-repeat;
+}
+
+/* GitHub icon */
+.header-github-link::before {
+  content: "";
+  width: 24px;
+  height: 24px;
+  display: flex;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='white' d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/%3E%3C/svg%3E")
+    no-repeat;
+}
+
+/* Login link */
+.header-login-link {
+  padding: 0.5rem 1rem !important;
+  font-weight: 600 !important;
+  font-size: 0.875rem !important;
+  color: var(--ifm-color-white) !important;
+  transition: color 0.2s ease-in-out !important;
+}
+
+/* Sign Up button */
+.header-signup-link {
+  padding: 0.5rem 1.5rem !important;
+  font-weight: 600 !important;
+  font-size: 0.875rem !important;
+  color: var(--ifm-color-white) !important;
+  background: linear-gradient(90deg, #ff7b2d 0%, #ff5c00 100%) !important;
+  border-radius: 24px !important;
+  transition: opacity 0.2s ease-in-out !important;
+}
+
+.header-signup-link:hover {
+  opacity: 0.9 !important;
+  text-decoration: none !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 996px) {
+  .navbar__items--left:not(.navbar__items--primary) {
+    justify-content: flex-start;
+    margin-left: 0;
+  }
 }

@@ -43,9 +43,9 @@ The role of GRANT is divided into two aspects:
 
 ## Examples
 
-- grant the user `'lilly'@'%'` to create data tables in the mono database:
+- grant the user `'lilly'@'%'` to create data tables in the eloq database:
   ```sql
-  GRANT CREATE ON mono.* TO 'lilly'@'%';
+  GRANT CREATE ON eloq.* TO 'lilly'@'%';
   Query OK, 0 rows affected (0.010 sec)
   ```
 - grant the user `'lilly'@'%'` to access the columns "employee_id" and "phone_number" of the table "employees" with `SELECT` and `INSERT`, you can use the following statement:
@@ -62,23 +62,23 @@ The role of GRANT is divided into two aspects:
   GRANT SELECT ON employees TO 'lilly'@'%' WITH GRANT OPTION;
   Query OK, 0 rows affected (0.010 sec)
   ```
-- Suppose there is a role named "monorole", which includes permissions such as `SELECT`, `INSERT`, `UPDATE`, and now to grant this role to the user `lilly@%`, you can use the following statement:
+- Suppose there is a role named "eloqrole", which includes permissions such as `SELECT`, `INSERT`, `UPDATE`, and now to grant this role to the user `lilly@%`, you can use the following statement:
 
   ```sql
-  GRANT monorole TO 'lilly'@'%';
+  GRANT eloqrole TO 'lilly'@'%';
   Query OK, 0 rows affected (0.014 sec)
   ```
 
 - If you want to grant multiple users, you can use commas to separate them:
 
   ```sql
-  GRANT monorole TO 'lilly'@'%','bob'@'localhost';
+  GRANT eloqrole TO 'lilly'@'%','bob'@'localhost';
   Query OK, 0 rows affected (0.028 sec)
   ```
 
 - If you want to grant users to authorize this role to other users, you can add the `WITH ADMIN OPTION` option:
   ```sql
-  GRANT monorole TO 'lilly'@'%' WITH ADMIN OPTION;
+  GRANT eloqrole TO 'lilly'@'%' WITH ADMIN OPTION;
   Query OK, 0 rows affected (0.016 sec)
   ```
 

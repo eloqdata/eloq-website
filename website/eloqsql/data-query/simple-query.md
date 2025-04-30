@@ -18,7 +18,7 @@ Before reading this document, you need to do the following preparations:
 ## Execute a simple query
 
 EloqSQL is compatible with MySQL, so it supports the standard SELECT statement provided by MySQL for query, including complex commands such as using `WHERE`, `GROUP BY`, `ORDER BY`, `LIMIT`, etc. to filter and sort data, and limit the number of query results.
-Through the database creation example we provide, you can create a `mono` database and corresponding data tables. The created data table `employees` stores some basic information of the company's employees.
+Through the database creation example we provide, you can create a `eloq` database and corresponding data tables. The created data table `employees` stores some basic information of the company's employees.
 
 To view the data in the `employees`, use the `SELECT` statement
 

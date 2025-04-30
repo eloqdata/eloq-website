@@ -44,10 +44,10 @@ Create a database using the `CREATE DATABASE` statement. The syntax is as follow
 CREATE DATABASE db_name [options];
 ```
 
-For example, to create a database called `mono`, use the following statement:
+For example, to create a database called `eloq`, use the following statement:
 
 ```sql
-CREATE DATABASE IF NOT EXISTS mono;
+CREATE DATABASE IF NOT EXISTS eloq;
 ```
 
 In SQL, `IF NOT EXISTS` is a conditional statement, which is used to determine whether a table or index with the same name already exists when executing DDL statements such as `CREATE TABLE`, `CREATE INDEX`, so as to avoid repeated creation of objects mistake
@@ -55,7 +55,7 @@ In SQL, `IF NOT EXISTS` is a conditional statement, which is used to determine w
 Use the `DROP DATABASE` statement to drop a database. For example:
 
 ```sql
-DROP DATABASE mono;
+DROP DATABASE eloq;
 ```
 
 > **Note**
@@ -201,28 +201,28 @@ Commonly used DCL functions are to create or delete users, and to manage user pe
 
 ## Create, authorize and delete a user
 
-Use the `CREATE USER` statement to create a user `monouser` with a password of `10001`:
+Use the `CREATE USER` statement to create a user `eloquser` with a password of `10001`:
 
 ```sql
-CREATE USER 'monouser'@'localhost' IDENTIFIED BY '10001';
+CREATE USER 'eloquser'@'localhost' IDENTIFIED BY '10001';
 ```
 
-The authorized user `monouser` can search tables in the database `mono`:
+The authorized user `eloquser` can search tables in the database `eloq`:
 
 ```sql
-GRANT SELECT ON mono.* TO 'monouser'@'localhost';
+GRANT SELECT ON eloq.* TO 'eloquser'@'localhost';
 ```
 
-Query the permissions of the user `monouser`:
+Query the permissions of the user `eloquser`:
 
 ```sql
-SHOW GRANTS for monouser@localhost;
+SHOW GRANTS for eloquser@localhost;
 ```
 
-Delete user `monouser`:
+Delete user `eloquser`:
 
 ```sql
-DROP USER 'monouser'@'localhost';
+DROP USER 'eloquser'@'localhost';
 ```
 
 ## Create stored procedures and functions

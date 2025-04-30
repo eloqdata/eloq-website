@@ -34,24 +34,24 @@ CREATE [OR REPLACE] USER [IF NOT EXISTS]
 
 ## Examples
 
-- Create a user named `mono1@localhost` with host name **localhost**, specified password as `monopasssword1`, and use `OR REPLACE` to delete possible existing users with the same name
+- Create a user named `eloq1@localhost` with host name **localhost**, specified password as `eloqpasssword1`, and use `OR REPLACE` to delete possible existing users with the same name
   ```sql
-  CREATE OR REPLACE USER 'mono1'@'localhost' IDENTIFIED BY 'monopassword1';
+  CREATE OR REPLACE USER 'eloq1'@'localhost' IDENTIFIED BY 'eloqpassword1';
   ```
-- Create a user named `mono2@%` with host name **%** and specify password as `monopassword2`
+- Create a user named `eloq2@%` with host name **%** and specify password as `eloqpassword2`
   ```sql
-   CREATE OR REPLACE USER 'mono2'@'%' IDENTIFIED BY 'monopassword2';
+   CREATE OR REPLACE USER 'eloq2'@'%' IDENTIFIED BY 'eloqpassword2';
   ```
-- Create a user named `mono3` without hostname, and specify password as `monopassword3`
+- Create a user named `eloq3` without hostname, and specify password as `eloqpassword3`
 
   ```sql
-  CREATE USER 'mono3' IDENTIFIED BY 'monopassword3';
+  CREATE USER 'eloq3' IDENTIFIED BY 'eloqpassword3';
   ```
 
   Use the following SQL statement to show the hostname of the generated user
 
   ```sql
-  select user,host from mysql.user where user='mono3';
+  select user,host from mysql.user where user='eloq3';
   ```
 
   output
@@ -60,36 +60,36 @@ CREATE [OR REPLACE] USER [IF NOT EXISTS]
   +-------+------+
   | User | Host |
   +-------+------+
-  | mono3 | % |
+  | eloq3 | % |
   +-------+------+
   1 row in set (0.005 sec)
   ```
 
   It can be seen that not specifying a host name is equivalent to creating an account with host name **%**.
 
-- Create a user named `mono4`, specify **hashed password**
-  First, use the PASSWORD function to calculate the hash value password corresponding to the plaintext password. For example, use the following statement to calculate the hash value of `mono`
+- Create a user named `eloq4`, specify **hashed password**
+  First, use the PASSWORD function to calculate the hash value password corresponding to the plaintext password. For example, use the following statement to calculate the hash value of `eloq`
   ```sql
-  SELECT PASSWORD('mono');
+  SELECT PASSWORD('eloq');
   ```
   The output looks like this
   ```bash
   +-------------------------------------------+
-  | PASSWORD('mono') |
+  | PASSWORD('eloq') |
   +-------------------------------------------+
   | *70EAEE5007749F475555BADD67A4F93B02B98000 |
   +-------------------------------------------+
   1 row in set (0.008 sec)
   ```
-  Use the following SQL statement to create `mono4` user
+  Use the following SQL statement to create `eloq4` user
   ```sql
-  CREATE USER mono4 IDENTIFIED BY PASSWORD '*70EAEE5007749F475555BADD67A4F93B02B98000';
+  CREATE USER eloq4 IDENTIFIED BY PASSWORD '*70EAEE5007749F475555BADD67A4F93B02B98000';
   ```
 - Create an account and use the **identity plugin** method of user authentication
-  For example, create a user `mono5` and use the USING or AS keywords to provide the plain text password to the plug-in method for corresponding authentication
+  For example, create a user `eloq5` and use the USING or AS keywords to provide the plain text password to the plug-in method for corresponding authentication
 
 ```sql
-CREATE USER mono IDENTIFIED VIA ed25519 USING PASSWORD('secret');
+CREATE USER eloq IDENTIFIED VIA ed25519 USING PASSWORD('secret');
 ```
 
 > **Note**
@@ -112,14 +112,14 @@ CREATE USER mono IDENTIFIED VIA ed25519 USING PASSWORD('secret');
   Note that since mysql.db contains the default anonymous account `''@'%'` with the host name **%**, if you want to recreate `''@'%'` by yourself, you need to use `DROP USER` to delete the existing account Anonymous users, or use `OR REPLACE`.
 - Set the account password expiration time
   In addition to the automatic password expiration determined by `default_password_lifetime`, password expiration can also be set on an individual user basis, overriding the global setting.
-  When creating the user `'mono'@'localhost'`, specify a password expiration time of 100 days.
+  When creating the user `'eloq'@'localhost'`, specify a password expiration time of 100 days.
   ```sql
-  CREATE USER 'mono'@'localhost' PASSWORD EXPIRE INTERVAL 100 DAY;
+  CREATE USER 'eloq'@'localhost' PASSWORD EXPIRE INTERVAL 100 DAY;
   ```
 - Lock account
   Account Lockout allows privileged administrators to lock or unlock user accounts. If the account is locked (existing connections are not affected), new client connections are not allowed.
   ```sql
-  CREATE OR REPLACE USER 'mono'@'localhost' ACCOUNT LOCK;
+  CREATE OR REPLACE USER 'eloq'@'localhost' ACCOUNT LOCK;
   ```
 
 ## MySQL Compatibility

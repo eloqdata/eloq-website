@@ -1,0 +1,104 @@
+---
+title: Install from Binary
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+## Download and unzip EloqDoc tarball
+
+EloqDoc is compatible Ubuntu 20.04, 22.04. Download
+the proper tarball for your operating system from [here](/download/eloqdoc).
+
+After successfully downloading the proper binary, untar it in a directory.
+
+<Tabs
+  groupId="language"
+  defaultValue="ubuntu2004"
+  values={[
+    { label: 'Ubuntu20.04', value: 'ubuntu2004', },
+    { label: 'Ubuntu22.04', value: 'ubuntu2204', }
+  ]
+}>
+
+<TabItem value="ubuntu2004">
+
+```shell
+tar -zxvf eloqdoc-0.1.0-ubuntu20-amd64.tar.gz
+```
+
+</TabItem>
+
+<TabItem value="ubuntu2204">
+
+```shell
+tar -zxvf eloqdoc-0.1.0-ubuntu22-amd64.tar.gz
+```
+
+</TabItem>
+
+</Tabs>
+
+## Start Cassandra server
+
+```shell
+wget https://archive.apache.org/dist/cassandra/4.1.8/apache-cassandra-4.1.8-bin.tar.gz
+tar -zxvf apache-cassandra-4.1.8-bin.tar.gz
+./apache-cassandra-4.1.8/bin/cassandra -f
+# Verify Cassandra is running:
+./apache-cassandra-4.1.8/bin/cqlsh localhost -u cassandra -p cassandra
+```
+
+## Prepare EloqDoc config file
+
+EloqDoc uses a configuration file to customize settings. An example is provided in `etc/mongod.conf`
+under the installation directory. Below is an example of how to configure EloqDoc to run on a local machine.
+
+```shell
+systemLog:
+  verbosity: 2
+  destination: file
+  path: /home/ubuntu/eloqdoc.log
+  component:
+    ftdc:
+      verbosity: 0
+net:
+  port: 27017
+  serviceExecutor: "adaptive"
+  enableCoroutine: true
+  reservedThreadNum: 2
+  adaptiveThreadNum: 1
+storage:
+  dbPath: /home/ubuntu/eloqdoc_data
+  engine: "eloq"
+  eloq:
+    txService:
+      coreNum: 2
+      checkpointerIntervalSec: 10
+      nodeMemoryLimitMB: 8192
+      nodeLogLimitMB: 8192
+      realtimeSampling: true
+      collectActiveTxTsIntervalSec: 2
+      checkpointerDelaySec: 5
+    storage:
+      keyspaceName: eloqdoc
+      cassHosts: 127.0.0.1
+setParameter:
+  diagnosticDataCollectionEnabled: false
+  disableLogicalSessionCacheRefresh: true
+  ttlMonitorEnabled: false
+
+
+```
+
+## Start EloqDoc server
+
+```shell
+./bin/mongod --config ./etc/mongod.conf
+```
+
+## Connect to EloqDoc server
+
+```shell
+./mongo --eval "db.t1.save({k: 1}); db.t1.find();"
+```
