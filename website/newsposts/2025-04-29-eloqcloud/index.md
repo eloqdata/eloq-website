@@ -72,7 +72,7 @@ EloqCloud 是一个**产品矩阵**，支持多种数据模态和计算 API，�
 ## 开始使用
 
 准备好体验云数据库的未来了吗？  
-立即[加入 EloqCloud 等待名单](https://cloud.eloqdata.com/join-waitlist) — 获得独家邀请，免费试用 EloqCloud。
+立即[申请 EloqCloud](https://cloud.eloqdata.com/join-waitlist) — 获得独家邀请，免费试用 EloqCloud。
 
 <p align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
