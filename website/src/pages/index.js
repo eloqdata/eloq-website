@@ -677,21 +677,34 @@ function HomePage() {
                 position: 'relative',
                 zIndex: 102,
               }}>
-              🎉 News!
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                style={{color: '#ff7b2d'}}>
-                <path
-                  d="M5 12h14M12 5l7 7-7 7"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <Link
+                to="/news/2025/04/29/eloqcloud"
+                style={{
+                  color: '#ff7b2d',
+                  textDecoration: 'none',
+                  fontWeight: '500',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                }}
+                target="_blank"
+                rel="noopener noreferrer">
+                🎉 News!
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  style={{color: '#ff7b2d'}}>
+                  <path
+                    d="M5 12h14M12 5l7 7-7 7"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </Link>
             </span>
             <span
               style={{
