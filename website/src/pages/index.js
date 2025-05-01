@@ -157,7 +157,7 @@ function HomePage() {
                 }}
                 target="_blank"
                 rel="noopener noreferrer">
-                🎉 News!
+                🎉 新闻!
                 <svg
                   width="20"
                   height="20"
@@ -181,7 +181,7 @@ function HomePage() {
                 position: 'relative',
                 zIndex: 102,
               }}>
-              EloqCloud Public Access Open:{' '}
+              EloqCloud 现已正式开放注册:{' '}
               <Link
                 to="https://cloud.eloqdata.com/join-waitlist"
                 style={{
@@ -195,7 +195,7 @@ function HomePage() {
                 }}
                 target="_blank"
                 rel="noopener noreferrer">
-                Apply Now
+                立即申请
               </Link>
             </span>
           </div>
