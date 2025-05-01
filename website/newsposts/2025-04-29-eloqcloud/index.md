@@ -14,6 +14,14 @@ The first product **EloqCloud for EloqKV** — a key-value database with Redis-c
 
 <!--truncate-->
 
+<p align="center">
+<div style={{ width: '640px', textAlign: 'center'}}>
+import EnlargeableImage from '@site/src/pages/enlarge_pic';
+
+<EnlargeableImage src={require('./img/launcheloqcloud.png').default} alt="EloqCloud Public Access Now Open" />
+
+</div></p>
+
 **EloqCloud** is the SaaS platform for **EloqDB**, designed to deliver an **economical, scalable, and predictable** cloud experience for developers — using the APIs they already love.
 
 EloqCloud is a **product matrix**, supporting a variety of data models and compute APIs, including **SQL**, **Redis**, **MongoDB**, **Vector**, **Graph**, as well as an all-in-one solution, [ConvergedDB](/blog/2025/03/19/agentic), that support operation cross data models. These product features will be rolled out over time — and today, we're thrilled to introduce the first product **EloqCloud for EloqKV** — a key-value database with Redis-compatible API.
@@ -75,7 +83,6 @@ Ready to experience the future of cloud databases?
 
 <p align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
-import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
 <EnlargeableImage src={require('./img/joinwaitlist.png').default} alt="Building a Data Foundation for Agentic AI Applications" />
 
