@@ -27,3 +27,6 @@ EloqKV is compatible with higher versions of Redis, and there may be incompatibi
    Currently, EloqKV supports `CONFIG SET` and `CONFIG GET` for the following parameters only:  
    - `slowlog-log-slower-than`  
    - `slowlog-max-len`
+
+4. **Cross Slot Error**  
+   The `CROSS SLOT` error code will not be returned by EloqKV. If it does appear, it is because some clients perform slot related checks before issuing the command. 
