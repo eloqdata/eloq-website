@@ -21,7 +21,7 @@ EloqKV is compatible with higher versions of Redis, and there may be incompatibi
    In Redis Cluster, commands like `DBSIZE`, `INFO`, `FLUSHDB`, and `SCAN` return results from a single node. In contrast, EloqKV returns aggregated, global results across all nodes. This leads to differences in behavior for these commands.
 
 2. **Client Info and Client List**  
-   Output of `CLIENT INFO` and `CLIENT LIST` is not consistent with Redis Cluster.
+   Output of `CLIENT INFO` and `CLIENT LIST` is not consistent with Redis Cluster. The following are dummy fields and users should not rely on those. (qbuf, qbuf-free, argv-mem, obl, omem, tot-mem)
    
 3. **Config Set / Get Support**  
    Currently, EloqKV supports `CONFIG SET` and `CONFIG GET` for the following parameters only:  
