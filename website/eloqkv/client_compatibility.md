@@ -29,4 +29,4 @@ EloqKV is compatible with higher versions of Redis, and there may be incompatibi
    - `slowlog-max-len`
 
 4. **Cross Slot Error**  
-   The `CROSS SLOT` error code will not be returned by EloqKV. If it does appear, it is because some clients perform slot related checks before issuing the command. 
+   If the `auto_redirect` flag is enabled, EloqKV will not return the `CROSS SLOT` error code. If the client receives a `CROSS SLOT` error in this case, it is because some clients perform slot related checks before issuing the command. 
