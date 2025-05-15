@@ -254,7 +254,7 @@ module.exports = {
           },
           // Log In link
           {
-            href: 'https://cloud.eloqdata.com/join-waitlist',
+            href: 'https://cloud.eloqdata.com/login',
             position: 'right',
             className: 'header-login-link',
             label: 'Log In',
