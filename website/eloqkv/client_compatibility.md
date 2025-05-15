@@ -5,15 +5,18 @@ title: EloqKV Compatibility with different Redis Clients
 # EloqKV Compatibility with different Redis Clients
 
 ## OverView
-This document aims to illustrate the incompatibility and behavior of connecting eloqkv and redis cluster when using the same client (jedis, redis-py, go-redis).
+
+This document outlines the compatibility and connection behavior of EloqKV and Redis Cluster when accessed using the same client libraries (Jedis, redis-py, go-redis).
 
 ## Recommended Client Version
-EloqKV is compatible with higher versions of Redis, and there may be incompatibility problems for lower version clients. Below is the client version we recommend.
-| Client  | Versions |
-|-----------------|-------------------|
-| jedis | >= 4.0,  [please refer to](https://github.com/redis/jedis/tree/master)  |
-| redis-py | >= 4.5.0,  [please refer to](https://github.com/redis/redis-py) |
-| go-redis | >= v9,  [please refer to](https://github.com/redis/go-redis/discussions/2241) |
+
+EloqKV is compatible with Redis 7.0. Clients built for earlier Redis versions may encounter compatibility issues. We recommend using one of the client versions listed below.
+
+| Client   | Versions                                                                     |
+| -------- | ---------------------------------------------------------------------------- |
+| jedis    | >= 4.0, [please refer to](https://github.com/redis/jedis/tree/master)        |
+| redis-py | >= 4.5.0, [please refer to](https://github.com/redis/redis-py)               |
+| go-redis | >= v9, [please refer to](https://github.com/redis/go-redis/discussions/2241) |
 
 ## Incompatible Command Behavior
 
@@ -22,11 +25,11 @@ EloqKV is compatible with higher versions of Redis, and there may be incompatibi
 
 2. **Client Info and Client List**  
    Output of `CLIENT INFO` and `CLIENT LIST` is not consistent with Redis Cluster. The following are dummy fields and users should not rely on those. (qbuf, qbuf-free, argv-mem, obl, omem, tot-mem)
-   
 3. **Config Set / Get Support**  
-   Currently, EloqKV supports `CONFIG SET` and `CONFIG GET` for the following parameters only:  
-   - `slowlog-log-slower-than`  
+   Currently, EloqKV supports `CONFIG SET` and `CONFIG GET` for the following parameters only:
+
+   - `slowlog-log-slower-than`
    - `slowlog-max-len`
 
 4. **Cross Slot Error**  
-   If the `auto_redirect` flag is enabled, EloqKV will not return the `CROSS SLOT` error code. If the client receives a `CROSS SLOT` error in this case, it is because some clients perform slot related checks before issuing the command. 
+   If the `auto_redirect` flag is enabled, EloqKV will not return the `CROSS SLOT` error code. If the client receives a `CROSS SLOT` error in this case, it is because some clients perform slot related checks before issuing the command.
