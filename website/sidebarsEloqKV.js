@@ -32,7 +32,7 @@ const sidebars = {
       'dump-tools',
       'failover',
     ],
-    'Redis Comaptibility': ['kvstore_compatibility', 'known-limit'],
+    'Redis Comaptibility': ['kvstore_compatibility', 'client_compatibility', 'known-limit'],
     'Command Reference': [
       {
         type: 'category',
