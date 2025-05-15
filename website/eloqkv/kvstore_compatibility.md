@@ -154,6 +154,95 @@ title: EloqKV 与 Redis 命令的兼容性
 - [✅] UNWATCH
 - [✅] WATCH
 
+## Cluster management
+
+- [✖] ASKING
+- [✖] CLUSTER ADDSLOTS
+- [✖] CLUSTER ADDSLOTSRANGE
+- [✖] CLUSTER BUMPEPOCH
+- [✖] CLUSTER COUNT-FAILURE-REPORTS
+- [✖] CLUSTER COUNTKEYSINSLOT
+- [✖] CLUSTER DELSLOTS
+- [✖] CLUSTER DELSLOTSRANGE
+- [✖] CLUSTER FAILOVER
+- [✖] CLUSTER FLUSHSLOTS
+- [✖] CLUSTER FORGET
+- [✖] CLUSTER GETKEYSINSLOT
+- [✅] CLUSTER INFO
+- [✅] CLUSTER KEYSLOT
+- [✖] CLUSTER LINKS
+- [✖] CLUSTER MEET
+- [✖] CLUSTER MYID
+- [✖] CLUSTER MYSHARDID
+- [✅] CLUSTER NODES
+- [✖] CLUSTER REPLICAS
+- [✖] CLUSTER REPLICATE
+- [✖] CLUSTER RESET
+- [✖] CLUSTER SAVECONFIG
+- [✖] CLUSTER SET-CONFIG-EPOCH
+- [✖] CLUSTER SETSLOT
+- [✖] CLUSTER SHARDS
+- [✖] CLUSTER SLAVES
+- [✅] CLUSTER SLOTS
+- [✅] READONLY
+- [✖] READWRITE
+
+## Server management
+
+- [✖] ACL
+- [✖] BGREWRITEAOF
+- [✖] BGSAVE
+- [✅] COMMAND
+- [✅] COMMAND COUNT
+- [✖] COMMAND DOCS
+- [✖] COMMAND GETKEYS
+- [✖] COMMAND GETKEYSANDFLAGS
+- [✅] COMMAND INFO
+- [✅] COMMAND LIST
+- [✅] CONFIG GET
+- [✖] CONFIG RESETSTAT
+- [✖] CONFIG REWRITE
+- [✅] CONFIG SET
+- [✅] DBSIZE
+- [✅] FAILOVER
+- [✅] FLUSHALL
+- [✅] FLUSHDB
+- [✅] INFO
+- [✖] LASTSAVE
+- [✖] LATENCY DOCTOR
+- [✖] LATENCY GRAPH
+- [✖] LATENCY HISTOGRAM
+- [✖] LATENCY HISTORY
+- [✖] LATENCY LATEST
+- [✖] LATENCY RESET
+- [✖] LOLWUT
+- [✖] MEMORY DOCTOR
+- [✖] MEMORY MALLOC-STATS
+- [✖] MEMORY PURGE
+- [✖] MEMORY STATS
+- [✖] MEMORY USAGE
+- [✖] MODULE LIST
+- [✖] MODULE LOAD
+- [✖] MODULE LOADEX
+- [✖] MODULE UNLOAD
+- [✖] MONITOR 
+- [✖] PSYNC
+- [✖] REPLCONF
+- [✖] REPLICAOF
+- [✖] RESTORE-ASKING
+- [✖] ROLE
+- [✖] SAVE
+- [✖] SHUTDOWN
+- [✖] SLAVEOF
+- [✖] PSYNC
+- [✅] SLOWLOG GET
+- [✅] SLOWLOG LEN
+- [✅] SLOWLOG RESET
+- [✖] SWAPDB
+- [✖] SYNC
+- [✅] TIME
+
+
 ## Scripting
 
 - [✅] EVAL
@@ -178,20 +267,40 @@ title: EloqKV 与 Redis 命令的兼容性
 
 ## Connection
 
-- [✅] AUTH
+- [✅] AUTH (users are not supported)
+- [✖] CLIENT CACHING
+- [✅] CLIENT GETNAME
+- [✖] CLIENT GETREDIR
+- [✅] CLIENT ID
+- [✅] CLIENT INFO
+- [✅] CLIENT KILL
+- [✅] CLIENT LIST
+- [✖] CLIENT NO-EVICT
+- [✖] CLIENT NO-TOUCH
+- [✖] CLIENT PAUSE
+- [✖] CLIENT REPLY
+- [✅] CLIENT SETINFO
+- [✅] CLIENT SETNAME
+- [✖] CLIENT TRACKING
+- [✖] CLIENT TRACKINGINFO
+- [✖] CLIENT UNBLOCK
+- [✖] CLIENT UNPAUSE
 - [✅] ECHO
 - [✖] HELLO
 - [✅] PING
 - [✖] QUIT
 - [✖] RESET
+- [✅] SELECT
 
 ## Generic
 
+- [✖] COPY
 - [✅] DEL
 - [✅] DUMP
 - [✅] EXISTS
 - [✅] EXPIRE
 - [✅] EXPIREAT
+- [✅] EXPIRETIME
 - [✅] INFO
 - [✅] KEYS
 - [✖] MIGRATE
@@ -206,10 +315,11 @@ title: EloqKV 与 Redis 命令的兼容性
 - [✖] RENAMENX
 - [✅] RESTORE
 - [✅] SCAN
-- [✅] SELECT
 - [✅] SORT
+- [✅] SORT_RO
 - [✖] TOUCH
 - [✅] TTL
 - [✅] TYPE
 - [✖] UNLINK
 - [✖] WAIT
+- [✖] WAITAOF
