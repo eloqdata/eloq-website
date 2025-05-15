@@ -5,10 +5,12 @@ title: EloqKV 与不同 Redis 客户端的兼容性
 # EloqKV 与不同 Redis 客户端的兼容性
 
 ## 概述
-本文旨在说明使用相同客户端（jedis、redis-py、go-redis）连接 EloqKV 和 Redis 集群时的不兼容性和行为差异。
+
+本文旨在说明使用 Redis 客户端（jedis、redis-py、go-redis）连接 EloqKV 和 Redis 集群时的兼容性和行为差异。
 
 ## 推荐的客户端版本
-EloqKV 兼容 Redis 的高版本，低版本客户端可能存在不兼容问题。以下是推荐的客户端版本：
+
+EloqKV 兼容 Redis7.0, 所以对 Redis 客户端版本有最低要求，以下是推荐的客户端版本：
 | 客户端 | 版本 |
 |-----------------|-------------------|
 | jedis | >= 4.0，[请参考](https://github.com/redis/jedis/tree/master) |
@@ -24,8 +26,9 @@ EloqKV 兼容 Redis 的高版本，低版本客户端可能存在不兼容问题
    `CLIENT INFO` 和 `CLIENT LIST` 的输出与 Redis 集群不一致。以下字段的值不可靠，用户不应依赖这些字段：（qbuf、qbuf-free、argv-mem、obl、omem、tot-mem）
 
 3. **支持的 Config Set / Get**  
-   目前，EloqKV 仅支持以下参数的 `CONFIG SET` 和 `CONFIG GET`：  
-   - `slowlog-log-slower-than`  
+   目前，EloqKV 仅支持以下参数的 `CONFIG SET` 和 `CONFIG GET`：
+
+   - `slowlog-log-slower-than`
    - `slowlog-max-len`
 
 4. **跨槽错误**  
