@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import styles from './styles.module.css';
@@ -7,41 +7,65 @@ const PRICING_PLANS = {
   free: {
     name: 'Free',
     price: '0',
-    description: 'Perfect for getting started and experimenting.',
-    features: ['1 GB storage', '200 compute hours', 'SKU up to 2CU'],
+    description:
+      'The first free-tier database built for production workloads, not just testing.',
+    features: [
+      '1 project',
+      '25 GB storage',
+      'Unlimited compute hours',
+      'Up to 10K read QPS',
+      'Up to 1K write QPS',
+      '25 GB Data Transfer',
+      'Scale to zero',
+    ],
     cta: 'Start for free',
     ctaLink: '/signup',
   },
   launch: {
-    name: 'Launch',
-    price: '9.9',
+    name: 'Business',
+    price: '19',
     priceLabel: 'From',
-    description: 'For small applications and development teams.',
-    features: ['10 GB storage', '400 compute hours', 'SKU up to 4CU'],
-    cta: 'Get started',
-    ctaLink: '/contact',
-  },
-  medium: {
-    name: 'Medium',
-    price: '39.9',
-    priceLabel: 'From',
-    description: 'For growing applications with moderate workloads.',
-    features: ['100 GB storage', '1000 compute hours', 'SKU up to 8CU'],
+    description:
+      'High-performance database services for growing teams and real-time applications.',
+    features: [
+      '100 projects',
+      '50 GB storage',
+      '180 compute hours',
+      'Unlimited Data Transfer',
+      'Up to 4CU',
+    ],
     cta: 'Get started',
     ctaLink: '/contact',
   },
   large: {
-    name: 'Large',
-    price: '899',
+    name: 'Enterprise',
+    price: '999',
     priceLabel: 'From',
-    description: 'For large-scale production applications.',
-    features: ['1 TB storage', '10000 compute hours', 'SKU up to 32CU'],
+    description:
+      'Enterprise-grade database with Private Link, advanced security, compliance, and custom SLAs.',
+    features: [
+      '1000 projects',
+      '1 TB storage',
+      '4000 compute hours',
+      'Unlimited Data Transfer',
+      'Up to 32CU',
+    ],
     cta: 'Get started',
     ctaLink: '/contact',
   },
 };
 
 export default function Pricing() {
+  const [tooltipVisible, setTooltipVisible] = useState({});
+
+  const showTooltip = index => {
+    setTooltipVisible({...tooltipVisible, [index]: true});
+  };
+
+  const hideTooltip = index => {
+    setTooltipVisible({...tooltipVisible, [index]: false});
+  };
+
   return (
     <Layout
       title="EloqKV Pricing"
@@ -75,11 +99,69 @@ export default function Pricing() {
                     <p className={styles.planDescription}>{plan.description}</p>
                   </div>
                   <ul className={styles.featureList}>
-                    {plan.features.map((feature, index) => (
-                      <li key={index} className={styles.feature}>
-                        {feature}
-                      </li>
-                    ))}
+                    {plan.features.map((feature, index) => {
+                      const tooltipId = `${key}-${index}`;
+                      return (
+                        <li key={index} className={styles.feature}>
+                          {feature}
+                          {feature.toLowerCase().includes('compute hours') &&
+                            feature.toLowerCase() !==
+                              'unlimited compute hours' && (
+                              <div className={styles.tooltipContainer}>
+                                <span
+                                  className={styles.infoIcon}
+                                  onMouseEnter={() => showTooltip(tooltipId)}
+                                  onMouseLeave={() => hideTooltip(tooltipId)}>
+                                  i
+                                </span>
+                                {tooltipVisible[tooltipId] && (
+                                  <div className={styles.tooltip}>
+                                    Additional at $0.08 per compute hour
+                                  </div>
+                                )}
+                              </div>
+                            )}
+                          {feature.toLowerCase().includes('50 gb storage') && (
+                            <div className={styles.tooltipContainer}>
+                              <span
+                                className={styles.infoIcon}
+                                onMouseEnter={() =>
+                                  showTooltip(`storage-${tooltipId}`)
+                                }
+                                onMouseLeave={() =>
+                                  hideTooltip(`storage-${tooltipId}`)
+                                }>
+                                i
+                              </span>
+                              {tooltipVisible[`storage-${tooltipId}`] && (
+                                <div className={styles.tooltip}>
+                                  Additional at $0.75 per GB
+                                </div>
+                              )}
+                            </div>
+                          )}
+                          {feature.toLowerCase().includes('1 tb storage') && (
+                            <div className={styles.tooltipContainer}>
+                              <span
+                                className={styles.infoIcon}
+                                onMouseEnter={() =>
+                                  showTooltip(`storage-${tooltipId}`)
+                                }
+                                onMouseLeave={() =>
+                                  hideTooltip(`storage-${tooltipId}`)
+                                }>
+                                i
+                              </span>
+                              {tooltipVisible[`storage-${tooltipId}`] && (
+                                <div className={styles.tooltip}>
+                                  Additional at $0.5 per GB
+                                </div>
+                              )}
+                            </div>
+                          )}
+                        </li>
+                      );
+                    })}
                   </ul>
                   <div className={styles.planFooter}>
                     {plan.name === 'Free' ? (
