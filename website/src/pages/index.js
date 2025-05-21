@@ -1109,6 +1109,39 @@ function HomePage() {
           </div>
         </div>
 
+        {/* Product Matrix Section */}
+        <div className="section-container">
+          <h2 className="section-title">Product Matrix</h2>
+          <p className="section-subtitle">
+            One database engine, multiple APIs for all your application needs
+          </p>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              marginTop: '30px',
+            }}>
+            <div
+              style={{
+                maxWidth: '850px',
+                width: '100%',
+                boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)',
+                borderRadius: '12px',
+                overflow: 'hidden',
+              }}>
+              <img
+                src="/img/product-matrix.png"
+                alt="EloqDB Product Matrix"
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  display: 'block',
+                }}
+              />
+            </div>
+          </div>
+        </div>
+
         {/* Features Section */}
         <div className="section-container">
           <h2 className="section-title">Features</h2>
