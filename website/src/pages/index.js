@@ -144,8 +144,23 @@ const reversedStyles = {
     marginRight: '8px',
   },
   tagline: {
-    fontSize: '20px', // Make the tagline slightly larger
-    marginBottom: '20px',
+    fontSize: '22px', // Slightly larger
+    marginBottom: '24px',
+    fontFamily:
+      'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+    fontWeight: '300',
+    letterSpacing: '0.8px',
+    lineHeight: '1.4',
+    textShadow: '0 1px 2px rgba(0,0,0,0.1)',
+  },
+  highlightedText: {
+    color: '#ff7b2d',
+    fontWeight: '600',
+    position: 'relative',
+    padding: '0 2px',
+    animation: 'pulse 3s infinite ease-in-out',
+    textDecoration: 'none',
+    borderBottom: '2px solid #ff7b2d',
   },
   convergedImage: {
     maxWidth: '100%',
@@ -788,9 +803,9 @@ function HomePage() {
       clearInterval(timerRef.current);
     }
 
-    // Set up new rotation timer
+    // Set up new rotation timer - toggle between 0 and 1
     timerRef.current = setInterval(() => {
-      setContentIndex(prevIndex => (prevIndex + 1) % 3);
+      setContentIndex(prevIndex => (prevIndex === 0 ? 1 : 0));
     }, 5000);
 
     // Clean up timer on component unmount
@@ -891,7 +906,9 @@ function HomePage() {
           EloqKV
         </h1>
         <p className="tagline" style={reversedStyles.tagline}>
-          Redis Compatible Distributed Transactional Key-Value Database
+          Redis Compatible{' '}
+          <span style={reversedStyles.highlightedText}>Transactional</span>{' '}
+          Key-Value Database
         </p>
 
         {/* Buttons for second layout */}
@@ -921,7 +938,7 @@ function HomePage() {
 
   // Add keyframe animation for floating effect
   useEffect(() => {
-    // Add keyframe animation for floating effect
+    // Add keyframe animation for floating effect and pulse effect
     const styleSheet = document.createElement('style');
     styleSheet.type = 'text/css';
     styleSheet.innerText = `
@@ -931,6 +948,15 @@ function HomePage() {
         }
         100% {
           transform: translateY(-10px);
+        }
+      }
+      
+      @keyframes pulse {
+        0%, 100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.85;
         }
       }
     `;
@@ -952,7 +978,7 @@ function HomePage() {
     }
 
     timerRef.current = setInterval(() => {
-      setContentIndex(prevIndex => (prevIndex + 1) % 3); // Update to handle 3 layouts
+      setContentIndex(prevIndex => (prevIndex === 0 ? 1 : 0));
     }, 5000);
   };
 
