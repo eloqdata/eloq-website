@@ -170,6 +170,29 @@ const reversedStyles = {
   },
 };
 
+// Update styles for the navigation arrows to position them at dot level
+const navigationArrowStyles = {
+  container: {
+    width: '40px',
+    height: '40px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    color: '#fff',
+    borderRadius: '50%',
+    fontSize: '24px',
+    cursor: 'pointer',
+    transition: 'all 0.3s ease',
+    boxShadow: '0 2px 10px rgba(0, 0, 0, 0.2)',
+    margin: '0 15px',
+  },
+  hover: {
+    backgroundColor: 'rgba(255, 123, 45, 0.2)',
+    boxShadow: '0 4px 15px rgba(0, 0, 0, 0.3)',
+  },
+};
+
 const textContent = {
   intro: `
   Data Substrate is a layer of abstraction that provides core functionalities commonly needed for managing data across various scenarios.<br/><br/>
@@ -803,9 +826,9 @@ function HomePage() {
       clearInterval(timerRef.current);
     }
 
-    // Set up new rotation timer - toggle between 0 and 1
+    // Set up new rotation timer - toggle between layouts
     timerRef.current = setInterval(() => {
-      setContentIndex(prevIndex => (prevIndex === 0 ? 1 : 0));
+      setContentIndex(prevIndex => (prevIndex + 1) % 4); // Update to handle 4 layouts
     }, 5000);
 
     // Clean up timer on component unmount
@@ -883,7 +906,7 @@ function HomePage() {
             height: '450px',
           }}>
           <img
-            src={useBaseUrl('img/eloqhomepage1.svg')}
+            src={useBaseUrl('img/EloqKV-banner.png')}
             alt="EloqConvergedDB Architecture"
             style={{
               maxWidth: '100%',
@@ -934,6 +957,209 @@ function HomePage() {
         </div>
       </div>
     </div>,
+
+    // Third layout - EloqDoc (Animation left, Text right)
+    <div
+      className="product-columns"
+      style={reversedStyles.reversed}
+      key="layout-3">
+      <div
+        className="product-left-column"
+        style={reversedStyles.animationContainer}>
+        <div
+          className="animation-container2"
+          style={{
+            position: 'relative',
+            width: '100%',
+            height: '450px',
+          }}>
+          <img
+            src={useBaseUrl('img/EloqDoc-banner.png')}
+            alt="EloqDoc Architecture"
+            style={{
+              maxWidth: '100%',
+              height: 'auto',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+            }}
+          />
+        </div>
+      </div>
+
+      <div className="product-right-column" style={reversedStyles.textContent}>
+        <h1 className="title" style={reversedStyles.title}>
+          <img
+            src={useBaseUrl('img/EloqDoc-icon.svg')}
+            alt="EloqDoc Icon"
+            style={reversedStyles.icon}
+          />
+          EloqDoc
+        </h1>
+        <p className="tagline" style={reversedStyles.tagline}>
+          MongoDB Compatible{' '}
+          <span style={reversedStyles.highlightedText}>Elastic</span> Document
+          Database
+        </p>
+
+        {/* Buttons for third layout */}
+        <div style={{...buttonStyles.buttonContainer, gap: '20px'}}>
+          <Link
+            to="/download/eloqdoc"
+            style={{
+              ...buttonStyles.actionButton,
+              ...buttonStyles.primary,
+              padding: '14px 28px', // Slightly larger buttons
+            }}>
+            Try it Now
+          </Link>
+          <Link
+            to="/product/eloqdoc"
+            style={{
+              ...buttonStyles.actionButton,
+              ...buttonStyles.secondary,
+              padding: '14px 28px', // Slightly larger buttons
+            }}>
+            Explore EloqDoc
+          </Link>
+        </div>
+      </div>
+    </div>,
+
+    // Fourth layout - EloqSQL (Animation left, Text right)
+    <div
+      className="product-columns"
+      style={reversedStyles.reversed}
+      key="layout-4">
+      <div
+        className="product-left-column"
+        style={reversedStyles.animationContainer}>
+        <div
+          className="animation-container2"
+          style={{
+            position: 'relative',
+            width: '100%',
+            height: '450px',
+          }}>
+          <img
+            src={useBaseUrl('img/EloqSQL-banner.png')}
+            alt="EloqSQL Architecture"
+            style={{
+              maxWidth: '100%',
+              height: 'auto',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+            }}
+          />
+        </div>
+      </div>
+
+      <div className="product-right-column" style={reversedStyles.textContent}>
+        <h1 className="title" style={reversedStyles.title}>
+          <img
+            src={useBaseUrl('img/EloqSQL-icon.svg')}
+            alt="EloqSQL Icon"
+            style={reversedStyles.icon}
+          />
+          EloqSQL
+        </h1>
+        <p className="tagline" style={reversedStyles.tagline}>
+          MySQL Compatible{' '}
+          <span style={reversedStyles.highlightedText}>Distributed</span> SQL
+          Database
+        </p>
+
+        {/* Buttons for fourth layout */}
+        <div style={{...buttonStyles.buttonContainer, gap: '20px'}}>
+          <Link
+            to="/download/eloqsql"
+            style={{
+              ...buttonStyles.actionButton,
+              ...buttonStyles.primary,
+              padding: '14px 28px', // Slightly larger buttons
+            }}>
+            Try it Now
+          </Link>
+          <Link
+            to="/product/eloqsql"
+            style={{
+              ...buttonStyles.actionButton,
+              ...buttonStyles.secondary,
+              padding: '14px 28px', // Slightly larger buttons
+            }}>
+            Explore EloqSQL
+          </Link>
+        </div>
+      </div>
+    </div>,
+
+    // Fifth layout - EloqConverged (Animation left, Text right)
+    <div
+      className="product-columns"
+      style={reversedStyles.reversed}
+      key="layout-5">
+      <div
+        className="product-left-column"
+        style={reversedStyles.animationContainer}>
+        <div
+          className="animation-container2"
+          style={{
+            position: 'relative',
+            width: '100%',
+            height: '450px',
+          }}>
+          <img
+            src={useBaseUrl('img/EloqConvergedDB-banner.png')}
+            alt="EloqConvergedDB Architecture"
+            style={{
+              maxWidth: '100%',
+              height: 'auto',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+            }}
+          />
+        </div>
+      </div>
+
+      <div className="product-right-column" style={reversedStyles.textContent}>
+        <h1 className="title" style={reversedStyles.title}>
+          <img
+            src={useBaseUrl('img/EloqCloud-icon.svg')}
+            alt="EloqSQL Icon"
+            style={reversedStyles.icon}
+          />
+          EloqConvergedDB
+        </h1>
+        <p className="tagline" style={reversedStyles.tagline}>
+          The First Multi Model{' '}
+          <span style={reversedStyles.highlightedText}>AI Native</span> Database
+        </p>
+
+        {/* Buttons for fourth layout */}
+        <div style={{...buttonStyles.buttonContainer, gap: '20px'}}>
+          <Link
+            to="/download/eloqsql"
+            style={{
+              ...buttonStyles.actionButton,
+              ...buttonStyles.primary,
+              padding: '14px 28px', // Slightly larger buttons
+            }}>
+            Try it Now
+          </Link>
+          <Link
+            to="/product/eloqsql"
+            style={{
+              ...buttonStyles.actionButton,
+              ...buttonStyles.secondary,
+              padding: '14px 28px', // Slightly larger buttons
+            }}>
+            Explore EloqSQL
+          </Link>
+        </div>
+      </div>
+    </div>,
   ];
 
   // Add keyframe animation for floating effect
@@ -967,6 +1193,37 @@ function HomePage() {
     };
   }, []);
 
+  // Add navigation handlers
+  const goToPrevious = () => {
+    const newIndex =
+      contentIndex === 0 ? contentLayouts.length - 1 : contentIndex - 1;
+    setContentIndex(newIndex);
+
+    // Reset timer
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+    }
+
+    timerRef.current = setInterval(() => {
+      setContentIndex(prevIndex => (prevIndex + 1) % 4); // Update to handle 4 layouts
+    }, 5000);
+  };
+
+  const goToNext = () => {
+    const newIndex =
+      contentIndex === contentLayouts.length - 1 ? 0 : contentIndex + 1;
+    setContentIndex(newIndex);
+
+    // Reset timer
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+    }
+
+    timerRef.current = setInterval(() => {
+      setContentIndex(prevIndex => (prevIndex + 1) % 4); // Update to handle 4 layouts
+    }, 5000);
+  };
+
   // In the HomePage component
   const handleIndicatorClick = index => {
     // Set the content index directly
@@ -978,7 +1235,7 @@ function HomePage() {
     }
 
     timerRef.current = setInterval(() => {
-      setContentIndex(prevIndex => (prevIndex === 0 ? 1 : 0));
+      setContentIndex(prevIndex => (prevIndex + 1) % 4); // Update to handle 4 layouts
     }, 5000);
   };
 
@@ -1077,7 +1334,8 @@ function HomePage() {
 
         <div className="container1">
           {/* Animated content rotation */}
-          <div style={rotatingContentStyles.container}>
+          <div
+            style={{...rotatingContentStyles.container, position: 'relative'}}>
             {contentLayouts.map((layout, index) => (
               <div
                 key={`content-${index}`}
@@ -1092,8 +1350,35 @@ function HomePage() {
             ))}
           </div>
 
-          {/* Content indicators */}
-          <div style={indicatorStyles.container}>
+          {/* Content indicators with navigation arrows */}
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: '8px',
+              marginTop: '16px',
+            }}>
+            {/* Left navigation arrow */}
+            <div
+              style={navigationArrowStyles.container}
+              onClick={goToPrevious}
+              onMouseEnter={e => {
+                e.currentTarget.style.backgroundColor =
+                  'rgba(255, 123, 45, 0.2)';
+                e.currentTarget.style.boxShadow =
+                  '0 4px 15px rgba(0, 0, 0, 0.3)';
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.backgroundColor =
+                  'rgba(255, 255, 255, 0.1)';
+                e.currentTarget.style.boxShadow =
+                  '0 2px 10px rgba(0, 0, 0, 0.2)';
+              }}>
+              &lt;
+            </div>
+
+            {/* Dots */}
             {contentLayouts.map((_, index) => (
               <div
                 key={`indicator-${index}`}
@@ -1106,6 +1391,25 @@ function HomePage() {
                 }}
               />
             ))}
+
+            {/* Right navigation arrow */}
+            <div
+              style={navigationArrowStyles.container}
+              onClick={goToNext}
+              onMouseEnter={e => {
+                e.currentTarget.style.backgroundColor =
+                  'rgba(255, 123, 45, 0.2)';
+                e.currentTarget.style.boxShadow =
+                  '0 4px 15px rgba(0, 0, 0, 0.3)';
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.backgroundColor =
+                  'rgba(255, 255, 255, 0.1)';
+                e.currentTarget.style.boxShadow =
+                  '0 2px 10px rgba(0, 0, 0, 0.2)';
+              }}>
+              &gt;
+            </div>
           </div>
         </div>
 
