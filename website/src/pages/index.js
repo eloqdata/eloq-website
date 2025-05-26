@@ -644,7 +644,95 @@ function HomePage() {
     <Layout
       description="Build the Next Generation of Databases the Right Way"
       wrapperClassName="homepage">
-      <main>
+      <main style={{marginTop: '-0px'}}>
+        {/* News Banner */}
+        <div
+          className="container1"
+          style={{
+            paddingTop: 0,
+            paddingBottom: 0,
+            position: 'relative',
+            zIndex: 100,
+          }}>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '2px',
+              padding: '2px 2px',
+              width: '100%',
+              marginTop: 0,
+              position: 'relative',
+              zIndex: 101,
+            }}>
+            <span
+              style={{
+                color: '#ff7b2d',
+                fontWeight: '500',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                fontSize: '18px',
+                position: 'relative',
+                zIndex: 102,
+              }}>
+              <Link
+                to="/news/2025/04/29/eloqcloud"
+                style={{
+                  color: '#ff7b2d',
+                  textDecoration: 'none',
+                  fontWeight: '500',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                }}
+                target="_blank"
+                rel="noopener noreferrer">
+                🎉 News!
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  style={{color: '#ff7b2d'}}>
+                  <path
+                    d="M5 12h14M12 5l7 7-7 7"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </Link>
+            </span>
+            <span
+              style={{
+                color: '#ffffff',
+                fontSize: '18px',
+                position: 'relative',
+                zIndex: 102,
+              }}>
+              EloqCloud Public Access Open:{' '}
+              <Link
+                to="https://cloud.eloqdata.com/join-waitlist"
+                style={{
+                  color: '#ff7b2d',
+                  textDecoration: 'none',
+                  fontWeight: '500',
+                  display: 'inline-block',
+                  position: 'relative',
+                  zIndex: 103,
+                  padding: '0 4px',
+                }}
+                target="_blank"
+                rel="noopener noreferrer">
+                Apply Now
+              </Link>
+            </span>
+          </div>
+        </div>
+
         <div className="container1">
           <div className="product-columns">
             <div className="product-left-column">
