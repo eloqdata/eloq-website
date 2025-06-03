@@ -129,7 +129,7 @@ const reversedStyles = {
     marginTop: '40px', // Reduced margin to move content higher
   },
   animationContainer: {
-    marginTop: '-120px', // Move animation container further up
+    marginTop: '-100px', // Move animation container further up
   },
   title: {
     fontSize: '42px', // Make the title larger
@@ -137,6 +137,7 @@ const reversedStyles = {
     display: 'flex',
     alignItems: 'center',
     gap: '12px',
+    color: 'white',
   },
   icon: {
     width: '48px',
@@ -144,7 +145,7 @@ const reversedStyles = {
     marginRight: '8px',
   },
   tagline: {
-    fontSize: '22px', // Slightly larger
+    fontSize: '20px', // Make the tagline slightly larger
     marginBottom: '24px',
     fontFamily:
       'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
@@ -152,6 +153,7 @@ const reversedStyles = {
     letterSpacing: '0.8px',
     lineHeight: '1.4',
     textShadow: '0 1px 2px rgba(0,0,0,0.1)',
+    color: 'rgba(255, 255, 255, 0.7)', // Match the light grey color
   },
   highlightedText: {
     color: '#ff7b2d',
@@ -828,7 +830,7 @@ function HomePage() {
 
     // Set up new rotation timer - toggle between layouts
     timerRef.current = setInterval(() => {
-      setContentIndex(prevIndex => (prevIndex + 1) % 4); // Update to handle 4 layouts
+      setContentIndex(prevIndex => (prevIndex + 1) % 5); // Update to handle 5 layouts
     }, 5000);
 
     // Clean up timer on component unmount
@@ -861,7 +863,7 @@ function HomePage() {
             Apply For Access
           </Link>
           <Link
-            to="/eloqkv"
+            to="/product/eloqkv"
             style={{
               ...buttonStyles.actionButton,
               ...buttonStyles.secondary,
@@ -977,7 +979,7 @@ function HomePage() {
             src={useBaseUrl('img/EloqDoc-banner.png')}
             alt="EloqDoc Architecture"
             style={{
-              maxWidth: '100%',
+              maxWidth: '80%',
               height: 'auto',
               position: 'absolute',
               top: 0,
@@ -1045,7 +1047,7 @@ function HomePage() {
             src={useBaseUrl('img/EloqSQL-banner.png')}
             alt="EloqSQL Architecture"
             style={{
-              maxWidth: '100%',
+              maxWidth: '90%',
               height: 'auto',
               position: 'absolute',
               top: 0,
@@ -1127,7 +1129,7 @@ function HomePage() {
         <h1 className="title" style={reversedStyles.title}>
           <img
             src={useBaseUrl('img/EloqCloud-icon.svg')}
-            alt="EloqSQL Icon"
+            alt="EloqConvergedDB Icon"
             style={reversedStyles.icon}
           />
           EloqConvergedDB
@@ -1137,10 +1139,10 @@ function HomePage() {
           <span style={reversedStyles.highlightedText}>AI Native</span> Database
         </p>
 
-        {/* Buttons for fourth layout */}
+        {/* Buttons for fifth layout */}
         <div style={{...buttonStyles.buttonContainer, gap: '20px'}}>
           <Link
-            to="/download/eloqsql"
+            to="/download/eloqconvergeddb"
             style={{
               ...buttonStyles.actionButton,
               ...buttonStyles.primary,
@@ -1149,13 +1151,13 @@ function HomePage() {
             Try it Now
           </Link>
           <Link
-            to="/product/eloqsql"
+            to="/product/eloqconvergeddb"
             style={{
               ...buttonStyles.actionButton,
               ...buttonStyles.secondary,
               padding: '14px 28px', // Slightly larger buttons
             }}>
-            Explore EloqSQL
+            Explore EloqConvergedDB
           </Link>
         </div>
       </div>
@@ -1205,7 +1207,7 @@ function HomePage() {
     }
 
     timerRef.current = setInterval(() => {
-      setContentIndex(prevIndex => (prevIndex + 1) % 4); // Update to handle 4 layouts
+      setContentIndex(prevIndex => (prevIndex + 1) % 5); // Update to handle 5 layouts
     }, 5000);
   };
 
@@ -1220,7 +1222,7 @@ function HomePage() {
     }
 
     timerRef.current = setInterval(() => {
-      setContentIndex(prevIndex => (prevIndex + 1) % 4); // Update to handle 4 layouts
+      setContentIndex(prevIndex => (prevIndex + 1) % 5); // Update to handle 5 layouts
     }, 5000);
   };
 
@@ -1235,7 +1237,7 @@ function HomePage() {
     }
 
     timerRef.current = setInterval(() => {
-      setContentIndex(prevIndex => (prevIndex + 1) % 4); // Update to handle 4 layouts
+      setContentIndex(prevIndex => (prevIndex + 1) % 5); // Update to handle 5 layouts
     }, 5000);
   };
 
