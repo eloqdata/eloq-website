@@ -1425,25 +1425,185 @@ function HomePage() {
             style={{
               display: 'flex',
               justifyContent: 'center',
+              alignItems: 'center',
               marginTop: '30px',
+              width: '100%',
             }}>
             <div
               style={{
-                maxWidth: '850px',
+                maxWidth: '900px',
                 width: '100%',
-                boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)',
-                borderRadius: '12px',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                borderRadius: '10px',
                 overflow: 'hidden',
+                background: 'rgba(25, 25, 40, 0.9)',
+                color: 'white',
+                boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3)',
               }}>
-              <img
-                src="/img/product-matrix.png"
-                alt="EloqDB Product Matrix"
+              {/* Product Matrix as a grid layout */}
+              <div
                 style={{
-                  width: '100%',
-                  height: 'auto',
-                  display: 'block',
-                }}
-              />
+                  display: 'grid',
+                  gridTemplateColumns: '1fr 1fr',
+                  gridGap: '10px',
+                  padding: '10px',
+                }}>
+                {/* EloqKV */}
+                <div
+                  style={{
+                    background: 'rgba(30, 30, 50, 0.7)',
+                    borderRadius: '8px',
+                    padding: '0',
+                    overflow: 'hidden',
+                  }}>
+                  <Link
+                    to="/product/eloqkv"
+                    style={{display: 'block', height: '100%'}}>
+                    <img
+                      src={useBaseUrl('img/homepage/EloqKV.svg')}
+                      alt="EloqKV"
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'contain',
+                        padding: '20px',
+                        transition: 'transform 0.3s ease',
+                      }}
+                      onMouseEnter={e => {
+                        e.currentTarget.style.transform = 'scale(1.05)';
+                      }}
+                      onMouseLeave={e => {
+                        e.currentTarget.style.transform = 'scale(1)';
+                      }}
+                    />
+                  </Link>
+                </div>
+
+                {/* EloqDoc */}
+                <div
+                  style={{
+                    background: 'rgba(30, 30, 50, 0.7)',
+                    borderRadius: '8px',
+                    padding: '0',
+                    overflow: 'hidden',
+                  }}>
+                  <Link
+                    to="/product/eloqdoc"
+                    style={{display: 'block', height: '100%'}}>
+                    <img
+                      src={useBaseUrl('img/homepage/EloqDoc.svg')}
+                      alt="EloqDoc"
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'contain',
+                        padding: '20px',
+                        transition: 'transform 0.3s ease',
+                      }}
+                      onMouseEnter={e => {
+                        e.currentTarget.style.transform = 'scale(1.05)';
+                      }}
+                      onMouseLeave={e => {
+                        e.currentTarget.style.transform = 'scale(1)';
+                      }}
+                    />
+                  </Link>
+                </div>
+
+                {/* EloqSQL */}
+                <div
+                  style={{
+                    background: 'rgba(30, 30, 50, 0.7)',
+                    borderRadius: '8px',
+                    padding: '0',
+                    overflow: 'hidden',
+                  }}>
+                  <Link
+                    to="/product/eloqsql"
+                    style={{display: 'block', height: '100%'}}>
+                    <img
+                      src={useBaseUrl('img/homepage/EloqSQL.svg')}
+                      alt="EloqSQL"
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'contain',
+                        padding: '20px',
+                        transition: 'transform 0.3s ease',
+                      }}
+                      onMouseEnter={e => {
+                        e.currentTarget.style.transform = 'scale(1.05)';
+                      }}
+                      onMouseLeave={e => {
+                        e.currentTarget.style.transform = 'scale(1)';
+                      }}
+                    />
+                  </Link>
+                </div>
+
+                {/* EloqCloud */}
+                <div
+                  style={{
+                    background: 'rgba(30, 30, 50, 0.7)',
+                    borderRadius: '8px',
+                    padding: '0',
+                    overflow: 'hidden',
+                  }}>
+                  <Link
+                    to="/product/eloqcloud"
+                    style={{display: 'block', height: '100%'}}>
+                    <img
+                      src={useBaseUrl('img/homepage/EloqCloud.svg')}
+                      alt="EloqCloud"
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'contain',
+                        padding: '20px',
+                        transition: 'transform 0.3s ease',
+                      }}
+                      onMouseEnter={e => {
+                        e.currentTarget.style.transform = 'scale(1.05)';
+                      }}
+                      onMouseLeave={e => {
+                        e.currentTarget.style.transform = 'scale(1)';
+                      }}
+                    />
+                  </Link>
+                </div>
+
+                {/* EloqConvergedDB - spans full width */}
+                <div
+                  style={{
+                    gridColumn: '1 / span 2',
+                    background: 'rgba(30, 30, 50, 0.7)',
+                    borderRadius: '8px',
+                    padding: '0',
+                    overflow: 'hidden',
+                  }}>
+                  <Link
+                    to="/product/eloqconvergeddb"
+                    style={{display: 'block', height: '100%'}}>
+                    <img
+                      src={useBaseUrl('img/homepage/EloqConvergedDB.svg')}
+                      alt="EloqConvergedDB"
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'contain',
+                        padding: '20px',
+                        transition: 'transform 0.3s ease',
+                      }}
+                      onMouseEnter={e => {
+                        e.currentTarget.style.transform = 'scale(1.05)';
+                      }}
+                      onMouseLeave={e => {
+                        e.currentTarget.style.transform = 'scale(1)';
+                      }}
+                    />
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </div>
