@@ -129,7 +129,7 @@ const reversedStyles = {
     marginTop: '40px', // Reduced margin to move content higher
   },
   animationContainer: {
-    marginTop: '-100px', // Move animation container further up
+    marginTop: '-50px', // Move animation container further up
   },
   title: {
     fontSize: '42px', // Make the title larger
@@ -175,23 +175,23 @@ const reversedStyles = {
 // Update styles for the navigation arrows to position them at dot level
 const navigationArrowStyles = {
   container: {
-    width: '40px',
-    height: '40px',
+    width: '70px',
+    height: '70px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
     color: '#fff',
     borderRadius: '50%',
-    fontSize: '24px',
+    fontSize: '32px',
     cursor: 'pointer',
     transition: 'all 0.3s ease',
-    boxShadow: '0 2px 10px rgba(0, 0, 0, 0.2)',
-    margin: '0 15px',
+    boxShadow: '0 4px 15px rgba(0, 0, 0, 0.25)',
+    margin: '0 25px',
   },
   hover: {
     backgroundColor: 'rgba(255, 123, 45, 0.2)',
-    boxShadow: '0 4px 15px rgba(0, 0, 0, 0.3)',
+    boxShadow: '0 6px 20px rgba(0, 0, 0, 0.4)',
   },
 };
 
@@ -855,7 +855,7 @@ function HomePage() {
         {/* Add buttons for signup and trial */}
         <div style={buttonStyles.buttonContainer}>
           <Link
-            to="/signup"
+            to="https://cloud.eloqdata.com/join-waitlist"
             style={{
               ...buttonStyles.actionButton,
               ...buttonStyles.primary,
@@ -908,7 +908,7 @@ function HomePage() {
             height: '450px',
           }}>
           <img
-            src={useBaseUrl('img/EloqKV-banner.png')}
+            src={useBaseUrl('img/homepage/EloqKV-banner-svg.svg')}
             alt="EloqConvergedDB Architecture"
             style={{
               maxWidth: '100%',
@@ -945,7 +945,7 @@ function HomePage() {
               ...buttonStyles.primary,
               padding: '14px 28px', // Slightly larger buttons
             }}>
-            Try it Now
+            Download Now
           </Link>
           <Link
             to="/product/eloqkv"
@@ -976,7 +976,7 @@ function HomePage() {
             height: '450px',
           }}>
           <img
-            src={useBaseUrl('img/EloqDoc-banner.png')}
+            src={useBaseUrl('img/homepage/EloqDoc-banner-svg.svg')}
             alt="EloqDoc Architecture"
             style={{
               maxWidth: '80%',
@@ -1013,7 +1013,7 @@ function HomePage() {
               ...buttonStyles.primary,
               padding: '14px 28px', // Slightly larger buttons
             }}>
-            Try it Now
+            Download Now
           </Link>
           <Link
             to="/product/eloqdoc"
@@ -1044,7 +1044,7 @@ function HomePage() {
             height: '450px',
           }}>
           <img
-            src={useBaseUrl('img/EloqSQL-banner.png')}
+            src={useBaseUrl('img/homepage/EloqSQL-banner-svg.svg')}
             alt="EloqSQL Architecture"
             style={{
               maxWidth: '90%',
@@ -1081,7 +1081,7 @@ function HomePage() {
               ...buttonStyles.primary,
               padding: '14px 28px', // Slightly larger buttons
             }}>
-            Try it Now
+            Download Now
           </Link>
           <Link
             to="/product/eloqsql"
@@ -1128,7 +1128,7 @@ function HomePage() {
       <div className="product-right-column" style={reversedStyles.textContent}>
         <h1 className="title" style={reversedStyles.title}>
           <img
-            src={useBaseUrl('img/EloqCloud-icon.svg')}
+            src={useBaseUrl('img/homepage/EloqConvergedDB-icon.svg')}
             alt="EloqConvergedDB Icon"
             style={reversedStyles.icon}
           />
@@ -1148,16 +1148,75 @@ function HomePage() {
               ...buttonStyles.primary,
               padding: '14px 28px', // Slightly larger buttons
             }}>
+            Explore EloqConvergedDB
+          </Link>
+        </div>
+      </div>
+    </div>,
+
+    // Sixth layout - EloqCloud (Animation left, Text right)
+    <div
+      className="product-columns"
+      style={reversedStyles.reversed}
+      key="layout-4">
+      <div
+        className="product-left-column"
+        style={reversedStyles.animationContainer}>
+        <div
+          className="animation-container2"
+          style={{
+            position: 'relative',
+            width: '100%',
+            height: '450px',
+          }}>
+          <img
+            src={useBaseUrl('img/homepage/EloqCloud-banner-svg.svg')}
+            alt="EloqCloud Architecture"
+            style={{
+              maxWidth: '90%',
+              height: 'auto',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+            }}
+          />
+        </div>
+      </div>
+
+      <div className="product-right-column" style={reversedStyles.textContent}>
+        <h1 className="title" style={reversedStyles.title}>
+          <img
+            src={useBaseUrl('img/homepage/EloqCloud-icon.svg')}
+            alt="EloqCLoud Icon"
+            style={reversedStyles.icon}
+          />
+          EloqCloud
+        </h1>
+        <p className="tagline" style={reversedStyles.tagline}>
+          The Most{' '}
+          <span style={reversedStyles.highlightedText}>Cost Effective</span>{' '}
+          Serverless Database Platform
+        </p>
+
+        {/* Buttons for fourth layout */}
+        <div style={{...buttonStyles.buttonContainer, gap: '20px'}}>
+          <Link
+            to="https://cloud.eloqdata.com/join-waitlist"
+            style={{
+              ...buttonStyles.actionButton,
+              ...buttonStyles.primary,
+              padding: '14px 28px', // Slightly larger buttons
+            }}>
             Try it Now
           </Link>
           <Link
-            to="/product/eloqconvergeddb"
+            to="/pricing"
             style={{
               ...buttonStyles.actionButton,
               ...buttonStyles.secondary,
               padding: '14px 28px', // Slightly larger buttons
             }}>
-            Explore EloqConvergedDB
+            Pricing
           </Link>
         </div>
       </div>
@@ -1369,13 +1428,13 @@ function HomePage() {
                 e.currentTarget.style.backgroundColor =
                   'rgba(255, 123, 45, 0.2)';
                 e.currentTarget.style.boxShadow =
-                  '0 4px 15px rgba(0, 0, 0, 0.3)';
+                  '0 6px 20px rgba(0, 0, 0, 0.4)';
               }}
               onMouseLeave={e => {
                 e.currentTarget.style.backgroundColor =
                   'rgba(255, 255, 255, 0.1)';
                 e.currentTarget.style.boxShadow =
-                  '0 2px 10px rgba(0, 0, 0, 0.2)';
+                  '0 4px 15px rgba(0, 0, 0, 0.25)';
               }}>
               &lt;
             </div>
@@ -1402,13 +1461,13 @@ function HomePage() {
                 e.currentTarget.style.backgroundColor =
                   'rgba(255, 123, 45, 0.2)';
                 e.currentTarget.style.boxShadow =
-                  '0 4px 15px rgba(0, 0, 0, 0.3)';
+                  '0 6px 20px rgba(0, 0, 0, 0.4)';
               }}
               onMouseLeave={e => {
                 e.currentTarget.style.backgroundColor =
                   'rgba(255, 255, 255, 0.1)';
                 e.currentTarget.style.boxShadow =
-                  '0 2px 10px rgba(0, 0, 0, 0.2)';
+                  '0 4px 15px rgba(0, 0, 0, 0.25)';
               }}>
               &gt;
             </div>
@@ -1433,26 +1492,27 @@ function HomePage() {
               style={{
                 maxWidth: '900px',
                 width: '100%',
-                border: '1px solid rgba(255, 255, 255, 0.2)',
+                border: 'none',
                 borderRadius: '10px',
                 overflow: 'hidden',
                 background: 'rgba(25, 25, 40, 0.9)',
                 color: 'white',
-                boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3)',
+                boxShadow: '0 0px 0px rgba(103, 25, 90, 0.2)',
               }}>
               {/* Product Matrix as a grid layout */}
               <div
                 style={{
                   display: 'grid',
                   gridTemplateColumns: '1fr 1fr',
-                  gridGap: '10px',
-                  padding: '10px',
+                  gridGap: '0px',
+                  gridRowGap: '0px',
+                  padding: '0px',
                 }}>
                 {/* EloqKV */}
                 <div
                   style={{
                     background: 'rgba(30, 30, 50, 0.7)',
-                    borderRadius: '8px',
+                    borderRadius: '0px',
                     padding: '0',
                     overflow: 'hidden',
                   }}>
@@ -1460,13 +1520,13 @@ function HomePage() {
                     to="/product/eloqkv"
                     style={{display: 'block', height: '100%'}}>
                     <img
-                      src={useBaseUrl('img/homepage/EloqKV.svg')}
+                      src={useBaseUrl('img/homepage/EloqKV-dark.svg')}
                       alt="EloqKV"
                       style={{
                         width: '100%',
                         height: '100%',
                         objectFit: 'contain',
-                        padding: '20px',
+                        padding: '20px 20px 5px 20px',
                         transition: 'transform 0.3s ease',
                       }}
                       onMouseEnter={e => {
@@ -1483,7 +1543,7 @@ function HomePage() {
                 <div
                   style={{
                     background: 'rgba(30, 30, 50, 0.7)',
-                    borderRadius: '8px',
+                    borderRadius: '0px',
                     padding: '0',
                     overflow: 'hidden',
                   }}>
@@ -1491,13 +1551,13 @@ function HomePage() {
                     to="/product/eloqdoc"
                     style={{display: 'block', height: '100%'}}>
                     <img
-                      src={useBaseUrl('img/homepage/EloqDoc.svg')}
+                      src={useBaseUrl('img/homepage/EloqDoc-dark.svg')}
                       alt="EloqDoc"
                       style={{
                         width: '100%',
                         height: '100%',
                         objectFit: 'contain',
-                        padding: '20px',
+                        padding: '20px 20px 5px 20px',
                         transition: 'transform 0.3s ease',
                       }}
                       onMouseEnter={e => {
@@ -1514,21 +1574,22 @@ function HomePage() {
                 <div
                   style={{
                     background: 'rgba(30, 30, 50, 0.7)',
-                    borderRadius: '8px',
+                    borderRadius: '0px',
                     padding: '0',
                     overflow: 'hidden',
+                    marginTop: '-10px',
                   }}>
                   <Link
                     to="/product/eloqsql"
                     style={{display: 'block', height: '100%'}}>
                     <img
-                      src={useBaseUrl('img/homepage/EloqSQL.svg')}
+                      src={useBaseUrl('img/homepage/EloqSQL-dark.svg')}
                       alt="EloqSQL"
                       style={{
                         width: '100%',
                         height: '100%',
                         objectFit: 'contain',
-                        padding: '20px',
+                        padding: '20px 20px 5px 20px',
                         transition: 'transform 0.3s ease',
                       }}
                       onMouseEnter={e => {
@@ -1545,21 +1606,22 @@ function HomePage() {
                 <div
                   style={{
                     background: 'rgba(30, 30, 50, 0.7)',
-                    borderRadius: '8px',
+                    borderRadius: '0px',
                     padding: '0',
                     overflow: 'hidden',
+                    marginTop: '-10px',
                   }}>
                   <Link
-                    to="/product/eloqcloud"
+                    to="https://cloud.eloqdata.com/join-waitlist"
                     style={{display: 'block', height: '100%'}}>
                     <img
-                      src={useBaseUrl('img/homepage/EloqCloud.svg')}
+                      src={useBaseUrl('img/homepage/EloqCloud-dark.svg')}
                       alt="EloqCloud"
                       style={{
                         width: '100%',
                         height: '100%',
                         objectFit: 'contain',
-                        padding: '20px',
+                        padding: '20px 20px 5px 20px',
                         transition: 'transform 0.3s ease',
                       }}
                       onMouseEnter={e => {
@@ -1577,21 +1639,22 @@ function HomePage() {
                   style={{
                     gridColumn: '1 / span 2',
                     background: 'rgba(30, 30, 50, 0.7)',
-                    borderRadius: '8px',
+                    borderRadius: '0px',
                     padding: '0',
                     overflow: 'hidden',
+                    marginTop: '-10px',
                   }}>
                   <Link
                     to="/product/eloqconvergeddb"
                     style={{display: 'block', height: '100%'}}>
                     <img
-                      src={useBaseUrl('img/homepage/EloqConvergedDB.svg')}
+                      src={useBaseUrl('img/homepage/EloqConvergedDB-dark.svg')}
                       alt="EloqConvergedDB"
                       style={{
                         width: '100%',
                         height: '100%',
                         objectFit: 'contain',
-                        padding: '20px',
+                        padding: '20px 20px 5px 20px',
                         transition: 'transform 0.3s ease',
                       }}
                       onMouseEnter={e => {
@@ -1679,184 +1742,6 @@ function HomePage() {
                 </p>
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* Product Matrix Section */}
-        <div className={styles.productMatrixSection}>
-          <h2 className={styles.matrixTitle}>产品矩阵</h2>
-          <p className={styles.matrixSubtitle}>
-            为新一代人工智能应用构建数据库产品
-          </p>
-
-          <div className={styles.matrixOuterBorder}>
-            <div className={styles.matrixHeader}>
-              <div className={styles.matrixHeaderText}>EloqDB 产品矩阵</div>
-            </div>
-
-            <div className={styles.matrixGrid}>
-              <div className={styles.verticalLine}></div>
-              <div className={`${styles.circleLeft} ${styles.topCircle}`}></div>
-              <div
-                className={`${styles.circleRight} ${styles.topCircle}`}></div>
-
-              <div className={styles.matrixRow}>
-                <div className={styles.productItem}>
-                  <div className={`${styles.productIcon} ${styles.kvIcon}`}>
-                    <img
-                      src={useBaseUrl('img/eloqdata_logo.png')}
-                      alt="EloqKV"
-                    />
-                  </div>
-                  <div className={styles.productInfo}>
-                    <h3 className={styles.productName}>EloqKV</h3>
-                    <p className={styles.productDesc}>Redis兼容</p>
-                    <p className={styles.productDesc}>Key-Value数据库</p>
-                  </div>
-                </div>
-
-                <div className={styles.productItem}>
-                  <div className={`${styles.productIcon} ${styles.docIcon}`}>
-                    <img
-                      src={useBaseUrl('img/eloqdata_logo.png')}
-                      alt="EloqDoc"
-                    />
-                  </div>
-                  <div className={styles.productInfo}>
-                    <h3 className={styles.productName}>EloqDoc</h3>
-                    <p className={styles.productDesc}>MongoDB兼容</p>
-                    <p className={styles.productDesc}>分布式文档数据库</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className={styles.matrixRow}>
-                <div className={styles.productItem}>
-                  <div className={`${styles.productIcon} ${styles.sqlIcon}`}>
-                    <img
-                      src={useBaseUrl('img/eloqdata_logo.png')}
-                      alt="EloqSQL"
-                    />
-                  </div>
-                  <div className={styles.productInfo}>
-                    <h3 className={styles.productName}>EloqSQL</h3>
-                    <p className={styles.productDesc}>MySQL兼容</p>
-                    <p className={styles.productDesc}>分布式关系型数据库</p>
-                  </div>
-                </div>
-
-                <div className={styles.productItem}>
-                  <div className={`${styles.productIcon} ${styles.cloudIcon}`}>
-                    <img
-                      src={useBaseUrl('img/eloqdata_logo.png')}
-                      alt="EloqCloud"
-                    />
-                  </div>
-                  <div className={styles.productInfo}>
-                    <h3 className={styles.productName}>EloqCloud</h3>
-                    <p className={styles.productDesc}>云原生Serverless</p>
-                    <p className={styles.productDesc}>数据服务平台</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className={`${styles.matrixRow} ${styles.lastRow}`}>
-                <div className={styles.productItemFull}>
-                  <div
-                    className={`${styles.productIcon} ${styles.convergedIcon}`}>
-                    <img
-                      src={useBaseUrl('img/eloqdata_logo.png')}
-                      alt="EloqConvergedDB"
-                    />
-                  </div>
-                  <div className={styles.productInfo}>
-                    <h3 className={styles.productName}>EloqConvergedDB</h3>
-                    <p className={styles.productDesc}>
-                      支持SQL、Redis、Mongo、Vector、Graph等数据模型和API的AI-Native
-                      融合数据库
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div
-                className={`${styles.circleLeft} ${styles.bottomCircle}`}></div>
-              <div
-                className={`${styles.circleRight} ${styles.bottomCircle}`}></div>
-            </div>
-          </div>
-
-          <div className={styles.matrixButton}>
-            <Link
-              to="/products"
-              className={`button button--primary ${styles.learnMoreButton}`}>
-              了解更多产品信息
-            </Link>
-          </div>
-        </div>
-
-        {/* Product & Activity Updates */}
-        <div className={styles.updatesSection}>
-          <div className={styles.updateContainer}>
-            <div className={styles.updateCard}>
-              <div className={styles.updateBadge}>new</div>
-              <div className={styles.updateIcon}>
-                <img
-                  src={useBaseUrl('img/eloqdata_logo.png')}
-                  alt="Product Update"
-                  width="48"
-                  height="48"
-                />
-              </div>
-              <h3 className={styles.updateTitle}>产品动态</h3>
-              <p className={styles.updateDesc}>
-                EloqCloud for EloqKV 正式面向公众开放
-              </p>
-              <Link to="/news" className={styles.updateLink}>
-                learn more
-              </Link>
-            </div>
-
-            <div className={styles.updateCard}>
-              <div className={styles.updateBadge}>new</div>
-              <div className={styles.updateIcon}>
-                <img
-                  src={useBaseUrl('img/eloqdata_logo.png')}
-                  alt="Activity Update"
-                  width="48"
-                  height="48"
-                />
-              </div>
-              <h3 className={styles.updateTitle}>活动动态</h3>
-              <p className={styles.updateDesc}>
-                QCon全球软件开发大会: 面向AI Agents的高性能数据基座
-              </p>
-              <Link to="/news" className={styles.updateLink}>
-                learn more
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        {/* Products Section */}
-        <div className="section-container">
-          <h2 className="section-title">Products</h2>
-          <p className="section-subtitle">
-            Flexibility at its best—choose your standard API
-          </p>
-          <div className="product-cards">
-            <Link to="/product/eloqkv" className="product-card">
-              <h3>EloqKV</h3>
-              <p>Redis Compatible Database</p>
-            </Link>
-            <Link to="/product/eloqsql" className="product-card">
-              <h3>EloqSQL</h3>
-              <p>MySQL Compatible Database</p>
-            </Link>
-            <Link to="/product/eloqdoc" className="product-card">
-              <h3>EloqDoc</h3>
-              <p>Mongo Compatible Database</p>
-            </Link>
           </div>
         </div>
 
