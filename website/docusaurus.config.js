@@ -511,7 +511,7 @@ module.exports = {
                         <path d="M8 18v4c0 1.5 3.5 3 8 3s8-1.5 8-3v-4" stroke="#FFFFFF" stroke-width="2" fill="none" />
                       </svg>
                       <div style="display: flex; flex-direction: column;">
-                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqSQL <sup style="font-size:12px">preview</sup></span>
+                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqSQL</span>
                         <span style="font-size: 14px; color: rgba(255,255,255,0.6);">MySQL compatible RDBMS</span>
                       </div>
                     </div>
@@ -530,7 +530,7 @@ module.exports = {
                         <path d="M12 14h8M12 18h8M12 22h5" stroke="#FFFFFF" stroke-width="2" />
                       </svg>
                       <div style="display: flex; flex-direction: column;">
-                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqDoc <sup style="font-size:12px">preview</sup></span>
+                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqDoc</span>
                         <span style="font-size: 14px; color: rgba(255,255,255,0.6);">MongoDB compatible JSON database</span>
                       </div>
                     </div>
@@ -548,7 +548,7 @@ module.exports = {
                         <path d="M16 12v8M12 16h8" stroke="#FFFFFF" stroke-width="2" />
                       </svg>
                       <div style="display: flex; flex-direction: column;">
-                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqCtl <sup style="font-size:12px">preview</sup></span>
+                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqCtl</span>
                         <span style="font-size: 14px; color: rgba(255,255,255,0.6);">One stop cluster deployment and management tool</span>
                       </div>
                     </div>
