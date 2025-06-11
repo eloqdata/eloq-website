@@ -7,7 +7,6 @@ image: /img/tourbuddy.png
 description: Explore EloqKV’s decoupled architecture powering TourBuddy, scaling smoothly from fast cache to durable, elastic storage—keeping your AI apps quick, resilient, and cost-effective at every growth stage.
 featured: true
 blog: true
-featuredMain: true
 ---
 
 In the previous blog, we discussed the future [database foundation](/blog/2025/03/19/agentic) for Agentic AI Applications. In this blog we will simplify the agentic application and use EloqKV as data store to explore EloqKV's decoupled architecture.

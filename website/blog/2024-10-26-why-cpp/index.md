@@ -5,7 +5,6 @@ date: 2024-10-26
 tags: [Company]
 image: /img/c_old_solid.jpg
 description: Discover why we chose C++ for EloqKV, focusing on its scalability, efficiency, and durability over languages like Rust and Go.
-featured: true
 blog: true
 ---
 
