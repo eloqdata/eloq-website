@@ -116,7 +116,7 @@ export default function Pricing() {
                                 </span>
                                 {tooltipVisible[tooltipId] && (
                                   <div className={styles.tooltip}>
-                                    Additional at $0.08 per compute hour
+                                    Additional at $0.15 per compute hour
                                   </div>
                                 )}
                               </div>
@@ -154,7 +154,7 @@ export default function Pricing() {
                               </span>
                               {tooltipVisible[`storage-${tooltipId}`] && (
                                 <div className={styles.tooltip}>
-                                  Additional at $0.5 per GB
+                                  Additional at $0.25 per GB
                                 </div>
                               )}
                             </div>
