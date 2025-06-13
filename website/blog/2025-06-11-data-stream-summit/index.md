@@ -49,7 +49,7 @@ Object storage provides key benefits that enable cost-effective scaling and sepa
 - **Low Bandwidth Cost for Access:** Even in failover scenarios, retrieving terabytes of data costs around \$0.10 per million requests—far lower than other storage solutions.
 - **Lowest Cost Per GB:** Object storage is approximately 3.5× cheaper than standard EBS.
 
-Next-generation databases are already leveraging object storage. OLAP systems were early adopters, with technologies like Snowflake and formats like Iceberg and Parquet making full use of S3. More recently, streaming platforms such as [StreamNative](https://streamnative.io/)'s Ursa engine have adopted object storage as the primary storage layer. Recognizing this trend, [Confluent]() acquired [WarpStream](https://www.warpstream.com/) and introduced Freight Clusters that also utilize object storage. Vector and full-text search engines like [Turbopuffer](https://turbopuffer.com) have followed suit.
+Next-generation databases are already leveraging object storage. OLAP systems were early adopters, with technologies like Snowflake and formats like Iceberg and Parquet making full use of S3. More recently, streaming platforms such as [StreamNative](https://streamnative.io/)'s Ursa engine have adopted object storage as the primary storage layer. Recognizing this trend, [Confluent](https://www.confluent.io/) acquired [WarpStream](https://www.warpstream.com/) and introduced Freight Clusters that also utilize object storage. Vector and full-text search engines like [Turbopuffer](https://turbopuffer.com) have followed suit.
 
 However, using object storage directly introduces additional latency. While acceptable for OLAP workloads and asynchronous event-driven architectures, this latency is less suitable for OLTP workloads that demand low-latency responses. As a result, object storage is rarely used in OLTP database systems—until now.
 
@@ -63,7 +63,7 @@ Key advantages of EloqDoc include:
 - **Object Storage as Primary Storage:** Batches writes asynchronously to mitigate object storage latency, while recent data is safeguarded with EBS for durability.
 - **Local NVMe Caching:** Delivers high-throughput, low-latency reads that outperform EBS IOPS by caching object storage locally.
 - **Scalable Redo Logs:** Improves write performance cost-effectively using additional EBS volumes.
-- **MongoDB Compatibility and Distributed Transactions:** Seamless migration from MongoDB 4.0, with robust transaction support powered by [Data Substrate](/blog/2024-08-11-data-substrate).
+- **MongoDB Compatibility and Distributed Transactions:** Seamless migration from MongoDB, with robust transaction support powered by [Data Substrate](/blog/2024-08-11-data-substrate).
 
 EloqDoc addresses the latency challenge by using local NVMe storage as an intelligent cache. Modern cloud-optimized instances offer significant local NVMe capacity (e.g., 3.5TB per 16-core server), enabling high-performance caching of active data while reducing costs.
 
