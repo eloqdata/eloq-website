@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, {useEffect} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import GitHubButton from 'react-github-btn';
 import Typed from '@theme/Typed';
 
@@ -26,6 +26,174 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import Link from '@docusaurus/Link';
 import styles from './styles.module.css';
+
+// Add new styles for our buttons
+const buttonStyles = {
+  buttonContainer: {
+    display: 'flex',
+    gap: '26px',
+    marginTop: '6px',
+    marginBottom: '20px',
+  },
+  actionButton: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '12px 24px',
+    borderRadius: '30px',
+    fontWeight: '600',
+    fontSize: '16px',
+    textDecoration: 'none',
+    transition: 'all 0.3s ease',
+  },
+  primary: {
+    backgroundColor: '#ff7b2d',
+    color: 'white',
+    border: '2px solid #ff7b2d',
+    '&:hover': {
+      backgroundColor: '#e86a1e',
+    },
+  },
+  secondary: {
+    backgroundColor: 'transparent',
+    color: '#ff7b2d',
+    border: '2px solid #ff7b2d',
+    '&:hover': {
+      backgroundColor: 'rgba(255, 123, 45, 0.1)',
+    },
+  },
+};
+
+// Add CSS for the rotating content
+const rotatingContentStyles = {
+  container: {
+    position: 'relative',
+    minHeight: '400px', // Ensure consistent height during transitions
+  },
+  content: {
+    position: 'absolute',
+    width: '100%',
+    transition: 'opacity 0.8s ease-in-out',
+  },
+  visible: {
+    opacity: 1,
+    zIndex: 1,
+  },
+  hidden: {
+    opacity: 0,
+    zIndex: 0,
+  },
+};
+
+// Add CSS for the content indicators
+const indicatorStyles = {
+  container: {
+    display: 'flex',
+    justifyContent: 'center',
+    gap: '8px',
+    marginTop: '16px',
+  },
+  dot: {
+    width: '10px',
+    height: '10px',
+    borderRadius: '50%',
+    cursor: 'pointer',
+    transition: 'all 0.3s ease',
+  },
+  active: {
+    backgroundColor: '#ff7b2d',
+    transform: 'scale(1.2)',
+  },
+  inactive: {
+    backgroundColor: 'rgba(255, 123, 45, 0.3)',
+    '&:hover': {
+      backgroundColor: 'rgba(255, 123, 45, 0.5)',
+    },
+  },
+};
+
+// Styling for the reversed layout
+const reversedStyles = {
+  // In reversed mode, handle the layout changes
+  reversed: {
+    flexDirection: 'row-reverse',
+    alignItems: 'flex-start', // Align items to the top
+    marginTop: '30px', // Add some top margin to the entire layout
+  },
+  textContent: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-end', // Align content to the bottom
+    alignItems: 'flex-start',
+    paddingLeft: '40px',
+    marginTop: '40px', // Reduced margin to move content higher
+  },
+  animationContainer: {
+    marginTop: '-50px', // Move animation container further up
+  },
+  title: {
+    fontSize: '42px', // Make the title larger
+    marginBottom: '16px',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '12px',
+    color: 'white',
+  },
+  icon: {
+    width: '48px',
+    height: '48px',
+    marginRight: '8px',
+  },
+  tagline: {
+    fontSize: '20px', // Make the tagline slightly larger
+    marginBottom: '24px',
+    fontFamily:
+      'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+    fontWeight: '300',
+    letterSpacing: '0.8px',
+    lineHeight: '1.4',
+    textShadow: '0 1px 2px rgba(0,0,0,0.1)',
+    color: 'rgba(255, 255, 255, 0.7)', // Match the light grey color
+  },
+  highlightedText: {
+    color: '#ff7b2d',
+    fontWeight: '600',
+    position: 'relative',
+    padding: '0 2px',
+    animation: 'pulse 3s infinite ease-in-out',
+    textDecoration: 'none',
+    borderBottom: '2px solid #ff7b2d',
+  },
+  convergedImage: {
+    maxWidth: '100%',
+    height: 'auto',
+    transition: 'transform 2s ease-in-out',
+    animation: 'float 3s ease-in-out infinite alternate',
+  },
+};
+
+// Update styles for the navigation arrows to position them at dot level
+const navigationArrowStyles = {
+  container: {
+    width: '70px',
+    height: '70px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    color: '#fff',
+    borderRadius: '50%',
+    fontSize: '32px',
+    cursor: 'pointer',
+    transition: 'all 0.3s ease',
+    boxShadow: '0 4px 15px rgba(0, 0, 0, 0.25)',
+    margin: '0 25px',
+  },
+  hover: {
+    backgroundColor: 'rgba(255, 123, 45, 0.2)',
+    boxShadow: '0 6px 20px rgba(0, 0, 0, 0.4)',
+  },
+};
 
 const textContent = {
   intro: `
@@ -640,6 +808,498 @@ const features = [
 ];
 
 function HomePage() {
+  const handleImageUpload = event => {
+    const file = event.target.files[0];
+    if (file) {
+      console.log('Image uploaded:', file.name);
+      // Here you would typically process the image
+      // For example, you might upload it to a server
+    }
+  };
+
+  // Add state for the rotating content
+  const [contentIndex, setContentIndex] = useState(0);
+  const timerRef = useRef(null);
+
+  // Set up the rotation timer effect
+  useEffect(() => {
+    // Clear previous timer if it exists
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+    }
+
+    // Set up new rotation timer - toggle between layouts
+    timerRef.current = setInterval(() => {
+      setContentIndex(prevIndex => (prevIndex + 1) % 5); // Update to handle 5 layouts
+    }, 5000);
+
+    // Clean up timer on component unmount
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+      }
+    };
+  }, []);
+
+  // Define the different content layouts
+  const contentLayouts = [
+    // First layout - Text left, Animation right (current)
+    <div className="product-columns" key="layout-1">
+      <div className="product-left-column">
+        <h1 className="title">Revolutionary Databases Powering the AI Age</h1>
+        <p className="tagline">
+          Databases for all your AI app needs—multimodal, transactional, elastic
+          and standard API-compatible{' '}
+        </p>
+
+        {/* Add buttons for signup and trial */}
+        <div style={buttonStyles.buttonContainer}>
+          <Link
+            to="https://cloud.eloqdata.com/join-waitlist"
+            style={{
+              ...buttonStyles.actionButton,
+              ...buttonStyles.primary,
+            }}>
+            Apply For Access
+          </Link>
+          <Link
+            to="/product/eloqkv"
+            style={{
+              ...buttonStyles.actionButton,
+              ...buttonStyles.secondary,
+            }}>
+            Explore More Products
+          </Link>
+        </div>
+      </div>
+
+      <div className="product-right-column">
+        <div className="animation-container1">
+          {/* Static base image */}
+          <img
+            className="static-image1"
+            alt="Static base"
+            src={useBaseUrl('img/eloqhomepage1.svg')}
+          />
+
+          {/* Dynamic floating image */}
+          <img
+            className="floating-image1"
+            alt="Dynamic element"
+            src={useBaseUrl('img/eloqhomepage2.svg')}
+          />
+        </div>
+      </div>
+    </div>,
+
+    // Second layout - Animation left, Text right (adjusted positioning)
+    <div
+      className="product-columns"
+      style={reversedStyles.reversed}
+      key="layout-2">
+      <div
+        className="product-left-column"
+        style={reversedStyles.animationContainer}>
+        <div
+          className="animation-container2"
+          style={{
+            position: 'relative',
+            width: '100%',
+            height: '450px',
+          }}>
+          <img
+            src={useBaseUrl('img/homepage/EloqKV-banner-svg.svg')}
+            alt="EloqConvergedDB Architecture"
+            style={{
+              maxWidth: '100%',
+              height: 'auto',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+            }}
+          />
+        </div>
+      </div>
+
+      <div className="product-right-column" style={reversedStyles.textContent}>
+        <h1 className="title" style={reversedStyles.title}>
+          <img
+            src={useBaseUrl('img/EloqKV-icon.svg')}
+            alt="EloqKV Icon"
+            style={reversedStyles.icon}
+          />
+          EloqKV
+        </h1>
+        <p className="tagline" style={reversedStyles.tagline}>
+          Redis Compatible{' '}
+          <span style={reversedStyles.highlightedText}>Transactional</span>{' '}
+          Key-Value Database
+        </p>
+
+        {/* Buttons for second layout */}
+        <div style={{...buttonStyles.buttonContainer, gap: '20px'}}>
+          <Link
+            to="/download/eloqkv"
+            style={{
+              ...buttonStyles.actionButton,
+              ...buttonStyles.primary,
+              padding: '14px 28px', // Slightly larger buttons
+            }}>
+            Download Now
+          </Link>
+          <Link
+            to="/product/eloqkv"
+            style={{
+              ...buttonStyles.actionButton,
+              ...buttonStyles.secondary,
+              padding: '14px 28px', // Slightly larger buttons
+            }}>
+            Explore EloqKV
+          </Link>
+        </div>
+      </div>
+    </div>,
+
+    // Third layout - EloqDoc (Animation left, Text right)
+    <div
+      className="product-columns"
+      style={reversedStyles.reversed}
+      key="layout-3">
+      <div
+        className="product-left-column"
+        style={reversedStyles.animationContainer}>
+        <div
+          className="animation-container2"
+          style={{
+            position: 'relative',
+            width: '100%',
+            height: '450px',
+          }}>
+          <img
+            src={useBaseUrl('img/homepage/EloqDoc-banner-svg.svg')}
+            alt="EloqDoc Architecture"
+            style={{
+              maxWidth: '80%',
+              height: 'auto',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+            }}
+          />
+        </div>
+      </div>
+
+      <div className="product-right-column" style={reversedStyles.textContent}>
+        <h1 className="title" style={reversedStyles.title}>
+          <img
+            src={useBaseUrl('img/EloqDoc-icon.svg')}
+            alt="EloqDoc Icon"
+            style={reversedStyles.icon}
+          />
+          EloqDoc
+        </h1>
+        <p className="tagline" style={reversedStyles.tagline}>
+          MongoDB Compatible{' '}
+          <span style={reversedStyles.highlightedText}>Elastic</span> Document
+          Database
+        </p>
+
+        {/* Buttons for third layout */}
+        <div style={{...buttonStyles.buttonContainer, gap: '20px'}}>
+          <Link
+            to="/download/eloqdoc"
+            style={{
+              ...buttonStyles.actionButton,
+              ...buttonStyles.primary,
+              padding: '14px 28px', // Slightly larger buttons
+            }}>
+            Download Now
+          </Link>
+          <Link
+            to="/product/eloqdoc"
+            style={{
+              ...buttonStyles.actionButton,
+              ...buttonStyles.secondary,
+              padding: '14px 28px', // Slightly larger buttons
+            }}>
+            Explore EloqDoc
+          </Link>
+        </div>
+      </div>
+    </div>,
+
+    // Fourth layout - EloqSQL (Animation left, Text right)
+    <div
+      className="product-columns"
+      style={reversedStyles.reversed}
+      key="layout-4">
+      <div
+        className="product-left-column"
+        style={reversedStyles.animationContainer}>
+        <div
+          className="animation-container2"
+          style={{
+            position: 'relative',
+            width: '100%',
+            height: '450px',
+          }}>
+          <img
+            src={useBaseUrl('img/homepage/EloqSQL-banner-svg.svg')}
+            alt="EloqSQL Architecture"
+            style={{
+              maxWidth: '90%',
+              height: 'auto',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+            }}
+          />
+        </div>
+      </div>
+
+      <div className="product-right-column" style={reversedStyles.textContent}>
+        <h1 className="title" style={reversedStyles.title}>
+          <img
+            src={useBaseUrl('img/EloqSQL-icon.svg')}
+            alt="EloqSQL Icon"
+            style={reversedStyles.icon}
+          />
+          EloqSQL
+        </h1>
+        <p className="tagline" style={reversedStyles.tagline}>
+          MySQL Compatible{' '}
+          <span style={reversedStyles.highlightedText}>Distributed</span> SQL
+          Database
+        </p>
+
+        {/* Buttons for fourth layout */}
+        <div style={{...buttonStyles.buttonContainer, gap: '20px'}}>
+          <Link
+            to="/download/eloqsql"
+            style={{
+              ...buttonStyles.actionButton,
+              ...buttonStyles.primary,
+              padding: '14px 28px', // Slightly larger buttons
+            }}>
+            Download Now
+          </Link>
+          <Link
+            to="/product/eloqsql"
+            style={{
+              ...buttonStyles.actionButton,
+              ...buttonStyles.secondary,
+              padding: '14px 28px', // Slightly larger buttons
+            }}>
+            Explore EloqSQL
+          </Link>
+        </div>
+      </div>
+    </div>,
+
+    // Fifth layout - EloqConverged (Animation left, Text right)
+    <div
+      className="product-columns"
+      style={reversedStyles.reversed}
+      key="layout-5">
+      <div
+        className="product-left-column"
+        style={reversedStyles.animationContainer}>
+        <div
+          className="animation-container2"
+          style={{
+            position: 'relative',
+            width: '100%',
+            height: '450px',
+          }}>
+          <img
+            src={useBaseUrl('img/EloqConvergedDB-banner.png')}
+            alt="EloqConvergedDB Architecture"
+            style={{
+              maxWidth: '100%',
+              height: 'auto',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+            }}
+          />
+        </div>
+      </div>
+
+      <div className="product-right-column" style={reversedStyles.textContent}>
+        <h1 className="title" style={reversedStyles.title}>
+          <img
+            src={useBaseUrl('img/homepage/EloqConvergedDB-icon.svg')}
+            alt="EloqConvergedDB Icon"
+            style={reversedStyles.icon}
+          />
+          EloqConvergedDB
+        </h1>
+        <p className="tagline" style={reversedStyles.tagline}>
+          The First Multi Model{' '}
+          <span style={reversedStyles.highlightedText}>AI Native</span> Database
+        </p>
+
+        {/* Buttons for fifth layout */}
+        <div style={{...buttonStyles.buttonContainer, gap: '20px'}}>
+          <Link
+            to="/download/eloqconvergeddb"
+            style={{
+              ...buttonStyles.actionButton,
+              ...buttonStyles.primary,
+              padding: '14px 28px', // Slightly larger buttons
+            }}>
+            Explore EloqConvergedDB
+          </Link>
+        </div>
+      </div>
+    </div>,
+
+    // Sixth layout - EloqCloud (Animation left, Text right)
+    <div
+      className="product-columns"
+      style={reversedStyles.reversed}
+      key="layout-4">
+      <div
+        className="product-left-column"
+        style={reversedStyles.animationContainer}>
+        <div
+          className="animation-container2"
+          style={{
+            position: 'relative',
+            width: '100%',
+            height: '450px',
+          }}>
+          <img
+            src={useBaseUrl('img/homepage/EloqCloud-banner-svg.svg')}
+            alt="EloqCloud Architecture"
+            style={{
+              maxWidth: '90%',
+              height: 'auto',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+            }}
+          />
+        </div>
+      </div>
+
+      <div className="product-right-column" style={reversedStyles.textContent}>
+        <h1 className="title" style={reversedStyles.title}>
+          <img
+            src={useBaseUrl('img/homepage/EloqCloud-icon.svg')}
+            alt="EloqCLoud Icon"
+            style={reversedStyles.icon}
+          />
+          EloqCloud
+        </h1>
+        <p className="tagline" style={reversedStyles.tagline}>
+          The Most{' '}
+          <span style={reversedStyles.highlightedText}>Cost Effective</span>{' '}
+          Serverless Database Platform
+        </p>
+
+        {/* Buttons for fourth layout */}
+        <div style={{...buttonStyles.buttonContainer, gap: '20px'}}>
+          <Link
+            to="https://cloud.eloqdata.com/join-waitlist"
+            style={{
+              ...buttonStyles.actionButton,
+              ...buttonStyles.primary,
+              padding: '14px 28px', // Slightly larger buttons
+            }}>
+            Try it Now
+          </Link>
+          <Link
+            to="/pricing"
+            style={{
+              ...buttonStyles.actionButton,
+              ...buttonStyles.secondary,
+              padding: '14px 28px', // Slightly larger buttons
+            }}>
+            Pricing
+          </Link>
+        </div>
+      </div>
+    </div>,
+  ];
+
+  // Add keyframe animation for floating effect
+  useEffect(() => {
+    // Add keyframe animation for floating effect and pulse effect
+    const styleSheet = document.createElement('style');
+    styleSheet.type = 'text/css';
+    styleSheet.innerText = `
+      @keyframes float {
+        0% {
+          transform: translateY(0);
+        }
+        100% {
+          transform: translateY(-10px);
+        }
+      }
+      
+      @keyframes pulse {
+        0%, 100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.85;
+        }
+      }
+    `;
+    document.head.appendChild(styleSheet);
+
+    return () => {
+      document.head.removeChild(styleSheet);
+    };
+  }, []);
+
+  // Add navigation handlers
+  const goToPrevious = () => {
+    const newIndex =
+      contentIndex === 0 ? contentLayouts.length - 1 : contentIndex - 1;
+    setContentIndex(newIndex);
+
+    // Reset timer
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+    }
+
+    timerRef.current = setInterval(() => {
+      setContentIndex(prevIndex => (prevIndex + 1) % 5); // Update to handle 5 layouts
+    }, 5000);
+  };
+
+  const goToNext = () => {
+    const newIndex =
+      contentIndex === contentLayouts.length - 1 ? 0 : contentIndex + 1;
+    setContentIndex(newIndex);
+
+    // Reset timer
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+    }
+
+    timerRef.current = setInterval(() => {
+      setContentIndex(prevIndex => (prevIndex + 1) % 5); // Update to handle 5 layouts
+    }, 5000);
+  };
+
+  // In the HomePage component
+  const handleIndicatorClick = index => {
+    // Set the content index directly
+    setContentIndex(index);
+
+    // Reset the interval timer to give full viewing time
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+    }
+
+    timerRef.current = setInterval(() => {
+      setContentIndex(prevIndex => (prevIndex + 1) % 5); // Update to handle 5 layouts
+    }, 5000);
+  };
+
   return (
     <Layout
       description="Build the Next Generation of Databases the Right Way"
@@ -734,142 +1394,278 @@ function HomePage() {
         </div>
 
         <div className="container1">
-          <div className="product-columns">
-            <div className="product-left-column">
-              <h1 className="title">
-                Revolutionary Databases Powering the AI Age
-              </h1>
-              <p className="tagline">
-                Databases for all your AI app needs—multimodal, transactional,
-                elastic and standard API-compatible{' '}
-              </p>
-
-              {/* Add product shortcuts */}
-              <div className="product-shortcuts-container">
-                <div className="product-shortcuts">
-                  {/* EloqKV */}
-                  <div className="product-shortcut-wrapper">
-                    <Link to="/product/eloqkv" className="product-shortcut">
-                      <div className="shortcut-icon redis">
-                        <img
-                          src={useBaseUrl('img/EloqKV-icon.svg')}
-                          alt="EloqKV"
-                          width="32"
-                          height="32"
-                        />
-                      </div>
-                      <span className="product-name">
-                        EloqKV
-                        <a
-                          href="https://github.com/eloqdata/eloqkv"
-                          className="github-superscript"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label="EloqKV GitHub Repository"
-                          onClick={e => e.stopPropagation()}>
-                          <svg
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none">
-                            <path
-                              d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.167 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"
-                              fill="white"
-                            />
-                          </svg>
-                        </a>
-                      </span>
-                    </Link>
-                  </div>
-
-                  {/* EloqSQL */}
-                  <div className="product-shortcut-wrapper">
-                    <Link to="/product/eloqsql" className="product-shortcut">
-                      <div className="shortcut-icon postgres">
-                        <img
-                          src={useBaseUrl('img/EloqSQL-icon.svg')}
-                          alt="EloqSQL"
-                          width="32"
-                          height="32"
-                        />
-                      </div>
-                      <span className="product-name">
-                        EloqSQL
-                        <a
-                          href="https://github.com/eloqdata/eloqsql"
-                          className="github-superscript"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label="EloqSQL GitHub Repository"
-                          onClick={e => e.stopPropagation()}>
-                          <svg
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none">
-                            <path
-                              d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.167 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"
-                              fill="white"
-                            />
-                          </svg>
-                        </a>
-                      </span>
-                    </Link>
-                  </div>
-
-                  {/* EloqDoc */}
-                  <div className="product-shortcut-wrapper">
-                    <Link to="/product/eloqdoc" className="product-shortcut">
-                      <div className="shortcut-icon mongo">
-                        <img
-                          src={useBaseUrl('img/EloqDoc-icon.svg')}
-                          alt="EloqDoc"
-                          width="32"
-                          height="32"
-                        />
-                      </div>
-                      <span className="product-name">
-                        EloqDoc
-                        <a
-                          href="https://github.com/eloqdata/eloqdoc"
-                          className="github-superscript"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label="EloqDoc GitHub Repository"
-                          onClick={e => e.stopPropagation()}>
-                          <svg
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none">
-                            <path
-                              d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.167 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"
-                              fill="white"
-                            />
-                          </svg>
-                        </a>
-                      </span>
-                    </Link>
-                  </div>
-                </div>
+          {/* Animated content rotation */}
+          <div
+            style={{...rotatingContentStyles.container, position: 'relative'}}>
+            {contentLayouts.map((layout, index) => (
+              <div
+                key={`content-${index}`}
+                style={{
+                  ...rotatingContentStyles.content,
+                  ...(contentIndex === index
+                    ? rotatingContentStyles.visible
+                    : rotatingContentStyles.hidden),
+                }}>
+                {layout}
               </div>
+            ))}
+          </div>
+
+          {/* Content indicators with navigation arrows */}
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: '8px',
+              marginTop: '16px',
+            }}>
+            {/* Left navigation arrow */}
+            <div
+              style={navigationArrowStyles.container}
+              onClick={goToPrevious}
+              onMouseEnter={e => {
+                e.currentTarget.style.backgroundColor =
+                  'rgba(255, 123, 45, 0.2)';
+                e.currentTarget.style.boxShadow =
+                  '0 6px 20px rgba(0, 0, 0, 0.4)';
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.backgroundColor =
+                  'rgba(255, 255, 255, 0.1)';
+                e.currentTarget.style.boxShadow =
+                  '0 4px 15px rgba(0, 0, 0, 0.25)';
+              }}>
+              &lt;
             </div>
 
-            <div className="product-right-column">
-              <div className="animation-container1">
-                {/* Static base image */}
-                <img
-                  className="static-image1"
-                  alt="Static base"
-                  src={useBaseUrl('img/eloqhomepage1.svg')}
-                />
+            {/* Dots */}
+            {contentLayouts.map((_, index) => (
+              <div
+                key={`indicator-${index}`}
+                onClick={() => handleIndicatorClick(index)}
+                style={{
+                  ...indicatorStyles.dot,
+                  ...(contentIndex === index
+                    ? indicatorStyles.active
+                    : indicatorStyles.inactive),
+                }}
+              />
+            ))}
 
-                {/* Dynamic floating image */}
-                <img
-                  className="floating-image1"
-                  alt="Dynamic element"
-                  src={useBaseUrl('img/eloqhomepage2.svg')}
-                />
+            {/* Right navigation arrow */}
+            <div
+              style={navigationArrowStyles.container}
+              onClick={goToNext}
+              onMouseEnter={e => {
+                e.currentTarget.style.backgroundColor =
+                  'rgba(255, 123, 45, 0.2)';
+                e.currentTarget.style.boxShadow =
+                  '0 6px 20px rgba(0, 0, 0, 0.4)';
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.backgroundColor =
+                  'rgba(255, 255, 255, 0.1)';
+                e.currentTarget.style.boxShadow =
+                  '0 4px 15px rgba(0, 0, 0, 0.25)';
+              }}>
+              &gt;
+            </div>
+          </div>
+        </div>
+
+        {/* Product Matrix Section */}
+        <div className="section-container">
+          <h2 className="section-title">Product Matrix</h2>
+          <p className="section-subtitle">
+            One database engine, multiple APIs for all your application needs
+          </p>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginTop: '30px',
+              width: '100%',
+            }}>
+            <div
+              style={{
+                maxWidth: '900px',
+                width: '100%',
+                border: 'none',
+                borderRadius: '10px',
+                overflow: 'hidden',
+                background: 'rgba(25, 25, 40, 0.9)',
+                color: 'white',
+                boxShadow: '0 0px 0px rgba(103, 25, 90, 0.2)',
+              }}>
+              {/* Product Matrix as a grid layout */}
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: '1fr 1fr',
+                  gridGap: '0px',
+                  gridRowGap: '0px',
+                  padding: '0px',
+                }}>
+                {/* EloqKV */}
+                <div
+                  style={{
+                    background: 'rgba(30, 30, 50, 0.7)',
+                    borderRadius: '0px',
+                    padding: '0',
+                    overflow: 'hidden',
+                  }}>
+                  <Link
+                    to="/product/eloqkv"
+                    style={{display: 'block', height: '100%'}}>
+                    <img
+                      src={useBaseUrl('img/homepage/EloqKV-dark.svg')}
+                      alt="EloqKV"
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'contain',
+                        padding: '20px 20px 5px 20px',
+                        transition: 'transform 0.3s ease',
+                      }}
+                      onMouseEnter={e => {
+                        e.currentTarget.style.transform = 'scale(1.05)';
+                      }}
+                      onMouseLeave={e => {
+                        e.currentTarget.style.transform = 'scale(1)';
+                      }}
+                    />
+                  </Link>
+                </div>
+
+                {/* EloqDoc */}
+                <div
+                  style={{
+                    background: 'rgba(30, 30, 50, 0.7)',
+                    borderRadius: '0px',
+                    padding: '0',
+                    overflow: 'hidden',
+                  }}>
+                  <Link
+                    to="/product/eloqdoc"
+                    style={{display: 'block', height: '100%'}}>
+                    <img
+                      src={useBaseUrl('img/homepage/EloqDoc-dark.svg')}
+                      alt="EloqDoc"
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'contain',
+                        padding: '20px 20px 5px 20px',
+                        transition: 'transform 0.3s ease',
+                      }}
+                      onMouseEnter={e => {
+                        e.currentTarget.style.transform = 'scale(1.05)';
+                      }}
+                      onMouseLeave={e => {
+                        e.currentTarget.style.transform = 'scale(1)';
+                      }}
+                    />
+                  </Link>
+                </div>
+
+                {/* EloqSQL */}
+                <div
+                  style={{
+                    background: 'rgba(30, 30, 50, 0.7)',
+                    borderRadius: '0px',
+                    padding: '0',
+                    overflow: 'hidden',
+                    marginTop: '-10px',
+                  }}>
+                  <Link
+                    to="/product/eloqsql"
+                    style={{display: 'block', height: '100%'}}>
+                    <img
+                      src={useBaseUrl('img/homepage/EloqSQL-dark.svg')}
+                      alt="EloqSQL"
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'contain',
+                        padding: '20px 20px 5px 20px',
+                        transition: 'transform 0.3s ease',
+                      }}
+                      onMouseEnter={e => {
+                        e.currentTarget.style.transform = 'scale(1.05)';
+                      }}
+                      onMouseLeave={e => {
+                        e.currentTarget.style.transform = 'scale(1)';
+                      }}
+                    />
+                  </Link>
+                </div>
+
+                {/* EloqCloud */}
+                <div
+                  style={{
+                    background: 'rgba(30, 30, 50, 0.7)',
+                    borderRadius: '0px',
+                    padding: '0',
+                    overflow: 'hidden',
+                    marginTop: '-10px',
+                  }}>
+                  <Link
+                    to="https://cloud.eloqdata.com/join-waitlist"
+                    style={{display: 'block', height: '100%'}}>
+                    <img
+                      src={useBaseUrl('img/homepage/EloqCloud-dark.svg')}
+                      alt="EloqCloud"
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'contain',
+                        padding: '20px 20px 5px 20px',
+                        transition: 'transform 0.3s ease',
+                      }}
+                      onMouseEnter={e => {
+                        e.currentTarget.style.transform = 'scale(1.05)';
+                      }}
+                      onMouseLeave={e => {
+                        e.currentTarget.style.transform = 'scale(1)';
+                      }}
+                    />
+                  </Link>
+                </div>
+
+                {/* EloqConvergedDB - spans full width */}
+                <div
+                  style={{
+                    gridColumn: '1 / span 2',
+                    background: 'rgba(30, 30, 50, 0.7)',
+                    borderRadius: '0px',
+                    padding: '0',
+                    overflow: 'hidden',
+                    marginTop: '-10px',
+                  }}>
+                  <Link
+                    to="/product/eloqconvergeddb"
+                    style={{display: 'block', height: '100%'}}>
+                    <img
+                      src={useBaseUrl('img/homepage/EloqConvergedDB-dark.svg')}
+                      alt="EloqConvergedDB"
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'contain',
+                        padding: '20px 20px 5px 20px',
+                        transition: 'transform 0.3s ease',
+                      }}
+                      onMouseEnter={e => {
+                        e.currentTarget.style.transform = 'scale(1.05)';
+                      }}
+                      onMouseLeave={e => {
+                        e.currentTarget.style.transform = 'scale(1)';
+                      }}
+                    />
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -949,28 +1745,6 @@ function HomePage() {
           </div>
         </div>
 
-        {/* Products Section */}
-        <div className="section-container">
-          <h2 className="section-title">Products</h2>
-          <p className="section-subtitle">
-            Flexibility at its best—choose your standard API
-          </p>
-          <div className="product-cards">
-            <Link to="/product/eloqkv" className="product-card">
-              <h3>EloqKV</h3>
-              <p>Redis Compatible Database</p>
-            </Link>
-            <Link to="/product/eloqsql" className="product-card">
-              <h3>EloqSQL</h3>
-              <p>MySQL Compatible Database</p>
-            </Link>
-            <Link to="/product/eloqdoc" className="product-card">
-              <h3>EloqDoc</h3>
-              <p>Mongo Compatible Database</p>
-            </Link>
-          </div>
-        </div>
-
         {/* Community Section */}
         <div className="section-container">
           <h2 className="section-title">Community</h2>
@@ -1016,9 +1790,7 @@ function HomePage() {
               </p>
             </Link>
 
-            <Link
-              href="https://discord.gg/nmYjBkfak6"
-              className="community-card">
+            <Link to="https://discord.gg/nmYjBkfak6" className="community-card">
               <div className="community-icon">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                   <path

@@ -330,6 +330,26 @@ module.exports = {
               {
                 type: 'html',
                 value: `
+                  <a href="/product/eloqconvergeddb" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 340px;">
+                    <div style="display: flex; align-items: center;">
+                      <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
+                        <rect width="32" height="32" rx="6" fill="#222" />
+                        <path d="M8 8v16h16V8H8z" stroke="#FFFFFF" stroke-width="2" fill="none" />
+                        <path d="M8 14h16" stroke="#FFFFFF" stroke-width="2" />
+                        <path d="M14 8v16" stroke="#FFFFFF" stroke-width="2" />
+                        <circle cx="19" cy="19" r="3" stroke="#FFFFFF" stroke-width="2" fill="none" />
+                      </svg>
+                      <div style="display: flex; flex-direction: column;">
+                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqConvergedDB</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Multi model AI native database</span>
+                      </div>
+                    </div>
+                  </a>
+                `,
+              },
+              {
+                type: 'html',
+                value: `
                   <a href="https://cloud.eloqdata.com/join-waitlist" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 340px;">
                     <div style="display: flex; align-items: center;">
                       <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
@@ -411,6 +431,11 @@ module.exports = {
             ],
           },
           {
+            to: '/pricing',
+            label: 'Pricing',
+            position: 'left',
+          },
+          {
             type: 'dropdown',
             label: 'Learn',
             position: 'left',
@@ -445,24 +470,6 @@ module.exports = {
                       <div style="display: flex; flex-direction: column;">
                         <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">News</span>
                         <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Get latest updates</span>
-                      </div>
-                    </div>
-                  </a>
-                `,
-              },
-              {
-                type: 'html',
-                value: `
-                  <a href="https://eloqdata.discourse.group/" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 240px;">
-                    <div style="display: flex; align-items: center;">
-                      <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
-                        <rect width="32" height="32" rx="6" fill="#222" />
-                        <path d="M6 10h20v12H16l-6 4v-4H6V10z" stroke="#FFFFFF" stroke-width="2" fill="none" />
-                        <path d="M11 16h2M15 16h2M19 16h2" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
-                      </svg>
-                      <div style="display: flex; flex-direction: column;">
-                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">Forum</span>
-                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Discuss with community</span>
                       </div>
                     </div>
                   </a>
@@ -504,7 +511,7 @@ module.exports = {
                         <path d="M8 18v4c0 1.5 3.5 3 8 3s8-1.5 8-3v-4" stroke="#FFFFFF" stroke-width="2" fill="none" />
                       </svg>
                       <div style="display: flex; flex-direction: column;">
-                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqSQL <sup style="font-size:12px">preview</sup></span>
+                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqSQL</span>
                         <span style="font-size: 14px; color: rgba(255,255,255,0.6);">MySQL compatible RDBMS</span>
                       </div>
                     </div>
@@ -523,7 +530,7 @@ module.exports = {
                         <path d="M12 14h8M12 18h8M12 22h5" stroke="#FFFFFF" stroke-width="2" />
                       </svg>
                       <div style="display: flex; flex-direction: column;">
-                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqDoc <sup style="font-size:12px">preview</sup></span>
+                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqDoc</span>
                         <span style="font-size: 14px; color: rgba(255,255,255,0.6);">MongoDB compatible JSON database</span>
                       </div>
                     </div>
@@ -541,7 +548,7 @@ module.exports = {
                         <path d="M16 12v8M12 16h8" stroke="#FFFFFF" stroke-width="2" />
                       </svg>
                       <div style="display: flex; flex-direction: column;">
-                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqCtl <sup style="font-size:12px">preview</sup></span>
+                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqCtl</span>
                         <span style="font-size: 14px; color: rgba(255,255,255,0.6);">One stop cluster deployment and management tool</span>
                       </div>
                     </div>
