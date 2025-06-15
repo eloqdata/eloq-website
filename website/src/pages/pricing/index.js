@@ -19,7 +19,7 @@ const PRICING_PLANS = {
       'Scale to zero',
     ],
     cta: 'Start for free',
-    ctaLink: '/signup',
+    ctaLink: 'https://cloud.eloqdata.com/join-waitlist',
   },
   launch: {
     name: 'Business',
@@ -161,7 +161,7 @@ export default function Pricing() {
                           )}
                           {feature
                             .toLowerCase()
-                            .includes('50 GB data transfer') && (
+                            .includes('50 gb data transfer') && (
                             <div className={styles.tooltipContainer}>
                               <span
                                 className={styles.infoIcon}
@@ -175,7 +175,8 @@ export default function Pricing() {
                               </span>
                               {tooltipVisible[`storage-${tooltipId}`] && (
                                 <div className={styles.tooltip}>
-                                  Additional at $0.75 per GB
+                                  Additional usage charged at cloud provider’s
+                                  network rates.
                                 </div>
                               )}
                             </div>

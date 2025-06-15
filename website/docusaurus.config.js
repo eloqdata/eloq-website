@@ -431,11 +431,6 @@ module.exports = {
             ],
           },
           {
-            to: '/pricing',
-            label: 'Pricing',
-            position: 'left',
-          },
-          {
             type: 'dropdown',
             label: 'Learn',
             position: 'left',
