@@ -52,12 +52,14 @@
 @media (max-width: 1024px) {
   .feature-section {
     grid-template-columns: repeat(2, 1fr);
+    padding: 2rem 1rem;
   }
 }
 
 @media (max-width: 640px) {
   .feature-section {
     grid-template-columns: 1fr;
+    padding: 1rem;
   }
 }
 
