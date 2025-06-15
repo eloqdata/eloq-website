@@ -11,11 +11,11 @@ const PRICING_PLANS = {
       'The first free-tier database built for production workloads, not just testing.',
     features: [
       '1 project',
-      '25 GB storage',
+      '10 GB storage',
       'Unlimited compute hours',
       'Up to 10K read QPS',
       'Up to 1K write QPS',
-      '25 GB Data Transfer',
+      '10 GB data transfer',
       'Scale to zero',
     ],
     cta: 'Start for free',
@@ -31,7 +31,7 @@ const PRICING_PLANS = {
       '100 projects',
       '50 GB storage',
       '180 compute hours',
-      'Unlimited Data Transfer',
+      '50 GB data transfer',
       'Up to 4CU',
     ],
     cta: 'Get started',
@@ -47,7 +47,7 @@ const PRICING_PLANS = {
       '1000 projects',
       '1 TB storage',
       '4000 compute hours',
-      'Unlimited Data Transfer',
+      'Unlimited data transfer',
       'Up to 32CU',
     ],
     cta: 'Get started',
@@ -68,7 +68,7 @@ export default function Pricing() {
 
   return (
     <Layout
-      title="EloqKV Pricing"
+      title="EloqCloud for EloqKV Pricing"
       description="Pricing plans that grow with you. From prototype to Enterprise.">
       <main className={styles.pricingPage}>
         <div className={styles.hero}>
@@ -135,7 +135,7 @@ export default function Pricing() {
                               </span>
                               {tooltipVisible[`storage-${tooltipId}`] && (
                                 <div className={styles.tooltip}>
-                                  Additional at $0.75 per GB
+                                  Additional at $0.5 per GB
                                 </div>
                               )}
                             </div>
@@ -155,6 +155,27 @@ export default function Pricing() {
                               {tooltipVisible[`storage-${tooltipId}`] && (
                                 <div className={styles.tooltip}>
                                   Additional at $0.25 per GB
+                                </div>
+                              )}
+                            </div>
+                          )}
+                          {feature
+                            .toLowerCase()
+                            .includes('50 GB data transfer') && (
+                            <div className={styles.tooltipContainer}>
+                              <span
+                                className={styles.infoIcon}
+                                onMouseEnter={() =>
+                                  showTooltip(`storage-${tooltipId}`)
+                                }
+                                onMouseLeave={() =>
+                                  hideTooltip(`storage-${tooltipId}`)
+                                }>
+                                i
+                              </span>
+                              {tooltipVisible[`storage-${tooltipId}`] && (
+                                <div className={styles.tooltip}>
+                                  Additional at $0.75 per GB
                                 </div>
                               )}
                             </div>
