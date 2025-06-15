@@ -67,8 +67,6 @@ Key advantages of EloqDoc include:
 
 EloqDoc addresses the latency challenge by using local NVMe storage as an intelligent cache. Modern cloud-optimized instances offer significant local NVMe capacity (e.g., 3.5TB per 16-core server), enabling high-performance caching of active data while reducing costs.
 
-Other cloud-native databases such as [Neon](https://neon.com/) employ a separate page server to cache object storage data. However, this adds costs for CPU, memory, and page server storage—and cache misses still incur network latency. In contrast, EloqDoc’s direct use of local NVMe for caching yields lower latency and better cost efficiency.
-
 ## Summary of the Video
 
 In Hubert’s presentation, we demonstrate how EloqDoc and StreamNative’s Ursa can be combined to build scalable, efficient data pipelines. Ursa is an innovative streaming storage engine that disrupts traditional models like Kafka, which rely on costly persistent storage and cross-AZ replication.
