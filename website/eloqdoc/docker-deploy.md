@@ -8,7 +8,7 @@ shell
 docker network create --subnet=172.20.0.0/16 eloqnet
 
 # Launch eloq-doc container.
-docker run -d --net eloqnet --ip 172.20.0.10 -p 27017:27017 --name=eloqdoc-cloud eloqdoc-cloud-ubuntu2204-public
+docker run -d --net eloqnet --ip 172.20.0.10 -p 27017:27017 --name=eloqdoc-cloud eloqdata/eloqdoc-cloud-ubuntu2204-public
 
 # Check the container launched succeed.
 docker ps | grep eloqdoc-cloud
