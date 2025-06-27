@@ -480,24 +480,7 @@ module.exports = {
               {
                 type: 'html',
                 value: `
-                  <a href="/download/eloqkv" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 320px;">
-                    <div style="display: flex; align-items: center;">
-                      <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
-                        <rect width="32" height="32" rx="6" fill="#222" />
-                        <path d="M24 16.5l-8 4.5-8-4.5L16 12l8 4.5z" fill="#FFFFFF" />
-                      </svg>
-                      <div style="display: flex; flex-direction: column;">
-                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqKV</span>
-                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Redis compatible Key-Value database</span>
-                      </div>
-                    </div>
-                  </a>
-                `,
-              },
-              {
-                type: 'html',
-                value: `
-                  <a href="/download/eloqsql" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 240px;">
+                  <a href="/download" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 320px;">
                     <div style="display: flex; align-items: center;">
                       <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
                         <rect width="32" height="32" rx="6" fill="#222" />
@@ -506,8 +489,8 @@ module.exports = {
                         <path d="M8 18v4c0 1.5 3.5 3 8 3s8-1.5 8-3v-4" stroke="#FFFFFF" stroke-width="2" fill="none" />
                       </svg>
                       <div style="display: flex; flex-direction: column;">
-                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqSQL</span>
-                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">MySQL compatible RDBMS</span>
+                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">Eloq Database</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Download EloqKV, EloqDoc and EloqSQL</span>
                       </div>
                     </div>
                   </a>
@@ -516,26 +499,7 @@ module.exports = {
               {
                 type: 'html',
                 value: `
-                  <a href="/download/eloqdoc" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 240px;">
-                    <div style="display: flex; align-items: center;">
-                      <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
-                        <rect width="32" height="32" rx="6" fill="#222" />
-                        <path d="M10 8h8l4 4v12H10V8z" stroke="#FFFFFF" stroke-width="2" fill="none" />
-                        <path d="M18 8v4h4" stroke="#FFFFFF" stroke-width="2" fill="none" />
-                        <path d="M12 14h8M12 18h8M12 22h5" stroke="#FFFFFF" stroke-width="2" />
-                      </svg>
-                      <div style="display: flex; flex-direction: column;">
-                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqDoc</span>
-                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">MongoDB compatible JSON database</span>
-                      </div>
-                    </div>
-                  </a>
-                `,
-              },
-              {
-                type: 'html',
-                value: `
-                  <a href="/downloadeloqctl" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 240px;">
+                  <a href="/downloadeloqctl" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 320px;">
                     <div style="display: flex; align-items: center;">
                       <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
                         <rect width="32" height="32" rx="6" fill="#222" />

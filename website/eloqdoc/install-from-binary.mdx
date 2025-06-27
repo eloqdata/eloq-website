@@ -25,7 +25,7 @@ After successfully downloading the proper binary, untar it in a directory.
 <TabItem value="ubuntu2004">
 
 ```shell
-mkdir eloqdoc-cloud && tar -zxf eloqdoc-v0.2.0-ubuntu20-amd64.tar.gz -C eloqdoc-cloud
+mkdir eloqdoc-cloud && tar -zxf eloqdoc-v0.2.1-ubuntu20-amd64.tar.gz -C eloqdoc-cloud
 ```
 
 </TabItem>
@@ -33,15 +33,15 @@ mkdir eloqdoc-cloud && tar -zxf eloqdoc-v0.2.0-ubuntu20-amd64.tar.gz -C eloqdoc-
 <TabItem value="ubuntu2204">
 
 ```shell
-mkdir eloqdoc-cloud && tar -zxf eloqdoc-v0.2.0-ubuntu22-amd64.tar.gz -C eloqdoc-cloud
+mkdir eloqdoc-cloud && tar -zxf eloqdoc-v0.2.1-ubuntu22-amd64.tar.gz -C eloqdoc-cloud
 ```
 
 </TabItem>
 
-<TabItem>
+<TabItem value="ubuntu2404">
 
 ```shell
-mkdir eloqdoc-cloud && tar -zxf eloqdoc-v0.2.0-ubuntu24-amd64.tar.gz -C eloqdoc-cloud
+mkdir eloqdoc-cloud && tar -zxf eloqdoc-v0.2.1-ubuntu24-amd64.tar.gz -C eloqdoc-cloud
 ```
 
 </TabItem>
@@ -52,7 +52,6 @@ After tarball eloqdoc, you should see three folders: bin, lib, and etc. The bin
 folder contains executable files. The lib folder contains dependency shared libs.
 The etc folder contains a configuration file which you should modify based on
 your environment.
-
 
 ## Start S3 emulator
 
@@ -68,19 +67,20 @@ chmod +x minio
 ```
 
 After launch minio successfully, you shoud see outputs.
+
 ```shell
 MinIO Object Storage Server
 Copyright: 2015-2025 MinIO, Inc.
 License: GNU AGPLv3 - https://www.gnu.org/licenses/agpl-3.0.html
 Version: RELEASE.2025-05-24T17-08-30Z (go1.24.3 linux/amd64)
 
-API: http://192.168.12.52:9000  http://172.17.0.1:9000  http://127.0.0.1:9000 
-   RootUser: minioadmin 
-   RootPass: minioadmin 
+API: http://192.168.12.52:9000  http://172.17.0.1:9000  http://127.0.0.1:9000
+   RootUser: minioadmin
+   RootPass: minioadmin
 
-WebUI: http://192.168.12.52:41127 http://172.17.0.1:41127 http://127.0.0.1:41127    
-   RootUser: minioadmin 
-   RootPass: minioadmin 
+WebUI: http://192.168.12.52:41127 http://172.17.0.1:41127 http://127.0.0.1:41127
+   RootUser: minioadmin
+   RootPass: minioadmin
 
 CLI: https://min.io/docs/minio/linux/reference/minio-mc.html#quickstart
    $ mc alias set 'myminio' 'http://192.168.12.52:9000' 'minioadmin' 'minioadmin'
@@ -134,6 +134,7 @@ setParameter:
 
 Modify `systemLog.path` and `storage.dbPath` based on your environment. And
 create the target folders if not exist.
+
 ```shell
 mkdir eloqdoc-cloud/db
 mkdir eloqdoc-cloud/logs
@@ -150,12 +151,14 @@ env LD_PRELOAD=./lib/libmimalloc.so.2:./lib/libbrpc.so \
 ## Connect to EloqDoc server
 
 # Open another terminal and execute run mongo client.
+
 ```shell
 cd eloqdoc-cloud && \
 ./bin/mongo --eval "db.t1.save({k: 1}); db.t1.find();"
 ```
 
 It should outputs
+
 ```shell
 MongoDB shell version v4.0.3
 connecting to: mongodb://127.0.0.1:27017

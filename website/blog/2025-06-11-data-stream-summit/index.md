@@ -10,7 +10,7 @@ blog: true
 featuredMain: true
 ---
 
-At the recent [Data Stream Summit 2025](https://datastreaming-summit.org/event/data-streaming-virtual-2025/speakers), Hubert Zhang, CTO of EloqData, delivered a talk on building elastic, agentic AI data pipelines using [Apache Pulsar](https://pulsar.apache.org/) and [EloqDoc](/product/eloqdoc).
+At the recent [Data Stream Summit 2025](https://datastreaming-summit.org/event/data-streaming-virtual-2025/speakers), Hubert Zhang, CTO of EloqData, delivered a talk on building elastic, agentic AI data pipelines using [Apache Pulsar](https://pulsar.apache.org/) and [EloqDoc](https://www.eloqdata.com/product/eloqdoc).
 
 <!--truncate-->
 

@@ -199,13 +199,17 @@
 }
 
 #download-reason label {
-  display: block; /* Ensure each label starts on a new line */
-  margin-bottom: 2px; /* Add some space between the checkboxes */
-  cursor: pointer; /* Make the label clickable */
+  display: block;
+  /* Ensure each label starts on a new line */
+  margin-bottom: 2px;
+  /* Add some space between the checkboxes */
+  cursor: pointer;
+  /* Make the label clickable */
 }
 
 #download-reason input[type="checkbox"] {
-  margin-right: 2px; /* Space between checkbox and label text */
+  margin-right: 2px;
+  /* Space between checkbox and label text */
 }
 
 /* Optional: Style for checkboxes */
@@ -217,19 +221,72 @@
 
 /* Optional: Adding hover effect for the labels */
 #download-reason label:hover {
-  color: #007bff; /* Change the color on hover */
+  color: #007bff;
+  /* Change the color on hover */
 }
 
 #download-reason label {
-  display: block; /* Ensure each label starts on a new line */
-  margin: 1px 0; /* Adjust this value to reduce top and bottom margin */
-  cursor: pointer; /* Make the label clickable */
+  display: block;
+  /* Ensure each label starts on a new line */
+  margin: 1px 0;
+  /* Adjust this value to reduce top and bottom margin */
+  cursor: pointer;
+  /* Make the label clickable */
 }
 
 .checkbox-option {
-  margin: 2px 0; /* Adjust margin between options */
+  margin: 2px 0;
+  /* Adjust margin between options */
 }
 
 #download-reason input[type="checkbox"] {
-  margin-right: 8px; /* Space between checkbox and text */
+  margin-right: 8px;
+  /* Space between checkbox and text */
+}
+
+.tooltipContainer {
+  display: inline-block;
+  position: relative;
+  margin-left: 8px;
+}
+
+.infoIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #666;
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+  margin-left: 4px;
+}
+
+.tooltip {
+  position: absolute;
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #333;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  white-space: pre-wrap;
+  z-index: 1000;
+  width: 450px;
+  line-height: 1.4;
+}
+
+.tooltip::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent #333 transparent transparent;
 }
