@@ -77,6 +77,40 @@ html[data-theme="dark"] {
       0 1px 2px 1px var(--ifm-table-border-color);
     --docsearch-container-background: rgba(0, 0, 0, 0.6);
   }
+
+  --ifm-background-color: #1b1b1d;
+  --ifm-background-surface-color: #1b1b1d;
+
+  .theme-doc-sidebar-container {
+    background-color: var(--ifm-background-color);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .menu {
+    background-color: var(--ifm-background-color);
+  }
+
+  .theme-doc-sidebar-menu {
+    background-color: var(--ifm-background-color);
+  }
+
+  /* Active and hover states */
+  .menu__link--active {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .menu__link:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  /* Main content area */
+  .main-wrapper {
+    background-color: var(--ifm-background-color);
+  }
+
+  article {
+    background-color: var(--ifm-background-color);
+  }
 }
 
 :root {
@@ -1951,8 +1985,7 @@ figcaption > p:last-child {
 .blog-container,
 article,
 .markdown {
-  background-color: #212128 !important;
-  /* Dark gray with slight blue tint like code editors */
+  background-color: var(--ifm-background-color) !important;
   color: #e4e4e7 !important;
   /* Slightly off-white for better readability */
 }
@@ -2231,4 +2264,10 @@ article code,
     justify-content: flex-start;
     margin-left: 0;
   }
+}
+
+/* Ensure consistent spacing */
+.theme-doc-sidebar-container {
+  margin-top: 0;
+  padding-top: 0;
 }

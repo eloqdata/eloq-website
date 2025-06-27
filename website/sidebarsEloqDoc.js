@@ -15,7 +15,7 @@
 const sidebars = {
   // By default, Docusaurus generates a sidebar from the docs folder structure
   eloqdoc: {
-    'Get Started': ['install-from-binary'],
+    'Get Started': ['install-from-binary', 'docker-deploy'],
   },
 };
 module.exports = sidebars;
