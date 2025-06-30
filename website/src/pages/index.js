@@ -1179,68 +1179,156 @@ function HomePage() {
             All the database features you need for your next blockbuster AI
             application
           </p>
-          <div className="feature-section">
-            {features.map((feature, index) => (
-              <a
-                href={useBaseUrl(feature.link)}
-                key={index}
-                className="feature-card">
-                <FontAwesomeIcon icon={feature.icon} className="feature-icon" />
-                <h3>{feature.title}</h3>
-                {feature.details.map((detail, i) => (
-                  <p key={i}>{detail}</p>
-                ))}
-              </a>
-            ))}
-          </div>
-        </div>
 
-        {/* Full ACID Transaction Section */}
-        <div className={styles.acidSection}>
-          <div className={styles.acidInner}>
-            <div className={styles.acidContent}>
-              <div className={styles.acidInfo}>
-                <h2 className={styles.acidTitle}>ACID Transaction Support</h2>
-                <p className={styles.acidDescription}>
-                  EloqKV is more than just an in-memory cache—it's a fully
-                  featured, distributed ACID-compliant transactional database.
-                  Eliminate the need for a separate SQL + Redis setup and say
-                  goodbye to cache coherence challenges.
-                </p>
-              </div>
-              <div className={styles.acidImageContainer}>
-                <img
-                  src="/img/acid-transaction.jpg"
-                  alt="ACID Transaction Diagram"
-                  className={styles.acidImage}
-                />
+          {/* Full ACID Transaction Section */}
+          <div className={styles.acidSection}>
+            <div className={styles.acidInner}>
+              <div className={styles.acidContent}>
+                <div className={styles.acidInfo}>
+                  <h2 className={styles.acidTitle}>ACID Transaction</h2>
+                  <p className={styles.acidDescription}>
+                    EloqKV is more than just an in-memory cache—it's a fully
+                    featured, distributed ACID-compliant transactional database.
+                    Eliminate the need for a separate SQL + Redis setup and say
+                    goodbye to cache coherence challenges.
+                  </p>
+                </div>
+                <div className={styles.acidImageContainer}>
+                  <img
+                    src="/img/acid-transaction.jpg"
+                    alt="ACID Transaction Diagram"
+                    className={styles.acidImage}
+                  />
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Tiered Storage Section */}
-        <div className={styles.tieredSection}>
-          <div className={styles.tieredInner}>
-            <div className={styles.tieredContent}>
-              <div className={styles.tieredImageContainer}>
-                <img
-                  src="/img/tiered-storage.jpg"
-                  alt="Tiered Storage Architecture"
-                  className={styles.tieredImage}
-                />
+          {/* Tiered Storage Section */}
+          <div className={styles.tieredSection}>
+            <div className={styles.tieredInner}>
+              <div className={styles.tieredContent}>
+                <div className={styles.tieredImageContainer}>
+                  <img
+                    src="/img/tiered-storage.jpg"
+                    alt="Tiered Storage Architecture"
+                    className={styles.tieredImage}
+                  />
+                </div>
+                <div className={styles.tieredInfo}>
+                  <h2 className={styles.tieredTitle}>Tiered Storage</h2>
+                  <p className={styles.tieredDescription}>
+                    EloqKV intelligently manages your data across multiple
+                    storage tiers, optimizing both performance and cost. Hot
+                    data stays in memory for lightning-fast access, warm data
+                    moves to SSD for balanced performance, and cold data is
+                    persisted to object storage—all while maintaining seamless
+                    access. This multi-tiered approach dramatically reduces TCO.
+                  </p>
+                </div>
               </div>
-              <div className={styles.tieredInfo}>
-                <h2 className={styles.tieredTitle}>Tiered Storage</h2>
-                <p className={styles.tieredDescription}>
-                  EloqKV intelligently manages your data across multiple storage
-                  tiers, optimizing both performance and cost. Hot data stays in
-                  memory for lightning-fast access, warm data moves to SSD for
-                  balanced performance, and cold data is persisted to object
-                  storage—all while maintaining seamless access. This
-                  multi-tiered approach dramatically reduces TCO (Total Cost of
-                  Ownership).
-                </p>
+            </div>
+          </div>
+
+          {/* Elastic Section */}
+          <div className={styles.acidSection}>
+            <div className={styles.acidInner}>
+              <div className={styles.acidContent}>
+                <div className={styles.acidInfo}>
+                  <h2 className={styles.acidTitle}>Scalable & Elastic</h2>
+                  <p className={styles.acidDescription}>
+                    EloqKV is architected for true scalability and elasticity,
+                    adapting seamlessly to workload demands. It scales up
+                    efficiently across multicore CPUs to maximize single-node
+                    performance, and scales out across distributed nodes for
+                    high availability and throughput. Clusters can expand
+                    dynamically to adapt to unpredictable traffic surges.
+                  </p>
+                </div>
+                <div className={styles.acidImageContainer}>
+                  <img
+                    src="/img/elastic.png"
+                    alt="Scalable & Elastic"
+                    className={styles.acidImage}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* High Performance Section */}
+          <div className={styles.tieredSection}>
+            <div className={styles.tieredInner}>
+              <div className={styles.tieredContent}>
+                <div className={styles.tieredImageContainer}>
+                  <img
+                    src="/img/highperf.png"
+                    alt="High Performance"
+                    className={styles.tieredImage}
+                  />
+                </div>
+                <div className={styles.tieredInfo}>
+                  <h2 className={styles.tieredTitle}>High Performance</h2>
+                  <p className={styles.tieredDescription}>
+                    EloqKV is engineered for high-performance, low-latency
+                    applications that demand speed at scale. It delivers
+                    blazing-fast distributed transactions, powered by the 1PC
+                    protocol. It enables EloqKV to match—and often exceed—the
+                    throughput of best-in-class solutions, making it ideal for
+                    real-time workloads.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* High Availability Section */}
+          <div className={styles.acidSection}>
+            <div className={styles.acidInner}>
+              <div className={styles.acidContent}>
+                <div className={styles.acidInfo}>
+                  <h2 className={styles.acidTitle}>High Availability</h2>
+                  <p className={styles.acidDescription}>
+                    EloqKV is built for high availability and fault tolerance at
+                    its core. Data is replicated seamlessly across multiple
+                    servers or disks to ensure durability and resilience, even
+                    under failure conditions. With built-in support for hot
+                    standbys and fast failover, EloqKV can recover from node
+                    outages in sub-second.
+                  </p>
+                </div>
+                <div className={styles.acidImageContainer}>
+                  <img
+                    src="/img/highavail.png"
+                    alt="High Availability"
+                    className={styles.acidImage}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Standard API Section */}
+          <div className={styles.tieredSection}>
+            <div className={styles.tieredInner}>
+              <div className={styles.tieredContent}>
+                <div className={styles.tieredImageContainer}>
+                  <img
+                    src="/img/standardapi.png"
+                    alt="Standard API"
+                    className={styles.tieredImage}
+                  />
+                </div>
+                <div className={styles.tieredInfo}>
+                  <h2 className={styles.tieredTitle}>Standard API</h2>
+                  <p className={styles.tieredDescription}>
+                    EloqKV offers broad compatibility through support for
+                    standard APIs, including Redis, SQL, and MongoDB. This
+                    multi-model interface empowers developers to integrate
+                    EloqKV into existing ecosystems effortlessly—enabling
+                    seamless migration with minimal code changes.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
