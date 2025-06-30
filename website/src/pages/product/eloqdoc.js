@@ -107,50 +107,144 @@ export default function EloqDoc() {
         </div>
 
         {/* Features Section */}
-        <div className={styles.features}>
-          <div className={styles.featuresInner}>
-            <h2 className={styles.featuresTitle}>Features</h2>
-            <p className={styles.featuresSubtitle}>
-              Designed for Developers: Explore EloqDoc's Rich, Scalable, and
-              Reliable Features
-            </p>
-            <div className={styles.featureCards}>
-              <div className={styles.feature}>
-                <h3>MongoDB Compatible</h3>
-                <p>
-                  Drop-in replacement for MongoDB with enhanced capabilities
-                </p>
+        <div className="section-container">
+          <h2 className="section-title">Features</h2>
+          <p className="section-subtitle">
+            Revolutionary document database features designed for the AI era
+          </p>
+
+          {/* Multi Writer Section */}
+          <div className={styles.acidSection}>
+            <div className={styles.acidInner}>
+              <div className={styles.acidContent}>
+                <div className={styles.acidInfo}>
+                  <h2 className={styles.acidTitle}>Multi Writer</h2>
+                  <p className={styles.acidDescription}>
+                    EloqDoc is a truly multi-writer document database that
+                    supports concurrent writes across all nodes—no sharding, no
+                    mongos, no single-writer bottleneck. EloqDoc enables
+                    multi-master writes with built-in conflict resolution and
+                    consensus, delivering horizontal write scalability and low
+                    latency for globally distributed workloads.
+                  </p>
+                </div>
+                <div className={styles.acidImageContainer}>
+                  <img
+                    src="/img/multi-writer.png"
+                    alt="Multi Writer Architecture"
+                    className={styles.acidImage}
+                  />
+                </div>
               </div>
-              <div className={styles.feature}>
-                <h3>ACID Transactions</h3>
-                <p>SQL transaction support with configurable isolation level</p>
+            </div>
+          </div>
+
+          {/* Fully Decoupled Section */}
+          <div className={styles.tieredSection}>
+            <div className={styles.tieredInner}>
+              <div className={styles.tieredContent}>
+                <div className={styles.tieredImageContainer}>
+                  <img
+                    src="/img/decoupled-architecture.png"
+                    alt="Fully Decoupled Architecture"
+                    className={styles.tieredImage}
+                  />
+                </div>
+                <div className={styles.tieredInfo}>
+                  <h2 className={styles.tieredTitle}>
+                    Fully Decoupled Architecture
+                  </h2>
+                  <p className={styles.tieredDescription}>
+                    EloqDoc's revolutionary architecture completely separates
+                    CPU, memory, logging, and storage components, enabling
+                    unprecedented flexibility and cost optimization. This
+                    disaggregated design allows you to optimize each resource
+                    tier for specific workload requirements, dramatically
+                    reducing over-provisioning and operational costs.
+                  </p>
+                </div>
               </div>
-              <div className={styles.feature}>
-                <h3>Fully Elastic</h3>
-                <p>
-                  Scale compute and storage independently to match workload
-                  demands
-                </p>
+            </div>
+          </div>
+
+          {/* Tiered Storage Section */}
+          <div className={styles.acidSection}>
+            <div className={styles.acidInner}>
+              <div className={styles.acidContent}>
+                <div className={styles.acidInfo}>
+                  <h2 className={styles.acidTitle}>Tiered Storage</h2>
+                  <p className={styles.acidDescription}>
+                    Our intelligent tiered storage architecture automatically
+                    optimizes data placement across memory, SSD, and object
+                    storage based on access patterns and document age. Hot
+                    documents remain in memory for instant access, warm data
+                    transitions to high-performance Local SSDs, and cold data
+                    moves to cost-effective object storage. This approach
+                    reduces storage costs by up to 90% even with better query
+                    performance.
+                  </p>
+                </div>
+                <div className={styles.acidImageContainer}>
+                  <img
+                    src="/img/tiered-storage.jpg"
+                    alt="Tiered Storage Architecture"
+                    className={styles.acidImage}
+                  />
+                </div>
               </div>
-              <div className={styles.feature}>
-                <h3>Simple Operation</h3>
-                <p>
-                  Cross-node operations made simple—no manual sharding required
-                </p>
+            </div>
+          </div>
+
+          {/* Low Latency Distributed Transaction Section */}
+          <div className={styles.tieredSection}>
+            <div className={styles.tieredInner}>
+              <div className={styles.tieredContent}>
+                <div className={styles.tieredImageContainer}>
+                  <img
+                    src="/img/low-latency-transaction.png"
+                    alt="Low Latency Distributed Transaction"
+                    className={styles.tieredImage}
+                  />
+                </div>
+                <div className={styles.tieredInfo}>
+                  <h2 className={styles.tieredTitle}>
+                    Low Latency Distributed Transaction
+                  </h2>
+                  <p className={styles.tieredDescription}>
+                    Experience lightning-fast distributed transactions with our
+                    patented 1PC protocol. Our innovative approach reduces
+                    network round-trips and eliminates coordinator bottlenecks,
+                    enabling complex multi-document operations across shards
+                    with minimal performance impact.
+                  </p>
+                </div>
               </div>
-              <div className={styles.feature}>
-                <h3>Tiered Storage</h3>
-                <p>
-                  Achieve the perfect balance of speed and cost with tiered
-                  storage across memory, disk, and object storage
-                </p>
-              </div>
-              <div className={styles.feature}>
-                <h3>Distributed Transaction</h3>
-                <p>
-                  Blazing-fast distributed transactions powered by the 1PC
-                  protocol
-                </p>
+            </div>
+          </div>
+
+          {/* MongoDB Comparison Section */}
+          <div className={styles.acidSection}>
+            <div className={styles.acidInner}>
+              <div className={styles.acidContent}>
+                <div className={styles.acidInfo}>
+                  <h2 className={styles.acidTitle}>Compare with MongoDB</h2>
+                  <p className={styles.acidDescription}>
+                    EloqDoc offers high compatibility with MongoDB. Unlike
+                    MongoDB's complex sharding that requires data movement and
+                    rebalancing, EloqDoc achieves true elasticity without data
+                    migration. Our compute-storage separation means scaling up
+                    storage capacity is as simple as expanding object storage.
+                    This approach delivers 100x better elasticity than MongoDB
+                    while reducing TCO by 90%.
+                  </p>
+                </div>
+                <div className={styles.acidImageContainer}>
+                  <img
+                    src="/img/mongodb-comparison.png"
+                    alt="MongoDB vs EloqDoc Comparison"
+                    className={styles.acidImage}
+                  />
+                </div>
               </div>
             </div>
           </div>
