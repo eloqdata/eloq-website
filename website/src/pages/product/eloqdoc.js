@@ -6,63 +6,40 @@ import {CheckIcon, XIcon, InfoIcon} from '@heroicons/react/solid';
 
 const PRODUCT_COMPARISON = [
   {
-    feature: 'Supported Cloud Platform',
-    openSource: 'ALL',
-    enterprise: 'ALL',
-    cloudSaas: 'AWS',
-  },
-  {feature: 'On Premise', openSource: true, enterprise: true, cloudSaas: false},
-  {feature: 'Persistence', openSource: true, enterprise: true, cloudSaas: true},
-  {
-    feature: 'Object Storage',
-    openSource: false,
-    enterprise: true,
-    cloudSaas: true,
-  },
-  {
-    feature: 'Multiple Writer',
-    openSource: true,
-    enterprise: true,
-    cloudSaas: true,
+    feature: 'Multi-Writer Support',
+    eloqdoc: 'Native Multi Master',
+    mongodb: 'Mongos Router Based',
+    documentdb: 'Sharding Based',
   },
   {
     feature: 'Distributed Transaction',
-    openSource: true,
-    enterprise: true,
-    cloudSaas: true,
+    eloqdoc: 'Strong',
+    mongodb: 'Weak',
+    documentdb: 'Weak',
   },
   {
-    feature: 'WAL Multiple Replicas',
-    openSource: false,
-    enterprise: true,
-    cloudSaas: true,
+    feature: 'Compute-Storage Decouple',
+    eloqdoc: true,
+    mongodb: false,
+    documentdb: true,
   },
   {
-    feature: 'Auto Failover',
-    openSource: false,
-    enterprise: true,
-    cloudSaas: true,
-  },
-  {feature: 'Hot Backup', openSource: true, enterprise: true, cloudSaas: true},
-  {
-    feature: 'TLS Encryption',
-    openSource: true,
-    enterprise: true,
-    cloudSaas: true,
-  },
-  {feature: 'Scale-Up', openSource: true, enterprise: true, cloudSaas: true},
-  {feature: 'Scale-Out', openSource: false, enterprise: true, cloudSaas: true},
-  {
-    feature: 'Community Support',
-    openSource: true,
-    enterprise: true,
-    cloudSaas: true,
+    feature: 'Main Storage',
+    eloqdoc: 'Object Storage',
+    mongodb: 'EBS',
+    documentdb: 'EBS',
   },
   {
-    feature: 'Enterprise Support',
-    openSource: false,
-    enterprise: true,
-    cloudSaas: true,
+    feature: 'NVMe Acceleration',
+    eloqdoc: true,
+    mongodb: false,
+    documentdb: false,
+  },
+  {
+    feature: 'Scale-Out Speed',
+    eloqdoc: 'Fast',
+    mongodb: 'Slow',
+    documentdb: 'Slow',
   },
 ];
 
@@ -76,7 +53,7 @@ export default function EloqDoc() {
         <div className={styles.hero}>
           <div className={styles.heroInner}>
             <h1 className={styles.heroTitle}>
-              Next-Gen Distributed Document Database: Elastic and Transactional
+              Next-Gen Distributed Document Database: Elastic and Cost Effective
             </h1>
             <p className={styles.heroSubtitle}>
               Fully elastic, Mongo-compatible distributed database with
@@ -113,25 +90,27 @@ export default function EloqDoc() {
             Revolutionary document database features designed for the AI era
           </p>
 
-          {/* Multi Writer Section */}
+          {/* Cost Effective Section */}
           <div className={styles.acidSection}>
             <div className={styles.acidInner}>
               <div className={styles.acidContent}>
                 <div className={styles.acidInfo}>
-                  <h2 className={styles.acidTitle}>Multi Writer</h2>
+                  <h2 className={styles.acidTitle}>Cost Effective</h2>
                   <p className={styles.acidDescription}>
-                    EloqDoc is a truly multi-writer document database that
-                    supports concurrent writes across all nodes—no sharding, no
-                    mongos, no single-writer bottleneck. EloqDoc enables
-                    multi-master writes with built-in conflict resolution and
-                    consensus, delivering horizontal write scalability and low
-                    latency for globally distributed workloads.
+                    Our intelligent tiered storage architecture automatically
+                    optimizes data placement across memory, SSD, and object
+                    storage based on access patterns and document age. Hot
+                    documents remain in memory for instant access, warm data
+                    transitions to high-performance Local SSDs, and cold data
+                    moves to cost-effective object storage. This approach
+                    reduces storage costs by up to 90% even with better query
+                    performance.
                   </p>
                 </div>
                 <div className={styles.acidImageContainer}>
                   <img
-                    src="/img/multi-writer.png"
-                    alt="Multi Writer Architecture"
+                    src="/img/tiered-storage.jpg"
+                    alt="Tiered Storage Architecture"
                     className={styles.acidImage}
                   />
                 </div>
@@ -167,27 +146,25 @@ export default function EloqDoc() {
             </div>
           </div>
 
-          {/* Tiered Storage Section */}
+          {/* Multi Writer Section */}
           <div className={styles.acidSection}>
             <div className={styles.acidInner}>
               <div className={styles.acidContent}>
                 <div className={styles.acidInfo}>
-                  <h2 className={styles.acidTitle}>Tiered Storage</h2>
+                  <h2 className={styles.acidTitle}>Multi Writer</h2>
                   <p className={styles.acidDescription}>
-                    Our intelligent tiered storage architecture automatically
-                    optimizes data placement across memory, SSD, and object
-                    storage based on access patterns and document age. Hot
-                    documents remain in memory for instant access, warm data
-                    transitions to high-performance Local SSDs, and cold data
-                    moves to cost-effective object storage. This approach
-                    reduces storage costs by up to 90% even with better query
-                    performance.
+                    EloqDoc is a truly multi-writer document database that
+                    supports concurrent writes across all nodes—no sharding, no
+                    mongos, no single-writer bottleneck. EloqDoc enables
+                    multi-master writes with built-in conflict resolution and
+                    consensus, delivering horizontal write scalability and low
+                    latency for globally distributed workloads.
                   </p>
                 </div>
                 <div className={styles.acidImageContainer}>
                   <img
-                    src="/img/tiered-storage.jpg"
-                    alt="Tiered Storage Architecture"
+                    src="/img/multi-writer.png"
+                    alt="Multi Writer Architecture"
                     className={styles.acidImage}
                   />
                 </div>
@@ -253,11 +230,9 @@ export default function EloqDoc() {
         {/* Product Comparison Section */}
         <div className={styles.comparisonSection}>
           <div className={styles.comparisonInner}>
-            <h2 className={styles.comparisonTitle}>
-              Product Editions Overview
-            </h2>
+            <h2 className={styles.comparisonTitle}>Database Comparison</h2>
             <p className={styles.comparisonSubtitle}>
-              Choose the EloqDoc offering that suits your needs
+              See how EloqDoc compares to MongoDB and DocumentDB
             </p>
 
             <div className={styles.comparisonTable}>
@@ -266,13 +241,13 @@ export default function EloqDoc() {
                   <h3>Features</h3>
                 </div>
                 <div className={styles.comparisonColumn}>
-                  <h3>Community Edition</h3>
+                  <h3>EloqDoc</h3>
                 </div>
                 <div className={styles.comparisonColumn}>
-                  <h3>Enterprise Edition</h3>
+                  <h3>MongoDB</h3>
                 </div>
                 <div className={styles.comparisonColumn}>
-                  <h3>Cloud Edition</h3>
+                  <h3>DocumentDB</h3>
                 </div>
               </div>
 
@@ -284,8 +259,8 @@ export default function EloqDoc() {
                   }`}>
                   <div className={styles.featureColumn}>{item.feature}</div>
                   <div className={styles.comparisonColumn}>
-                    {typeof item.openSource === 'boolean' ? (
-                      item.openSource ? (
+                    {typeof item.eloqdoc === 'boolean' ? (
+                      item.eloqdoc ? (
                         <div className={styles.checkIcon}>
                           <svg
                             viewBox="0 0 20 20"
@@ -313,12 +288,12 @@ export default function EloqDoc() {
                         </div>
                       )
                     ) : (
-                      <span>{item.openSource}</span>
+                      <span>{item.eloqdoc}</span>
                     )}
                   </div>
                   <div className={styles.comparisonColumn}>
-                    {typeof item.enterprise === 'boolean' ? (
-                      item.enterprise ? (
+                    {typeof item.mongodb === 'boolean' ? (
+                      item.mongodb ? (
                         <div className={styles.checkIcon}>
                           <svg
                             viewBox="0 0 20 20"
@@ -346,12 +321,12 @@ export default function EloqDoc() {
                         </div>
                       )
                     ) : (
-                      <span>{item.enterprise}</span>
+                      <span>{item.mongodb}</span>
                     )}
                   </div>
                   <div className={styles.comparisonColumn}>
-                    {typeof item.cloudSaas === 'boolean' ? (
-                      item.cloudSaas ? (
+                    {typeof item.documentdb === 'boolean' ? (
+                      item.documentdb ? (
                         <div className={styles.checkIcon}>
                           <svg
                             viewBox="0 0 20 20"
@@ -365,10 +340,21 @@ export default function EloqDoc() {
                           </svg>
                         </div>
                       ) : (
-                        <div className={styles.naText}>N/A</div>
+                        <div className={styles.xIcon}>
+                          <svg
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            className={styles.icon}>
+                            <path
+                              fillRule="evenodd"
+                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
                       )
                     ) : (
-                      <span>{item.cloudSaas}</span>
+                      <span>{item.documentdb}</span>
                     )}
                   </div>
                 </div>
@@ -378,7 +364,7 @@ export default function EloqDoc() {
             <div className={styles.comparisonCTA}>
               <Link
                 className={`button button--primary ${styles.ctaButton}`}
-                to="/eloqdoc/introduction">
+                to="/eloqdoc/install-from-binary">
                 Learn More
               </Link>
               <Link
