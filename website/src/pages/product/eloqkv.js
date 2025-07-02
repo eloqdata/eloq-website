@@ -53,71 +53,40 @@ const testimonials = [
 
 const PRODUCT_COMPARISON = [
   {
-    feature: 'Supported Cloud Platform',
-    openSource: 'ALL',
-    enterprise: 'ALL',
-    cloudSaas: 'AWS',
-  },
-  {feature: 'On Premise', openSource: true, enterprise: true, cloudSaas: false},
-  {feature: 'Persistence', openSource: true, enterprise: true, cloudSaas: true},
-  {
-    feature: 'Object Storage',
-    openSource: false,
-    enterprise: true,
-    cloudSaas: true,
-  },
-  {
-    feature: 'Local Transaction',
-    openSource: true,
-    enterprise: true,
-    cloudSaas: true,
-  },
-  {
     feature: 'Distributed Transaction',
-    openSource: true,
-    enterprise: true,
-    cloudSaas: true,
-  },
-  {feature: 'Lua', openSource: true, enterprise: true, cloudSaas: true},
-  {
-    feature: 'Cross-Slot Lua',
-    openSource: true,
-    enterprise: true,
-    cloudSaas: true,
+    eloqkv: true,
+    upstash: false,
+    redis: false,
   },
   {
-    feature: 'WAL Multiple Replicas',
-    openSource: false,
-    enterprise: true,
-    cloudSaas: true,
+    feature: 'Tiered Storage',
+    eloqkv: true,
+    upstash: true,
+    redis: false,
   },
   {
-    feature: 'Auto Failover',
-    openSource: false,
-    enterprise: true,
-    cloudSaas: true,
-  },
-  {feature: 'Hot Backup', openSource: true, enterprise: true, cloudSaas: true},
-  {
-    feature: 'TLS Encryption',
-    openSource: true,
-    enterprise: true,
-    cloudSaas: true,
-  },
-  {feature: 'Monitor', openSource: true, enterprise: true, cloudSaas: true},
-  {feature: 'Scale-Up', openSource: true, enterprise: true, cloudSaas: true},
-  {feature: 'Scale-Out', openSource: true, enterprise: true, cloudSaas: true},
-  {
-    feature: 'Community Support',
-    openSource: true,
-    enterprise: true,
-    cloudSaas: true,
+    feature: 'Scale Out',
+    eloqkv: 'Native Multi Master',
+    upstash: 'Can Only Scale Out Read',
+    redis: 'Sharding Based',
   },
   {
-    feature: 'Enterprise Support',
-    openSource: false,
-    enterprise: true,
-    cloudSaas: true,
+    feature: 'Scale Up',
+    eloqkv: true,
+    upstash: 'Single Worker Thread',
+    redis: 'Single Worker Thread',
+  },
+  {
+    feature: 'Distributed Lua',
+    eloqkv: true,
+    upstash: false,
+    redis: false,
+  },
+  {
+    feature: 'Session Style Transaction',
+    eloqkv: true,
+    upstash: false,
+    redis: false,
   },
 ];
 
@@ -243,23 +212,163 @@ COMMIT`}
           </div>
         </div>
 
-        {/* Features Section */}
-        <div className={styles.kvFeatures}>
-          <div className={styles.kvFeaturesInner}>
-            <div className={styles.kvFeatureCards}>
-              <div className={styles.kvFeature}>
-                <h3>ACID Transactions</h3>
-                <p>
-                  Full ACID compliance with distributed transactions support
-                </p>
+        {/* Features Section for EloqKV */}
+        <div className="section-container">
+          <h2 className="section-title">EloqKV Features</h2>
+          <p className="section-subtitle">
+            Redis-compatible database built for durability, scalability, and
+            performance
+          </p>
+
+          {/* Primary Database Section */}
+          <div className={styles.acidSection}>
+            <div className={styles.acidInner}>
+              <div className={styles.acidContent}>
+                <div className={styles.acidInfo}>
+                  <h2 className={styles.acidTitle}>
+                    Primary Database with Redis API
+                  </h2>
+                  <p className={styles.acidDescription}>
+                    EloqKV is not just a cache—it's a full-fledged transactional
+                    key-value database. It eliminates the need for a
+                    Redis+database combo and resolves cache consistency issues.
+                    By combining persistence, high availability, and full Redis
+                    API compatibility, EloqKV enables developers to use Redis
+                    commands in real database workloads.
+                  </p>
+                </div>
+                <div className={styles.acidImageContainer}>
+                  <img
+                    src="/img/eloqkv-feature-primary.png"
+                    alt="Primary Database with Redis API"
+                    className={styles.acidImage}
+                  />
+                </div>
               </div>
-              <div className={styles.kvFeature}>
-                <h3>Redis Compatible</h3>
-                <p>Drop-in replacement for Redis with enhanced capabilities</p>
+            </div>
+          </div>
+
+          {/* Tiered Storage Section */}
+          <div className={styles.tieredSection}>
+            <div className={styles.tieredInner}>
+              <div className={styles.tieredContent}>
+                <div className={styles.tieredImageContainer}>
+                  <img
+                    src="/img/tiered-storage.jpg"
+                    alt="Tiered Storage"
+                    className={styles.tieredImage}
+                  />
+                </div>
+                <div className={styles.tieredInfo}>
+                  <h2 className={styles.tieredTitle}>Tiered Storage</h2>
+                  <p className={styles.tieredDescription}>
+                    EloqKV automatically optimizes hot, warm, and cold data
+                    across memory, SSD, and object storage. Hot data stays in
+                    memory, warm data transitions to SSDs, and rarely accessed
+                    data moves to object storage—cutting storage costs without
+                    hurting performance.
+                  </p>
+                </div>
               </div>
-              <div className={styles.kvFeature}>
-                <h3>Scalable Storage</h3>
-                <p>Horizontal & vertical scaling with auto-tiering</p>
+            </div>
+          </div>
+
+          {/* Multi-Threaded Section */}
+          <div className={styles.acidSection}>
+            <div className={styles.acidInner}>
+              <div className={styles.acidContent}>
+                <div className={styles.acidInfo}>
+                  <h2 className={styles.acidTitle}>Multi-Threaded Execution</h2>
+                  <p className={styles.acidDescription}>
+                    EloqKV breaks Redis’s single-thread limitation and leverages
+                    modern multi-core hardware. With a multi-threaded engine, it
+                    can process millions of QPS on a single machine—unlocking
+                    unprecedented vertical scaling.
+                  </p>
+                </div>
+                <div className={styles.acidImageContainer}>
+                  <img
+                    src="/img/eloqkv-feature-multithread.png"
+                    alt="Multi Threaded Execution"
+                    className={styles.acidImage}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Truly Distributed Section */}
+          <div className={styles.tieredSection}>
+            <div className={styles.tieredInner}>
+              <div className={styles.tieredContent}>
+                <div className={styles.tieredImageContainer}>
+                  <img
+                    src="/img/eloqkv-feature-distributed.png"
+                    alt="Truly Distributed Architecture"
+                    className={styles.tieredImage}
+                  />
+                </div>
+                <div className={styles.tieredInfo}>
+                  <h2 className={styles.tieredTitle}>
+                    Truly Distributed Architecture
+                  </h2>
+                  <p className={styles.tieredDescription}>
+                    Unlike Redis Cluster which relies on smart clients and lacks
+                    cross-shard capabilities, EloqKV nodes collaborate
+                    internally to fetch and operate on remote keys. Cross-shard
+                    transactions and Lua scripts work seamlessly—true
+                    distribution, no client burden.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Client Transparency Section */}
+          <div className={styles.acidSection}>
+            <div className={styles.acidInner}>
+              <div className={styles.acidContent}>
+                <div className={styles.acidInfo}>
+                  <h2 className={styles.acidTitle}>Client Transparency</h2>
+                  <p className={styles.acidDescription}>
+                    Redis Cluster requires a special client that handles
+                    cluster-specific logic. EloqKV hides this complexity—your
+                    application can use the same Redis client to connect to both
+                    single-node and distributed deployments, with zero code
+                    changes.
+                  </p>
+                </div>
+                <div className={styles.acidImageContainer}>
+                  <img
+                    src="/img/eloqkv-feature-client.png"
+                    alt="Client Transparency"
+                    className={styles.acidImage}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* SQL-Style Transaction Section */}
+          <div className={styles.tieredSection}>
+            <div className={styles.tieredInner}>
+              <div className={styles.tieredContent}>
+                <div className={styles.tieredImageContainer}>
+                  <img
+                    src="/img/eloqkv-feature-transaction.png"
+                    alt="SQL Style Transaction"
+                    className={styles.tieredImage}
+                  />
+                </div>
+                <div className={styles.tieredInfo}>
+                  <h2 className={styles.tieredTitle}>SQL-Style Transactions</h2>
+                  <p className={styles.tieredDescription}>
+                    Go beyond Redis's MULTI/EXEC limitations. EloqKV introduces
+                    SQL-style transaction control, with `BEGIN`, `COMMIT`, and
+                    `ROLLBACK`—making it easier to write robust,
+                    rollback-capable application logic.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -268,27 +377,24 @@ COMMIT`}
         {/* Product Comparison Section */}
         <div className={styles.comparisonSection}>
           <div className={styles.comparisonInner}>
-            <h2 className={styles.comparisonTitle}>
-              Product Editions Overview
-            </h2>
+            <h2 className={styles.comparisonTitle}>Database Comparison</h2>
             <p className={styles.comparisonSubtitle}>
-              Choose the EloqKV offering that suits your needs
+              See how EloqKV compares to Upstash and Redis
             </p>
 
             <div className={styles.comparisonTable}>
               <div className={styles.comparisonHeader}>
                 <div className={styles.featureColumn}>
-                  {' '}
                   <h3>Features</h3>
                 </div>
                 <div className={styles.comparisonColumn}>
-                  <h3>Community Edition</h3>
+                  <h3>EloqKV</h3>
                 </div>
                 <div className={styles.comparisonColumn}>
-                  <h3>Enterprise Edition</h3>
+                  <h3>Upstash</h3>
                 </div>
                 <div className={styles.comparisonColumn}>
-                  <h3>Cloud Edition</h3>
+                  <h3>Redis</h3>
                 </div>
               </div>
 
@@ -300,8 +406,8 @@ COMMIT`}
                   }`}>
                   <div className={styles.featureColumn}>{item.feature}</div>
                   <div className={styles.comparisonColumn}>
-                    {typeof item.openSource === 'boolean' ? (
-                      item.openSource ? (
+                    {typeof item.eloqkv === 'boolean' ? (
+                      item.eloqkv ? (
                         <div className={styles.checkIcon}>
                           <svg
                             viewBox="0 0 20 20"
@@ -329,12 +435,12 @@ COMMIT`}
                         </div>
                       )
                     ) : (
-                      <span>{item.openSource}</span>
+                      <span>{item.eloqkv}</span>
                     )}
                   </div>
                   <div className={styles.comparisonColumn}>
-                    {typeof item.enterprise === 'boolean' ? (
-                      item.enterprise ? (
+                    {typeof item.upstash === 'boolean' ? (
+                      item.upstash ? (
                         <div className={styles.checkIcon}>
                           <svg
                             viewBox="0 0 20 20"
@@ -362,12 +468,12 @@ COMMIT`}
                         </div>
                       )
                     ) : (
-                      <span>{item.enterprise}</span>
+                      <span>{item.upstash}</span>
                     )}
                   </div>
                   <div className={styles.comparisonColumn}>
-                    {typeof item.cloudSaas === 'boolean' ? (
-                      item.cloudSaas ? (
+                    {typeof item.redis === 'boolean' ? (
+                      item.redis ? (
                         <div className={styles.checkIcon}>
                           <svg
                             viewBox="0 0 20 20"
@@ -381,10 +487,21 @@ COMMIT`}
                           </svg>
                         </div>
                       ) : (
-                        <div className={styles.naText}>N/A</div>
+                        <div className={styles.xIcon}>
+                          <svg
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            className={styles.icon}>
+                            <path
+                              fillRule="evenodd"
+                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
                       )
                     ) : (
-                      <span>{item.cloudSaas}</span>
+                      <span>{item.redis}</span>
                     )}
                   </div>
                 </div>
