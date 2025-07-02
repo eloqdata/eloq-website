@@ -1192,7 +1192,7 @@ function HomePage() {
                   />
                 </div>
                 <div className={styles.tieredInfo}>
-                  <h2 className={styles.tieredTitle}>Cosst Effective</h2>
+                  <h2 className={styles.tieredTitle}>Cost Effective</h2>
                   <p className={styles.tieredDescription}>
                     EloqKV intelligently manages your data across multiple
                     storage tiers, optimizing both performance and cost. Hot

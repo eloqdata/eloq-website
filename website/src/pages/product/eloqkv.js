@@ -53,6 +53,12 @@ const testimonials = [
 
 const PRODUCT_COMPARISON = [
   {
+    feature: 'Primary Storage',
+    eloqkv: true,
+    upstash: true,
+    redis: false,
+  },
+  {
     feature: 'Distributed Transaction',
     eloqkv: true,
     upstash: false,
@@ -87,6 +93,12 @@ const PRODUCT_COMPARISON = [
     eloqkv: true,
     upstash: false,
     redis: false,
+  },
+  {
+    feature: 'Open Source',
+    eloqkv: true,
+    upstash: false,
+    redis: 'Limited',
   },
 ];
 
