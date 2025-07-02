@@ -1180,6 +1180,32 @@ function HomePage() {
             application
           </p>
 
+          {/* Tiered Storage Section */}
+          <div className={styles.tieredSection}>
+            <div className={styles.tieredInner}>
+              <div className={styles.tieredContent}>
+                <div className={styles.tieredImageContainer}>
+                  <img
+                    src="/img/tiered-storage.jpg"
+                    alt="Tiered Storage Architecture"
+                    className={styles.tieredImage}
+                  />
+                </div>
+                <div className={styles.tieredInfo}>
+                  <h2 className={styles.tieredTitle}>Cosst Effective</h2>
+                  <p className={styles.tieredDescription}>
+                    EloqKV intelligently manages your data across multiple
+                    storage tiers, optimizing both performance and cost. Hot
+                    data stays in memory for lightning-fast access, warm data
+                    moves to SSD for balanced performance, and cold data is
+                    persisted to object storage—all while maintaining seamless
+                    access. This multi-tiered approach dramatically reduces TCO.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Full ACID Transaction Section */}
           <div className={styles.acidSection}>
             <div className={styles.acidInner}>
@@ -1197,58 +1223,6 @@ function HomePage() {
                   <img
                     src="/img/acid-transaction.jpg"
                     alt="ACID Transaction Diagram"
-                    className={styles.acidImage}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Tiered Storage Section */}
-          <div className={styles.tieredSection}>
-            <div className={styles.tieredInner}>
-              <div className={styles.tieredContent}>
-                <div className={styles.tieredImageContainer}>
-                  <img
-                    src="/img/tiered-storage.jpg"
-                    alt="Tiered Storage Architecture"
-                    className={styles.tieredImage}
-                  />
-                </div>
-                <div className={styles.tieredInfo}>
-                  <h2 className={styles.tieredTitle}>Tiered Storage</h2>
-                  <p className={styles.tieredDescription}>
-                    EloqKV intelligently manages your data across multiple
-                    storage tiers, optimizing both performance and cost. Hot
-                    data stays in memory for lightning-fast access, warm data
-                    moves to SSD for balanced performance, and cold data is
-                    persisted to object storage—all while maintaining seamless
-                    access. This multi-tiered approach dramatically reduces TCO.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Elastic Section */}
-          <div className={styles.acidSection}>
-            <div className={styles.acidInner}>
-              <div className={styles.acidContent}>
-                <div className={styles.acidInfo}>
-                  <h2 className={styles.acidTitle}>Scalable & Elastic</h2>
-                  <p className={styles.acidDescription}>
-                    EloqKV is architected for true scalability and elasticity,
-                    adapting seamlessly to workload demands. It scales up
-                    efficiently across multicore CPUs to maximize single-node
-                    performance, and scales out across distributed nodes for
-                    high availability and throughput. Clusters can expand
-                    dynamically to adapt to unpredictable traffic surges.
-                  </p>
-                </div>
-                <div className={styles.acidImageContainer}>
-                  <img
-                    src="/img/elastic.png"
-                    alt="Scalable & Elastic"
                     className={styles.acidImage}
                   />
                 </div>
@@ -1282,25 +1256,25 @@ function HomePage() {
             </div>
           </div>
 
-          {/* High Availability Section */}
+          {/* Elastic Section */}
           <div className={styles.acidSection}>
             <div className={styles.acidInner}>
               <div className={styles.acidContent}>
                 <div className={styles.acidInfo}>
-                  <h2 className={styles.acidTitle}>High Availability</h2>
+                  <h2 className={styles.acidTitle}>Scalable & Elastic</h2>
                   <p className={styles.acidDescription}>
-                    EloqKV is built for high availability and fault tolerance at
-                    its core. Data is replicated seamlessly across multiple
-                    servers or disks to ensure durability and resilience, even
-                    under failure conditions. With built-in support for hot
-                    standbys and fast failover, EloqKV can recover from node
-                    outages in sub-second.
+                    EloqKV is architected for true scalability and elasticity,
+                    adapting seamlessly to workload demands. It scales up
+                    efficiently across multicore CPUs to maximize single-node
+                    performance, and scales out across distributed nodes for
+                    high availability and throughput. Clusters can expand
+                    dynamically to adapt to unpredictable traffic surges.
                   </p>
                 </div>
                 <div className={styles.acidImageContainer}>
                   <img
-                    src="/img/highavail.png"
-                    alt="High Availability"
+                    src="/img/elastic.png"
+                    alt="Scalable & Elastic"
                     className={styles.acidImage}
                   />
                 </div>
@@ -1328,6 +1302,31 @@ function HomePage() {
                     EloqKV into existing ecosystems effortlessly—enabling
                     seamless migration with minimal code changes.
                   </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* High Availability Section */}
+          <div className={styles.acidSection}>
+            <div className={styles.acidInner}>
+              <div className={styles.acidContent}>
+                <div className={styles.acidInfo}>
+                  <h2 className={styles.acidTitle}>High Availability</h2>
+                  <p className={styles.acidDescription}>
+                    EloqKV is built for high availability and fault tolerance at
+                    its core. Data is replicated seamlessly across multiple
+                    servers or disks to ensure durability and resilience, even
+                    under failure conditions. With built-in support for hot
+                    standbys and fast failover, EloqKV can recover from node
+                    outages in sub-second.
+                  </p>
+                </div>
+                <div className={styles.acidImageContainer}>
+                  <img
+                    src="/img/highavail.png"
+                    alt="High Availability"
+                    className={styles.acidImage}
+                  />
                 </div>
               </div>
             </div>

@@ -6,64 +6,46 @@ import {CheckIcon, XIcon, InfoIcon} from '@heroicons/react/solid';
 
 const PRODUCT_COMPARISON = [
   {
-    feature: 'Supported Cloud Platform',
-    openSource: 'ALL',
-    enterprise: 'ALL',
-    cloudSaas: 'AWS',
-  },
-  {feature: 'On Premise', openSource: true, enterprise: true, cloudSaas: false},
-  {feature: 'Persistence', openSource: true, enterprise: true, cloudSaas: true},
-  {
-    feature: 'Object Storage',
-    openSource: false,
-    enterprise: true,
-    cloudSaas: true,
-  },
-  {
-    feature: 'Multiple Writer',
-    openSource: true,
-    enterprise: true,
-    cloudSaas: true,
+    feature: 'Multi-Writer Support',
+    eloqsql: true,
+    aurora: false,
+    cockroachdb: true,
   },
   {
     feature: 'Distributed Transaction',
-    openSource: true,
-    enterprise: true,
-    cloudSaas: true,
+    eloqsql: 'Fast',
+    aurora: 'NA',
+    cockroachdb: 'Slow',
   },
   {
-    feature: 'WAL Multiple Replicas',
-    openSource: false,
-    enterprise: true,
-    cloudSaas: true,
+    feature: 'Compute-Storage Decouple',
+    eloqsql: true,
+    aurora: true,
+    cockroachdb: false,
   },
   {
-    feature: 'Auto Failover',
-    openSource: false,
-    enterprise: true,
-    cloudSaas: true,
-  },
-  {feature: 'Hot Backup', openSource: true, enterprise: true, cloudSaas: true},
-  {
-    feature: 'TLS Encryption',
-    openSource: true,
-    enterprise: true,
-    cloudSaas: true,
-  },
-  {feature: 'Monitor', openSource: true, enterprise: true, cloudSaas: true},
-  {feature: 'Scale-Up', openSource: true, enterprise: true, cloudSaas: true},
-  {feature: 'Scale-Out', openSource: true, enterprise: true, cloudSaas: true},
-  {
-    feature: 'Community Support',
-    openSource: true,
-    enterprise: true,
-    cloudSaas: true,
+    feature: 'Parallel Redo Log',
+    eloqsql: true,
+    aurora: false,
+    cockroachdb: false,
   },
   {
-    feature: 'Enterprise Support',
-    openSource: false,
-    enterprise: true,
-    cloudSaas: true,
+    feature: 'Main Storage',
+    eloqsql: 'Object Storage',
+    aurora: 'Page Server',
+    cockroachdb: 'EBS',
+  },
+  {
+    feature: 'NVMe Acceleration',
+    eloqsql: true,
+    aurora: false,
+    cockroachdb: false,
+  },
+  {
+    feature: 'Scale-Out Speed',
+    eloqsql: 'Fast',
+    aurora: 'Only Read Replica',
+    cockroachdb: 'Slow',
   },
 ];
 
@@ -71,7 +53,7 @@ export default function EloqSQL() {
   return (
     <Layout
       title="EloqSQL - Distributed SQL Database"
-      description="The MySQL compatible distributed database - Elastic at Any Scale, High Performance, Full ACID Transaction">
+      description="The MySQL compatible distributed database - Elastic at Any Scale, High Performance, Full ACID Transaction, Cost Effective">
       <main>
         {/* Hero Section */}
         <div className={styles.hero}>
@@ -79,7 +61,7 @@ export default function EloqSQL() {
             <h1 className={styles.heroTitle}>The Fastest Distributed SQL</h1>
             <p className={styles.heroSubtitle}>
               The MySQL compatible distributed database - Elastic at Any Scale,
-              High Performance, Full ACID Transaction
+              High Performance, Full ACID Transaction and Cost Effective
             </p>
             <div className={styles.heroButtons}>
               <Link
@@ -105,52 +87,160 @@ export default function EloqSQL() {
           </div>
         </div>
 
-        {/* Features Section */}
-        <div className={styles.features}>
-          <div className={styles.featuresInner}>
-            <h2 className={styles.featuresTitle}>Features</h2>
-            <p className={styles.featuresSubtitle}>
-              Discover the Power of EloqSQL: Scalable, Elastic, and Fully
-              ACID-Compliant
-            </p>
-            <div className={styles.featureCards}>
-              <div className={styles.feature}>
-                <h3>MySQL Compatible</h3>
-                <p>Drop-in replacement for MySQL with enhanced capabilities</p>
+        {/* Features Section for EloqSQL */}
+        <div className="section-container">
+          <h2 className="section-title">EloqSQL Features</h2>
+          <p className="section-subtitle">
+            Cloud-native SQL database designed for scale, simplicity, and cost
+            savings
+          </p>
+
+          {/* Cost Effective Section */}
+          <div className={styles.acidSection}>
+            <div className={styles.acidInner}>
+              <div className={styles.acidContent}>
+                <div className={styles.acidInfo}>
+                  <h2 className={styles.acidTitle}>Cost Effective</h2>
+                  <p className={styles.acidDescription}>
+                    EloqSQL uses an intelligent tiered storage strategy to
+                    reduce costs while maintaining performance. Frequently
+                    accessed data is kept in memory, mid-frequency data lives on
+                    SSDs, and cold data moves to object storage. This dynamic
+                    data placement slashes storage costs without sacrificing
+                    query speed.
+                  </p>
+                </div>
+                <div className={styles.acidImageContainer}>
+                  <img
+                    src="/img/tiered-storage.jpg"
+                    alt="Cost Effective Storage"
+                    className={styles.acidImage}
+                  />
+                </div>
               </div>
-              <div className={styles.feature}>
-                <h3>Tiered Storage</h3>
-                <p>
-                  Achieve the perfect balance of speed and cost with tiered
-                  storage across memory, disk, and object storage
-                </p>
+            </div>
+          </div>
+
+          {/* Fully Decoupled Architecture Section */}
+          <div className={styles.tieredSection}>
+            <div className={styles.tieredInner}>
+              <div className={styles.tieredContent}>
+                <div className={styles.tieredImageContainer}>
+                  <img
+                    src="/img/decoupled-architecture.png"
+                    alt="Fully Decoupled Architecture"
+                    className={styles.tieredImage}
+                  />
+                </div>
+                <div className={styles.tieredInfo}>
+                  <h2 className={styles.tieredTitle}>
+                    Fully Decoupled Architecture
+                  </h2>
+                  <p className={styles.tieredDescription}>
+                    EloqSQL separates compute, memory, transaction logs, and
+                    storage into independent layers. This decoupled design gives
+                    you granular control over resources and enables flexible
+                    scaling for cost and performance optimization.
+                  </p>
+                </div>
               </div>
-              <div className={styles.feature}>
-                <h3>Fully Elastic</h3>
-                <p>
-                  Scale compute memory, log and storage independently to match
-                  workload demands
-                </p>
+            </div>
+          </div>
+
+          {/* Simple Operation Section */}
+          <div className={styles.acidSection}>
+            <div className={styles.acidInner}>
+              <div className={styles.acidContent}>
+                <div className={styles.acidInfo}>
+                  <h2 className={styles.acidTitle}>Simple Operation</h2>
+                  <p className={styles.acidDescription}>
+                    Say goodbye to manual sharding and complex routing. EloqSQL
+                    automatically manages data distribution across nodes,
+                    enabling seamless cross-node joins and transactions—no extra
+                    tooling or manual tuning required.
+                  </p>
+                </div>
+                <div className={styles.acidImageContainer}>
+                  <img
+                    src="/img/eloqsql-feature-simple.png"
+                    alt="Simple Cross-Node Operation"
+                    className={styles.acidImage}
+                  />
+                </div>
               </div>
-              <div className={styles.feature}>
-                <h3>Simple Operation</h3>
-                <p>
-                  Cross-node operations made simple—no manual sharding required
-                </p>
+            </div>
+          </div>
+
+          {/* Extreme Compression Section */}
+          <div className={styles.tieredSection}>
+            <div className={styles.tieredInner}>
+              <div className={styles.tieredContent}>
+                <div className={styles.tieredImageContainer}>
+                  <img
+                    src="/img/eloqsql-feature-compression.png"
+                    alt="Extreme Compression"
+                    className={styles.tieredImage}
+                  />
+                </div>
+                <div className={styles.tieredInfo}>
+                  <h2 className={styles.tieredTitle}>Extreme Compression</h2>
+                  <p className={styles.tieredDescription}>
+                    Powered by columnar storage, EloqSQL achieves 5x–10x higher
+                    compression ratios compared to MySQL, significantly reducing
+                    storage footprint while retaining fast access to compressed
+                    data.
+                  </p>
+                </div>
               </div>
-              <div className={styles.feature}>
-                <h3>Extreme Compression</h3>
-                <p>
-                  Column storage optimizes space with high compression
-                  efficiency
-                </p>
+            </div>
+          </div>
+
+          {/* Low Latency Distributed Transaction Section */}
+          <div className={styles.acidSection}>
+            <div className={styles.acidInner}>
+              <div className={styles.acidContent}>
+                <div className={styles.acidInfo}>
+                  <h2 className={styles.acidTitle}>
+                    Low Latency Distributed Transaction
+                  </h2>
+                  <p className={styles.acidDescription}>
+                    EloqSQL supports ultra-fast distributed transactions with
+                    our patented 1PC protocol. By minimizing coordination
+                    overhead, it enables real-time consistency across
+                    distributed shards without performance trade-offs.
+                  </p>
+                </div>
+                <div className={styles.acidImageContainer}>
+                  <img
+                    src="/img/low-latency-transaction.png"
+                    alt="Low Latency Distributed Transaction"
+                    className={styles.acidImage}
+                  />
+                </div>
               </div>
-              <div className={styles.feature}>
-                <h3>Distributed Transaction</h3>
-                <p>
-                  Blazing-fast distributed transactions powered by the 1PC
-                  protocol
-                </p>
+            </div>
+          </div>
+
+          {/* MySQL Compatible Section */}
+          <div className={styles.tieredSection}>
+            <div className={styles.tieredInner}>
+              <div className={styles.tieredContent}>
+                <div className={styles.tieredImageContainer}>
+                  <img
+                    src="/img/eloqsql-feature-mysql.png"
+                    alt="MySQL Compatible"
+                    className={styles.tieredImage}
+                  />
+                </div>
+                <div className={styles.tieredInfo}>
+                  <h2 className={styles.tieredTitle}>MySQL Compatible</h2>
+                  <p className={styles.tieredDescription}>
+                    EloqSQL speaks native MySQL protocol, making it drop-in
+                    compatible with existing tools, drivers, and applications.
+                    No need to change your ORM or rewrite queries—just point to
+                    EloqSQL and scale effortlessly.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -159,11 +249,9 @@ export default function EloqSQL() {
         {/* Product Comparison Section */}
         <div className={styles.comparisonSection}>
           <div className={styles.comparisonInner}>
-            <h2 className={styles.comparisonTitle}>
-              Product Editions Overview
-            </h2>
+            <h2 className={styles.comparisonTitle}>Database Comparison</h2>
             <p className={styles.comparisonSubtitle}>
-              Choose the EloqSQL offering that suits your needs
+              See how EloqSQL compares to Aurora and CockroachDB
             </p>
 
             <div className={styles.comparisonTable}>
@@ -172,13 +260,13 @@ export default function EloqSQL() {
                   <h3>Features</h3>
                 </div>
                 <div className={styles.comparisonColumn}>
-                  <h3>Community Edition</h3>
+                  <h3>EloqSQL</h3>
                 </div>
                 <div className={styles.comparisonColumn}>
-                  <h3>Enterprise Edition</h3>
+                  <h3>Aurora</h3>
                 </div>
                 <div className={styles.comparisonColumn}>
-                  <h3>Cloud Edition</h3>
+                  <h3>CockroachDB</h3>
                 </div>
               </div>
 
@@ -190,8 +278,8 @@ export default function EloqSQL() {
                   }`}>
                   <div className={styles.featureColumn}>{item.feature}</div>
                   <div className={styles.comparisonColumn}>
-                    {typeof item.openSource === 'boolean' ? (
-                      item.openSource ? (
+                    {typeof item.eloqsql === 'boolean' ? (
+                      item.eloqsql ? (
                         <div className={styles.checkIcon}>
                           <svg
                             viewBox="0 0 20 20"
@@ -219,12 +307,12 @@ export default function EloqSQL() {
                         </div>
                       )
                     ) : (
-                      <span>{item.openSource}</span>
+                      <span>{item.eloqsql}</span>
                     )}
                   </div>
                   <div className={styles.comparisonColumn}>
-                    {typeof item.enterprise === 'boolean' ? (
-                      item.enterprise ? (
+                    {typeof item.aurora === 'boolean' ? (
+                      item.aurora ? (
                         <div className={styles.checkIcon}>
                           <svg
                             viewBox="0 0 20 20"
@@ -252,12 +340,12 @@ export default function EloqSQL() {
                         </div>
                       )
                     ) : (
-                      <span>{item.enterprise}</span>
+                      <span>{item.aurora}</span>
                     )}
                   </div>
                   <div className={styles.comparisonColumn}>
-                    {typeof item.cloudSaas === 'boolean' ? (
-                      item.cloudSaas ? (
+                    {typeof item.cockroachdb === 'boolean' ? (
+                      item.cockroachdb ? (
                         <div className={styles.checkIcon}>
                           <svg
                             viewBox="0 0 20 20"
@@ -271,10 +359,21 @@ export default function EloqSQL() {
                           </svg>
                         </div>
                       ) : (
-                        <div className={styles.naText}>N/A</div>
+                        <div className={styles.xIcon}>
+                          <svg
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            className={styles.icon}>
+                            <path
+                              fillRule="evenodd"
+                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
                       )
                     ) : (
-                      <span>{item.cloudSaas}</span>
+                      <span>{item.cockroachdb}</span>
                     )}
                   </div>
                 </div>
@@ -284,12 +383,12 @@ export default function EloqSQL() {
             <div className={styles.comparisonCTA}>
               <Link
                 className={`button button--primary ${styles.ctaButton}`}
-                to="/eloqsql/introduction">
+                to="/eloqdoc/install-from-binary">
                 Learn More
               </Link>
               <Link
                 className={`button button--secondary ${styles.ctaButton}`}
-                href="https://github.com/eloqdata/eloqsql">
+                href="https://github.com/eloqdata/eloqdoc">
                 View on GitHub
               </Link>
             </div>
