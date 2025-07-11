@@ -157,15 +157,15 @@ export default function EloqKV() {
   return (
     <Layout
       title="EloqKV - Redis Compatible Database"
-      description="The Redis API Compatible Distributed Database for Production - Scalable Storage and ACID with Session Style Transactions">
+      description="The Redis API Compatible Distributed Database for Production - High Performance, Cost Effective and Full ACID Transactions">
       <main>
         {/* Hero Section */}
         <div className={styles.hero}>
           <div className={styles.heroInner}>
             <h1 className={styles.heroTitle}>Redis's API, Database's Power</h1>
             <p className={styles.heroSubtitle}>
-              The Redis-API Compatible Distributed Database for Production,
-              Scalable Storage and ACID with Session Style Transactions
+              The Redis-API Compatible Distributed Database for Production, High
+              Performance, Cost Effective and Full ACID Transactions
             </p>
             <div className={styles.heroButtons}>
               <Link
@@ -188,39 +188,6 @@ export default function EloqKV() {
                 Star on GitHub ⭐
               </Link>
             </div>
-          </div>
-        </div>
-
-        {/* Code Comparison Section */}
-        <div className={styles.codeComparison}>
-          <div className={styles.codeComparisonInner}>
-            <div className={styles.codeBlock}>
-              <h3>Redis</h3>
-              <pre className={styles.codeContent}>
-                <code>
-                  {`MULTI
-SET user:1000:balance 500
-SET user:2000:balance 1500
-EXEC`}
-                </code>
-              </pre>
-            </div>
-            <div className={styles.codeBlock}>
-              <h3>EloqKV</h3>
-              <pre className={styles.codeContent}>
-                <code>
-                  {`BEGIN
-SET user:1000:balance 500
--- Perform Other Operations In-Between
-SET user:2000:balance 1500
-COMMIT`}
-                </code>
-              </pre>
-            </div>
-            <p style={{color: 'grey', fontSize: 'smaller'}}>
-              *EloqKV also support MULTI/EXEC style Redis atomic transactions,
-              even in distributed setting.
-            </p>
           </div>
         </div>
 
@@ -383,6 +350,39 @@ COMMIT`}
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Code Comparison Section */}
+        <div className={styles.codeComparison}>
+          <div className={styles.codeComparisonInner}>
+            <div className={styles.codeBlock}>
+              <h3>Redis</h3>
+              <pre className={styles.codeContent}>
+                <code>
+                  {`MULTI
+SET user:1000:balance 500
+SET user:2000:balance 1500
+EXEC`}
+                </code>
+              </pre>
+            </div>
+            <div className={styles.codeBlock}>
+              <h3>EloqKV</h3>
+              <pre className={styles.codeContent}>
+                <code>
+                  {`BEGIN
+SET user:1000:balance 500
+-- Perform Other Operations In-Between
+SET user:2000:balance 1500
+COMMIT`}
+                </code>
+              </pre>
+            </div>
+            <p style={{color: 'grey', fontSize: 'smaller'}}>
+              *EloqKV also support MULTI/EXEC style Redis atomic transactions,
+              even in distributed setting.
+            </p>
           </div>
         </div>
 

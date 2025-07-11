@@ -73,6 +73,42 @@ const buttonStyles = {
   },
 };
 
+// Add animations for the circular product layout
+const circularAnimationStyles = `
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes counterRotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(-360deg);
+    }
+  }
+
+  @keyframes pulse {
+    0% {
+      border-color: rgba(255, 123, 45, 0.3);
+      box-shadow: 0 0 0 0 rgba(255, 123, 45, 0.2);
+    }
+    50% {
+      border-color: rgba(255, 123, 45, 0.6);
+      box-shadow: 0 0 0 10px rgba(255, 123, 45, 0.1);
+    }
+    100% {
+      border-color: rgba(255, 123, 45, 0.3);
+      box-shadow: 0 0 0 0 rgba(255, 123, 45, 0.2);
+    }
+  }
+`;
+
 // Add CSS for the rotating content
 const rotatingContentStyles = {
   container: {
@@ -834,6 +870,7 @@ function HomePage() {
     <Layout
       description="Build the Next Generation of Databases the Right Way"
       wrapperClassName="homepage">
+      <style>{circularAnimationStyles}</style>
       <main style={{marginTop: '-0px'}}>
         {/* News Banner */}
         <div
@@ -981,190 +1018,588 @@ function HomePage() {
           <p className="section-subtitle">
             One database engine, multiple APIs for all your application needs
           </p>
+
+          {/* Circular Product Layout */}
           <div
             style={{
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
-              marginTop: '30px',
+              marginTop: '30px', // Reduced from 60px
+              marginBottom: '30px', // Reduced from 60px
               width: '100%',
+              minHeight: '600px', // Reduced from 700px
+              position: 'relative',
             }}>
+            {/* Wrapper for Product Matrix */}
             <div
               style={{
-                maxWidth: '900px',
-                width: '100%',
-                border: 'none',
-                borderRadius: '10px',
-                overflow: 'hidden',
-                background: 'rgba(25, 25, 40, 0.9)',
-                color: 'white',
-                boxShadow: '0 0px 0px rgba(103, 25, 90, 0.2)',
+                position: 'relative',
+                width: '600px',
+                height: '600px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
               }}>
-              {/* Product Matrix as a grid layout */}
+              {/* Orbit Lines - replacing old border */}
+              <svg
+                width="500"
+                height="500"
+                viewBox="0 0 500 500"
+                style={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  zIndex: 0,
+                  pointerEvents: 'none',
+                }}>
+                <ellipse
+                  cx="250"
+                  cy="250"
+                  rx="200"
+                  ry="90"
+                  fill="none"
+                  stroke="rgba(255,255,255,0.08)"
+                  strokeWidth="1"
+                />
+                <ellipse
+                  cx="250"
+                  cy="250"
+                  rx="200"
+                  ry="90"
+                  fill="none"
+                  stroke="rgba(255,255,255,0.08)"
+                  strokeWidth="1"
+                  transform="rotate(60 250 250)"
+                />
+                <ellipse
+                  cx="250"
+                  cy="250"
+                  rx="200"
+                  ry="90"
+                  fill="none"
+                  stroke="rgba(255,255,255,0.08)"
+                  strokeWidth="1"
+                  transform="rotate(-60 250 250)"
+                />
+              </svg>
+
+              {/* Central EloqCloud */}
               <div
                 style={{
-                  display: 'grid',
-                  gridTemplateColumns: '1fr 1fr',
-                  gridGap: '0px',
-                  gridRowGap: '0px',
-                  padding: '0px',
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  zIndex: 5,
                 }}>
-                {/* EloqKV */}
+                <Link
+                  to="https://cloud.eloqdata.com/join-waitlist"
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    textDecoration: 'none',
+                  }}>
+                  <div
+                    style={{
+                      width: '140px',
+                      height: '140px',
+                      background:
+                        'linear-gradient(145deg, rgba(50,50,80,0.95), rgba(30,30,50,0.95))',
+                      borderRadius: '50%',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      boxShadow: '0 15px 40px rgba(255, 123, 45, 0.3)',
+                      marginBottom: '10px',
+                    }}>
+                    <img
+                      src={useBaseUrl('img/homepage/EloqCloud-icon.svg')}
+                      alt="EloqCloud"
+                      style={{
+                        width: '100px',
+                        height: '100px',
+                        objectFit: 'contain',
+                        transition: 'transform 0.3s ease',
+                      }}
+                      onMouseEnter={e => {
+                        e.currentTarget.style.transform = 'scale(1.1)';
+                        e.currentTarget.parentElement.style.boxShadow =
+                          '0 20px 50px rgba(255, 123, 45, 0.4)';
+                        const tooltip = document.createElement('div');
+                        tooltip.id = 'eloqcloud-tooltip';
+                        tooltip.innerHTML =
+                          'EloqCloud<br/>Cloud-native Serverless Data Service Platform';
+                        tooltip.style.cssText = `
+                        position: fixed;
+                        background: rgba(0, 0, 0, 0.9);
+                        color: white;
+                        padding: 12px 16px;
+                        border-radius: 8px;
+                        font-size: 14px;
+                        font-weight: 500;
+                        text-align: center;
+                        line-height: 1.4;
+                        z-index: 1000;
+                        pointer-events: none;
+                        border: 1px solid rgba(255, 123, 45, 0.5);
+                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+                        white-space: nowrap;
+                      `;
+                        document.body.appendChild(tooltip);
+
+                        const updatePosition = evt => {
+                          tooltip.style.left = evt.clientX + 10 + 'px';
+                          tooltip.style.top = evt.clientY - 10 + 'px';
+                        };
+
+                        updatePosition(e);
+                        e.currentTarget.addEventListener(
+                          'mousemove',
+                          updatePosition
+                        );
+                      }}
+                      onMouseLeave={e => {
+                        e.currentTarget.style.transform = 'scale(1)';
+                        e.currentTarget.parentElement.style.boxShadow =
+                          '0 15px 40px rgba(255, 123, 45, 0.3)';
+                        const tooltip =
+                          document.getElementById('eloqcloud-tooltip');
+                        if (tooltip) tooltip.remove();
+                      }}
+                    />
+                  </div>
+                  <span
+                    style={{
+                      color: '#fff',
+                      fontSize: '16px',
+                      fontWeight: '500',
+                      textAlign: 'center',
+                    }}>
+                    EloqCloud
+                  </span>
+                </Link>
+              </div>
+
+              {/* Static container for outer products */}
+              <div
+                style={{
+                  position: 'absolute',
+                  width: '100%',
+                  height: '100%',
+                }}>
+                {/* EloqKV - Top-Left */}
                 <div
                   style={{
-                    background: 'rgba(30, 30, 50, 0.7)',
-                    borderRadius: '0px',
-                    padding: '0',
-                    overflow: 'hidden',
+                    position: 'absolute',
+                    top: '8%',
+                    left: '15%',
+                    transform: 'none',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    // no animation
                   }}>
                   <Link
                     to="/product/eloqkv"
-                    style={{display: 'block', height: '100%'}}>
-                    <img
-                      src={useBaseUrl('img/homepage/EloqKV-dark.svg')}
-                      alt="EloqKV"
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      textDecoration: 'none',
+                    }}>
+                    <div
                       style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'contain',
-                        padding: '20px 20px 5px 20px',
-                        transition: 'transform 0.3s ease',
-                      }}
-                      onMouseEnter={e => {
-                        e.currentTarget.style.transform = 'scale(1.05)';
-                      }}
-                      onMouseLeave={e => {
-                        e.currentTarget.style.transform = 'scale(1)';
-                      }}
-                    />
+                        width: '120px',
+                        height: '120px',
+                        background:
+                          'linear-gradient(145deg, rgba(50,50,80,0.9), rgba(30,30,50,0.9))',
+                        borderRadius: '50%',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        boxShadow: '0 10px 30px rgba(0, 0, 0, 0.4)',
+                        marginBottom: '10px',
+                      }}>
+                      <img
+                        src={useBaseUrl('img/homepage/EloqKV-icon.svg')}
+                        alt="EloqKV"
+                        style={{
+                          width: '80px',
+                          height: '80px',
+                          objectFit: 'contain',
+                          transition: 'transform 0.3s ease',
+                        }}
+                        onMouseEnter={e => {
+                          e.currentTarget.style.transform = 'scale(1.2)';
+                          e.currentTarget.parentElement.style.boxShadow =
+                            '0 15px 40px rgba(0, 0, 0, 0.6)';
+                          // Show tooltip
+                          const tooltip = document.createElement('div');
+                          tooltip.id = 'eloqkv-tooltip';
+                          tooltip.innerHTML =
+                            'EloqKV<br/>Redis-compatible Key-Value Database';
+                          tooltip.style.cssText = `
+                            position: fixed;
+                            background: rgba(0, 0, 0, 0.9);
+                            color: white;
+                            padding: 12px 16px;
+                            border-radius: 8px;
+                            font-size: 14px;
+                            font-weight: 500;
+                            text-align: center;
+                            line-height: 1.4;
+                            z-index: 1000;
+                            pointer-events: none;
+                            border: 1px solid rgba(255, 123, 45, 0.5);
+                            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+                            white-space: nowrap;
+                          `;
+                          document.body.appendChild(tooltip);
+
+                          const updatePosition = e => {
+                            tooltip.style.left = e.clientX + 10 + 'px';
+                            tooltip.style.top = e.clientY - 10 + 'px';
+                          };
+
+                          updatePosition(e);
+                          e.currentTarget.addEventListener(
+                            'mousemove',
+                            updatePosition
+                          );
+                        }}
+                        onMouseLeave={e => {
+                          e.currentTarget.style.transform = 'scale(1)';
+                          e.currentTarget.parentElement.style.boxShadow =
+                            '0 10px 30px rgba(0, 0, 0, 0.4)';
+                          const tooltip =
+                            document.getElementById('eloqkv-tooltip');
+                          if (tooltip) tooltip.remove();
+                        }}
+                      />
+                    </div>
+                    <span
+                      style={{
+                        color: '#fff',
+                        fontSize: '14px',
+                        fontWeight: '500',
+                        textAlign: 'center',
+                      }}>
+                      EloqKV
+                    </span>
                   </Link>
                 </div>
 
-                {/* EloqDoc */}
+                {/* EloqDoc - Bottom-Left */}
                 <div
                   style={{
-                    background: 'rgba(30, 30, 50, 0.7)',
-                    borderRadius: '0px',
-                    padding: '0',
-                    overflow: 'hidden',
+                    position: 'absolute',
+                    left: '15%',
+                    bottom: '8%',
+                    transform: 'none',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    // no animation
                   }}>
                   <Link
                     to="/product/eloqdoc"
-                    style={{display: 'block', height: '100%'}}>
-                    <img
-                      src={useBaseUrl('img/homepage/EloqDoc-dark.svg')}
-                      alt="EloqDoc"
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      textDecoration: 'none',
+                    }}>
+                    <div
                       style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'contain',
-                        padding: '20px 20px 5px 20px',
-                        transition: 'transform 0.3s ease',
-                      }}
-                      onMouseEnter={e => {
-                        e.currentTarget.style.transform = 'scale(1.05)';
-                      }}
-                      onMouseLeave={e => {
-                        e.currentTarget.style.transform = 'scale(1)';
-                      }}
-                    />
+                        width: '120px',
+                        height: '120px',
+                        background:
+                          'linear-gradient(145deg, rgba(50,50,80,0.9), rgba(30,30,50,0.9))',
+                        borderRadius: '50%',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        boxShadow: '0 10px 30px rgba(0, 0, 0, 0.4)',
+                        marginBottom: '10px',
+                      }}>
+                      <img
+                        src={useBaseUrl('img/homepage/EloqDoc-icon.svg')}
+                        alt="EloqDoc"
+                        style={{
+                          width: '80px',
+                          height: '80px',
+                          objectFit: 'contain',
+                          transition: 'transform 0.3s ease',
+                        }}
+                        onMouseEnter={e => {
+                          e.currentTarget.style.transform = 'scale(1.2)';
+                          e.currentTarget.parentElement.style.boxShadow =
+                            '0 15px 40px rgba(0, 0, 0, 0.6)';
+                          // Show tooltip
+                          const tooltip = document.createElement('div');
+                          tooltip.id = 'eloqdoc-tooltip';
+                          tooltip.innerHTML =
+                            'EloqDoc<br/>MongoDB-compatible Distributed Document Database';
+                          tooltip.style.cssText = `
+                            position: fixed;
+                            background: rgba(0, 0, 0, 0.9);
+                            color: white;
+                            padding: 12px 16px;
+                            border-radius: 8px;
+                            font-size: 14px;
+                            font-weight: 500;
+                            text-align: center;
+                            line-height: 1.4;
+                            z-index: 1000;
+                            pointer-events: none;
+                            border: 1px solid rgba(255, 123, 45, 0.5);
+                            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+                            white-space: nowrap;
+                          `;
+                          document.body.appendChild(tooltip);
+
+                          const updatePosition = e => {
+                            tooltip.style.left = e.clientX + 10 + 'px';
+                            tooltip.style.top = e.clientY - 10 + 'px';
+                          };
+
+                          updatePosition(e);
+                          e.currentTarget.addEventListener(
+                            'mousemove',
+                            updatePosition
+                          );
+                        }}
+                        onMouseLeave={e => {
+                          e.currentTarget.style.transform = 'scale(1)';
+                          e.currentTarget.parentElement.style.boxShadow =
+                            '0 10px 30px rgba(0, 0, 0, 0.4)';
+                          const tooltip =
+                            document.getElementById('eloqdoc-tooltip');
+                          if (tooltip) tooltip.remove();
+                        }}
+                      />
+                    </div>
+                    <span
+                      style={{
+                        color: '#fff',
+                        fontSize: '14px',
+                        fontWeight: '500',
+                        textAlign: 'center',
+                      }}>
+                      EloqDoc
+                    </span>
                   </Link>
                 </div>
 
-                {/* EloqSQL */}
+                {/* EloqSQL - Top-Right */}
                 <div
                   style={{
-                    background: 'rgba(30, 30, 50, 0.7)',
-                    borderRadius: '0px',
-                    padding: '0',
-                    overflow: 'hidden',
-                    marginTop: '-10px',
+                    position: 'absolute',
+                    top: '8%',
+                    right: '15%',
+                    transform: 'none',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    // no animation
                   }}>
                   <Link
                     to="/product/eloqsql"
-                    style={{display: 'block', height: '100%'}}>
-                    <img
-                      src={useBaseUrl('img/homepage/EloqSQL-dark.svg')}
-                      alt="EloqSQL"
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      textDecoration: 'none',
+                    }}>
+                    <div
                       style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'contain',
-                        padding: '20px 20px 5px 20px',
-                        transition: 'transform 0.3s ease',
-                      }}
-                      onMouseEnter={e => {
-                        e.currentTarget.style.transform = 'scale(1.05)';
-                      }}
-                      onMouseLeave={e => {
-                        e.currentTarget.style.transform = 'scale(1)';
-                      }}
-                    />
+                        width: '120px',
+                        height: '120px',
+                        background:
+                          'linear-gradient(145deg, rgba(50,50,80,0.9), rgba(30,30,50,0.9))',
+                        borderRadius: '50%',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        boxShadow: '0 10px 30px rgba(0, 0, 0, 0.4)',
+                        marginBottom: '10px',
+                      }}>
+                      <img
+                        src={useBaseUrl('img/homepage/EloqSQL-icon.svg')}
+                        alt="EloqSQL"
+                        style={{
+                          width: '80px',
+                          height: '80px',
+                          objectFit: 'contain',
+                          transition: 'transform 0.3s ease',
+                        }}
+                        onMouseEnter={e => {
+                          e.currentTarget.style.transform = 'scale(1.2)';
+                          e.currentTarget.parentElement.style.boxShadow =
+                            '0 15px 40px rgba(0, 0, 0, 0.6)';
+                          // Show tooltip
+                          const tooltip = document.createElement('div');
+                          tooltip.id = 'eloqsql-tooltip';
+                          tooltip.innerHTML =
+                            'EloqSQL<br/>MySQL-compatible Distributed Relational Database';
+                          tooltip.style.cssText = `
+                            position: fixed;
+                            background: rgba(0, 0, 0, 0.9);
+                            color: white;
+                            padding: 12px 16px;
+                            border-radius: 8px;
+                            font-size: 14px;
+                            font-weight: 500;
+                            text-align: center;
+                            line-height: 1.4;
+                            z-index: 1000;
+                            pointer-events: none;
+                            border: 1px solid rgba(255, 123, 45, 0.5);
+                            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+                            white-space: nowrap;
+                          `;
+                          document.body.appendChild(tooltip);
+
+                          const updatePosition = e => {
+                            tooltip.style.left = e.clientX + 10 + 'px';
+                            tooltip.style.top = e.clientY - 10 + 'px';
+                          };
+
+                          updatePosition(e);
+                          e.currentTarget.addEventListener(
+                            'mousemove',
+                            updatePosition
+                          );
+                        }}
+                        onMouseLeave={e => {
+                          e.currentTarget.style.transform = 'scale(1)';
+                          e.currentTarget.parentElement.style.boxShadow =
+                            '0 10px 30px rgba(0, 0, 0, 0.4)';
+                          const tooltip =
+                            document.getElementById('eloqsql-tooltip');
+                          if (tooltip) tooltip.remove();
+                        }}
+                      />
+                    </div>
+                    <span
+                      style={{
+                        color: '#fff',
+                        fontSize: '14px',
+                        fontWeight: '500',
+                        textAlign: 'center',
+                      }}>
+                      EloqSQL
+                    </span>
                   </Link>
                 </div>
 
-                {/* EloqCloud */}
+                {/* EloqConvergedDB - Bottom-Right */}
                 <div
                   style={{
-                    background: 'rgba(30, 30, 50, 0.7)',
-                    borderRadius: '0px',
-                    padding: '0',
-                    overflow: 'hidden',
-                    marginTop: '-10px',
-                  }}>
-                  <Link
-                    to="https://cloud.eloqdata.com/join-waitlist"
-                    style={{display: 'block', height: '100%'}}>
-                    <img
-                      src={useBaseUrl('img/homepage/EloqCloud-dark.svg')}
-                      alt="EloqCloud"
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'contain',
-                        padding: '20px 20px 5px 20px',
-                        transition: 'transform 0.3s ease',
-                      }}
-                      onMouseEnter={e => {
-                        e.currentTarget.style.transform = 'scale(1.05)';
-                      }}
-                      onMouseLeave={e => {
-                        e.currentTarget.style.transform = 'scale(1)';
-                      }}
-                    />
-                  </Link>
-                </div>
-
-                {/* EloqConvergedDB - spans full width */}
-                <div
-                  style={{
-                    gridColumn: '1 / span 2',
-                    background: 'rgba(30, 30, 50, 0.7)',
-                    borderRadius: '0px',
-                    padding: '0',
-                    overflow: 'hidden',
-                    marginTop: '-10px',
+                    position: 'absolute',
+                    right: '15%',
+                    bottom: '8%',
+                    transform: 'none',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    // no animation
                   }}>
                   <Link
                     to="/product/eloqconvergeddb"
-                    style={{display: 'block', height: '100%'}}>
-                    <img
-                      src={useBaseUrl('img/homepage/EloqConvergedDB-dark.svg')}
-                      alt="EloqConvergedDB"
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      textDecoration: 'none',
+                    }}>
+                    <div
                       style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'contain',
-                        padding: '20px 20px 5px 20px',
-                        transition: 'transform 0.3s ease',
-                      }}
-                      onMouseEnter={e => {
-                        e.currentTarget.style.transform = 'scale(1.05)';
-                      }}
-                      onMouseLeave={e => {
-                        e.currentTarget.style.transform = 'scale(1)';
-                      }}
-                    />
+                        width: '120px',
+                        height: '120px',
+                        background:
+                          'linear-gradient(145deg, rgba(50,50,80,0.9), rgba(30,30,50,0.9))',
+                        borderRadius: '50%',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        boxShadow: '0 10px 30px rgba(0, 0, 0, 0.4)',
+                        marginBottom: '10px',
+                      }}>
+                      <img
+                        src={useBaseUrl(
+                          'img/homepage/EloqConvergedDB-icon.svg'
+                        )}
+                        alt="EloqConvergedDB"
+                        style={{
+                          width: '80px',
+                          height: '80px',
+                          objectFit: 'contain',
+                          transition: 'transform 0.3s ease',
+                        }}
+                        onMouseEnter={e => {
+                          e.currentTarget.style.transform = 'scale(1.2)';
+                          e.currentTarget.parentElement.style.boxShadow =
+                            '0 15px 40px rgba(0, 0, 0, 0.6)';
+                          // Show tooltip
+                          const tooltip = document.createElement('div');
+                          tooltip.id = 'eloqconverged-tooltip';
+                          tooltip.innerHTML =
+                            'EloqConvergedDB<br/>AI-Native Converged Database<br/>Supporting SQL, Redis, Mongo, Vector, Graph,<br/>and Other Data Modalities and APIs';
+                          tooltip.style.cssText = `
+                            position: fixed;
+                            background: rgba(0, 0, 0, 0.9);
+                            color: white;
+                            padding: 12px 16px;
+                            border-radius: 8px;
+                            font-size: 14px;
+                            font-weight: 500;
+                            text-align: center;
+                            line-height: 1.4;
+                            z-index: 1000;
+                            pointer-events: none;
+                            border: 1px solid rgba(255, 123, 45, 0.5);
+                            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+                          `;
+                          document.body.appendChild(tooltip);
+
+                          const updatePosition = e => {
+                            tooltip.style.left = e.clientX + 10 + 'px';
+                            tooltip.style.top = e.clientY - 10 + 'px';
+                          };
+
+                          updatePosition(e);
+                          e.currentTarget.addEventListener(
+                            'mousemove',
+                            updatePosition
+                          );
+                        }}
+                        onMouseLeave={e => {
+                          e.currentTarget.style.transform = 'scale(1)';
+                          e.currentTarget.parentElement.style.boxShadow =
+                            '0 10px 30px rgba(0, 0, 0, 0.4)';
+                          const tooltip = document.getElementById(
+                            'eloqconverged-tooltip'
+                          );
+                          if (tooltip) tooltip.remove();
+                        }}
+                      />
+                    </div>
+                    <span
+                      style={{
+                        color: '#fff',
+                        fontSize: '14px',
+                        fontWeight: '500',
+                        textAlign: 'center',
+                      }}>
+                      EloqConvergedDB
+                    </span>
                   </Link>
                 </div>
               </div>
