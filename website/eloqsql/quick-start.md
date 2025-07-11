@@ -15,13 +15,13 @@ EloqSQL is compatible with Red Hat 9 and Ubuntu 20.04, 22.04, and 24.04.
 
 Please ensure you've reviewed the following documents:
 
-- [Configuration Checklist](./prerequisite)
+- [Configuration Checklist](/eloqkv/prerequisite)
 
 ## 2. Deploy eloqctl on the control machine
 
 1. Get your eloqctl installation script here:
 
-- [Eloqctl Install Script](../downloadeloqctl)
+- [Eloqctl Install Script](/downloadeloqctl)
 
 2. To install eloqctl, simply run the following command:
 
@@ -119,7 +119,7 @@ deployment:
 
 Next, we'll provide detailed explanations for each configuration option available in the YAML file.
 
-The `connection` section includes settings for connecting to EloqSQL nodes from the control machine. If you followed the steps in the [Prerequisite Document](./prerequisite), you can leave the connection section unchanged.
+The `connection` section includes settings for connecting to EloqSQL nodes from the control machine. If you followed the steps in the [Prerequisite Document](/eloqkv/prerequisite), you can leave the connection section unchanged.
 
 The `deployment` section covers the configurations for deploying cluster metadata as well as the three key components: the transaction cluster, log cluster, and persistent storage cluster.
 

@@ -55,7 +55,7 @@ However, using object storage directly introduces additional latency. While acce
 
 ## EloqDoc: A Cost-Efficient, High-Performance Document Database
 
-Leveraging EloqData’s groundbreaking decoupled architecture, [EloqDoc](../product/eloqdoc)—a MongoDB-compatible JSON document store—effectively solves this challenge. EloqDoc fully embraces object storage, extending its benefits to document databases and unlocking elasticity, performance, and cost-efficiency. Unlike [MongoDB Atlas](https://www.mongodb.com/products/platform/atlas-database), which incurs high costs from multiple replicas and cross-AZ traffic, EloqDoc uses object storage as its persistent layer.
+Leveraging EloqData’s groundbreaking decoupled architecture, [EloqDoc](/product/eloqdoc)—a MongoDB-compatible JSON document store—effectively solves this challenge. EloqDoc fully embraces object storage, extending its benefits to document databases and unlocking elasticity, performance, and cost-efficiency. Unlike [MongoDB Atlas](https://www.mongodb.com/products/platform/atlas-database), which incurs high costs from multiple replicas and cross-AZ traffic, EloqDoc uses object storage as its persistent layer.
 
 Key advantages of EloqDoc include:
 
@@ -63,7 +63,7 @@ Key advantages of EloqDoc include:
 - **Object Storage as Primary Storage:** Batches writes asynchronously to mitigate object storage latency, while recent data is safeguarded with EBS for durability.
 - **Local NVMe Caching:** Delivers high-throughput, low-latency reads that outperform EBS IOPS by caching object storage locally.
 - **Scalable Redo Logs:** Improves write performance cost-effectively using additional EBS volumes.
-- **MongoDB Compatibility and Distributed Transactions:** Seamless migration from MongoDB, with robust transaction support powered by [Data Substrate](/blog/2024-08-11-data-substrate).
+- **MongoDB Compatibility and Distributed Transactions:** Seamless migration from MongoDB, with robust transaction support powered by [Data Substrate](/blog/2024/08/11/data-substrate).
 
 EloqDoc addresses the latency challenge by using local NVMe storage as an intelligent cache. Modern cloud-optimized instances offer significant local NVMe capacity (e.g., 3.5TB per 16-core server), enabling high-performance caching of active data while reducing costs.
 

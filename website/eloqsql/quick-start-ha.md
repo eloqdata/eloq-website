@@ -11,7 +11,7 @@ summary: Learn how to quickly get started with the EloqSQL database.
 
 Please ensure you've reviewed the following document:
 
-- [Configuration Checklist](./prerequisite)
+- [Configuration Checklist](/eloqkv/prerequisite)
 
 ## 2. Deploy Eloqctl on the control machine
 
