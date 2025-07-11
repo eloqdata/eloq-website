@@ -1054,14 +1054,74 @@ function HomePage() {
                   zIndex: 0,
                   pointerEvents: 'none',
                 }}>
+                {/* Define gradients */}
+                <defs>
+                  <linearGradient
+                    id="orbit-gradient-1"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="0%">
+                    <stop
+                      offset="0%"
+                      style={{stopColor: 'rgba(255, 123, 45, 0.4)'}}
+                    />
+                    <stop
+                      offset="50%"
+                      style={{stopColor: 'rgba(255, 255, 255, 0.3)'}}
+                    />
+                    <stop
+                      offset="100%"
+                      style={{stopColor: 'rgba(255, 123, 45, 0.4)'}}
+                    />
+                  </linearGradient>
+                  <linearGradient
+                    id="orbit-gradient-2"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="0%">
+                    <stop
+                      offset="0%"
+                      style={{stopColor: 'rgba(255, 123, 45, 0.4)'}}
+                    />
+                    <stop
+                      offset="50%"
+                      style={{stopColor: 'rgba(255, 255, 255, 0.3)'}}
+                    />
+                    <stop
+                      offset="100%"
+                      style={{stopColor: 'rgba(255, 123, 45, 0.4)'}}
+                    />
+                  </linearGradient>
+                  <linearGradient
+                    id="orbit-gradient-3"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="0%">
+                    <stop
+                      offset="0%"
+                      style={{stopColor: 'rgba(255, 123, 45, 0.4)'}}
+                    />
+                    <stop
+                      offset="50%"
+                      style={{stopColor: 'rgba(255, 255, 255, 0.3)'}}
+                    />
+                    <stop
+                      offset="100%"
+                      style={{stopColor: 'rgba(255, 123, 45, 0.4)'}}
+                    />
+                  </linearGradient>
+                </defs>
                 <ellipse
                   cx="250"
                   cy="250"
                   rx="200"
                   ry="90"
                   fill="none"
-                  stroke="rgba(255,255,255,0.08)"
-                  strokeWidth="1"
+                  stroke="url(#orbit-gradient-1)"
+                  strokeWidth="1.5"
                 />
                 <ellipse
                   cx="250"
@@ -1069,8 +1129,8 @@ function HomePage() {
                   rx="200"
                   ry="90"
                   fill="none"
-                  stroke="rgba(255,255,255,0.08)"
-                  strokeWidth="1"
+                  stroke="url(#orbit-gradient-2)"
+                  strokeWidth="1.5"
                   transform="rotate(60 250 250)"
                 />
                 <ellipse
@@ -1079,8 +1139,8 @@ function HomePage() {
                   rx="200"
                   ry="90"
                   fill="none"
-                  stroke="rgba(255,255,255,0.08)"
-                  strokeWidth="1"
+                  stroke="url(#orbit-gradient-3)"
+                  strokeWidth="1.5"
                   transform="rotate(-60 250 250)"
                 />
               </svg>
@@ -1608,7 +1668,7 @@ function HomePage() {
         </div>
 
         {/* Features Section */}
-        <div className="section-container">
+        <div className="section-container" style={{marginTop: '-30px'}}>
           <h2 className="section-title">Features</h2>
           <p className="section-subtitle">
             All the database features you need for your next blockbuster AI
@@ -1616,7 +1676,7 @@ function HomePage() {
           </p>
 
           {/* Tiered Storage Section */}
-          <div className={styles.tieredSection}>
+          <div className={styles.tieredSection} style={{marginTop: '-20px'}}>
             <div className={styles.tieredInner}>
               <div className={styles.tieredContent}>
                 <div className={styles.tieredImageContainer}>
