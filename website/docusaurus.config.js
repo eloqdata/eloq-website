@@ -290,7 +290,9 @@ module.exports = {
                     <div style="display: flex; align-items: center;">
                       <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
                         <rect width="32" height="32" rx="6" fill="#222" />
-                        <path d="M24 16.5l-8 4.5-8-4.5L16 12l8 4.5z" fill="#FFFFFF" />
+                        <path d="M6 10h8v12H6z" fill="#FFFFFF" />
+                        <path d="M18 10h8v12h-8z" fill="#FFFFFF" opacity="0.6" />
+                        <path d="M14 16h4" stroke="#FFFFFF" stroke-width="2" />
                       </svg>
                       <div style="display: flex; flex-direction: column;">
                         <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqKV</span>
@@ -365,9 +367,7 @@ module.exports = {
                     <div style="display: flex; align-items: center;">
                       <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
                         <rect width="32" height="32" rx="6" fill="#222" />
-                        <path d="M8 20c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="#FFFFFF" stroke-width="2" fill="none" />
-                        <path d="M10 24l6-6 6 6" stroke="#FFFFFF" stroke-width="2" fill="none" />
-                        <path d="M16 8v10" stroke="#FFFFFF" stroke-width="2" />
+                        <path d="M8 18.5C8 16 10 14 12.5 14c.5-2.5 2.7-4.5 5.5-4.5 3 0 5.4 2.4 5.5 5.4 1.8.3 3 1.8 3 3.6 0 2-1.5 3.5-3.5 3.5h-12C9.5 22 8 20.5 8 18.5z" stroke="#FFFFFF" stroke-width="2" fill="none"/>
                       </svg>
                       <div style="display: flex; flex-direction: column;">
                         <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqCloud</span>
@@ -391,7 +391,9 @@ module.exports = {
                     <div style="display: flex; align-items: center;">
                       <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
                         <rect width="32" height="32" rx="6" fill="#222" />
-                        <path d="M24 16.5l-8 4.5-8-4.5L16 12l8 4.5z" fill="#FFFFFF" />
+                        <path d="M6 10h8v12H6z" fill="#FFFFFF" />
+                        <path d="M18 10h8v12h-8z" fill="#FFFFFF" opacity="0.6" />
+                        <path d="M14 16h4" stroke="#FFFFFF" stroke-width="2" />
                       </svg>
                       <div style="display: flex; flex-direction: column;">
                         <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqKV</span>
@@ -446,9 +448,7 @@ module.exports = {
                     <div style="display: flex; align-items: center;">
                       <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
                         <rect width="32" height="32" rx="6" fill="#222" />
-                        <path d="M8 20c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="#FFFFFF" stroke-width="2" fill="none" />
-                        <path d="M10 24l6-6 6 6" stroke="#FFFFFF" stroke-width="2" fill="none" />
-                        <path d="M16 8v10" stroke="#FFFFFF" stroke-width="2" />
+                        <path d="M8 18.5C8 16 10 14 12.5 14c.5-2.5 2.7-4.5 5.5-4.5 3 0 5.4 2.4 5.5 5.4 1.8.3 3 1.8 3 3.6 0 2-1.5 3.5-3.5 3.5h-12C9.5 22 8 20.5 8 18.5z" stroke="#FFFFFF" stroke-width="2" fill="none"/>
                       </svg>
                       <div style="display: flex; flex-direction: column;">
                         <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqCloud</span>
