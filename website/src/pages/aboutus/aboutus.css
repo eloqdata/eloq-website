@@ -28,17 +28,22 @@
 .company-branding {
   display: flex;
   align-items: center;
-  justify-content: center; /* Centers the content horizontally */
+  justify-content: center;
+  /* Centers the content horizontally */
 }
 
 .company-logo {
-  height: 4em; /* This makes the image height consistent with the font size */
-  width: auto; /* Maintain aspect ratio */
-  margin-right: 20px; /* Space between image and text */
+  height: 4em;
+  /* This makes the image height consistent with the font size */
+  width: auto;
+  /* Maintain aspect ratio */
+  margin-right: 20px;
+  /* Space between image and text */
 }
 
 .company-name {
-  font-size: 4em; /* Adjust this as needed */
+  font-size: 4em;
+  /* Adjust this as needed */
   margin: 0;
   color: rgb(120, 200, 244);
 }
@@ -62,8 +67,8 @@
 }
 
 .mission-section {
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 1%;
+  margin-right: 1%;
   margin-bottom: 40px;
 }
 
@@ -75,7 +80,7 @@
 }
 
 .columna {
-  width: 48%;
+  width: 45%;
 }
 
 .mission-heading {
@@ -90,16 +95,18 @@
 
 .mission-image,
 .vision-imager {
-  width: 70%;
-  margin-right: 20%; /* Adds margin to the left of each office box */
+  width: 100%;
+  margin-right: 0%;
+  /* Adds margin to the left of each office box */
   height: auto;
   border-radius: 8px;
 }
 
 .mission-image,
 .vision-imagel {
-  width: 70%;
-  margin-left: 20%; /* Adds margin to the left of each office box */
+  width: 100%;
+  margin-left: 0%;
+  /* Adds margin to the left of each office box */
   height: auto;
   border-radius: 8px;
 }
@@ -110,7 +117,8 @@
 }
 
 .emphasized-text {
-  color: #f75b0c; /* Highlight color for emphasis */
+  color: #f75b0c;
+  /* Highlight color for emphasis */
   font-weight: bold;
   font-size: 2.2rem;
 }
@@ -140,28 +148,34 @@
   border-radius: 8px;
   margin-bottom: 60px;
   margin-bottom: 20px;
-  margin-right: 10%; /* Adds margin to the right of each office box */
-  box-shadow: 0 10px 16px rgba(210, 240, 220, 0.5); /* Stronger shadow with increased blur and opacity */
+  margin-right: 10%;
+  /* Adds margin to the right of each office box */
+  box-shadow: 0 10px 16px rgba(210, 240, 220, 0.5);
+  /* Stronger shadow with increased blur and opacity */
   transition: transform 0.3s, background-color 0.3s;
-  color: #ffffff; /* Ensure the text is white */
+  color: #ffffff;
+  /* Ensure the text is white */
   border-radius: 8px;
 }
 
 .office h3 {
   font-size: 1.5rem;
-  #color: #00bcd4; /* A brighter, contrasting color for headings */
   color: rgb(120, 200, 244);
+  /* A brighter, contrasting color for headings */
 }
 
 .office p {
   font-size: 1.2rem;
   color: #b3b3b3;
-  line-height: 1.6; /* Increased line height for better text spacing */
+  line-height: 1.6;
+  /* Increased line height for better text spacing */
 }
 
 .office:hover {
-  background-color: #3a3a3a; /* Slightly different background on hover */
-  transform: translateY(-5px); /* Lift the box slightly on hover */
+  background-color: #3a3a3a;
+  /* Slightly different background on hover */
+  transform: translateY(-5px);
+  /* Lift the box slightly on hover */
 }
 
 .join-us-section {
@@ -198,5 +212,6 @@
 }
 
 .large-text {
-  font-size: 1.2em; /* Adjust the size as needed */
+  font-size: 1.2em;
+  /* Adjust the size as needed */
 }
