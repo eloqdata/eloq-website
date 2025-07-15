@@ -259,7 +259,7 @@ export default function ProductComparison() {
                 </ul>
                 <Link
                   className={`button button--primary ${styles.editionButton}`}
-                  href="https://cloud.eloqdata.com/join-waitlist">
+                  href="https://cloud.eloqdata.com">
                   Try Cloud Free
                 </Link>
               </div>

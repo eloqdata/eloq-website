@@ -271,7 +271,7 @@ module.exports = {
           },
           // Sign Up button with orange background
           {
-            href: 'https://cloud.eloqdata.com/join-waitlist',
+            href: 'https://cloud.eloqdata.com',
             position: 'right',
             className: 'header-signup-link',
             label: 'Sign Up',
@@ -360,7 +360,7 @@ module.exports = {
               {
                 type: 'html',
                 value: `
-                  <a href="https://cloud.eloqdata.com/join-waitlist" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 340px;">
+                  <a href="https://cloud.eloqdata.com" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 340px;">
                     <div style="display: flex; align-items: center;">
                       <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
                         <rect width="32" height="32" rx="6" fill="#222" />
