@@ -7,7 +7,7 @@ image: /img/dds2025.jpeg
 description: At Data Stream Summit 2025, EloqData showed how Ursa and EloqDoc use object storage to cut costs and boost scalability—redefining cloud OLTP and streaming for AI-era workloads.
 featured: true
 blog: true
-featuredMain: true
+featuredMain: false
 ---
 
 At the recent [Data Stream Summit 2025](https://datastreaming-summit.org/event/data-streaming-virtual-2025/speakers), Hubert Zhang, CTO of EloqData, delivered a talk on building elastic, agentic AI data pipelines using [Apache Pulsar](https://pulsar.apache.org/) and [EloqDoc](https://www.eloqdata.com/product/eloqdoc).

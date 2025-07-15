@@ -89,6 +89,7 @@ module.exports = {
           path: 'blog',
           blogSidebarCount: 'ALL',
           blogSidebarTitle: 'All Blog Posts',
+          postsPerPage: 20,
           feedOptions: {
             type: 'all',
             copyright,

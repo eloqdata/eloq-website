@@ -30,21 +30,47 @@ const CompanyPage: React.FC = () => {
           <section className="mission-section">
             <div className="rowa">
               <div className="columna">
-                <h2 className="mission-heading">Our Vision</h2>
+                <img
+                  src={visionImage}
+                  alt="Our Team"
+                  className="vision-imagel"
+                />
+              </div>
+              <div className="columna">
+                <h2 className="mission-heading">Our Team</h2>
                 <p className="large-text">
-                  We envision a future where managing data for AI applications
-                  is seamless, efficient, and innovative. EloqData aims to
-                  eliminate the complexity of fragmented data systems by
-                  unifying multi-data-model access into a one-stop solution. By
-                  delivering unmatched performance, scalability, and full ACID
-                  transaction, we aspire to be the foundational data layer that
-                  drives the next wave of AI innovation.{" "}
+                  EloqData consists of a <a href="https://www.linkedin.com/company/eloqdata"> 
+                  team </a>with deep expertise in databases, 
+                  distributed systems, and artificial intelligence. Drawing on 
+                  decades of experience building and scaling mission-critical 
+                  infrastructure, we came together with a shared vision: to rethink 
+                  what a database should be in the AI age. We believe that the data 
+                  stack must be radically simplified and modernized to meet the needs
+                  of emerging AI applications—and we're building EloqData to make 
+                  that future a reality.
+                </p>
+              </div>
+            </div>
+            <br />
+            <div className="rowa">
+              <div className="columna">
+                <h2 className="mission-heading">Our Technology</h2>
+                <p className="large-text">
+                  At the heart of EloqData is <a href="blog/2025/07/14/technology">
+                  Data Substrate</a>—a modular database architecture that redefines how databases 
+                  are built. By abstracting the core components of database functionality, Data
+                  Substrate enables us to create high-performance, scalable and 
+                  fully transactional systems without reinventing the wheel. This 
+                  composable foundation allows us to support multiple APIs and data
+                  modalities (such as MySQL, Redis, and MongoDB) while delivering
+                  consistent performance and reliability across all workloads. 
+                  You can read more about of our technology foundation here. 
                 </p>
               </div>
               <div className="columna">
                 <img
                   src={visionImage}
-                  alt="Our Vision"
+                  alt="Our Technology"
                   className="vision-imagel"
                 />
               </div>
@@ -61,14 +87,15 @@ const CompanyPage: React.FC = () => {
               <div className="columna">
                 <h2 className="mission-heading">Our Mission</h2>
                 <p className="large-text">
-                  Our mission is to revolutionize data management for modern AI
-                  applications by addressing inefficiencies and inconsistencies
-                  in traditional multi-database setups. With our groundbreaking
-                  "data substrate" architecture, we are committed to providing a
-                  one-stop solution that delivers over 10x performance gains and
-                  cost savings. By combining cutting-edge technology, EloqData
-                  strives to build the ideal data infrastructure for the
-                  AI-driven world.
+                  At EloqData, we aim to be the foundational data layer that drives
+                  the AI era forward. We believe the future of data lies in 
+                  simplicity, performance, and adaptability. Our goal is to 
+                  modernize database architecture by unifying fragmented systems
+                  into a single, seamless platform. We drive to offer a range of 
+                  data management products that deliver unmatched scalability, full 
+                  ACID compliance, upto10x performance gains and up to 90% the cost
+                  savings — empowering developers to build the next generation of 
+                  AI-native applications with ease and confidence. 
                 </p>
               </div>
             </div>

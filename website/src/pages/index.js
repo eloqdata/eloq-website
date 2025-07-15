@@ -1689,12 +1689,12 @@ function HomePage() {
                 <div className={styles.tieredInfo}>
                   <h2 className={styles.tieredTitle}>Cost Effective</h2>
                   <p className={styles.tieredDescription}>
-                    EloqKV intelligently manages your data across multiple
-                    storage tiers, optimizing both performance and cost. Hot
-                    data stays in memory for lightning-fast access, warm data
-                    moves to SSD for balanced performance, and cold data is
-                    persisted to object storage—all while maintaining seamless
-                    access. This multi-tiered approach dramatically reduces TCO.
+                    Eloq Databases intelligently manage your data across multiple
+                    storage tiers to optimize both performance and cost. Hot data
+                    is kept in memory for lightning-fast access, warm data is moved
+                    to SSDs for balanced speed and efficiency, and cold data is 
+                    offloaded to object storage. Our smart tiering strategy can dramatically
+                    reduces your Total Cost of Ownership (TCO).
                   </p>
                 </div>
               </div>
@@ -1708,10 +1708,11 @@ function HomePage() {
                 <div className={styles.acidInfo}>
                   <h2 className={styles.acidTitle}>ACID Transaction</h2>
                   <p className={styles.acidDescription}>
-                    EloqKV is more than just an in-memory cache—it's a fully
-                    featured, distributed ACID-compliant transactional database.
-                    Eliminate the need for a separate SQL + Redis setup and say
-                    goodbye to cache coherence challenges.
+                    Eloq Databases are fully featured, ACID-compliant transactional systems. 
+                    Backed by cross-AZ durable write-ahead logs and support session-based 
+                    transaction with familiar isolation levels, 
+                    Eloq solutions ensure data integrity and consistency across distributed 
+                    nodes, making them ideal for mission-critical applications.
                   </p>
                 </div>
                 <div className={styles.acidImageContainer}>
@@ -1739,12 +1740,11 @@ function HomePage() {
                 <div className={styles.tieredInfo}>
                   <h2 className={styles.tieredTitle}>High Performance</h2>
                   <p className={styles.tieredDescription}>
-                    EloqKV is engineered for high-performance, low-latency
-                    applications that demand speed at scale. It delivers
-                    blazing-fast distributed transactions, powered by the 1PC
-                    protocol. It enables EloqKV to match—and often exceed—the
-                    throughput of best-in-class solutions, making it ideal for
-                    real-time workloads.
+                    Eloq Databases are engineered for high-performance, low-latency 
+                    applications that demand speed at scale. Featuring a highly 
+                    optimized thread-per-core execution model and asynchronous I/O, 
+                    Eloq delivers performance that rivals—and often surpasses—the best 
+                    purpose-built point solutions in the industry.
                   </p>
                 </div>
               </div>
@@ -1758,12 +1758,11 @@ function HomePage() {
                 <div className={styles.acidInfo}>
                   <h2 className={styles.acidTitle}>Scalable & Elastic</h2>
                   <p className={styles.acidDescription}>
-                    EloqKV is architected for true scalability and elasticity,
-                    adapting seamlessly to workload demands. It scales up
-                    efficiently across multicore CPUs to maximize single-node
-                    performance, and scales out across distributed nodes for
-                    high availability and throughput. Clusters can expand
-                    dynamically to adapt to unpredictable traffic surges.
+                    Eloq Databases are architected for true scalability and elasticity. 
+                    They scale up efficiently across multicore CPUs to maximize single-node 
+                    performance, and scale out across distributed nodes to deliver virtually
+                    unlimited throughput. Clusters can grow or shrink dynamically in response
+                    to traffic surges—all without service disruption.
                   </p>
                 </div>
                 <div className={styles.acidImageContainer}>
@@ -1791,10 +1790,10 @@ function HomePage() {
                 <div className={styles.tieredInfo}>
                   <h2 className={styles.tieredTitle}>Standard API</h2>
                   <p className={styles.tieredDescription}>
-                    EloqKV offers broad compatibility through support for
+                    Eloq Databases offers broad compatibility through support for
                     standard APIs, including Redis, SQL, and MongoDB. This
                     multi-model interface empowers developers to integrate
-                    EloqKV into existing ecosystems effortlessly—enabling
+                    Eloq into existing ecosystems effortlessly—enabling
                     seamless migration with minimal code changes.
                   </p>
                 </div>
@@ -1808,12 +1807,11 @@ function HomePage() {
                 <div className={styles.acidInfo}>
                   <h2 className={styles.acidTitle}>High Availability</h2>
                   <p className={styles.acidDescription}>
-                    EloqKV is built for high availability and fault tolerance at
-                    its core. Data is replicated seamlessly across multiple
-                    servers or disks to ensure durability and resilience, even
-                    under failure conditions. With built-in support for hot
-                    standbys and fast failover, EloqKV can recover from node
-                    outages in sub-second.
+                    Eloq Databases are built for high availability and fault tolerance. 
+                    Data is seamlessly replicated across multiple servers or disks to 
+                    ensure durability and resilience. With built-in support for hot 
+                    standbys and fast failover, Eloq can recover from node outages in
+                    seconds—minimizing downtime and maintaining continuous service.
                   </p>
                 </div>
                 <div className={styles.acidImageContainer}>
@@ -1832,7 +1830,7 @@ function HomePage() {
         <div className="section-container">
           <h2 className="section-title">Community</h2>
           <p className="section-subtitle">
-            Let's build the next generation of AI native databases together
+            Let's build the next generation of databases for the AI age together
           </p>
           <div className="community-grid">
             <Link to="/blog" className="community-card">
