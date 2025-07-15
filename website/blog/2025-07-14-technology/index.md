@@ -12,6 +12,14 @@ featuredMain: true
 
 At EloqData, we've developed **Data Substrate**—a revolutionary database architecture designed to meet the unprecedented demands of modern applications in the AI age. Unlike traditional database systems that struggle with the scale and complexity of AI workloads, Data Substrate reimagines the database as a unified, distributed computer where memory, compute, logging, and storage are fully decoupled yet globally addressable.
 
+<p align="center">
+<div style={{ width: '720px', textAlign: 'center'}}>
+import EnlargeableImage from '@site/src/pages/enlarge_pic';
+
+<EnlargeableImage src={require('/img/blog/dstech1.jpg').default} alt="Building a Data Foundation for Agentic AI Applications" />
+
+</div></p>
+
 This series of articles explore the motivations, technical foundations, and benefits of Data Substrate, providing a comprehensive understanding of how this architecture addresses the critical challenges facing modern data infrastructure in the AI age.
 
 Some of the topics covered are rather heavy in technical jargons, and require a good understanding of database internal mechanisms to appreciate. We apologize in advance.
