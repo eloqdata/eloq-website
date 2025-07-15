@@ -19,7 +19,7 @@ const PRICING_PLANS = {
       'Scale to zero',
     ],
     cta: 'Start for free',
-    ctaLink: 'https://cloud.eloqdata.com/join-waitlist',
+    ctaLink: 'https://cloud.eloqdata.com',
   },
   launch: {
     name: 'Business',
