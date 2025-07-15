@@ -64,10 +64,54 @@
   height: calc(50% - 0.75rem);
   border: none;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
 }
 
 .featuredSidePosts .blogCardImage {
-  height: 150px;
+  height: 60%;
+  width: 100%;
+  position: relative;
+}
+
+.featuredSidePosts .blogCardImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.featuredSidePosts .blogCardContent {
+  padding: 0.75rem;
+  height: 15%;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(
+    to bottom,
+    rgba(27, 27, 27, 0.9),
+    rgba(27, 27, 27, 1)
+  );
+}
+
+.featuredSidePosts .blogCardTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.featuredSidePosts .blogCardTitle a {
+  color: white;
+}
+
+.featuredSidePosts .blogCardDescription,
+.featuredSidePosts .blogCardMeta {
+  display: none;
 }
 
 .blogGrid {
