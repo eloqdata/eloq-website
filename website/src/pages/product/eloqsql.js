@@ -23,12 +23,14 @@ const PRODUCT_COMPARISON = [
     aurora: true,
     cockroachdb: false,
   },
+/*
   {
     feature: 'Parallel Redo Log',
     eloqsql: true,
     aurora: false,
     cockroachdb: false,
   },
+*/
   {
     feature: 'Main Storage',
     eloqsql: 'Object Storage',
@@ -46,6 +48,12 @@ const PRODUCT_COMPARISON = [
     eloqsql: 'Fast',
     aurora: 'Only Read Replica',
     cockroachdb: 'Slow',
+  },
+  {
+    feature: 'Open Source',
+    eloqsql: true,
+    aurora: false,
+    cockroachdb: 'Source Available',
   },
 ];
 
@@ -263,7 +271,7 @@ export default function EloqSQL() {
                   <h3>EloqSQL</h3>
                 </div>
                 <div className={styles.comparisonColumn}>
-                  <h3>Aurora</h3>
+                  <h3>AWS Aurora</h3>
                 </div>
                 <div className={styles.comparisonColumn}>
                   <h3>CockroachDB</h3>

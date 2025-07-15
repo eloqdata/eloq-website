@@ -41,6 +41,12 @@ const PRODUCT_COMPARISON = [
     mongodb: 'Slow',
     documentdb: 'Slow',
   },
+  {
+    feature: 'Open Source',
+    eloqdoc: true,
+    mongodb: 'SSPL',
+    documentdb: false,
+  },
 ];
 
 export default function EloqDoc() {
@@ -208,7 +214,7 @@ export default function EloqDoc() {
           <div className={styles.comparisonInner}>
             <h2 className={styles.comparisonTitle}>Database Comparison</h2>
             <p className={styles.comparisonSubtitle}>
-              See how EloqDoc compares to MongoDB and DocumentDB
+              See how EloqDoc compares to MongoDB and Amazon DocumentDB
             </p>
 
             <div className={styles.comparisonTable}>
@@ -223,7 +229,7 @@ export default function EloqDoc() {
                   <h3>MongoDB</h3>
                 </div>
                 <div className={styles.comparisonColumn}>
-                  <h3>DocumentDB</h3>
+                  <h3>Amazon DocumentDB</h3>
                 </div>
               </div>
 
