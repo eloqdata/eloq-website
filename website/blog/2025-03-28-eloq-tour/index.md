@@ -5,7 +5,6 @@ date: 2025-03-28
 tags: [Company]
 image: /img/tourbuddy.png
 description: Explore EloqKV’s decoupled architecture powering TourBuddy, scaling smoothly from fast cache to durable, elastic storage—keeping your AI apps quick, resilient, and cost-effective at every growth stage.
-featured: true
 blog: true
 ---
 
