@@ -1687,7 +1687,7 @@ function HomePage() {
                   />
                 </div>
                 <div className={styles.tieredInfo}>
-                  <h2 className={styles.tieredTitle}>Cost Effective</h2>
+                  <h2 className={styles.tieredTitle}>Tiered Storage</h2>
                   <p className={styles.tieredDescription}>
                     Eloq Databases intelligently manage your data across multiple
                     storage tiers to optimize both performance and cost. Hot data
@@ -1776,17 +1776,36 @@ function HomePage() {
             </div>
           </div>
 
+          {/* High Availability Section */}
+          <div className={styles.acidSection}>
+            <div className={styles.acidInner}>
+              <div className={styles.acidContent}>
+                <div className={styles.acidImageContainer}>
+                  <img
+                    src="/img/highavail.png"
+                    alt="High Availability"
+                    className={styles.acidImage}
+                  />
+                </div>
+
+                <div className={styles.acidInfo}>
+                  <h2 className={styles.acidTitle}>Highly Available</h2>
+                  <p className={styles.acidDescription}>
+                    Eloq Databases are built for high availability and fault tolerance. 
+                    Data is seamlessly replicated across multiple servers or disks to 
+                    ensure durability and resilience. With built-in support for hot 
+                    standbys and fast failover, Eloq can recover from node outages in
+                    seconds—minimizing downtime and maintaining continuous service.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Standard API Section */}
           <div className={styles.tieredSection}>
             <div className={styles.tieredInner}>
               <div className={styles.tieredContent}>
-                <div className={styles.tieredImageContainer}>
-                  <img
-                    src="/img/standardapi.png"
-                    alt="Standard API"
-                    className={styles.tieredImage}
-                  />
-                </div>
                 <div className={styles.tieredInfo}>
                   <h2 className={styles.tieredTitle}>Standard API</h2>
                   <p className={styles.tieredDescription}>
@@ -1797,30 +1816,15 @@ function HomePage() {
                     seamless migration with minimal code changes.
                   </p>
                 </div>
-              </div>
-            </div>
-          </div>
-          {/* High Availability Section */}
-          <div className={styles.acidSection}>
-            <div className={styles.acidInner}>
-              <div className={styles.acidContent}>
-                <div className={styles.acidInfo}>
-                  <h2 className={styles.acidTitle}>High Availability</h2>
-                  <p className={styles.acidDescription}>
-                    Eloq Databases are built for high availability and fault tolerance. 
-                    Data is seamlessly replicated across multiple servers or disks to 
-                    ensure durability and resilience. With built-in support for hot 
-                    standbys and fast failover, Eloq can recover from node outages in
-                    seconds—minimizing downtime and maintaining continuous service.
-                  </p>
-                </div>
-                <div className={styles.acidImageContainer}>
+
+                <div className={styles.tieredImageContainer}>
                   <img
-                    src="/img/highavail.png"
-                    alt="High Availability"
-                    className={styles.acidImage}
+                    src="/img/standardapi.png"
+                    alt="Standard API"
+                    className={styles.tieredImage}
                   />
                 </div>
+
               </div>
             </div>
           </div>

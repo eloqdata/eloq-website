@@ -58,9 +58,9 @@ export default function EloqSQL() {
         {/* Hero Section */}
         <div className={styles.hero}>
           <div className={styles.heroInner}>
-            <h1 className={styles.heroTitle}>The Fastest Distributed SQL</h1>
+            <h1 className={styles.heroTitle}>The Better Distributed SQL Database</h1>
             <p className={styles.heroSubtitle}>
-              The MySQL compatible distributed database - Elastic at Any Scale,
+              MySQL API compatible distributed database - Elastic at Any Scale,
               High Performance, Full ACID Transaction and Cost Effective
             </p>
             <div className={styles.heroButtons}>
@@ -95,25 +95,24 @@ export default function EloqSQL() {
             savings
           </p>
 
-          {/* Cost Effective Section */}
+          {/* Multi Writer Section */}
           <div className={styles.acidSection}>
             <div className={styles.acidInner}>
               <div className={styles.acidContent}>
                 <div className={styles.acidInfo}>
-                  <h2 className={styles.acidTitle}>Cost Effective</h2>
+                  <h2 className={styles.acidTitle}>Multi Writer</h2>
                   <p className={styles.acidDescription}>
-                    EloqSQL uses an intelligent tiered storage strategy to
-                    reduce costs while maintaining performance. Frequently
-                    accessed data is kept in memory, mid-frequency data lives on
-                    SSDs, and cold data moves to object storage. This dynamic
-                    data placement slashes storage costs without sacrificing
-                    query speed.
+                    EloqSQL is a true multi-writer SQL database that
+                    supports concurrent writes across all nodes—no database sharding, 
+                    no stale read from secondaries, and no single-writer bottleneck. 
+                    EloqSQL enables multi-master writes with built-in conflict resolution and
+                    consensus, delivering horizontal write scalability.
                   </p>
                 </div>
                 <div className={styles.acidImageContainer}>
                   <img
-                    src="/img/tiered-storage.jpg"
-                    alt="Cost Effective Storage"
+                    src="/img/multi-writer.png"
+                    alt="Multi Writer Architecture"
                     className={styles.acidImage}
                   />
                 </div>
@@ -121,26 +120,27 @@ export default function EloqSQL() {
             </div>
           </div>
 
-          {/* Fully Decoupled Architecture Section */}
-          <div className={styles.tieredSection}>
-            <div className={styles.tieredInner}>
-              <div className={styles.tieredContent}>
-                <div className={styles.tieredImageContainer}>
+          {/* Elastic Section */}
+          <div className={styles.acidSection}>
+            <div className={styles.acidInner}>
+              <div className={styles.acidContent}>
+                <div className={styles.acidImageContainer}>
                   <img
-                    src="/img/decoupled-architecture.png"
-                    alt="Fully Decoupled Architecture"
-                    className={styles.tieredImage}
+                    src="/img/elastic.png"
+                    alt="Scalable & Elastic"
+                    className={styles.acidImage}
                   />
                 </div>
-                <div className={styles.tieredInfo}>
-                  <h2 className={styles.tieredTitle}>
-                    Fully Decoupled Architecture
-                  </h2>
-                  <p className={styles.tieredDescription}>
-                    EloqSQL separates compute, memory, transaction logs, and
-                    storage into independent layers. This decoupled design gives
-                    you granular control over resources and enables flexible
-                    scaling for cost and performance optimization.
+
+                <div className={styles.acidInfo}>
+                  <h2 className={styles.acidTitle}>Scalable & Elastic</h2>
+                  <p className={styles.acidDescription}>
+                    Whether you need 1 or 1000 CPU cores, 10G or 10T memory, 
+                    100G or 100T storage, EloqSQL achieves the best-in-class performance 
+                    regardless of scale. No need to worry about future database migration 
+                    pains. Even better, say goodby to capacity planning 3 months in advance 
+                    as clusters can grow or shrink dynamically in response to traffic 
+                    surges—all without service disruption.
                   </p>
                 </div>
               </div>
@@ -171,7 +171,7 @@ export default function EloqSQL() {
             </div>
           </div>
 
-          {/* Extreme Compression Section */}
+          {/* Extreme Compression Section 
           <div className={styles.tieredSection}>
             <div className={styles.tieredInner}>
               <div className={styles.tieredContent}>
@@ -194,8 +194,8 @@ export default function EloqSQL() {
               </div>
             </div>
           </div>
-
-          {/* Low Latency Distributed Transaction Section */}
+          */}
+          {/* Low Latency Distributed Transaction Section 
           <div className={styles.acidSection}>
             <div className={styles.acidInner}>
               <div className={styles.acidContent}>
@@ -220,7 +220,7 @@ export default function EloqSQL() {
               </div>
             </div>
           </div>
-
+            */}
           {/* MySQL Compatible Section */}
           <div className={styles.tieredSection}>
             <div className={styles.tieredInner}>

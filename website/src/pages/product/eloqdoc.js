@@ -53,7 +53,7 @@ export default function EloqDoc() {
         <div className={styles.hero}>
           <div className={styles.heroInner}>
             <h1 className={styles.heroTitle}>
-              Next-Gen Distributed Document Database: Elastic and Cost Effective
+              Next-Gen Distributed JSON Document Database
             </h1>
             <p className={styles.heroSubtitle}>
               Fully elastic, Mongo-compatible distributed database with
@@ -146,25 +146,26 @@ export default function EloqDoc() {
             </div>
           </div>
 
-          {/* Multi Writer Section */}
+          {/* Simple Manaagement         */}
+
           <div className={styles.acidSection}>
             <div className={styles.acidInner}>
               <div className={styles.acidContent}>
                 <div className={styles.acidInfo}>
-                  <h2 className={styles.acidTitle}>Multi Writer</h2>
+                  <h2 className={styles.acidTitle}>Simple Management</h2>
                   <p className={styles.acidDescription}>
-                    EloqDoc is a truly multi-writer document database that
-                    supports concurrent writes across all nodes—no sharding, no
-                    mongos, no single-writer bottleneck. EloqDoc enables
-                    multi-master writes with built-in conflict resolution and
-                    consensus, delivering horizontal write scalability and low
-                    latency for globally distributed workloads.
+                    EloqDoc offers high compatibility with MongoDB. But unlike
+                    MongoDB's complex sharding that requires data movement and
+                    rebalancing, EloqDoc achieves true elasticity without data
+                    migration. Moreover, as a truely distributed database,
+                    EloqDoc do not need routers such as mongos to distribute
+                    requests, which means no more single point of failure.
                   </p>
                 </div>
                 <div className={styles.acidImageContainer}>
                   <img
-                    src="/img/multi-writer.png"
-                    alt="Multi Writer Architecture"
+                    src="/img/mongodb-comparison.png"
+                    alt="MongoDB vs EloqDoc Comparison"
                     className={styles.acidImage}
                   />
                 </div>
@@ -183,6 +184,7 @@ export default function EloqDoc() {
                     className={styles.tieredImage}
                   />
                 </div>
+
                 <div className={styles.tieredInfo}>
                   <h2 className={styles.tieredTitle}>
                     Low Latency Distributed Transaction
@@ -195,38 +197,12 @@ export default function EloqDoc() {
                     with minimal performance impact.
                   </p>
                 </div>
+
               </div>
             </div>
           </div>
 
-          {/* MongoDB Comparison Section */}
-          <div className={styles.acidSection}>
-            <div className={styles.acidInner}>
-              <div className={styles.acidContent}>
-                <div className={styles.acidInfo}>
-                  <h2 className={styles.acidTitle}>Compare with MongoDB</h2>
-                  <p className={styles.acidDescription}>
-                    EloqDoc offers high compatibility with MongoDB. Unlike
-                    MongoDB's complex sharding that requires data movement and
-                    rebalancing, EloqDoc achieves true elasticity without data
-                    migration. Our compute-storage separation means scaling up
-                    storage capacity is as simple as expanding object storage.
-                    This approach delivers 100x better elasticity than MongoDB
-                    while reducing TCO by 90%.
-                  </p>
-                </div>
-                <div className={styles.acidImageContainer}>
-                  <img
-                    src="/img/mongodb-comparison.png"
-                    alt="MongoDB vs EloqDoc Comparison"
-                    className={styles.acidImage}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-
         {/* Product Comparison Section */}
         <div className={styles.comparisonSection}>
           <div className={styles.comparisonInner}>
