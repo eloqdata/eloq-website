@@ -227,15 +227,17 @@ const EloqDBDownloadPage: React.FC = () => {
                     Quick Start{" "}
                   </a>
                   guide.
-                  <br />
-                  <br />
-                  If you're interested in a more in-depth experience, we
-                  recommend trying our
-                  <a href="/downloadeloqctl"> Eloqctl </a> tool to deploy a
-                  cluster
-                  {selectedProduct === "eloqkv" &&
-                    " and take it for a more serious test drive"}
-                  .
+                  {(selectedProduct === "eloqkv" ||
+                    selectedProduct === "eloqsql") && (
+                    <>
+                      <br />
+                      <br />
+                      If you're interested in a more in-depth experience, we
+                      recommend trying our
+                      <a href="/downloadeloqctl"> Eloqctl </a> tool to deploy a
+                      cluster.
+                    </>
+                  )}
                   <br />
                   <br />
                   If you'd like to stay informed about the exciting developments

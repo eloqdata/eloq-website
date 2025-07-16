@@ -57,4 +57,4 @@ Ready to explore Data Substrate in action? Our open-source implementations are a
 - **[EloqSQL](https://github.com/eloqdata/eloqsql)**: A MySQL-compatible distributed SQL database
 - **[EloqDoc](https://github.com/eloqdata/eloqdoc)**: A document database for modern applications
 
-Join our [Discord community](https://discord.gg/eloqdata) to connect with other developers and stay updated on the latest developments in Data Substrate technology.
+Join our [Discord community](https://discord.gg/nmYjBkfak6) to connect with other developers and stay updated on the latest developments in Data Substrate technology.
