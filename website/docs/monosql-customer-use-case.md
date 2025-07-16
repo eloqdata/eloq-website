@@ -60,7 +60,7 @@ MonoSQL is the stateless SQL wrapper for Amazon DynamoDB.
 
 MonoSQL's key features includes:
 
-1. MySQL compatible. MonoSQL supports JDBC/ODBC drivers, basic transactions and complete SQL query API incuding Join, Aggregation and Recursive CTE etc.
+1. MySQL API compatible. MonoSQL supports JDBC/ODBC drivers, basic transactions and complete SQL query API incuding Join, Aggregation and Recursive CTE etc.
 
 2. SQL layer can dynamically expand and shrink based on workload.
 

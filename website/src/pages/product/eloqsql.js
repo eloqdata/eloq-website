@@ -61,7 +61,7 @@ export default function EloqSQL() {
   return (
     <Layout
       title="EloqSQL - Distributed SQL Database"
-      description="The MySQL compatible distributed database - Elastic at Any Scale, High Performance, Full ACID Transaction, Cost Effective">
+      description="The MySQL API compatible distributed database - Elastic at Any Scale, High Performance, Full ACID Transaction, Cost Effective">
       <main>
         {/* Hero Section */}
         <div className={styles.hero}>

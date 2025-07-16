@@ -296,7 +296,7 @@ module.exports = {
                       </svg>
                       <div style="display: flex; flex-direction: column;">
                         <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqKV</span>
-                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Redis compatible, transactional, auto tiering</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Redis API compatible, transactional, auto tiering</span>
                       </div>
                     </div>
                   </a>
@@ -315,7 +315,7 @@ module.exports = {
                       </svg>
                       <div style="display: flex; flex-direction: column;">
                         <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqSQL</span>
-                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">MySQL compatible, high perfromance, elastic</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">MySQL API compatible, high perfromance, elastic</span>
                       </div>
                     </div>
                   </a>

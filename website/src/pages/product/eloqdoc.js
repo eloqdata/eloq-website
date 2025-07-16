@@ -53,7 +53,7 @@ export default function EloqDoc() {
   return (
     <Layout
       title="EloqDoc - Distributed Document Database"
-      description="Fully elastic, Mongo-compatible distributed database with compute-storage separation and robust ACID transactions">
+      description="Fully elastic, MongoDB API compatible distributed database with compute-storage separation and robust ACID transactions">
       <main>
         {/* Hero Section */}
         <div className={styles.hero}>
@@ -63,7 +63,7 @@ export default function EloqDoc() {
               Next-Gen Distributed JSON Document DB
             </h1>
             <p className={styles.heroSubtitle}>
-              Fully elastic, Mongo-compatible distributed database with
+              Fully elastic, MongoDB API compatible distributed database with
               compute-storage separation and robust ACID transactions
             </p>
             <div className={styles.heroButtons}>

@@ -86,7 +86,7 @@ const productFeatures: ProductFeatures = {
     ],
     features: [
       {
-        value: "mongo-compatible",
+        value: "MongoDB API compatible",
         label: "MongoDB Compatible API",
       },
       {
