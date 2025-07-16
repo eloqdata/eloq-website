@@ -142,4 +142,4 @@ Compared with DragonflyDB, **EloqKV** currently lacks a few optimizations such a
 
 Even so, as the experiments demonstrated, **EloqKV** works _almost_ as well as DragonflyDB on a workload that DragonflyDB was specifically designed and optimized for. This begs the question of whether designing special database software for limited use cases is profitable. Unlike Redis and DragonflyDB, **EloqKV** is much more than a single node memory cache. It excels in clustered, durable, and fully ACID-compliant transactional setups. Future blog posts will explore these capabilities in greater detail.
 
-**EloqKV** is based on our [Data Substrate](/blog/2024/08/11/data-substrate) technology. We believe that with this revolutionary technology, users can greatly simplify their data infrastructures by reducing the need for many specialized databases.
+**EloqKV** is based on our [Data Substrate](/blog/2025/07/14/technology) technology. We believe that with this technology, users can greatly simplify their data infrastructures by reducing the need for many specialized databases.

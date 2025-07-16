@@ -13,7 +13,7 @@ We are thrilled to introduce **EloqSQL** and **EloqDoc**, two groundbreaking add
 
 <!--truncate-->
 
-**EloqSQL** is a MySQL-compatible, fully distributed relational database, while **EloqDoc** is a MongoDB-compatible, distributed JSON document database. Both are built on our revolutionary modular [Data Substrate](/blog/2024/08/11/data-substrate) technology, inheriting all the benefits of this cutting-edge architecture, including best-in-class performance in all scales and full distributed ACID transactional capabilities with selectable isolation levels to ensure data integrity and reliability.
+**EloqSQL** is a MySQL-compatible, fully distributed relational database, while **EloqDoc** is a MongoDB-compatible, distributed JSON document database. Both are built on our modular [Data Substrate](/blog/2025/07/14/technology) technology, inheriting all the benefits of this cutting-edge architecture, including best-in-class performance in all scales and full distributed ACID transactional capabilities with selectable isolation levels to ensure data integrity and reliability.
 
 [**EloqSQL**](/product/eloqsql) is a MySQL-compatible distributed relation database that sets a new standard for high performance, scalability, compatibility, and resilience. Designed for modern applications, it supports multiple writers, secondary indexes, cross-AZ data replication, and hot-backup for non-stop operation. Engineered to handle the most demanding workloads with ease, **EloqSQL** transforms the way you manage and process data with the most widely accepted API in the industry.
 

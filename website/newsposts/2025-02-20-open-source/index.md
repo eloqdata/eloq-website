@@ -7,7 +7,7 @@ image: /img/blog/opensource.jpg
 description: EloqData announces the open-source release of EloqKV, EloqSQL, and EloqDoc, making our high-performance distributed database solutions available to the community.
 ---
 
-We are thrilled to announce that **EloqData** is open-sourcing our core products: **EloqKV**, **EloqSQL**, and **EloqDoc**, as well as the revolutionary technology underpinning of these product - our Data Substrate component. This marks a significant milestone in our journey to build a more open and collaborative database ecosystem.
+We are thrilled to announce that **EloqData** is open-sourcing our core products: **EloqKV**, **EloqSQL**, and **EloqDoc**, as well as the technology underpinning of these product - our Data Substrate component. This marks a significant milestone in our journey to build a more open and collaborative database ecosystem.
 
 <!--truncate-->
 

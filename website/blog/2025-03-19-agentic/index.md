@@ -72,7 +72,7 @@ Why Eventual Consistency Falls Short
 
 ### The Promise of a Unified Solution
 
-EloqData is redefining data infrastructure for AI applications with a one-stop solution ConvergedDB, that offers high performance, scalability, and full ACID transactions. This breakthrough eliminates the need for complex middleware like [Kafka](https://kafka.apache.org/) and allows developers to focus on building applications rather than managing infrastructure. At the heart of this solution is our innovative [Data Substrate](/blog/2024/08/11/data-substrate) architecture.
+EloqData is redefining data infrastructure for AI applications with a one-stop solution ConvergedDB, that offers high performance, scalability, and full ACID transactions. This breakthrough eliminates the need for complex middleware like [Kafka](https://kafka.apache.org/) and allows developers to focus on building applications rather than managing infrastructure. At the heart of this solution is our innovative [Data Substrate](/blog/2025/07/14/technology) architecture.
 
 <p align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>

@@ -46,7 +46,7 @@ Choose the SKU that fits your workload. Resources are **dedicated**, ensuring **
 
 **3. Economic High Availability**  
 Why pay for [2x or 3x replicas](https://www.mongodb.com/docs/manual/replication) just to achieve high availability?  
-With **EloqCloud for EloqKV**, one compute replica is enough. Our [Data Substrate](/blog/2024/08/11/data-substrate) architecture decouples compute, memory, log and storage, enabling:
+With **EloqCloud for EloqKV**, one compute replica is enough. Our [Data Substrate](/blog/2025/07/14/technology) architecture decouples compute, memory, log and storage, enabling:
 
 - **Automatic failover within seconds**
 - **Zero data loss**

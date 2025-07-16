@@ -26,7 +26,7 @@ At the recent [Data Stream Summit 2025](https://datastreaming-summit.org/event/d
   ></iframe>
 </div>
 
-The rise of autonomous, agentic AI applications has significantly increased demands on underlying data infrastructure, emphasizing the critical need for scalable, flexible, and cost-efficient solutions. There are many discussions on scalability and flexibility of modern data infrastructures. Our [Data Substrate](/blog/2024/08/11/data-substrate) architecture is designed from ground up for these goals. Achieving cost-efficiency, on the other hand, isn’t straightforward. Many organizations only realize the hefty database costs when they receive unexpectedly high bills from cloud vendors. In this post, we discuss how our revolutionary architecture offer ultimate cost savings to our customers. To understand this issue better, let's first explore traditional cloud data infrastructure’s pain points, particularly those using EBS or local NVMe storage.
+The rise of autonomous, agentic AI applications has significantly increased demands on underlying data infrastructure, emphasizing the critical need for scalable, flexible, and cost-efficient solutions. There are many discussions on scalability and flexibility of modern data infrastructures. Our [Data Substrate](/blog/2025/07/14/technology) architecture is designed from ground up for these goals. Achieving cost-efficiency, on the other hand, isn’t straightforward. Many organizations only realize the hefty database costs when they receive unexpectedly high bills from cloud vendors. In this post, we discuss how our database architecture offer ultimate cost savings to our customers. To understand this issue better, let's first explore traditional cloud data infrastructure’s pain points, particularly those using EBS or local NVMe storage.
 
 ## Challenges with Traditional Cloud Architectures
 
@@ -72,7 +72,7 @@ Next, let's explore practical examples—Ursa and EloqDoc—to understand the tr
 
 ## StreamNative’s Ursa: Redefining Streaming Storage
 
-StreamNative’s Ursa is an innovative streaming storage solution that disrupts traditional models like Kafka, which rely heavily on costly persistent storage and cross-AZ traffic. Ursa's revolutionary design is diskless, stateless, and leverages object storage for direct data streaming.
+StreamNative’s Ursa is an innovative streaming storage solution that disrupts traditional models like Kafka, which rely heavily on costly persistent storage and cross-AZ traffic. Ursa's design is diskless, stateless, and leverages object storage for direct data streaming.
 
 Key innovations of Ursa include:
 

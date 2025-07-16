@@ -102,7 +102,7 @@
 
 .comparisonHeader {
   display: grid;
-  grid-template-columns: 1.2fr 1fr 1fr 1fr;
+  grid-template-columns: 1.0fr 0.7fr 0.7fr 0.7fr;
   background: rgba(255, 123, 45, 0.1);
   border-bottom: 2px solid rgba(255, 123, 45, 0.3);
 }
@@ -118,7 +118,7 @@
 
 .comparisonRow {
   display: grid;
-  grid-template-columns: 1.2fr 1fr 1fr 1fr;
+  grid-template-columns: 1.0fr 0.7fr 0.7fr 0.7fr;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   transition: background-color 0.2s ease;
 }

@@ -94,7 +94,7 @@ export default function EloqDoc() {
         <div className="section-container">
           <h2 className="section-title">Features</h2>
           <p className="section-subtitle">
-            Revolutionary document database features designed for the AI era
+            Next-gen document database features designed for the AI era
           </p>
 
           {/* Cost Effective Section */}
@@ -141,7 +141,7 @@ export default function EloqDoc() {
                     Fully Decoupled Architecture
                   </h2>
                   <p className={styles.tieredDescription}>
-                    EloqDoc's revolutionary architecture completely separates
+                    EloqDoc's innovative architecture completely separates
                     CPU, memory, logging, and storage components, enabling
                     unprecedented flexibility and cost optimization. This
                     disaggregated design allows you to optimize each resource

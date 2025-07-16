@@ -8,7 +8,7 @@ title: Introduction to EloqSQL
 
 In today's data-driven world, organizations face the challenge of managing ever-increasing volumes of data while ensuring high performance, scalability, and cost-effectiveness. Traditional database systems often struggle to meet these demands, leading to bottlenecks and performance limitations.
 
-EloqSQL is a revolutionary distributed NewSQL database that addresses these challenges head-on. Powered by its innovative Data Substrate, EloqSQL delivers exceptional elasticity, scalability, and performance for latency-sensitive workloads, making it an ideal choice for modern enterprises.
+EloqSQL is a distributed NewSQL database that addresses these challenges head-on. Powered by its innovative Data Substrate, EloqSQL delivers exceptional elasticity, scalability, and performance for latency-sensitive workloads, making it an ideal choice for modern enterprises.
 
 ## Achitecture
 

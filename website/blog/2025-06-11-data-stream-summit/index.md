@@ -26,7 +26,7 @@ At the recent [Data Stream Summit 2025](https://datastreaming-summit.org/event/d
 
 The rise of autonomous, agentic AI applications has dramatically increased demands on underlying data infrastructure—highlighting the need for scalable, flexible, and cost-efficient solutions. While scalability and flexibility are widely discussed, cost-efficiency is harder to achieve. Many organizations only recognize the high cost of databases when faced with unexpectedly large cloud bills.
 
-EloqData's [Data Substrate](/blog/2024/08/11/data-substrate) architecture is built from the ground up to address these challenges. In this post, we explore how our innovative approach delivers substantial cost savings. To understand the context, let’s first examine the pain points of traditional cloud data infrastructures, particularly those relying on EBS or local NVMe storage.
+EloqData's [Data Substrate](/blog/2025/07/14/technology) architecture is built from the ground up to address these challenges. In this post, we explore how our innovative approach delivers substantial cost savings. To understand the context, let’s first examine the pain points of traditional cloud data infrastructures, particularly those relying on EBS or local NVMe storage.
 
 ## Challenges with Traditional Cloud Architectures
 
@@ -61,7 +61,7 @@ Key advantages of EloqDoc include:
 - **Object Storage as Primary Storage:** Batches writes asynchronously to mitigate object storage latency, while recent data is safeguarded with EBS for durability.
 - **Local NVMe Caching:** Delivers high-throughput, low-latency reads that outperform EBS IOPS by caching object storage locally.
 - **Scalable Redo Logs:** Improves write performance cost-effectively using additional EBS volumes.
-- **MongoDB Compatibility and Distributed Transactions:** Seamless migration from MongoDB, with robust transaction support powered by [Data Substrate](/blog/2024/08/11/data-substrate).
+- **MongoDB Compatibility and Distributed Transactions:** Seamless migration from MongoDB, with robust transaction support powered by [Data Substrate](/blog/2025/07/14/technology).
 
 EloqDoc addresses the latency challenge by using local NVMe storage as an intelligent cache. Modern cloud-optimized instances offer significant local NVMe capacity (e.g., 3.5TB per 16-core server), enabling high-performance caching of active data while reducing costs.
 
