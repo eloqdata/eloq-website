@@ -177,7 +177,8 @@ export default function EloqKV() {
         {/* Hero Section */}
         <div className={styles.hero}>
           <div className={styles.heroInner}>
-            <h1 className={styles.heroTitle}>Redis API, Database Power</h1>
+            <h1 className={styles.heroTitle}>EloqKV</h1>
+            <h1 className={styles.heroTitleSecondary}>Redis API, Database Power</h1>
             <p className={styles.heroSubtitle}>
               The Redis-API Compatible Distributed Database for Production, High
               Performance, Cost Effective and Full ACID Transactions

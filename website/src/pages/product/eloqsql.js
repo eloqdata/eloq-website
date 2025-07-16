@@ -66,7 +66,8 @@ export default function EloqSQL() {
         {/* Hero Section */}
         <div className={styles.hero}>
           <div className={styles.heroInner}>
-            <h1 className={styles.heroTitle}>The Better Distributed SQL Database</h1>
+            <h1 className={styles.heroTitle}>EloqSQL</h1>
+            <h1 className={styles.heroTitleSecondary}>The Better Distributed SQL Database</h1>
             <p className={styles.heroSubtitle}>
               MySQL API compatible distributed database - Elastic at Any Scale,
               High Performance, Full ACID Transaction and Cost Effective

@@ -76,7 +76,8 @@ export default function EloqConvergedDB() {
         {/* Hero Section */}
         <div className={styles.hero}>
           <div className={styles.heroInner}>
-            <h1 className={styles.heroTitle}>
+            <h1 className={styles.heroTitle}>Eloq ConvergedDB</h1>
+            <h1 className={styles.heroTitleSecondary}>
               The All-in-One Database for AI Era
             </h1>
             <p className={styles.heroSubtitle}>
@@ -107,30 +108,10 @@ export default function EloqConvergedDB() {
             </p>
             <div className={styles.featureCards}>
               <div className={styles.feature}>
-                <h3>API Compatible</h3>
-                <p>
-                  Choose the API you love, from Redis, MongoDB, SQL to Vector
-                </p>
-              </div>
-              <div className={styles.feature}>
-                <h3>Tiered Storage</h3>
-                <p>
-                  Achieve the perfect balance of speed and cost with tiered
-                  storage across memory, disk, and object storage
-                </p>
-              </div>
-              <div className={styles.feature}>
                 <h3>Cross Model Transaction</h3>
                 <p>
                   Seamlessly perform cross-model transactions - say goodbye to
                   inconsistent data across databases
-                </p>
-              </div>
-              <div className={styles.feature}>
-                <h3>Fully Elastic</h3>
-                <p>
-                  Scale compute memory, log and storage independently to match
-                  workload demands
                 </p>
               </div>
               <div className={styles.feature}>
@@ -142,6 +123,26 @@ export default function EloqConvergedDB() {
                 <p>
                   ConvergedDB is a single database for all your data, built for
                   the AI era
+                </p>
+              </div>
+              <div className={styles.feature}>
+                <h3>Fully Elastic</h3>
+                <p>
+                  Scale compute memory, log and storage independently to match
+                  workload demands
+                </p>
+              </div>
+              <div className={styles.feature}>
+                <h3>Tiered Storage</h3>
+                <p>
+                  Achieve the perfect balance of speed and cost with tiered
+                  storage across memory, disk, and object storage
+                </p>
+              </div>
+              <div className={styles.feature}>
+                <h3>Familiar API</h3>
+                <p>
+                  Choose the API you love, from Redis, MongoDB, SQL to Vector
                 </p>
               </div>
             </div>

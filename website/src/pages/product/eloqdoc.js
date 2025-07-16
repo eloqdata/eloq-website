@@ -58,8 +58,9 @@ export default function EloqDoc() {
         {/* Hero Section */}
         <div className={styles.hero}>
           <div className={styles.heroInner}>
-            <h1 className={styles.heroTitle}>
-              Next-Gen Distributed JSON Document Database
+            <h1 className={styles.heroTitle}>EloqDoc</h1>
+            <h1 className={styles.heroTitleSecondary}>
+              Next-Gen Distributed JSON Document DB
             </h1>
             <p className={styles.heroSubtitle}>
               Fully elastic, Mongo-compatible distributed database with
