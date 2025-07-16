@@ -44,7 +44,7 @@ const PRODUCT_COMPARISON = [
   {
     feature: 'Open Source',
     eloqdoc: true,
-    mongodb: 'SSPL',
+    mongodb: 'Source Available: SSPL',
     documentdb: false,
   },
 ];
@@ -218,7 +218,7 @@ export default function EloqDoc() {
             </p>
 
             <div className={styles.comparisonTable}>
-              <div className={styles.comparisonHeader}>
+              <div className={`${styles.comparisonHeader} ${styles.comparisonHeader4}`}>
                 <div className={styles.featureColumn}>
                   <h3>Features</h3>
                 </div>
@@ -236,7 +236,7 @@ export default function EloqDoc() {
               {PRODUCT_COMPARISON.map((item, index) => (
                 <div
                   key={index}
-                  className={`${styles.comparisonRow} ${
+                  className={`${styles.comparisonRow} ${styles.comparisonRow4} ${
                     index % 2 === 0 ? styles.rowEven : styles.rowOdd
                   }`}>
                   <div className={styles.featureColumn}>{item.feature}</div>

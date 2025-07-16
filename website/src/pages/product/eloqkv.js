@@ -53,52 +53,67 @@ const testimonials = [
 
 const PRODUCT_COMPARISON = [
   {
-    feature: 'Primary Storage',
+    feature: 'In-Memory Cache with Redis API',
     eloqkv: true,
+    redis: true,
+    dragonfly: true,
     upstash: true,
+  },
+  {
+    feature: 'Work as Durable Primary Storage',
+    eloqkv: true,
     redis: false,
+    dragonfly: false,
+    upstash: true,
   },
   {
     feature: 'Distributed Transaction',
     eloqkv: true,
-    upstash: false,
     redis: false,
+    dragonfly: false,
+    upstash: false,
   },
   {
     feature: 'Tiered Storage',
     eloqkv: true,
-    upstash: true,
     redis: false,
+    dragonfly: true,
+    upstash: true,
   },
   {
     feature: 'Scale Out',
     eloqkv: 'Native Multi Master',
-    upstash: 'Can Only Scale Out Read',
     redis: 'Sharding Based',
+    dragonfly: 'Sharding Based',
+    upstash: 'Can Only Scale Out Read',
   },
   {
     feature: 'Scale Up',
     eloqkv: true,
-    upstash: 'Single Worker Thread',
     redis: 'Single Worker Thread',
+    dragonfly: true,
+    upstash: 'Single Worker Thread',
   },
   {
     feature: 'Distributed Lua',
     eloqkv: true,
-    upstash: false,
     redis: false,
+    dragonfly: false,
+    upstash: false,
   },
   {
     feature: 'Session Style Transaction',
     eloqkv: true,
-    upstash: false,
     redis: false,
+    dragonfly: false,
+    upstash: false,
   },
   {
     feature: 'Open Source',
     eloqkv: true,
+    redis: 'Complicated',
+    dragonfly: 'Source Available: BSL',
     upstash: false,
-    redis: 'Limited',
   },
 ];
 
@@ -391,11 +406,11 @@ COMMIT`}
           <div className={styles.comparisonInner}>
             <h2 className={styles.comparisonTitle}>Database Comparison</h2>
             <p className={styles.comparisonSubtitle}>
-              See how EloqKV compares to Upstash and Redis
+              See how EloqKV compares to Redis, DragonflyDB and Upstash
             </p>
 
             <div className={styles.comparisonTable}>
-              <div className={styles.comparisonHeader}>
+              <div className={`${styles.comparisonHeader} ${styles.comparisonHeader5}`}>
                 <div className={styles.featureColumn}>
                   <h3>Features</h3>
                 </div>
@@ -403,17 +418,20 @@ COMMIT`}
                   <h3>EloqKV</h3>
                 </div>
                 <div className={styles.comparisonColumn}>
-                  <h3>Upstash</h3>
+                  <h3>Redis</h3>
                 </div>
                 <div className={styles.comparisonColumn}>
-                  <h3>Redis</h3>
+                  <h3>DragonflyDB</h3>
+                </div>
+                <div className={styles.comparisonColumn}>
+                  <h3>Upstash</h3>
                 </div>
               </div>
 
               {PRODUCT_COMPARISON.map((item, index) => (
                 <div
                   key={index}
-                  className={`${styles.comparisonRow} ${
+                  className={`${styles.comparisonRow} ${styles.comparisonRow5} ${
                     index % 2 === 0 ? styles.rowEven : styles.rowOdd
                   }`}>
                   <div className={styles.featureColumn}>{item.feature}</div>
@@ -451,39 +469,6 @@ COMMIT`}
                     )}
                   </div>
                   <div className={styles.comparisonColumn}>
-                    {typeof item.upstash === 'boolean' ? (
-                      item.upstash ? (
-                        <div className={styles.checkIcon}>
-                          <svg
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            className={styles.icon}>
-                            <path
-                              fillRule="evenodd"
-                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        </div>
-                      ) : (
-                        <div className={styles.xIcon}>
-                          <svg
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            className={styles.icon}>
-                            <path
-                              fillRule="evenodd"
-                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        </div>
-                      )
-                    ) : (
-                      <span>{item.upstash}</span>
-                    )}
-                  </div>
-                  <div className={styles.comparisonColumn}>
                     {typeof item.redis === 'boolean' ? (
                       item.redis ? (
                         <div className={styles.checkIcon}>
@@ -514,6 +499,72 @@ COMMIT`}
                       )
                     ) : (
                       <span>{item.redis}</span>
+                    )}
+                  </div>
+                  <div className={styles.comparisonColumn}>
+                    {typeof item.dragonfly === 'boolean' ? (
+                      item.dragonfly ? (
+                        <div className={styles.checkIcon}>
+                          <svg
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            className={styles.icon}>
+                            <path
+                              fillRule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
+                      ) : (
+                        <div className={styles.xIcon}>
+                          <svg
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            className={styles.icon}>
+                            <path
+                              fillRule="evenodd"
+                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
+                      )
+                    ) : (
+                      <span>{item.dragonfly}</span>
+                    )}
+                  </div>
+                  <div className={styles.comparisonColumn}>
+                    {typeof item.upstash === 'boolean' ? (
+                      item.upstash ? (
+                        <div className={styles.checkIcon}>
+                          <svg
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            className={styles.icon}>
+                            <path
+                              fillRule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
+                      ) : (
+                        <div className={styles.xIcon}>
+                          <svg
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            className={styles.icon}>
+                            <path
+                              fillRule="evenodd"
+                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
+                      )
+                    ) : (
+                      <span>{item.upstash}</span>
                     )}
                   </div>
                 </div>

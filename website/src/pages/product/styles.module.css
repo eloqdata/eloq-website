@@ -1023,10 +1023,27 @@
   padding: 1.5rem 1rem;
 }
 
+/* Specific grid layouts for different table types */
+.comparisonHeader5 {
+  grid-template-columns: 1.5fr 0.8fr 0.8fr 0.8fr 0.8fr;
+}
+
+.comparisonHeader4 {
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+}
+
+.comparisonHeader3 {
+  grid-template-columns: 1.5fr 1fr 1fr;
+}
+
 .comparisonHeader h3 {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   margin: 0;
   color: #fff;
+  word-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+  line-height: 1.2;
 }
 
 .comparisonHeader p {
@@ -1041,6 +1058,19 @@
   padding: 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   align-items: center;
+}
+
+/* Specific grid layouts for different table types */
+.comparisonRow5 {
+  grid-template-columns: 1.5fr 0.8fr 0.8fr 0.8fr 0.8fr;
+}
+
+.comparisonRow4 {
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+}
+
+.comparisonRow3 {
+  grid-template-columns: 1.5fr 1fr 1fr;
 }
 
 .rowEven {
@@ -1058,6 +1088,12 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+  word-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+  font-size: 0.9rem;
+  line-height: 1.3;
+  padding: 0 0.5rem;
 }
 
 .checkIcon {
@@ -1133,28 +1169,76 @@
   .comparisonRow {
     grid-template-columns: 1.3fr 1fr 1fr 1fr;
   }
+  
+  .comparisonHeader5,
+  .comparisonRow5 {
+    grid-template-columns: 1.3fr 0.7fr 0.7fr 0.7fr 0.7fr;
+  }
+  
+  .comparisonHeader4,
+  .comparisonRow4 {
+    grid-template-columns: 1.3fr 1fr 1fr 1fr;
+  }
+  
+  .comparisonHeader3,
+  .comparisonRow3 {
+    grid-template-columns: 1.3fr 1fr 1fr;
+  }
 
   .comparisonTitle {
     font-size: 2rem;
   }
+  
+  .comparisonHeader h3 {
+    font-size: 0.9rem;
+  }
+  
+  .comparisonColumn {
+    font-size: 0.8rem;
+  }
 }
 
-@media (max-width: 0.55px) {
+@media (max-width: 480px) {
+  .comparisonHeader,
+  .comparisonRow {
+    grid-template-columns: 1.2fr 0.6fr 0.6fr 0.6fr 0.6fr;
+    padding: 0.75rem 0.5rem;
+  }
+  
+  .comparisonHeader5,
+  .comparisonRow5 {
+    grid-template-columns: 1.2fr 0.6fr 0.6fr 0.6fr 0.6fr;
+    padding: 0.75rem 0.5rem;
+  }
+  
+  .comparisonHeader4,
+  .comparisonRow4 {
+    grid-template-columns: 1.2fr 0.8fr 0.8fr 0.8fr;
+    padding: 0.75rem 0.5rem;
+  }
+  
+  .comparisonHeader3,
+  .comparisonRow3 {
+    grid-template-columns: 1.2fr 0.8fr 0.8fr;
+    padding: 0.75rem 0.5rem;
+  }
+  
   .comparisonHeader h3 {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
 
-  .comparisonHeader p {
-    font-size: 0.75rem;
+  .comparisonColumn {
+    font-size: 0.7rem;
+    padding: 0 0.25rem;
   }
 
   .featureColumn {
-    font-size: 0.875rem;
+    font-size: 0.8rem;
   }
 
   .icon {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
   }
 }
 
