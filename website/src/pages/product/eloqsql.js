@@ -129,20 +129,19 @@ export default function EloqSQL() {
           </div>
 
           {/* Elastic Section */}
-          <div className={styles.acidSection}>
-            <div className={styles.acidInner}>
-              <div className={styles.acidContent}>
-                <div className={styles.acidImageContainer}>
+          <div className={styles.tieredSection}>
+            <div className={styles.tieredInner}>
+              <div className={styles.tieredContent}>
+                <div className={styles.tieredImageContainer}>
                   <img
                     src="/img/elastic.png"
                     alt="Scalable & Elastic"
-                    className={styles.acidImage}
+                    className={styles.tieredImage}
                   />
                 </div>
-
-                <div className={styles.acidInfo}>
-                  <h2 className={styles.acidTitle}>Scalable & Elastic</h2>
-                  <p className={styles.acidDescription}>
+                <div className={styles.tieredInfo}>
+                  <h2 className={styles.tieredTitle}>Scalable & Elastic</h2>
+                  <p className={styles.tieredDescription}>
                     Whether you need 1 or 1000 CPU cores, 10G or 10T memory, 
                     100G or 100T storage, EloqSQL achieves the best-in-class performance 
                     regardless of scale. No need to worry about future database migration 

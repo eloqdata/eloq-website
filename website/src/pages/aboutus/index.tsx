@@ -39,16 +39,15 @@ const CompanyPage: React.FC = () => {
               <div className="columna">
                 <h2 className="mission-heading">Our Vision</h2>
                 <p className="large-text">
-                  EloqData consists of a{" "}
-                  <a href="https://www.linkedin.com/company/eloqdata">team </a>
-                  with deep expertise in databases, distributed systems, and
-                  artificial intelligence. Drawing on decades of experience
-                  building and scaling mission-critical infrastructure, we came
-                  together with a shared vision: to rethink what a database
-                  should be in the AI age. We believe that the data stack must
-                  be radically simplified and modernized to meet the needs of
-                  emerging AI applications—and we're building EloqData to make
-                  that future a reality.
+                  We are a <a href="https://www.linkedin.com/company/eloqdata">team </a>
+                  with deep expertise and shared passion in databases, distributed systems, and
+                  AI. Drawing on decades of experience building and scaling
+                  mission-critical infrastructure, we came together with a shared vision: 
+                  to rethink what databases should be in the AI era. 
+                  We believe the future demands more than incremental change. It calls for a
+                  radical simplification and reinvention of the data stack.—one that 
+                  empowers developers, accelerates innovation, and unleashes the full potential 
+                  of intelligent applications.
                 </p>
               </div>
             </div>
@@ -66,8 +65,7 @@ const CompanyPage: React.FC = () => {
                   without reinventing the wheel. This composable foundation
                   allows us to support multiple APIs and data modalities (such
                   as MySQL, Redis, and MongoDB) while delivering consistent
-                  performance and reliability across all workloads. You can read
-                  more about of our technology foundation here.
+                  performance and reliability across all workloads. 
                 </p>
               </div>
               <div className="columna">
@@ -96,8 +94,8 @@ const CompanyPage: React.FC = () => {
                   modernize database architecture by unifying fragmented systems
                   into a single, seamless platform. We drive to offer a range of
                   data management products that deliver unmatched scalability,
-                  full ACID compliance, upto10x performance gains and up to 90%
-                  the cost savings — empowering developers to build the next
+                  full ACID compliance, upto 10x performance gains and up to 90%
+                  cost savings — empowering developers to build the next
                   generation of AI-native applications with ease and confidence.
                 </p>
               </div>
