@@ -133,6 +133,12 @@ const EloqDBDownloadPage: React.FC = () => {
     const formData = new FormData(event.currentTarget);
     formData.append("access_key", "aabaace1-59e8-471d-9dbe-352665e8efcd");
 
+    // Create a custom subject
+    const subject = `User Downloaded EloqData Software`;
+
+    // Append the custom subject to the form data
+    formData.append("subject", subject);
+
     const selectedFeatures = Array.from(
       document.querySelectorAll('input[name="download-reason"]:checked')
     ).map((checkbox: Element) => (checkbox as HTMLInputElement).value);
