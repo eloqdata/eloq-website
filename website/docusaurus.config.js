@@ -9,7 +9,7 @@ const users = require('./showcase.json');
 //const versions = require('./versions.json');
 
 //const lastVersion = versions[0];
-const copyright = `Copyright © ${new Date().getFullYear()} EloqData Inc. 京ICP备2021032383号-3`;
+const copyright = `<a href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer">Copyright © ${new Date().getFullYear()} EloqData Inc. 京ICP备2021032383号-3</a>`;
 
 const commonDocsOptions = {
   breadcrumbs: false,
