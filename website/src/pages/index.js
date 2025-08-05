@@ -851,7 +851,7 @@ const features = [
     icon: faRedoAlt,
     title: 'Standard API',
     details: [
-      'EloqDB supports standard APIs, including Redis, SQL, and Mongo',
+      'EloqDB supports standard APIs, including Redis, MySQL, and Mongo',
       'Enable seamless migration of existing applications with minimal effort',
     ],
     link: 'eloqkv/kvstore_compatibility',
