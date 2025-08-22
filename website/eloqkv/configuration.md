@@ -11,6 +11,14 @@ Please note that command line arguments will override values specified in the co
 
 Below is a detailed description of each configuration variable:
 
+## `bind_all`
+- Description: Whether listen on all interfaces. If `bind_all` is enabled EloqKV will listen on `0.0.0.0`, otherwise it will listen on the address specified by `ip`.
+- Category: [local]
+- Commandline: --bind_all=true|false
+- Scope: Global
+- Data Type: Boolean
+- Default Value: "false"
+
 ### `ip`
 
 - Description: Local IP address of the EloqKV node. This value is recorded in the EloqKV catalog and cannot be changed once the server has been launched. It is strongly recommended to set this to the actual IP address of the node, rather than the default `127.0.0.1`, which will prevent external nodes from accessing this EloqKV instance. If you mistakenly set it to `127.0.0.1` and need to change it to the correct IP, you must clear the raft data directory and the associated persistent storage, such as RocksDB. Check `path` and `rocksdb_storage_path` parameters to obtain the location of raft data and RocksDB.
