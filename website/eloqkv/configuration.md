@@ -12,7 +12,7 @@ Please note that command line arguments will override values specified in the co
 Below is a detailed description of each configuration variable:
 
 ## `bind_all`
-- Description: Whether listen on all interfaces. If `bind_all` is enabled EloqDoc will listen on `0.0.0.0`, otherwise it will listen on the address specified by `ip`.
+- Description: Whether listen on all interfaces. If `bind_all` is enabled EloqKV will listen on `0.0.0.0`, otherwise it will listen on the address specified by `ip`.
 - Category: [local]
 - Commandline: --bind_all=true|false
 - Scope: Global
