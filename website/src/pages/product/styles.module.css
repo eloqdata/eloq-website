@@ -1038,7 +1038,6 @@
 
 .comparisonHeader {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr;
   background: linear-gradient(180deg, #2a2a30, #1b1b1d);
   padding: 1.5rem 1rem;
 }
@@ -1074,7 +1073,6 @@
 
 .comparisonRow {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr;
   padding: 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   align-items: center;
@@ -1224,12 +1222,6 @@
 }
 
 @media (max-width: 480px) {
-  .comparisonHeader,
-  .comparisonRow {
-    grid-template-columns: 1.2fr 0.6fr 0.6fr 0.6fr 0.6fr;
-    padding: 0.75rem 0.5rem;
-  }
-
   .comparisonHeader5,
   .comparisonRow5 {
     grid-template-columns: 1.2fr 0.6fr 0.6fr 0.6fr 0.6fr;

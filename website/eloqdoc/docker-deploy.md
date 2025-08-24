@@ -20,7 +20,7 @@ To connect to **EloqDoc**, you'll need a MongoDB-compatible client. You can down
 ```
 wget -c https://download.eloqdata.com/eloqdoc/rocksdbcloud/eloqdoc-v0.2.0-ubuntu22-amd64.tar.gz
 
-mkdir eloqdoc-cloud && cd eloqdoc-cloud && tar -xf eloqdoc-v0.2.0-ubuntu22-amd64.tar.gz
+mkdir eloqdoc-cloud && cd eloqdoc-cloud && tar -xf ../eloqdoc-v0.2.0-ubuntu22-amd64.tar.gz
 
 ./bin/mongo --host 172.20.0.10 --port 27017 --eval "db.t1.save({k: 1}); db.t1.find();"
 ```
