@@ -1104,9 +1104,6 @@
 }
 
 .comparisonColumn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   text-align: center;
   word-wrap: break-word;
   word-break: break-word;
@@ -1119,41 +1116,41 @@
 }
 
 .comparisonColumn .checkIcon {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  width: 28px !important;
-  height: 28px !important;
-  background-color: #3f9e58 !important;
-  border-radius: 50% !important;
-  margin: 0 auto !important;
-  flex-shrink: 0 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 28px;
+  height: 28px;
+  background-color: #3f9e58;
+  border-radius: 50%;
+  margin: 0 auto;
+  flex-shrink: 0;
 }
 
 .comparisonColumn .checkIcon .icon {
-  width: 16px !important;
-  height: 16px !important;
-  color: #ffffff !important;
-  flex-shrink: 0 !important;
+  width: 16px;
+  height: 16px;
+  color: #ffffff;
+  flex-shrink: 0;
 }
 
 .comparisonColumn .xIcon {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  width: 28px !important;
-  height: 28px !important;
-  background-color: #e1e1e1 !important;
-  border-radius: 50% !important;
-  margin: 0 auto !important;
-  flex-shrink: 0 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 28px;
+  height: 28px;
+  background-color: #e1e1e1;
+  border-radius: 50%;
+  margin: 0 auto;
+  flex-shrink: 0;
 }
 
 .comparisonColumn .xIcon .icon {
-  width: 16px !important;
-  height: 16px !important;
-  color: #9c9c9c !important;
-  flex-shrink: 0 !important;
+  width: 16px;
+  height: 16px;
+  color: #9c9c9c;
+  flex-shrink: 0;
 }
 
 .naText {
