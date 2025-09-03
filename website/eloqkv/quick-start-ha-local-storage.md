@@ -122,6 +122,46 @@ For detailed explanations for each configuration option in the YAML file, please
   _Type_: `String`  
   `Local` indicates that an embedded RocksDB engine is used for on-disk data storage.
 
+The following example demonstrates how to configure a distributed, highly available cluster. It features three primary nodes, each paired with a dedicated standby node. A single voter node is shared across the cluster to manage failover events. To implement this, modify your YAML configuration as shown below:
+
+```
+connection:
+  username: "${USER}"
+  auth_type: "keypair"
+  auth:
+    keypair: "/home/${USER}/.ssh/id_rsa"
+deployment:
+  cluster_name: "eloqkv_with_hot_standby_and_voter"
+  product: "EloqKV"
+  version: "latest"
+  install_dir: "/home/${USER}"
+  tx_service:
+    tx_host_ports: [10.0.0.1:6379,10.0.0.2:6379,10.0.0.3:6379]
+    standby_host_ports: [10.0.0.5:6379,10.0.0.6:6379,10.0.0.7:6379]
+    voter_host_ports: [10.0.0.4:6379]
+    enable_cache_replacement: on
+
+  storage_service:
+    rocksdb: Local
+
+  monitor:
+    data_dir: ""
+    eloq_metrics:
+      path: "/eloq_metrics"
+      port: 18081
+    prometheus:
+      download_url: "https://github.com/prometheus/prometheus/releases/download/v2.42.0/prometheus-2.42.0.linux-amd64.tar.gz"
+      port: 9500
+      host: 10.0.0.4
+    grafana:
+      download_url: "https://dl.grafana.com/oss/release/grafana-9.3.6.linux-amd64.tar.gz"
+      port: 3301
+      host: 10.0.0.4
+    node_exporter:
+      url: "https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_exporter-1.5.0.linux-amd64.tar.gz"
+      port: 9200
+```
+
 ## 4. Run the deployment command
 
 After you modified the `eloqkv_rocksdb_standby_with_voter.yaml`. Use the `eloqctl launch` command to provision an EloqKV cluster
