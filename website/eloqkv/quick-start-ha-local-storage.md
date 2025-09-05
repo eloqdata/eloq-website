@@ -138,7 +138,7 @@ deployment:
   tx_service:
     tx_host_ports: [10.0.0.1:6379,10.0.0.2:6379,10.0.0.3:6379]
     standby_host_ports: [10.0.0.5:6379,10.0.0.6:6379,10.0.0.7:6379]
-    voter_host_ports: [10.0.0.4:6379]
+    voter_host_ports: [10.0.0.4:6379,10.0.0.4:6379,10.0.0.4:6379]
     enable_cache_replacement: on
 
   storage_service:

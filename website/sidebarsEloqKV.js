@@ -20,7 +20,6 @@ const sidebars = {
     Deploy: [
       'quick-start',
       'quick-start-ha-local-storage',
-      'quick-start-ha',
       'manage-cluster',
       'upgrade',
       'prerequisite',
@@ -32,7 +31,11 @@ const sidebars = {
       'dump-tools',
       'failover',
     ],
-    'Redis Comaptibility': ['kvstore_compatibility', 'client_compatibility', 'known-limit'],
+    'Redis Comaptibility': [
+      'kvstore_compatibility',
+      'client_compatibility',
+      'known-limit',
+    ],
     'Command Reference': [
       {
         type: 'category',
