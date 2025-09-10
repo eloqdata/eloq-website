@@ -2,7 +2,7 @@
 
 Official TypeScript SDK for Eloq API - A powerful and type-safe way to interact with Eloq services.
 
-## 📦 Installation
+## Installation
 
 ```bash
 npm install eloq-sdk-typescript
@@ -12,14 +12,14 @@ npm install eloq-sdk-typescript
 yarn add eloq-sdk-typescript
 ```
 
-## 📋 Function Directory
+## Function Directory
 
-### 🚀 Quick Start
+### Quick Start
 
 - [Client Creation](#client-creation)
   - [`createEloqClient()`](#createeloqclientconfig-eloqclientconfig--string-eloqapiclient)
 
-### 🔧 Core Methods
+### Core Methods
 
 - [Connection & Organization](#core-methods)
   - [`testConnection()`](#testconnection-promiseconnectiontestresult)
@@ -27,7 +27,7 @@ yarn add eloq-sdk-typescript
   - [`projects()`](#projects-promiseprojectsummary)
   - [`project()`](#projectprojectid-number-promiseeloqproject)
 
-### 🗂️ Cluster Management
+### Cluster Management
 
 - [Cluster Operations](#cluster-management)
   - [`clusters()`](#clustersparams-listclustersparams-promiseeloqcluster)
@@ -102,7 +102,7 @@ allClusters.forEach(({projectName, projectId, clusters}) => {
 });
 ```
 
-## 📚 API Reference
+## API Reference
 
 ### Client Creation
 
