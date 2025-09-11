@@ -178,7 +178,9 @@ export default function EloqKV() {
         <div className={styles.hero}>
           <div className={styles.heroInner}>
             <h1 className={styles.heroTitle}>EloqKV</h1>
-            <h1 className={styles.heroTitleSecondary}>Redis API, Database Power</h1>
+            <h1 className={styles.heroTitleSecondary}>
+              Redis API, Database Power
+            </h1>
             <p className={styles.heroSubtitle}>
               The Redis-API Compatible Distributed Database for Production, High
               Performance, Cost Effective and Full ACID Transactions
@@ -186,7 +188,7 @@ export default function EloqKV() {
             <div className={styles.heroButtons}>
               <Link
                 className={`button button--primary button--lg ${styles.heroButton}`}
-                to="/eloqkv/introduction"
+                href="https://cloud.eloqdata.com/signup"
                 style={{
                   background: 'linear-gradient(120deg, #ff7b2d, #ff9f4a)',
                   border: 'none',
@@ -411,7 +413,8 @@ COMMIT`}
             </p>
 
             <div className={styles.comparisonTable}>
-              <div className={`${styles.comparisonHeader} ${styles.comparisonHeader5}`}>
+              <div
+                className={`${styles.comparisonHeader} ${styles.comparisonHeader5}`}>
                 <div className={styles.featureColumn}>
                   <h3>Features</h3>
                 </div>
@@ -432,9 +435,9 @@ COMMIT`}
               {PRODUCT_COMPARISON.map((item, index) => (
                 <div
                   key={index}
-                  className={`${styles.comparisonRow} ${styles.comparisonRow5} ${
-                    index % 2 === 0 ? styles.rowEven : styles.rowOdd
-                  }`}>
+                  className={`${styles.comparisonRow} ${
+                    styles.comparisonRow5
+                  } ${index % 2 === 0 ? styles.rowEven : styles.rowOdd}`}>
                   <div className={styles.featureColumn}>{item.feature}</div>
                   <div className={styles.comparisonColumn}>
                     {typeof item.eloqkv === 'boolean' ? (

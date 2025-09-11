@@ -69,7 +69,7 @@ export default function EloqDoc() {
             <div className={styles.heroButtons}>
               <Link
                 className={`button button--primary button--lg ${styles.heroButton}`}
-                to="/eloqdoc/install-from-binary"
+                href="https://cloud.eloqdata.com/signup"
                 style={{
                   background: 'linear-gradient(120deg, #ff7b2d, #ff9f4a)',
                   border: 'none',
@@ -141,8 +141,8 @@ export default function EloqDoc() {
                     Fully Decoupled Architecture
                   </h2>
                   <p className={styles.tieredDescription}>
-                    EloqDoc's innovative architecture completely separates
-                    CPU, memory, logging, and storage components, enabling
+                    EloqDoc's innovative architecture completely separates CPU,
+                    memory, logging, and storage components, enabling
                     unprecedented flexibility and cost optimization. This
                     disaggregated design allows you to optimize each resource
                     tier for specific workload requirements, dramatically
@@ -204,11 +204,9 @@ export default function EloqDoc() {
                     with minimal performance impact.
                   </p>
                 </div>
-
               </div>
             </div>
           </div>
-
         </div>
         {/* Product Comparison Section */}
         <div className={styles.comparisonSection}>
@@ -219,7 +217,8 @@ export default function EloqDoc() {
             </p>
 
             <div className={styles.comparisonTable}>
-              <div className={`${styles.comparisonHeader} ${styles.comparisonHeader4}`}>
+              <div
+                className={`${styles.comparisonHeader} ${styles.comparisonHeader4}`}>
                 <div className={styles.featureColumn}>
                   <h3>Features</h3>
                 </div>
@@ -237,9 +236,9 @@ export default function EloqDoc() {
               {PRODUCT_COMPARISON.map((item, index) => (
                 <div
                   key={index}
-                  className={`${styles.comparisonRow} ${styles.comparisonRow4} ${
-                    index % 2 === 0 ? styles.rowEven : styles.rowOdd
-                  }`}>
+                  className={`${styles.comparisonRow} ${
+                    styles.comparisonRow4
+                  } ${index % 2 === 0 ? styles.rowEven : styles.rowOdd}`}>
                   <div className={styles.featureColumn}>{item.feature}</div>
                   <div className={styles.comparisonColumn}>
                     {typeof item.eloqdoc === 'boolean' ? (

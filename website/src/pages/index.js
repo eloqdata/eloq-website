@@ -940,7 +940,7 @@ function HomePage() {
                 position: 'relative',
                 zIndex: 102,
               }}>
-              EloqCloud Public Access Open:{' '}
+              EloqCloud Public Access:{' '}
               <Link
                 to="https://cloud.eloqdata.com"
                 style={{
@@ -954,7 +954,7 @@ function HomePage() {
                 }}
                 target="_blank"
                 rel="noopener noreferrer">
-                Apply Now
+                Start for Free
               </Link>
             </span>
           </div>
@@ -964,7 +964,7 @@ function HomePage() {
           <div className="product-columns">
             <div className="product-left-column">
               <h1 className="title">
-               Revolutionary Databases Powering the AI Age
+                Revolutionary Databases Powering the AI Age
               </h1>
               <p className="tagline">
                 Databases for all your AI app needs—multimodal, transactional,
@@ -979,7 +979,7 @@ function HomePage() {
                     ...buttonStyles.actionButton,
                     ...buttonStyles.primary,
                   }}>
-                  Apply For Access
+                  Start for Free
                 </Link>
                 <Link
                   to="/product/eloqkv"
@@ -1689,12 +1689,13 @@ function HomePage() {
                 <div className={styles.tieredInfo}>
                   <h2 className={styles.tieredTitle}>Tiered Storage</h2>
                   <p className={styles.tieredDescription}>
-                    Eloq Databases intelligently manage your data across multiple
-                    storage tiers to optimize both performance and cost. Hot data
-                    is kept in memory for lightning-fast access, warm data is moved
-                    to SSDs for balanced speed and efficiency, and cold data is 
-                    offloaded to object storage. Our smart tiering strategy can dramatically
-                    reduces your Total Cost of Ownership (TCO).
+                    Eloq Databases intelligently manage your data across
+                    multiple storage tiers to optimize both performance and
+                    cost. Hot data is kept in memory for lightning-fast access,
+                    warm data is moved to SSDs for balanced speed and
+                    efficiency, and cold data is offloaded to object storage.
+                    Our smart tiering strategy can dramatically reduces your
+                    Total Cost of Ownership (TCO).
                   </p>
                 </div>
               </div>
@@ -1708,11 +1709,12 @@ function HomePage() {
                 <div className={styles.acidInfo}>
                   <h2 className={styles.acidTitle}>ACID Transaction</h2>
                   <p className={styles.acidDescription}>
-                    Eloq Databases are fully featured, ACID-compliant transactional systems. 
-                    Backed by cross-AZ durable write-ahead logs and support session-based 
-                    transaction with familiar isolation levels, 
-                    Eloq solutions ensure data integrity and consistency across distributed 
-                    nodes, making them ideal for mission-critical applications.
+                    Eloq Databases are fully featured, ACID-compliant
+                    transactional systems. Backed by cross-AZ durable
+                    write-ahead logs and support session-based transaction with
+                    familiar isolation levels, Eloq solutions ensure data
+                    integrity and consistency across distributed nodes, making
+                    them ideal for mission-critical applications.
                   </p>
                 </div>
                 <div className={styles.acidImageContainer}>
@@ -1740,11 +1742,12 @@ function HomePage() {
                 <div className={styles.tieredInfo}>
                   <h2 className={styles.tieredTitle}>High Performance</h2>
                   <p className={styles.tieredDescription}>
-                    Eloq Databases are engineered for high-performance, low-latency 
-                    applications that demand speed at scale. Featuring a highly 
-                    optimized thread-per-core execution model and asynchronous I/O, 
-                    Eloq delivers performance that rivals—and often surpasses—the best 
-                    purpose-built point solutions in the industry.
+                    Eloq Databases are engineered for high-performance,
+                    low-latency applications that demand speed at scale.
+                    Featuring a highly optimized thread-per-core execution model
+                    and asynchronous I/O, Eloq delivers performance that
+                    rivals—and often surpasses—the best purpose-built point
+                    solutions in the industry.
                   </p>
                 </div>
               </div>
@@ -1758,11 +1761,12 @@ function HomePage() {
                 <div className={styles.acidInfo}>
                   <h2 className={styles.acidTitle}>Scalable & Elastic</h2>
                   <p className={styles.acidDescription}>
-                    Eloq Databases are architected for true scalability and elasticity. 
-                    They scale up efficiently across multicore CPUs to maximize single-node 
-                    performance, and scale out across distributed nodes to deliver virtually
-                    unlimited throughput. Clusters can grow or shrink dynamically in response
-                    to traffic surges—all without service disruption.
+                    Eloq Databases are architected for true scalability and
+                    elasticity. They scale up efficiently across multicore CPUs
+                    to maximize single-node performance, and scale out across
+                    distributed nodes to deliver virtually unlimited throughput.
+                    Clusters can grow or shrink dynamically in response to
+                    traffic surges—all without service disruption.
                   </p>
                 </div>
                 <div className={styles.acidImageContainer}>
@@ -1791,11 +1795,12 @@ function HomePage() {
                 <div className={styles.acidInfo}>
                   <h2 className={styles.acidTitle}>Highly Available</h2>
                   <p className={styles.acidDescription}>
-                    Eloq Databases are built for high availability and fault tolerance. 
-                    Data is seamlessly replicated across multiple servers or disks to 
-                    ensure durability and resilience. With built-in support for hot 
-                    standbys and fast failover, Eloq can recover from node outages in
-                    seconds—minimizing downtime and maintaining continuous service.
+                    Eloq Databases are built for high availability and fault
+                    tolerance. Data is seamlessly replicated across multiple
+                    servers or disks to ensure durability and resilience. With
+                    built-in support for hot standbys and fast failover, Eloq
+                    can recover from node outages in seconds—minimizing downtime
+                    and maintaining continuous service.
                   </p>
                 </div>
               </div>
@@ -1809,11 +1814,11 @@ function HomePage() {
                 <div className={styles.tieredInfo}>
                   <h2 className={styles.tieredTitle}>Standard API</h2>
                   <p className={styles.tieredDescription}>
-                    Eloq Databases offers broad compatibility through support for
-                    standard APIs, including Redis, SQL, and MongoDB. This
-                    multi-model interface empowers developers to integrate
-                    Eloq into existing ecosystems effortlessly—enabling
-                    seamless migration with minimal code changes.
+                    Eloq Databases offers broad compatibility through support
+                    for standard APIs, including Redis, SQL, and MongoDB. This
+                    multi-model interface empowers developers to integrate Eloq
+                    into existing ecosystems effortlessly—enabling seamless
+                    migration with minimal code changes.
                   </p>
                 </div>
 
@@ -1824,7 +1829,6 @@ function HomePage() {
                     className={styles.tieredImage}
                   />
                 </div>
-
               </div>
             </div>
           </div>

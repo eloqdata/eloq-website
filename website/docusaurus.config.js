@@ -272,7 +272,7 @@ module.exports = {
           },
           // Sign Up button with orange background
           {
-            href: 'https://cloud.eloqdata.com',
+            href: 'https://cloud.eloqdata.com/signup',
             position: 'right',
             className: 'header-signup-link',
             label: 'Sign Up',
@@ -363,7 +363,7 @@ module.exports = {
               {
                 type: 'html',
                 value: `
-                  <a href="https://cloud.eloqdata.com" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 340px;">
+                  <a href="https://cloud.eloqdata.com/signup" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 340px;">
                     <div style="display: flex; align-items: center;">
                       <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
                         <rect width="32" height="32" rx="6" fill="#222" />
@@ -371,7 +371,7 @@ module.exports = {
                       </svg>
                       <div style="display: flex; flex-direction: column;">
                         <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqCloud</span>
-                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Apply to Join</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Get Started for Free</span>
                       </div>
                     </div>
                   </a>
