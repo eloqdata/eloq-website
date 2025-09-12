@@ -1,8 +1,33 @@
-# TypeScript SDK
+# TypeScript SDK for Eloq
 
-Official TypeScript SDK for Eloq API - A powerful and type-safe way to interact with Eloq services.
+> Welcome to the TypeScript SDK for Eloq! This SDK provides type-safe integration with Eloq's cloud cluster platform for managing your cluster infrastructure programmatically. Built with TypeScript, it offers excellent developer experience with full type safety and IntelliSense support.
+
+## About TypeScript SDK for Eloq
+
+The **Eloq TypeScript SDK** is a TypeScript client library for managing Eloq cloud cluster services. This SDK provides type-safe APIs to programmatically control your cluster infrastructure.
+
+You can use the Eloq TypeScript SDK to manage your Eloq Organization and Clusters. The SDK abstracts the underlying API requests, authentication, and error handling, allowing you to focus on building applications that interact with Eloq resources.
+
+Our SDK enables the following functionalities:
+
+#### **Organization Management**
+
+- Access organization details, user roles, and permissions
+
+#### **Cluster Management**
+
+- Create clusters
+- Get real-time cluster status and performance metrics
+- Get cluster configurations and connection credentials
+
+Eloq API:
+
+- [**Manage organization with the Eloq API**](./Organization.md)
+- [**Manage cluster with the Eloq API**](./cluster.md)
 
 ## Installation
+
+You can install the SDK using npm or yarn:
 
 ```bash
 npm install eloq-sdk-typescript
@@ -12,122 +37,31 @@ npm install eloq-sdk-typescript
 yarn add eloq-sdk-typescript
 ```
 
-## Function Directory
+## Quick Start
 
-### Quick Start
+### **Installation**
 
-- [Client Creation](#client-creation)
-  - [`createEloqClient()`](#createeloqclientconfig-eloqclientconfig--string-eloqapiclient)
+You can install the SDK using npm or yarn:
 
-### Core Methods
+```bash
+npm install eloq-sdk-typescript
+```
 
-- [Connection & Organization](#core-methods)
-  - [`testConnection()`](#testconnection-promiseconnectiontestresult)
-  - [`orgInfo()`](#orginfo-promiseeloquser)
-  - [`projects()`](#projects-promiseprojectsummary)
-  - [`project()`](#projectprojectid-number-promiseeloqproject)
+```bash
+yarn add eloq-sdk-typescript
+```
 
-### Cluster Management
-
-- [Cluster Operations](#cluster-management)
-  - [`clusters()`](#clustersparams-listclustersparams-promiseeloqcluster)
-  - [`cluster()`](#clusterorgid-number-projectid-number-clustername-string-promiseeloqcluster)
-  - [`cluster_admin()`](#cluster_adminorgid-number-projectid-number-clustername-string-promiseclusteradmininfo)
-  - [`createCluster()`](#createclusterorgid-number-projectid-number-request-createclusterrequest-promiseeloqcluster)
-
----
-
-## func Docs
-
-### Basic Usage
+### **Basic Usage**
 
 ```typescript
 import {createEloqClient} from 'eloq-sdk-typescript';
 
-// Create client with API key only
-const client = createEloqClient('your-api-key-here');
+// Create client with API key
+const client = createEloqClient('your_api_token');
 
-// Or create client with full configuration
+// Or create with full configuration
 const client = createEloqClient({
-  apiKey: 'your-api-key-here',
-  timeout: 30000,
-  maxRetries: 3,
-  retryDelay: 1000,
-});
-
-// Test connection
-const connectionResult = await client.testConnection();
-if (connectionResult.success) {
-  console.log('✅ Successfully connected to Eloq API');
-  console.log(`Latency: ${connectionResult.latency}ms`);
-} else {
-  console.error(
-    '❌ Connection failed:',
-    connectionResult.message,
-  );
-}
-```
-
-### Get Organization Information
-
-```typescript
-try {
-  const userInfo = await client.orgInfo();
-  console.log('Organization:', userInfo.org_info.org_name);
-  console.log('User:', userInfo.user_name);
-  console.log('Email:', userInfo.email);
-  console.log('Projects:', userInfo.org_info.projects);
-} catch (error) {
-  console.error('Failed to get organization info:', error);
-}
-```
-
-### Get Projects and Clusters
-
-```typescript
-// Get all projects
-const {orgId, projects} = await client.projects();
-console.log(`Organization ID: ${orgId}`);
-console.log(`Total ${projects.length} projects:`);
-
-// Get clusters for all projects
-const allClusters = await client.allClusters();
-allClusters.forEach(({projectName, projectId, clusters}) => {
-  console.log(`\n📁 Project: ${projectName} (ID: ${projectId})`);
-  clusters.forEach(cluster => {
-    console.log(
-      `  - ${cluster.cluster_name} (${cluster.status}) in ${cluster.region}`,
-    );
-  });
-});
-```
-
-## API Reference
-
-### Client Creation
-
-#### `createEloqClient(config: EloqClientConfig | string): EloqApiClient`
-
-Create a new Eloq API client instance.
-
-- **Inputs**:
-  - **config**:
-    - `string`: API key for authentication
-    - `EloqClientConfig` object:
-      - `apiKey` (string, required): Your Eloq API key for authentication
-      - `baseURL` (string, optional): Base URL for API requests (default: 'https://api.eloqdata.com')
-      - `timeout` (number, optional): Request timeout in milliseconds (default: 30000)
-      - `maxRetries` (number, optional): Maximum retry attempts for failed requests (default: 3)
-      - `retryDelay` (number, optional): Base delay between retries in milliseconds (default: 1000)
-- **Returns**: `EloqApiClient` - Configured client instance for making API calls
-
-```typescript
-// Simple usage with API key
-const client = createEloqClient('your-api-key');
-
-// Full configuration
-const client = createEloqClient({
-  apiKey: 'your-api-key',
+  apiKey: 'your_api_token',
   baseURL: 'https://api.eloqdata.com',
   timeout: 30000,
   maxRetries: 3,
@@ -135,168 +69,187 @@ const client = createEloqClient({
 });
 ```
 
-### Core Methods
+### **Get Your API Token**
 
-#### `testConnection(): Promise<ConnectionTestResult>`
+Before using the SDK, you need to obtain your API token from the [EloqCloud Dashboard](https://cloud.eloqdata.com):
 
-Test connection to Eloq API with latency measurement.
+1. Log in to your EloqCloud account
+2. Navigate to **Settings** → **API Keys**
+3. Generate a new API key
+4. Copy the token for use in your application
 
-- **Inputs**: None
-- **Returns**: `Promise<ConnectionTestResult>` object:
-  - `success` (boolean): Whether the connection test was successful
-  - `message` (string): Description of the connection result or error message
-  - `latency` (number, optional): Response time in milliseconds (only present on success)
+### **First API Call**
+
+Let's start with getting your organization information:
 
 ```typescript
-const result = await client.testConnection();
-// {
-//   success: true,
-//   message: 'Connection successful',
-//   latency: 150
-// }
+import {createEloqClient} from 'eloq-sdk-typescript';
+
+async function getOrganizationInfo() {
+  try {
+    // Initialize the client
+    const client = createEloqClient('your_api_token');
+
+    // Get organization information
+    const orgInfo = await client.orgInfo();
+
+    console.log('Organization:', orgInfo.org_info.org_name);
+    console.log('User:', orgInfo.user_name);
+    console.log('Email:', orgInfo.email);
+    console.log('Projects:', orgInfo.org_info.projects.length);
+
+    return orgInfo;
+  } catch (error) {
+    console.error('Error getting organization info:', error);
+    throw error;
+  }
+}
+
+// Call the function
+getOrganizationInfo();
 ```
 
-#### `orgInfo(): Promise<EloqUser>`
+### **Working with Clusters**
 
-Get complete organization and user information.
-
-- **Inputs**: None
-- **Returns**: `Promise<EloqUser>` object:
-  - `auth_provider` (string): Authentication provider used (e.g., 'google', 'github')
-  - `create_at` (string): User account creation timestamp
-  - `email` (string): User's email address
-  - `user_name` (string): User's display name
-  - `org_info` (EloqOrgInfo object):
-    - `org_create_at` (string): Organization creation timestamp
-    - `org_id` (number): Unique organization identifier
-    - `org_name` (string): Organization name
-    - `projects` (EloqProject[]): Array of projects in the organization
-    - `roles` (string[]): User's roles in the organization
+Here's a more comprehensive example showing how to work with projects and clusters:
 
 ```typescript
-const userInfo = await client.orgInfo();
-console.log('Organization:', userInfo.org_info.org_name);
-console.log('User:', userInfo.user_name);
+import {createEloqClient} from 'eloq-sdk-typescript';
+
+async function manageClusters() {
+  const client = createEloqClient('your_api_token');
+
+  try {
+    // Get all projects
+    const {orgId, projects} = await client.projects();
+    console.log(`Organization ID: ${orgId}`);
+    console.log(`Found ${projects.length} projects`);
+
+    // List clusters for each project
+    for (const project of projects) {
+      console.log(
+        `\n📁 Project: ${project.project_name} (ID: ${project.project_id})`,
+      );
+
+      try {
+        const clusters = await client.clusters(
+          orgId,
+          project.project_id,
+        );
+        console.log(`  Clusters: ${clusters.length}`);
+
+        clusters.forEach(cluster => {
+          console.log(
+            `    - ${cluster.cluster_name} (${cluster.status}) in ${cluster.region}`,
+          );
+        });
+      } catch (error) {
+        console.log(`  Error getting clusters: ${error.message}`);
+      }
+    }
+
+    // Create a new cluster (example)
+    if (projects.length > 0) {
+      const firstProject = projects[0];
+      console.log(
+        `\n🚀 Creating cluster in project: ${firstProject.project_name}`,
+      );
+
+      try {
+        const newCluster = await client.createCluster(
+          orgId,
+          firstProject.project_id,
+          {
+            clusterName: 'my-new-cluster',
+            region: 'us-east-1',
+            RequiredZone: 'us-east-1a',
+            skuId: 1,
+          },
+        );
+
+        console.log(
+          `✅ Cluster created: ${newCluster.cluster_name}`,
+        );
+        console.log(`   Status: ${newCluster.status}`);
+        console.log(`   Region: ${newCluster.region}`);
+      } catch (error) {
+        console.error(
+          `❌ Failed to create cluster: ${error.message}`,
+        );
+      }
+    }
+  } catch (error) {
+    console.error('Error managing clusters:', error);
+  }
+}
+
+// Run the example
+manageClusters();
 ```
 
-#### `projects(): Promise<ProjectSummary>`
+### **Environment Variables**
 
-Get summary information of all projects in the organization.
-
-- **Inputs**: None
-- **Returns**: `Promise<ProjectSummary>` object:
-  - `orgId` (number): Organization identifier
-  - `projects` (EloqProject[]): Array of project objects:
-    - `create_at` (string): Project creation timestamp
-    - `project_id` (number): Unique project identifier
-    - `project_name` (string): Project display name
+For better security, you can store your API token in environment variables:
 
 ```typescript
-const {orgId, projects} = await client.projects();
-projects.forEach(project => {
-  console.log(
-    `- ${project.project_name} (ID: ${project.project_id})`,
-  );
+import {createEloqClient} from 'eloq-sdk-typescript';
+
+// Create client using environment variable
+const client = createEloqClient(process.env.ELOQ_API_TOKEN);
+
+// Or with full configuration from environment
+const client = createEloqClient({
+  apiKey: process.env.ELOQ_API_TOKEN,
+  baseURL: process.env.ELOQ_API_URL || 'https://api.eloqdata.com',
+  timeout: parseInt(process.env.ELOQ_TIMEOUT || '30000'),
 });
 ```
 
-#### `project(projectId: number): Promise<EloqProject>`
+### **Error Handling**
 
-Get a specific project by ID.
-
-- **Inputs**:
-  - **projectId** (number, required): Unique identifier of the project to retrieve
-- **Returns**: `Promise<EloqProject>` object:
-  - `create_at` (string): Project creation timestamp
-  - `project_id` (number): Unique project identifier
-  - `project_name` (string): Project display name
+The SDK provides comprehensive error handling:
 
 ```typescript
-const project = await client.project(123);
-console.log('Project:', project.project_name);
+import {createEloqClient} from 'eloq-sdk-typescript';
+
+async function handleErrors() {
+  const client = createEloqClient('your_api_token');
+
+  try {
+    const orgInfo = await client.orgInfo();
+    console.log('Success:', orgInfo.org_info.org_name);
+  } catch (error) {
+    if (error.response) {
+      // API returned an error response
+      console.error(
+        'API Error:',
+        error.response.status,
+        error.response.data,
+      );
+    } else if (error.request) {
+      // Network error
+      console.error('Network Error:', error.message);
+    } else {
+      // Other error
+      console.error('Error:', error.message);
+    }
+  }
+}
 ```
 
-### Cluster Management
+## Core API Methods
 
-#### `clusters(params: ListClustersParams): Promise<EloqCluster[]>`
+**Organization Management**
 
-Get cluster list for specified organization and project.
+- [`orgInfo()`](#orginfo---promiseeloquser)
 
-- **Inputs**:
-  - **params** (ListClustersParams object):
-    - `orgId` (number, required): Organization identifier
-    - `projectId` (number, required): Project identifier
-    - `perPage` (number, optional): Number of clusters per page (default: 10)
-    - `page` (number, optional): Page number for pagination (default: 1)
-- **Returns**: `Promise<EloqCluster[]>` - Array of cluster objects:
-  - `cloud_provider` (string): Cloud provider name (e.g., 'aws', 'gcp')
-  - `cluster_name` (string): Unique cluster identifier
-  - `create_at` (string): Cluster creation timestamp
-  - `module_type` (string): Type of cluster module
-  - `region` (string): Geographic region where cluster is deployed
-  - `status` (string): Current cluster status (e.g., 'active', 'creating', 'error')
-  - `version` (string): Cluster version
-  - `zone` (string): Availability zone within the region
+**Cluster Management:**
 
-```typescript
-const clusters = await client.listClusters({
-  orgId: 1,
-  projectId: 147,
-  perPage: 10,
-  page: 1,
-});
-```
+- [`clusters()`](#clustersorgid-number-projectid-number--page-number--1-perpage-number--20---promiseeloqcluster)
+- [`cluster()`](#clusterorgid-number-projectid-number-clustername-string---promiseeloqcluster)
+- [`createCluster()`](#createclusterorgid-number-projectid-number-request-createclusterrequest---promiseeloqcluster)
+- [`clusterCredentials()`](#clustercredentialsorgid-number-projectid-number-clustername-string---promiseclustercredentials)
 
-#### `cluster(orgId: number, projectId: number, clusterName: string): Promise<EloqCluster>`
+---
 
-Get a specific cluster.
-
-- **Inputs**:
-  - **orgId** (number, required): Organization identifier
-  - **projectId** (number, required): Project identifier
-  - **clusterName** (string, required): Unique name of the cluster to retrieve
-- **Returns**: `Promise<EloqCluster>` object:
-  - `cloud_provider` (string): Cloud provider name (e.g., 'aws', 'gcp')
-  - `cluster_name` (string): Unique cluster identifier
-  - `create_at` (string): Cluster creation timestamp
-  - `module_type` (string): Type of cluster module
-  - `region` (string): Geographic region where cluster is deployed
-  - `status` (string): Current cluster status (e.g., 'active', 'creating', 'error')
-  - `version` (string): Cluster version
-  - `zone` (string): Availability zone within the region
-
-```typescript
-const cluster = await client.cluster(1, 147, 'my-cluster');
-console.log('Cluster status:', cluster.status);
-```
-
-#### `createCluster(orgId: number, projectId: number, request: CreateClusterRequest): Promise<EloqCluster>`
-
-Create a new cluster.
-
-- **Inputs**:
-  - **orgId** (number, required): Organization identifier
-  - **projectId** (number, required): Project identifier
-  - **request** (CreateClusterRequest object):
-    - `clusterName` (string, required): Unique name for the new cluster
-    - `region` (string, required): Geographic region for deployment (e.g., 'us-east-1')
-    - `RequiredZone` (string, required): Availability zone within the region (e.g., 'us-east-1a')
-    - `skuId` (number, required): SKU identifier for cluster specifications
-- **Returns**: `Promise<EloqCluster>` object:
-  - `cloud_provider` (string): Cloud provider name (e.g., 'aws', 'gcp')
-  - `cluster_name` (string): Unique cluster identifier
-  - `create_at` (string): Cluster creation timestamp
-  - `module_type` (string): Type of cluster module
-  - `region` (string): Geographic region where cluster is deployed
-  - `status` (string): Current cluster status (e.g., 'active', 'creating', 'error')
-  - `version` (string): Cluster version
-  - `zone` (string): Availability zone within the region
-
-```typescript
-const cluster = await client.createCluster(1, 147, {
-  clusterName: 'new-cluster',
-  region: 'us-east-1',
-  RequiredZone: 'us-east-1a',
-  skuId: 1,
-});
-```
+For detailed function documentation with input/output specifications, see [**TypeScript SDK API Documentation**](./typescriptdoc).
