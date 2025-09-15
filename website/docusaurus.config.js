@@ -305,25 +305,6 @@ module.exports = {
               {
                 type: 'html',
                 value: `
-                  <a href="/product/eloqsql" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 240px;">
-                    <div style="display: flex; align-items: center;">
-                      <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
-                        <rect width="32" height="32" rx="6" fill="#222" />
-                        <ellipse cx="16" cy="10" rx="8" ry="3" fill="#FFFFFF" opacity="0.8" />
-                        <path d="M8 10v8c0 1.5 3.5 3 8 3s8-1.5 8-3v-8" stroke="#FFFFFF" stroke-width="2" fill="none" />
-                        <path d="M8 18v4c0 1.5 3.5 3 8 3s8-1.5 8-3v-4" stroke="#FFFFFF" stroke-width="2" fill="none" />
-                      </svg>
-                      <div style="display: flex; flex-direction: column;">
-                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqSQL</span>
-                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">MySQL API compatible, high perfromance, elastic</span>
-                      </div>
-                    </div>
-                  </a>
-                `,
-              },
-              {
-                type: 'html',
-                value: `
                   <a href="/product/eloqdoc" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 240px;">
                     <div style="display: flex; align-items: center;">
                       <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
@@ -335,6 +316,25 @@ module.exports = {
                       <div style="display: flex; flex-direction: column;">
                         <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqDoc</span>
                         <span style="font-size: 14px; color: rgba(255,255,255,0.6);">MongoDB compatible, decouple compute & storage</span>
+                      </div>
+                    </div>
+                  </a>
+                `,
+              },
+              {
+                type: 'html',
+                value: `
+                  <a href="/product/eloqsql" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 240px;">
+                    <div style="display: flex; align-items: center;">
+                      <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
+                        <rect width="32" height="32" rx="6" fill="#222" />
+                        <ellipse cx="16" cy="10" rx="8" ry="3" fill="#FFFFFF" opacity="0.8" />
+                        <path d="M8 10v8c0 1.5 3.5 3 8 3s8-1.5 8-3v-8" stroke="#FFFFFF" stroke-width="2" fill="none" />
+                        <path d="M8 18v4c0 1.5 3.5 3 8 3s8-1.5 8-3v-4" stroke="#FFFFFF" stroke-width="2" fill="none" />
+                      </svg>
+                      <div style="display: flex; flex-direction: column;">
+                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqSQL</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">MySQL API compatible, high perfromance, elastic</span>
                       </div>
                     </div>
                   </a>
@@ -406,25 +406,6 @@ module.exports = {
               {
                 type: 'html',
                 value: `
-                  <a href="/eloqsql/introduction" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 240px;">
-                    <div style="display: flex; align-items: center;">
-                      <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
-                        <rect width="32" height="32" rx="6" fill="#222" />
-                        <ellipse cx="16" cy="10" rx="8" ry="3" fill="#FFFFFF" opacity="0.8" />
-                        <path d="M8 10v8c0 1.5 3.5 3 8 3s8-1.5 8-3v-8" stroke="#FFFFFF" stroke-width="2" fill="none" />
-                        <path d="M8 18v4c0 1.5 3.5 3 8 3s8-1.5 8-3v-4" stroke="#FFFFFF" stroke-width="2" fill="none" />
-                      </svg>
-                      <div style="display: flex; flex-direction: column;">
-                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqSQL</span>
-                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Deploy cluster, data migration</span>
-                      </div>
-                    </div>
-                  </a>
-                `,
-              },
-              {
-                type: 'html',
-                value: `
                   <a href="/eloqdoc/install-from-binary" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 240px;">
                     <div style="display: flex; align-items: center;">
                       <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
@@ -436,6 +417,25 @@ module.exports = {
                       <div style="display: flex; flex-direction: column;">
                         <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqDoc</span>
                         <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Quick start</span>
+                      </div>
+                    </div>
+                  </a>
+                `,
+              },
+              {
+                type: 'html',
+                value: `
+                  <a href="/eloqsql/introduction" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 240px;">
+                    <div style="display: flex; align-items: center;">
+                      <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
+                        <rect width="32" height="32" rx="6" fill="#222" />
+                        <ellipse cx="16" cy="10" rx="8" ry="3" fill="#FFFFFF" opacity="0.8" />
+                        <path d="M8 10v8c0 1.5 3.5 3 8 3s8-1.5 8-3v-8" stroke="#FFFFFF" stroke-width="2" fill="none" />
+                        <path d="M8 18v4c0 1.5 3.5 3 8 3s8-1.5 8-3v-4" stroke="#FFFFFF" stroke-width="2" fill="none" />
+                      </svg>
+                      <div style="display: flex; flex-direction: column;">
+                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqSQL</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Deploy cluster, data migration</span>
                       </div>
                     </div>
                   </a>

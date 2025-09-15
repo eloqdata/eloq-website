@@ -942,7 +942,7 @@ function HomePage() {
               }}>
               EloqCloud Public Access:{' '}
               <Link
-                to="https://cloud.eloqdata.com"
+                to="https://cloud.eloqdata.com/signup"
                 style={{
                   color: '#ff7b2d',
                   textDecoration: 'none',
@@ -974,7 +974,7 @@ function HomePage() {
               {/* Add buttons for signup and trial */}
               <div style={buttonStyles.buttonContainer}>
                 <Link
-                  to="https://cloud.eloqdata.com"
+                  to="https://cloud.eloqdata.com/signup"
                   style={{
                     ...buttonStyles.actionButton,
                     ...buttonStyles.primary,
@@ -1158,7 +1158,7 @@ function HomePage() {
                   zIndex: 5,
                 }}>
                 <Link
-                  to="https://cloud.eloqdata.com"
+                  to="https://cloud.eloqdata.com/signup"
                   style={{
                     display: 'flex',
                     flexDirection: 'column',
