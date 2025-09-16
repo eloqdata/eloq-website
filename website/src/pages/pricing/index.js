@@ -8,18 +8,19 @@ const PRICING_PLANS = {
     name: 'Free',
     price: '0',
     description:
-      'The first free-tier database built for production workloads, not just testing.',
+      'The first free-tier database built for production workloads, not just testing with unlimited compute hours.',
     features: [
-      '1 project',
-      '10 GB storage',
+      '3 clusters',
+      '25 GB storage',
       'Unlimited compute hours',
       'Up to 10K read QPS',
       'Up to 1K write QPS',
       '10 GB data transfer',
       'Scale to zero',
+      'Redis/MongoDB compatible',
     ],
     cta: 'Start for free',
-    ctaLink: 'https://cloud.eloqdata.com',
+    ctaLink: 'https://cloud.eloqdata.com/login',
   },
   launch: {
     name: 'Business',
@@ -28,14 +29,16 @@ const PRICING_PLANS = {
     description:
       'High-performance database services for growing teams and real-time applications.',
     features: [
-      '100 projects',
+      '100 clusters',
       '50 GB storage',
       '180 compute hours',
       '50 GB data transfer',
-      'Up to 4CU',
+      'Up to 8CU',
+      'Scale to zero',
+      'Redis/MongoDB compatible',
     ],
     cta: 'Get started',
-    ctaLink: '/contact',
+    ctaLink: 'https://cloud.eloqdata.com/login',
   },
   large: {
     name: 'Enterprise',
@@ -44,11 +47,14 @@ const PRICING_PLANS = {
     description:
       'Enterprise-grade database with Private Link, advanced security, compliance, and custom SLAs.',
     features: [
-      '1000 projects',
+      '1000 clusters',
       '1 TB storage',
       '4000 compute hours',
       'Unlimited data transfer',
-      'Up to 32CU',
+      'Up to 64CU',
+      'Priority support & SLAs',
+      'Private network',
+      'Soc2 compliance',
     ],
     cta: 'Get started',
     ctaLink: '/contact',
@@ -58,24 +64,24 @@ const PRICING_PLANS = {
 export default function Pricing() {
   const [tooltipVisible, setTooltipVisible] = useState({});
 
-  const showTooltip = index => {
-    setTooltipVisible({...tooltipVisible, [index]: true});
+  const showTooltip = id => {
+    setTooltipVisible({...tooltipVisible, [id]: true});
   };
 
-  const hideTooltip = index => {
-    setTooltipVisible({...tooltipVisible, [index]: false});
+  const hideTooltip = id => {
+    setTooltipVisible({...tooltipVisible, [id]: false});
   };
 
   return (
     <Layout
-      title="EloqCloud for EloqKV Pricing"
-      description="Pricing plans that grow with you. From prototype to Enterprise.">
+      title="EloqCloud Pricing"
+      description="The most cost effective DBaaS, from prototype to Enterprise.">
       <main className={styles.pricingPage}>
         <div className={styles.hero}>
           <div className={styles.heroInner}>
-            <h1 className={styles.heroTitle}>EloqKV Pricing</h1>
+            <h1 className={styles.heroTitle}>EloqCloud Pricing</h1>
             <p className={styles.heroSubtitle}>
-              Pricing plans that grow with you. From prototype to Enterprise.
+              The most cost effective DBaaS, from prototype to Enterprise.
             </p>
           </div>
         </div>
@@ -101,86 +107,62 @@ export default function Pricing() {
                   <ul className={styles.featureList}>
                     {plan.features.map((feature, index) => {
                       const tooltipId = `${key}-${index}`;
+
+                      // Determine if this feature has additional pricing info
+                      let additionalInfo = null;
+                      if (
+                        feature.toLowerCase().includes('compute hours') &&
+                        feature.toLowerCase() !== 'unlimited compute hours'
+                      ) {
+                        additionalInfo = 'then $0.14 per compute hour';
+                      } else if (
+                        feature.toLowerCase().includes('50 gb storage')
+                      ) {
+                        additionalInfo = 'then $0.1 per GB';
+                      } else if (
+                        feature.toLowerCase().includes('1 tb storage')
+                      ) {
+                        additionalInfo = 'then $0.1 per GB';
+                      } else if (
+                        feature.toLowerCase().includes('50 gb data transfer')
+                      ) {
+                        additionalInfo = 'then at cloud provider rates';
+                      }
+
+                      // Check if this feature is about compute hours (for tooltip)
+                      const isComputeHours = feature
+                        .toLowerCase()
+                        .includes('compute hours');
+
                       return (
                         <li key={index} className={styles.feature}>
-                          {feature}
-                          {feature.toLowerCase().includes('compute hours') &&
-                            feature.toLowerCase() !==
-                              'unlimited compute hours' && (
-                              <div className={styles.tooltipContainer}>
-                                <span
-                                  className={styles.infoIcon}
-                                  onMouseEnter={() => showTooltip(tooltipId)}
-                                  onMouseLeave={() => hideTooltip(tooltipId)}>
-                                  i
-                                </span>
-                                {tooltipVisible[tooltipId] && (
-                                  <div className={styles.tooltip}>
-                                    Additional at $0.15 per compute hour
-                                  </div>
-                                )}
+                          <div className={styles.featureContent}>
+                            <div className={styles.featureMainLine}>
+                              <span className={styles.featureText}>
+                                {feature}
+                              </span>
+                              {isComputeHours && (
+                                <div className={styles.tooltipContainer}>
+                                  <span
+                                    className={styles.infoIcon}
+                                    onMouseEnter={() => showTooltip(tooltipId)}
+                                    onMouseLeave={() => hideTooltip(tooltipId)}>
+                                    i
+                                  </span>
+                                  {tooltipVisible[tooltipId] && (
+                                    <div className={styles.tooltip}>
+                                      1 compute unit = 1 vCPU, 8 GB RAM
+                                    </div>
+                                  )}
+                                </div>
+                              )}
+                            </div>
+                            {additionalInfo && (
+                              <div className={styles.additionalPricing}>
+                                {additionalInfo}
                               </div>
                             )}
-                          {feature.toLowerCase().includes('50 gb storage') && (
-                            <div className={styles.tooltipContainer}>
-                              <span
-                                className={styles.infoIcon}
-                                onMouseEnter={() =>
-                                  showTooltip(`storage-${tooltipId}`)
-                                }
-                                onMouseLeave={() =>
-                                  hideTooltip(`storage-${tooltipId}`)
-                                }>
-                                i
-                              </span>
-                              {tooltipVisible[`storage-${tooltipId}`] && (
-                                <div className={styles.tooltip}>
-                                  Additional at $0.5 per GB
-                                </div>
-                              )}
-                            </div>
-                          )}
-                          {feature.toLowerCase().includes('1 tb storage') && (
-                            <div className={styles.tooltipContainer}>
-                              <span
-                                className={styles.infoIcon}
-                                onMouseEnter={() =>
-                                  showTooltip(`storage-${tooltipId}`)
-                                }
-                                onMouseLeave={() =>
-                                  hideTooltip(`storage-${tooltipId}`)
-                                }>
-                                i
-                              </span>
-                              {tooltipVisible[`storage-${tooltipId}`] && (
-                                <div className={styles.tooltip}>
-                                  Additional at $0.25 per GB
-                                </div>
-                              )}
-                            </div>
-                          )}
-                          {feature
-                            .toLowerCase()
-                            .includes('50 gb data transfer') && (
-                            <div className={styles.tooltipContainer}>
-                              <span
-                                className={styles.infoIcon}
-                                onMouseEnter={() =>
-                                  showTooltip(`storage-${tooltipId}`)
-                                }
-                                onMouseLeave={() =>
-                                  hideTooltip(`storage-${tooltipId}`)
-                                }>
-                                i
-                              </span>
-                              {tooltipVisible[`storage-${tooltipId}`] && (
-                                <div className={styles.tooltip}>
-                                  Additional usage charged at cloud provider’s
-                                  network rates.
-                                </div>
-                              )}
-                            </div>
-                          )}
+                          </div>
                         </li>
                       );
                     })}
@@ -188,8 +170,14 @@ export default function Pricing() {
                   <div className={styles.planFooter}>
                     {plan.name === 'Free' ? (
                       <Link
-                        to="https://www.eloqdata.com"
+                        to="https://cloud.eloqdata.com/login"
                         className={`button button--lg ${styles.planButton}`}>
+                        {plan.cta}
+                      </Link>
+                    ) : plan.name === 'Business' ? (
+                      <Link
+                        to={plan.ctaLink}
+                        className={`button button--lg ${styles.planButton} ${styles.businessButton}`}>
                         {plan.cta}
                       </Link>
                     ) : (
