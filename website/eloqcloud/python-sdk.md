@@ -1,6 +1,12 @@
 # Python SDK for Eloq
 
-> Welcome to the **Python SDK** for Eloq! This SDK provides integration with Eloq's cloud cluster platform for managing your cluster infrastructure programmatically.
+> On this page, you can learn about:
+>
+> 1. **Python SDK Overview** - Understand the SDK's functionality and purpose
+> 2. **Installation** - Quick setup of the eloq-sdk package
+> 3. **Basic Usage** - Learn how to create clients and basic configuration
+> 4. **API Methods Directory** - View all available organization and cluster management methods
+> 5. **Detailed Documentation Links** - Jump to complete API reference documentation
 
 ## About Python SDK for Eloq
 
@@ -54,10 +60,10 @@ For detailed function documentation with input/output specifications, see [**Pyt
 
 **Cluster Management:**
 
-- [`cluster()`](./pythondoc#clusterorg_id-int-project_id-int-cluster_name-str---descclusterdto)
-- [`clusters()`](./pythondoc#clustersorg_id-int-project_id-int--page-int--1-per_page-int--20---listclusterlistitem)
-- [`cluster_create()`](./pythondoc#cluster_createorg_id-int-project_id-int-json-dict---shelfresponse)
-- [`cluster_credentials()`](./pythondoc#cluster_credentialsorg_id-int-project_id-int-cluster_name-str---clustercredentials)
+- [`cluster()`](./pythondoc#clustercluster_name-str---descclusterdto)
+- [`clusters()`](./pythondoc#clusterspage-int--1-per_page-int--20---listclusterlistitem)
+- [`cluster_create()`](./pythondoc#cluster_createjson-dict---shelfresponse)
+- [`cluster_credentials()`](./pythondoc#cluster_credentialscluster_name-str---clustercredentials)
 
 ---
 

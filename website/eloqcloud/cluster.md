@@ -69,22 +69,6 @@ Redis-compatible key-value database clusters optimized for high-performance cach
 - **Features**: Sub-millisecond latency, high throughput, Redis API compatibility
 - **Scaling**: Horizontal scaling with automatic sharding
 
-### **EloqSQL Clusters**
-
-MySQL-compatible relational database clusters with advanced features and performance optimizations.
-
-- **Use Cases**: Transactional applications, data warehousing, business intelligence
-- **Features**: ACID compliance, complex queries, MySQL API compatibility
-- **Scaling**: Vertical and horizontal scaling options
-
-### **EloqDoc Clusters**
-
-MongoDB-compatible document database clusters for flexible schema and rapid development.
-
-- **Use Cases**: Content management, user profiles, IoT data
-- **Features**: Flexible schema, JSON documents, MongoDB API compatibility
-- **Scaling**: Horizontal scaling with automatic sharding
-
 ## Best Practices
 
 ### **Cluster Management**

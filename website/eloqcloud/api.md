@@ -1,6 +1,13 @@
 # Eloq API
 
-> Welcome to the Eloq API documentation! The Eloq API provides comprehensive programmatic access to Eloq's cloud platform, enabling you to manage organizations, projects, clusters, and resources through RESTful endpoints.
+> On this page, you can learn about:
+>
+> 1. **API Overview** - Understand the Eloq API's capabilities and architecture
+> 2. **Authentication** - Learn how to authenticate and secure your API requests
+> 3. **Base URL & Endpoints** - Access the API base URL and available endpoints
+> 4. **Request/Response Format** - Understand API request and response structures
+> 5. **Example Usage** - See practical examples of API calls with curl commands
+> 6. **SDK Integration** - Links to Python and TypeScript SDKs for easier development
 
 ## About Eloq API
 

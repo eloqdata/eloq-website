@@ -57,12 +57,6 @@ def get_organization_info():
         print(f"Created: {org_info.create_at}")
         print(f"Projects: {len(org_info.org_info.projects)}")
 
-        # List all projects
-        print("\n=== Projects ===")
-        for project in org_info.org_info.projects:
-            print(f"- {project.project_name} (ID: {project.project_id})")
-            print(f"  Created: {project.create_at}")
-
         return org_info
 
     except Exception as e:
@@ -85,23 +79,11 @@ def manage_clusters():
     client = EloqAPI.from_token("your_api_token")
 
     try:
-        # Step 1: Get organization information
-        org_info = client.org_info()
-        org_id = org_info.org_info.org_id
 
-        # Use the first project for this example
-        if not org_info.org_info.projects:
-            print("No projects found. Please create a project first.")
-            return
 
-        project = org_info.org_info.projects[0]
-        project_id = project.project_id
-
-        print(f"Working with project: {project.project_name} (ID: {project_id})")
-
-        # Step 2: List existing clusters
+        # Step 1 List existing clusters
         print("\n=== Listing Clusters ===")
-        clusters = client.clusters(org_id=org_id, project_id=project_id)
+        clusters = client.clusters()
         print(f"Found {len(clusters)} clusters:")
 
         for cluster in clusters:
@@ -111,7 +93,7 @@ def manage_clusters():
             print(f"  Region: {cluster.region}")
             print(f"  Created: {cluster.create_at}")
 
-        # Step 3: Create a new cluster (if less than 4 clusters)
+        # Step 2: Create a new cluster (if less than 4 clusters)
         if len(clusters) < 4:  # Free tier limit
             print(f"\n=== Creating New Cluster ===")
             cluster_name = f"demo-cluster-{len(clusters) + 1}"
@@ -142,13 +124,13 @@ def manage_clusters():
         else:
             print("\n⚠️  Free tier limit reached (4 clusters maximum)")
 
-        # Step 4: Get cluster connection credentials
+        # Step 3: Get cluster connection credentials
         if clusters:
             print(f"\n=== Getting Cluster Credentials ===")
             cluster_name = clusters[0].cluster_name
 
             try:
-                credentials = client.cluster_credentials(org_id, project_id, cluster_name)
+                credentials = client.cluster_credentials(cluster_name)
                 print(f"Cluster: {cluster_name}")
                 print(f"Host: {credentials.host}")
                 print(f"Port: {credentials.port}")
@@ -255,15 +237,12 @@ def batch_cluster_info():
 
     all_clusters = []
 
-    for project in org_info.org_info.projects:
-        clusters = client.clusters(org_info.org_info.org_id, project.project_id)
-        for cluster in clusters:
-            cluster_details = client.cluster(
-                org_info.org_info.org_id,
-                project.project_id,
+    clusters = client.clusters()
+    for cluster in clusters:
+        cluster_details = client.cluster(
                 cluster.cluster_name
             )
-            all_clusters.append({
+        all_clusters.append({
                 'project': project.project_name,
                 'cluster': cluster.cluster_name,
                 'status': cluster.status,
@@ -332,7 +311,7 @@ print(f"User: {org_info.user_name}")
 
 Get simplified organization information.
 
-This function calls the `org_info()` method and extracts only the basic organization details for simplified access.
+This function extracts only the basic organization details for simplified access.
 
 **Returns:** `SimpleOrgInfo` object containing basic organization information:
 
@@ -351,14 +330,12 @@ print(f"Created: {org.org_create_at}")
 
 ## Cluster Management
 
-### `clusters(org_id: int, project_id: int, *, page: int = 1, per_page: int = 20) -> List[ClusterListItem]`
+### `clusters(page: int = 1, per_page: int = 20) -> List[ClusterListItem]`
 
 Get a list of clusters in a project.
 
 **Parameters:**
 
-- `org_id` (int): Organization ID
-- `project_id` (int): Project ID
 - `page` (int, optional): Page number for pagination (default: 1)
 - `per_page` (int, optional): Items per page (default: 20)
 
@@ -381,14 +358,12 @@ for cluster in clusters:
     print(f"Cluster: {cluster.cluster_name}, Status: {cluster.status}")
 ```
 
-### `cluster(org_id: int, project_id: int, cluster_name: str) -> DescClusterDTO`
+### `cluster(cluster_name: str) -> DescClusterDTO`
 
 Get detailed information about a specific cluster.
 
 **Parameters:**
 
-- `org_id` (int): Organization ID
-- `project_id` (int): Project ID
 - `cluster_name` (str): Name of the cluster
 
 **Returns:** `DescClusterDTO` object with detailed cluster information including:
@@ -424,14 +399,12 @@ print(f"Cloud Provider: {cluster_details.cloud_provider}")
 print(f"Region: {cluster_details.region}")
 ```
 
-### `cluster_create(org_id: int, project_id: int, **json: dict) -> ShelfResponse`
+### `cluster_create(**json: dict) -> ShelfResponse`
 
 Create a new cluster in a project.
 
 **Parameters:**
 
-- `org_id` (int): Organization ID
-- `project_id` (int): Project ID
 - `cluster_name` (string): Name of the cluster
 - `region` (string): Cloud region
 - `requiredZone` (string): Cloud zone
@@ -464,16 +437,12 @@ response = client.cluster_create(
 print(f"Cluster created: {response.data.cluster_name}")
 ```
 
-### `cluster_credentials(org_id: int, project_id: int, cluster_name: str) -> ClusterCredentials`
+### `cluster_credentials(cluster_name: str) -> ClusterCredentials`
 
 Get cluster credentials (username and password) for database connection.
 
-This function calls the `cluster()` method and extracts the admin credentials for easy access to database connection information.
-
 **Parameters:**
 
-- `org_id` (int): Organization ID
-- `project_id` (int): Project ID
 - `cluster_name` (str): Name of the cluster
 
 **Returns:** `ClusterCredentials` object containing cluster credentials and connection info:
