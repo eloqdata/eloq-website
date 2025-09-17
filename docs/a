@@ -1,0 +1,222 @@
+jobs:
+- name: compile-and-regression-test
+  plan:
+  - in_parallel:
+      limit: 2
+      steps:
+      - get: mono_release_config
+      - get: mariadb_src
+      - get: mono_metrics_src
+      - get: mono_src
+      - get: build_base_ubuntu_2004
+      - get: regression_base_ubuntu_2004
+  - file: mono_release_config/concourse/tasks/compile_task.yml
+    image: build_base_ubuntu_2004
+    task: compile-task
+  - file: mono_release_config/concourse/tasks/regression_test_task.yml
+    image: regression_base_ubuntu_2004
+    on_success:
+      params:
+        file: release-output/monographdb-1.0.1-bin.tar.gz
+      put: s3_release_output
+    task: regression-test-task
+  serial: true
+resources:
+- name: build_base_ubuntu_2004
+  source:
+    password: Mono_cz158#
+    repository: monographdb/monograph-dev-ci-ubuntu2004
+    tag: latest
+    username: monographdb
+  type: registry-image
+- name: mariadb_src
+  source:
+    branch: monograph-10.6.10-monosql
+    private_key: |
+      -----BEGIN OPENSSH PRIVATE KEY-----
+      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
+      -----END OPENSSH PRIVATE KEY-----
+    uri: git@github.com:monographdb/mariadb.git
+  type: git
+- name: mono_metrics_src
+  source:
+    branch: main
+    private_key: |
+      -----BEGIN OPENSSH PRIVATE KEY-----
+      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
+      -----END OPENSSH PRIVATE KEY-----
+    uri: git@github.com:monographdb/mono-metrics-cpp.git
+  type: git
+- name: mono_release_config
+  source:
+    branch: mono-release-ci-monosql
+    private_key: |
+      -----BEGIN OPENSSH PRIVATE KEY-----
+      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
+      -----END OPENSSH PRIVATE KEY-----
+    uri: git@github.com:monographdb/toolsmith.git
+  type: git
+- name: mono_src
+  source:
+    branch: main
+    private_key: |
+      -----BEGIN OPENSSH PRIVATE KEY-----
+      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
+      -----END OPENSSH PRIVATE KEY-----
+    uri: git@github.com:monographdb/monosql.git
+  type: git
+- name: regression_base_ubuntu_2004
+  source:
+    password: CZ_xl123!
+    repository: nilnoterr/regression_ci
+    tag: v1
+    username: nilnoterr
+  type: registry-image
+- name: s3_release_output
+  source:
+    access_key_id: AKIA4DL5IV2R76SKJF67
+    bucket: monographdb-release
+    region_name: ap-northeast-1
+    secret_access_key: qW11GMZkxaNjCzhjbCu1MnAoGlCditY+k9TPX5xa
+    versioned_file: dynosql/monographdb-release-bin.tar.gz
+  type: s3

@@ -1,0 +1,2028 @@
+sysbench 1.0.20 (using bundled LuaJIT 2.1.0-beta2)
+
+Running the test with following options:
+Number of threads: 100
+Report intermediate results every 10 second(s)
+Initializing random number generator from current time
+
+
+Initializing worker threads...
+
+Threads started!
+
+[ 10s ] thds: 100 tps: 333898.44 qps: 333898.44 (r/w/o: 333898.44/0.00/0.00) lat (ms,95%): 0.42 err/s: 0.00 reconn/s: 0.00
+[ 20s ] thds: 100 tps: 332815.14 qps: 332815.14 (r/w/o: 332815.14/0.00/0.00) lat (ms,95%): 0.42 err/s: 0.00 reconn/s: 0.00
+[ 30s ] thds: 100 tps: 332827.02 qps: 332827.02 (r/w/o: 332827.02/0.00/0.00) lat (ms,95%): 0.42 err/s: 0.00 reconn/s: 0.00
+[ 40s ] thds: 100 tps: 331940.72 qps: 331940.72 (r/w/o: 331940.72/0.00/0.00) lat (ms,95%): 0.42 err/s: 0.00 reconn/s: 0.00
+[ 50s ] thds: 100 tps: 333462.91 qps: 333462.91 (r/w/o: 333462.91/0.00/0.00) lat (ms,95%): 0.42 err/s: 0.00 reconn/s: 0.00
+[ 60s ] thds: 100 tps: 332534.97 qps: 332534.97 (r/w/o: 332534.97/0.00/0.00) lat (ms,95%): 0.42 err/s: 0.00 reconn/s: 0.00
+[ 70s ] thds: 100 tps: 333638.32 qps: 333638.32 (r/w/o: 333638.32/0.00/0.00) lat (ms,95%): 0.42 err/s: 0.00 reconn/s: 0.00
+[ 80s ] thds: 100 tps: 331834.34 qps: 331834.34 (r/w/o: 331834.34/0.00/0.00) lat (ms,95%): 0.42 err/s: 0.00 reconn/s: 0.00
+[ 90s ] thds: 100 tps: 332952.13 qps: 332952.13 (r/w/o: 332952.13/0.00/0.00) lat (ms,95%): 0.42 err/s: 0.00 reconn/s: 0.00
+[ 100s ] thds: 100 tps: 334235.19 qps: 334235.19 (r/w/o: 334235.19/0.00/0.00) lat (ms,95%): 0.42 err/s: 0.00 reconn/s: 0.00
+[ 110s ] thds: 100 tps: 333983.77 qps: 333983.77 (r/w/o: 333983.77/0.00/0.00) lat (ms,95%): 0.42 err/s: 0.00 reconn/s: 0.00
+[ 120s ] thds: 100 tps: 332225.85 qps: 332225.85 (r/w/o: 332225.85/0.00/0.00) lat (ms,95%): 0.42 err/s: 0.00 reconn/s: 0.00
+SQL statistics:
+    queries performed:
+        read:                            39964184
+        write:                           0
+        other:                           0
+        total:                           39964184
+    transactions:                        39964184 (333012.20 per sec.)
+    queries:                             39964184 (333012.20 per sec.)
+    ignored errors:                      0      (0.00 per sec.)
+    reconnects:                          0      (0.00 per sec.)
+
+General statistics:
+    total time:                          120.0067s
+    total number of events:              39964184
+
+Latency (ms):
+         min:                                    0.09
+         avg:                                    0.30
+         max:                                   16.14
+         95th percentile:                        0.42
+         sum:                             11988405.75
+
+Threads fairness:
+    events (avg/stddev):           399641.8400/38760.86
+    execution time (avg/stddev):   119.8841/0.01
+
+sysbench 1.0.20 (using bundled LuaJIT 2.1.0-beta2)
+
+Running the test with following options:
+Number of threads: 200
+Report intermediate results every 10 second(s)
+Initializing random number generator from current time
+
+
+Initializing worker threads...
+
+Threads started!
+
+[ 10s ] thds: 200 tps: 533526.21 qps: 533526.21 (r/w/o: 533526.21/0.00/0.00) lat (ms,95%): 0.54 err/s: 0.00 reconn/s: 0.00
+[ 20s ] thds: 200 tps: 539449.55 qps: 539449.55 (r/w/o: 539449.55/0.00/0.00) lat (ms,95%): 0.54 err/s: 0.00 reconn/s: 0.00
+[ 30s ] thds: 200 tps: 538685.55 qps: 538685.55 (r/w/o: 538685.55/0.00/0.00) lat (ms,95%): 0.54 err/s: 0.00 reconn/s: 0.00
+[ 40s ] thds: 200 tps: 539299.23 qps: 539299.23 (r/w/o: 539299.23/0.00/0.00) lat (ms,95%): 0.54 err/s: 0.00 reconn/s: 0.00
+[ 50s ] thds: 200 tps: 535260.37 qps: 535260.37 (r/w/o: 535260.37/0.00/0.00) lat (ms,95%): 0.54 err/s: 0.00 reconn/s: 0.00
+[ 60s ] thds: 200 tps: 537795.32 qps: 537795.32 (r/w/o: 537795.32/0.00/0.00) lat (ms,95%): 0.54 err/s: 0.00 reconn/s: 0.00
+[ 70s ] thds: 200 tps: 537642.34 qps: 537642.34 (r/w/o: 537642.34/0.00/0.00) lat (ms,95%): 0.54 err/s: 0.00 reconn/s: 0.00
+[ 80s ] thds: 200 tps: 537629.37 qps: 537629.37 (r/w/o: 537629.37/0.00/0.00) lat (ms,95%): 0.54 err/s: 0.00 reconn/s: 0.00
+[ 90s ] thds: 200 tps: 535269.34 qps: 535269.34 (r/w/o: 535269.34/0.00/0.00) lat (ms,95%): 0.54 err/s: 0.00 reconn/s: 0.00
+[ 100s ] thds: 200 tps: 541012.11 qps: 541012.11 (r/w/o: 541012.11/0.00/0.00) lat (ms,95%): 0.53 err/s: 0.00 reconn/s: 0.00
+[ 110s ] thds: 200 tps: 536279.93 qps: 536279.83 (r/w/o: 536279.83/0.00/0.00) lat (ms,95%): 0.54 err/s: 0.00 reconn/s: 0.00
+[ 120s ] thds: 200 tps: 539036.04 qps: 539036.14 (r/w/o: 539036.14/0.00/0.00) lat (ms,95%): 0.54 err/s: 0.00 reconn/s: 0.00
+SQL statistics:
+    queries performed:
+        read:                            64510636
+        write:                           0
+        other:                           0
+        total:                           64510636
+    transactions:                        64510636 (537523.82 per sec.)
+    queries:                             64510636 (537523.82 per sec.)
+    ignored errors:                      0      (0.00 per sec.)
+    reconnects:                          0      (0.00 per sec.)
+
+General statistics:
+    total time:                          120.0130s
+    total number of events:              64510636
+
+Latency (ms):
+         min:                                    0.08
+         avg:                                    0.37
+         max:                                   15.02
+         95th percentile:                        0.54
+         sum:                             23981757.68
+
+Threads fairness:
+    events (avg/stddev):           322553.1800/23434.80
+    execution time (avg/stddev):   119.9088/0.01
+
+sysbench 1.0.20 (using bundled LuaJIT 2.1.0-beta2)
+
+Running the test with following options:
+Number of threads: 500
+Report intermediate results every 10 second(s)
+Initializing random number generator from current time
+
+
+Initializing worker threads...
+
+Threads started!
+
+[ 10s ] thds: 500 tps: 758274.27 qps: 758274.27 (r/w/o: 758274.27/0.00/0.00) lat (ms,95%): 1.04 err/s: 0.00 reconn/s: 0.00
+[ 20s ] thds: 500 tps: 765965.11 qps: 765965.11 (r/w/o: 765965.11/0.00/0.00) lat (ms,95%): 1.03 err/s: 0.00 reconn/s: 0.00
+[ 30s ] thds: 500 tps: 756250.67 qps: 756250.37 (r/w/o: 756250.37/0.00/0.00) lat (ms,95%): 1.06 err/s: 0.00 reconn/s: 0.00
+[ 40s ] thds: 500 tps: 764457.49 qps: 764457.79 (r/w/o: 764457.79/0.00/0.00) lat (ms,95%): 1.04 err/s: 0.00 reconn/s: 0.00
+[ 50s ] thds: 500 tps: 765198.62 qps: 765198.42 (r/w/o: 765198.42/0.00/0.00) lat (ms,95%): 1.04 err/s: 0.00 reconn/s: 0.00
+[ 60s ] thds: 500 tps: 770378.35 qps: 770378.55 (r/w/o: 770378.55/0.00/0.00) lat (ms,95%): 1.03 err/s: 0.00 reconn/s: 0.00
+[ 70s ] thds: 500 tps: 763445.00 qps: 763445.00 (r/w/o: 763445.00/0.00/0.00) lat (ms,95%): 1.04 err/s: 0.00 reconn/s: 0.00
+[ 80s ] thds: 500 tps: 762055.14 qps: 762055.04 (r/w/o: 762055.04/0.00/0.00) lat (ms,95%): 1.06 err/s: 0.00 reconn/s: 0.00
+[ 90s ] thds: 500 tps: 765578.94 qps: 765578.94 (r/w/o: 765578.94/0.00/0.00) lat (ms,95%): 1.04 err/s: 0.00 reconn/s: 0.00
+[ 100s ] thds: 500 tps: 760496.51 qps: 760496.51 (r/w/o: 760496.51/0.00/0.00) lat (ms,95%): 1.04 err/s: 0.00 reconn/s: 0.00
+[ 110s ] thds: 500 tps: 763784.32 qps: 763784.42 (r/w/o: 763784.42/0.00/0.00) lat (ms,95%): 1.06 err/s: 0.00 reconn/s: 0.00
+[ 120s ] thds: 500 tps: 759161.83 qps: 759161.83 (r/w/o: 759161.83/0.00/0.00) lat (ms,95%): 1.04 err/s: 0.00 reconn/s: 0.00
+SQL statistics:
+    queries performed:
+        read:                            91552270
+        write:                           0
+        other:                           0
+        total:                           91552270
+    transactions:                        91552270 (762697.64 per sec.)
+    queries:                             91552270 (762697.64 per sec.)
+    ignored errors:                      0      (0.00 per sec.)
+    reconnects:                          0      (0.00 per sec.)
+
+General statistics:
+    total time:                          120.0359s
+    total number of events:              91552270
+
+Latency (ms):
+         min:                                    0.09
+         avg:                                    0.65
+         max:                                   26.67
+         95th percentile:                        1.04
+         sum:                             59964470.36
+
+Threads fairness:
+    events (avg/stddev):           183104.5400/6446.81
+    execution time (avg/stddev):   119.9289/0.01
+
+sysbench 1.0.20 (using bundled LuaJIT 2.1.0-beta2)
+
+Running the test with following options:
+Number of threads: 1000
+Report intermediate results every 10 second(s)
+Initializing random number generator from current time
+
+
+Initializing worker threads...
+
+Threads started!
+
+[ 10s ] thds: 1000 tps: 833915.20 qps: 833914.80 (r/w/o: 833914.80/0.00/0.00) lat (ms,95%): 2.11 err/s: 0.00 reconn/s: 0.00
+[ 20s ] thds: 1000 tps: 829660.55 qps: 829660.55 (r/w/o: 829660.55/0.00/0.00) lat (ms,95%): 2.03 err/s: 0.00 reconn/s: 0.00
+[ 30s ] thds: 1000 tps: 828643.29 qps: 828643.49 (r/w/o: 828643.49/0.00/0.00) lat (ms,95%): 2.11 err/s: 0.00 reconn/s: 0.00
+[ 40s ] thds: 1000 tps: 826403.28 qps: 826402.68 (r/w/o: 826402.68/0.00/0.00) lat (ms,95%): 2.18 err/s: 0.00 reconn/s: 0.00
+[ 50s ] thds: 1000 tps: 824417.27 qps: 824417.87 (r/w/o: 824417.87/0.00/0.00) lat (ms,95%): 2.11 err/s: 0.00 reconn/s: 0.00
+[ 60s ] thds: 1000 tps: 828791.21 qps: 828790.71 (r/w/o: 828790.71/0.00/0.00) lat (ms,95%): 2.07 err/s: 0.00 reconn/s: 0.00
+[ 70s ] thds: 1000 tps: 826197.14 qps: 826197.44 (r/w/o: 826197.44/0.00/0.00) lat (ms,95%): 2.07 err/s: 0.00 reconn/s: 0.00
+[ 80s ] thds: 1000 tps: 825361.64 qps: 825361.54 (r/w/o: 825361.54/0.00/0.00) lat (ms,95%): 2.11 err/s: 0.00 reconn/s: 0.00
+[ 90s ] thds: 1000 tps: 810855.73 qps: 810856.13 (r/w/o: 810856.13/0.00/0.00) lat (ms,95%): 2.26 err/s: 0.00 reconn/s: 0.00
+[ 100s ] thds: 1000 tps: 820193.94 qps: 820193.74 (r/w/o: 820193.74/0.00/0.00) lat (ms,95%): 2.14 err/s: 0.00 reconn/s: 0.00
+[ 110s ] thds: 1000 tps: 826710.48 qps: 826710.48 (r/w/o: 826710.48/0.00/0.00) lat (ms,95%): 2.11 err/s: 0.00 reconn/s: 0.00
+[ 120s ] thds: 1000 tps: 833573.36 qps: 833573.66 (r/w/o: 833573.66/0.00/0.00) lat (ms,95%): 2.03 err/s: 0.00 reconn/s: 0.00
+SQL statistics:
+    queries performed:
+        read:                            99149749
+        write:                           0
+        other:                           0
+        total:                           99149749
+    transactions:                        99149749 (825721.28 per sec.)
+    queries:                             99149749 (825721.28 per sec.)
+    ignored errors:                      0      (0.00 per sec.)
+    reconnects:                          0      (0.00 per sec.)
+
+General statistics:
+    total time:                          120.0750s
+    total number of events:              99149749
+
+Latency (ms):
+         min:                                    0.08
+         avg:                                    1.21
+         max:                                   62.74
+         95th percentile:                        2.11
+         sum:                            119935292.49
+
+Threads fairness:
+    events (avg/stddev):           99149.7490/3170.49
+    execution time (avg/stddev):   119.9353/0.03
+
+sysbench 1.0.20 (using bundled LuaJIT 2.1.0-beta2)
+
+Running the test with following options:
+Number of threads: 2000
+Report intermediate results every 10 second(s)
+Initializing random number generator from current time
+
+
+Initializing worker threads...
+
+Threads started!
+
+[ 10s ] thds: 2000 tps: 780083.85 qps: 780083.25 (r/w/o: 780083.25/0.00/0.00) lat (ms,95%): 4.74 err/s: 0.00 reconn/s: 0.00
+[ 20s ] thds: 2000 tps: 746946.51 qps: 746946.21 (r/w/o: 746946.21/0.00/0.00) lat (ms,95%): 3.96 err/s: 0.00 reconn/s: 0.00
+[ 30s ] thds: 2000 tps: 741976.84 qps: 741977.14 (r/w/o: 741977.14/0.00/0.00) lat (ms,95%): 3.89 err/s: 0.00 reconn/s: 0.00
+[ 40s ] thds: 2000 tps: 741552.00 qps: 741551.70 (r/w/o: 741551.70/0.00/0.00) lat (ms,95%): 3.89 err/s: 0.00 reconn/s: 0.00
+[ 50s ] thds: 2000 tps: 739974.92 qps: 739975.42 (r/w/o: 739975.42/0.00/0.00) lat (ms,95%): 4.25 err/s: 0.00 reconn/s: 0.00
+[ 60s ] thds: 2000 tps: 741359.31 qps: 741358.91 (r/w/o: 741358.91/0.00/0.00) lat (ms,95%): 4.03 err/s: 0.00 reconn/s: 0.00
+[ 70s ] thds: 2000 tps: 739764.38 qps: 739764.58 (r/w/o: 739764.58/0.00/0.00) lat (ms,95%): 3.68 err/s: 0.00 reconn/s: 0.00
+[ 80s ] thds: 2000 tps: 740900.53 qps: 740900.53 (r/w/o: 740900.53/0.00/0.00) lat (ms,95%): 3.82 err/s: 0.00 reconn/s: 0.00
+[ 90s ] thds: 2000 tps: 741547.13 qps: 741546.83 (r/w/o: 741546.83/0.00/0.00) lat (ms,95%): 3.75 err/s: 0.00 reconn/s: 0.00
+[ 100s ] thds: 2000 tps: 741520.67 qps: 741520.77 (r/w/o: 741520.77/0.00/0.00) lat (ms,95%): 3.96 err/s: 0.00 reconn/s: 0.00
+[ 110s ] thds: 2000 tps: 742564.08 qps: 742563.98 (r/w/o: 742563.98/0.00/0.00) lat (ms,95%): 3.96 err/s: 0.00 reconn/s: 0.00
+[ 120s ] thds: 2000 tps: 742944.16 qps: 742944.96 (r/w/o: 742944.96/0.00/0.00) lat (ms,95%): 4.10 err/s: 0.00 reconn/s: 0.00
+SQL statistics:
+    queries performed:
+        read:                            89414701
+        write:                           0
+        other:                           0
+        total:                           89414701
+    transactions:                        89414701 (744121.28 per sec.)
+    queries:                             89414701 (744121.28 per sec.)
+    ignored errors:                      0      (0.00 per sec.)
+    reconnects:                          0      (0.00 per sec.)
+
+General statistics:
+    total time:                          120.1600s
+    total number of events:              89414701
+
+Latency (ms):
+         min:                                    0.08
+         avg:                                    2.68
+         max:                                  110.38
+         95th percentile:                        4.03
+         sum:                            239894738.36
+
+Threads fairness:
+    events (avg/stddev):           44707.3505/844.15
+    execution time (avg/stddev):   119.9474/0.03
+
+sysbench 1.0.20 (using bundled LuaJIT 2.1.0-beta2)
+
+Running the test with following options:
+Number of threads: 100
+Report intermediate results every 10 second(s)
+Initializing random number generator from current time
+
+
+Initializing worker threads...
+
+Threads started!
+
+[ 10s ] thds: 100 tps: 9418.00 qps: 56639.28 (r/w/o: 0.00/37751.29/18887.99) lat (ms,95%): 21.89 err/s: 41.99 reconn/s: 0.00
+[ 20s ] thds: 100 tps: 1800.60 qps: 10819.88 (r/w/o: 0.00/7209.89/3609.99) lat (ms,95%): 303.33 err/s: 8.80 reconn/s: 0.00
+[ 30s ] thds: 100 tps: 8538.03 qps: 51319.48 (r/w/o: 0.00/34200.42/17119.06) lat (ms,95%): 27.17 err/s: 43.00 reconn/s: 0.00
+[ 40s ] thds: 100 tps: 13239.64 qps: 79581.66 (r/w/o: 0.00/53036.97/26544.69) lat (ms,95%): 12.30 err/s: 65.40 reconn/s: 0.00
+[ 50s ] thds: 100 tps: 13763.07 qps: 82740.32 (r/w/o: 0.00/55137.88/27602.44) lat (ms,95%): 11.87 err/s: 76.60 reconn/s: 0.00
+[ 60s ] thds: 100 tps: 13637.93 qps: 81973.29 (r/w/o: 0.00/54626.03/27347.26) lat (ms,95%): 12.08 err/s: 71.20 reconn/s: 0.00
+[ 70s ] thds: 100 tps: 13581.36 qps: 81634.76 (r/w/o: 0.00/54401.34/27233.42) lat (ms,95%): 12.08 err/s: 70.60 reconn/s: 0.00
+[ 80s ] thds: 100 tps: 13523.81 qps: 81287.54 (r/w/o: 0.00/54171.03/27116.51) lat (ms,95%): 12.30 err/s: 68.90 reconn/s: 0.00
+[ 90s ] thds: 100 tps: 13401.81 qps: 80552.53 (r/w/o: 0.00/53682.02/26870.51) lat (ms,95%): 12.30 err/s: 67.70 reconn/s: 0.00
+[ 100s ] thds: 100 tps: 13619.46 qps: 81843.75 (r/w/o: 0.00/54535.83/27307.92) lat (ms,95%): 12.30 err/s: 68.20 reconn/s: 0.00
+[ 110s ] thds: 100 tps: 13681.09 qps: 82250.97 (r/w/o: 0.00/54818.08/27432.89) lat (ms,95%): 12.08 err/s: 70.70 reconn/s: 0.00
+[ 120s ] thds: 100 tps: 12609.29 qps: 75788.75 (r/w/o: 0.00/50508.76/25279.98) lat (ms,95%): 12.75 err/s: 61.40 reconn/s: 0.00
+SQL statistics:
+    queries performed:
+        read:                            0
+        write:                           5640859
+        other:                           2823655
+        total:                           8464514
+    transactions:                        1408255 (11734.15 per sec.)
+    queries:                             8464514 (70529.74 per sec.)
+    ignored errors:                      7145   (59.54 per sec.)
+    reconnects:                          0      (0.00 per sec.)
+
+General statistics:
+    total time:                          120.0119s
+    total number of events:              1408255
+
+Latency (ms):
+         min:                                    2.63
+         avg:                                    8.52
+         max:                                 4994.25
+         95th percentile:                       12.98
+         sum:                             11998959.12
+
+Threads fairness:
+    events (avg/stddev):           14082.5500/517.09
+    execution time (avg/stddev):   119.9896/0.00
+
+sysbench 1.0.20 (using bundled LuaJIT 2.1.0-beta2)
+
+Running the test with following options:
+Number of threads: 200
+Report intermediate results every 10 second(s)
+Initializing random number generator from current time
+
+
+Initializing worker threads...
+
+Threads started!
+
+[ 10s ] thds: 200 tps: 20480.01 qps: 123384.45 (r/w/o: 0.00/82194.28/41190.17) lat (ms,95%): 15.83 err/s: 211.06 reconn/s: 0.00
+[ 20s ] thds: 200 tps: 20103.39 qps: 121074.02 (r/w/o: 0.00/80652.34/40421.67) lat (ms,95%): 15.83 err/s: 214.10 reconn/s: 0.00
+[ 30s ] thds: 200 tps: 20537.56 qps: 123669.66 (r/w/o: 0.00/82384.94/41284.72) lat (ms,95%): 15.55 err/s: 209.50 reconn/s: 0.00
+[ 40s ] thds: 200 tps: 21178.49 qps: 127528.33 (r/w/o: 0.00/84953.76/42574.58) lat (ms,95%): 15.55 err/s: 217.60 reconn/s: 0.00
+[ 50s ] thds: 200 tps: 20989.56 qps: 126393.37 (r/w/o: 0.00/84192.05/42201.32) lat (ms,95%): 15.27 err/s: 222.20 reconn/s: 0.00
+[ 60s ] thds: 200 tps: 21338.88 qps: 128486.97 (r/w/o: 0.00/85586.41/42900.56) lat (ms,95%): 14.73 err/s: 223.20 reconn/s: 0.00
+[ 70s ] thds: 200 tps: 20925.66 qps: 126000.43 (r/w/o: 0.00/83932.62/42067.81) lat (ms,95%): 14.73 err/s: 216.20 reconn/s: 0.00
+[ 80s ] thds: 200 tps: 20729.36 qps: 124806.36 (r/w/o: 0.00/83135.74/41670.62) lat (ms,95%): 15.55 err/s: 211.90 reconn/s: 0.00
+[ 90s ] thds: 200 tps: 20883.00 qps: 125761.70 (r/w/o: 0.00/83779.80/41981.90) lat (ms,95%): 15.27 err/s: 215.80 reconn/s: 0.00
+[ 100s ] thds: 200 tps: 20485.95 qps: 123338.91 (r/w/o: 0.00/82159.10/41179.80) lat (ms,95%): 15.83 err/s: 207.90 reconn/s: 0.00
+[ 110s ] thds: 200 tps: 19572.18 qps: 117839.40 (r/w/o: 0.00/78494.04/39345.37) lat (ms,95%): 15.83 err/s: 201.00 reconn/s: 0.00
+[ 120s ] thds: 200 tps: 20987.09 qps: 126400.26 (r/w/o: 0.00/84199.97/42200.28) lat (ms,95%): 15.00 err/s: 226.10 reconn/s: 0.00
+SQL statistics:
+    queries performed:
+        read:                            0
+        write:                           9956830
+        other:                           4990462
+        total:                           14947292
+    transactions:                        2482348 (20682.31 per sec.)
+    queries:                             14947292 (124537.13 per sec.)
+    ignored errors:                      25766  (214.68 per sec.)
+    reconnects:                          0      (0.00 per sec.)
+
+General statistics:
+    total time:                          120.0213s
+    total number of events:              2482348
+
+Latency (ms):
+         min:                                    2.71
+         avg:                                    9.67
+         max:                                  347.97
+         95th percentile:                       15.55
+         sum:                             23998107.88
+
+Threads fairness:
+    events (avg/stddev):           12411.7400/401.97
+    execution time (avg/stddev):   119.9905/0.00
+
+sysbench 1.0.20 (using bundled LuaJIT 2.1.0-beta2)
+
+Running the test with following options:
+Number of threads: 500
+Report intermediate results every 10 second(s)
+Initializing random number generator from current time
+
+
+Initializing worker threads...
+
+Threads started!
+
+[ 10s ] thds: 500 tps: 30221.26 qps: 183206.50 (r/w/o: 0.00/121904.35/61302.16) lat (ms,95%): 24.83 err/s: 811.05 reconn/s: 0.00
+[ 20s ] thds: 500 tps: 30088.26 qps: 182159.56 (r/w/o: 0.00/121171.64/60987.92) lat (ms,95%): 26.68 err/s: 812.60 reconn/s: 0.00
+[ 30s ] thds: 500 tps: 29977.41 qps: 181519.59 (r/w/o: 0.00/120752.25/60767.33) lat (ms,95%): 27.17 err/s: 809.92 reconn/s: 0.00
+[ 40s ] thds: 500 tps: 28639.86 qps: 173462.32 (r/w/o: 0.00/115410.12/58052.20) lat (ms,95%): 27.66 err/s: 772.49 reconn/s: 0.00
+[ 50s ] thds: 500 tps: 29397.32 qps: 177978.66 (r/w/o: 0.00/118403.50/59575.16) lat (ms,95%): 27.17 err/s: 780.52 reconn/s: 0.00
+[ 60s ] thds: 500 tps: 28910.03 qps: 175057.86 (r/w/o: 0.00/116446.61/58611.25) lat (ms,95%): 27.17 err/s: 791.20 reconn/s: 0.00
+[ 70s ] thds: 500 tps: 30790.16 qps: 186450.14 (r/w/o: 0.00/124032.73/62417.41) lat (ms,95%): 23.52 err/s: 838.89 reconn/s: 0.00
+[ 80s ] thds: 500 tps: 29304.46 qps: 177474.20 (r/w/o: 0.00/118065.16/59409.04) lat (ms,95%): 27.17 err/s: 798.32 reconn/s: 0.00
+[ 90s ] thds: 500 tps: 29670.20 qps: 179639.48 (r/w/o: 0.00/119488.79/60150.69) lat (ms,95%): 28.16 err/s: 810.29 reconn/s: 0.00
+[ 100s ] thds: 500 tps: 29334.95 qps: 177658.50 (r/w/o: 0.00/118194.90/59463.60) lat (ms,95%): 28.16 err/s: 793.69 reconn/s: 0.00
+[ 110s ] thds: 500 tps: 29036.17 qps: 175790.95 (r/w/o: 0.00/116943.39/58847.55) lat (ms,95%): 27.66 err/s: 775.21 reconn/s: 0.00
+[ 120s ] thds: 500 tps: 30536.76 qps: 184868.04 (r/w/o: 0.00/122962.73/61905.31) lat (ms,95%): 25.74 err/s: 831.80 reconn/s: 0.00
+SQL statistics:
+    queries performed:
+        read:                            0
+        write:                           14338368
+        other:                           7215495
+        total:                           21553863
+    transactions:                        3559615 (29648.57 per sec.)
+    queries:                             21553863 (179525.37 per sec.)
+    ignored errors:                      96265  (801.81 per sec.)
+    reconnects:                          0      (0.00 per sec.)
+
+General statistics:
+    total time:                          120.0588s
+    total number of events:              3559615
+
+Latency (ms):
+         min:                                    2.85
+         avg:                                   16.86
+         max:                                  404.36
+         95th percentile:                       26.68
+         sum:                             59998485.50
+
+Threads fairness:
+    events (avg/stddev):           7119.2300/230.14
+    execution time (avg/stddev):   119.9970/0.00
+
+sysbench 1.0.20 (using bundled LuaJIT 2.1.0-beta2)
+
+Running the test with following options:
+Number of threads: 1000
+Report intermediate results every 10 second(s)
+Initializing random number generator from current time
+
+
+Initializing worker threads...
+
+Threads started!
+
+[ 10s ] thds: 1000 tps: 36736.09 qps: 225032.46 (r/w/o: 0.00/149405.90/75626.56) lat (ms,95%): 43.39 err/s: 2054.40 reconn/s: 0.00
+[ 20s ] thds: 1000 tps: 36904.80 qps: 225648.20 (r/w/o: 0.00/149748.30/75899.90) lat (ms,95%): 42.61 err/s: 2090.29 reconn/s: 0.00
+[ 30s ] thds: 1000 tps: 35500.85 qps: 217030.92 (r/w/o: 0.00/144021.86/73009.06) lat (ms,95%): 46.63 err/s: 2007.37 reconn/s: 0.00
+[ 40s ] thds: 1000 tps: 35620.90 qps: 217812.10 (r/w/o: 0.00/144524.45/73287.65) lat (ms,95%): 44.98 err/s: 2048.05 reconn/s: 0.00
+[ 50s ] thds: 1000 tps: 35796.55 qps: 218884.61 (r/w/o: 0.00/145257.40/73627.21) lat (ms,95%): 46.63 err/s: 2034.01 reconn/s: 0.00
+[ 60s ] thds: 1000 tps: 35773.79 qps: 218774.38 (r/w/o: 0.00/145172.38/73602.00) lat (ms,95%): 50.11 err/s: 2052.63 reconn/s: 0.00
+[ 70s ] thds: 1000 tps: 37737.74 qps: 230805.13 (r/w/o: 0.00/153155.36/77649.77) lat (ms,95%): 38.94 err/s: 2175.98 reconn/s: 0.00
+[ 80s ] thds: 1000 tps: 36681.55 qps: 224195.41 (r/w/o: 0.00/148753.80/75441.61) lat (ms,95%): 49.21 err/s: 2081.81 reconn/s: 0.00
+[ 90s ] thds: 1000 tps: 36043.23 qps: 220503.76 (r/w/o: 0.00/146360.51/74143.25) lat (ms,95%): 46.63 err/s: 2051.50 reconn/s: 0.00
+[ 100s ] thds: 1000 tps: 35159.18 qps: 214958.74 (r/w/o: 0.00/142624.00/72334.74) lat (ms,95%): 51.94 err/s: 2019.68 reconn/s: 0.00
+[ 110s ] thds: 1000 tps: 34175.03 qps: 209040.87 (r/w/o: 0.00/138725.67/70315.20) lat (ms,95%): 44.98 err/s: 1962.24 reconn/s: 0.00
+[ 120s ] thds: 1000 tps: 36289.13 qps: 221838.70 (r/w/o: 0.00/147196.58/74642.12) lat (ms,95%): 45.79 err/s: 2065.36 reconn/s: 0.00
+SQL statistics:
+    queries performed:
+        read:                            0
+        write:                           17550329
+        other:                           8896945
+        total:                           26447274
+    transactions:                        4325252 (36006.67 per sec.)
+    queries:                             26447274 (220167.13 per sec.)
+    ignored errors:                      246441 (2051.56 per sec.)
+    reconnects:                          0      (0.00 per sec.)
+
+General statistics:
+    total time:                          120.1221s
+    total number of events:              4325252
+
+Latency (ms):
+         min:                                    2.92
+         avg:                                   27.75
+         max:                                  513.14
+         95th percentile:                       45.79
+         sum:                            120005577.40
+
+Threads fairness:
+    events (avg/stddev):           4325.2520/146.65
+    execution time (avg/stddev):   120.0056/0.01
+
+sysbench 1.0.20 (using bundled LuaJIT 2.1.0-beta2)
+
+Running the test with following options:
+Number of threads: 2000
+Report intermediate results every 10 second(s)
+Initializing random number generator from current time
+
+
+Initializing worker threads...
+
+Threads started!
+
+[ 10s ] thds: 2000 tps: 38194.34 qps: 239429.87 (r/w/o: 0.00/158155.68/81274.19) lat (ms,95%): 161.51 err/s: 4685.54 reconn/s: 0.00
+[ 20s ] thds: 2000 tps: 37882.85 qps: 236644.28 (r/w/o: 0.00/156134.04/80510.24) lat (ms,95%): 158.63 err/s: 4744.54 reconn/s: 0.00
+[ 30s ] thds: 2000 tps: 39418.79 qps: 246340.91 (r/w/o: 0.00/162574.59/83766.32) lat (ms,95%): 134.90 err/s: 4931.85 reconn/s: 0.00
+[ 40s ] thds: 2000 tps: 37922.63 qps: 236825.85 (r/w/o: 0.00/156270.76/80555.09) lat (ms,95%): 173.58 err/s: 4708.53 reconn/s: 0.00
+[ 50s ] thds: 2000 tps: 39620.12 qps: 247386.63 (r/w/o: 0.00/163350.29/84036.34) lat (ms,95%): 161.51 err/s: 4794.30 reconn/s: 0.00
+[ 60s ] thds: 2000 tps: 37323.13 qps: 232942.11 (r/w/o: 0.00/153774.04/79168.07) lat (ms,95%): 196.89 err/s: 4521.80 reconn/s: 0.00
+[ 70s ] thds: 2000 tps: 40429.23 qps: 252368.64 (r/w/o: 0.00/166537.55/85831.09) lat (ms,95%): 134.90 err/s: 4975.44 reconn/s: 0.00
+[ 80s ] thds: 2000 tps: 38873.72 qps: 242645.92 (r/w/o: 0.00/160173.08/82472.84) lat (ms,95%): 142.39 err/s: 4726.10 reconn/s: 0.00
+[ 90s ] thds: 2000 tps: 39706.86 qps: 247843.46 (r/w/o: 0.00/163598.09/84245.37) lat (ms,95%): 127.81 err/s: 4829.84 reconn/s: 0.00
+[ 100s ] thds: 2000 tps: 37320.37 qps: 233008.20 (r/w/o: 0.00/153819.97/79188.23) lat (ms,95%): 186.54 err/s: 4545.78 reconn/s: 0.00
+[ 110s ] thds: 2000 tps: 37703.52 qps: 235158.87 (r/w/o: 0.00/155215.21/79943.66) lat (ms,95%): 161.51 err/s: 4536.61 reconn/s: 0.00
+[ 120s ] thds: 2000 tps: 37824.31 qps: 236118.79 (r/w/o: 0.00/155863.61/80255.18) lat (ms,95%): 153.02 err/s: 4608.86 reconn/s: 0.00
+SQL statistics:
+    queries performed:
+        read:                            0
+        write:                           19055498
+        other:                           9814641
+        total:                           28870139
+    transactions:                        4624264 (38456.85 per sec.)
+    queries:                             28870139 (240093.26 per sec.)
+    ignored errors:                      566113 (4707.98 per sec.)
+    reconnects:                          0      (0.00 per sec.)
+
+General statistics:
+    total time:                          120.2440s
+    total number of events:              4624264
+
+Latency (ms):
+         min:                                    3.38
+         avg:                                   51.90
+         max:                                  640.19
+         95th percentile:                      155.80
+         sum:                            240000348.38
+
+Threads fairness:
+    events (avg/stddev):           2312.1320/75.89
+    execution time (avg/stddev):   120.0002/0.01
+
+sysbench 1.0.20 (using bundled LuaJIT 2.1.0-beta2)
+
+Running the test with following options:
+Number of threads: 100
+Report intermediate results every 10 second(s)
+Initializing random number generator from current time
+
+
+Initializing worker threads...
+
+Threads started!
+
+[ 10s ] thds: 100 tps: 21019.79 qps: 21019.79 (r/w/o: 0.00/21019.79/0.00) lat (ms,95%): 8.43 err/s: 12.20 reconn/s: 0.00
+[ 20s ] thds: 100 tps: 21300.45 qps: 21300.45 (r/w/o: 0.00/21300.45/0.00) lat (ms,95%): 8.43 err/s: 12.20 reconn/s: 0.00
+[ 30s ] thds: 100 tps: 21640.81 qps: 21640.81 (r/w/o: 0.00/21640.81/0.00) lat (ms,95%): 8.28 err/s: 11.80 reconn/s: 0.00
+[ 40s ] thds: 100 tps: 21571.46 qps: 21571.46 (r/w/o: 0.00/21571.46/0.00) lat (ms,95%): 8.28 err/s: 10.60 reconn/s: 0.00
+[ 50s ] thds: 100 tps: 21640.11 qps: 21640.11 (r/w/o: 0.00/21640.11/0.00) lat (ms,95%): 8.28 err/s: 10.80 reconn/s: 0.00
+[ 60s ] thds: 100 tps: 21622.63 qps: 21622.63 (r/w/o: 0.00/21622.63/0.00) lat (ms,95%): 8.28 err/s: 13.70 reconn/s: 0.00
+[ 70s ] thds: 100 tps: 21588.97 qps: 21588.97 (r/w/o: 0.00/21588.97/0.00) lat (ms,95%): 8.28 err/s: 10.60 reconn/s: 0.00
+[ 80s ] thds: 100 tps: 21047.58 qps: 21047.58 (r/w/o: 0.00/21047.58/0.00) lat (ms,95%): 8.58 err/s: 11.20 reconn/s: 0.00
+[ 90s ] thds: 100 tps: 20940.31 qps: 20940.31 (r/w/o: 0.00/20940.31/0.00) lat (ms,95%): 8.58 err/s: 11.50 reconn/s: 0.00
+[ 100s ] thds: 100 tps: 21281.16 qps: 21281.16 (r/w/o: 0.00/21281.16/0.00) lat (ms,95%): 8.43 err/s: 11.40 reconn/s: 0.00
+[ 110s ] thds: 100 tps: 21285.78 qps: 21285.78 (r/w/o: 0.00/21285.78/0.00) lat (ms,95%): 8.28 err/s: 14.70 reconn/s: 0.00
+[ 120s ] thds: 100 tps: 21657.99 qps: 21657.99 (r/w/o: 0.00/21657.99/0.00) lat (ms,95%): 8.13 err/s: 11.90 reconn/s: 0.00
+SQL statistics:
+    queries performed:
+        read:                            0
+        write:                           2566101
+        other:                           0
+        total:                           2566101
+    transactions:                        2566101 (21382.50 per sec.)
+    queries:                             2566101 (21382.50 per sec.)
+    ignored errors:                      1426   (11.88 per sec.)
+    reconnects:                          0      (0.00 per sec.)
+
+General statistics:
+    total time:                          120.0079s
+    total number of events:              2566101
+
+Latency (ms):
+         min:                                    1.78
+         avg:                                    4.68
+         max:                                   58.61
+         95th percentile:                        8.43
+         sum:                             11999156.21
+
+Threads fairness:
+    events (avg/stddev):           25661.0100/698.11
+    execution time (avg/stddev):   119.9916/0.00
+
+
+sysbench 1.0.20 (using bundled LuaJIT 2.1.0-beta2)
+
+Running the test with following options:
+Number of threads: 200
+Report intermediate results every 10 second(s)
+Initializing random number generator from current time
+
+
+Initializing worker threads...
+
+Threads started!
+
+[ 10s ] thds: 200 tps: 33444.78 qps: 33444.78 (r/w/o: 0.00/33444.78/0.00) lat (ms,95%): 10.46 err/s: 38.29 reconn/s: 0.00
+[ 20s ] thds: 200 tps: 33640.20 qps: 33640.20 (r/w/o: 0.00/33640.20/0.00) lat (ms,95%): 10.65 err/s: 39.40 reconn/s: 0.00
+[ 30s ] thds: 200 tps: 34016.71 qps: 34016.71 (r/w/o: 0.00/34016.71/0.00) lat (ms,95%): 10.65 err/s: 40.00 reconn/s: 0.00
+[ 40s ] thds: 200 tps: 33441.56 qps: 33441.56 (r/w/o: 0.00/33441.56/0.00) lat (ms,95%): 10.65 err/s: 38.10 reconn/s: 0.00
+[ 50s ] thds: 200 tps: 34678.00 qps: 34678.00 (r/w/o: 0.00/34678.00/0.00) lat (ms,95%): 10.65 err/s: 40.50 reconn/s: 0.00
+[ 60s ] thds: 200 tps: 33819.50 qps: 33819.50 (r/w/o: 0.00/33819.50/0.00) lat (ms,95%): 10.27 err/s: 41.40 reconn/s: 0.00
+[ 70s ] thds: 200 tps: 34985.17 qps: 34985.17 (r/w/o: 0.00/34985.17/0.00) lat (ms,95%): 10.09 err/s: 43.00 reconn/s: 0.00
+[ 80s ] thds: 200 tps: 33781.67 qps: 33781.67 (r/w/o: 0.00/33781.67/0.00) lat (ms,95%): 10.65 err/s: 41.60 reconn/s: 0.00
+[ 90s ] thds: 200 tps: 33925.98 qps: 33925.98 (r/w/o: 0.00/33925.98/0.00) lat (ms,95%): 10.09 err/s: 42.10 reconn/s: 0.00
+[ 100s ] thds: 200 tps: 34121.40 qps: 34121.40 (r/w/o: 0.00/34121.40/0.00) lat (ms,95%): 10.46 err/s: 40.40 reconn/s: 0.00
+[ 110s ] thds: 200 tps: 33938.89 qps: 33938.89 (r/w/o: 0.00/33938.89/0.00) lat (ms,95%): 10.27 err/s: 41.30 reconn/s: 0.00
+[ 120s ] thds: 200 tps: 34432.70 qps: 34432.70 (r/w/o: 0.00/34432.70/0.00) lat (ms,95%): 10.65 err/s: 41.10 reconn/s: 0.00
+SQL statistics:
+    queries performed:
+        read:                            0
+        write:                           4082521
+        other:                           0
+        total:                           4082521
+    transactions:                        4082521 (34016.34 per sec.)
+    queries:                             4082521 (34016.34 per sec.)
+    ignored errors:                      4872   (40.59 per sec.)
+    reconnects:                          0      (0.00 per sec.)
+
+General statistics:
+    total time:                          120.0150s
+    total number of events:              4082521
+
+Latency (ms):
+         min:                                    1.64
+         avg:                                    5.88
+         max:                                  291.19
+         95th percentile:                       10.46
+         sum:                             23999129.52
+
+Threads fairness:
+    events (avg/stddev):           20412.6050/604.81
+    execution time (avg/stddev):   119.9956/0.00
+
+sysbench 1.0.20 (using bundled LuaJIT 2.1.0-beta2)
+
+Running the test with following options:
+Number of threads: 500
+Report intermediate results every 10 second(s)
+Initializing random number generator from current time
+
+
+Initializing worker threads...
+
+Threads started!
+
+[ 10s ] thds: 500 tps: 58065.22 qps: 58065.22 (r/w/o: 0.00/58065.22/0.00) lat (ms,95%): 13.95 err/s: 192.07 reconn/s: 0.00
+[ 20s ] thds: 500 tps: 57059.26 qps: 57059.26 (r/w/o: 0.00/57059.26/0.00) lat (ms,95%): 13.70 err/s: 193.00 reconn/s: 0.00
+[ 30s ] thds: 500 tps: 57812.92 qps: 57812.92 (r/w/o: 0.00/57812.92/0.00) lat (ms,95%): 14.21 err/s: 188.40 reconn/s: 0.00
+[ 40s ] thds: 500 tps: 56351.65 qps: 56351.65 (r/w/o: 0.00/56351.65/0.00) lat (ms,95%): 13.70 err/s: 182.20 reconn/s: 0.00
+[ 50s ] thds: 500 tps: 57897.33 qps: 57897.33 (r/w/o: 0.00/57897.33/0.00) lat (ms,95%): 13.70 err/s: 182.00 reconn/s: 0.00
+[ 60s ] thds: 500 tps: 56920.61 qps: 56920.61 (r/w/o: 0.00/56920.61/0.00) lat (ms,95%): 14.21 err/s: 191.30 reconn/s: 0.00
+[ 70s ] thds: 500 tps: 55531.86 qps: 55531.86 (r/w/o: 0.00/55531.86/0.00) lat (ms,95%): 14.21 err/s: 180.10 reconn/s: 0.00
+[ 80s ] thds: 500 tps: 56509.51 qps: 56509.51 (r/w/o: 0.00/56509.51/0.00) lat (ms,95%): 14.21 err/s: 185.80 reconn/s: 0.00
+[ 90s ] thds: 500 tps: 58424.14 qps: 58424.14 (r/w/o: 0.00/58424.14/0.00) lat (ms,95%): 13.70 err/s: 190.90 reconn/s: 0.00
+[ 100s ] thds: 500 tps: 56396.95 qps: 56396.95 (r/w/o: 0.00/56396.95/0.00) lat (ms,95%): 13.95 err/s: 186.40 reconn/s: 0.00
+[ 110s ] thds: 500 tps: 56611.23 qps: 56611.23 (r/w/o: 0.00/56611.23/0.00) lat (ms,95%): 13.95 err/s: 196.00 reconn/s: 0.00
+[ 120s ] thds: 500 tps: 58099.84 qps: 58099.84 (r/w/o: 0.00/58099.84/0.00) lat (ms,95%): 13.70 err/s: 194.20 reconn/s: 0.00
+SQL statistics:
+    queries performed:
+        read:                            0
+        write:                           6857392
+        other:                           0
+        total:                           6857392
+    transactions:                        6857392 (57125.32 per sec.)
+    queries:                             6857392 (57125.32 per sec.)
+    ignored errors:                      22624  (188.47 per sec.)
+    reconnects:                          0      (0.00 per sec.)
+
+General statistics:
+    total time:                          120.0397s
+    total number of events:              6857392
+
+Latency (ms):
+         min:                                    1.81
+         avg:                                    8.75
+         max:                                  283.04
+         95th percentile:                       13.95
+         sum:                             59998618.22
+
+Threads fairness:
+    events (avg/stddev):           13714.7840/408.83
+    execution time (avg/stddev):   119.9972/0.00
+
+sysbench 1.0.20 (using bundled LuaJIT 2.1.0-beta2)
+
+Running the test with following options:
+Number of threads: 1000
+Report intermediate results every 10 second(s)
+Initializing random number generator from current time
+
+
+Initializing worker threads...
+
+Threads started!
+
+[ 10s ] thds: 1000 tps: 78941.10 qps: 78940.90 (r/w/o: 0.00/78940.90/0.00) lat (ms,95%): 18.28 err/s: 547.11 reconn/s: 0.00
+[ 20s ] thds: 1000 tps: 79679.42 qps: 79679.62 (r/w/o: 0.00/79679.62/0.00) lat (ms,95%): 18.95 err/s: 549.41 reconn/s: 0.00
+[ 30s ] thds: 1000 tps: 79875.73 qps: 79875.73 (r/w/o: 0.00/79875.73/0.00) lat (ms,95%): 18.95 err/s: 552.80 reconn/s: 0.00
+[ 40s ] thds: 1000 tps: 78441.98 qps: 78441.98 (r/w/o: 0.00/78441.98/0.00) lat (ms,95%): 18.95 err/s: 548.10 reconn/s: 0.00
+[ 50s ] thds: 1000 tps: 76572.42 qps: 76572.42 (r/w/o: 0.00/76572.42/0.00) lat (ms,95%): 19.65 err/s: 522.80 reconn/s: 0.00
+[ 60s ] thds: 1000 tps: 79841.21 qps: 79841.11 (r/w/o: 0.00/79841.11/0.00) lat (ms,95%): 18.95 err/s: 537.60 reconn/s: 0.00
+[ 70s ] thds: 1000 tps: 78271.56 qps: 78271.66 (r/w/o: 0.00/78271.66/0.00) lat (ms,95%): 19.29 err/s: 532.90 reconn/s: 0.00
+[ 80s ] thds: 1000 tps: 77578.86 qps: 77578.86 (r/w/o: 0.00/77578.86/0.00) lat (ms,95%): 18.95 err/s: 528.80 reconn/s: 0.00
+[ 90s ] thds: 1000 tps: 76960.56 qps: 76960.56 (r/w/o: 0.00/76960.56/0.00) lat (ms,95%): 19.65 err/s: 527.20 reconn/s: 0.00
+[ 100s ] thds: 1000 tps: 80795.37 qps: 80795.37 (r/w/o: 0.00/80795.37/0.00) lat (ms,95%): 19.29 err/s: 550.10 reconn/s: 0.00
+[ 110s ] thds: 1000 tps: 79595.26 qps: 79595.26 (r/w/o: 0.00/79595.26/0.00) lat (ms,95%): 20.00 err/s: 543.20 reconn/s: 0.00
+[ 120s ] thds: 1000 tps: 78194.91 qps: 78194.81 (r/w/o: 0.00/78194.81/0.00) lat (ms,95%): 19.65 err/s: 536.58 reconn/s: 0.00
+SQL statistics:
+    queries performed:
+        read:                            0
+        write:                           9448595
+        other:                           0
+        total:                           9448595
+    transactions:                        9448595 (78683.82 per sec.)
+    queries:                             9448595 (78683.82 per sec.)
+    ignored errors:                      64769  (539.37 per sec.)
+    reconnects:                          0      (0.00 per sec.)
+
+General statistics:
+    total time:                          120.0816s
+    total number of events:              9448595
+
+Latency (ms):
+         min:                                    2.09
+         avg:                                   12.70
+         max:                                  321.73
+         95th percentile:                       19.29
+         sum:                            119995425.03
+
+Threads fairness:
+    events (avg/stddev):           9448.5950/378.43
+    execution time (avg/stddev):   119.9954/0.00
+
+sysbench 1.0.20 (using bundled LuaJIT 2.1.0-beta2)
+
+Running the test with following options:
+Number of threads: 2000
+Report intermediate results every 10 second(s)
+Initializing random number generator from current time
+
+
+Initializing worker threads...
+
+Threads started!
+
+[ 10s ] thds: 2000 tps: 90749.86 qps: 90749.86 (r/w/o: 0.00/90749.86/0.00) lat (ms,95%): 28.67 err/s: 1285.29 reconn/s: 0.00
+[ 20s ] thds: 2000 tps: 89291.23 qps: 89291.23 (r/w/o: 0.00/89291.23/0.00) lat (ms,95%): 29.72 err/s: 1260.80 reconn/s: 0.00
+[ 30s ] thds: 2000 tps: 87119.25 qps: 87119.25 (r/w/o: 0.00/87119.25/0.00) lat (ms,95%): 28.16 err/s: 1225.71 reconn/s: 0.00
+[ 40s ] thds: 2000 tps: 89715.45 qps: 89715.45 (r/w/o: 0.00/89715.45/0.00) lat (ms,95%): 27.17 err/s: 1266.49 reconn/s: 0.00
+[ 50s ] thds: 2000 tps: 91975.91 qps: 91975.91 (r/w/o: 0.00/91975.91/0.00) lat (ms,95%): 29.19 err/s: 1286.61 reconn/s: 0.00
+[ 60s ] thds: 2000 tps: 85349.26 qps: 85349.26 (r/w/o: 0.00/85349.26/0.00) lat (ms,95%): 28.16 err/s: 1218.79 reconn/s: 0.00
+[ 70s ] thds: 2000 tps: 87943.57 qps: 87943.37 (r/w/o: 0.00/87943.37/0.00) lat (ms,95%): 27.66 err/s: 1220.59 reconn/s: 0.00
+[ 80s ] thds: 2000 tps: 85578.78 qps: 85578.98 (r/w/o: 0.00/85578.98/0.00) lat (ms,95%): 28.16 err/s: 1194.70 reconn/s: 0.00
+[ 90s ] thds: 2000 tps: 86496.21 qps: 86496.21 (r/w/o: 0.00/86496.21/0.00) lat (ms,95%): 27.66 err/s: 1211.12 reconn/s: 0.00
+[ 100s ] thds: 2000 tps: 88663.48 qps: 88663.48 (r/w/o: 0.00/88663.48/0.00) lat (ms,95%): 29.19 err/s: 1276.10 reconn/s: 0.00
+[ 110s ] thds: 2000 tps: 83147.56 qps: 83147.56 (r/w/o: 0.00/83147.56/0.00) lat (ms,95%): 26.20 err/s: 1168.50 reconn/s: 0.00
+[ 120s ] thds: 2000 tps: 92866.60 qps: 92866.60 (r/w/o: 0.00/92866.60/0.00) lat (ms,95%): 26.68 err/s: 1320.70 reconn/s: 0.00
+SQL statistics:
+    queries performed:
+        read:                            0
+        write:                           10591110
+        other:                           0
+        total:                           10591110
+    transactions:                        10591110 (88048.33 per sec.)
+    queries:                             10591110 (88048.33 per sec.)
+    ignored errors:                      149356 (1241.66 per sec.)
+    reconnects:                          0      (0.00 per sec.)
+
+General statistics:
+    total time:                          120.2859s
+    total number of events:              10591110
+
+Latency (ms):
+         min:                                    2.31
+         avg:                                   22.68
+         max:                                  581.88
+         95th percentile:                       28.16
+         sum:                            240230054.03
+
+Threads fairness:
+    events (avg/stddev):           5295.5550/158.94
+    execution time (avg/stddev):   120.1150/0.06
+
+sysbench 1.0.20 (using bundled LuaJIT 2.1.0-beta2)
+
+Running the test with following options:
+Number of threads: 100
+Report intermediate results every 10 second(s)
+Initializing random number generator from current time
+
+
+Initializing worker threads...
+
+Threads started!
+
+[ 10s ] thds: 100 tps: 6676.13 qps: 133920.45 (r/w/o: 93806.20/26734.60/13379.65) lat (ms,95%): 23.52 err/s: 17.40 reconn/s: 0.00
+[ 20s ] thds: 100 tps: 6682.62 qps: 133943.47 (r/w/o: 93806.63/26754.49/13382.35) lat (ms,95%): 23.10 err/s: 17.20 reconn/s: 0.00
+[ 30s ] thds: 100 tps: 6554.27 qps: 131388.28 (r/w/o: 92028.94/26231.50/13127.85) lat (ms,95%): 23.52 err/s: 19.20 reconn/s: 0.00
+[ 40s ] thds: 100 tps: 6646.80 qps: 133219.48 (r/w/o: 93295.09/26615.40/13309.00) lat (ms,95%): 23.52 err/s: 15.40 reconn/s: 0.00
+[ 50s ] thds: 100 tps: 6547.87 qps: 131217.47 (r/w/o: 91897.93/26207.09/13112.45) lat (ms,95%): 23.52 err/s: 16.70 reconn/s: 0.00
+[ 60s ] thds: 100 tps: 6624.79 qps: 132759.97 (r/w/o: 92982.71/26509.57/13267.69) lat (ms,95%): 23.52 err/s: 18.10 reconn/s: 0.00
+[ 70s ] thds: 100 tps: 6665.27 qps: 133611.65 (r/w/o: 93581.35/26681.37/13348.94) lat (ms,95%): 23.52 err/s: 18.40 reconn/s: 0.00
+[ 80s ] thds: 100 tps: 6529.83 qps: 130847.36 (r/w/o: 91639.19/26131.01/13077.16) lat (ms,95%): 23.95 err/s: 17.50 reconn/s: 0.00
+[ 90s ] thds: 100 tps: 6509.72 qps: 130499.95 (r/w/o: 91396.74/26066.67/13036.53) lat (ms,95%): 23.52 err/s: 17.10 reconn/s: 0.00
+[ 100s ] thds: 100 tps: 6703.61 qps: 134345.63 (r/w/o: 94088.29/26833.33/13424.01) lat (ms,95%): 23.52 err/s: 16.80 reconn/s: 0.00
+[ 110s ] thds: 100 tps: 6727.75 qps: 134832.58 (r/w/o: 94434.86/26924.22/13473.51) lat (ms,95%): 23.10 err/s: 18.00 reconn/s: 0.00
+[ 120s ] thds: 100 tps: 6558.85 qps: 131416.15 (r/w/o: 92034.96/26247.79/13133.39) lat (ms,95%): 23.95 err/s: 15.80 reconn/s: 0.00
+SQL statistics:
+    queries performed:
+        read:                            11150468
+        write:                           3179704
+        other:                           1590848
+        total:                           15921020
+    transactions:                        794386 (6618.85 per sec.)
+    queries:                             15921020 (132654.46 per sec.)
+    ignored errors:                      2076   (17.30 per sec.)
+    reconnects:                          0      (0.00 per sec.)
+
+General statistics:
+    total time:                          120.0173s
+    total number of events:              794386
+
+Latency (ms):
+         min:                                    5.67
+         avg:                                   15.11
+         max:                                  232.90
+         95th percentile:                       23.52
+         sum:                             11999602.17
+
+Threads fairness:
+    events (avg/stddev):           7943.8600/508.38
+    execution time (avg/stddev):   119.9960/0.00
+
+sysbench 1.0.20 (using bundled LuaJIT 2.1.0-beta2)
+
+Running the test with following options:
+Number of threads: 200
+Report intermediate results every 10 second(s)
+Initializing random number generator from current time
+
+
+Initializing worker threads...
+
+Threads started!
+
+[ 10s ] thds: 200 tps: 9576.70 qps: 192560.87 (r/w/o: 134966.97/38373.20/19220.69) lat (ms,95%): 33.12 err/s: 47.29 reconn/s: 0.00
+[ 20s ] thds: 200 tps: 9739.34 qps: 195557.37 (r/w/o: 137029.44/38999.25/19528.68) lat (ms,95%): 32.53 err/s: 50.00 reconn/s: 0.00
+[ 30s ] thds: 200 tps: 9837.84 qps: 197508.27 (r/w/o: 138382.71/39402.28/19723.29) lat (ms,95%): 31.37 err/s: 47.60 reconn/s: 0.00
+[ 40s ] thds: 200 tps: 9443.67 qps: 189646.52 (r/w/o: 132890.43/37821.36/18934.73) lat (ms,95%): 33.72 err/s: 48.60 reconn/s: 0.00
+[ 50s ] thds: 200 tps: 9582.81 qps: 192392.59 (r/w/o: 134804.43/38374.64/19213.52) lat (ms,95%): 33.12 err/s: 46.70 reconn/s: 0.00
+[ 60s ] thds: 200 tps: 9643.53 qps: 193799.41 (r/w/o: 135794.13/38668.32/19336.96) lat (ms,95%): 32.53 err/s: 49.90 reconn/s: 0.00
+[ 70s ] thds: 200 tps: 9558.36 qps: 191817.30 (r/w/o: 134405.77/38247.82/19163.71) lat (ms,95%): 32.53 err/s: 47.00 reconn/s: 0.00
+[ 80s ] thds: 200 tps: 9702.58 qps: 194851.29 (r/w/o: 136533.81/38864.52/19452.96) lat (ms,95%): 32.53 err/s: 47.80 reconn/s: 0.00
+[ 90s ] thds: 200 tps: 9655.94 qps: 193836.57 (r/w/o: 135823.44/38652.46/19360.68) lat (ms,95%): 32.53 err/s: 48.80 reconn/s: 0.00
+[ 100s ] thds: 200 tps: 9593.75 qps: 192682.28 (r/w/o: 135008.99/38437.49/19235.80) lat (ms,95%): 33.12 err/s: 48.30 reconn/s: 0.00
+[ 110s ] thds: 200 tps: 9443.42 qps: 189653.71 (r/w/o: 132883.88/37836.88/18932.94) lat (ms,95%): 34.95 err/s: 46.10 reconn/s: 0.00
+[ 120s ] thds: 200 tps: 9546.56 qps: 191736.08 (r/w/o: 134354.33/38237.34/19144.42) lat (ms,95%): 33.12 err/s: 51.40 reconn/s: 0.00
+SQL statistics:
+    queries performed:
+        read:                            16229584
+        write:                           4619682
+        other:                           2312717
+        total:                           23161983
+    transactions:                        1153461 (9609.45 per sec.)
+    queries:                             23161983 (192961.88 per sec.)
+    ignored errors:                      5795   (48.28 per sec.)
+    reconnects:                          0      (0.00 per sec.)
+
+General statistics:
+    total time:                          120.0325s
+    total number of events:              1153461
+
+Latency (ms):
+         min:                                    6.30
+         avg:                                   20.81
+         max:                                  166.46
+         95th percentile:                       33.12
+         sum:                             23999960.40
+
+Threads fairness:
+    events (avg/stddev):           5767.3050/438.83
+    execution time (avg/stddev):   119.9998/0.01
+
+sysbench 1.0.20 (using bundled LuaJIT 2.1.0-beta2)
+
+Running the test with following options:
+Number of threads: 500
+Report intermediate results every 10 second(s)
+Initializing random number generator from current time
+
+
+Initializing worker threads...
+
+Threads started!
+
+[ 10s ] thds: 500 tps: 13829.09 qps: 279570.40 (r/w/o: 196186.84/55530.01/27853.54) lat (ms,95%): 57.87 err/s: 145.77 reconn/s: 0.00
+[ 20s ] thds: 500 tps: 13759.24 qps: 277296.73 (r/w/o: 194476.99/55168.85/27650.88) lat (ms,95%): 57.87 err/s: 132.01 reconn/s: 0.00
+[ 30s ] thds: 500 tps: 13910.44 qps: 280427.37 (r/w/o: 196684.36/55780.94/27962.07) lat (ms,95%): 57.87 err/s: 142.00 reconn/s: 0.00
+[ 40s ] thds: 500 tps: 13485.19 qps: 271721.31 (r/w/o: 190562.47/54058.96/27099.88) lat (ms,95%): 59.99 err/s: 134.10 reconn/s: 0.00
+[ 50s ] thds: 500 tps: 13675.89 qps: 276144.86 (r/w/o: 193753.13/54886.75/27504.98) lat (ms,95%): 58.92 err/s: 147.80 reconn/s: 0.00
+[ 60s ] thds: 500 tps: 13895.48 qps: 280433.70 (r/w/o: 196648.09/55850.74/27934.87) lat (ms,95%): 57.87 err/s: 143.90 reconn/s: 0.00
+[ 70s ] thds: 500 tps: 13774.32 qps: 277312.79 (r/w/o: 194526.27/55101.38/27685.14) lat (ms,95%): 57.87 err/s: 137.40 reconn/s: 0.00
+[ 80s ] thds: 500 tps: 14003.17 qps: 282447.70 (r/w/o: 198150.08/56146.18/28151.44) lat (ms,95%): 56.84 err/s: 145.00 reconn/s: 0.00
+[ 90s ] thds: 500 tps: 13751.75 qps: 277197.13 (r/w/o: 194418.42/55135.01/27643.70) lat (ms,95%): 57.87 err/s: 139.70 reconn/s: 0.00
+[ 100s ] thds: 500 tps: 13798.80 qps: 278482.62 (r/w/o: 195335.21/55402.90/27744.50) lat (ms,95%): 57.87 err/s: 146.60 reconn/s: 0.00
+[ 110s ] thds: 500 tps: 13490.11 qps: 272061.79 (r/w/o: 190847.20/54096.56/27118.03) lat (ms,95%): 58.92 err/s: 137.80 reconn/s: 0.00
+[ 120s ] thds: 500 tps: 13899.60 qps: 280071.41 (r/w/o: 196459.30/55669.91/27942.20) lat (ms,95%): 56.84 err/s: 144.00 reconn/s: 0.00
+SQL statistics:
+    queries performed:
+        read:                            23383066
+        write:                           6630104
+        other:                           3323470
+        total:                           33336640
+    transactions:                        1653251 (13766.81 per sec.)
+    queries:                             33336640 (277598.05 per sec.)
+    ignored errors:                      16968  (141.29 per sec.)
+    reconnects:                          0      (0.00 per sec.)
+
+General statistics:
+    total time:                          120.0881s
+    total number of events:              1653251
+
+Latency (ms):
+         min:                                    6.10
+         avg:                                   36.30
+         max:                                  313.05
+         95th percentile:                       57.87
+         sum:                             60007101.98
+
+Threads fairness:
+    events (avg/stddev):           3306.5020/208.79
+    execution time (avg/stddev):   120.0142/0.01
+
+sysbench 1.0.20 (using bundled LuaJIT 2.1.0-beta2)
+
+Running the test with following options:
+Number of threads: 1000
+Report intermediate results every 10 second(s)
+Initializing random number generator from current time
+
+
+Initializing worker threads...
+
+Threads started!
+
+[ 10s ] thds: 1000 tps: 15376.77 qps: 313248.94 (r/w/o: 220192.99/61933.98/31121.96) lat (ms,95%): 112.67 err/s: 268.45 reconn/s: 0.00
+[ 20s ] thds: 1000 tps: 15597.78 qps: 316090.12 (r/w/o: 222013.04/62601.42/31475.66) lat (ms,95%): 108.68 err/s: 281.20 reconn/s: 0.00
+[ 30s ] thds: 1000 tps: 15643.96 qps: 317350.71 (r/w/o: 222935.96/62859.94/31554.82) lat (ms,95%): 108.68 err/s: 268.20 reconn/s: 0.00
+[ 40s ] thds: 1000 tps: 15478.12 qps: 313714.47 (r/w/o: 220330.63/62160.50/31223.35) lat (ms,95%): 114.72 err/s: 265.30 reconn/s: 0.00
+[ 50s ] thds: 1000 tps: 15929.02 qps: 323521.13 (r/w/o: 227236.90/64146.39/32137.84) lat (ms,95%): 104.84 err/s: 279.90 reconn/s: 0.00
+[ 60s ] thds: 1000 tps: 16055.67 qps: 325161.01 (r/w/o: 228365.98/64400.79/32394.24) lat (ms,95%): 99.33 err/s: 282.60 reconn/s: 0.00
+[ 70s ] thds: 1000 tps: 15233.50 qps: 308998.41 (r/w/o: 217062.81/61205.00/30730.60) lat (ms,95%): 106.75 err/s: 265.90 reconn/s: 0.00
+[ 80s ] thds: 1000 tps: 15515.44 qps: 314943.43 (r/w/o: 221226.28/62409.26/31307.88) lat (ms,95%): 116.80 err/s: 277.00 reconn/s: 0.00
+[ 90s ] thds: 1000 tps: 15494.15 qps: 313824.89 (r/w/o: 220453.89/62113.30/31257.70) lat (ms,95%): 108.68 err/s: 271.50 reconn/s: 0.00
+[ 100s ] thds: 1000 tps: 15619.66 qps: 317173.64 (r/w/o: 222803.00/62852.83/31517.81) lat (ms,95%): 106.75 err/s: 274.00 reconn/s: 0.00
+[ 110s ] thds: 1000 tps: 15925.58 qps: 322704.86 (r/w/o: 226677.26/63902.03/32125.57) lat (ms,95%): 102.97 err/s: 274.10 reconn/s: 0.00
+[ 120s ] thds: 1000 tps: 5785.31 qps: 117408.93 (r/w/o: 82472.80/23261.32/11674.81) lat (ms,95%): 89.16 err/s: 107.70 reconn/s: 0.00
+[ 130s ] thds: 1000 tps: 7.30 qps: 90.90 (r/w/o: 57.90/0.00/33.00) lat (ms,95%): 10722.67 err/s: 25.70 reconn/s: 0.00
+[ 140s ] thds: 1000 tps: 1.10 qps: 116.20 (r/w/o: 88.20/4.90/23.10) lat (ms,95%): 17124.84 err/s: 17.50 reconn/s: 19.80
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+(last message repeated 1 times)
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+(last message repeated 1 times)
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+(last message repeated 1 times)
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+(last message repeated 1 times)
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+(last message repeated 1 times)
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+(last message repeated 2 times)
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+(last message repeated 2 times)
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+(last message repeated 1 times)
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+(last message repeated 1 times)
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+(last message repeated 1 times)
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+(last message repeated 1 times)
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+(last message repeated 2 times)
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+(last message repeated 1 times)
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+(last message repeated 1 times)
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+(last message repeated 1 times)
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+(last message repeated 1 times)
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+(last message repeated 1 times)
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+(last message repeated 1 times)
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+(last message repeated 1 times)
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+(last message repeated 1 times)
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+(last message repeated 1 times)
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+(last message repeated 1 times)
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+(last message repeated 1 times)
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+(last message repeated 1 times)
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+(last message repeated 2 times)
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+(last message repeated 1 times)
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+(last message repeated 2 times)
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+(last message repeated 2 times)
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+(last message repeated 1 times)
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+(last message repeated 1 times)
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+(last message repeated 1 times)
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+(last message repeated 1 times)
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+[ 150s ] thds: 1000 tps: 0.00 qps: 58444.04 (r/w/o: 0.00/0.00/58444.04) lat (ms,95%): 0.00 err/s: 58445.64 reconn/s: 0.00
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:405: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 2 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:458: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 2 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:405: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:469: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:405: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 2 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:458: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 2 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 2 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:405: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 3 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:405: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 4 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:405: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:487: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:487: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 2 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:458: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:469: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:487: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:487: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 2 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:458: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 2 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:458: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:458: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:405: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 4 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:405: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 2 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:405: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 5 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:487: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:458: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:487: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 2 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:487: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:469: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 2 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:487: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:469: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: mysql_stmt_prepare() failed
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:405: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:469: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: mysql_stmt_prepare() failed
+FATAL: MySQL error: 202 "Eloq: failed to start transaction at eloq engine, Txservice is not ready yet."
+FATAL: `thread_run' function failed: [string "sysbench.sql.lua"]:291: SQL error, errno = 2013, state = '00000': 
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 4 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 4 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 3 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 2 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 2 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:458: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 2 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:487: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:458: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 2 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 4 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:487: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:487: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 3 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 2 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:469: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 2 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 3 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 3 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 1 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+(last message repeated 2 times)
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:405: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:432: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+FATAL: `thread_run' function failed: /usr/share/sysbench/oltp_common.lua:409: SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server at 'reading initial communication packet', system error: 2
+[ 160s ] thds: 998 tps: 0.00 qps: 60981.81 (r/w/o: 0.00/0.00/60981.81) lat (ms,95%): 0.00 err/s: 60982.11 reconn/s: 45.60
+[ 170s ] thds: 998 tps: 0.00 qps: 62465.98 (r/w/o: 0.00/0.00/62465.98) lat (ms,95%): 0.00 err/s: 62465.88 reconn/s: 0.00
+[ 180s ] thds: 998 tps: 0.00 qps: 61879.79 (r/w/o: 0.00/0.00/61879.79) lat (ms,95%): 0.00 err/s: 61879.69 reconn/s: 0.00
+[ 190s ] thds: 998 tps: 0.00 qps: 61029.80 (r/w/o: 0.00/0.00/61029.80) lat (ms,95%): 0.00 err/s: 61029.70 reconn/s: 0.00
+[ 200s ] thds: 998 tps: 0.00 qps: 61436.41 (r/w/o: 0.00/0.00/61436.41) lat (ms,95%): 0.00 err/s: 61436.11 reconn/s: 0.00
+[ 210s ] thds: 998 tps: 0.00 qps: 61732.97 (r/w/o: 0.00/0.00/61732.97) lat (ms,95%): 0.00 err/s: 61733.47 reconn/s: 0.00
+[ 220s ] thds: 998 tps: 0.00 qps: 63190.22 (r/w/o: 0.00/0.00/63190.22) lat (ms,95%): 0.00 err/s: 63189.92 reconn/s: 0.00
+[ 230s ] thds: 998 tps: 0.00 qps: 60940.90 (r/w/o: 0.00/0.00/60940.90) lat (ms,95%): 0.00 err/s: 60941.30 reconn/s: 0.00
+[ 240s ] thds: 998 tps: 0.00 qps: 62407.03 (r/w/o: 0.00/0.00/62407.03) lat (ms,95%): 0.00 err/s: 62406.83 reconn/s: 0.00
+[ 250s ] thds: 998 tps: 0.00 qps: 63695.21 (r/w/o: 0.00/0.00/63695.21) lat (ms,95%): 0.00 err/s: 63695.41 reconn/s: 0.00
+[ 260s ] thds: 998 tps: 0.00 qps: 60427.71 (r/w/o: 0.00/0.00/60427.71) lat (ms,95%): 0.00 err/s: 60427.71 reconn/s: 0.00
+[ 270s ] thds: 998 tps: 0.00 qps: 61692.76 (r/w/o: 0.00/0.00/61692.76) lat (ms,95%): 0.00 err/s: 61692.56 reconn/s: 0.00
+[ 280s ] thds: 998 tps: 0.00 qps: 61457.63 (r/w/o: 0.00/0.00/61457.63) lat (ms,95%): 0.00 err/s: 61458.13 reconn/s: 0.00
+[ 290s ] thds: 998 tps: 0.00 qps: 60660.46 (r/w/o: 0.00/0.00/60660.46) lat (ms,95%): 0.00 err/s: 60660.16 reconn/s: 0.00
+[ 300s ] thds: 998 tps: 0.00 qps: 60980.59 (r/w/o: 0.00/0.00/60980.59) lat (ms,95%): 0.00 err/s: 60980.99 reconn/s: 0.00
+[ 310s ] thds: 998 tps: 0.00 qps: 63541.61 (r/w/o: 0.00/0.00/63541.61) lat (ms,95%): 0.00 err/s: 63541.11 reconn/s: 0.00
+[ 320s ] thds: 998 tps: 0.00 qps: 62035.19 (r/w/o: 0.00/0.00/62035.19) lat (ms,95%): 0.00 err/s: 62035.29 reconn/s: 0.00
+[ 330s ] thds: 998 tps: 0.00 qps: 64472.69 (r/w/o: 0.00/0.00/64472.69) lat (ms,95%): 0.00 err/s: 64472.79 reconn/s: 0.00
+[ 340s ] thds: 998 tps: 0.00 qps: 62259.98 (r/w/o: 0.00/0.00/62259.98) lat (ms,95%): 0.00 err/s: 62259.98 reconn/s: 0.00
+[ 350s ] thds: 998 tps: 0.00 qps: 62436.90 (r/w/o: 0.00/0.00/62436.90) lat (ms,95%): 0.00 err/s: 62436.70 reconn/s: 0.00
+[ 360s ] thds: 998 tps: 0.00 qps: 62545.15 (r/w/o: 0.00/0.00/62545.15) lat (ms,95%): 0.00 err/s: 62545.15 reconn/s: 0.00
+[ 370s ] thds: 998 tps: 0.00 qps: 63609.57 (r/w/o: 0.00/0.00/63609.57) lat (ms,95%): 0.00 err/s: 63609.77 reconn/s: 0.00
+[ 380s ] thds: 998 tps: 0.00 qps: 63580.93 (r/w/o: 0.00/0.00/63580.93) lat (ms,95%): 0.00 err/s: 63581.33 reconn/s: 0.00
+[ 390s ] thds: 998 tps: 0.00 qps: 61956.66 (r/w/o: 0.00/0.00/61956.66) lat (ms,95%): 0.00 err/s: 61955.76 reconn/s: 0.00
+[ 400s ] thds: 998 tps: 0.00 qps: 62344.96 (r/w/o: 0.00/0.00/62344.96) lat (ms,95%): 0.00 err/s: 62345.76 reconn/s: 0.00
+[ 410s ] thds: 998 tps: 0.00 qps: 61791.81 (r/w/o: 0.00/0.00/61791.81) lat (ms,95%): 0.00 err/s: 61791.51 reconn/s: 0.00
+[ 420s ] thds: 998 tps: 0.00 qps: 63107.52 (r/w/o: 0.00/0.00/63107.52) lat (ms,95%): 0.00 err/s: 63107.42 reconn/s: 0.00
+[ 430s ] thds: 998 tps: 0.00 qps: 61139.54 (r/w/o: 0.00/0.00/61139.54) lat (ms,95%): 0.00 err/s: 61139.74 reconn/s: 0.00
+[ 440s ] thds: 998 tps: 0.00 qps: 62816.20 (r/w/o: 0.00/0.00/62816.20) lat (ms,95%): 0.00 err/s: 62816.40 reconn/s: 0.00
+[ 450s ] thds: 998 tps: 0.00 qps: 61379.30 (r/w/o: 0.00/0.00/61379.30) lat (ms,95%): 0.00 err/s: 61378.80 reconn/s: 0.00
+[ 460s ] thds: 998 tps: 0.00 qps: 61100.81 (r/w/o: 0.00/0.00/61100.81) lat (ms,95%): 0.00 err/s: 61100.41 reconn/s: 0.00
+[ 470s ] thds: 998 tps: 0.00 qps: 62163.73 (r/w/o: 0.00/0.00/62163.73) lat (ms,95%): 0.00 err/s: 62163.73 reconn/s: 0.00
+[ 480s ] thds: 998 tps: 0.00 qps: 62663.79 (r/w/o: 0.00/0.00/62663.79) lat (ms,95%): 0.00 err/s: 62663.99 reconn/s: 0.00
+[ 490s ] thds: 998 tps: 0.00 qps: 62131.56 (r/w/o: 0.00/0.00/62131.56) lat (ms,95%): 0.00 err/s: 62131.46 reconn/s: 0.00
+[ 500s ] thds: 998 tps: 0.00 qps: 64044.61 (r/w/o: 0.00/0.00/64044.61) lat (ms,95%): 0.00 err/s: 64044.81 reconn/s: 0.00
+[ 510s ] thds: 998 tps: 0.00 qps: 61102.28 (r/w/o: 0.00/0.00/61102.28) lat (ms,95%): 0.00 err/s: 61102.38 reconn/s: 0.00
+[ 520s ] thds: 998 tps: 0.00 qps: 61545.72 (r/w/o: 0.00/0.00/61545.72) lat (ms,95%): 0.00 err/s: 61545.62 reconn/s: 0.00
+[ 530s ] thds: 998 tps: 0.00 qps: 63883.63 (r/w/o: 0.00/0.00/63883.63) lat (ms,95%): 0.00 err/s: 63883.83 reconn/s: 0.00
+[ 540s ] thds: 998 tps: 0.00 qps: 62038.06 (r/w/o: 0.00/0.00/62038.06) lat (ms,95%): 0.00 err/s: 62037.96 reconn/s: 0.00
+[ 550s ] thds: 998 tps: 0.00 qps: 62547.87 (r/w/o: 0.00/0.00/62547.87) lat (ms,95%): 0.00 err/s: 62547.87 reconn/s: 0.00
+[ 560s ] thds: 998 tps: 0.00 qps: 61379.84 (r/w/o: 0.00/0.00/61379.84) lat (ms,95%): 0.00 err/s: 61379.74 reconn/s: 0.00
+[ 570s ] thds: 998 tps: 0.00 qps: 62076.56 (r/w/o: 0.00/0.00/62076.56) lat (ms,95%): 0.00 err/s: 62076.66 reconn/s: 0.00
+[ 580s ] thds: 998 tps: 0.00 qps: 63426.71 (r/w/o: 0.00/0.00/63426.71) lat (ms,95%): 0.00 err/s: 63426.71 reconn/s: 0.00
+[ 590s ] thds: 998 tps: 0.00 qps: 62403.59 (r/w/o: 0.00/0.00/62403.59) lat (ms,95%): 0.00 err/s: 62403.59 reconn/s: 0.00
+[ 600s ] thds: 998 tps: 0.00 qps: 60440.03 (r/w/o: 0.00/0.00/60440.03) lat (ms,95%): 0.00 err/s: 60440.13 reconn/s: 0.00
+[ 610s ] thds: 998 tps: 0.00 qps: 60527.05 (r/w/o: 0.00/0.00/60527.05) lat (ms,95%): 0.00 err/s: 60527.75 reconn/s: 0.00
+[ 620s ] thds: 998 tps: 0.00 qps: 61235.23 (r/w/o: 0.00/0.00/61235.23) lat (ms,95%): 0.00 err/s: 61234.43 reconn/s: 0.00
+[ 630s ] thds: 998 tps: 0.00 qps: 62434.56 (r/w/o: 0.00/0.00/62434.56) lat (ms,95%): 0.00 err/s: 62434.56 reconn/s: 0.00
+[ 640s ] thds: 998 tps: 0.00 qps: 61720.32 (r/w/o: 0.00/0.00/61720.32) lat (ms,95%): 0.00 err/s: 61720.12 reconn/s: 0.00
+[ 650s ] thds: 998 tps: 0.00 qps: 61223.47 (r/w/o: 0.00/0.00/61223.47) lat (ms,95%): 0.00 err/s: 61223.57 reconn/s: 0.00
+[ 660s ] thds: 998 tps: 0.00 qps: 61743.13 (r/w/o: 0.00/0.00/61743.13) lat (ms,95%): 0.00 err/s: 61742.93 reconn/s: 0.00
+[ 670s ] thds: 998 tps: 0.00 qps: 61639.70 (r/w/o: 0.00/0.00/61639.70) lat (ms,95%): 0.00 err/s: 61640.30 reconn/s: 0.00
+[ 680s ] thds: 998 tps: 0.00 qps: 63221.48 (r/w/o: 0.00/0.00/63221.48) lat (ms,95%): 0.00 err/s: 63221.18 reconn/s: 0.00
+[ 690s ] thds: 998 tps: 0.00 qps: 61793.88 (r/w/o: 0.00/0.00/61793.88) lat (ms,95%): 0.00 err/s: 61793.68 reconn/s: 0.00
+[ 700s ] thds: 998 tps: 0.00 qps: 60880.87 (r/w/o: 0.00/0.00/60880.87) lat (ms,95%): 0.00 err/s: 60880.17 reconn/s: 0.00
+[ 710s ] thds: 998 tps: 0.00 qps: 60773.42 (r/w/o: 0.00/0.00/60773.42) lat (ms,95%): 0.00 err/s: 60774.92 reconn/s: 0.00
+[ 720s ] thds: 998 tps: 0.00 qps: 62096.39 (r/w/o: 0.00/0.00/62096.39) lat (ms,95%): 0.00 err/s: 62096.19 reconn/s: 0.00
+[ 730s ] thds: 998 tps: 0.00 qps: 61510.59 (r/w/o: 0.00/0.00/61510.59) lat (ms,95%): 0.00 err/s: 61510.09 reconn/s: 0.00
+[ 740s ] thds: 998 tps: 0.00 qps: 63189.44 (r/w/o: 0.00/0.00/63189.44) lat (ms,95%): 0.00 err/s: 63189.04 reconn/s: 0.00
+[ 750s ] thds: 998 tps: 0.00 qps: 61373.42 (r/w/o: 0.00/0.00/61373.42) lat (ms,95%): 0.00 err/s: 61373.82 reconn/s: 0.00
+[ 760s ] thds: 998 tps: 0.00 qps: 61351.29 (r/w/o: 0.00/0.00/61351.29) lat (ms,95%): 0.00 err/s: 61350.69 reconn/s: 0.00
+[ 770s ] thds: 998 tps: 0.00 qps: 62858.72 (r/w/o: 0.00/0.00/62858.72) lat (ms,95%): 0.00 err/s: 62859.32 reconn/s: 0.00
+[ 780s ] thds: 998 tps: 0.00 qps: 62362.07 (r/w/o: 0.00/0.00/62362.07) lat (ms,95%): 0.00 err/s: 62362.37 reconn/s: 0.00
+[ 790s ] thds: 998 tps: 0.00 qps: 62469.78 (r/w/o: 0.00/0.00/62469.78) lat (ms,95%): 0.00 err/s: 62469.98 reconn/s: 0.00
+[ 800s ] thds: 998 tps: 0.00 qps: 60682.33 (r/w/o: 0.00/0.00/60682.33) lat (ms,95%): 0.00 err/s: 60681.63 reconn/s: 0.00
+[ 810s ] thds: 998 tps: 0.00 qps: 63521.66 (r/w/o: 0.00/0.00/63521.66) lat (ms,95%): 0.00 err/s: 63521.66 reconn/s: 0.00
+[ 820s ] thds: 998 tps: 0.00 qps: 62917.68 (r/w/o: 0.00/0.00/62917.68) lat (ms,95%): 0.00 err/s: 62917.58 reconn/s: 0.00
+[ 830s ] thds: 998 tps: 0.00 qps: 62241.97 (r/w/o: 0.00/0.00/62241.97) lat (ms,95%): 0.00 err/s: 62242.27 reconn/s: 0.00
+[ 840s ] thds: 998 tps: 0.00 qps: 60427.02 (r/w/o: 0.00/0.00/60427.02) lat (ms,95%): 0.00 err/s: 60426.72 reconn/s: 0.00
+[ 850s ] thds: 998 tps: 0.00 qps: 64409.43 (r/w/o: 0.00/0.00/64409.43) lat (ms,95%): 0.00 err/s: 64409.73 reconn/s: 0.00
+[ 860s ] thds: 998 tps: 0.00 qps: 62484.48 (r/w/o: 0.00/0.00/62484.48) lat (ms,95%): 0.00 err/s: 62484.48 reconn/s: 0.00
+[ 870s ] thds: 998 tps: 0.00 qps: 62492.84 (r/w/o: 0.00/0.00/62492.84) lat (ms,95%): 0.00 err/s: 62493.34 reconn/s: 0.00
+[ 880s ] thds: 998 tps: 0.00 qps: 62212.74 (r/w/o: 0.00/0.00/62212.74) lat (ms,95%): 0.00 err/s: 62212.74 reconn/s: 0.00
+[ 890s ] thds: 998 tps: 0.00 qps: 60729.90 (r/w/o: 0.00/0.00/60729.90) lat (ms,95%): 0.00 err/s: 60729.20 reconn/s: 0.00
+[ 900s ] thds: 998 tps: 0.00 qps: 62348.59 (r/w/o: 0.00/0.00/62348.59) lat (ms,95%): 0.00 err/s: 62349.09 reconn/s: 0.00
+[ 910s ] thds: 998 tps: 0.00 qps: 61464.97 (r/w/o: 0.00/0.00/61464.97) lat (ms,95%): 0.00 err/s: 61464.67 reconn/s: 0.00
+[ 920s ] thds: 998 tps: 0.00 qps: 65562.08 (r/w/o: 0.00/0.00/65562.08) lat (ms,95%): 0.00 err/s: 65561.78 reconn/s: 0.00
+[ 930s ] thds: 998 tps: 0.00 qps: 63599.05 (r/w/o: 0.00/0.00/63599.05) lat (ms,95%): 0.00 err/s: 63599.45 reconn/s: 0.00
+[ 940s ] thds: 998 tps: 0.00 qps: 62781.65 (r/w/o: 0.00/0.00/62781.65) lat (ms,95%): 0.00 err/s: 62781.55 reconn/s: 0.00
+[ 950s ] thds: 998 tps: 0.00 qps: 65389.29 (r/w/o: 0.00/0.00/65389.29) lat (ms,95%): 0.00 err/s: 65389.29 reconn/s: 0.00
+[ 960s ] thds: 998 tps: 0.00 qps: 61673.00 (r/w/o: 0.00/0.00/61673.00) lat (ms,95%): 0.00 err/s: 61672.80 reconn/s: 0.00
+[ 970s ] thds: 998 tps: 0.00 qps: 64803.04 (r/w/o: 0.00/0.00/64803.04) lat (ms,95%): 0.00 err/s: 64803.64 reconn/s: 0.00
+[ 980s ] thds: 998 tps: 0.00 qps: 63707.08 (r/w/o: 0.00/0.00/63707.08) lat (ms,95%): 0.00 err/s: 63706.88 reconn/s: 0.00
+[ 990s ] thds: 998 tps: 0.00 qps: 62449.80 (r/w/o: 0.00/0.00/62449.80) lat (ms,95%): 0.00 err/s: 62449.70 reconn/s: 0.00
+[ 1000s ] thds: 998 tps: 0.00 qps: 61592.64 (r/w/o: 0.00/0.00/61592.64) lat (ms,95%): 0.00 err/s: 61592.54 reconn/s: 0.00
+[ 1010s ] thds: 998 tps: 0.00 qps: 61861.21 (r/w/o: 0.00/0.00/61861.21) lat (ms,95%): 0.00 err/s: 61861.51 reconn/s: 0.00
+[ 1020s ] thds: 998 tps: 0.00 qps: 63337.81 (r/w/o: 0.00/0.00/63337.81) lat (ms,95%): 0.00 err/s: 63337.61 reconn/s: 0.00
+[ 1030s ] thds: 998 tps: 0.00 qps: 64740.23 (r/w/o: 0.00/0.00/64740.23) lat (ms,95%): 0.00 err/s: 64739.93 reconn/s: 0.00
+[ 1040s ] thds: 998 tps: 0.00 qps: 65156.90 (r/w/o: 0.00/0.00/65156.90) lat (ms,95%): 0.00 err/s: 65157.10 reconn/s: 0.00
+[ 1050s ] thds: 998 tps: 0.00 qps: 67127.08 (r/w/o: 0.00/0.00/67127.08) lat (ms,95%): 0.00 err/s: 67127.48 reconn/s: 0.00
+[ 1060s ] thds: 998 tps: 0.00 qps: 64605.11 (r/w/o: 0.00/0.00/64605.11) lat (ms,95%): 0.00 err/s: 64605.41 reconn/s: 0.00
+[ 1070s ] thds: 998 tps: 0.00 qps: 66096.25 (r/w/o: 0.00/0.00/66096.25) lat (ms,95%): 0.00 err/s: 66095.75 reconn/s: 0.00
+[ 1080s ] thds: 998 tps: 0.00 qps: 64947.27 (r/w/o: 0.00/0.00/64947.27) lat (ms,95%): 0.00 err/s: 64947.47 reconn/s: 0.00
+[ 1090s ] thds: 998 tps: 0.00 qps: 62383.47 (r/w/o: 0.00/0.00/62383.47) lat (ms,95%): 0.00 err/s: 62382.77 reconn/s: 0.00
+[ 1100s ] thds: 998 tps: 0.00 qps: 63691.61 (r/w/o: 0.00/0.00/63691.61) lat (ms,95%): 0.00 err/s: 63691.51 reconn/s: 0.00
+[ 1110s ] thds: 998 tps: 0.00 qps: 67773.73 (r/w/o: 0.00/0.00/67773.73) lat (ms,95%): 0.00 err/s: 67773.83 reconn/s: 0.00
+[ 1120s ] thds: 998 tps: 0.00 qps: 66802.49 (r/w/o: 0.00/0.00/66802.49) lat (ms,95%): 0.00 err/s: 66803.29 reconn/s: 0.00
+[ 1130s ] thds: 998 tps: 0.00 qps: 63473.40 (r/w/o: 0.00/0.00/63473.40) lat (ms,95%): 0.00 err/s: 63473.20 reconn/s: 0.00
+[ 1140s ] thds: 998 tps: 0.00 qps: 63111.23 (r/w/o: 0.00/0.00/63111.23) lat (ms,95%): 0.00 err/s: 63110.73 reconn/s: 0.00
+[ 1150s ] thds: 998 tps: 0.00 qps: 60779.24 (r/w/o: 0.00/0.00/60779.24) lat (ms,95%): 0.00 err/s: 60779.84 reconn/s: 0.00
+[ 1160s ] thds: 998 tps: 0.00 qps: 62153.22 (r/w/o: 0.00/0.00/62153.22) lat (ms,95%): 0.00 err/s: 62152.72 reconn/s: 0.00
+[ 1170s ] thds: 998 tps: 0.00 qps: 65325.86 (r/w/o: 0.00/0.00/65325.86) lat (ms,95%): 0.00 err/s: 65326.36 reconn/s: 0.00
+[ 1180s ] thds: 998 tps: 0.00 qps: 61868.36 (r/w/o: 0.00/0.00/61868.36) lat (ms,95%): 0.00 err/s: 61868.06 reconn/s: 0.00
+[ 1190s ] thds: 998 tps: 0.00 qps: 62416.31 (r/w/o: 0.00/0.00/62416.31) lat (ms,95%): 0.00 err/s: 62416.51 reconn/s: 0.00
+[ 1200s ] thds: 998 tps: 0.00 qps: 61863.39 (r/w/o: 0.00/0.00/61863.39) lat (ms,95%): 0.00 err/s: 61863.69 reconn/s: 0.00
+[ 1210s ] thds: 998 tps: 0.00 qps: 65392.85 (r/w/o: 0.00/0.00/65392.85) lat (ms,95%): 0.00 err/s: 65392.15 reconn/s: 0.00
+[ 1220s ] thds: 998 tps: 0.00 qps: 63208.00 (r/w/o: 0.00/0.00/63208.00) lat (ms,95%): 0.00 err/s: 63208.10 reconn/s: 0.00
+[ 1230s ] thds: 998 tps: 0.00 qps: 64664.33 (r/w/o: 0.00/0.00/64664.33) lat (ms,95%): 0.00 err/s: 64664.23 reconn/s: 0.00
+[ 1240s ] thds: 998 tps: 0.00 qps: 61811.46 (r/w/o: 0.00/0.00/61811.46) lat (ms,95%): 0.00 err/s: 61811.26 reconn/s: 0.00
+[ 1250s ] thds: 998 tps: 0.00 qps: 62827.44 (r/w/o: 0.00/0.00/62827.44) lat (ms,95%): 0.00 err/s: 62828.14 reconn/s: 0.00
+[ 1260s ] thds: 998 tps: 0.00 qps: 62664.22 (r/w/o: 0.00/0.00/62664.22) lat (ms,95%): 0.00 err/s: 62663.92 reconn/s: 0.00
+[ 1270s ] thds: 998 tps: 0.00 qps: 63259.65 (r/w/o: 0.00/0.00/63259.65) lat (ms,95%): 0.00 err/s: 63259.55 reconn/s: 0.00
+[ 1280s ] thds: 998 tps: 0.00 qps: 63118.53 (r/w/o: 0.00/0.00/63118.53) lat (ms,95%): 0.00 err/s: 63118.03 reconn/s: 0.00
+[ 1290s ] thds: 998 tps: 0.00 qps: 62789.75 (r/w/o: 0.00/0.00/62789.75) lat (ms,95%): 0.00 err/s: 62790.35 reconn/s: 0.00
+[ 1300s ] thds: 998 tps: 0.00 qps: 62833.98 (r/w/o: 0.00/0.00/62833.98) lat (ms,95%): 0.00 err/s: 62834.28 reconn/s: 0.00
+[ 1310s ] thds: 998 tps: 0.00 qps: 66447.87 (r/w/o: 0.00/0.00/66447.87) lat (ms,95%): 0.00 err/s: 66447.57 reconn/s: 0.00
+[ 1320s ] thds: 998 tps: 0.00 qps: 63891.03 (r/w/o: 0.00/0.00/63891.03) lat (ms,95%): 0.00 err/s: 63891.13 reconn/s: 0.00
+[ 1330s ] thds: 998 tps: 0.00 qps: 62811.70 (r/w/o: 0.00/0.00/62811.70) lat (ms,95%): 0.00 err/s: 62811.80 reconn/s: 0.00
+[ 1340s ] thds: 998 tps: 0.00 qps: 63103.85 (r/w/o: 0.00/0.00/63103.85) lat (ms,95%): 0.00 err/s: 63103.05 reconn/s: 0.00
+[ 1350s ] thds: 998 tps: 0.00 qps: 63044.52 (r/w/o: 0.00/0.00/63044.52) lat (ms,95%): 0.00 err/s: 63044.82 reconn/s: 0.00
+[ 1360s ] thds: 998 tps: 0.00 qps: 63272.48 (r/w/o: 0.00/0.00/63272.48) lat (ms,95%): 0.00 err/s: 63273.18 reconn/s: 0.00
+[ 1370s ] thds: 998 tps: 0.00 qps: 65630.61 (r/w/o: 0.00/0.00/65630.61) lat (ms,95%): 0.00 err/s: 65630.11 reconn/s: 0.00
+[ 1380s ] thds: 998 tps: 0.00 qps: 62957.14 (r/w/o: 0.00/0.00/62957.14) lat (ms,95%): 0.00 err/s: 62957.24 reconn/s: 0.00
+[ 1390s ] thds: 998 tps: 0.00 qps: 64999.89 (r/w/o: 0.00/0.00/64999.89) lat (ms,95%): 0.00 err/s: 65000.09 reconn/s: 0.00
+[ 1400s ] thds: 998 tps: 0.00 qps: 63627.18 (r/w/o: 0.00/0.00/63627.18) lat (ms,95%): 0.00 err/s: 63626.98 reconn/s: 0.00
+[ 1410s ] thds: 998 tps: 0.00 qps: 62309.58 (r/w/o: 0.00/0.00/62309.58) lat (ms,95%): 0.00 err/s: 62309.48 reconn/s: 0.00
+[ 1420s ] thds: 998 tps: 0.00 qps: 61868.29 (r/w/o: 0.00/0.00/61868.29) lat (ms,95%): 0.00 err/s: 61868.19 reconn/s: 0.00
+[ 1430s ] thds: 998 tps: 0.00 qps: 64498.44 (r/w/o: 0.00/0.00/64498.44) lat (ms,95%): 0.00 err/s: 64498.54 reconn/s: 0.00
+[ 1440s ] thds: 998 tps: 0.00 qps: 63459.91 (r/w/o: 0.00/0.00/63459.91) lat (ms,95%): 0.00 err/s: 63459.91 reconn/s: 0.00
+[ 1450s ] thds: 998 tps: 0.00 qps: 64289.48 (r/w/o: 0.00/0.00/64289.48) lat (ms,95%): 0.00 err/s: 64290.08 reconn/s: 0.00
+[ 1460s ] thds: 998 tps: 0.00 qps: 61728.88 (r/w/o: 0.00/0.00/61728.88) lat (ms,95%): 0.00 err/s: 61728.48 reconn/s: 0.00
+[ 1470s ] thds: 998 tps: 0.00 qps: 62474.91 (r/w/o: 0.00/0.00/62474.91) lat (ms,95%): 0.00 err/s: 62474.61 reconn/s: 0.00
+[ 1480s ] thds: 998 tps: 0.00 qps: 64873.56 (r/w/o: 0.00/0.00/64873.56) lat (ms,95%): 0.00 err/s: 64873.36 reconn/s: 0.00
+[ 1490s ] thds: 998 tps: 0.00 qps: 62827.36 (r/w/o: 0.00/0.00/62827.36) lat (ms,95%): 0.00 err/s: 62827.66 reconn/s: 0.00
+[ 1500s ] thds: 998 tps: 0.00 qps: 62798.03 (r/w/o: 0.00/0.00/62798.03) lat (ms,95%): 0.00 err/s: 62798.23 reconn/s: 0.00
+[ 1510s ] thds: 998 tps: 0.00 qps: 61486.06 (r/w/o: 0.00/0.00/61486.06) lat (ms,95%): 0.00 err/s: 61486.06 reconn/s: 0.00
+[ 1520s ] thds: 998 tps: 0.00 qps: 62917.38 (r/w/o: 0.00/0.00/62917.38) lat (ms,95%): 0.00 err/s: 62916.98 reconn/s: 0.00
+[ 1530s ] thds: 998 tps: 0.00 qps: 63293.24 (r/w/o: 0.00/0.00/63293.24) lat (ms,95%): 0.00 err/s: 63293.54 reconn/s: 0.00
+[ 1540s ] thds: 998 tps: 0.00 qps: 61668.65 (r/w/o: 0.00/0.00/61668.65) lat (ms,95%): 0.00 err/s: 61668.75 reconn/s: 0.00
+[ 1550s ] thds: 998 tps: 0.00 qps: 65133.80 (r/w/o: 0.00/0.00/65133.80) lat (ms,95%): 0.00 err/s: 65133.70 reconn/s: 0.00
+[ 1560s ] thds: 998 tps: 0.00 qps: 65260.96 (r/w/o: 0.00/0.00/65260.96) lat (ms,95%): 0.00 err/s: 65261.26 reconn/s: 0.00
+[ 1570s ] thds: 998 tps: 0.00 qps: 61833.01 (r/w/o: 0.00/0.00/61833.01) lat (ms,95%): 0.00 err/s: 61833.01 reconn/s: 0.00
+[ 1580s ] thds: 998 tps: 0.00 qps: 63271.19 (r/w/o: 0.00/0.00/63271.19) lat (ms,95%): 0.00 err/s: 63270.69 reconn/s: 0.00
+[ 1590s ] thds: 998 tps: 0.00 qps: 63665.97 (r/w/o: 0.00/0.00/63665.97) lat (ms,95%): 0.00 err/s: 63666.57 reconn/s: 0.00
+[ 1600s ] thds: 998 tps: 0.00 qps: 62179.83 (r/w/o: 0.00/0.00/62179.83) lat (ms,95%): 0.00 err/s: 62179.93 reconn/s: 0.00
+[ 1610s ] thds: 998 tps: 0.00 qps: 63010.44 (r/w/o: 0.00/0.00/63010.44) lat (ms,95%): 0.00 err/s: 63009.64 reconn/s: 0.00
+[ 1620s ] thds: 998 tps: 0.00 qps: 65093.47 (r/w/o: 0.00/0.00/65093.47) lat (ms,95%): 0.00 err/s: 65093.97 reconn/s: 0.00
+[ 1630s ] thds: 998 tps: 0.00 qps: 62903.27 (r/w/o: 0.00/0.00/62903.27) lat (ms,95%): 0.00 err/s: 62902.97 reconn/s: 0.00
+[ 1640s ] thds: 998 tps: 0.00 qps: 61725.68 (r/w/o: 0.00/0.00/61725.68) lat (ms,95%): 0.00 err/s: 61726.18 reconn/s: 0.00
+[ 1650s ] thds: 998 tps: 0.00 qps: 62464.71 (r/w/o: 0.00/0.00/62464.71) lat (ms,95%): 0.00 err/s: 62464.41 reconn/s: 0.00
+[ 1660s ] thds: 998 tps: 0.00 qps: 61582.28 (r/w/o: 0.00/0.00/61582.28) lat (ms,95%): 0.00 err/s: 61582.28 reconn/s: 0.00
+[ 1670s ] thds: 998 tps: 0.00 qps: 63051.69 (r/w/o: 0.00/0.00/63051.69) lat (ms,95%): 0.00 err/s: 63051.49 reconn/s: 0.00
+[ 1680s ] thds: 998 tps: 0.00 qps: 65403.00 (r/w/o: 0.00/0.00/65403.00) lat (ms,95%): 0.00 err/s: 65402.60 reconn/s: 0.00
+[ 1690s ] thds: 998 tps: 0.00 qps: 67070.48 (r/w/o: 0.00/0.00/67070.48) lat (ms,95%): 0.00 err/s: 67071.28 reconn/s: 0.00
+[ 1700s ] thds: 998 tps: 0.00 qps: 66025.65 (r/w/o: 0.00/0.00/66025.65) lat (ms,95%): 0.00 err/s: 66025.25 reconn/s: 0.00
+[ 1710s ] thds: 998 tps: 0.00 qps: 64685.20 (r/w/o: 0.00/0.00/64685.20) lat (ms,95%): 0.00 err/s: 64685.70 reconn/s: 0.00
+[ 1720s ] thds: 998 tps: 0.00 qps: 63552.88 (r/w/o: 0.00/0.00/63552.88) lat (ms,95%): 0.00 err/s: 63552.68 reconn/s: 0.00
+[ 1730s ] thds: 998 tps: 0.00 qps: 63297.07 (r/w/o: 0.00/0.00/63297.07) lat (ms,95%): 0.00 err/s: 63296.97 reconn/s: 0.00
+[ 1740s ] thds: 998 tps: 0.00 qps: 62046.33 (r/w/o: 0.00/0.00/62046.33) lat (ms,95%): 0.00 err/s: 62046.43 reconn/s: 0.00
+[ 1750s ] thds: 998 tps: 0.00 qps: 62662.69 (r/w/o: 0.00/0.00/62662.69) lat (ms,95%): 0.00 err/s: 62662.69 reconn/s: 0.00
+[ 1760s ] thds: 998 tps: 0.00 qps: 63938.03 (r/w/o: 0.00/0.00/63938.03) lat (ms,95%): 0.00 err/s: 63938.23 reconn/s: 0.00
+[ 1770s ] thds: 998 tps: 0.00 qps: 63768.82 (r/w/o: 0.00/0.00/63768.82) lat (ms,95%): 0.00 err/s: 63768.72 reconn/s: 0.00
+[ 1780s ] thds: 998 tps: 0.00 qps: 64131.25 (r/w/o: 0.00/0.00/64131.25) lat (ms,95%): 0.00 err/s: 64130.95 reconn/s: 0.00
+[ 1790s ] thds: 998 tps: 0.00 qps: 61692.46 (r/w/o: 0.00/0.00/61692.46) lat (ms,95%): 0.00 err/s: 61691.86 reconn/s: 0.00
+[ 1800s ] thds: 998 tps: 0.00 qps: 62407.13 (r/w/o: 0.00/0.00/62407.13) lat (ms,95%): 0.00 err/s: 62406.93 reconn/s: 0.00
+[ 1810s ] thds: 998 tps: 0.00 qps: 64119.39 (r/w/o: 0.00/0.00/64119.39) lat (ms,95%): 0.00 err/s: 64120.59 reconn/s: 0.00
+[ 1820s ] thds: 998 tps: 0.00 qps: 63176.79 (r/w/o: 0.00/0.00/63176.79) lat (ms,95%): 0.00 err/s: 63176.59 reconn/s: 0.00
+[ 1830s ] thds: 998 tps: 0.00 qps: 62718.86 (r/w/o: 0.00/0.00/62718.86) lat (ms,95%): 0.00 err/s: 62718.46 reconn/s: 0.00
+[ 1840s ] thds: 998 tps: 0.00 qps: 63940.78 (r/w/o: 0.00/0.00/63940.78) lat (ms,95%): 0.00 err/s: 63940.78 reconn/s: 0.00
+[ 1850s ] thds: 998 tps: 0.00 qps: 62854.20 (r/w/o: 0.00/0.00/62854.20) lat (ms,95%): 0.00 err/s: 62854.00 reconn/s: 0.00
+[ 1860s ] thds: 998 tps: 0.00 qps: 64481.96 (r/w/o: 0.00/0.00/64481.96) lat (ms,95%): 0.00 err/s: 64482.96 reconn/s: 0.00
+[ 1870s ] thds: 998 tps: 0.00 qps: 63027.13 (r/w/o: 0.00/0.00/63027.13) lat (ms,95%): 0.00 err/s: 63027.03 reconn/s: 0.00
+[ 1880s ] thds: 998 tps: 0.00 qps: 64568.56 (r/w/o: 0.00/0.00/64568.56) lat (ms,95%): 0.00 err/s: 64568.16 reconn/s: 0.00
+[ 1890s ] thds: 998 tps: 0.00 qps: 64952.57 (r/w/o: 0.00/0.00/64952.57) lat (ms,95%): 0.00 err/s: 64952.17 reconn/s: 0.00
+[ 1900s ] thds: 998 tps: 0.00 qps: 63258.19 (r/w/o: 0.00/0.00/63258.19) lat (ms,95%): 0.00 err/s: 63258.39 reconn/s: 0.00
+[ 1910s ] thds: 998 tps: 0.00 qps: 66846.81 (r/w/o: 0.00/0.00/66846.81) lat (ms,95%): 0.00 err/s: 66847.31 reconn/s: 0.00
+[ 1920s ] thds: 998 tps: 0.00 qps: 65976.84 (r/w/o: 0.00/0.00/65976.84) lat (ms,95%): 0.00 err/s: 65976.34 reconn/s: 0.00
+[ 1930s ] thds: 998 tps: 0.00 qps: 63029.98 (r/w/o: 0.00/0.00/63029.98) lat (ms,95%): 0.00 err/s: 63029.68 reconn/s: 0.00
+[ 1940s ] thds: 998 tps: 0.00 qps: 66043.19 (r/w/o: 0.00/0.00/66043.19) lat (ms,95%): 0.00 err/s: 66043.29 reconn/s: 0.00
+[ 1950s ] thds: 998 tps: 0.00 qps: 65051.15 (r/w/o: 0.00/0.00/65051.15) lat (ms,95%): 0.00 err/s: 65051.05 reconn/s: 0.00
+[ 1960s ] thds: 998 tps: 0.00 qps: 67936.64 (r/w/o: 0.00/0.00/67936.64) lat (ms,95%): 0.00 err/s: 67936.54 reconn/s: 0.00
+[ 1970s ] thds: 998 tps: 0.00 qps: 64927.21 (r/w/o: 0.00/0.00/64927.21) lat (ms,95%): 0.00 err/s: 64927.81 reconn/s: 0.00
+[ 1980s ] thds: 998 tps: 0.00 qps: 65152.54 (r/w/o: 0.00/0.00/65152.54) lat (ms,95%): 0.00 err/s: 65152.94 reconn/s: 0.00
+[ 1990s ] thds: 998 tps: 0.00 qps: 62593.60 (r/w/o: 0.00/0.00/62593.60) lat (ms,95%): 0.00 err/s: 62593.00 reconn/s: 0.00
+[ 2000s ] thds: 998 tps: 0.00 qps: 64379.31 (r/w/o: 0.00/0.00/64379.31) lat (ms,95%): 0.00 err/s: 64379.51 reconn/s: 0.00
+[ 2010s ] thds: 998 tps: 0.00 qps: 61935.75 (r/w/o: 0.00/0.00/61935.75) lat (ms,95%): 0.00 err/s: 61935.55 reconn/s: 0.00
+[ 2020s ] thds: 998 tps: 0.00 qps: 62964.77 (r/w/o: 0.00/0.00/62964.77) lat (ms,95%): 0.00 err/s: 62965.37 reconn/s: 0.00
+[ 2030s ] thds: 998 tps: 0.00 qps: 62739.16 (r/w/o: 0.00/0.00/62739.16) lat (ms,95%): 0.00 err/s: 62738.26 reconn/s: 0.00
+[ 2040s ] thds: 998 tps: 0.00 qps: 64540.90 (r/w/o: 0.00/0.00/64540.90) lat (ms,95%): 0.00 err/s: 64541.30 reconn/s: 0.00
+[ 2050s ] thds: 998 tps: 0.00 qps: 65624.56 (r/w/o: 0.00/0.00/65624.56) lat (ms,95%): 0.00 err/s: 65624.46 reconn/s: 0.00
+[ 2060s ] thds: 998 tps: 0.00 qps: 63013.26 (r/w/o: 0.00/0.00/63013.26) lat (ms,95%): 0.00 err/s: 63013.66 reconn/s: 0.00
+[ 2070s ] thds: 998 tps: 0.00 qps: 63902.62 (r/w/o: 0.00/0.00/63902.62) lat (ms,95%): 0.00 err/s: 63902.12 reconn/s: 0.00
+[ 2080s ] thds: 998 tps: 0.00 qps: 62557.59 (r/w/o: 0.00/0.00/62557.59) lat (ms,95%): 0.00 err/s: 62557.69 reconn/s: 0.00
+[ 2090s ] thds: 998 tps: 0.00 qps: 62772.92 (r/w/o: 0.00/0.00/62772.92) lat (ms,95%): 0.00 err/s: 62773.02 reconn/s: 0.00
+[ 2100s ] thds: 998 tps: 0.00 qps: 61696.01 (r/w/o: 0.00/0.00/61696.01) lat (ms,95%): 0.00 err/s: 61696.51 reconn/s: 0.00
+[ 2110s ] thds: 998 tps: 0.00 qps: 65267.72 (r/w/o: 0.00/0.00/65267.72) lat (ms,95%): 0.00 err/s: 65266.82 reconn/s: 0.00
+[ 2120s ] thds: 998 tps: 0.00 qps: 64918.55 (r/w/o: 0.00/0.00/64918.55) lat (ms,95%): 0.00 err/s: 64919.25 reconn/s: 0.00

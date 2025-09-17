@@ -1,0 +1,146 @@
+.feature-section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  padding: 2rem 2rem;
+  background-color: #0a0a14;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.feature-card {
+  text-align: center;
+  padding: 2.5rem 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: white;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.feature-icon {
+  font-size: 2.5em;
+  color: #ff7b2d;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(120deg, #ff7b2d, #ff9f4a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.feature-card h3 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+  background: linear-gradient(120deg, #ff7b2d, #ff9f4a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.feature-card p {
+  color: #8b8b9c;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  margin-bottom: 0.8rem;
+}
+
+@media (max-width: 1024px) {
+  .feature-section {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 2rem 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .feature-section {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+}
+
+/* Make animation container more specific */
+.animation-container1 {
+  position: relative !important;
+  width: 100% !important;
+  max-width: 600px !important;
+  height: auto !important;
+  aspect-ratio: 1.1 !important;
+  margin: 0 auto !important;
+  overflow: visible !important;
+}
+
+/* Make static image selector more specific */
+.animation-container1 .static-image1,
+.static-image1 {
+  width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Make floating image selector more specific */
+.animation-container1 .floating-image1,
+.floating-image1 {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: auto !important;
+  z-index: 2 !important;
+  animation: floatUpDown1 6s ease-in-out infinite !important;
+}
+
+/* Keyframes for the floating animation */
+@keyframes floatUpDown1 {
+  0% {
+    transform: translateY(30px);
+  }
+
+  50% {
+    transform: translateY(-3px);
+  }
+
+  100% {
+    transform: translateY(30px);
+  }
+}
+
+/* Position product name for superscript */
+.product-name {
+  position: relative;
+  padding-right: 5px;
+}
+
+/* Style the GitHub superscript icon */
+.github-superscript {
+  position: absolute;
+  top: -10px;
+  right: -14px;
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 102, 0, 0.9);
+  border-radius: 50%;
+  padding: 3px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.github-superscript:hover {
+  transform: scale(1.2);
+  background: rgba(255, 120, 20, 1);
+}
+
+.github-superscript svg {
+  width: 14px;
+  height: 14px;
+}

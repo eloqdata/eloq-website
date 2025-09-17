@@ -1,0 +1,201 @@
+---
+title: Install from Binary
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+## Download and unzip EloqKV tarball
+
+EloqKV is compatible with RHEl 7, 8 and 9, Ubuntu 20.04, 22.04 and 24.04. Download
+the proper tarball for your operating system from [here](/download).
+
+After successfully downloading the proper binary, untar it in a directory.
+
+<Tabs
+  groupId="language"
+  defaultValue="ubuntu2404"
+  values={[
+    { label: 'Rhel7', value: 'centos7', },
+    { label: 'Rhel8', value: 'centos8', },
+    { label: 'Rhel9', value: 'centos9', },
+    { label: 'Ubuntu20.04', value: 'ubuntu2004', },
+    { label: 'Ubuntu22.04', value: 'ubuntu2204', },
+    { label: 'Ubuntu24.04', value: 'ubuntu2404', }
+  ]
+}>
+
+<TabItem value="centos7">
+
+```shell
+cd ${HOME}
+tar -zxvf eloqkv-0.8.20-rhel7-amd64.tar.gz
+```
+
+</TabItem>
+
+<TabItem value="centos8">
+
+```shell
+cd ${HOME}
+tar -zxvf eloqkv-0.8.20-rhel8-amd64.tar.gz
+```
+
+</TabItem>
+
+<TabItem value="centos9">
+
+```shell
+cd ${HOME}
+tar -zxvf eloqkv-0.8.20-rhel9-amd64.tar.gz
+```
+
+</TabItem>
+
+<TabItem value="ubuntu2004">
+
+```shell
+cd ${HOME}
+tar -zxvf eloqkv-0.8.20-ubuntu20-amd64.tar.gz
+```
+
+</TabItem>
+
+<TabItem value="ubuntu2204">
+
+```shell
+cd ${HOME}
+tar -zxvf eloqkv-0.8.20-ubuntu22-amd64.tar.gz
+```
+
+</TabItem>
+
+<TabItem value="ubuntu2404">
+
+```shell
+cd ${HOME}
+tar -zxvf eloqkv-0.8.20-ubuntu24-amd64.tar.gz
+```
+
+</TabItem>
+
+</Tabs>
+
+## Prepare EloqKV config file
+
+EloqKV uses a configuration file to customize settings. An example is provided in `conf/eloqkv.ini`
+under the installation directory. Below is an example of how to configure EloqKV to run on a local machine.
+
+Note: set `ip` field to 127.0.0.1 will block external access to EloqKV. It is recommened to set `ip` to
+the actual IP address of the server if you want to access EloqKV from another machine.
+
+Also note that EloqKV will automatically set reasonable default values for its parameters if no user specified
+value is provided in the configuration file. So if you have doubt with a certain parameter, just do not specify
+it in the configuration file.
+
+```shell
+[local]
+# It is recommended to set the IP to the actual server IP for external access
+ip=127.0.0.1
+port=6379
+
+# It is recommended to set core_number to approximately 80% of the total available
+# cores for optimal performance.
+core_number=3
+
+# Set node_memory_limit_mb to 60% of the total system memory to optimize resource allocation.
+node_memory_limit_mb=8192
+
+# Whether to enable persistent data store
+enable_data_store=off
+
+# Whether to enable WAL log
+enable_wal=off
+
+# Where to store raft log data
+path=data
+
+# It is recommended to set event_dispatcher_num to one-seventh of core_number
+# for balanced performance.
+event_dispatcher_num=1
+
+[cluster]
+#ip_port_list should include all eloqkv nodes in a cluster deployment.
+#For a single node deployment, set it to match the ip:port specified in the [local] section.
+ip_port_list=127.0.0.1:6379
+
+[store]
+# data store related configuration. Keep it empty for rocksdb based data store.
+```
+
+## Start EloqKV server
+
+The EloqKV `eloqkv` executable binary is installed in the `EloqKV/bin` directory. Start the server on the local machine using the commands below.
+
+```shell
+cd ${HOME}/EloqKV
+./bin/eloqkv --config=conf/eloqkv.ini
+```
+
+## Connect to EloqKV server
+
+EloqKV is compatible with the Redis protocol. We have included a `eloq-cli` for your convinence, but any redis client can connect to EloqKV. You can obtain official `redis-cli` by e.g. execute `sudo apt-get install redis-tools` on Ubuntu. Please use the same ip and port in config file `eloqkv.ini` to connect to EloqKV.
+
+```shell
+redis-cli -h 127.0.0.1 -p 6379
+```
+
+## Enable Persistent Data Store
+
+EloqKV supports the integration with pluggable data stores, enabling data persistence even when the EloqKV service is stopped. This capability facilitates the implementation of tiered storage strategies, allowing hot data to reside in memory for quick access, while cold data can be offloaded to disks.
+
+Current EloqKV release includes a local RocksDB storage engine. You can turn it on by edit `eloqkv.ini` and restart EloqKV.
+
+```shell
+[local]
+# set it to `on` to turn on persistent storage
+enable_data_store=on
+
+# Checkpoint_interval determines the period of flushing records into persistent store
+# so that data in persistent store will not lag too much behind
+checkpoint_interval=60
+```
+
+Note that enable persisitent storage will consume CPU resource to flush records in memory to kv store periodically. As a result, reduce core_num in `eloqkv.ini` when enable persisitent kv.
+
+## Enable WAL for Durability
+
+By enabling the Write-Ahead Logging (WAL), EloqKV can achieve Durability, i.e. all writes will be logged and data won't get lost in the event of a system crash. WAL need to be combined with persistent data store to work properly.
+
+Edit `eloqkv.ini` and restart EloqKV to enable WAL.
+
+```shell
+[local]
+# set it to `on` to turn on WAL
+enable_wal=on
+```
+
+## Setting Up a Cluster
+
+It is very simple to set up a cluster of EloqKV. Just start several EloqKV instances on different machines, each provided with a configuration file with nodes listed in the cluster section.
+
+For example, assuming we are setting up a cluster with 3 servers, on 192.168.1.20, 192.168.1.21 and 192.168.1.22:
+
+```shell
+[cluster]
+# ip_port_list should include all eloqkv nodes in the cluster.
+# Make sure to set them to match the ip:port specified in the [local]
+# section of the configuration file on each node.
+ip_port_list=192.168.1.20:6379,192.168.1.21:6379,192.168.1.22:6379
+```
+
+Now you can connect your client to any one of the servers in the cluster and enjoy the increased capacity. Data will be automatically sharded.
+By default, a server will fetch data from other servers automatically if the data is located on another node. You can disable auto-redirect
+and follow the Redis Cluster protocol by letting Redis cluster-aware client route query to the proper node.
+
+```shell
+[local]
+auto_redirect=false
+```
+
+Distributed transactions are always supported in EloqKV clusters. For example, MULTI commands and Lua scritpts will behave the same in a cluster just as on a single node.
