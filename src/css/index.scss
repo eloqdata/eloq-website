@@ -12,6 +12,7 @@
   max-width: 100%;
   background-color: #0a0a14;
   color: white;
+  overflow-x: hidden;
 }
 
 /* ActionButton */
@@ -1302,12 +1303,14 @@ html[data-theme="dark"] .Section p a {
   width: 100%;
   min-height: 600px;
   position: relative;
+  overflow: hidden;
 }
 
 .product-matrix-wrapper {
   position: relative;
-  width: 600px;
-  height: 600px;
+  width: min(92vw, 600px);
+  height: auto;
+  aspect-ratio: 1 / 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1324,28 +1327,16 @@ html[data-theme="dark"] .Section p a {
   .product-matrix-container {
     min-height: 480px;
   }
-
-  .product-matrix-wrapper {
-    transform: scale(0.8);
-  }
 }
 
 @media (max-width: 768px) {
   .product-matrix-container {
-    min-height: 380px;
-  }
-
-  .product-matrix-wrapper {
-    transform: scale(0.65);
+    min-height: 360px;
   }
 }
 
 @media (max-width: 480px) {
   .product-matrix-container {
-    min-height: 320px;
-  }
-
-  .product-matrix-wrapper {
-    transform: scale(0.55);
+    min-height: 300px;
   }
 }
