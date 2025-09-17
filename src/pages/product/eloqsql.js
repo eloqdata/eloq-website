@@ -235,7 +235,7 @@ export default function EloqSQL() {
               <div className={styles.tieredContent}>
                 <div className={styles.tieredImageContainer}>
                   <img
-                    src="/img/eloqsql-feature-mysql.png"
+                    src="/img/eloqsql-feature-mysql.jpg"
                     alt="MySQL Compatible"
                     className={styles.tieredImage}
                   />
