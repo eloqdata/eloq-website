@@ -1,3 +1,8 @@
+---
+toc_min_heading_level: 2
+toc_max_heading_level: 2
+---
+
 # Python SDK for Eloq
 
 > On this page, you can learn about:

@@ -229,10 +229,6 @@ module.exports = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      tableOfContents: {
-        minHeadingLevel: 2,
-        maxHeadingLevel: 2,
-      },
       colorMode: {
         defaultMode: 'dark',
         disableSwitch: true,
