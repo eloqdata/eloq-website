@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, {useEffect, useState, useRef} from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import GitHubButton from 'react-github-btn';
 import Typed from '@theme/Typed';
 
@@ -15,7 +15,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 import Layout from '@theme/Layout';
 import './FeatureSection.css';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faBolt,
   faDollarSign,
@@ -346,11 +346,11 @@ You can follow the latest news from the React Native team on Twitter
   `,
 };
 
-function Heading({text}) {
+function Heading({ text }) {
   return <h2 className="Heading">{text}</h2>;
 }
 
-function ActionButton({href, type = 'primary', target, children}) {
+function ActionButton({ href, type = 'primary', target, children }) {
   return (
     <a className={`ActionButton ${type}`} href={href} target={target}>
       {children}
@@ -358,11 +358,11 @@ function ActionButton({href, type = 'primary', target, children}) {
   );
 }
 
-function TextColumn({title, text, moreContent}) {
+function TextColumn({ title, text, moreContent }) {
   return (
     <>
       <Heading text={title} />
-      <div dangerouslySetInnerHTML={{__html: text}} />
+      <div dangerouslySetInnerHTML={{ __html: text }} />
       {moreContent}
     </>
   );
@@ -406,7 +406,7 @@ function HomeCallToAction() {
   );
 }
 
-function TwitterButton({accountName}) {
+function TwitterButton({ accountName }) {
   return (
     <a
       href={`https://twitter.com/intent/follow?screen_name=${accountName}&region=follow_link`}
@@ -450,7 +450,7 @@ export function Section({
   );
 }
 
-function TwoColumns({columnOne, columnTwo, reverse}) {
+function TwoColumns({ columnOne, columnTwo, reverse }) {
   return (
     <div className={`TwoColumns ${reverse ? 'reverse' : ''}`}>
       <div className={`column first ${reverse ? 'right' : 'left'}`}>
@@ -463,7 +463,7 @@ function TwoColumns({columnOne, columnTwo, reverse}) {
   );
 }
 
-function ScreenRect({className, fill, stroke}) {
+function ScreenRect({ className, fill, stroke }) {
   return (
     <rect
       className={`screen ${className || ''}`}
@@ -687,7 +687,7 @@ function DecoupleStore() {
 /* Community */
 
 function AppList() {
-  const {siteConfig} = useDocusaurusContext();
+  const { siteConfig } = useDocusaurusContext();
   const apps = Object.values(siteConfig.customFields.users)
     .flat()
     .filter(app => app.pinned);
@@ -871,7 +871,7 @@ function HomePage() {
       description="Build the Next Generation of Databases the Right Way"
       wrapperClassName="homepage">
       <style>{circularAnimationStyles}</style>
-      <main style={{marginTop: '-0px'}}>
+      <main style={{ marginTop: '-0px' }}>
         {/* News Banner */}
         <div
           className="container1"
@@ -922,7 +922,7 @@ function HomePage() {
                   height="20"
                   viewBox="0 0 24 24"
                   fill="none"
-                  style={{color: '#ff7b2d'}}>
+                  style={{ color: '#ff7b2d' }}>
                   <path
                     d="M5 12h14M12 5l7 7-7 7"
                     stroke="currentColor"
@@ -972,21 +972,11 @@ function HomePage() {
               </p>
 
               {/* Add buttons for signup and trial */}
-              <div style={buttonStyles.buttonContainer}>
-                <Link
-                  to="https://cloud.eloqdata.com/signup"
-                  style={{
-                    ...buttonStyles.actionButton,
-                    ...buttonStyles.primary,
-                  }}>
+              <div className="home-button-container">
+                <Link to="https://cloud.eloqdata.com/signup" className="home-button primary">
                   Start for Free
                 </Link>
-                <Link
-                  to="/product/eloqkv"
-                  style={{
-                    ...buttonStyles.actionButton,
-                    ...buttonStyles.secondary,
-                  }}>
+                <Link to="/product/eloqkv" className="home-button secondary">
                   Explore More Products
                 </Link>
               </div>
@@ -1020,27 +1010,9 @@ function HomePage() {
           </p>
 
           {/* Circular Product Layout */}
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginTop: '30px', // Reduced from 60px
-              marginBottom: '30px', // Reduced from 60px
-              width: '100%',
-              minHeight: '600px', // Reduced from 700px
-              position: 'relative',
-            }}>
+          <div className="product-matrix-container">
             {/* Wrapper for Product Matrix */}
-            <div
-              style={{
-                position: 'relative',
-                width: '600px',
-                height: '600px',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
+            <div className="product-matrix-wrapper">
               {/* Orbit Lines - replacing old border */}
               <svg
                 width="500"
@@ -1064,15 +1036,15 @@ function HomePage() {
                     y2="0%">
                     <stop
                       offset="0%"
-                      style={{stopColor: 'rgba(255, 123, 45, 0.4)'}}
+                      style={{ stopColor: 'rgba(255, 123, 45, 0.4)' }}
                     />
                     <stop
                       offset="50%"
-                      style={{stopColor: 'rgba(255, 255, 255, 0.3)'}}
+                      style={{ stopColor: 'rgba(255, 255, 255, 0.3)' }}
                     />
                     <stop
                       offset="100%"
-                      style={{stopColor: 'rgba(255, 123, 45, 0.4)'}}
+                      style={{ stopColor: 'rgba(255, 123, 45, 0.4)' }}
                     />
                   </linearGradient>
                   <linearGradient
@@ -1083,15 +1055,15 @@ function HomePage() {
                     y2="0%">
                     <stop
                       offset="0%"
-                      style={{stopColor: 'rgba(255, 123, 45, 0.4)'}}
+                      style={{ stopColor: 'rgba(255, 123, 45, 0.4)' }}
                     />
                     <stop
                       offset="50%"
-                      style={{stopColor: 'rgba(255, 255, 255, 0.3)'}}
+                      style={{ stopColor: 'rgba(255, 255, 255, 0.3)' }}
                     />
                     <stop
                       offset="100%"
-                      style={{stopColor: 'rgba(255, 123, 45, 0.4)'}}
+                      style={{ stopColor: 'rgba(255, 123, 45, 0.4)' }}
                     />
                   </linearGradient>
                   <linearGradient
@@ -1102,15 +1074,15 @@ function HomePage() {
                     y2="0%">
                     <stop
                       offset="0%"
-                      style={{stopColor: 'rgba(255, 123, 45, 0.4)'}}
+                      style={{ stopColor: 'rgba(255, 123, 45, 0.4)' }}
                     />
                     <stop
                       offset="50%"
-                      style={{stopColor: 'rgba(255, 255, 255, 0.3)'}}
+                      style={{ stopColor: 'rgba(255, 255, 255, 0.3)' }}
                     />
                     <stop
                       offset="100%"
-                      style={{stopColor: 'rgba(255, 123, 45, 0.4)'}}
+                      style={{ stopColor: 'rgba(255, 123, 45, 0.4)' }}
                     />
                   </linearGradient>
                 </defs>
@@ -1247,24 +1219,9 @@ function HomePage() {
               </div>
 
               {/* Static container for outer products */}
-              <div
-                style={{
-                  position: 'absolute',
-                  width: '100%',
-                  height: '100%',
-                }}>
+              <div className="matrix-products">
                 {/* EloqKV - Top-Left */}
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: '8%',
-                    left: '15%',
-                    transform: 'none',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    // no animation
-                  }}>
+                <div className="matrix-item eloqkv" style={{ position: 'absolute', top: '8%', left: '15%', transform: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   <Link
                     to="/product/eloqkv"
                     style={{
@@ -1356,17 +1313,7 @@ function HomePage() {
                 </div>
 
                 {/* EloqDoc - Bottom-Left */}
-                <div
-                  style={{
-                    position: 'absolute',
-                    left: '15%',
-                    bottom: '8%',
-                    transform: 'none',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    // no animation
-                  }}>
+                <div className="matrix-item eloqdoc" style={{ position: 'absolute', left: '15%', bottom: '8%', transform: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   <Link
                     to="/product/eloqdoc"
                     style={{
@@ -1458,17 +1405,7 @@ function HomePage() {
                 </div>
 
                 {/* EloqSQL - Top-Right */}
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: '8%',
-                    right: '15%',
-                    transform: 'none',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    // no animation
-                  }}>
+                <div className="matrix-item eloqsql" style={{ position: 'absolute', top: '8%', right: '15%', transform: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   <Link
                     to="/product/eloqsql"
                     style={{
@@ -1560,17 +1497,7 @@ function HomePage() {
                 </div>
 
                 {/* EloqConvergedDB - Bottom-Right */}
-                <div
-                  style={{
-                    position: 'absolute',
-                    right: '15%',
-                    bottom: '8%',
-                    transform: 'none',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    // no animation
-                  }}>
+                <div className="matrix-item eloqconverged" style={{ position: 'absolute', right: '15%', bottom: '8%', transform: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   <Link
                     to="/product/eloqconvergeddb"
                     style={{
@@ -1668,7 +1595,7 @@ function HomePage() {
         </div>
 
         {/* Features Section */}
-        <div className="section-container" style={{marginTop: '-30px'}}>
+        <div className="section-container" style={{ marginTop: '-30px' }}>
           <h2 className="section-title">Features</h2>
           <p className="section-subtitle">
             All the database features you need for your next blockbuster AI
@@ -1676,7 +1603,7 @@ function HomePage() {
           </p>
 
           {/* Tiered Storage Section */}
-          <div className={styles.tieredSection} style={{marginTop: '-20px'}}>
+          <div className={styles.tieredSection} style={{ marginTop: '-20px' }}>
             <div className={styles.tieredInner}>
               <div className={styles.tieredContent}>
                 <div className={styles.tieredImageContainer}>

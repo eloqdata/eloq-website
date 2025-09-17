@@ -198,6 +198,7 @@
 }
 
 @media only screen and (min-width: 961px) {
+
   /* Give video more space than text */
   .FastRefresh .TwoColumns {
     grid-template-columns: 2fr 1fr;
@@ -700,7 +701,7 @@
   overflow-x: hidden;
 }
 
-.Section + .Section {
+.Section+.Section {
   border-top: 1px solid var(--ifm-table-border-color);
 }
 
@@ -759,6 +760,7 @@ html[data-theme="dark"] .Section p a {
 }
 
 @media only screen and (min-width: 961px) {
+
   /* Give more width for the video */
   .VideoContent .TwoColumns {
     grid-template-columns: 1fr 2fr;
@@ -814,6 +816,7 @@ html[data-theme="dark"] .Section p a {
 }
 
 @media only screen and (max-width: 960px) {
+
   .TwoColumns,
   .TwoColumns.reverse {
     grid-template-columns: 1fr;
@@ -879,6 +882,52 @@ html[data-theme="dark"] .Section p a {
   background-position: center;
 }
 
+/* Home primary/secondary buttons */
+.home-button-container {
+  display: flex;
+  gap: 26px;
+  margin-top: 6px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.home-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 2px solid #ff7b2d;
+}
+
+.home-button.primary {
+  background: linear-gradient(120deg, #ff7b2d, #ff9f4a);
+  color: #fff;
+  border: none;
+}
+
+.home-button.secondary {
+  background: transparent;
+  color: #ff7b2d;
+  border-color: #ff7b2d;
+}
+
+@media (max-width: 768px) {
+  .home-button-container {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .home-button {
+    width: 100%;
+    text-align: center;
+  }
+}
+
 .product-mid-column {
   text-align: center;
   margin-bottom: 2rem;
@@ -904,14 +953,12 @@ html[data-theme="dark"] .Section p a {
     font-size: 2.75rem;
     font-weight: 1000;
     margin-bottom: 1rem;
-    background: linear-gradient(
-      120deg,
-      #ff7b2d 0%,
-      #ff9f4a 25%,
-      #ff7b2d 50%,
-      #ff9f4a 75%,
-      #ff7b2d 100%
-    );
+    background: linear-gradient(120deg,
+        #ff7b2d 0%,
+        #ff9f4a 25%,
+        #ff7b2d 50%,
+        #ff9f4a 75%,
+        #ff7b2d 100%);
     background-size: 100% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -989,6 +1036,23 @@ html[data-theme="dark"] .Section p a {
   }
 }
 
+@media (max-width: 640px) {
+  .container1 {
+    padding: 2.5rem 0;
+  }
+
+  .product-left-column {
+    .title {
+      font-size: 2.2rem;
+    }
+
+    .tagline {
+      margin-bottom: 2rem;
+      font-size: 1rem;
+    }
+  }
+}
+
 .feature-section {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1050,6 +1114,20 @@ html[data-theme="dark"] .Section p a {
     max-width: 1200px;
     margin: 0 auto 2rem;
     padding: 0 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .section-container {
+    .section-title {
+      font-size: 2.2rem;
+      padding: 0 1rem;
+    }
+
+    .section-subtitle {
+      font-size: 1.05rem;
+      padding: 0 1rem;
+    }
   }
 }
 
@@ -1211,5 +1289,63 @@ html[data-theme="dark"] .Section p a {
 @media (max-width: 1024px) {
   .product-shortcuts {
     justify-content: center;
+  }
+}
+
+/* Product Matrix layout */
+.product-matrix-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  width: 100%;
+  min-height: 600px;
+  position: relative;
+}
+
+.product-matrix-wrapper {
+  position: relative;
+  width: 600px;
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-origin: center center;
+}
+
+.matrix-products {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 1024px) {
+  .product-matrix-container {
+    min-height: 480px;
+  }
+
+  .product-matrix-wrapper {
+    transform: scale(0.8);
+  }
+}
+
+@media (max-width: 768px) {
+  .product-matrix-container {
+    min-height: 380px;
+  }
+
+  .product-matrix-wrapper {
+    transform: scale(0.65);
+  }
+}
+
+@media (max-width: 480px) {
+  .product-matrix-container {
+    min-height: 320px;
+  }
+
+  .product-matrix-wrapper {
+    transform: scale(0.55);
   }
 }
