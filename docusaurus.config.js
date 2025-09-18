@@ -9,6 +9,7 @@
 
 //const lastVersion = versions[0];
 const copyright = `Copyright © ${new Date().getFullYear()} EloqData PTE. LTD.`;
+const trademark = `Redis, MySQL, PostgreSQL, MariaDB, MongoDB, and Kubernetes are trademarks of their respective owners. All other trademarks are the property of their respective owners.`;
 
 const commonDocsOptions = {
   breadcrumbs: false,
@@ -581,7 +582,7 @@ module.exports = {
           src: 'img/eloqdata_logo.png',
           href: 'https://www.eloqdata.com/',
         },
-        copyright,
+        copyright: `${copyright}<br/>${trademark}`,
       },
       metadata: [
         {
