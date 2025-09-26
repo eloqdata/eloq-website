@@ -1005,7 +1005,7 @@ function HomePage() {
           <div className="product-columns">
             <div className="product-left-column">
               <h1 className="title">
-                Revolutionary Databases Powering the AI Age
+                Converged Databases Powering the AI Age
               </h1>
               <p className="tagline">
                 Databases for all your AI app needs—multimodal, transactional,
