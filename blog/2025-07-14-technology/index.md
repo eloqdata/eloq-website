@@ -7,7 +7,7 @@ image: /img/blog/dstech1.jpg
 description: This article explores the motivations, technical foundations, and benefits of Data Substrate, providing a comprehensive understanding of how this architecture addresses the critical challenges facing modern data infrastructures.
 featured: true
 blog: true
-featuredMain: true
+featuredMain: false
 ---
 
 At EloqData, we've developed **Data Substrate**—a database architecture designed to meet the unprecedented demands of modern applications in the AI age. Unlike traditional database systems that struggle with the scale and complexity of AI workloads, Data Substrate reimagines the database as a unified, distributed computer where memory, compute, logging, and storage are fully decoupled yet globally addressable.

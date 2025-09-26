@@ -3,9 +3,11 @@ title: "Coroutines and Async Programming: The Future of Online Databases"
 authors: eloq
 date: 2025-09-26
 tags: [Company]
+image: /img/blog/blog_coro.jpg
 description: "Explore one of our core engineering practices for future online databases: coroutines and async programming."
 blog: true
-featured: false
+featured: true
+featuredMain: true
 ---
 
 Online databases are the backbone of interactive applications. Despite coming in many different types, online databases are all engineered for low-latency, high-throughput [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) operations. At EloqData, we use the universal [Data Substrate](https://eloqdata.com/blog/2025/07/14/technology) to build online databases for any model—from key-value and tables to JSON documents and vectors. In this post, we explore one of our core engineering practices for future online databases.

@@ -1,5 +1,5 @@
 ---
-title: 'Exploring EloqKV Decoupled Architecture: A Tour with an Agentic AI Case Study'
+title: 'Exploring EloqKV Decoupled Architecture: A Tour with an Agentic AI'
 authors: eloq
 date: 2025-03-28
 tags: [Company]

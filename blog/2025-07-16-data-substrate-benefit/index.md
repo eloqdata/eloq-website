@@ -5,9 +5,8 @@ date: 2025-07-16
 tags: [Company]
 image: /img/blog/dsbenefit1.jpg
 description: In this post, we elaborate on why we made specific design choices in Data Substrate and how these choices affect the resulting database solutions we built, including auto-scaling and cloud-native features.
-featured: true
+featured: false
 blog: true
-featuredMain: false
 ---
 
 In the [previous article](/blog/2025/07/15/data-substrate-detail), we discussed the details of some of the architecture design of Data Substrate. In this article, we continue the discussion and elaborate on why we made these design choices and how these choices affect the resulting database solutions we built.
