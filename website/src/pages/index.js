@@ -866,6 +866,47 @@ function HomePage() {
     }
   };
 
+  // Clean up all tooltips on component unmount or page navigation
+  useEffect(() => {
+    const cleanupAllTooltips = () => {
+      const tooltipIds = [
+        'eloqcloud-tooltip',
+        'eloqkv-tooltip',
+        'eloqdoc-tooltip',
+        'eloqsql-tooltip',
+        'eloqconverged-tooltip',
+      ];
+
+      tooltipIds.forEach(id => {
+        const tooltip = document.getElementById(id);
+        if (tooltip) tooltip.remove();
+      });
+    };
+
+    // Clean up on page visibility change (when user switches tabs/windows)
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        cleanupAllTooltips();
+      }
+    };
+
+    // Clean up on beforeunload (when page is about to be unloaded)
+    const handleBeforeUnload = () => {
+      cleanupAllTooltips();
+    };
+
+    // Add event listeners
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    // Cleanup function - runs when component unmounts
+    return () => {
+      cleanupAllTooltips();
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
+
   return (
     <Layout
       description="Build the Next Generation of Databases the Right Way"
@@ -1191,6 +1232,12 @@ function HomePage() {
                         e.currentTarget.style.transform = 'scale(1.1)';
                         e.currentTarget.parentElement.style.boxShadow =
                           '0 20px 50px rgba(255, 123, 45, 0.4)';
+
+                        // Remove existing tooltip if any
+                        const existingTooltip =
+                          document.getElementById('eloqcloud-tooltip');
+                        if (existingTooltip) existingTooltip.remove();
+
                         const tooltip = document.createElement('div');
                         tooltip.id = 'eloqcloud-tooltip';
                         tooltip.innerHTML =
@@ -1214,11 +1261,15 @@ function HomePage() {
                         document.body.appendChild(tooltip);
 
                         const updatePosition = evt => {
-                          tooltip.style.left = evt.clientX + 10 + 'px';
-                          tooltip.style.top = evt.clientY - 10 + 'px';
+                          if (tooltip && tooltip.parentNode) {
+                            tooltip.style.left = evt.clientX + 10 + 'px';
+                            tooltip.style.top = evt.clientY - 10 + 'px';
+                          }
                         };
 
                         updatePosition(e);
+                        // Store the updatePosition function for cleanup
+                        e.currentTarget._tooltipUpdatePosition = updatePosition;
                         e.currentTarget.addEventListener(
                           'mousemove',
                           updatePosition
@@ -1228,6 +1279,17 @@ function HomePage() {
                         e.currentTarget.style.transform = 'scale(1)';
                         e.currentTarget.parentElement.style.boxShadow =
                           '0 15px 40px rgba(255, 123, 45, 0.3)';
+
+                        // Remove mousemove event listener
+                        if (e.currentTarget._tooltipUpdatePosition) {
+                          e.currentTarget.removeEventListener(
+                            'mousemove',
+                            e.currentTarget._tooltipUpdatePosition
+                          );
+                          delete e.currentTarget._tooltipUpdatePosition;
+                        }
+
+                        // Remove tooltip
                         const tooltip =
                           document.getElementById('eloqcloud-tooltip');
                         if (tooltip) tooltip.remove();
@@ -1299,6 +1361,12 @@ function HomePage() {
                           e.currentTarget.style.transform = 'scale(1.2)';
                           e.currentTarget.parentElement.style.boxShadow =
                             '0 15px 40px rgba(0, 0, 0, 0.6)';
+
+                          // Remove existing tooltip if any
+                          const existingTooltip =
+                            document.getElementById('eloqkv-tooltip');
+                          if (existingTooltip) existingTooltip.remove();
+
                           // Show tooltip
                           const tooltip = document.createElement('div');
                           tooltip.id = 'eloqkv-tooltip';
@@ -1323,11 +1391,16 @@ function HomePage() {
                           document.body.appendChild(tooltip);
 
                           const updatePosition = e => {
-                            tooltip.style.left = e.clientX + 10 + 'px';
-                            tooltip.style.top = e.clientY - 10 + 'px';
+                            if (tooltip && tooltip.parentNode) {
+                              tooltip.style.left = e.clientX + 10 + 'px';
+                              tooltip.style.top = e.clientY - 10 + 'px';
+                            }
                           };
 
                           updatePosition(e);
+                          // Store the updatePosition function for cleanup
+                          e.currentTarget._tooltipUpdatePosition =
+                            updatePosition;
                           e.currentTarget.addEventListener(
                             'mousemove',
                             updatePosition
@@ -1337,6 +1410,17 @@ function HomePage() {
                           e.currentTarget.style.transform = 'scale(1)';
                           e.currentTarget.parentElement.style.boxShadow =
                             '0 10px 30px rgba(0, 0, 0, 0.4)';
+
+                          // Remove mousemove event listener
+                          if (e.currentTarget._tooltipUpdatePosition) {
+                            e.currentTarget.removeEventListener(
+                              'mousemove',
+                              e.currentTarget._tooltipUpdatePosition
+                            );
+                            delete e.currentTarget._tooltipUpdatePosition;
+                          }
+
+                          // Remove tooltip
                           const tooltip =
                             document.getElementById('eloqkv-tooltip');
                           if (tooltip) tooltip.remove();
@@ -1401,6 +1485,12 @@ function HomePage() {
                           e.currentTarget.style.transform = 'scale(1.2)';
                           e.currentTarget.parentElement.style.boxShadow =
                             '0 15px 40px rgba(0, 0, 0, 0.6)';
+
+                          // Remove existing tooltip if any
+                          const existingTooltip =
+                            document.getElementById('eloqdoc-tooltip');
+                          if (existingTooltip) existingTooltip.remove();
+
                           // Show tooltip
                           const tooltip = document.createElement('div');
                           tooltip.id = 'eloqdoc-tooltip';
@@ -1425,11 +1515,16 @@ function HomePage() {
                           document.body.appendChild(tooltip);
 
                           const updatePosition = e => {
-                            tooltip.style.left = e.clientX + 10 + 'px';
-                            tooltip.style.top = e.clientY - 10 + 'px';
+                            if (tooltip && tooltip.parentNode) {
+                              tooltip.style.left = e.clientX + 10 + 'px';
+                              tooltip.style.top = e.clientY - 10 + 'px';
+                            }
                           };
 
                           updatePosition(e);
+                          // Store the updatePosition function for cleanup
+                          e.currentTarget._tooltipUpdatePosition =
+                            updatePosition;
                           e.currentTarget.addEventListener(
                             'mousemove',
                             updatePosition
@@ -1439,6 +1534,17 @@ function HomePage() {
                           e.currentTarget.style.transform = 'scale(1)';
                           e.currentTarget.parentElement.style.boxShadow =
                             '0 10px 30px rgba(0, 0, 0, 0.4)';
+
+                          // Remove mousemove event listener
+                          if (e.currentTarget._tooltipUpdatePosition) {
+                            e.currentTarget.removeEventListener(
+                              'mousemove',
+                              e.currentTarget._tooltipUpdatePosition
+                            );
+                            delete e.currentTarget._tooltipUpdatePosition;
+                          }
+
+                          // Remove tooltip
                           const tooltip =
                             document.getElementById('eloqdoc-tooltip');
                           if (tooltip) tooltip.remove();
@@ -1503,6 +1609,12 @@ function HomePage() {
                           e.currentTarget.style.transform = 'scale(1.2)';
                           e.currentTarget.parentElement.style.boxShadow =
                             '0 15px 40px rgba(0, 0, 0, 0.6)';
+
+                          // Remove existing tooltip if any
+                          const existingTooltip =
+                            document.getElementById('eloqsql-tooltip');
+                          if (existingTooltip) existingTooltip.remove();
+
                           // Show tooltip
                           const tooltip = document.createElement('div');
                           tooltip.id = 'eloqsql-tooltip';
@@ -1527,11 +1639,16 @@ function HomePage() {
                           document.body.appendChild(tooltip);
 
                           const updatePosition = e => {
-                            tooltip.style.left = e.clientX + 10 + 'px';
-                            tooltip.style.top = e.clientY - 10 + 'px';
+                            if (tooltip && tooltip.parentNode) {
+                              tooltip.style.left = e.clientX + 10 + 'px';
+                              tooltip.style.top = e.clientY - 10 + 'px';
+                            }
                           };
 
                           updatePosition(e);
+                          // Store the updatePosition function for cleanup
+                          e.currentTarget._tooltipUpdatePosition =
+                            updatePosition;
                           e.currentTarget.addEventListener(
                             'mousemove',
                             updatePosition
@@ -1541,6 +1658,17 @@ function HomePage() {
                           e.currentTarget.style.transform = 'scale(1)';
                           e.currentTarget.parentElement.style.boxShadow =
                             '0 10px 30px rgba(0, 0, 0, 0.4)';
+
+                          // Remove mousemove event listener
+                          if (e.currentTarget._tooltipUpdatePosition) {
+                            e.currentTarget.removeEventListener(
+                              'mousemove',
+                              e.currentTarget._tooltipUpdatePosition
+                            );
+                            delete e.currentTarget._tooltipUpdatePosition;
+                          }
+
+                          // Remove tooltip
                           const tooltip =
                             document.getElementById('eloqsql-tooltip');
                           if (tooltip) tooltip.remove();
@@ -1607,6 +1735,13 @@ function HomePage() {
                           e.currentTarget.style.transform = 'scale(1.2)';
                           e.currentTarget.parentElement.style.boxShadow =
                             '0 15px 40px rgba(0, 0, 0, 0.6)';
+
+                          // Remove existing tooltip if any
+                          const existingTooltip = document.getElementById(
+                            'eloqconverged-tooltip'
+                          );
+                          if (existingTooltip) existingTooltip.remove();
+
                           // Show tooltip
                           const tooltip = document.createElement('div');
                           tooltip.id = 'eloqconverged-tooltip';
@@ -1630,11 +1765,16 @@ function HomePage() {
                           document.body.appendChild(tooltip);
 
                           const updatePosition = e => {
-                            tooltip.style.left = e.clientX + 10 + 'px';
-                            tooltip.style.top = e.clientY - 10 + 'px';
+                            if (tooltip && tooltip.parentNode) {
+                              tooltip.style.left = e.clientX + 10 + 'px';
+                              tooltip.style.top = e.clientY - 10 + 'px';
+                            }
                           };
 
                           updatePosition(e);
+                          // Store the updatePosition function for cleanup
+                          e.currentTarget._tooltipUpdatePosition =
+                            updatePosition;
                           e.currentTarget.addEventListener(
                             'mousemove',
                             updatePosition
@@ -1644,6 +1784,17 @@ function HomePage() {
                           e.currentTarget.style.transform = 'scale(1)';
                           e.currentTarget.parentElement.style.boxShadow =
                             '0 10px 30px rgba(0, 0, 0, 0.4)';
+
+                          // Remove mousemove event listener
+                          if (e.currentTarget._tooltipUpdatePosition) {
+                            e.currentTarget.removeEventListener(
+                              'mousemove',
+                              e.currentTarget._tooltipUpdatePosition
+                            );
+                            delete e.currentTarget._tooltipUpdatePosition;
+                          }
+
+                          // Remove tooltip
                           const tooltip = document.getElementById(
                             'eloqconverged-tooltip'
                           );
