@@ -22,7 +22,7 @@ Our SDK allows you to manage:
 
 Eloq API:
 
-- [**Manage organization with the Eloq API**](./Organization)
+- [**Manage organization with the Eloq API**](./organization)
 - [**Manage cluster with the Eloq API**](./cluster)
 
 ## Installation

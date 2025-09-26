@@ -58,7 +58,7 @@ The API returns responses in JSON format with standard HTTP status codes:
 
 ## See details
 
-- [Organization Management API](./Organization)
+- [Organization Management API](./organization)
 - [Cluster Management API](./cluster)
 
 ## SDK Support
