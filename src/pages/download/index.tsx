@@ -76,9 +76,13 @@ const productFeatures: ProductFeatures = {
   },
   eloqdoc: {
     title: "EloqDoc",
-    version: "v0.2.1",
+    version: "0.2.6",
     kvtype: "cassandra",
     storageTypes: [
+      {
+        value: "eloqdss_rocksdb",
+        label: "RocksDB",
+      },
       {
         value: "rocks_s3",
         label: "RocksCloud",
