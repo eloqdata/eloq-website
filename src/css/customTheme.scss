@@ -1987,18 +1987,6 @@ figcaption>p:last-child {
   margin-bottom: 0;
 }
 
-/* Blog and News section styling improvements */
-.blog-wrapper,
-.blog-list-page,
-.blog-post-page,
-.blog-container,
-article,
-.markdown {
-  background-color: var(--ifm-background-color) !important;
-  color: #e4e4e7 !important;
-  /* Slightly off-white for better readability */
-}
-
 /* Adjust heading colors */
 .blog-wrapper h1,
 .blog-post-page h1,
@@ -2016,8 +2004,7 @@ article h2,
 .blog-container h3,
 article h3,
 .markdown h3 {
-  color: #ff7b2d !important;
-  /* Slightly brighter for headings */
+  color: var(--ifm-heading-color) !important;
 }
 
 .blog-list-page h2,
@@ -2038,8 +2025,7 @@ article p,
 .blog-container li,
 article li,
 .markdown li {
-  color: #d4d4d8 !important;
-  /* Softer white for better contrast */
+  color: var(--ifm-font-color-base) !important;
 }
 
 .blog-wrapper a:hover,
@@ -2048,8 +2034,7 @@ article li,
 .blog-container a:hover,
 article a:hover,
 .markdown a:hover {
-  color: #93c5fd !important;
-  /* Lighter blue on hover */
+  color: var(--ifm-link-hover-color) !important;
 }
 
 /* Code blocks */
@@ -2059,8 +2044,7 @@ article a:hover,
 .blog-container pre,
 article pre,
 .markdown pre {
-  background-color: #282c34 !important;
-  /* Darker background for code blocks */
+  background-color: var(--ifm-pre-background) !important;
 }
 
 /* Inline code */
@@ -2070,8 +2054,8 @@ article pre,
 .blog-container code,
 article code,
 .markdown code {
-  background-color: #2d3748 !important;
-  color: #e2e8f0 !important;
+  background-color: var(--ifm-code-background) !important;
+  color: var(--ifm-code-color) !important;
 }
 
 /* Blog post cards */

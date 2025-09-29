@@ -218,6 +218,7 @@ h1.header-title {
 
 /* For smaller screens, adjust the font size */
 @media (max-width: 768px) {
+
   .hero__title,
   .hero-title,
   h1.header-title {

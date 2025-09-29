@@ -1,10 +1,14 @@
 /* Common container styles */
 .blogPostContainer {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
+  box-sizing: border-box;
 }
 
 /* Blog list page - smaller sidebars */
@@ -15,8 +19,10 @@
 }
 
 :global(.blog-list-page) .blogContent {
-  flex: 0 1 900px;
+  flex: 1 1 900px;
   margin: 0 1rem;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 /* Blog post page - wider sidebars */
@@ -27,8 +33,10 @@
 }
 
 :global(.blog-post-page) .blogContent {
-  flex: 0 1 800px;
+  flex: 1 1 800px;
   margin: 0 2rem;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 @media (max-width: 996px) {
@@ -36,6 +44,7 @@
     flex-direction: column;
     align-items: center;
     padding: 1rem;
+    gap: 1.5rem;
   }
 
   .blogSidebar {
@@ -45,5 +54,6 @@
   .blogContent {
     margin: 0;
     width: 100%;
+    box-sizing: border-box;
   }
 }
