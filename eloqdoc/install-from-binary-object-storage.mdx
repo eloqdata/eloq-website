@@ -1,0 +1,146 @@
+---
+title: Install from Binary - Object Storage
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+## Download and unzip EloqDoc tarball
+
+EloqDoc is compatible with RHEl 7, 8 and 9, Ubuntu 20.04, 22.04 and 24.04. Download
+the proper tarball for your operating system from [here](/download). For **Storage Type**, select `RocksCloud`.
+
+After successfully downloading the proper binary, untar it in a directory.
+
+<Tabs
+  groupId="language"
+  defaultValue="ubuntu2204"
+  values={[
+    { label: 'Rhel7', value: 'centos7', },
+    { label: 'Rhel8', value: 'centos8', },
+    { label: 'Rhel9', value: 'centos9', },
+    { label: 'Ubuntu20.04', value: 'ubuntu2004', },
+    { label: 'Ubuntu22.04', value: 'ubuntu2204', },
+    { label: 'Ubuntu24.04', value: 'ubuntu2404', }
+  ]
+}>
+
+<TabItem value="centos7">
+
+```shell
+cd ${HOME}
+mkdir eloqdoc-rockscloud && tar -zxf eloqdoc-0.2.6-rhel7-amd64.tar.gz -C eloqdoc-rockscloud
+```
+
+</TabItem>
+
+<TabItem value="centos8">
+
+```shell
+cd ${HOME}
+mkdir eloqdoc-rockscloud && tar -zxf eloqdoc-0.2.6-rhel8-amd64.tar.gz -C eloqdoc-rockscloud
+```
+
+</TabItem>
+
+<TabItem value="centos9">
+
+```shell
+cd ${HOME}
+mkdir eloqdoc-rockscloud && tar -zxf eloqdoc-0.2.6-rhel9-amd64.tar.gz -C eloqdoc-rockscloud
+```
+
+</TabItem>
+
+<TabItem value="ubuntu2004">
+
+```shell
+cd ${HOME}
+mkdir eloqdoc-rockscloud && tar -zxf eloqdoc-0.2.6-ubuntu20-amd64.tar.gz -C eloqdoc-rockscloud
+```
+
+</TabItem>
+
+<TabItem value="ubuntu2204">
+
+```shell
+cd ${HOME}
+mkdir eloqdoc-rockscloud && tar -zxf eloqdoc-0.2.6-ubuntu22-amd64.tar.gz -C eloqdoc-rockscloud
+```
+
+</TabItem>
+
+<TabItem value="ubuntu2404">
+
+```shell
+cd ${HOME}
+mkdir eloqdoc-rockscloud && tar -zxf eloqdoc-0.2.6-ubuntu24-amd64.tar.gz -C eloqdoc-rockscloud
+```
+
+</TabItem>
+
+</Tabs>
+
+
+## Start a S3 emulator, takes `minio` as an exmaple.
+
+```bash
+cd $HOME
+mkdir minio-service && cd minio-service
+wget https://dl.min.io/server/minio/release/linux-amd64/minio
+chmod +x minio
+./minio server ./data
+```
+
+By default, `minio` listens on `http://127.0.0.1:9000`, whose default credentials is `minioadmin:minioadmin`,.
+
+
+## Prepare EloqDoc for Object Storage config file
+
+
+After uncompress the package, you should see three directories: `bin`, `lib`, and `etc`.
+`bin` contains all executable files, `lib` contains all dependencies, and `etc` contains an example configuration file `mongod.conf`. Switch to `eloqdoc-rockscloud` to verify that.
+
+```bash
+cd $HOME/eloqdoc-rockscloud && ls
+```
+
+Create a data directory and a log directory. Simply place them under `$HOME/eloqdoc-rockscloud`.
+
+```bash
+mkdir db logs
+```
+
+Modify  `etc/mongod.conf`. Assume your `$HOME` is `/home/eloq`, then
+
+* Set `systemLog.path` to `/home/eloq/eloqdoc-rockscloud/logs/mongod.log`.
+* Set `storage.dbPath` to `/home/eloq/eloqdoc-rockscloud/db`.
+* `etc/mongod.conf` has configured minio as its cloud storage, and needs no modification.
+
+
+## Start EloqDoc server
+
+The EloqDoc `mongod` executable binary is installed in the `$HOME/eloqdoc-rockscloud/bin` directory. Start the server on the local machine using the commands below.
+
+```shell
+cd ${HOME}/eloqdoc-rockscloud
+./bin/mongod --config ./etc/mongod.conf
+```
+
+## Connect to EloqDoc server
+
+EloqDoc is compatible with the MongoDB protocol. Open another terminal and run mongo client.
+
+```shell
+./bin/mongo --eval "db.t1.save({k: 1}); db.t1.find();"
+```
+
+It should output
+
+```bash
+MongoDB shell version v4.0.3
+connecting to: mongodb://127.0.0.1:27017
+Implicit session: session { "id" : UUID("288393c1-aff6-4a84-ad46-dee6691b361d") }
+MongoDB server version: 4.0.3
+{ "_id" : ObjectId("68493ec41cc981ea926ec094"), "k" : 1 }
+```

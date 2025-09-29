@@ -1,5 +1,5 @@
 ---
-title: Install from Binary
+title: Install from Binary - Local Storage
 ---
 
 import Tabs from "@theme/Tabs";
@@ -7,25 +7,56 @@ import TabItem from "@theme/TabItem";
 
 ## Download and unzip EloqDoc tarball
 
-EloqDoc is compatible Ubuntu 20.04, 22.04 and 24.04. Download
-the proper tarball for your operating system from [here](/download).
+EloqDoc is compatible with RHEl 7, 8 and 9, Ubuntu 20.04, 22.04 and 24.04. Download
+the proper tarball for your operating system from [here](/download). For **Storage Type**, select `RocksDB`.
 
 After successfully downloading the proper binary, untar it in a directory.
 
 <Tabs
   groupId="language"
-  defaultValue="ubuntu2004"
+  defaultValue="ubuntu2204"
   values={[
+    { label: 'Rhel7', value: 'centos7', },
+    { label: 'Rhel8', value: 'centos8', },
+    { label: 'Rhel9', value: 'centos9', },
     { label: 'Ubuntu20.04', value: 'ubuntu2004', },
     { label: 'Ubuntu22.04', value: 'ubuntu2204', },
-    { label: 'Ubuntu24.04', value: 'ubuntu2404', },
+    { label: 'Ubuntu24.04', value: 'ubuntu2404', }
   ]
 }>
+
+<TabItem value="centos7">
+
+```shell
+cd ${HOME}
+mkdir eloqdoc-rocksdb && tar -zxf eloqdoc-0.2.6-rhel7-amd64.tar.gz -C eloqdoc-rocksdb
+```
+
+</TabItem>
+
+<TabItem value="centos8">
+
+```shell
+cd ${HOME}
+mkdir eloqdoc-rocksdb && tar -zxf eloqdoc-0.2.6-rhel8-amd64.tar.gz -C eloqdoc-rocksdb
+```
+
+</TabItem>
+
+<TabItem value="centos9">
+
+```shell
+cd ${HOME}
+mkdir eloqdoc-rocksdb && tar -zxf eloqdoc-0.2.6-rhel9-amd64.tar.gz -C eloqdoc-rocksdb
+```
+
+</TabItem>
 
 <TabItem value="ubuntu2004">
 
 ```shell
-mkdir eloqdoc-cloud && tar -zxf eloqdoc-v0.2.1-ubuntu20-amd64.tar.gz -C eloqdoc-cloud
+cd ${HOME}
+mkdir eloqdoc-rocksdb && tar -zxf eloqdoc-0.2.6-ubuntu20-amd64.tar.gz -C eloqdoc-rocksdb
 ```
 
 </TabItem>
@@ -33,7 +64,8 @@ mkdir eloqdoc-cloud && tar -zxf eloqdoc-v0.2.1-ubuntu20-amd64.tar.gz -C eloqdoc-
 <TabItem value="ubuntu2204">
 
 ```shell
-mkdir eloqdoc-cloud && tar -zxf eloqdoc-v0.2.1-ubuntu22-amd64.tar.gz -C eloqdoc-cloud
+cd ${HOME}
+mkdir eloqdoc-rocksdb && tar -zxf eloqdoc-0.2.6-ubuntu22-amd64.tar.gz -C eloqdoc-rocksdb
 ```
 
 </TabItem>
@@ -41,129 +73,59 @@ mkdir eloqdoc-cloud && tar -zxf eloqdoc-v0.2.1-ubuntu22-amd64.tar.gz -C eloqdoc-
 <TabItem value="ubuntu2404">
 
 ```shell
-mkdir eloqdoc-cloud && tar -zxf eloqdoc-v0.2.1-ubuntu24-amd64.tar.gz -C eloqdoc-cloud
+cd ${HOME}
+mkdir eloqdoc-rocksdb && tar -zxf eloqdoc-0.2.6-ubuntu24-amd64.tar.gz -C eloqdoc-rocksdb
 ```
 
 </TabItem>
 
 </Tabs>
 
-After tarball eloqdoc, you should see three folders: bin, lib, and etc. The bin
-folder contains executable files. The lib folder contains dependency shared libs.
-The etc folder contains a configuration file which you should modify based on
-your environment.
-
-## Start S3 emulator
-
-eloqdoc-cloud is cloud-native. However, developer can use some S3 emulator to run it for testing.
-
-Open a new terminal. Download and launch minio.
-
-```
-mkdir minio-service && cd minio-service
-wget https://dl.min.io/server/minio/release/linux-amd64/minio
-chmod +x minio
-./minio server ./data
-```
-
-After launch minio successfully, you shoud see outputs.
-
-```shell
-MinIO Object Storage Server
-Copyright: 2015-2025 MinIO, Inc.
-License: GNU AGPLv3 - https://www.gnu.org/licenses/agpl-3.0.html
-Version: RELEASE.2025-05-24T17-08-30Z (go1.24.3 linux/amd64)
-
-API: http://192.168.12.52:9000  http://172.17.0.1:9000  http://127.0.0.1:9000
-   RootUser: minioadmin
-   RootPass: minioadmin
-
-WebUI: http://192.168.12.52:41127 http://172.17.0.1:41127 http://127.0.0.1:41127
-   RootUser: minioadmin
-   RootPass: minioadmin
-
-CLI: https://min.io/docs/minio/linux/reference/minio-mc.html#quickstart
-   $ mc alias set 'myminio' 'http://192.168.12.52:9000' 'minioadmin' 'minioadmin'
-
-Docs: https://docs.min.io
-WARN: Detected default credentials 'minioadmin:minioadmin', we recommend that you change these values with 'MINIO_ROOT_USER' and 'MINIO_ROOT_PASSWORD' environment variables
-
-```
-
 ## Prepare EloqDoc config file
 
-EloqDoc uses a configuration file to customize settings. An example is provided in `etc/mongod.conf`
-under the installation directory. Below is an example of how to configure EloqDoc to run on a local machine.
 
-```shell
-systemLog:
-  verbosity: 0
-  destination: file
-  path: "/home/mono/eloqdoc-cloud/logs/mongod.log"
-  component:
-    ftdc:
-      verbosity: 0
-net:
-  serviceExecutor: "adaptive"
-storage:
-  dbPath: "/home/mono/eloqdoc-cloud/db"
-  engine: "eloq"
-  eloq:
-    adaptiveThreadNum: 1
-    reservedThreadNum: 4
-    txService:
-      localIP: "127.0.0.1:8080"
-      ccProtocol: OccRead
-      checkpointerIntervalSec: 10
-      nodeMemoryLimitMB: 16384
-      collectActiveTxTsIntervalSec: 2
-      checkpointerDelaySec: 5
-    storage:
-      awsAccessKeyId: "minioadmin"
-      awsSecretKey: "minioadmin"
-      rocksdbCloudBucketName: "eloqdoc-storage"
-      rocksdbCloudBucketPrefix: "rocksdb-cloud-"
-      rocksdbCloudRegion: ""
-      rocksdbCloudEndpointUrl: "http://127.0.0.1:9000"
+After uncompress the package, you should see three directories: `bin`, `lib`, and `etc`.
+`bin` contains all executable files, `lib` contains all dependencies, and `etc` contains an example configuration file `mongod.conf`. Switch to `eloqdoc-rocksdb` to verify that.
 
-setParameter:
-  diagnosticDataCollectionEnabled: false
-  disableLogicalSessionCacheRefresh: true
-  ttlMonitorEnabled: false
+```bash
+cd $HOME/eloqdoc-rocksdb && ls
 ```
 
-Modify `systemLog.path` and `storage.dbPath` based on your environment. And
-create the target folders if not exist.
+Create a data directory and a log directory. Simply place them under `$HOME/eloqdoc-rocksdb`.
 
-```shell
-mkdir eloqdoc-cloud/db
-mkdir eloqdoc-cloud/logs
+```bash
+mkdir db logs
 ```
+
+Modify  `etc/mongod.conf`. Assume your `$HOME` is `/home/eloq`, then
+
+* Set `systemLog.path` to `/home/eloq/eloqdoc-rocksdb/logs/mongod.log`.
+* Set `storage.dbPath` to `/home/eloq/eloqdoc-rocksdb/db`.
+
 
 ## Start EloqDoc server
 
+The EloqDoc `mongod` executable binary is installed in the `$HOME/eloqdoc-rocksdb/bin` directory. Start the server on the local machine using the commands below.
+
 ```shell
-cd eloqdoc-cloud && \
-env LD_PRELOAD=./lib/libmimalloc.so.2:./lib/libbrpc.so \
+cd ${HOME}/eloqdoc-rocksdb
 ./bin/mongod --config ./etc/mongod.conf
 ```
 
 ## Connect to EloqDoc server
 
-Open another terminal and execute run mongo client.
+EloqDoc is compatible with the MongoDB protocol. Open another terminal and run mongo client.
 
 ```shell
-cd eloqdoc-cloud && \
 ./bin/mongo --eval "db.t1.save({k: 1}); db.t1.find();"
 ```
 
-It should outputs
+It should output
 
-```shell
+```bash
 MongoDB shell version v4.0.3
 connecting to: mongodb://127.0.0.1:27017
 Implicit session: session { "id" : UUID("288393c1-aff6-4a84-ad46-dee6691b361d") }
 MongoDB server version: 4.0.3
 { "_id" : ObjectId("68493ec41cc981ea926ec094"), "k" : 1 }
-
 ```
