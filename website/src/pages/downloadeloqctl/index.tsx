@@ -45,6 +45,9 @@ const ContactPage: React.FC = () => {
     const formData = new FormData(event.currentTarget);
     formData.append("access_key", "aabaace1-59e8-471d-9dbe-352665e8efcd");
 
+    const subject = "User Downloaded EloqData Software";
+    formData.append("subject", subject);
+
     const selectedFeatures = Array.from(
       document.querySelectorAll('input[name="download-reason"]:checked')
     ).map((checkbox) => (checkbox as HTMLInputElement).value);
