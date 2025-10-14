@@ -64,7 +64,7 @@ Below is the price comparison between MongoDB Atlas and EloqCloud for EloqDoc un
 
 While both platforms offer similar compute and memory setups, the difference in architecture leads to dramatically different pricing.
 
-EloqCloud for EloqDoc leverages object storage as its main data layer and local SSDs for caching, enabling up to 70% lower costs compared to MongoDB Atlas, which relies on multiple replicas and EBS storage.
+EloqCloud for EloqDoc leverages object storage as its primary data layer and local SSDs for caching, delivering significant cost savings compared to MongoDB Atlas, which depends on multiple replicas and EBS-based storage.
 
 <p align="center">
 <div style={{ width: '640px', textAlign: 'center'}}>

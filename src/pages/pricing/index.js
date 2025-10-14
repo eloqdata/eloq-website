@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import styles from './styles.module.css';
@@ -65,11 +65,11 @@ export default function Pricing() {
   const [tooltipVisible, setTooltipVisible] = useState({});
 
   const showTooltip = id => {
-    setTooltipVisible({...tooltipVisible, [id]: true});
+    setTooltipVisible({ ...tooltipVisible, [id]: true });
   };
 
   const hideTooltip = id => {
-    setTooltipVisible({...tooltipVisible, [id]: false});
+    setTooltipVisible({ ...tooltipVisible, [id]: false });
   };
 
   return (
@@ -108,31 +108,26 @@ export default function Pricing() {
                     {plan.features.map((feature, index) => {
                       const tooltipId = `${key}-${index}`;
 
-                      // Determine if this feature has additional pricing info
+                      // Determine additional pricing info and tooltip text
                       let additionalInfo = null;
+                      let tooltipText = null;
+                      const featureText = feature.toLowerCase();
+
                       if (
-                        feature.toLowerCase().includes('compute hours') &&
-                        feature.toLowerCase() !== 'unlimited compute hours'
+                        featureText.includes('compute hours') &&
+                        featureText !== 'unlimited compute hours'
                       ) {
                         additionalInfo = 'then $0.14 per compute hour';
-                      } else if (
-                        feature.toLowerCase().includes('50 gb storage')
-                      ) {
+                        tooltipText = '1 compute unit = 1 vCPU, 8 GB RAM';
+                      } else if (featureText.includes('50 gb storage')) {
                         additionalInfo = 'then $0.1 per GB';
-                      } else if (
-                        feature.toLowerCase().includes('1 tb storage')
-                      ) {
+                        tooltipText = 'limited-time 50% off';
+                      } else if (featureText.includes('1 tb storage')) {
                         additionalInfo = 'then $0.1 per GB';
-                      } else if (
-                        feature.toLowerCase().includes('50 gb data transfer')
-                      ) {
+                        tooltipText = 'limited-time 50% off';
+                      } else if (featureText.includes('50 gb data transfer')) {
                         additionalInfo = 'then at cloud provider rates';
                       }
-
-                      // Check if this feature is about compute hours (for tooltip)
-                      const isComputeHours = feature
-                        .toLowerCase()
-                        .includes('compute hours');
 
                       return (
                         <li key={index} className={styles.feature}>
@@ -141,7 +136,7 @@ export default function Pricing() {
                               <span className={styles.featureText}>
                                 {feature}
                               </span>
-                              {isComputeHours && (
+                              {tooltipText && (
                                 <div className={styles.tooltipContainer}>
                                   <span
                                     className={styles.infoIcon}
@@ -151,7 +146,7 @@ export default function Pricing() {
                                   </span>
                                   {tooltipVisible[tooltipId] && (
                                     <div className={styles.tooltip}>
-                                      1 compute unit = 1 vCPU, 8 GB RAM
+                                      {tooltipText}
                                     </div>
                                   )}
                                 </div>
