@@ -46,6 +46,17 @@ EloqCloud for EloqDoc introduces a **production-grade free tier** with dedicated
 
 You can start building your application with a **real, isolated and predictable document database** — not shared compute or ephemeral sandboxes.
 
+Below is the performance comparison between MongoDB Atlas and EloqCloud for EloqDoc (Free Tier) across three typical workloads — Read Only, Read Write, and Write Only.
+
+The results show a dramatic difference: EloqCloud for EloqDoc consistently outperforms MongoDB Atlas by nearly an order of magnitude, delivering up to 10× higher throughput even on its free-tier environment.
+
+<p align="center">
+<div style={{ width: '640px', textAlign: 'center'}}>
+
+<EnlargeableImage src={require('./img/eloqdocmongofreetier').default} alt="EloqCloud for EloqDoc" />
+
+</div></p>
+
 ---
 
 ### 💰 Flexible, Cost-Efficient Pricing Plan
