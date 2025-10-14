@@ -88,7 +88,7 @@ EloqCloud for EloqDoc leverages object storage as its primary data layer and loc
 
 ### 💡 The Most Cost-Effective Architecture Ever Built for Document Databases
 
-How can EloqCloud for EloqDoc deliver a **production-grade free tier** and **up to 70% lower costs ** than MongoDB Atlas? The answer lies in its **Cost-Effective Architecture**, a reimagined foundation purpose-built for the cloud.
+How can EloqCloud for EloqDoc deliver a **production-grade free tier** and **significant cost savings** compared to MongoDB Atlas? The answer lies in its **Cost-Effective Architecture**, a reimagined foundation purpose-built for the cloud.
 
 MongoDB Atlas requires at least **three replica set nodes** to maintain availability — which **triples compute and memory consumption**. Even worse, it relies on **EBS volumes** as the default storage layer, which are significantly more expensive than cloud object storage. Since each EBS volume maintains **three replicas per compute node**, a standard three-node replica set ends up with **nine total storage replicas**, leading to excessive storage overhead and cost.
 
