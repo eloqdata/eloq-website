@@ -53,7 +53,7 @@ The results show a dramatic difference: EloqCloud for EloqDoc consistently outpe
 <p align="center">
 <div style={{ width: '640px', textAlign: 'center'}}>
 
-<EnlargeableImage src={require('./img/eloqdocmongofreetier').default} alt="EloqCloud for EloqDoc" />
+<EnlargeableImage src={require('./img/eloqdocmongofreetier.jpg').default} alt="EloqCloud for EloqDoc" />
 
 </div></p>
 
