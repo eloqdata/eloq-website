@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, {useEffect, useState, useRef} from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import GitHubButton from 'react-github-btn';
 import Typed from '@theme/Typed';
 
@@ -15,7 +15,8 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 import Layout from '@theme/Layout';
 import './FeatureSection.css';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import '../css/logoWall.css'; // Import the new CSS file
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faBolt,
   faDollarSign,
@@ -346,11 +347,11 @@ You can follow the latest news from the React Native team on Twitter
   `,
 };
 
-function Heading({text}) {
+function Heading({ text }) {
   return <h2 className="Heading">{text}</h2>;
 }
 
-function ActionButton({href, type = 'primary', target, children}) {
+function ActionButton({ href, type = 'primary', target, children }) {
   return (
     <a className={`ActionButton ${type}`} href={href} target={target}>
       {children}
@@ -358,11 +359,11 @@ function ActionButton({href, type = 'primary', target, children}) {
   );
 }
 
-function TextColumn({title, text, moreContent}) {
+function TextColumn({ title, text, moreContent }) {
   return (
     <>
       <Heading text={title} />
-      <div dangerouslySetInnerHTML={{__html: text}} />
+      <div dangerouslySetInnerHTML={{ __html: text }} />
       {moreContent}
     </>
   );
@@ -406,7 +407,7 @@ function HomeCallToAction() {
   );
 }
 
-function TwitterButton({accountName}) {
+function TwitterButton({ accountName }) {
   return (
     <a
       href={`https://twitter.com/intent/follow?screen_name=${accountName}&region=follow_link`}
@@ -450,7 +451,7 @@ export function Section({
   );
 }
 
-function TwoColumns({columnOne, columnTwo, reverse}) {
+function TwoColumns({ columnOne, columnTwo, reverse }) {
   return (
     <div className={`TwoColumns ${reverse ? 'reverse' : ''}`}>
       <div className={`column first ${reverse ? 'right' : 'left'}`}>
@@ -463,7 +464,7 @@ function TwoColumns({columnOne, columnTwo, reverse}) {
   );
 }
 
-function ScreenRect({className, fill, stroke}) {
+function ScreenRect({ className, fill, stroke }) {
   return (
     <rect
       className={`screen ${className || ''}`}
@@ -687,7 +688,7 @@ function DecoupleStore() {
 /* Community */
 
 function AppList() {
-  const {siteConfig} = useDocusaurusContext();
+  const { siteConfig } = useDocusaurusContext();
   const apps = Object.values(siteConfig.customFields.users)
     .flat()
     .filter(app => app.pinned);
@@ -794,6 +795,37 @@ function GetStarted() {
         <h2 className="Heading">Try Our Cutting-Edge Products</h2>
       </div>
     </Section>
+  );
+}
+
+function LogoWall() {
+  const { siteConfig } = useDocusaurusContext();
+  const { baseUrl } = siteConfig;
+
+  // Placeholder logo images (replace with actual paths later)
+  const logos = Array.from({ length: 10 }, (_, i) => ({
+    src: useBaseUrl(`img/logo/placeholder-logo-${i + 1}.svg`), // Placeholder SVG images
+    alt: `Logo ${i + 1}`,
+  }));
+
+  // Duplicate the logos to create a seamless loop
+  const duplicatedLogos = [...logos, ...logos];
+
+  return (
+    <div className="logo-wall-wrapper">
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <p className="section-subtitle logo-wall-heading">
+          Trusted by innovators — from global enterprises to AI pioneers
+        </p>
+        <div className="logo-wall-container">
+          <div className="logo-wall-track">
+            {duplicatedLogos.map((logo, index) => (
+              <img key={index} src={logo.src} alt={logo.alt} className="logo-wall-logo" />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -912,7 +944,7 @@ function HomePage() {
       description="Build the Next Generation of Databases the Right Way"
       wrapperClassName="homepage">
       <style>{circularAnimationStyles}</style>
-      <main style={{marginTop: '-0px'}}>
+      <main style={{ marginTop: '-0px' }}>
         {/* News Banner */}
         <div
           className="container1"
@@ -963,7 +995,7 @@ function HomePage() {
                   height="20"
                   viewBox="0 0 24 24"
                   fill="none"
-                  style={{color: '#ff7b2d'}}>
+                  style={{ color: '#ff7b2d' }}>
                   <path
                     d="M5 12h14M12 5l7 7-7 7"
                     stroke="currentColor"
@@ -1053,6 +1085,9 @@ function HomePage() {
           </div>
         </div>
 
+        {/* Logo Wall Section */}
+        <LogoWall />
+
         {/* Product Matrix Section */}
         <div className="section-container">
           <h2 className="section-title">Product Matrix</h2>
@@ -1105,15 +1140,15 @@ function HomePage() {
                     y2="0%">
                     <stop
                       offset="0%"
-                      style={{stopColor: 'rgba(255, 123, 45, 0.4)'}}
+                      style={{ stopColor: 'rgba(255, 123, 45, 0.4)' }}
                     />
                     <stop
                       offset="50%"
-                      style={{stopColor: 'rgba(255, 255, 255, 0.3)'}}
+                      style={{ stopColor: 'rgba(255, 255, 255, 0.3)' }}
                     />
                     <stop
                       offset="100%"
-                      style={{stopColor: 'rgba(255, 123, 45, 0.4)'}}
+                      style={{ stopColor: 'rgba(255, 123, 45, 0.4)' }}
                     />
                   </linearGradient>
                   <linearGradient
@@ -1124,15 +1159,15 @@ function HomePage() {
                     y2="0%">
                     <stop
                       offset="0%"
-                      style={{stopColor: 'rgba(255, 123, 45, 0.4)'}}
+                      style={{ stopColor: 'rgba(255, 123, 45, 0.4)' }}
                     />
                     <stop
                       offset="50%"
-                      style={{stopColor: 'rgba(255, 255, 255, 0.3)'}}
+                      style={{ stopColor: 'rgba(255, 255, 255, 0.3)' }}
                     />
                     <stop
                       offset="100%"
-                      style={{stopColor: 'rgba(255, 123, 45, 0.4)'}}
+                      style={{ stopColor: 'rgba(255, 123, 45, 0.4)' }}
                     />
                   </linearGradient>
                   <linearGradient
@@ -1143,15 +1178,15 @@ function HomePage() {
                     y2="0%">
                     <stop
                       offset="0%"
-                      style={{stopColor: 'rgba(255, 123, 45, 0.4)'}}
+                      style={{ stopColor: 'rgba(255, 123, 45, 0.4)' }}
                     />
                     <stop
                       offset="50%"
-                      style={{stopColor: 'rgba(255, 255, 255, 0.3)'}}
+                      style={{ stopColor: 'rgba(255, 255, 255, 0.3)' }}
                     />
                     <stop
                       offset="100%"
-                      style={{stopColor: 'rgba(255, 123, 45, 0.4)'}}
+                      style={{ stopColor: 'rgba(255, 123, 45, 0.4)' }}
                     />
                   </linearGradient>
                 </defs>
@@ -1819,7 +1854,7 @@ function HomePage() {
         </div>
 
         {/* Features Section */}
-        <div className="section-container" style={{marginTop: '-30px'}}>
+        <div className="section-container" style={{ marginTop: '-30px' }}>
           <h2 className="section-title">Features</h2>
           <p className="section-subtitle">
             All the database features you need for your next blockbuster AI
@@ -1827,7 +1862,7 @@ function HomePage() {
           </p>
 
           {/* Tiered Storage Section */}
-          <div className={styles.tieredSection} style={{marginTop: '-20px'}}>
+          <div className={styles.tieredSection} style={{ marginTop: '-20px' }}>
             <div className={styles.tieredInner}>
               <div className={styles.tieredContent}>
                 <div className={styles.tieredImageContainer}>

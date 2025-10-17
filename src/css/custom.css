@@ -228,3 +228,15 @@ h1.header-title {
     /* Allow wrapping on very small screens */
   }
 }
+
+/* Navbar dropdown triggers: unify font size for Docs, Learn, Pricing, Download */
+.navbar__items .navbar__link,
+.navbar__items .dropdown>.navbar__link {
+  font-size: 16px;
+  /* consistent size across items */
+}
+
+/* Mobile sidebar menu */
+.menu__list .menu__link {
+  font-size: 16px;
+}
