@@ -18,11 +18,12 @@
 }
 
 .logo-wall-heading {
-    margin: 8px 0 6px 0;
-    font-size: 16px;
-    line-height: 22px;
-    color: #ffffff !important;
-    /* force bright white */
+    margin: 10px 0 8px 0;
+    font-size: 24px;
+    line-height: 30px;
+    font-weight: 600;
+    color: #ff7b2d !important;
+    /* match Product Matrix title color */
     opacity: 1 !important;
     /* override any inherited opacity */
     filter: none;
@@ -87,8 +88,8 @@
 
 @media (max-width: 600px) {
     .logo-wall-heading {
-        font-size: 14px;
-        line-height: 20px;
+        font-size: 20px;
+        line-height: 26px;
     }
 
     .logo-wall-logo {
