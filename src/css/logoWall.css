@@ -1,6 +1,6 @@
 /* src/css/logoWall.css */
 
-@keyframes scroll-right {
+@keyframes marquee-ltr {
     0% {
         transform: translateX(-50%);
     }
@@ -25,10 +25,8 @@
     color: #ff7b2d !important;
     /* match Product Matrix title color */
     opacity: 1 !important;
-    /* override any inherited opacity */
     filter: none;
     text-shadow: 0 0 0 rgba(0, 0, 0, 0);
-    /* neutralize potential blend effects */
 }
 
 .logo-wall-container {
@@ -37,7 +35,6 @@
     white-space: nowrap;
     margin: 8px auto;
     /* tighter spacing */
-    /* Center the container */
     max-width: 1100px;
     /* Limit the width so it doesn't span full screen */
     padding: 8px 0;
@@ -52,15 +49,17 @@
 .logo-wall-track {
     display: flex;
     width: fit-content;
-    animation: scroll-right 38s linear infinite;
-    /* left-to-right */
+    gap: 32px;
+    will-change: transform;
+    animation: marquee-ltr 20s linear infinite;
+    /* clearer left-to-right motion */
 }
 
 .logo-wall-logo {
     height: 44px;
     /* Balanced size on dark background */
-    margin: 0 32px;
-    /* Even spacing */
+    margin: 0 0;
+    /* spacing handled by track gap */
     vertical-align: middle;
     opacity: 0.85;
     transition: opacity 0.2s ease, filter 0.2s ease, transform 0.2s ease;
@@ -82,7 +81,6 @@
 
     .logo-wall-logo {
         height: 36px;
-        margin: 0 24px;
     }
 }
 
@@ -94,6 +92,5 @@
 
     .logo-wall-logo {
         height: 28px;
-        margin: 0 18px;
     }
 }
