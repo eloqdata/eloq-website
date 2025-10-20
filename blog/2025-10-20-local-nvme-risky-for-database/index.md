@@ -15,7 +15,7 @@ featuredMain: false
 On October 20, 2025, AWS experienced a major disruption across multiple services in the **us-east-1 region**. According to [AWS Health Status](https://health.aws.amazon.com/health/status), various compute, storage, and networking services were impacted simultaneously. For many teams running OLTP databases on **instances backed by local NVMe**, this was not just a downtime problem—it was a **data durability nightmare**.
 
 <p align="center">
-<div style={{ width: '50%', textAlign: 'center'}}>
+<div style={{ width: '80%', textAlign: 'center'}}>
 import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
 <EnlargeableImage src={require('./img/awsoutage.jpg').default} alt="x" />
