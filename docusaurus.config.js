@@ -505,6 +505,24 @@ module.exports = {
                   </a>
                 `,
               },
+              {
+                type: 'html',
+                value: `
+                  <a href="/product-comparison" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; min-width: 320px;">
+                    <div style="display: flex; align-items: center;">
+                      <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
+                        <rect width="32" height="32" rx="6" fill="#222" />
+                        <path d="M8 8h16v16H8z" stroke="#FFFFFF" stroke-width="2" fill="none" />
+                        <path d="M8 12h16M8 16h16M8 20h12" stroke="#FFFFFF" stroke-width="2" />
+                      </svg>
+                      <div style="display: flex; flex-direction: column;">
+                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">Product Comparison</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Open Source vs Enterprise vs Cloud</span>
+                      </div>
+                    </div>
+                  </a>
+                `,
+              },
             ],
           },
           {

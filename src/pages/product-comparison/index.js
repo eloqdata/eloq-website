@@ -94,14 +94,14 @@ export default function ProductComparison() {
   return (
     <Layout
       title="Product Comparison - EloqDB Editions"
-      description="Compare features across EloqDB Community, Enterprise, and Cloud editions">
+      description="Compare features across EloqDB Open Source, Enterprise, and Cloud editions">
       <main>
         {/* Hero Section */}
         <div className={styles.hero}>
           <div className={styles.heroInner}>
             <h1 className={styles.heroTitle}>Product Comparison</h1>
             <p className={styles.heroSubtitle}>
-              Compare features across EloqDB Community, Enterprise, and Cloud
+              Compare features across EloqDB Open Source, Enterprise, and Cloud
               editions to find the perfect fit for your needs
             </p>
           </div>
@@ -116,7 +116,7 @@ export default function ProductComparison() {
                   <h3>Features</h3>
                 </div>
                 <div className={styles.comparisonColumn}>
-                  <h3>Community Edition</h3>
+                  <h3>Open Source Edition</h3>
                 </div>
                 <div className={styles.comparisonColumn}>
                   <h3>Enterprise Edition</h3>
