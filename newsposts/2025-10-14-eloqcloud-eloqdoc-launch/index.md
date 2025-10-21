@@ -26,7 +26,7 @@ import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
 ---
 
-### 🚀 Key Features of EloqCloud for EloqDoc
+### Key Features of EloqCloud for EloqDoc
 
 - **MongoDB-Compatible API** – Migrate your applications effortlessly.  
 - **Tiered Storage Architecture** – Seamlessly manages hot and cold data between memory, NVMe, and object storage.  
@@ -35,7 +35,7 @@ import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
 ---
 
-### 🎁 First Production-Ready Free Tier for DocumentDB
+### First Production-Ready Free Tier for DocumentDB
 
 EloqCloud for EloqDoc introduces a **production-grade free tier** with dedicated resources:
 
@@ -59,7 +59,7 @@ The results show a dramatic difference: EloqCloud for EloqDoc consistently outpe
 
 ---
 
-### 💰 Flexible, Cost-Efficient Pricing Plan
+### Flexible, Cost-Efficient Pricing Plan
 
 Beyond the industry’s first **production-grade free tier**, EloqCloud for EloqDoc offers the **most flexible and affordable paid plans** in the market.  
 You pay only for what you use — with **no forced replication, no bundled resources**.
@@ -86,7 +86,7 @@ EloqCloud for EloqDoc leverages object storage as its primary data layer and loc
 
 ---
 
-### 💡 The Most Cost-Effective Architecture Ever Built for Document Databases
+### The Most Cost-Effective Architecture Ever Built for Document Databases
 
 How can EloqCloud for EloqDoc deliver a **production-grade free tier** and **significant cost savings** compared to MongoDB Atlas? The answer lies in its **Cost-Effective Architecture**, a reimagined foundation purpose-built for the cloud.
 
@@ -103,9 +103,9 @@ This architecture enables **EloqCloud for EloqDoc** to deliver lower TCO and sup
 
 ---
 
-### 🎉 Try EloqCloud for EloqDoc Today
+### Try EloqCloud for EloqDoc Today
 
 EloqCloud for EloqDoc is now available for public access.
 
-👉 [Start for Free](https://cloud.eloqdata.com/signup) and experience the next-generation document database —  
+[Start for Free](https://cloud.eloqdata.com/signup) and experience the next-generation document database —  
 **MongoDB-compatible, object storage first, high performance and cost effective.**

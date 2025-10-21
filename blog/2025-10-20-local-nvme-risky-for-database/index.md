@@ -10,7 +10,7 @@ featured: false
 featuredMain: false
 ---
 
-# 🚨 When Your Database Lives on Local NVMe: What the AWS us-east-1 Outage Just Taught Us
+# When Your Database Lives on Local NVMe: What the AWS us-east-1 Outage Just Taught Us
 
 On October 20, 2025, AWS experienced a major disruption across multiple services in the **us-east-1 region**. According to [AWS Health Status](https://health.aws.amazon.com/health/status), various compute, storage, and networking services were impacted simultaneously. For many teams running OLTP databases on **instances backed by local NVMe**, this was not just a downtime problem—it was a **data durability nightmare**.
 
@@ -34,7 +34,7 @@ Let’s break down the trade-offs and why recent events place a spotlight on ris
 
 ---
 
-## 📦 Option 1: Block-Level Storage (EBS) — Durable but Expensive and Slow
+## Option 1: Block-Level Storage (EBS) — Durable but Expensive and Slow
 
 EBS is the default choice for reliability:
 
@@ -52,7 +52,7 @@ EBS gives you durability—but performance per dollar is disappointing.
 
 ---
 
-## ⚡ Option 2: Local NVMe — Fast but Ephemeral (and Now Proven Risky)
+## Option 2: Local NVMe — Fast but Ephemeral (and Now Proven Risky)
 
 Instance families like **i4i** provide **400K+ to 1M+ IOPS** from local NVMe, making them a natural fit for databases chasing performance.
 
@@ -67,11 +67,11 @@ During routine failures, cross-AZ replicas often protect you. But during region-
 
 In contrast, EBS volumes can always be reattached to a new node.
 
-👉 The AWS us-east-1 outage just validated that *“local NVMe + async replication” is a high-risk strategy for mission-critical databases.*
+The AWS us-east-1 outage just validated that *“local NVMe + async replication” is a high-risk strategy for mission-critical databases.*
 
 ---
 
-## ☁️ Option 3: Object Storage (S3) — Durable & Cheap, But Latency Is a Challenge
+## Option 3: Object Storage (S3) — Durable & Cheap, But Latency Is a Challenge
 
 Object storage is:
 - ✅ 3x cheaper than block storage
@@ -84,12 +84,11 @@ But the challenge remains: **S3 latency is too high for OLTP** if accessed synch
 
 This is why traditional OLTP engines avoid it.
 
-So the question becomes:
-🧠 *How do we get the cost & durability benefits of S3 without paying the latency penalty?*
+So the question becomes: *How do we get the cost & durability benefits of S3 without paying the latency penalty?*
 
 ---
 
-## ✅ The Data Substrate Approach: Object Storage First, NVMe as Cache, EBS for Logs
+## The Data Substrate Approach: Object Storage First, NVMe as Cache, EBS for Logs
 
 EloqData treats **object storage (e.g., S3)** as the **primary data store**, and architect the system to avoid the usual latency pitfalls:
 
@@ -118,7 +117,7 @@ Check out more on our products powered by Data Substrate:
 
 ---
 
-## 🌍 The Larger Industry Trend
+## The Larger Industry Trend
 
 We are not alone in this shift. The broader ecosystem is moving object-storage-first:
 
@@ -133,7 +132,7 @@ EloqData brings this model to OLTP with a transactional, low-latency engine powe
 
 ---
 
-## 📘 After the Outage: A Hard Question Every Architect Should Ask
+## After the Outage: A Hard Question Every Architect Should Ask
 
 > *If my database node died right now, would I lose all my data?*
 
@@ -143,7 +142,7 @@ It’s time to rethink durability assumptions in the cloud era.
 
 ---
 
-## ✅ TL;DR
+## Summary
 
 | Strategy                                         | Performance | Durability | Region Outage Risk | Cost |
 | ------------------------------------------------ | ----------- | ---------- | ------------------ | ---- |
@@ -152,18 +151,15 @@ It’s time to rethink durability assumptions in the cloud era.
 | NVMe + async replicas                            | ✅✅✅         | ⚠ Partial  | ⚠ High             | 💰💰   |
 | Object Storage + Log + NVMe Cache (**EloqData**) | ✅✅          | ✅✅         | ✅✅                 | 💰    |
 
----
-
-## 🔥 Final Thought
 
 AWS us-east-1 just reminded the industry:
 **Performance is replaceable. Lost data is not.**
 
 With the right architecture, you don’t have to choose.
 
-👉 *Build fast.*
-👉 *Stay durable.*
-👉 *Be outage-proof.*
+- *Build fast.*
+- *Stay durable.*
+- *Be outage-proof.*
 
 That’s the future we’re building at **EloqData**. 
 
