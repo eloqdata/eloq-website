@@ -2,11 +2,11 @@
 
 @keyframes marquee-ltr {
     0% {
-        transform: translateX(-50%);
+        transform: translateX(0);
     }
 
     100% {
-        transform: translateX(0%);
+        transform: translateX(-50%);
     }
 }
 
@@ -41,25 +41,22 @@
     /* Slimmer height */
     background-color: transparent;
     /* Use wrapper color */
-    /* Fade edges like Pine */
-    -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 8%, rgba(0, 0, 0, 1) 92%, rgba(0, 0, 0, 0));
-    mask-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 8%, rgba(0, 0, 0, 1) 92%, rgba(0, 0, 0, 0));
+    /* Fade edges for smooth appearance - gentle fade at far edges only */
+    -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 5%, rgba(0, 0, 0, 1) 95%, rgba(0, 0, 0, 0));
+    mask-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 5%, rgba(0, 0, 0, 1) 95%, rgba(0, 0, 0, 0));
 }
 
 .logo-wall-track {
     display: flex;
     width: fit-content;
-    gap: 32px;
     will-change: transform;
-    animation: marquee-ltr 20s linear infinite;
-    /* clearer left-to-right motion */
+    /* transform driven by JS for seamless infinite scroll */
 }
 
 .logo-wall-logo {
     height: 44px;
     /* Balanced size on dark background */
-    margin: 0 0;
-    /* spacing handled by track gap */
+    margin: 0 24px;
     vertical-align: middle;
     opacity: 0.85;
     transition: opacity 0.2s ease, filter 0.2s ease, transform 0.2s ease;

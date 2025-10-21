@@ -808,8 +808,43 @@ function LogoWall() {
     alt: `Logo ${i + 1}`,
   }));
 
-  // Duplicate the logos to create a seamless loop
+  // Duplicate the logos to create a seamless infinite loop
+  // We need exactly 2 sets for the 50% translation to work perfectly
   const duplicatedLogos = [...logos, ...logos];
+
+  // Seamless scroll via requestAnimationFrame
+  const trackRef = useRef(null);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    let posPx = 0;
+    const speedPxPerSec = 60; // increase speed
+    let lastTimestamp;
+    let rafId;
+
+    const step = ts => {
+      if (lastTimestamp == null) lastTimestamp = ts;
+      const deltaSec = (ts - lastTimestamp) / 1000;
+      lastTimestamp = ts;
+
+      posPx -= speedPxPerSec * deltaSec;
+      const loopWidth = track.scrollWidth / 2; // width of one logo set
+      if (loopWidth > 0 && -posPx >= loopWidth) {
+        // keep the remainder to avoid any jump
+        posPx += loopWidth;
+      }
+      track.style.transform = `translateX(${posPx}px)`;
+
+      rafId = requestAnimationFrame(step);
+    };
+
+    rafId = requestAnimationFrame(step);
+    return () => {
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+  }, []);
 
   return (
     <div className="logo-wall-wrapper">
@@ -818,7 +853,7 @@ function LogoWall() {
           Trusted by innovators — from global enterprises to AI pioneers
         </p>
         <div className="logo-wall-container">
-          <div className="logo-wall-track">
+          <div className="logo-wall-track" ref={trackRef}>
             {duplicatedLogos.map((logo, index) => (
               <img key={index} src={logo.src} alt={logo.alt} className="logo-wall-logo" />
             ))}
