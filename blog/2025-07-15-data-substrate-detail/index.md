@@ -5,7 +5,7 @@ date: 2025-07-15
 tags: [Company]
 image: /img/blog/dsdeepdive1.jpg
 description: In this post, we dive deeper into the technical foundations of Data Substrate—highlighting the key design decisions, abstractions, and architectural choices that set it apart from both classical and modern distributed databases.
-featured: true
+featured: false
 blog: true
 featuredMain: false
 ---
