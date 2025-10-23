@@ -2,32 +2,32 @@
 title: EloqDoc Compatibility
 ---
 
-# Table of Contents
+## Table of Contents
 - [Supported Features](#supported-features)
 - [Compatibility with MongoDB 4.0 and MongoDB 8.0](#compatibility-with-mongodb-4-0-and-mongodb-8-0)
 
-# Supported Features
+## Supported Features
 
-## Indexes
-- [✅] Single-Field Index
+### Indexes
 - [✅] Compound Index
-- [✅] Multikey Index
+- [✅] Covering Index
 - [✅] Full-Text Index
 - [✅] Geospatial Index
-- [✅] Sparse Index
-- [⚠️] Unique Index
+- [✅] Multikey Index
 - [✅] Partial Index
-- [✅] Covering Index
+- [✅] Single-Field Index
+- [✅] Sparse Index
 - [✅] TTL Index
-- [❌] Hidden Index
-- [❌] Hash Index
+- [⚠️] Unique Index
 - [❌] Clustered Index
+- [❌] Hash Index
+- [❌] Hidden Index
 - [❌] Time-Series Index
 - [❌] Wildcard Indexes
 
 * A unique index is supported only when the collection is empty. Create the index before inserting documents.
 
-## CRUD
+### CRUD
 - [✅] Aggregate
 - [✅] BulkWrite
 - [✅] Count
@@ -40,7 +40,7 @@ title: EloqDoc Compatibility
 - [✅] MapReduce
 - [✅] Update
 
-## Aggregation Stages
+### Aggregation Stages
 - [✅] AddFields
 - [✅] Bucket
 - [✅] BucketAuto
@@ -88,7 +88,7 @@ title: EloqDoc Compatibility
 - [❌] Unset
 - [❌] Vector Search
 
-## Transactions
+### Transactions
 - [✅] Distributed Transaction
 - [✅] Multi-document transactions
 - [✅] Multi-document transactions in a cluster
@@ -98,7 +98,7 @@ title: EloqDoc Compatibility
 - [❌] Retryable transactions
 - [❌] Write Concern
 
-## Security
+### Security
 - [✅] SCRAM Authentication
 - [✅] x.509 Certificate Authentication
 - [✅] Role-Based Access Control
@@ -107,12 +107,12 @@ title: EloqDoc Compatibility
 - [❌] LDAP Authentication
 - [❌] Kerberos Authentication
 
-## Backup & Restore
+### Backup & Restore
 - [✅] Mongodump
 - [✅] Mongosync
 - [✅] Snapshot
 
-## Other Features
+### Other Features
 - [✅] High Availability 
 - [✅] Scale-Out
 - [❌] Atlas Search
@@ -123,7 +123,7 @@ title: EloqDoc Compatibility
 * Vector Search is supported in EloqConvergedDB.
 
 
-# Compatibility with MongoDB 4.0 and MongoDB 8.0
+## Compatibility with MongoDB 4.0 and MongoDB 8.0
 
 This document provides a feature compatibility matrix comparing **EloqDoc** with **MongoDB 4.0** and **MongoDB 8.0**.
 
@@ -135,8 +135,7 @@ Note: The table below lists only the differences between EloqDoc and MongoDB 4.0
 
 ---
 
-## Feature Support Matrix
-
+### Feature Support Matrix
 | Feature                                  | EloqDoc | MongoDB 4.0 | MongoDB 8.0 |
 | ---------------------------------------- | :-----: | :---------: | :---------: |
 | Cluster-Wide Secondary Indexes           |    ✅    |      ❌      |      ✅      |
