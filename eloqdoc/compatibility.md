@@ -1,14 +1,18 @@
 ---
-title: EloqDoc Compatability
+title: EloqDoc Compatibility
 ---
+
+# Table of Contents
+- [Supported Features](#supported-features)
+- [Compatibility with MongoDB 4.0 and MongoDB 8.0](#compatibility-with-mongodb-4-0-and-mongodb-8-0)
 
 # Supported Features
 
-## Index
-- [✅] Single-field index
-- [✅] Compound index
-- [✅] Multikey index
-- [✅] Full Text index
+## Indexes
+- [✅] Single-Field Index
+- [✅] Compound Index
+- [✅] Multikey Index
+- [✅] Full-Text Index
 - [✅] Geospatial Index
 - [✅] Sparse Index
 - [⚠️] Unique Index
@@ -21,7 +25,7 @@ title: EloqDoc Compatability
 - [❌] Time-Series Index
 - [❌] Wildcard Indexes
 
-* Unique index is supported only when the collection is empty (create the index before inserting documents).
+* A unique index is supported only when the collection is empty. Create the index before inserting documents.
 
 ## CRUD
 - [✅] Aggregate
@@ -34,20 +38,20 @@ title: EloqDoc Compatability
 - [✅] GetMore
 - [✅] Insert
 - [✅] MapReduce
-- [✅] Update 
+- [✅] Update
 
-## Aggregation Stage
+## Aggregation Stages
 - [✅] AddFields
-- [✅] Bucket 
+- [✅] Bucket
 - [✅] BucketAuto
 - [✅] CollStats
-- [✅] Count 
-- [✅] CurrentOp 
-- [✅] Facet 
-- [✅] GeoNear 
+- [✅] Count
+- [✅] CurrentOp
+- [✅] Facet
+- [✅] GeoNear
 - [✅] GraphLookup
-- [✅] group 
-- [✅] IndexStats 
+- [✅] Group
+- [✅] IndexStats
 - [✅] Limit
 - [✅] LimitLocalSessions
 - [✅] LimitSessions
@@ -62,11 +66,10 @@ title: EloqDoc Compatability
 - [✅] Sort
 - [✅] SortByCount
 - [✅] Unwind
-- [✅] Sample 
 - [❌] Densify
 - [❌] Documents
 - [❌] Fill
-- [❌] ListClusterCatalog 
+- [❌] ListClusterCatalog
 - [❌] ListSampleQueries
 - [❌] ListSearchIndexes
 - [❌] Merge
@@ -76,19 +79,19 @@ title: EloqDoc Compatability
 - [❌] RankFusion
 - [❌] ReplaceWith
 - [❌] Score
-- [❌] ScoreFusion 
+- [❌] ScoreFusion
 - [❌] Search
 - [❌] SearchMeta
-- [❌] Set 
+- [❌] Set
 - [❌] SetWindowFields
 - [❌] UnionWith
 - [❌] Unset
 - [❌] Vector Search
 
-## Transaction
+## Transactions
 - [✅] Distributed Transaction
 - [✅] Multi-document transactions
-- [✅] Multi-document transactions in cluster
+- [✅] Multi-document transactions in a cluster
 - [✅] Single-document atomic writes
 - [✅] Snapshot isolation
 - [❌] Read Concern
@@ -109,15 +112,15 @@ title: EloqDoc Compatability
 - [✅] Mongosync
 - [✅] Snapshot
 
-## Others
+## Other Features
 - [✅] High Availability 
-- [✅] Scale out
+- [✅] Scale-Out
 - [❌] Atlas Search
-- [❌] Change Stream
-- [❌] Time-Series
+- [❌] Change Streams
+- [❌] Time-Series Collections
 - [⚠️] Vector Search
 
-* Vector Search in supported in EloqConvergedDB
+* Vector Search is supported in EloqConvergedDB.
 
 
 # Compatibility with MongoDB 4.0 and MongoDB 8.0
@@ -126,7 +129,9 @@ This document provides a feature compatibility matrix comparing **EloqDoc** with
 
 ✅ = Supported  
 ❌ = Not Supported  
-⚠️ = Partial Supported
+⚠️ = Partially Supported
+
+Note: The table below lists only the differences between EloqDoc and MongoDB 4.0/8.0. For features commonly supported across products, refer to the [Supported Features](#supported-features) section above.
 
 ---
 
@@ -160,6 +165,6 @@ This document provides a feature compatibility matrix comparing **EloqDoc** with
 | Unique Index                             |    ⚠️    |      ✅      |      ✅      |
 
 
-* Change Stream of EloqDoc use a separate CDC solution called `EloqCDC`.
-* EloqDoc use single compute node and use cloud storage to achieve high availability. Kubernetes is used to auto failover the compute node.
-* Unique index is supported only when the collection is empty (create the index before inserting documents).
+* Change Streams in EloqDoc use a separate CDC solution called `EloqCDC`.
+* EloqDoc uses a single compute node and cloud storage to achieve high availability. Kubernetes is used to automatically fail over the compute node.
+* A unique index is supported only when the collection is empty. Create the index before inserting documents.
