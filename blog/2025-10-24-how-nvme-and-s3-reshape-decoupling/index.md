@@ -2,10 +2,12 @@
 title: "How NVMe and S3 Reshape Decoupling of Compute and Storage for Online Databases"
 authors: eloq
 date: 2025-10-24
+image: /img/blog/s3nvme.jpg
 tags: [Company]
 description: "Re-examine the decoupled architecture through the lens of cloud storage mediums."
 blog: true
-featured: false
+featured: true
+featuredMain: false
 ---
 
 Cloud native databases are designed from the ground up to embrace core cloud principles: distributed architecture, automatic scalability, high availability, and elasticity. A prominent example is Amazon Aurora, which established the prevailing paradigm for online databases by championing the decoupling of compute and storage. This architecture allows the compute layer (responsible for query and transaction processing) and the storage layer (handling data persistence) to scale independently. As a result, database users benefit from granular resource allocation, cost efficiency through pay-per-use pricing, flexibility in hardware choices, and improved resilience by isolating persistent data from ephemeral compute instances.

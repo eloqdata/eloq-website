@@ -6,7 +6,7 @@ tags: [Company]
 image: /img/blog/blog_coro.jpg
 description: "Explore one of our core engineering practices for future online databases: coroutines and async programming."
 blog: true
-featured: true
+featured: false
 featuredMain: false
 ---
 
