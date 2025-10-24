@@ -1,6 +1,6 @@
 ---
 title: "EloqCloud for EloqDoc: 10X Cheaper Document DBaaS"
-date: 2025-10-13
+date: 2025-10-23
 authors: eloq
 tags: [Product]
 news: true
