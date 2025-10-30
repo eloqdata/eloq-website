@@ -2117,6 +2117,38 @@ function HomePage() {
             </Link>
           </div>
         </div>
+
+        {/* SOC 2 Compliance CTA Section */}
+        <div className={styles.soc2Section}>
+          <div className={styles.soc2Inner}>
+            <div className={styles.soc2Text}>
+              <span className={styles.soc2Tag}>Security & Compliance</span>
+              <h2 className={styles.soc2Title}>
+                Trust EloqCloud with Your Most Critical Data
+              </h2>
+              <p className={styles.soc2Subtitle}>
+                EloqCloud is audited against SOC 2 controls, so you can
+                deliver modern data experiences with confidence that your
+                customers' information stays protected.
+              </p>
+              <div className={styles.soc2Actions}>
+                <a
+                  className={styles.soc2Button}
+                  href="https://cloud.eloqdata.com"
+                  target="_blank"
+                  rel="noopener noreferrer">
+                  Try EloqCloud
+                </a>
+              </div>
+            </div>
+            <div className={styles.soc2Image}>
+              <img
+                src={useBaseUrl('img/homepage/soc2_badge.jpg')}
+                alt="EloqCloud SOC 2 Type II compliance badge"
+              />
+            </div>
+          </div>
+        </div>
       </main>
     </Layout>
   );
