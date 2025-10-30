@@ -1106,14 +1106,14 @@ function HomePage() {
                 <img
                   className="static-image1"
                   alt="Static base"
-                  src={useBaseUrl('img/eloqhomepage1.svg')}
+                  src={useBaseUrl('img/neweloqhomepage1.svg')}
                 />
 
                 {/* Dynamic floating image */}
                 <img
                   className="floating-image1"
                   alt="Dynamic element"
-                  src={useBaseUrl('img/eloqhomepage2.svg')}
+                  src={useBaseUrl('img/neweloqhomepage2.svg')}
                 />
               </div>
             </div>
