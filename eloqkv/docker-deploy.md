@@ -36,7 +36,7 @@ As an example, we show how to create a simple EloqKV cluster using containers in
 #/data/conf1/eloqkv.ini
 [local]
 # Local ip and port
-ip=172.20.0.1
+ip=172.20.0.11
 port=6379
 
 # Whether enable data store
@@ -45,15 +45,20 @@ enable_data_store=on
 # Whether enable redo log
 enable_wal=off
 
-# Where to store log data
-path=data
+# EloqKV data directory.
+eloq_data_path=eloq_data
+
+# set tx service node group replica number
+tx_nodegroup_replica_num=1
 
 [cluster]
 #ip_port_list should include all eloqkv nodes in a cluster deployment.
-ip_port_list=172.20.0.1:6379,172.20.0.2:6379,172.20.0.3:6379
+ip_port_list=172.20.0.11:6379,172.20.0.12:6379,172.20.0.13:6379
+
+[store]
 ```
 
-The files `/data/conf2/eloqkv.ini` and `/data/conf3/eloqkv.ini` are pretty much the same as `/data/conf1/eloqkv.ini`, except the local IP are set to `172.20.0.2` and `172.20.0.3` respectively.
+The files `/data/conf2/eloqkv.ini` and `/data/conf3/eloqkv.ini` are pretty much the same as `/data/conf1/eloqkv.ini`, except the local IP are set to `172.20.0.12` and `172.20.0.13` respectively.
 
 Now, let's use `docker run` to start three containers, each functioning as a unique EloqKV node, to build the cluster.
 
@@ -62,9 +67,9 @@ Now, let's use `docker run` to start three containers, each functioning as a uni
 docker network create --subnet=172.20.0.0/16 eloqnet
 
 # Mount local configuration files and launch three containers to create an EloqKV cluster.
-docker run -d --net eloqnet --ip 172.20.0.1 -p 6380:6379 -v /data/conf1:/home/eloquser/EloqKV/conf eloqdata/eloqkv
-docker run -d --net eloqnet --ip 172.20.0.2 -p 6381:6379 -v /data/conf2:/home/eloquser/EloqKV/conf eloqdata/eloqkv
-docker run -d --net eloqnet --ip 172.20.0.3 -p 6382:6379 -v /data/conf3:/home/eloquser/EloqKV/conf eloqdata/eloqkv
+docker run -d --net eloqnet --ip 172.20.0.11 -p 6380:6379 -v /data/conf1:/home/eloq/EloqKV/conf eloqdata/eloqkv
+docker run -d --net eloqnet --ip 172.20.0.12 -p 6381:6379 -v /data/conf2:/home/eloq/EloqKV/conf eloqdata/eloqkv
+docker run -d --net eloqnet --ip 172.20.0.13 -p 6382:6379 -v /data/conf3:/home/eloq/EloqKV/conf eloqdata/eloqkv
 ```
 
 You're ready to connect to the EloqKV cluster:
