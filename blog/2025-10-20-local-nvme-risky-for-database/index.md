@@ -6,8 +6,8 @@ tags: [Company]
 image: /img/blog/awsoutage.jpg
 description: "Many databases recommend local NVMe for performance with cross-AZ replicas for durability. The AWS outage showed how this can still lead to data loss. Here’s a breakdown and a safer alternative."
 blog: true
-featured: true
-featuredMain: true
+featured: false
+featuredMain: false
 ---
 
 # When Your Database Lives on Local NVMe: What the AWS us-east-1 Outage Just Taught Us
