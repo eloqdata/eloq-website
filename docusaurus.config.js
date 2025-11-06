@@ -180,6 +180,16 @@ module.exports = {
         // ... other options
       },
     ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'operator',
+        path: 'operator',
+        routeBasePath: 'operator',
+        sidebarPath: require.resolve('./sidebarsOperator.js'),
+        // ... other options
+      },
+    ],
   ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
@@ -409,6 +419,27 @@ module.exports = {
                       <div style="display: flex; flex-direction: column;">
                         <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">EloqCloud</span>
                         <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Quick start guide</span>
+                      </div>
+                    </div>
+                  </a>
+                `,
+              },
+              {
+                type: 'html',
+                value: `
+                  <a href="/operator/introduction" style="display: block; padding: 16px 20px; text-decoration: none; background-color: #1B1B1D; border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 320px;">
+                    <div style="display: flex; align-items: center;">
+                      <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
+                        <rect width="32" height="32" rx="6" fill="#222" />
+                        <path d="M16 6l-4 4h8l-4-4z" fill="#FFFFFF" opacity="0.8" />
+                        <rect x="12" y="10" width="8" height="8" stroke="#FFFFFF" stroke-width="2" fill="none" />
+                        <path d="M12 22h8M14 18v4M18 18v4" stroke="#FFFFFF" stroke-width="2" />
+                        <circle cx="9" cy="14" r="2" stroke="#FFFFFF" stroke-width="1.5" fill="none" />
+                        <circle cx="23" cy="14" r="2" stroke="#FFFFFF" stroke-width="1.5" fill="none" />
+                      </svg>
+                      <div style="display: flex; flex-direction: column;">
+                        <span style="font-size: 18px; font-weight: 500; color: #FFFFFF; margin: 0 0 4px 0;">Eloq Operator</span>
+                        <span style="font-size: 14px; color: rgba(255,255,255,0.6);">Deploy on Kubernetes</span>
                       </div>
                     </div>
                   </a>

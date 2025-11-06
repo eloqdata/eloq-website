@@ -25,9 +25,6 @@ const sidebars = {
         type: 'category',
         label: 'Deploy on AWS EKS',
         items: [
-          'eks-deployment',
-          'deployment-eloq-kv-aws-eks',
-          'configure-eloqkv-resource',
         ],
       },
     ],

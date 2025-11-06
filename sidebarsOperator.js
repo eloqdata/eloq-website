@@ -13,10 +13,13 @@
 
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
-  // By default, Docusaurus generates a sidebar from the docs folder structure
-  eloqdoc: {
-    'Get Started': ['install-from-binary', 'install-from-binary-object-storage'],
-    'Compatibility': ['compatibility'],
-  },
+    // By default, Docusaurus generates a sidebar from the docs folder structure
+    operator: {
+        'Eloq Operator': ['introduction'],
+        'Install Operator': [
+            'install-operator-aws',
+            'install-operator-baidu',
+        ],
+    },
 };
 module.exports = sidebars;
