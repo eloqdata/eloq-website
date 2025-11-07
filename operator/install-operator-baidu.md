@@ -282,9 +282,9 @@ The table below lists all images that need to be pushed to your private CCR regi
 |                   | kiwigrid/k8s-sidecar:1.30.2                                    | k8s-sidecar:1.30.2                   | K8s sidecar (optional)  |
 |                   | quay.io/minio/minio:RELEASE.2024-12-18T13-15-44Z               | minio:RELEASE.2024-12-18T13-15-44Z   | MinIO (optional)        |
 |                   | quay.io/minio/mc:RELEASE.2024-11-21T17-21-54Z                  | mc:RELEASE.2024-11-21T17-21-54Z      | MinIO client (optional) |
-| **Eloq Operator** | eloqdata/eloq-operator:lz-20251104-v1                          | eloq-operator:lz-20251104-v1         | Operator controller     |
+| **Eloq Operator** | eloqdata/eloq-operator:4.0.11                          | eloq-operator:4.0.11         | Operator controller     |
 |                   | quay.io/brancz/kube-rbac-proxy:v0.13.1                         | kube-rbac-proxy:v0.13.1              | RBAC proxy              |
-| **EloqDoc**       | eloqdata/eloqdoc-rocks-cloud:release-0.2.6-new                 | eloqdoc-rocks-cloud:0.2.6            | EloqDoc runtime         |
+| **EloqDoc**       | eloqdata/eloqdoc-rocks-cloud:release-0.2.6                 | eloqdoc-rocks-cloud:0.2.6            | EloqDoc runtime         |
 
 **Notes**:
 - Images marked as "optional" are for features like logging (Loki) or S3-compatible storage (MinIO) that you may not need
