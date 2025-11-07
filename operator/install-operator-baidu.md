@@ -13,7 +13,6 @@ Before you begin, ensure you have:
 
 - `kubectl` installed (v1.28 or later)
 - `helm` installed (v3.0 or later)
-- `eksctl` installed (v0.150.0 or later)
 - Baidu Cloud account with permissions to create CCE clusters, CCR (Container Registry) namespaces, and BOS (Object Storage) buckets
 
 ## Step 1 — Create the CCE cluster
@@ -40,7 +39,7 @@ Node setup script:
 # Robust Baidu Cloud CCE data-disk setup + mount for CCE nodes (XFS + quota),
 # then bootstrap.
 # - Waits for non-root, unmounted block device >= MIN_BYTES
-# - Accepts nvme/xvd/sd (Nitro and non-Nitro)
+# - Accepts nvme/xvd/sd
 # - Idempotent: skips mkfs if filesystem exists,
 #   skips fstab duplicates, etc.
 
@@ -240,15 +239,6 @@ EOF
 # Reload the systemd configuration and restart the containerd service to apply the change
 sudo systemctl daemon-reload
 sudo systemctl restart containerd
-
-###########################################################################
-# 9. Bootstrap EKS (start kubelet after mount is ready)
-#    If you prefer the original order, move this *above* the disk steps.
-###########################################################################
-log "Running EKS bootstrap for cluster '${CLUSTER_NAME}' (runtime: ${CONTAINER_RUNTIME})"
-sudo /etc/eks/bootstrap.sh "${CLUSTER_NAME}" --container-runtime "${CONTAINER_RUNTIME}"
-
-log "Done."
 ```
 
 ## Step 3 — Enable CCR and push images
