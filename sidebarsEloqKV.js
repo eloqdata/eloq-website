@@ -23,6 +23,7 @@ const sidebars = {
       'manage-cluster',
       'upgrade',
       'prerequisite',
+      'deploy-on-kubernetes',
     ],
     Manage: [
       'monitor',
