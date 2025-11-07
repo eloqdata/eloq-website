@@ -37,7 +37,7 @@ Node setup script:
 ```bash
 #!/bin/bash
 
-# Robust EC2 data-disk setup + mount for EKS nodes (XFS + quota),
+# Robust Baidu Cloud CCE data-disk setup + mount for CCE nodes (XFS + quota),
 # then bootstrap.
 # - Waits for non-root, unmounted block device >= MIN_BYTES
 # - Accepts nvme/xvd/sd (Nitro and non-Nitro)
