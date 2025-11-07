@@ -75,19 +75,19 @@ docker run -d --net eloqnet --ip 172.20.0.13 -p 6382:6379 -v /data/conf3:/home/e
 You're ready to connect to the EloqKV cluster:
 
 ```shell
-redis-cli -h 172.20.0.3
+redis-cli -h 172.20.0.13
 
-172.20.0.3:6379> multi
+172.20.0.13:6379> multi
 OK
-172.20.0.3:6379> set a a
+172.20.0.13:6379> set a a
 QUEUED
-172.20.0.3:6379> set b b
+172.20.0.13:6379> set b b
 QUEUED
-172.20.0.3:6379> set c c
+172.20.0.13:6379> set c c
 QUEUED
-172.20.0.3:6379> set d d
+172.20.0.13:6379> set d d
 QUEUED
-172.20.0.3:6379> exec
+172.20.0.13:6379> exec
 1) OK
 2) OK
 3) OK
