@@ -6,8 +6,8 @@ image: /img/blog/awsoutage.jpg
 tags: [Company]
 description: "Discussing why now distributed databases are losing popularity, and why they are going to be relevant in the AI age."
 blog: true
-featured: true
-featuredMain: true
+featured: false
+featuredMain: false
 ---
 
 # Why Everyone is using PostgreSQL and DuckDB — And Why It Might Not Last

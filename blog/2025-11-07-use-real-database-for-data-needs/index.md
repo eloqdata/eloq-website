@@ -2,16 +2,23 @@
 title: "Don't Split My Data: I Will Use a Database (Not PostgreSQL) for My Data Needs"
 authors: eloq
 date: 2025-11-05
-image: /img/blog/awsoutage.jpg
+image: /img/blog/pg_for_all.jpg
 tags: [Company]
 description: "Discussing the converged database substrate and why postgresql is not sufficient"
 blog: true
 featured: true
-featuredMain: false
+featuredMain: true
 ---
 
 The internet (or at least the IT community) had a field day when a couple of blog posts claimed you could replace Redis and Kafka with PostgreSQL. ["Redis is fast, I'll cache in Postgres"](https://dizzy.zone/2025/09/24/Redis-is-fast-Ill-cache-in-Postgres/) and ["Kafka is fast -- I'll use Postgres"](https://topicpartition.io/blog/postgres-pubsub-queue-benchmarks) have gotten much attention on HackerNews [here](https://news.ycombinator.com/item?id=45380699) and [here](https://news.ycombinator.com/item?id=45747018), and on Reddit [here](https://www.reddit.com/r/programming/comments/1nph2jh/redis_is_fast_ill_cache_in_postgres/) and [here](https://www.reddit.com/r/programming/comments/1oj7q6q/kafka_is_fast_ill_use_postgres/). Obviously, some of the claims in the posts got roasted on HN and Reddit for suggesting you could replace Redis or Kafka with PostgreSQL. Many people (correctly) pointed out that the benchmarks were far from properly set up, and the workloads were non-typical. Some of the Kafka people also posted [long articles](https://www.morling.dev/blog/you-dont-need-kafka-just-use-postgres-considered-harmful/) to clarify what Kafka is designed for and why it is not hard to use. But, on the flip side, many of the posts also (correctly) preached a valid point: keeping fewer moving parts matters, and using the right tool for the job matters even more.
 
+<p align="center">
+<div style={{ width: '75%', textAlign: 'center'}}>
+import EnlargeableImage from '@site/src/pages/enlarge_pic';
+
+<EnlargeableImage src={require('./img/pg_for_all.jpg').default} alt="x" />
+
+</div></p>
 Those "Postgres can replace Redis/Kafka" posts benchmarked tiny workloads where serious tools simply aren't needed and then stretched that into a sweeping "you don't need Redis or Kafka" narrative. It's like writing an article on how much cargo a U-Haul can carry, and concluding that you'll just use your convertible for grocery runs. Nobody would post that on a trucking forum expecting a heated debate. So why does the same flavored reasoning blow up every time someone writes it about databases?
 
 Sure, part of the drama is emotional. Developers get attached to their tools. Kafka, Redis, and Postgres all have cult-like followings, and any praise or criticism feels personal. But there's more to it than fandom. These debates touch on real technical trade-offs: complexity, durability, scaling, and the cost of managing multiple systems. In this article, we'll look at why it actually makes sense to use a *real* database for workloads that used to require specialized systems, and then tackle the elephant in the room: why this shift hasn't happened before and what's needed to make it possible.
@@ -102,7 +109,6 @@ If converging everything into a single database simplifies architecture so drama
 
 <p align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
-import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
 <EnlargeableImage src={require('./img/one_size_fit_all.png').default} alt="One Size Fit All?" />
 
