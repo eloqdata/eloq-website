@@ -186,6 +186,24 @@ Below is a detailed description of each configuration variable:
 - Data Type: String
 - Default Value: RepeatableRead
 
+### `enable_io_uring`
+
+- Description: Enables `io_uring` as the network I/O engine so accept/read/write operations can bypass the legacy epoll path and benefit from lower syscall overhead and better batching. When set to `false`, EloqKV falls back to epoll-based networking. Requires Linux kernel ≥ 6.5; leave disabled if the environment does not meet this requirement.
+- Category: [local]
+- Commandline: --enable_io_uring=true|false
+- Scope: Global
+- Data Type: Boolean
+- Default Value: "false"
+
+### `raft_log_async_fsync`
+
+- Description: Controls whether the Raft log fsync runs asynchronously through `io_uring` instead of blocking the worker thread. Turning it on helps smooth out latency spikes introduced when Raft log fsync is performed synchronously on the worker thread. Requires `enable_io_uring=true`, otherwise the flag is ignored.
+- Category: [local]
+- Commandline: --raft_log_async_fsync=true|false
+- Scope: Global
+- Data Type: Boolean
+- Default Value: "false"
+
 ### Log Configuration
 
 EloqKV uses GLOG to manage logging with various log levels. You can modify GLOG's behavior by exporting environment variables prefixed with GLOG\_. For more information, refer to the [GLOG FLAGS documentation](https://github.com/google/glog/blob/master/docs/flags.md).
