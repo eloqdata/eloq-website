@@ -188,7 +188,7 @@ Below is a detailed description of each configuration variable:
 
 ### `enable_io_uring`
 
-- Description: Enables `io_uring` as the network I/O engine so accept/read/write operations can bypass the legacy epoll path and benefit from lower syscall overhead and better batching. When set to `false`, EloqKV falls back to epoll-based networking. Requires Linux kernel ≥ 6.5; leave disabled if the environment does not meet this requirement.
+- Description: Enables `io_uring` as the network I/O engine so network read/write operations can bypass the legacy epoll path and benefit from lower syscall overhead and better batching. When set to `false`, EloqKV falls back to epoll-based networking. Requires Linux kernel ≥ 6.5; leave disabled if the environment does not meet this requirement.
 - Category: [local]
 - Commandline: --enable_io_uring=true|false
 - Scope: Global
