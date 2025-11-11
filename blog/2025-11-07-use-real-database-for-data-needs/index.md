@@ -7,7 +7,7 @@ tags: [Company]
 description: "Discussing the converged database substrate and why postgresql is not sufficient"
 blog: true
 featured: true
-featuredMain: true
+featuredMain: false
 ---
 
 The internet (or at least the IT community) had a field day when a couple of blog posts claimed you could replace Redis and Kafka with PostgreSQL. ["Redis is fast, I'll cache in Postgres"](https://dizzy.zone/2025/09/24/Redis-is-fast-Ill-cache-in-Postgres/) and ["Kafka is fast -- I'll use Postgres"](https://topicpartition.io/blog/postgres-pubsub-queue-benchmarks) have gotten much attention on HackerNews [here](https://news.ycombinator.com/item?id=45380699) and [here](https://news.ycombinator.com/item?id=45747018), and on Reddit [here](https://www.reddit.com/r/programming/comments/1nph2jh/redis_is_fast_ill_cache_in_postgres/) and [here](https://www.reddit.com/r/programming/comments/1oj7q6q/kafka_is_fast_ill_use_postgres/). Obviously, some of the claims in the posts got roasted on HN and Reddit for suggesting you could replace Redis or Kafka with PostgreSQL. Many people (correctly) pointed out that the benchmarks were far from properly set up, and the workloads were non-typical. Some of the Kafka people also posted [long articles](https://www.morling.dev/blog/you-dont-need-kafka-just-use-postgres-considered-harmful/) to clarify what Kafka is designed for and why it is not hard to use. But, on the flip side, many of the posts also (correctly) preached a valid point: keeping fewer moving parts matters, and using the right tool for the job matters even more.

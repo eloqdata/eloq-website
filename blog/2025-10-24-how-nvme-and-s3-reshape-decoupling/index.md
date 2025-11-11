@@ -6,7 +6,7 @@ image: /img/blog/s3nvme.jpg
 tags: [Company]
 description: "Re-examine the decoupled architecture through the lens of cloud storage mediums."
 blog: true
-featured: true
+featured: false
 featuredMain: false
 ---
 

@@ -2,7 +2,7 @@
 title: "Why Everyone is using PostgreSQL and DuckDB — And Why We May Need More"
 authors: eloq
 date: 2025-11-07
-image: /img/blog/awsoutage.jpg
+image: /img/blog/agent_need_more.jpg
 tags: [Company]
 description: "Discussing why now distributed databases are losing popularity, and why they are going to be relevant in the AI age."
 blog: true
@@ -17,6 +17,14 @@ featuredMain: true
 Many people now argue that single-node databases are enough for almost everything. Hardware has become so powerful that even massive workloads can often fit on one beefy machine. OpenAI recently [discussed](https://www.youtube.com/watch?v=Ni1SGhNu-Q4) how  their main database runs on a single-writer PostgreSQL setup. Just one node handling all the writes, with many read replicas to scale out read traffic. That's a bold design, and it suggests that maybe we no longer need complicated distributed databases because modern CPUs, SSDs, and memory are making scale-out architectures look like overkill.
 
 In this artcle, we discuss how we reached this state in the database landscape, and disucss the future for scalable databases. We draw many inspirations from history, and we believe that there is a very bright future for database community going forward as we entering the new era of growth and prosperity. 
+
+<p align="center">
+<div style={{ width: '720px', textAlign: 'center'}}>
+import EnlargeableImage from '@site/src/pages/enlarge_pic';
+
+<EnlargeableImage src={require('./img/agent_need_more.jpg').default} alt="One Size Fit All?" />
+
+</div></p>
 
 ## The Rise and Fall of the Scale-Out Mindset
 
@@ -59,7 +67,6 @@ This kind of competitive advantage will matter even more as we enter the hyper-s
 
 <p align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
-import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
 <EnlargeableImage src={require('./img/shovel_excavator.png').default} alt="One Size Fit All?" />
 
