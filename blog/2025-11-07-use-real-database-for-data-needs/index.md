@@ -1,7 +1,7 @@
 ---
 title: "Don't Split My Data: I Will Use a Database (Not PostgreSQL) for My Data Needs"
 authors: eloq
-date: 2025-11-05
+date: 2025-11-07
 image: /img/blog/pg_for_all.jpg
 tags: [Company]
 description: "Discussing the converged database substrate and why postgresql is not sufficient"

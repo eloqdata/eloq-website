@@ -1,7 +1,7 @@
 ---
 title: "Why Everyone is using PostgreSQL and DuckDB — And Why We May Need More"
 authors: eloq
-date: 2025-11-07
+date: 2025-11-11
 image: /img/blog/agent_need_more.jpg
 tags: [Company]
 description: "Discussing why now distributed databases are losing popularity, and why they are going to be relevant in the AI age."
