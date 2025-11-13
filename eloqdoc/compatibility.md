@@ -37,7 +37,7 @@ title: EloqDoc Compatibility
 - [✅] FindAndModify
 - [✅] GetMore
 - [✅] Insert
-- [✅] MapReduce
+- [❌] MapReduce
 - [✅] Update
 
 ### Aggregation Stages
@@ -57,7 +57,6 @@ title: EloqDoc Compatibility
 - [✅] LimitSessions
 - [✅] Lookup
 - [✅] Match
-- [✅] Out
 - [✅] Project
 - [✅] Redact
 - [✅] ReplaceRoot
@@ -66,6 +65,7 @@ title: EloqDoc Compatibility
 - [✅] Sort
 - [✅] SortByCount
 - [✅] Unwind
+- [❌] Out
 - [❌] Densify
 - [❌] Documents
 - [❌] Fill
