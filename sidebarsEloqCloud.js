@@ -3,7 +3,7 @@ const sidebars = {
   // By default, Docusaurus generates a sidebar from the docs folder structure
   eloqcloud: {
     'Get Started': ['quick-start'],
-    //'API': ['api', 'cluster'],
+    'API': ['api', 'basic', 'cluster'],
     //'SDK': ['python-sdk', 'typescript-sdk', 'pythondoc', 'typescriptdoc'],
   },
 };

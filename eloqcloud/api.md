@@ -20,16 +20,16 @@ The **Eloq API** is a RESTful web service that allows you to programmatically in
 
 The base URL is:
 
-https://api.eloqdata.com/api/v1/
+`https://api-prod.eloqdata.com/api/v1/`
 
 ### **Authentication**
 
-All API requests require authentication using an API token. You can obtain your API token from the [EloqCloud Dashboard](https://cloud.eloqdata.com).
+All API requests require authentication using an API token. You can obtain your API token from the [EloqCloud Dashboard](https://cloud.eloqdata.com/settings/api-keys).
 
 ```bash
 # Include your API token in the Authorization header
-curl -H "Authorization: Bearer {{YOUR_API_TOKEN}}" \
-     https://api.eloqdata.com/api/v1/org-info
+curl -X GET "https://api-prod.eloqdata.com/api/v1/org-info" \
+  -H "Authorization: {{YOUR_API_KEY}}"
 ```
 
 ### **Response Format**
@@ -46,27 +46,23 @@ The API returns responses in JSON format with standard HTTP status codes:
 
 ## API Endpoints Overview
 
-### **Organization Management**
+### **Basic Information**
 
-- `GET /org-info` - Get organization information
+- [`GET /org-info`](./basic#org-info-api) - Get organization information
+- [`GET /skus-by-args`](./basic#skus-by-args-api) - Filter available SKUs by type, module, and cloud provider
 
 ### **Cluster Management**
 
-- `GET /orgs/{org_id}/projects/{project_id}/clusters` - List clusters
-- `GET /orgs/{org_id}/projects/{project_id}/clusters/{cluster_name}` - Get cluster details
-- `POST /orgs/{org_id}/projects/{project_id}/clusters/{cluster_name}` - Create a new cluster
+- [`POST /orgs/{orgId}/projects/{projectId}/clusters`](./cluster#cluster-api) - Create a new cluster
+- [`GET /orgs/{orgId}/projects/{projectId}/clusters`](./cluster#cluster-api) - List clusters
+- [`GET /orgs/{orgId}/projects/{projectId}/clusters/{clusterName}`](./cluster#cluster-api) - Get cluster details
+- [`DELETE /orgs/{orgId}/projects/{projectId}/clusters/{clusterName}/delete`](./cluster#cluster-api) - Delete a cluster
 
 ## See details
 
-- [Organization Management API](./organization)
+- [Basic Information API](./basic)
 - [Cluster Management API](./cluster)
 
-## SDK Support
-
-For easier integration, we provide official SDKs:
-
-- **[Python SDK](./python-sdk)** - Full-featured Python client library
-- **[TypeScript SDK](./typescript-sdk)** - Type-safe JavaScript/TypeScript client
 
 ## Support
 
