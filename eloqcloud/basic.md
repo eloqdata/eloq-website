@@ -12,7 +12,7 @@ The following sections describe each basic API individually, including its purpo
 
 <a id="org-info-api"></a>
 
-### API 1 – Get basic oinfo (`GET /org-info`)
+### API 1 – Get basic info (`GET /org-info`)
 
 Fetch the current user’s organization information and basic profile data.
 
