@@ -26,61 +26,298 @@ Currently, free users are limited to **4 clusters** with **fixed resource quotas
 
 | Resource     | Free Tier Limit        |
 | ------------ | ---------------------- |
-| **Clusters** | 4 clusters maximum     |
+| **Clusters** | 3 clusters maximum     |
 | **CPU**      | 0.25 cores per cluster |
 | **Memory**   | 2GB RAM per cluster    |
 | **Storage**  | 20GB                   |
 
+<a id="cluster-api"></a>
+
 ## Cluster API
 
-The Cluster API provides programmatic access to manage cluster resources, configurations, and operations. You can use these endpoints to automate cluster management tasks and integrate Eloq services into your workflows.
+The Cluster API provides programmatic access to manage cluster resources, configurations, and lifecycle operations.
 
-### **Core API Endpoints:**
+- **Base path**: `/api/v1`  
+- **Authentication**: All APIs require an `Authorization` header with your API key: `Authorization: {{YOUR_API_KEY}}`  
+- **Base URL**: `https://api-prod.eloqdata.com`
 
-- **`GET /orgs/{org_id}/projects/{project_id}/clusters`** - List all clusters in a project
-- **`GET /orgs/{org_id}/projects/{project_id}/clusters/{cluster_name}`** - Get cluster details and status
-- **`POST /orgs/{org_id}/projects/{project_id}/clusters/{cluster_name}`** - Create a new cluster with custom configuration
+The following sections describe each cluster-related API individually, including its purpose, input, output, and a `curl` example.
 
-### **Example Usage:**
+---
 
-```bash
-# List all clusters in a project
-curl -H "Authorization: Bearer {{YOUR_API_TOKEN}}" \
-     https://api.eloqdata.com/api/v1/clusters?org_id=1&project_id=147
+### API 1 – Create a cluster (`POST /orgs/{orgId}/projects/{projectId}/clusters`)
 
-# Get cluster details
-curl -H "Authorization: Bearer {{YOUR_API_TOKEN}}" \
-     https://api.eloqdata.com/api/v1/cluster/1/147/my-cluster
+Create a new cluster in the specified project.
 
-# Create a new cluster
-curl -X POST -H "Authorization: Bearer {{YOUR_API_TOKEN}}" \
-     -H "Content-Type: application/json" \
-     -d '{"clusterName":"new-cluster","region":"us-east-1","requiredZone":"us-east-1a","skuId":1}' \
-     https://api.eloqdata.com/api/v1/cluster/create
+#### Endpoint
+
+- **Method**: `POST`  
+- **Path**: `/orgs/{orgId}/projects/{projectId}/clusters`
+
+#### Input
+
+- **Headers**:
+  - `Authorization: {{YOUR_API_KEY}}`
+  - `Content-Type: application/json`
+- **Path parameters**:
+
+| Name       | Type    | Required | Description  |
+|-----------|---------|----------|--------------|
+| `orgId`    | integer | Yes      | Organization ID |
+| `projectId`| integer | Yes      | Project ID      |
+
+- **Request body (JSON)**:
+
+```json
+{
+  "clusterName": "string",
+  "region": "string",
+  "requiredZone": "string",
+  "skuId": 0
+}
 ```
 
-## Cluster Types
+Field details:
 
-### **EloqKV Clusters**
+- `clusterName` (string, required): Cluster display name  
+- `region` (string, required): Region (for example: `ap-northeast-1`)  
+- `requiredZone` (string, optional): Availability zone  
+- `skuId` (integer, required): SKU ID
 
-Redis-compatible key-value database clusters optimized for high-performance caching and session storage.
+#### Example (`curl`)
 
-- **Use Cases**: Caching, session storage, real-time analytics
-- **Features**: Sub-millisecond latency, high throughput, Redis API compatibility
-- **Scaling**: Horizontal scaling with automatic sharding
+```bash
+curl -X POST "https://api-prod.eloqdata.com/api/v1/orgs/{orgId}/projects/{projectId}/clusters" \
+  -H "Authorization: {{YOUR_API_KEY}}" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "clusterName": "example-cluster",
+    "region": "ap-northeast-1",
+    "requiredZone": "ap-northeast-1a",
+    "skuId": 1
+  }'
+```
 
-## Best Practices
+#### Output
 
-### **Cluster Management**
+**Success (200)**:
 
-- **Monitor Resource Usage** - Regularly check CPU, memory, and storage utilization
-- **Plan for Growth** - Consider future scaling needs when designing cluster architecture
-- **Use Appropriate SKUs** - Choose the right SKU based on your workload requirements
-- **Implement Backup Strategies** - Regular backups and disaster recovery planning
+```json
+{
+  "code": 0,
+  "message": "success",
+  "data": null
+}
+```
 
-### **Performance Optimization**
+**Error responses**:
 
-- **Optimize Queries** - Use efficient query patterns and indexing strategies
-- **Monitor Performance** - Track key metrics like latency, throughput, and error rates
-- **Scale Proactively** - Monitor trends and scale before hitting resource limits
-- **Use Connection Pooling** - Implement proper connection management for better performance
+- `400`: Invalid request parameters  
+- `403`: Permission denied  
+- `500`: Internal server error
+
+---
+
+### API 2 – List clusters (`GET /orgs/{orgId}/projects/{projectId}/clusters`)
+
+Get a paginated list of clusters under the specified project.
+
+#### Endpoint
+
+- **Method**: `GET`  
+- **Path**: `/orgs/{orgId}/projects/{projectId}/clusters`
+
+#### Input
+
+- **Headers**:
+  - `Authorization: {{YOUR_API_KEY}}`
+- **Path parameters**:
+
+| Name       | Type    | Required | Description  |
+|-----------|---------|----------|--------------|
+| `orgId`    | integer | Yes      | Organization ID |
+| `projectId`| integer | Yes      | Project ID      |
+
+- **Query parameters**:
+
+| Name      | Type    | Required | Description        | Constraints |
+|-----------|---------|----------|--------------------|------------|
+| `perPage` | integer | Yes      | Number per page    | 1–50       |
+| `page`    | integer | Yes      | Page index (1-based)| > 0        |
+
+#### Example (`curl`)
+
+```bash
+curl -X GET "https://api-prod.eloqdata.com/api/v1/orgs/{orgId}/projects/{projectId}/clusters?perPage={perPage}&page={page}" \
+  -H "Authorization: {{YOUR_API_KEY}}"
+```
+
+#### Output
+
+**Success (200)**:
+
+```json
+{
+  "code": 0,
+  "message": "success",
+  "data": {
+    "cluster_list": [
+      {
+        "cluster_name": "string",
+        "version": "string",
+        "module_type": "string",
+        "status": "string",
+        "cloud_provider": "string",
+        "region": "string",
+        "zone": "string",
+        "create_at": "2024-01-01T00:00:00Z",
+        "sku_name": "string"
+      }
+    ],
+    "total": 0
+  }
+}
+```
+
+Field notes:
+
+- `module_type`: `EloqSQL`, `EloqKV`, `EloqDoc`  
+- `status`: e.g. `available`, `unavailable`, `provisioning`  
+- `cloud_provider`: `AWS`, `GCP`
+
+**Error responses**:
+
+- `400`: Invalid request parameters  
+- `403`: Permission denied  
+- `500`: Internal server error
+
+---
+
+### API 3 – Describe a cluster (`GET /orgs/{orgId}/projects/{projectId}/clusters/{clusterName}`)
+
+Get detailed information for a specific cluster.
+
+#### Endpoint
+
+- **Method**: `GET`  
+- **Path**: `/orgs/{orgId}/projects/{projectId}/clusters/{clusterName}`
+
+#### Input
+
+- **Headers**:
+  - `Authorization: {{YOUR_API_KEY}}`
+- **Path parameters**:
+
+| Name         | Type    | Required | Description          |
+|-------------|---------|----------|----------------------|
+| `orgId`      | integer | Yes      | Organization ID      |
+| `projectId`  | integer | Yes      | Project ID           |
+| `clusterName`| string  | Yes      | Cluster display name |
+
+#### Example (`curl`)
+
+```bash
+curl -X GET "https://api-prod.eloqdata.com/api/v1/orgs/{orgId}/projects/{projectId}/clusters/{clusterName}" \
+  -H "Authorization: {{YOUR_API_KEY}}"
+```
+
+#### Output
+
+**Success (200)**:
+
+```json
+{
+  "code": 0,
+  "message": "success",
+  "data": {
+    "org_name": "string",
+    "project_name": "string",
+    "display_cluster_name": "string",
+    "module_type": "string",
+    "cloud_provider": "string",
+    "region": "string",
+    "zone": "string",
+    "status": "string",
+    "tx_cpu_limit": 0.0,
+    "tx_memory_mi_limit": 0.0,
+    "log_cpu_limit": 0.0,
+    "log_memory_mi_limit": 0.0,
+    "tx_replica": 0,
+    "log_replica": 0,
+    "version": "string",
+    "elb_addr": "string",
+    "elb_port": 0,
+    "create_at": "2024-01-01T00:00:00Z",
+    "elb_state": "string",
+    "admin_user": "string",
+    "admin_password": "string",
+    "cluster_deploy_mode": "string"
+  }
+}
+```
+
+Field notes:
+
+- `module_type`: `EloqSQL`, `EloqKV`, `EloqDoc`  
+- `cloud_provider`: `AWS`, `GCP`  
+- `status`: e.g. `available`, `unavailable`, `provisioning`  
+- `admin_user`, `admin_password`: Base64-encoded admin credentials  
+- `elb_state`: e.g. `active`, `provisioning`
+
+**Error responses**:
+
+- `400`: Invalid request parameters  
+- `403`: Permission denied or cluster not found  
+- `500`: Internal server error
+
+---
+
+### API 4 – Delete a cluster (`DELETE /orgs/{orgId}/projects/{projectId}/clusters/{clusterName}/delete`)
+
+Delete the specified cluster. The cluster must be in `available` state.
+
+#### Endpoint
+
+- **Method**: `DELETE`  
+- **Path**: `/orgs/{orgId}/projects/{projectId}/clusters/{clusterName}/delete`
+
+#### Input
+
+- **Headers**:
+  - `Authorization: {{YOUR_API_KEY}}`
+- **Path parameters**:
+
+| Name         | Type    | Required | Description          |
+|-------------|---------|----------|----------------------|
+| `orgId`      | integer | Yes      | Organization ID      |
+| `projectId`  | integer | Yes      | Project ID           |
+| `clusterName`| string  | Yes      | Cluster display name |
+
+#### Example (`curl`)
+
+```bash
+curl -X DELETE "https://api-prod.eloqdata.com/api/v1/orgs/{orgId}/projects/{projectId}/clusters/{clusterName}/delete" \
+  -H "Authorization: {{YOUR_API_KEY}}"
+```
+
+#### Output
+
+**Success (200)**:
+
+```json
+{
+  "code": 0,
+  "message": "success",
+  "data": null
+}
+```
+
+**Error responses**:
+
+- `400`: Invalid request parameters  
+- `403`: Permission denied or cluster not in an available state  
+- `500`: Internal server error  
+
+**Note**: The cluster must be in `available` status before it can be deleted.
+
+---
