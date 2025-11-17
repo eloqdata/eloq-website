@@ -12,7 +12,7 @@ The following sections describe each basic API individually, including its purpo
 
 <a id="org-info-api"></a>
 
-### API 1 – Get basic info (`GET /org-info`)
+### API - Get basic info (`GET /org-info`)
 
 Fetch the current user’s organization information and basic profile data.
 
@@ -65,7 +65,7 @@ Example JSON response:
 
 <a id="skus-by-args-api"></a>
 
-### API 2 – Filter available SKUs (`GET /skus-by-args`)
+### API - Filter available SKUs (`GET /skus-by-args`)
 
 Filter the SKU list by SKU type, module type, and cloud provider.  
 Only SKUs that are available in the user’s current subscription plan are returned.

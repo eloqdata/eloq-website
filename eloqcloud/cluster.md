@@ -4,7 +4,7 @@
 
 ## About Cluster
 
-A **Cluster** is a flexible database cluster in our cloud service platform that enables **elastic scaling** and **seamless user experience**. Clusters serve as the core infrastructure for running EloqKV, EloqSQL, and EloqDoc databases with high availability and performance.
+A **Cluster** is a flexible database cluster in our cloud service platform that enables **elastic scaling** and **seamless user experience**. Clusters serve as the core infrastructure for running EloqKV and EloqDoc databases with high availability and performance.
 
 ### **Key Features:**
 
@@ -14,12 +14,12 @@ A **Cluster** is a flexible database cluster in our cloud service platform that 
 
 ## Free Tier Limitations
 
-Currently, free users are limited to **4 clusters** with **fixed resource quotas**. This includes:
+Currently, free users are limited to **3 clusters** with **fixed resource quotas**. This includes:
 
-- ✅ **Fixed Resource Allocation** - Predefined CPU, memory, and storage limits
-- ✅ **Standard Database Types** - Deploy EloqKV clusters
+- ✅ **Dedicated Resource** - Decicated CPU, memory, and storage limits
+- ✅ **All Database Types** - Support EloqKV and EloqDoc clusters
 - ✅ **Basic Monitoring** - Access to cluster status and basic metrics
-- ❌ **Cluster Limit** - Maximum of 4 clusters per organization
+- ❌ **Cluster Limit** - Maximum of 3 clusters per organization
 - ❌ **Advanced Features** - Some enterprise features are not available
 
 ### **Resource Quotas:**
@@ -27,9 +27,7 @@ Currently, free users are limited to **4 clusters** with **fixed resource quotas
 | Resource     | Free Tier Limit        |
 | ------------ | ---------------------- |
 | **Clusters** | 3 clusters maximum     |
-| **CPU**      | 0.25 cores per cluster |
-| **Memory**   | 2GB RAM per cluster    |
-| **Storage**  | 20GB                   |
+| **Storage**  | 25 GB                  |
 
 <a id="cluster-api"></a>
 
@@ -45,7 +43,7 @@ The following sections describe each cluster-related API individually, including
 
 ---
 
-### API 1 – Create a cluster (`POST /orgs/{orgId}/projects/{projectId}/clusters`)
+### API  – Create a cluster (`POST /orgs/{orgId}/projects/{projectId}/clusters`)
 
 Create a new cluster in the specified project.
 
@@ -66,6 +64,8 @@ Create a new cluster in the specified project.
 | `orgId`    | integer | Yes      | Organization ID |
 | `projectId`| integer | Yes      | Project ID      |
 
+Parameters ordId and projectId can be found at [GET /org-info API](./basic#api---get-basic-info-get-org-info)
+
 - **Request body (JSON)**:
 
 ```json
@@ -80,7 +80,7 @@ Create a new cluster in the specified project.
 Field details:
 
 - `clusterName` (string, required): Cluster display name  
-- `region` (string, required): Region (for example: `ap-northeast-1`)  
+- `region` (string, required): Region (for example: `us-west-1`)  
 - `requiredZone` (string, optional): Availability zone  
 - `skuId` (integer, required): SKU ID
 
@@ -92,8 +92,8 @@ curl -X POST "https://api-prod.eloqdata.com/api/v1/orgs/{orgId}/projects/{projec
   -H "Content-Type: application/json" \
   -d '{
     "clusterName": "example-cluster",
-    "region": "ap-northeast-1",
-    "requiredZone": "ap-northeast-1a",
+    "region": "us-west-1",
+    "requiredZone": "us-west-1a",
     "skuId": 1
   }'
 ```
@@ -104,8 +104,8 @@ curl -X POST "https://api-prod.eloqdata.com/api/v1/orgs/{orgId}/projects/{projec
 
 ```json
 {
-  "code": 0,
-  "message": "success",
+  "code": 200,
+  "message": "",
   "data": null
 }
 ```
@@ -118,7 +118,7 @@ curl -X POST "https://api-prod.eloqdata.com/api/v1/orgs/{orgId}/projects/{projec
 
 ---
 
-### API 2 – List clusters (`GET /orgs/{orgId}/projects/{projectId}/clusters`)
+### API – List clusters (`GET /orgs/{orgId}/projects/{projectId}/clusters`)
 
 Get a paginated list of clusters under the specified project.
 
@@ -193,7 +193,7 @@ Field notes:
 
 ---
 
-### API 3 – Describe a cluster (`GET /orgs/{orgId}/projects/{projectId}/clusters/{clusterName}`)
+### API – Describe a cluster (`GET /orgs/{orgId}/projects/{projectId}/clusters/{clusterName}`)
 
 Get detailed information for a specific cluster.
 
@@ -272,7 +272,7 @@ Field notes:
 
 ---
 
-### API 4 – Delete a cluster (`DELETE /orgs/{orgId}/projects/{projectId}/clusters/{clusterName}/delete`)
+### API – Delete a cluster (`DELETE /orgs/{orgId}/projects/{projectId}/clusters/{clusterName}/delete`)
 
 Delete the specified cluster. The cluster must be in `available` state.
 
@@ -306,8 +306,8 @@ curl -X DELETE "https://api-prod.eloqdata.com/api/v1/orgs/{orgId}/projects/{proj
 
 ```json
 {
-  "code": 0,
-  "message": "success",
+  "code": 200,
+  "message": "",
   "data": null
 }
 ```
