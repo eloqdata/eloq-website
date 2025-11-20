@@ -3,7 +3,7 @@ toc_min_heading_level: 2
 toc_max_heading_level: 2
 ---
 
-# Python SDK Documentation
+# Python SDK
 
 > Complete API reference for the Eloq Python SDK with detailed function documentation, input/output specifications, and usage examples.
 

@@ -6,7 +6,7 @@ toc_max_heading_level: 2
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# SDK for Eloq
+# SDK Overview
 
 > On this page, you can learn about:
 >
@@ -16,7 +16,7 @@ import TabItem from "@theme/TabItem";
 > 4. **API Methods Directory** - View all available organization and cluster management methods
 > 5. **Detailed Documentation Links** - Jump to complete API reference documentation
 
-## About SDK for Eloq
+## About SDK for EloqCloud
 
 The **Eloq SDK** provides client libraries for managing Eloq cloud cluster services. We support both **Python** and **TypeScript** implementations, allowing you to programmatically control your cluster infrastructure with type-safe APIs.
 
@@ -271,17 +271,17 @@ const client = createEloqClient({
 
 <TabItem value="python">
 
-Documentation for EloqAPI, including [quick start](./pythondoc#quick-start)
+Documentation for EloqAPI, including [quick start](./python-sdk#quick-start)
 
-For detailed function documentation with input/output specifications, see [**Python SDK Documentation**](./pythondoc).
+For detailed function documentation with input/output specifications, see [**Python SDK Documentation**](./python-sdk).
 
 </TabItem>
 
 <TabItem value="typescript">
 
-Documentation for TypeScript SDK, including [quick start](./typescriptdoc#quick-start)
+Documentation for TypeScript SDK, including [quick start](./typescript-sdk#quick-start)
 
-For detailed function documentation with input/output specifications, see [**TypeScript SDK Documentation**](./typescriptdoc).
+For detailed function documentation with input/output specifications, see [**TypeScript SDK Documentation**](./typescript-sdk).
 
 </TabItem>
 
@@ -400,17 +400,17 @@ async function handleErrors() {
 
 **Basic:**
 
-- [`org()`](./pythondoc#org---simpleorginfo) - Get simplified organization information
-- [`info()`](./pythondoc#info---userorginfodto) - Get detailed organization and project information
-- [`get_skus()`](./pythondoc#get_skussku_type-eloq_module-cloud_provider---listskuinfo) - Get available SKUs filtered by type, module, and cloud provider
+- [`org()`](./python-sdk#org---simpleorginfo) - Get simplified organization information
+- [`info()`](./python-sdk#info---userorginfodto) - Get detailed organization and project information
+- [`get_skus()`](./python-sdk#get_skussku_type-eloq_module-cloud_provider---listskuinfo) - Get available SKUs filtered by type, module, and cloud provider
 
 **Cluster Management:**
 
-- [`clusters()`](./pythondoc#clusterspage-int--1-per_page-int--20---clusterlist) - List all clusters in the current project
-- [`cluster()`](./pythondoc#clustercluster_name-str---descclusterdto) - Get detailed information about a specific cluster
-- [`cluster_create()`](./pythondoc#cluster_createcluster_name-region-sku_id---operationresult) - Create a new cluster
-- [`cluster_delete()`](./pythondoc#cluster_deletecluster_name---operationresult) - Delete a cluster
-- [`cluster_credentials()`](./pythondoc#cluster_credentialscluster_name---clustercredentials) - Get cluster credentials for database connection
+- [`clusters()`](./python-sdk#clusterspage-int--1-per_page-int--20---clusterlist) - List all clusters in the current project
+- [`cluster()`](./python-sdk#clustercluster_name-str---descclusterdto) - Get detailed information about a specific cluster
+- [`cluster_create()`](./python-sdk#cluster_createcluster_name-region-sku_id---operationresult) - Create a new cluster
+- [`cluster_delete()`](./python-sdk#cluster_deletecluster_name---operationresult) - Delete a cluster
+- [`cluster_credentials()`](./python-sdk#cluster_credentialscluster_name---clustercredentials) - Get cluster credentials for database connection
 
 </TabItem>
 
@@ -418,16 +418,16 @@ async function handleErrors() {
 
 **Basic:**
 
-- [`info()`](./typescriptdoc#info---promiseeloquser) - Get organization information including user details, organization details, and projects
-- [`get_skus()`](./typescriptdoc#get_skusparams---promiseeloqsku) - Get available SKUs filtered by type, module, and cloud provider
+- [`info()`](./typescript-sdk#info---promiseeloquser) - Get organization information including user details, organization details, and projects
+- [`get_skus()`](./typescript-sdk#get_skusparams---promiseeloqsku) - Get available SKUs filtered by type, module, and cloud provider
 
 **Cluster Management:**
 
-- [`clusters()`](./typescriptdoc#clusterspage-perpage-orgid-projectid---promiseclusterslistresponse) - List clusters for a specific organization and project with pagination support
-- [`cluster()`](./typescriptdoc#clusterclustername---promiseeloqcluster) - Get detailed information about a specific cluster
-- [`cluster_create()`](./typescriptdoc#cluster_createrequest---promiseeloqcluster) - Create a new cluster in your organization
-- [`cluster_delete()`](./typescriptdoc#cluster_deleteclustername-orgid-projectid---promisevoid) - Delete a cluster
-- [`cluster_credentials()`](./typescriptdoc#cluster_credentialsclustername---promiseclusteradmininfo) - Get cluster connection credentials including address, port, username, and password
+- [`clusters()`](./typescript-sdk#clusterspage-perpage-orgid-projectid---promiseclusterslistresponse) - List clusters for a specific organization and project with pagination support
+- [`cluster()`](./typescript-sdk#clusterclustername---promiseeloqcluster) - Get detailed information about a specific cluster
+- [`cluster_create()`](./typescript-sdk#cluster_createrequest---promiseeloqcluster) - Create a new cluster in your organization
+- [`cluster_delete()`](./typescript-sdk#cluster_deleteclustername-orgid-projectid---promisevoid) - Delete a cluster
+- [`cluster_credentials()`](./typescript-sdk#cluster_credentialsclustername---promiseclusteradmininfo) - Get cluster connection credentials including address, port, username, and password
 
 </TabItem>
 

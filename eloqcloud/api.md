@@ -1,4 +1,4 @@
-# Eloq API
+# API Overview
 
 > On this page, you can learn about:
 >
