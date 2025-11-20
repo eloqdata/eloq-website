@@ -25,7 +25,7 @@ Fetch the current user’s organization information and basic profile data.
 #### Input
 
 - **Headers**:
-  - `Authorization: Bearer {{YOUR_API_KEY}}`
+  - `Authorization: {{YOUR_API_KEY}}`
 - **Query parameters**: _None_
 
 #### Example (`curl`)

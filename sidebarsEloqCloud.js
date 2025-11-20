@@ -4,7 +4,7 @@ const sidebars = {
   eloqcloud: {
     'Get Started': ['quick-start'],
     'API': ['api', 'basic', 'cluster'],
-    //'SDK': ['python-sdk', 'typescript-sdk', 'pythondoc', 'typescriptdoc'],
+    'SDK': ['sdk', 'pythondoc', 'typescriptdoc'],
   },
 };
 module.exports = sidebars;

@@ -9,11 +9,17 @@ toc_max_heading_level: 2
 
 ## Installation
 
-You just need to use pip:
+### Using pip
 
 ```bash
 pip install eloq-sdk
 ```
+
+### Requirements
+
+- Python 3.7 or higher
+- `requests>=2.25.0`
+- `pydantic>=1.8.0`
 
 ## Quick Start
 
@@ -22,22 +28,32 @@ pip install eloq-sdk
 ```python
 from eloq_sdk import EloqAPI
 
-# Method 1: Create client with API token directly
-client = EloqAPI.from_token("your_api_token")
-
-# Method 2: Create client from environment variable
-# Set ELOQ_API_TOKEN environment variable first
-import os
-os.environ['ELOQ_API_TOKEN'] = 'your_api_token'
+# Initialize client from environment variable
 client = EloqAPI.from_environ()
+
+# Get organization information
+org_info = client.info()
+print(f"Organization: {org_info.org_info.org_name}")
+
+# List clusters
+clusters = client.clusters()
+print(f"Found {clusters.total} clusters")
 ```
 
-### **Getting Your API Token**
+### **Environment Setup**
+
+Set the `ELOQ_API_KEY` environment variable:
+
+```bash
+export ELOQ_API_KEY="your-api-key-here"
+```
+
+### **Getting Your API Key**
 
 1. Log in to your [EloqCloud Dashboard](https://cloud.eloqdata.com)
 2. Navigate to **Settings** → **API Keys**
 3. Generate a new API key
-4. Copy the token for use in your application
+4. Copy the key for use in your application
 
 ### **Your First API Call**
 
@@ -49,10 +65,10 @@ from eloq_sdk import EloqAPI
 def get_organization_info():
     try:
         # Initialize the client
-        client = EloqAPI.from_token("your_api_token")
+        client = EloqAPI.from_environ()
 
         # Get organization information
-        org_info = client.org_info()
+        org_info = client.info()
 
         print("=== Organization Information ===")
         print(f"Organization: {org_info.org_info.org_name}")
@@ -78,72 +94,64 @@ Here's a comprehensive example showing how to manage clusters:
 
 ```python
 from eloq_sdk import EloqAPI
+from eloq_sdk import schema
 from eloq_sdk.exceptions import EloqAPIError
 
 def manage_clusters():
-    client = EloqAPI.from_token("your_api_token")
+    client = EloqAPI.from_environ()
 
     try:
-
-
-        # Step 1 List existing clusters
+        # Step 1: List existing clusters
         print("\n=== Listing Clusters ===")
         clusters = client.clusters()
-        print(f"Found {len(clusters)} clusters:")
+        print(f"Found {clusters.total} clusters:")
 
-        for cluster in clusters:
+        for cluster in clusters.cluster_list:
             print(f"- {cluster.cluster_name}")
             print(f"  Status: {cluster.status}")
             print(f"  Type: {cluster.module_type}")
             print(f"  Region: {cluster.region}")
             print(f"  Created: {cluster.create_at}")
 
-        # Step 2: Create a new cluster (if less than 4 clusters)
-        if len(clusters) < 4:  # Free tier limit
+        # Step 2: Get available SKUs
+        print("\n=== Getting Available SKUs ===")
+        skus = client.get_skus(
+            sku_type=schema.SKUType.SERVERLESS,
+            eloq_module=schema.EloqModule.ELOQKV,
+            cloud_provider=schema.CloudProvider.AWS
+        )
+        print(f"Found {len(skus)} available SKUs")
+
+        # Step 3: Create a new cluster
+        if skus:
             print(f"\n=== Creating New Cluster ===")
-            cluster_name = f"demo-cluster-{len(clusters) + 1}"
+            cluster_name = "demo-cluster-1"
 
-            try:
-                response = client.cluster_create(
-                    org_id=org_id,
-                    project_id=project_id,
-                    clusterName=cluster_name,
-                    region="us-west-1",
-                    requiredZone="us-west-1a",
-                    skuId=1  # Basic SKU for free tier
-                )
+            result = client.cluster_create(
+                cluster_name=cluster_name,
+                region="us-west-1",
+                sku_id=skus[0].sku_id
+            )
 
-                print(f"✅ Cluster creation initiated: {cluster_name}")
-                print(f"Response: {response.message}")
+            if result.success:
+                print(f"✅ {result.message}")
+            else:
+                print(f"❌ {result.message}")
 
-                # Wait a moment and check cluster status
-                import time
-                time.sleep(5)
+            # Get cluster details
+            cluster_details = client.cluster(cluster_name)
+            print(f"Cluster status: {cluster_details.status}")
 
-                # Get cluster details
-                cluster_details = client.cluster(org_id, project_id, cluster_name)
-                print(f"Cluster status: {cluster_details.status}")
-
-            except EloqAPIError as e:
-                print(f"❌ Failed to create cluster: {e}")
-        else:
-            print("\n⚠️  Free tier limit reached (4 clusters maximum)")
-
-        # Step 3: Get cluster connection credentials
-        if clusters:
+        # Step 4: Get cluster connection credentials
+        if clusters.cluster_list:
             print(f"\n=== Getting Cluster Credentials ===")
-            cluster_name = clusters[0].cluster_name
+            cluster_name = clusters.cluster_list[0].cluster_name
 
-            try:
-                credentials = client.cluster_credentials(cluster_name)
-                print(f"Cluster: {cluster_name}")
-                print(f"Host: {credentials.host}")
-                print(f"Port: {credentials.port}")
-                print(f"Status: {credentials.status}")
-                print("Username and password are base64 encoded for security")
-
-            except EloqAPIError as e:
-                print(f"❌ Failed to get credentials: {e}")
+            credentials = client.cluster_credentials(cluster_name)
+            print(f"Cluster: {cluster_name}")
+            print(f"Host: {credentials.host}")
+            print(f"Port: {credentials.port}")
+            print(f"Status: {credentials.status}")
 
     except EloqAPIError as e:
         print(f"API Error: {e}")
@@ -154,65 +162,82 @@ def manage_clusters():
 manage_clusters()
 ```
 
-### **Environment Variables Setup**
+## Authentication & Client Initialization
 
-For better security, store your API token in environment variables:
+The SDK provides multiple ways to initialize the client:
+
+### 1. From Environment Variable
 
 ```python
-import os
 from eloq_sdk import EloqAPI
 
-# Set environment variable (do this once)
-os.environ['ELOQ_API_TOKEN'] = 'your_actual_api_token'
-
-# Create client from environment
 client = EloqAPI.from_environ()
+```
 
-# Now you can use the client
-org_info = client.org_info()
-print(f"Organization: {org_info.org_info.org_name}")
+This reads the API key from the `ELOQ_API_KEY` environment variable.
+
+### 2. From API Key
+
+```python
+from eloq_sdk import EloqAPI
+
+client = EloqAPI.from_key("your-api-key-here")
+```
+
+### 3. From API Key and Custom URL
+
+```python
+from eloq_sdk import EloqAPI
+
+client = EloqAPI.from_key_and_url(
+    "your-api-key-here",
+    "https://api-prod.eloqdata.com/api/v1/"
+)
 ```
 
 ### **Error Handling Best Practices**
 
+The SDK provides comprehensive error handling with specific exception types:
+
+#### Exception Types
+
+- `EloqAPIError`: Base exception for all API errors
+- `EloqAuthenticationError`: Authentication failed (401)
+- `EloqPermissionError`: Permission denied (403)
+- `EloqNotFoundError`: Resource not found (404)
+- `EloqRateLimitError`: Rate limit exceeded (429)
+- `EloqValidationError`: Invalid request (400)
+- `EloqServerError`: Server error (500+)
+
+#### Handling Errors
+
 ```python
 from eloq_sdk import EloqAPI
-from eloq_sdk.exceptions import EloqAPIError
+from eloq_sdk.exceptions import EloqAPIError, EloqNotFoundError
 
-def robust_api_call():
-    client = EloqAPI.from_token("your_api_token")
+try:
+    cluster = client.cluster("non-existent-cluster")
+except EloqNotFoundError:
+    print("Cluster not found")
+except EloqAPIError as e:
+    print(f"API error: {e}")
+except Exception as e:
+    print(f"Unexpected error: {e}")
+```
 
-    try:
-        # Your API calls here
-        org_info = client.org_info()
-        return org_info
+#### Operation Results
 
-    except EloqAPIError as e:
-        # Handle API-specific errors
-        print(f"API Error: {e}")
-        print("This could be due to:")
-        print("- Invalid API token")
-        print("- Rate limiting")
-        print("- Server issues")
-        return None
+For create and delete operations, errors are automatically handled and returned as `OperationResult` objects:
 
-    except ConnectionError as e:
-        # Handle network errors
-        print(f"Network Error: {e}")
-        print("Check your internet connection")
-        return None
+```python
+result = client.cluster_create(
+    cluster_name="my-cluster",
+    region="us-west-1",
+    sku_id=123
+)
 
-    except Exception as e:
-        # Handle unexpected errors
-        print(f"Unexpected error: {e}")
-        return None
-
-# Use the robust function
-result = robust_api_call()
-if result:
-    print("Success!")
-else:
-    print("Failed to get organization info")
+if not result.success:
+    print(f"Operation failed: {result.message}")
 ```
 
 ### **Common Use Cases**
@@ -221,46 +246,38 @@ else:
 
 ```python
 def monitor_clusters():
-    client = EloqAPI.from_token("your_api_token")
-    org_info = client.org_info()
+    client = EloqAPI.from_environ()
+    clusters = client.clusters()
 
-    for project in org_info.org_info.projects:
-        clusters = client.clusters(org_info.org_info.org_id, project.project_id)
-
-        print(f"\n📁 Project: {project.project_name}")
-        for cluster in clusters:
-            status_emoji = "✅" if cluster.status == "idle" else "⚠️"
-            print(f"  {status_emoji} {cluster.cluster_name}: {cluster.status}")
+    print(f"\n📁 Total Clusters: {clusters.total}")
+    for cluster in clusters.cluster_list:
+        status_emoji = "✅" if cluster.status == "available" else "⚠️"
+        print(f"  {status_emoji} {cluster.cluster_name}: {cluster.status}")
 ```
 
 #### **2. Batch Cluster Operations**
 
 ```python
 def batch_cluster_info():
-    client = EloqAPI.from_token("your_api_token")
-    org_info = client.org_info()
+    client = EloqAPI.from_environ()
+    clusters = client.clusters()
 
     all_clusters = []
-
-    clusters = client.clusters()
-    for cluster in clusters:
-        cluster_details = client.cluster(
-                cluster.cluster_name
-            )
+    for cluster in clusters.cluster_list:
+        cluster_details = client.cluster(cluster.cluster_name)
         all_clusters.append({
-                'project': project.project_name,
-                'cluster': cluster.cluster_name,
-                'status': cluster.status,
-                'region': cluster.region,
-                'type': cluster.module_type
-            })
+            'cluster': cluster.cluster_name,
+            'status': cluster.status,
+            'region': cluster.region,
+            'type': cluster.module_type
+        })
 
     return all_clusters
 
 # Get comprehensive cluster information
 cluster_info = batch_cluster_info()
 for info in cluster_info:
-    print(f"{info['project']}/{info['cluster']}: {info['status']} in {info['region']}")
+    print(f"{info['cluster']}: {info['status']} in {info['region']}")
 ```
 
 ### **Next Steps**
@@ -276,11 +293,13 @@ For detailed function documentation, see the sections below.
 
 ---
 
-## Organization
+## Basic
 
-### `org_info() -> UserOrgInfoDTO`
+### `info() -> UserOrgInfoDTO`
 
-Get current user's organization information.
+Get detailed organization and project information for the current user.
+
+**Input**: None (automatically detected from user context)
 
 **Returns:** `UserOrgInfoDTO` object with the following structure:
 
@@ -307,9 +326,10 @@ Get current user's organization information.
 **Example:**
 
 ```python
-org_info = client.org_info()
+org_info = client.info()
 print(f"Organization: {org_info.org_info.org_name}")
 print(f"User: {org_info.user_name}")
+print(f"Projects: {len(org_info.org_info.projects)}")
 ```
 
 ### `org() -> SimpleOrgInfo`
@@ -335,16 +355,21 @@ print(f"Created: {org.org_create_at}")
 
 ## Cluster Management
 
-### `clusters(page: int = 1, per_page: int = 20) -> List[ClusterListItem]`
+### `clusters(page: int = 1, per_page: int = 20) -> ClusterList`
 
-Get a list of clusters in a project.
+List all clusters in the current project.
 
 **Parameters:**
 
 - `page` (int, optional): Page number for pagination (default: 1)
-- `per_page` (int, optional): Items per page (default: 20)
+- `per_page` (int, optional): Number of items per page (default: 20)
 
-**Returns:** `List[ClusterListItem]` - List of cluster information objects, each containing:
+**Returns:** `ClusterList` object containing:
+
+- `cluster_list` (List[ClusterListItem]): List of cluster items
+- `total` (int): Total number of clusters
+
+**ClusterListItem** fields:
 
 - `cloud_provider` (str): Cloud provider name (e.g., "AWS")
 - `cluster_name` (str): Name of the cluster (e.g., "test-cluster-123", "nihhhh", "nihhhhop")
@@ -358,9 +383,10 @@ Get a list of clusters in a project.
 **Example:**
 
 ```python
-clusters = client.clusters(org_id=123, project_id=456)
-for cluster in clusters:
-    print(f"Cluster: {cluster.cluster_name}, Status: {cluster.status}")
+clusters = client.clusters(page=1, per_page=10)
+print(f"Total clusters: {clusters.total}")
+for cluster in clusters.cluster_list:
+    print(f"- {cluster.cluster_name} ({cluster.status})")
 ```
 
 ### `cluster(cluster_name: str) -> DescClusterDTO`
@@ -399,73 +425,152 @@ Get detailed information about a specific cluster.
 **Example:**
 
 ```python
-cluster_details = client.cluster(org_id=123, project_id=456, cluster_name="my-cluster")
-print(f"Cloud Provider: {cluster_details.cloud_provider}")
-print(f"Region: {cluster_details.region}")
+cluster_info = client.cluster("my-cluster")
+print(f"Status: {cluster_info.status}")
+print(f"Region: {cluster_info.region}")
+print(f"Module: {cluster_info.module_type}")
 ```
 
-### `cluster_create(**json: dict) -> ShelfResponse`
+### `cluster_create(cluster_name, region, sku_id) -> OperationResult`
 
-Create a new cluster in a project.
+Create a new cluster.
 
 **Parameters:**
 
-- `cluster_name` (string): Name of the cluster
-- `region` (string): Cloud region
-- `requiredZone` (string): Cloud zone
-- `skuId` (int): SKU type ID
+- `cluster_name` (str): Cluster display name (required)
+- `region` (str): Region where the cluster will be created, e.g., "us-west-1" (required)
+- `sku_id` (int): SKU ID for the cluster (required). Use `get_skus()` to find available SKU IDs
 
-**Returns:** `ShelfResponse` object with the following structure:
+**Returns:** `OperationResult` object containing:
 
-- `code` (int): Response status code
-- `data` (Any): Response data (usually cluster creation result)
-- `message` (str): Response message
-
-**Response Data Fields:**
-
-- `cluster_id` (str): ID of the created cluster
-- `cluster_name` (str): Name of the created cluster
-- `status` (str): Creation status
-- `message` (str): Additional information about the creation
+- `success` (bool): True if operation succeeded, False otherwise
+- `message` (str): Human-readable message describing the result
 
 **Example:**
 
 ```python
-response = client.cluster_create(
-    org_id=1,
-    project_id=147,
-    clusterName="test-cluster-123",
-    region="us-west-1",
-    requiredZone="us-west-1a",
-    skuId=1
+from eloq_sdk import schema
+
+# First, get available SKUs
+skus = client.get_skus(
+    sku_type=schema.SKUType.SERVERLESS,
+    eloq_module=schema.EloqModule.ELOQKV,
+    cloud_provider=schema.CloudProvider.AWS
 )
-print(f"Cluster created: {response.data.cluster_name}")
+
+# Create the cluster
+result = client.cluster_create(
+    cluster_name="my-cluster",
+    region="us-west-1",
+    sku_id=skus[0].sku_id
+)
+
+if result.success:
+    print(f"✅ {result.message}")
+else:
+    print(f"❌ {result.message}")
 ```
 
-### `cluster_credentials(cluster_name: str) -> ClusterCredentials`
+### `cluster_delete(cluster_name) -> OperationResult`
 
-Get cluster credentials (username and password) for database connection.
+Delete a cluster. The cluster must be in 'available' status to be deleted.
 
 **Parameters:**
 
-- `cluster_name` (str): Name of the cluster
+- `cluster_name` (str): Cluster display name (required)
 
-**Returns:** `ClusterCredentials` object containing cluster credentials and connection info:
+**Returns:** `OperationResult` object containing:
 
-- `username` (str): Base64 encoded admin username for the cluster
-- `password` (str): Base64 encoded admin password for the cluster
-- `host` (str): Elastic Load Balancer address for connection
-- `port` (int): Elastic Load Balancer port for connection
-- `status` (str): Cluster status (e.g., "idle")
+- `success` (bool): True if operation succeeded, False otherwise
+- `message` (str): Human-readable message describing the result
 
 **Example:**
 
 ```python
-credentials = client.cluster_credentials(1, 147, "my-cluster")
+result = client.cluster_delete("my-cluster")
+if result.success:
+    print(f"✅ {result.message}")
+else:
+    print(f"❌ {result.message}")
+```
+
+**Note**: The cluster must be in 'available' status to be deleted.
+
+### `cluster_credentials(cluster_name) -> ClusterCredentials`
+
+Get cluster credentials (username and password) for database connection. The admin user ID and password are automatically decoded from base64 encoding.
+
+**Parameters:**
+
+- `cluster_name` (str): Cluster display name (required)
+
+**Returns:** `ClusterCredentials` object containing:
+
+- `username` (str): Decoded admin username
+- `password` (str): Decoded admin password
+- `host` (str): Load balancer address
+- `port` (int): Load balancer port
+- `status` (str): Cluster status
+
+**Example:**
+
+```python
+credentials = client.cluster_credentials("my-cluster")
 print(f"Username: {credentials.username}")
 print(f"Password: {credentials.password}")
-print(f"Host: {credentials.host}")
-print(f"Port: {credentials.port}")
+print(f"Host: {credentials.host}:{credentials.port}")
+```
+
+### `get_skus(sku_type, eloq_module, cloud_provider) -> List[SKUInfo]`
+
+Get available SKUs filtered by SKU type, EloqDB module type, and cloud provider. Only SKUs available in the user's subscription plan are returned.
+
+**Parameters:**
+
+- `sku_type` (SKUType enum): SKU type filter
+  - `SKUType.SERVERLESS`: Serverless SKU
+  - `SKUType.DEDICATED`: Dedicated SKU
+- `eloq_module` (EloqModule enum): EloqDB module type filter
+  - `EloqModule.ELOQKV`: EloqKV module
+  - `EloqModule.ELOQDOC`: EloqDoc module
+- `cloud_provider` (CloudProvider enum): Cloud provider filter
+  - `CloudProvider.AWS`: Amazon Web Services
+  - `CloudProvider.GCP`: Google Cloud Platform
+
+**Returns:** List of `SKUInfo` objects, each containing:
+
+- `sku_id` (int): SKU ID
+- `sku_name` (str): SKU name
+- `sku_type` (str): SKU type ("serverless", "dedicated", "unspecified")
+- `module_type` (str): Module type ("EloqSQL", "EloqKV", "EloqDoc")
+- `version` (str): Version
+- `tx_cpu_limit` (float): Transaction CPU limit
+- `tx_memory_mi_limit` (float): Transaction memory limit (Mi)
+- `tx_ev_gi_limit` (float): Transaction ephemeral volume limit (Gi)
+- `tx_pv_gi_limit` (float): Transaction persistent volume limit (Gi)
+- `log_cpu_limit` (float): Log CPU limit
+- `log_memory_mi_limit` (float): Log memory limit (Mi)
+- `log_pv_gi_limit` (float): Log persistent volume limit (Gi)
+- `cloud_provider` (str): Cloud provider ("AWS", "GCP")
+- `tx_replica` (int): Transaction replica count
+- `log_replica` (int): Log replica count
+
+**Example:**
+
+```python
+from eloq_sdk import schema
+
+skus = client.get_skus(
+    sku_type=schema.SKUType.SERVERLESS,
+    eloq_module=schema.EloqModule.ELOQKV,
+    cloud_provider=schema.CloudProvider.AWS
+)
+
+print(f"Found {len(skus)} available SKUs:")
+for sku in skus:
+    print(f"  - SKU ID: {sku.sku_id}, Name: {sku.sku_name}")
+    print(f"    Type: {sku.sku_type}, Module: {sku.module_type}")
+    print(f"    Cloud: {sku.cloud_provider}")
 ```
 
 ## Data Models
@@ -473,61 +578,126 @@ print(f"Port: {credentials.port}")
 The SDK uses Pydantic dataclasses for data validation and serialization. Key models include:
 
 - **`UserOrgInfoDTO`**: User and organization information
+- **`SimpleOrgInfo`**: Simplified organization information
+- **`ClusterList`**: List of clusters with pagination information
 - **`ClusterListItem`**: Basic cluster information
 - **`DescClusterDTO`**: Detailed cluster information
-- **`ShelfResponse`**: Standard API response structure
+- **`ClusterCredentials`**: Cluster credentials for database connection
+- **`OperationResult`**: Result object for create and delete operations
+- **`SKUInfo`**: SKU information object
 - **`DataBaseAndOveragePlan`**: Billing plan information
 - **`DashboardType`**: Dashboard configuration
 
-## Error Handling
+### OperationResult
 
-The SDK raises `EloqAPIError` for API-related errors:
+Result object returned by create and delete operations.
 
 ```python
-from eloq_sdk_python.exceptions import EloqAPIError
-
-try:
-    clusters = client.clusters(org_id=123, project_id=456)
-except EloqAPIError as e:
-    print(f"API Error: {e}")
-except Exception as e:
-    print(f"Unexpected error: {e}")
+@dataclass
+class OperationResult:
+    success: bool  # True if operation succeeded, False otherwise
+    message: str   # Human-readable message describing the result
 ```
+
+### SKUInfo
+
+SKU information object.
+
+```python
+@dataclass
+class SKUInfo:
+    sku_id: int
+    sku_name: str
+    sku_type: str
+    module_type: str
+    version: str
+    tx_cpu_limit: float
+    tx_memory_mi_limit: float
+    tx_ev_gi_limit: float
+    tx_pv_gi_limit: float
+    log_cpu_limit: float
+    log_memory_mi_limit: float
+    log_pv_gi_limit: float
+    cloud_provider: str
+    tx_replica: int
+    log_replica: int
+```
+
+### Enums
+
+#### SKUType
+
+```python
+class SKUType(Enum):
+    SERVERLESS = "serverless"
+    DEDICATED = "dedicated"
+```
+
+#### EloqModule
+
+```python
+class EloqModule(Enum):
+    ELOQKV = "eloqkv"
+    ELOQDOC = "eloqdoc"
+```
+
+#### CloudProvider
+
+```python
+class CloudProvider(Enum):
+    AWS = "aws"
+    GCP = "gcp"
+```
+
+## Error Handling
+
+The SDK provides comprehensive error handling with specific exception types. See the [Error Handling section](#error-handling-best-practices) above for detailed information.
 
 ## Complete Examples
 
-### Cluster Management Workflow
+### Full Workflow: Get SKUs → Create Cluster → Check Status → Delete Cluster
 
 ```python
-from eloq_sdk_python import EloqAPI
+from eloq_sdk import EloqAPI
+from eloq_sdk import schema
 
 # Initialize client
-client = EloqAPI.from_token("your_token")
+client = EloqAPI.from_environ()
 
-# Get organization info
-org_info = client.org_info()
-org_id = org_info.org_info.org_id
-project_id = org_info.org_info.projects[0].project_id
-
-# List clusters
-clusters = client.clusters(org_id=org_id, project_id=project_id)
-print(f"Found {len(clusters)} clusters")
-
-# Create new cluster
-response = client.cluster_create(
-    org_id=org_id,
-    project_id=project_id,
-    clusterName="new-cluster",
-    region="us-west-1",
-    requiredZone="us-west-1a",
-    skuId=1
+# Step 1: Get available SKUs
+skus = client.get_skus(
+    sku_type=schema.SKUType.SERVERLESS,
+    eloq_module=schema.EloqModule.ELOQKV,
+    cloud_provider=schema.CloudProvider.AWS
 )
 
-# Get cluster details
-cluster_details = client.cluster(org_id, project_id, "new-cluster")
-print(f"Cluster status: {cluster_details.status}")
+if not skus:
+    print("No SKUs available")
+    exit(1)
 
-# Get connection credentials
-credentials = client.cluster_credentials(org_id, project_id, "new-cluster")
-print(f"Connection host: {credentials.host}:{credentials.port}")
+# Step 2: Create cluster
+result = client.cluster_create(
+    cluster_name="my-cluster",
+    region="us-west-1",
+    sku_id=skus[0].sku_id
+)
+
+if not result.success:
+    print(f"Failed to create cluster: {result.message}")
+    exit(1)
+
+print(f"✅ {result.message}")
+
+# Step 3: Check cluster status
+cluster_info = client.cluster("my-cluster")
+print(f"Cluster status: {cluster_info.status}")
+
+# Step 4: Get credentials
+credentials = client.cluster_credentials("my-cluster")
+print(f"Connection: {credentials.host}:{credentials.port}")
+
+# Step 5: Delete cluster (when done)
+result = client.cluster_delete("my-cluster")
+if result.success:
+    print(f"✅ {result.message}")
 ```
