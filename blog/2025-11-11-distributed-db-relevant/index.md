@@ -6,8 +6,8 @@ image: /img/blog/agent_need_more.jpg
 tags: [Company]
 description: "Discussing why now distributed databases are losing popularity, and why they are going to be relevant in the AI age."
 blog: true
-featured: false
-featuredMain: false
+featured: true
+featuredMain: true
 ---
 
 # Why Everyone is using PostgreSQL and DuckDB — And Why We May Need More
