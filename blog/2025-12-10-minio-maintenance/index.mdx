@@ -1,0 +1,262 @@
+---
+title: "MinIO Community Edition Enters Maintenance-Only — Can You Still Trust Your Self-Hosted S3?"
+authors: eloq
+date: 2025-12-10
+tags: [Company]
+image: /img/blog/miniomaintenance.jpg
+description: "A 48-Hour Emergency Plan for Engineers."
+blog: true
+featured: true
+featuredMain: true
+---
+
+## Introduction
+
+MinIO has officially moved its **Community Edition** to a **“maintenance-only”** release model:
+
+* No more prebuilt binaries from the community.
+* No regular acceptance of new features or PRs.
+* Only critical security patches will be handled when necessary.
+
+In plain terms:
+If your production object storage is built on MinIO Community Edition, you are now carrying **hidden operational risk and rising maintenance costs**.
+
+<p align="center">
+<div style={{ width: '75%', textAlign: 'center'}}>
+import EnlargeableImage from '@site/src/pages/enlarge_pic';
+
+<EnlargeableImage src={require('./img/miniomaintenance.jpg').default} alt="x" />
+
+</div></p>
+
+## For SREs: Three Things To Do Immediately
+
+1. Classify your MinIO usage:
+
+   - Mission-critical production
+   - Non-critical environment
+   - Test / dev only
+
+2. For critical workloads, start a **48-hour PoC immediately**.
+
+3. Select candidates that are:
+
+   - **S3-compatible**
+   - Actively maintained
+   - Commercially supportable
+     (e.g., Ceph RGW, SeaweedFS, RustFS), and run compatibility regression tests.
+
+## Part I: Why This Is Not “Minor News” — Real Engineering Risks
+
+Many teams treat object storage as **the foundation of their infrastructure**: cold data, backups, logs, media, and user uploads all live there.
+
+Unlike databases or message queues, the risk of an **unmaintained object storage layer** is not sudden downtime, but:
+
+- Extended patch windows
+- Growing compliance risk
+- Rising operational burden
+
+Once your S3 endpoint is public-facing and used with **cross-region replication, IAM, and access control**, even subtle incompatibilities in headers or signatures can become incident triggers.
+
+## Part II: Viable Alternatives in 2024–2025
+
+Selection criteria:
+
+- **S3-compatible**
+- Active releases or commercial support
+- Ability to provide patches and vendor/community support
+
+Below is a quick engineering-focused comparison:
+
+<div style={{ overflowX: 'auto' }}>
+| Object Storage                  | Introduction                                                | Engineering Appraisal                                                                                                                    | Repo                                                                                 |
+| -------------------------------- | ----------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| **Ceph (RGW)**             | Distributed object, block, and file storage platform           | Enterprise-grade, native S3 compatibility. Complex to deploy but the most stable with strong vendor backing. Best for high-capacity, high-reliability teams. | [https://github.com/ceph/ceph](https://github.com/ceph/ceph)                         |
+| **SeaweedFS**              | High-performance distributed storage for billions of files     | Lightweight, strong horizontal scalability, active S3 layer. Good for fast deployment and teams tolerant of minor compatibility gaps.                        | [https://github.com/seaweedfs/seaweedfs](https://github.com/seaweedfs/seaweedfs)     |
+| **RustFS**                 | High-performance, Rust-based S3-compatible object store        | Claims 2.3× MinIO performance on 4KB objects. Provides Helm and Docker resources for Kubernetes. Young but promising.                                        | [https://github.com/rustfs/rustfs](https://github.com/rustfs/rustfs)                 |
+| **OpenIO**                 | Open-source object storage for large-scale unstructured data   | S3-compatible, hardware-agnostic, strong UI, designed for big data and massive scale.                                                                        | [https://github.com/open-io](https://github.com/open-io)                             |
+| **Apache Ozone**           | Scalable distributed object store for analytics and data lakes | Hadoop-native, optimized for analytics and container platforms, supports billions of objects.                                                                | [https://github.com/apache/ozone](https://github.com/apache/ozone)                   |
+| **Garage (Deuxfleurs)**    | Lightweight, distributed, S3-compatible object store           | Designed for smaller self-hosted setups, geo-replication friendly. Suitable for edge and private clusters. Some advanced S3 features may be missing.         | [https://github.com/deuxfleurs-org/garage](https://github.com/deuxfleurs-org/garage) |
+</div>
+
+**Quick Engineering Rule of `Thumb**
+
+* Need full S3 features (versioning, lifecycle, ACLs, multipart)? → **Ceph** or commercial vendors first.
+* Only need basic read/write? → **SeaweedFS** or **RustFS** are fast to PoC.
+
+## Part III: A 48-Hour PoC Using SeaweedFS (Copy-Paste Friendly)
+
+**Goal:**
+Within 48 hours, produce **quantifiable results** to support decisions:
+
+* Compatibility gaps (API / headers / multipart / ACL)
+* Throughput & latency (P50 / P95 / P99)
+* Operational complexity (steps, recovery time, scriptability)
+* Failure recovery behavior (node failure → consistency)
+
+### Recommended Time Allocation
+
+| Phase                                   | Time        |
+| --------------------------------------- | ----------- |
+| Preparation & deployment                | 0–6 hours   |
+| Data migration & concurrency benchmarks | 6–18 hours  |
+| Compatibility testing                   | 18–30 hours |
+| Ops drills & fault injection            | 30–42 hours |
+| Summary & decision matrix               | 42–48 hours |
+
+### Environment Requirements
+
+* CPU: ≥4 vCPU per node (2 minimum)
+* Memory: 8–16 GB per node (Ceph: 16GB+ recommended)
+* Disk: 500GB–1TB per node (500GB enough for PoC)
+* Network: 1Gbps or better
+* OS: Ubuntu 20.04/22.04 or CentOS 8/9
+* Nodes: minimum 6
+
+### Common Setup Script (Run on All Nodes)
+
+```bash
+#!/usr/bin/env bash
+sudo apt update
+sudo apt-get install s3cmd
+
+set -euo pipefail
+WORKDIR="${PWD}/s3_distributed_poc"
+mkdir -p "$WORKDIR"{/seaweed,/scripts,/data}
+
+for cmd in s3cmd ; do
+  if ! command -v $cmd >/dev/null 2>&1; then
+    echo "Warning: $cmd not installed."
+  fi
+done
+
+cat > "$WORKDIR/README.md" <<'EOF'
+Directory layout:
+- seaweed/: SeaweedFS deployment and benchmarks
+- scripts/: General test scripts
+EOF
+echo "Init done"
+```
+
+Run:
+
+```bash
+chmod +x poc_setup_common.sh
+./poc_setup_common.sh
+```
+
+### SeaweedFS Deployment (3-Master + 3-Volume Example)
+
+Assumed nodes:
+
+```
+node1: 10.0.0.11
+node2: 10.0.0.12
+node3: 10.0.0.13
+node4: 10.0.0.14
+node5: 10.0.0.15
+node6: 10.0.0.16
+```
+
+Create directories (run on all nodes):
+
+```bash
+mkdir -p /data/seaweedfs/{master,volume,filer,data}
+```
+
+Start **masters** on node1/2/3:
+
+```bash
+nohup ./weed master -port=9333 -mdir=/data/seaweed/master -defaultReplication=001 -ip=10.0.0.11 -peers=10.0.0.11:9333,10.0.0.12:9333,10.0.0.13:9333 >> master.log 2>&1 &
+```
+
+(Repeat for three nodes)
+
+Start **volume servers** on node4/5/6:
+
+```bash
+nohup ./weed volume -port=9334 -dir=/data/seaweed/volume -max=30 \
+  -mserver=10.0.0.11:9333,10.0.0.12:9333,10.0.0.13:9333 \
+  -dataCenter=dc1 -rack=rack1 -publicUrl=10.0.0.14:9334 -ip=10.0.0.14 >> v1.log 2>&1 &
+```
+
+Verify:
+
+```bash
+curl http://10.0.0.11:9333
+```
+
+Run filer + S3 gateway:
+
+```bash
+./weed filer -s3 -ip=10.0.0.1x -master=10.0.0.11:9333,10.0.0.12:9333,10.0.0.13:9333
+```
+
+---
+
+### Benchmark Script
+
+The benchmark script can be downloaded at [EloqData Objecrt Storage Benchmark](img/s3_concurrent_test.sh)
+
+Benchmark with the following commands:
+
+```bash
+# generate local files
+./s3_concurrent_test.sh prepare
+# upload local files to object storage
+./s3_concurrent_test.sh upload
+# download files in object storage to local
+./s3_concurrent_test.sh download
+# test upload and download concurrently
+./s3_concurrent_test.sh both
+# cleanup object storage with prefix
+./s3_concurrent_test.sh cleanup
+```
+
+---
+
+### Key Metrics
+
+| Metric         | Meaning                         | How to Measure                         |
+| -------------- | ------------------------------- | -------------------------------------- |
+| Throughput     | Data per second (MB/s or req/s) | Total bytes / total time               |
+| Latency        | Single request response time    | p50/p90/p99 via curl or scripts        |
+| Error Rate     | Failed request ratio            | Non-zero s3cmd or HTTP 4xx/5xx         |
+| Availability   | Uptime                          | Health checks / ping                   |
+| Concurrency    | Performance under load          | Increase concurrency until degradation |
+| Data Integrity | Data correctness                | md5/sha256 comparison                  |
+
+## Part IV: From EloqData's Perpective
+
+EloqData provides two production-grade databases:
+
+* [EloqKV](https://github.com/eloqdata/eloqkv): A **Redis-compatible transactional KV database**
+* [EloqDoc](https://github.com/eloqdata/eloqdoc): A **MongoDB-compatible document database**
+
+Both are designed to **write directly to S3-compatible object storage**, eliminating traditional disk overhead and unlocking elastic scalability. EloqData also offers a **25GB Free Tier cloud service** at [EloqCloud](https://cloud.eloqdata.com).
+
+MinIO moving into maintenance mode does not mean the market is abandoning object storage — quite the opposite. Object storage is becoming the **foundation of next-generation databases**:
+
+* From Snowflake/Databricks-style lakehouse systems
+* To Kafka / Pulsar streaming platforms
+
+The real challenge today is:
+**How to unlock object storage for ultra-low-latency, high-concurrency OLTP workloads.**
+
+EloqData provides an answer:
+
+* **EloqKV**: a fully Redis-compatible transactional KV database, achieving sub-3ms P9999 latency under million-QPS workloads using disk-only reads.
+* **EloqDoc**: a MongoDB-compatible document database using a decoupled compute/storage architecture for elasticity and dramatic cost reduction.
+
+Unlike traditional cloud-disk architectures, EloqKV and EloqDoc use **object storage as primary storage and local SSD as an intelligent cache**, reducing total storage cost to **one-tenth of traditional solutions**.
+
+With native multi-replica object storage, EloqData enables a **single-compute + multi-storage replica** HA model, dramatically reducing CPU and memory overhead.
+
+Object storage also enables **second-level backup and branching**, turning backup, environment cloning, and testing workflows from hours into seconds.
+
+MinIO’s transition is not the end of object storage — it is the beginning of a new cloud-native infrastructure era.
+With a proprietary **quad-decoupled architecture**, EloqData breaks the performance limits of object storage in OLTP scenarios and is helping define the next generation of cloud-native databases.
+
+**EloqData — bringing object storage into the OLTP core battlefield.**
+
+Register at [https://cloud.eloqdata.com](https://cloud.eloqdata.com) and get **25GB free storage and 10,000 QPS free DBaaS**.
