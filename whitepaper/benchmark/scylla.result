@@ -1,0 +1,32 @@
+thread 500
+worload a
+[OVERALL], Throughput(ops/sec), 635482.4524788081
+[TOTAL_GCS_PS_Scavenge], Count, 66
+[TOTAL_GC_TIME_PS_Scavenge], Time(ms), 1306
+[TOTAL_GC_TIME_%_PS_Scavenge], Time(%), 2.0967120472643206
+[TOTAL_GCS_PS_MarkSweep], Count, 0
+[TOTAL_GC_TIME_PS_MarkSweep], Time(ms), 0
+[TOTAL_GC_TIME_%_PS_MarkSweep], Time(%), 0.0
+[TOTAL_GCs], Count, 66
+[TOTAL_GC_TIME], Time(ms), 1306
+[TOTAL_GC_TIME_%], Time(%), 2.0967120472643206
+[READ], Operations, 19800361
+[READ], AverageLatency(us), 752.873007466884
+[READ], MinLatency(us), 113
+[READ], MaxLatency(us), 296959
+[READ], 95thPercentileLatency(us), 1215
+[READ], 99thPercentileLatency(us), 1761
+[READ], Return=OK, 19800361
+[CLEANUP], Operations, 500
+[CLEANUP], AverageLatency(us), 4475.51
+[CLEANUP], MinLatency(us), 0
+[CLEANUP], MaxLatency(us), 2238463
+[CLEANUP], 95thPercentileLatency(us), 1
+[CLEANUP], 99thPercentileLatency(us), 15
+[UPDATE], Operations, 19782570
+[UPDATE], AverageLatency(us), 746.1710175674849
+[UPDATE], MinLatency(us), 94
+[UPDATE], MaxLatency(us), 236159
+[UPDATE], 95thPercentileLatency(us), 1211
+[UPDATE], 99thPercentileLatency(us), 1752
+[UPDATE], Return=OK, 19782570

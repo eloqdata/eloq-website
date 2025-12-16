@@ -1,0 +1,166 @@
+
+thread 100
+workloada
+[OVERALL], Throughput(ops/sec), 785620.4012263396
+[READ], Operations, 23569334
+[READ], AverageLatency(us), 128.58502323400398
+[READ], MinLatency(us), 61
+[READ], MaxLatency(us), 31023
+[READ], 95thPercentileLatency(us), 179
+[READ], 99thPercentileLatency(us), 215
+[READ], Return=OK, 23569334
+[CLEANUP], Operations, 100
+[CLEANUP], AverageLatency(us), 254.76
+[CLEANUP], MinLatency(us), 12
+[CLEANUP], MaxLatency(us), 1051
+[CLEANUP], 95thPercentileLatency(us), 907
+[CLEANUP], 99thPercentileLatency(us), 1042
+[UPDATE], Operations, 23580460
+[UPDATE], AverageLatency(us), 121.84440731860192
+[UPDATE], MinLatency(us), 56
+[UPDATE], MaxLatency(us), 31039
+[UPDATE], 95thPercentileLatency(us), 170
+[UPDATE], 99thPercentileLatency(us), 206
+[UPDATE], Return=OK, 23580460
+
+workloadb
+[OVERALL], Throughput(ops/sec), 755481.9387517078
+[READ], Operations, 43075960
+[READ], AverageLatency(us), 130.5640697270589
+[READ], MinLatency(us), 58
+[READ], MaxLatency(us), 588799
+[READ], 95thPercentileLatency(us), 185
+[READ], 99thPercentileLatency(us), 222
+[READ], Return=OK, 43075960
+[CLEANUP], Operations, 100
+[CLEANUP], AverageLatency(us), 873.35
+[CLEANUP], MinLatency(us), 12
+[CLEANUP], MaxLatency(us), 1694
+[CLEANUP], 95thPercentileLatency(us), 1620
+[CLEANUP], 99thPercentileLatency(us), 1680
+[UPDATE], Operations, 2266555
+[UPDATE], AverageLatency(us), 126.04027257225172
+[UPDATE], MinLatency(us), 59
+[UPDATE], MaxLatency(us), 27855
+[UPDATE], 95thPercentileLatency(us), 179
+[UPDATE], 99thPercentileLatency(us), 214
+[UPDATE], Return=OK, 2266555
+workloadc
+[OVERALL], Throughput(ops/sec), 760907.4944183412
+[READ], Operations, 45668146
+[READ], AverageLatency(us), 129.47627079058563
+[READ], MinLatency(us), 59
+[READ], MaxLatency(us), 508159
+[READ], 95thPercentileLatency(us), 184
+[READ], 99thPercentileLatency(us), 224
+[READ], Return=OK, 45668146
+
+thread 200
+workloada
+[OVERALL], Throughput(ops/sec), 1024182.5239483549
+[READ], Operations, 30739045
+[READ], AverageLatency(us), 196.04412557384265
+[READ], MinLatency(us), 62
+[READ], MaxLatency(us), 207103
+[READ], 95thPercentileLatency(us), 297
+[READ], 99thPercentileLatency(us), 378
+[READ], Return=OK, 30739045
+[CLEANUP], Operations, 200
+[CLEANUP], AverageLatency(us), 141.33
+[CLEANUP], MinLatency(us), 10
+[CLEANUP], MaxLatency(us), 1098
+[CLEANUP], 95thPercentileLatency(us), 888
+[CLEANUP], 99thPercentileLatency(us), 1045
+[UPDATE], Operations, 30737511
+[UPDATE], AverageLatency(us), 189.85705677339976
+[UPDATE], MinLatency(us), 57
+[UPDATE], MaxLatency(us), 689151
+[UPDATE], 95thPercentileLatency(us), 291
+[UPDATE], 99thPercentileLatency(us), 370
+[UPDATE], Return=OK, 30737511
+workloadb
+[OVERALL], Throughput(ops/sec), 961324.9487764655
+[READ], Operations, 54823302
+[READ], AverageLatency(us), 205.99077215378236
+[READ], MinLatency(us), 65
+[READ], MaxLatency(us), 48031
+[READ], 95thPercentileLatency(us), 317
+[READ], 99thPercentileLatency(us), 400
+[READ], Return=OK, 54823302
+[CLEANUP], Operations, 200
+[CLEANUP], AverageLatency(us), 3089.035
+[CLEANUP], MinLatency(us), 1396
+[CLEANUP], MaxLatency(us), 4551
+[CLEANUP], 95thPercentileLatency(us), 4319
+[CLEANUP], 99thPercentileLatency(us), 4455
+[UPDATE], Operations, 2885996
+[UPDATE], AverageLatency(us), 202.21478616047978
+[UPDATE], MinLatency(us), 65
+[UPDATE], MaxLatency(us), 43999
+[UPDATE], 95thPercentileLatency(us), 313
+[UPDATE], 99thPercentileLatency(us), 395
+[UPDATE], Return=OK, 2885996
+workloadc
+[OVERALL], Throughput(ops/sec), 944384.9498550628
+[READ], Operations, 56687651
+[READ], AverageLatency(us), 209.55083192633964
+[READ], MinLatency(us), 62
+[READ], MaxLatency(us), 64639
+[READ], 95thPercentileLatency(us), 326
+[READ], 99thPercentileLatency(us), 451
+[READ], Return=OK, 56687651
+
+thread 500
+workloada
+[OVERALL], Throughput(ops/sec), 1099032.169439033
+[READ], Operations, 33002001
+[READ], AverageLatency(us), 454.7977302952024
+[READ], MinLatency(us), 65
+[READ], MaxLatency(us), 388351
+[READ], 95thPercentileLatency(us), 680
+[READ], 99thPercentileLatency(us), 856
+[READ], Return=OK, 33002001
+[CLEANUP], Operations, 500
+[CLEANUP], AverageLatency(us), 83.87
+[CLEANUP], MinLatency(us), 10
+[CLEANUP], MaxLatency(us), 1290
+[CLEANUP], 95thPercentileLatency(us), 648
+[CLEANUP], 99thPercentileLatency(us), 1072
+[UPDATE], Operations, 33002574
+[UPDATE], AverageLatency(us), 447.03533142596694
+[UPDATE], MinLatency(us), 61
+[UPDATE], MaxLatency(us), 569343
+[UPDATE], 95thPercentileLatency(us), 674
+[UPDATE], 99thPercentileLatency(us), 850
+[UPDATE], Return=OK, 33002574
+workloadb
+[OVERALL], Throughput(ops/sec), 995052.3090245974
+[READ], Operations, 56762015
+[READ], AverageLatency(us), 497.50554147875124
+[READ], MinLatency(us), 66
+[READ], MaxLatency(us), 411135
+[READ], 95thPercentileLatency(us), 745
+[READ], 99thPercentileLatency(us), 936
+[READ], Return=OK, 56762015
+[CLEANUP], Operations, 500
+[CLEANUP], AverageLatency(us), 129.354
+[CLEANUP], MinLatency(us), 10
+[CLEANUP], MaxLatency(us), 1603
+[CLEANUP], 95thPercentileLatency(us), 920
+[CLEANUP], 99thPercentileLatency(us), 1495
+[UPDATE], Operations, 2987891
+[UPDATE], AverageLatency(us), 493.62939779262365
+[UPDATE], MinLatency(us), 66
+[UPDATE], MaxLatency(us), 205439
+[UPDATE], 95thPercentileLatency(us), 742
+[UPDATE], 99thPercentileLatency(us), 935
+[UPDATE], Return=OK, 2987891
+workloadc
+[OVERALL], Throughput(ops/sec), 1007629.3915881314
+[READ], Operations, 60516206
+[READ], AverageLatency(us), 491.6624058520787
+[READ], MinLatency(us), 61
+[READ], MaxLatency(us), 287487
+[READ], 95thPercentileLatency(us), 740
+[READ], 99thPercentileLatency(us), 896
+[READ], Return=OK, 60516206
