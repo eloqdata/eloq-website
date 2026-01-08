@@ -22,16 +22,12 @@ interface ProductFeatures {
 const productFeatures: ProductFeatures = {
   eloqkv: {
     title: "EloqKV",
-    version: "0.8.18",
-    kvtype: "rocksdb",
+    version: "1.0.1",
+    kvtype: "eloqstore",
     storageTypes: [
       {
-        value: "rocksdb",
-        label: "RocksDB",
-      },
-      {
-        value: "rocks_s3",
-        label: "RocksCloud",
+        value: "eloqstore",
+        label: "EloqStore",
       },
     ],
     features: [
@@ -239,15 +235,15 @@ const EloqDBDownloadPage: React.FC = () => {
                   guide.
                   {(selectedProduct === "eloqkv" ||
                     selectedProduct === "eloqsql") && (
-                    <>
-                      <br />
-                      <br />
-                      If you're interested in a more in-depth experience, we
-                      recommend trying our
-                      <a href="/downloadeloqctl"> Eloqctl </a> tool to deploy a
-                      cluster.
-                    </>
-                  )}
+                      <>
+                        <br />
+                        <br />
+                        If you're interested in a more in-depth experience, we
+                        recommend trying our
+                        <a href="/downloadeloqctl"> Eloqctl </a> tool to deploy a
+                        cluster.
+                      </>
+                    )}
                   <br />
                   <br />
                   If you'd like to stay informed about the exciting developments
@@ -323,18 +319,19 @@ const EloqDBDownloadPage: React.FC = () => {
                   <option value="" disabled selected>
                     Please Choose OS Type
                   </option>
-                  {selectedProduct === "eloqkv" && (
+                  {selectedProduct === "eloqsql" && (
                     <>
                       <option value="rhel7">RHEL 7</option>
                       <option value="rhel8">RHEL 8</option>
+                      <option value="rhel9">RHEL 9</option>
                     </>
                   )}
-                  {(selectedProduct === "eloqkv" ||
-                    selectedProduct === "eloqsql") && (
-                    <option value="rhel9">RHEL 9</option>
+                  {(selectedProduct === "eloqdoc") && (
+                    <>
+                      <option value="ubuntu20">Ubuntu 20.04</option>
+                      <option value="ubuntu22">Ubuntu 22.04</option>
+                    </>
                   )}
-                  <option value="ubuntu20">Ubuntu 20.04</option>
-                  <option value="ubuntu22">Ubuntu 22.04</option>
                   <option value="ubuntu24">Ubuntu 24.04</option>
                 </select>
 

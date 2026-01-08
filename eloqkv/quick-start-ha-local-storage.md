@@ -5,6 +5,8 @@ summary: Deploy High Available Cache Cluster on Local Storage.
 
 # Deploy a High Available Cache Cluster (Compitable With Redis Master-Replica Mode)
 
+> **Note:** EloqKV on EloqStore will support using Eloqctl to install and manage soon. This document covers EloqKV on RocksDB.
+
 [Previously](./quick-start), we covered how to deploy a single node EloqKV cluster using `eloqctl`. In this document, we will focus on deploying a highly available cache cluster on local storage (RocksDB). This deployment is compatible with Redis Master-Replica Mode
 
 ## 1. Prerequisites

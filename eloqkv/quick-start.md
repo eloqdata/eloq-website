@@ -5,13 +5,15 @@ summary: Learn how to quickly get started with the EloqKV database.
 
 # Deploy a Single Node EloqKV Instance Using Eloqctl
 
+> **Note:** EloqKV on EloqStore will support using Eloqctl to install and manage soon. This document covers EloqKV on RocksDB.
+
 `eloqctl` is a powerful tool designed for the operation and maintenance of EloqKV clusters. With Eloqctl, you can effortlessly manage daily database tasks, such as deploying, starting, stopping, upgrading, and decommissioning EloqKV clusters, as well as configuring cluster parameters.
 
 `eloqctl` supports the deployment of various cluster types, including EloqKV transactional clusters, EloqKV log clusters, persistent storage clusters like Cassandra, and associated monitoring systems. This document provides guidance on deploying EloqKV cluster on a single node.
 
 ## 1. Prerequisites
 
-EloqKV is compatible with Red Hat 8/9 and Ubuntu 20.04, 22.04, and 24.04.
+EloqKV requires Ubuntu 24.04+.
 
 Please ensure you've reviewed the following documents:
 
