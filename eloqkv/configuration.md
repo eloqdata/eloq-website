@@ -149,7 +149,7 @@ Below is a detailed description of each configuration variable:
 ### `txlog_service_list`
 
 - Description: Redo Log group servers configuration when deploying log servers seaprately. The `txlog_service_list` should include all the redo log groups, with each entry formatted as `ip:port` and separated by commas.
-- Category: [local]
+- Category: [store]
 - Scope: Global
 - Data Type: String
 - Default Value: Empty
@@ -157,7 +157,7 @@ Below is a detailed description of each configuration variable:
 ### `txlog_group_replica_num`
 
 - Description: Number of replicas for a redo log group. The default value is 1, indicating no high availability (HA) support. To enable HA, set this value to 3 or higher.
-- Category: [local]
+- Category: [store]
 - Scope: Global
 - Data Type: Integer
 - Default Value: 1
