@@ -18,6 +18,8 @@ From [Redis](https://redis.io/) and [Valkey](https://valkey.io/) to [Momento](ht
 
 Today, we’re proud to introduce [EloqKV powered by EloqStore](https://github.com/eloqdata/eloqstore) — a breakthrough architecture that harnesses modern NVMe technology to deliver memory-class performance with up to **20× cost reduction** compared to traditional DRAM-based systems
 
+Today, we’re proud to introduce [EloqKV powered by EloqStore](https://github.com/eloqdata/eloqstore). It is not just another cache; it is a **persistent key-value store** that speaks the Redis API. It is the first Redis-compatible store designed to deliver consistent, low P9999 latency while harnessing modern NVMe technology to offer up to 20× cost reduction compared to traditional DRAM-based systems.
+
 <p align="center">
 <div style={{ width: '75%', textAlign: 'center'}}>
 import EnlargeableImage from '@site/src/pages/enlarge_pic';
@@ -34,7 +36,7 @@ At the upcoming **Unlocked Conference 2026**, engineers from **Uber** will prese
 
 The challenge is compounding in the **AI Age**. We are moving toward a future of Agent-to-Agent communication, which will generate **100x more data and RPS** than human interaction. We see this with our own customers: AI chat scenarios involve massive data exploration because prompts are long, complex, and carry context payloads 100x larger than typical human chat messages.
 
-When you throw this level of concurrency at a standard SSD-based database, traditional architectures fail. Relying on multi-threading and synchronous I/O simply cannot guarantee consistent low tail latency (e.g., **P9999 < 6ms at 70K RPS**) on commodity hardware (like a 16 vCore machine). The threads block, the context switches pile up, and the tail latency spikes.
+When you throw this level of concurrency at a standard SSD-based database, traditional architectures fail. Relying on multi-threading and synchronous I/O simply cannot guarantee consistent low tail latency (e.g., **P9999 < 4ms at 100K RPS**) on commodity hardware (like a 16 vCore machine). The threads block, the context switches pile up, and the tail latency spikes.
 
 ## The Software-Hardware Gap
 
@@ -90,22 +92,29 @@ We put EloqKV on EloqStore to the test using `memtier_benchmark`.
 
 **The Setup:**
 *   **Hardware:** Single Node, GCP Z3-16 instance.
-*   **Specs:** 16 vCore, 128GB RAM, 4.4TB NVMe SSD.
-*   **Data:** Loaded **2TB of data** (200 Million items, with large payloads of 8-12KB per item).
+*   **Specs:** 16 vCore, 128GB RAM, 2.9TB NVMe SSD * 2.
+*   **Data:** Loaded **2TB of data** (800 Million items, with large payloads of 1-4KB per item).
 
 **The Result:**
-With a load of **70,000 QPS**, EloqKV maintained a **P9999 latency of under 6ms** among different kinds of workloads.
+With a load of **100,000 QPS**, EloqKV maintained a **P9999 latency of under 4ms** among different kinds of workloads.
 
 <p align="center">
 <div style={{ width: '75%', textAlign: 'center'}}>
 
-<EnlargeableImage src={require('./img/eloqstore_p9999.jpg').default} alt="x" />
+<EnlargeableImage src={require('./img/eloqstore_p9999.png').default} alt="x" />
 
 </div></p>
 
 **The Comparison:**
 To store this same 2TB dataset in **Redis**, you would typically require **20 nodes** of similar RAM capacity. By leveraging the NVMe SSD with EloqStore, we achieved a **20x cost reduction** while keeping the long tail latency low enough to meet strict business requirements.
 
+### Rethinking the Key-Value Store for the AI Era
+
+Beyond its performance as a cache, EloqKV is a full-featured key-value store. It does not require you to hold all keys in memory just to maintain performance. This architectural shift enables a new class of advanced features:
+
+- Cloud-Native "Scale to Zero": Because data is persisted on NVMe and/or object storage rather than volatile DRAM, EloqKV can spin down to zero when idle.
+
+- AI-Native "Quick Branching": For complex AI workflows and agent simulations, EloqKV supports rapid branching. You can fork your state to explore different prompt chains or agentic outcomes without duplicating massive DRAM footprints.
 
 ### Meet us at Unlocked 2026
 
