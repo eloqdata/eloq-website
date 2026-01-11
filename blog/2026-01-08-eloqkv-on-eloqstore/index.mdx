@@ -30,6 +30,25 @@ import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
 </div></p>
 
+<!--
+# Categories and Systems
+categories = ['RW 95:5', 'RW 50:50', 'RW 5:95']
+systems = ['Redis', 'EloqKV', 'Kvrocks']
+
+# Data values: [Redis, EloqKV, Kvrocks]
+data_set = {
+    'RW 95:5': [0.70, 1.5, 4.6],
+    'RW 50:50': [0.62, 2.5, 61.9],
+    'RW 5:95': [0.60, 2.7, 55.0]
+}
+
+data_get = {
+    'RW 95:5': [0.54, 2.4, 5.4],
+    'RW 50:50': [0.54, 3.1, 78.3],
+    'RW 5:95': [0.54, 3.0, 85.5]
+}
+-->
+
 As shown above, EloqKV’s P9999 latency on a 2TB dataset is indistinguishable from pure DRAM Redis, and far superior to existing SSD-based stores like Apache Kvrocks. For detailed benchmark configurations, see the [Benchmark](#benchmark) section below.
 
 
@@ -91,17 +110,20 @@ Under the hood, EloqStore is built with Coroutines. This allows the system to h
 
 Most importantly, this architecture eliminates the jitter caused by background maintenance. Traditional LSM-trees must periodically merge and rewrite files to maintain performance—a process that consumes massive CPU and I/O resources, leading to the dreaded "compaction stall." EloqStore’s append-only design manages data reclamation more gracefully, ensuring that background tasks never interfere with foreground traffic. The result is a P9999 latency profile that stays flat, delivering a "memory-like" experience at disk-based economics.
 
+
 ### Benchmark
 
-We put EloqKV on EloqStore to the test using `memtier_benchmark`.
+We evaluated the performance of EloqKV on EloqStore using `memtier_benchmark`, specifically focusing on how tail latency and throughput scale as data volumes transition from DRAM-only sizes to massive SSD-based datasets.
 
 **The Setup:**
-*   **Hardware:** Single Node, GCP Z3-16 instance.
-*   **Specs:** 16 vCore, 128GB RAM, 2.9TB NVMe SSD * 2.
-*   **Data:** Loaded **2TB of data** (800 Million items, with large payloads of 1-4KB per item).
 
-**The Result:**
-With a load of **100,000 QPS**, EloqKV maintained a **P9999 latency of under 4ms** among different kinds of workloads, delivering predictable performance at scale.
+* **Hardware:** Single Node, GCP Z3-16 instance.
+* **Specs:** 16 vCore, 128GB RAM, 2.9TB NVMe SSD × 2.
+* **Data Scaling:** Ranging from **20GB** (pure DRAM) up to **2TB** (full NVMe utilization with 800 Million items and large payloads of 1-4KB per item).
+
+**Performance & Scaling Analysis:**
+Traditional DRAM-based systems like Redis are strictly limited by physical memory. As shown in the benchmark below, while Redis performance is restricted to smaller datasets, EloqKV breaks this barrier by leveraging NVMe without the "tail-latency penalty" typically associated with disk.
+
 
 <p align="center">
 <div style={{ width: '75%', textAlign: 'center'}}>
@@ -110,8 +132,19 @@ With a load of **100,000 QPS**, EloqKV maintained a **P9999 latency of under 4ms
 
 </div></p>
 
-**The Comparison:**
-To store this same 2TB dataset in **Redis**, you would typically require **20 nodes** of similar RAM capacity. By leveraging the NVMe SSD with EloqStore, we achieved a **20x cost reduction** while keeping the long tail latency low enough to meet strict business requirements.
+<!--
+sizes = ['20GB', '100GB', '200GB', '2TB']
+eloq_throughput = [507012.93, 298712.73, 281433.00, 262198.00]
+eloq_latency = [1.55100, 1.43100, 2.03100, 2.60700]
+redis_throughput = [161910.38, 155415.41, None, None]
+redis_latency = [1.43100, 1.51100, None, None]
+-->
+
+* **DRAM-Level Consistency:** At 20GB and 100GB, EloqKV actually provides **higher throughput** than Redis while maintaining a nearly identical **P99.99 latency** profile.
+* **Seamless Scaling to 2TB:** While Redis hits a hard ceiling at 100GB on this hardware, EloqKV continues to scale. Even at a **2TB dataset**, EloqKV maintains a stable P99.99 latency of ~2-3ms—performance previously thought possible only in pure DRAM environments.
+* **20× Cost Reduction:** To manage a 2TB dataset with Redis, an organization would typically need a cluster of **20 nodes** to provide enough RAM. EloqKV delivers the same "long-tail" reliability on a single NVMe-optimized node, slashing infrastructure costs by 20×.
+
+By solving the P99.99 latency problem on SSDs, EloqKV allows businesses to scale their data footprint by orders of magnitude without sacrificing the sub-millisecond responsiveness their users demand.
 
 ### Rethinking the Key-Value Store for the AI Era
 
