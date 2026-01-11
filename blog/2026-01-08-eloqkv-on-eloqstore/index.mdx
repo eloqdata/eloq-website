@@ -14,17 +14,24 @@ featuredMain: true
 
 The hardware landscape is shifting under our feet. At **CES 2026**, NVIDIA CEO Jensen Huang delivered a stark warning: the industry is facing a critical shortage of DRAM. While the explosive growth of AI models is the primary driver, there is another massive consumer of memory that often flies under the radar: **Caching Services**.
 
-From [Redis](https://redis.io/) and [Valkey](https://valkey.io/) to [Momento](https://www.gomomento.com/), [DragonflyDB](https://dragonflydb.io/), and [Garnet](https://microsoft.github.io/garnet/), traditional cache services are memory-bound. As data volumes explode, maintaining Terabyte to Petabyte-scale caches in DRAM is becoming prohibitively expensive. The industry needs a new approach—one that delivers the speed of memory with the economics of disk.
 
-Today, we’re proud to introduce [EloqKV powered by EloqStore](https://github.com/eloqdata/eloqstore). It is not just another cache; it is a **persistent key-value store** that speaks the Redis API. It is the first Redis-compatible store designed to deliver consistent, low P9999 latency while harnessing modern NVMe technology to offer up to 20× cost reduction compared to traditional DRAM-based systems.
+Traditional services like [Redis](https://redis.io/) and [Valkey](https://valkey.io/) to [Momento](https://www.gomomento.com/), [DragonflyDB](https://dragonflydb.io/), and [Garnet](https://microsoft.github.io/garnet/) are memory-bound. As data volumes reach Petabyte-scale, DRAM costs have become prohibitively expensive. Yet, for latency-sensitive businesses, DRAM remained the only choice because SSD-based alternatives could never solve the P9999 (tail latency) problem. In mission-critical environments, a single latency spike in the 99.99th percentile can disrupt entire real-time workflows—making unpredictable SSD performance a dealbreaker.
+
+Today, we’re proud to introduce [EloqKV powered by EloqStore](https://github.com/eloqdata/eloqstore). It is a **persistent key-value store** that speaks the Redis API and finally breaks the DRAM monopoly.
+
+EloqKV is the first Redis-compatible store designed to deliver DRAM-level P9999 latency while harnessing modern NVMe technology. By eliminating the performance "tail" that plagues traditional disk-based systems, it offers up to **20X cost reduction** without sacrificing the sub-millisecond reliability your business demands.
+
 
 <p align="center">
 <div style={{ width: '75%', textAlign: 'center'}}>
 import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
-<EnlargeableImage src={require('./img/ces2026.jpg').default} alt="x" />
+<EnlargeableImage src={require('./img/ces26_p9999.jpg').default} alt="EloqKV P9999 Latency Comparison" />
 
 </div></p>
+
+As shown above, EloqKV’s P9999 latency on a 2TB dataset is indistinguishable from pure DRAM Redis, and far superior to existing SSD-based stores like Apache Kvrocks. For detailed benchmark configurations, see the [Benchmark](#benchmark) section below.
+
 
 ## The Long Tail Problem: Why SSD Caching is Hard
 
@@ -84,7 +91,7 @@ Under the hood, EloqStore is built with Coroutines. This allows the system to h
 
 Most importantly, this architecture eliminates the jitter caused by background maintenance. Traditional LSM-trees must periodically merge and rewrite files to maintain performance—a process that consumes massive CPU and I/O resources, leading to the dreaded "compaction stall." EloqStore’s append-only design manages data reclamation more gracefully, ensuring that background tasks never interfere with foreground traffic. The result is a P9999 latency profile that stays flat, delivering a "memory-like" experience at disk-based economics.
 
-### Benchmark: 20x Cost Reduction
+### Benchmark
 
 We put EloqKV on EloqStore to the test using `memtier_benchmark`.
 
@@ -94,12 +101,12 @@ We put EloqKV on EloqStore to the test using `memtier_benchmark`.
 *   **Data:** Loaded **2TB of data** (800 Million items, with large payloads of 1-4KB per item).
 
 **The Result:**
-With a load of **100,000 QPS**, EloqKV maintained a **P9999 latency of under 4ms** among different kinds of workloads.
+With a load of **100,000 QPS**, EloqKV maintained a **P9999 latency of under 4ms** among different kinds of workloads, delivering predictable performance at scale.
 
 <p align="center">
 <div style={{ width: '75%', textAlign: 'center'}}>
 
-<EnlargeableImage src={require('./img/eloqstore_p9999.png').default} alt="x" />
+<EnlargeableImage src={require('./img/eloqkvredis_ces26.jpg').default} alt="EloqKV vs Redis Throughput and Latency" />
 
 </div></p>
 
