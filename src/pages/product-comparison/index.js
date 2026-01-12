@@ -24,7 +24,7 @@ const PRODUCT_COMPARISON = [
   },
   {
     feature: 'Object Storage',
-    openSource: false,
+    openSource: true,
     enterprise: true,
     cloudSaas: true,
   },
@@ -54,13 +54,13 @@ const PRODUCT_COMPARISON = [
   },
   {
     feature: 'Hot Backup',
-    openSource: true,
+    openSource: false,
     enterprise: true,
     cloudSaas: true,
   },
   {
     feature: 'TLS Encryption',
-    openSource: true,
+    openSource: false,
     enterprise: true,
     cloudSaas: true,
   },
@@ -72,7 +72,7 @@ const PRODUCT_COMPARISON = [
   },
   {
     feature: 'Scale-Out',
-    openSource: false,
+    openSource: true,
     enterprise: true,
     cloudSaas: true
   },
@@ -93,7 +93,7 @@ const PRODUCT_COMPARISON = [
 export default function ProductComparison() {
   return (
     <Layout
-      title="Product Comparison - EloqDB Editions"
+      title="Product Edition Comparison"
       description="Compare features across EloqDB Open Source, Enterprise, and Cloud editions">
       <main>
         {/* Hero Section */}
