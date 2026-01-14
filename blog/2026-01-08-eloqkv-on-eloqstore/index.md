@@ -88,7 +88,7 @@ At the upcoming **Unlocked Conference 2026**, engineers from **Uber** will prese
 
 The challenge is compounding in the **AI Age**. We are moving toward a future of Agent-to-Agent communication, which will generate **100x more data and RPS** than human interaction. We see this with our own customers: AI chat scenarios create massive data explosion because prompts are long, complex, and carry context payloads 100x larger than typical human chat messages.
 
-Since DRAM is expensive, the obvious alternative is to use SSDs. However, for high-performance caching, standard SSD implementations have historically failed. The dealbreaker isn't average latency, instead, it's the **long tail latency**, especially when dealing with millions or billions of requests per second (RPS). When you throw this level of concurrency at a standard SSD-based database, traditional architectures fail. Relying on multi-threading and synchronous I/O simply cannot guarantee consistent low tail latency (e.g., **P9999 < 4ms at 100K RPS**) on commodity hardware (like a 16 vCore machine). The threads block, the context switches pile up, and the tail latency spikes.
+Since DRAM is expensive, the obvious alternative is to use SSDs. However, for high-performance caching, standard SSD implementations have historically failed. The dealbreaker isn't average latency, instead, it's the **long tail latency**, especially when dealing with millions or billions of requests per second (RPS). When you throw this level of concurrency at a standard SSD-based database, traditional architectures fail. Relying on multi-threading and synchronous I/O simply cannot guarantee consistent low tail latency on commodity hardware. The threads block, the context switches pile up, and the tail latency spikes.
 
 ## The Software-Hardware Gap
 
@@ -103,14 +103,14 @@ By combining these, we bypass the limitations of synchronous I/O. You can read m
 
 ## Introducing Our Open Source EloqStore Engine
 
-To this end, we developed **EloqStore**, a modern storage engine that is optimized for and takes advantage of the Data Substrate architecture to achieve unparalleled performance and stability. We are thrilled to announce that it is now **Open Source**.
+We developed **EloqStore**, a modern storage engine that is optimized for and takes advantage of the Data Substrate architecture to achieve unparalleled performance and stability. We are thrilled to announce that it is now **Open Source**.
 
 [**Check out EloqStore on GitHub**](https://github.com/eloqdata/eloqstore)
 
-Traditionally, EloqKV utilized **RocksDB** and **RocksCloud** as its underlying storage engine. While robust, RocksDB relies on Log-Structured Merge-trees (LSM), which suffer from well-known issues that destabilize long tail latency:
+EloqData's Data Substrate technology is designed for plugable storage engines. Previously, EloqKV utilized **RocksDB** and **RocksCloud** as its main underlying storage engine. While robust, RocksDB relies on Log-Structured Merge-trees (LSM), which suffer from well-known issues that destabilize long tail latency:
 *   **Write Amplification:** Repeatedly rewriting data during compaction.
 *   **Read Amplification:** Checking multiple files to find a single key.
-*   **Compression Stalls:** CPU spikes during background tasks.
+*   **Compaction Stalls:** CPU spikes during background compaction tasks.
 
 EloqStore addresses these issues head-on by abandoning the traditional Log-Structured Merge-tree (LSM) architecture in favor of a design optimized specifically for the high-parallelism nature of modern NVMe SSDs. While LSM-trees are designed to sequentialize writes for older spinning disks, EloqStore is built from the ground up to exploit the random-access strengths and massive IOPS of modern flash storage.
 
