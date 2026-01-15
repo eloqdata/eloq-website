@@ -163,6 +163,59 @@
   gap: 18px;
 }
 
+.featureNarrativeLayout {
+  max-width: min(1200px, 92vw);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 28px;
+  align-items: stretch;
+}
+
+.featureRail {
+  position: relative;
+}
+
+.featureRailTrack {
+  position: sticky;
+  top: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+  padding: 18px 0;
+  height: calc(100vh - 220px);
+  min-height: 480px;
+}
+
+.featureRailTrack::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(255, 154, 88, 0.2);
+  border-radius: 999px;
+}
+
+.featureRailDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 154, 88, 0.3);
+  background: rgba(12, 18, 32, 0.9);
+  box-shadow: inset 0 0 0 2px rgba(12, 18, 32, 0.9);
+  position: relative;
+  z-index: 1;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.featureRailDotActive {
+  border-color: rgba(255, 154, 88, 0.8);
+  box-shadow: 0 0 10px rgba(255, 123, 45, 0.45);
+  transform: scale(1.15);
+}
+
 .featureNarrativeEyebrow {
   background: linear-gradient(120deg, #ff7b2d, #ff9f4a, #ffb56b);
   background-clip: text;
@@ -194,8 +247,6 @@
 }
 
 .featureNarrativeList {
-  max-width: min(1200px, 92vw);
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 72px;
@@ -385,6 +436,14 @@
   .featureNarrativeRow,
   .featureNarrativeRowReverse {
     grid-template-columns: 1fr;
+  }
+
+  .featureNarrativeLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .featureRail {
+    display: none;
   }
 
   .featureNarrativeMedia {

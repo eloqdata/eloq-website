@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Head from '@docusaurus/Head';
 import Link from '@docusaurus/Link';
 import Layout from '@theme/Layout';
@@ -161,15 +161,67 @@ function FeatureNarrativeRow({ feature, reverse }) {
 }
 
 function FeatureNarratives() {
+    const [activeIndex, setActiveIndex] = useState(0);
+    const featureRefs = useRef([]);
+
+    useEffect(() => {
+        const updateProgress = () => {
+            const nodes = featureRefs.current.filter(Boolean);
+            if (!nodes.length) return;
+
+            const viewportCenter = window.innerHeight * 0.55;
+            let closestIndex = 0;
+            let closestDistance = Number.POSITIVE_INFINITY;
+
+            nodes.forEach((node, index) => {
+                const rect = node.getBoundingClientRect();
+                const distance = Math.abs(rect.top - viewportCenter);
+                if (distance < closestDistance) {
+                    closestDistance = distance;
+                    closestIndex = index;
+                }
+            });
+
+            setActiveIndex(closestIndex);
+        };
+
+        updateProgress();
+        window.addEventListener('scroll', updateProgress, { passive: true });
+        window.addEventListener('resize', updateProgress);
+        return () => {
+            window.removeEventListener('scroll', updateProgress);
+            window.removeEventListener('resize', updateProgress);
+        };
+    }, []);
+
     return (
         <section className={styles.featureNarratives}>
             <div className={styles.featureNarrativeHeader}>
                 <span className={styles.featureNarrativeEyebrow}>Technical Advantages</span>
             </div>
-            <div className={styles.featureNarrativeList}>
-                {FEATURE_DETAILS.map((feature, index) => (
-                    <FeatureNarrativeRow key={feature.title} feature={feature} reverse={index % 2 === 1} />
-                ))}
+            <div className={styles.featureNarrativeLayout}>
+                <div className={styles.featureRail} aria-hidden="true">
+                    <div className={styles.featureRailTrack}>
+                        {FEATURE_DETAILS.map((feature, index) => (
+                            <span
+                                key={feature.title}
+                                className={`${styles.featureRailDot} ${index === activeIndex ? styles.featureRailDotActive : ''
+                                    }`}
+                            />
+                        ))}
+                    </div>
+                </div>
+                <div className={styles.featureNarrativeList}>
+                    {FEATURE_DETAILS.map((feature, index) => (
+                        <div
+                            key={feature.title}
+                            ref={el => {
+                                featureRefs.current[index] = el;
+                            }}>
+                            <FeatureNarrativeRow feature={feature} reverse={index % 2 === 1} />
+                        </div>
+                    ))}
+                </div>
             </div>
         </section>
     );
@@ -208,7 +260,7 @@ function LogoWall() {
         };
     }, []);
 
-    const logos = Array.from({ length: 10 }, (_, index) => ({
+    const logos = Array.from({ length: 7 }, (_, index) => ({
         src: useBaseUrl(`img/logo/placeholder-logo-${index + 1}.svg`),
         alt: `Logo ${index + 1}`,
     }));
