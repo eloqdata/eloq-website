@@ -19,8 +19,8 @@ const FEATURE_DETAILS = [
     {
         title: 'EloqKV',
         body: [
-            'EloqKV is Redis-compatible but keeps hot data on NVMe instead of DRAM. By breaking the memory ceiling, EloqKV maintains extremely low and stable P9999 latency even under mixed read/write pressure.',
-            'This shrinks memory spend by 10× while holding predictable tail latency, making SSD a viable replacement for DRAM at production scale.',
+            'EloqKV is a Redis API compatible data store. By keeping hot data on NVMe instead of DRAM, EloqKV provides fully in-memory level throughput and P99.99 tail latency with 10X cost savings.',
+            'More than just a cache solution, EloqKV is designed for durability and consistency with a distributed architecture built for the agent era.',
         ],
         metricValue: '10X DRAM Savings',
         metricLabel: 'Cost Reduction · Stable P9999 Latency',
@@ -32,10 +32,9 @@ const FEATURE_DETAILS = [
     {
         title: 'EloqDoc',
         body: [
-            'Block volumes cap IOPS and throughput while charging premiums for provisioned capacity. EloqData replaces them with converged storage: local NVMe for performance, object storage for durability.',
-            'The result is millions of IOPS with P999999 durability at one-tenth the cost of EBS-class block devices.',
+            'EloqDoc is a MongoDB API compatible JSON document store that replaces EBS with local NVMe for performance and object storage for durability. By eliminating the high cost of IO and data storage of cloud block volumes, EloqDoc provides 10X IOPS and S3 level durability at one-tenth the cost of competitor\'s solutions.',
         ],
-        metricValue: '10X EBS Savings',
+        metricValue: '10X Storage Savings',
         metricLabel: 'Cheaper Than EBS · Millions of IOPS',
         image: 'img/decoupled-architecture.png',
         imageAlt: 'Illustration of converged NVMe and object storage layers',
@@ -43,10 +42,10 @@ const FEATURE_DETAILS = [
     {
         title: 'ConvergedDB',
         body: [
-            'Context, not parameters, defines agent fidelity. EloqData executes cross-model ACID transactions across vector, tabular, cache, document, and graph workloads—eliminating context drift even when models hallucinate.',
+            'AI applications deal with many different data types:  vector, tabular, cache, document, and graph. Storing data in multiple databases creates complexity and consistency hell. EloqData Converged DB supports multiple data models and executes cross-model ACID transactions, eliminating inconsistency and simplify operations. ',
             'Agents execute against verifiable, consistent state at all times.',
         ],
-        metricValue: '10X Less Context Hallucination',
+        metricValue: 'Fewer Databases, More Productivity',
         metricLabel: 'ACID Across All Data Models',
         image: 'img/low-latency-transaction.png',
         imageAlt: 'Cross-model ACID transaction flow',
@@ -54,10 +53,10 @@ const FEATURE_DETAILS = [
     {
         title: 'Fast Branching',
         body: [
-            'Agents need production-grade data, not mock replicas. EloqData spins up TB-scale branches in seconds so agents can explore, simulate, and reason without touching production.',
-            'Real datasets, safe isolation—agents deliver up to 100× accuracy gains.',
+            'GIT-like behavior on TB scale datasets. Constant time branching, constant time rollbacks.',
+            'Agents need production-grade data, not mock replicas. EloqData spins up branches in seconds so agents can explore, simulate, and reason without risking production data.',
         ],
-        metricValue: '10X Agent Accuracy',
+        metricValue: 'Fearless Experiments on Production Data',
         metricLabel: 'TB-Scale Branching · Seconds',
         image: 'img/agentic.png',
         imageAlt: 'Agent workflow branching across datasets',
@@ -65,11 +64,10 @@ const FEATURE_DETAILS = [
     {
         title: 'Truly Distributed',
         body: [
-            'Agent traffic dwarfs human demand; two-phase commit cannot keep up. EloqData’s distributed architecture runs a single-phase commit protocol, unlocking massive concurrency with predictable latency.',
-            'Designed for agent-era throughput without sacrificing correctness.',
+            'Today\'s enterprises may need to quickly scale up capacity as demand increases. Traditional database solutions often force users to choose between efficient un-scalable solution or inefficient distributed solution. EloqData breaks this tradeoff by providing a truly scalable architecture that maintains high efficiency at small scale while enabling seamless scaling to thousands of nodes.',
         ],
-        metricValue: '100X Scalability for Agent Workloads',
-        metricLabel: '1PC Protocol · Agent-Scale Throughput',
+        metricValue: 'No Compromise Scalability',
+        metricLabel: 'Agent-Scale Throughput',
         linkLabel: 'Read the paper →',
         linkHref: '#',
         image: 'img/highperf.png',
@@ -96,10 +94,10 @@ function Hero() {
                         <HeroBadge key={badge} label={badge} />
                     ))}
                 </div>
-                <h1 className={styles.heroTitle}>Converged Database Breaking the Memory Barrier</h1>
+                <h1 className={styles.heroTitle}>DRAM Performance, SSD Cost, 10X Savings</h1>
                 <p className={styles.heroSubtitle}>
-                    NVMe + Object Storage architecture delivering extreme low long-tail latency with 10× cost
-                    efficiency over DRAM or cloud block storage.
+                    Converged Database Providing DRAM Level Throughput and P99.99 Latency 
+                    with NVMe SSD and Low Cost Cloud Object Storage
                 </p>
                 <div className={styles.ctaGroup}>
                     <Link className={styles.primaryCta} to={architectureUrl}>
