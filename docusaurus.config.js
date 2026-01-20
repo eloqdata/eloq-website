@@ -606,6 +606,10 @@ module.exports = {
                 label: 'Document',
                 to: '/eloqkv/introduction',
               },
+              {
+                label: 'Product',
+                to: '/product/eloqkv',
+              },
             ],
           },
           {
@@ -627,6 +631,10 @@ module.exports = {
               {
                 label: 'Blog',
                 to: '/blog',
+              },
+              {
+                label: 'News',
+                to: '/news',
               },
             ],
           },
