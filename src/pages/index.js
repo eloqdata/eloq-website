@@ -32,7 +32,7 @@ const FEATURE_DETAILS = [
     {
         title: 'EloqDoc',
         body: [
-            'EloqDoc is a MongoDB API compatible JSON document store that replaces EBS with local NVMe for performance and object storage for durability. By eliminating the high cost of IO and data storage of cloud block volumes, EloqDoc provides 10X IOPS and S3 level durability at one-tenth the cost of competitor\'s solutions.',
+            'EloqDoc is a MongoDB API compatible JSON document store that replaces EBS with local NVMe for performance and object storage for durability. By eliminating the high cost of IO and data storage of cloud block volumes, EloqDoc provides 100X IOPS and S3 level durability at one-tenth the cost of competitor\'s solutions.',
         ],
         metricValue: '10X Storage Savings',
         metricLabel: 'Cheaper Than EBS · Millions of IOPS',
@@ -100,8 +100,7 @@ function Hero() {
                 </div>
                 <h1 className={styles.heroTitle}>DRAM Performance, SSD Cost, 10X Savings</h1>
                 <p className={styles.heroSubtitle}>
-                    Converged Database Providing DRAM Level Throughput and P99.99 Latency
-                    with NVMe SSD and Low Cost Cloud Object Storage
+                    A Redis-compatible, production-proven key-value store that delivers DRAM-level throughput and P99.99 latency using NVMe SSD and low-cost object storage
                 </p>
                 <div className={styles.ctaGroup}>
                     <Link className={styles.primaryCta} to={cloudUrl}>
