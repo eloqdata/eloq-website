@@ -38,7 +38,7 @@ const FEATURE_DETAILS = [
         metricLabel: 'Cheaper Than EBS · Millions of IOPS',
         linkLabel: 'Read report →',
         linkHref: '/news/2025/10/23/eloqcloud-eloqdoc-launch',
-        image: 'img/decoupled-architecture.png',
+        image: 'img/10xStorageSavings.jpg',
         imageAlt: 'Illustration of converged NVMe and object storage layers',
     },
     {
@@ -51,7 +51,7 @@ const FEATURE_DETAILS = [
         metricLabel: 'ACID Across All Data Models',
         linkLabel: 'Explore data substrate behind ConvergedDB →',
         linkHref: '/blog/2025/07/14/technology',
-        image: 'img/low-latency-transaction.png',
+        image: 'img/FewerDatabasesMoreProductivity.jpg',
         imageAlt: 'Cross-model ACID transaction flow',
     },
     {
@@ -62,7 +62,7 @@ const FEATURE_DETAILS = [
         ],
         metricValue: 'Fearless Experiments on Production Data',
         metricLabel: 'TB-Scale Branching · Seconds',
-        image: 'img/agentic.png',
+        image: 'img/FearlessExperimentsonProductionData.jpg',
         imageAlt: 'Agent workflow branching across datasets',
     },
     {
@@ -74,7 +74,7 @@ const FEATURE_DETAILS = [
         metricLabel: 'Agent-Scale Throughput',
         linkLabel: 'Request the paper →',
         linkHref: '/request-paper',
-        image: 'img/highperf.png',
+        image: 'img/NoCompromiseScalability.jpg',
         imageAlt: 'High-performance distributed topology diagram',
     },
 ];
@@ -108,7 +108,7 @@ function Hero() {
                         Try EloqCloud for Free
                     </Link>
                     <Link className={styles.secondaryCta} to={benchmarkUrl}>
-                        Explore Redis Cost Savings (10X)
+                        Explore 10X Cost Savings V.S. Redis
                     </Link>
                 </div>
             </div>
@@ -262,7 +262,7 @@ function LogoWall() {
         };
     }, []);
 
-    const logos = Array.from({ length: 7 }, (_, index) => ({
+    const logos = Array.from({ length: 8 }, (_, index) => ({
         src: useBaseUrl(`img/logo/placeholder-logo-${index + 1}.svg`),
         alt: `Logo ${index + 1}`,
     }));
