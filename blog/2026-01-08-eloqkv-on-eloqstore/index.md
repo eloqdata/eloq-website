@@ -7,7 +7,7 @@ image: /img/blog/ces2026.jpg
 description: "EloqKV powered by EloqStore unlocks predictable low latency on NVMe and up to 20X cost savings vs traditional in-memory caching."
 blog: true
 featured: true
-featuredMain: true
+featuredMain: false
 ---
 
 ## Introduction

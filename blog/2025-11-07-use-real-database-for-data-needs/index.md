@@ -6,7 +6,7 @@ image: /img/blog/pg_for_all.jpg
 tags: [Company]
 description: "Discussing the converged database substrate and why postgresql is not sufficient"
 blog: true
-featured: true
+featured: false
 featuredMain: false
 ---
 
