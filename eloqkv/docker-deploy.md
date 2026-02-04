@@ -28,7 +28,7 @@ OK
 
 ## Pass in Configuration and Setup EloqKV cluster
 
-Often, we need to pass a configuration file to EloqKV to modify its behavior. See the [next document](../eloqkv/install-from-binary#prepare-eloqkv-config-file) to find out some of the configuration options. The easiest way to pass in the configuration file is to [bind mount](https://docs.docker.com/engine/storage/bind-mounts/) a directory containing a file named `eloqkv.ini` to directory `/home/eloquser/EloqKV/conf` inside the container, replacing the default `eloqkv.ini`. An alternative is to modify the original `eloqkv.ini` directly in the container.
+Often, we need to pass a configuration file to EloqKV to modify its behavior. See the [next document](../eloqkv/install-from-binary#prepare-eloqkv-config-file) to find out some of the configuration options. The easiest way to pass in the configuration file is to [bind mount](https://docs.docker.com/engine/storage/bind-mounts/) a directory containing a file named `eloqkv.ini` to directory `/home/eloq/EloqKV/conf` inside the container, replacing the default `eloqkv.ini`. An alternative is to modify the original `eloqkv.ini` directly in the container.
 
 As an example, we show how to create a simple EloqKV cluster using containers in a server. We will need 3 containers to form a cluster. In this example, assume we have generated three configuration files located in `/data/conf1`, `/data/conf2`, and `/data/conf3`.
 
