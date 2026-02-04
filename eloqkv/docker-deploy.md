@@ -12,8 +12,10 @@ If Docker isn't installed on your machine, you can install it following this [in
 # Create subnet for containers.
 docker network create --subnet=172.20.0.0/16 eloqnet
 
-docker run -d --net eloqnet --ip 172.20.0.10 -p 6379:6379 --name=eloqkv eloqdata/eloqkv
+docker run -d --net eloqnet --ip 172.20.0.10 -p 6379:6379 --name eloqkv --security-opt seccomp=unconfined --cap-add=SYS_ADMIN --ulimit memlock=-1:-1 eloqdata/eloqkv
 ```
+
+The extra `--security-opt`, `--cap-add`, and `--ulimit` flags relax the sandbox and lift the memory lock limit so EloqKV can enable its io_uring-based fast I/O path.
 
 You're all set! Now you can connect to the EloqKV server:
 
@@ -67,9 +69,9 @@ Now, let's use `docker run` to start three containers, each functioning as a uni
 docker network create --subnet=172.20.0.0/16 eloqnet
 
 # Mount local configuration files and launch three containers to create an EloqKV cluster.
-docker run -d --net eloqnet --ip 172.20.0.11 -p 6380:6379 -v /data/conf1:/home/eloq/EloqKV/conf eloqdata/eloqkv
-docker run -d --net eloqnet --ip 172.20.0.12 -p 6381:6379 -v /data/conf2:/home/eloq/EloqKV/conf eloqdata/eloqkv
-docker run -d --net eloqnet --ip 172.20.0.13 -p 6382:6379 -v /data/conf3:/home/eloq/EloqKV/conf eloqdata/eloqkv
+docker run -d --net eloqnet --ip 172.20.0.11 -p 6380:6379 --security-opt seccomp=unconfined --cap-add=SYS_ADMIN --ulimit memlock=-1:-1 -v /data/conf1:/home/eloq/EloqKV/conf eloqdata/eloqkv
+docker run -d --net eloqnet --ip 172.20.0.12 -p 6381:6379 --security-opt seccomp=unconfined --cap-add=SYS_ADMIN --ulimit memlock=-1:-1 -v /data/conf2:/home/eloq/EloqKV/conf eloqdata/eloqkv
+docker run -d --net eloqnet --ip 172.20.0.13 -p 6382:6379 --security-opt seccomp=unconfined --cap-add=SYS_ADMIN --ulimit memlock=-1:-1 -v /data/conf3:/home/eloq/EloqKV/conf eloqdata/eloqkv
 ```
 
 You're ready to connect to the EloqKV cluster:
