@@ -21,13 +21,13 @@ Watch the [video](https://www.youtube.com/watch?v=XSuwjiNt0N4).
 
 Visit the official Monster Scale Summit [website](https://www.scylladb.com/monster-scale-summit).
 
-<p align="center">
+<div align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
 import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
 <EnlargeableImage src={require('./img/monster.png').default} alt="EloqKV vs Redis Transaction" />
 
-</div></p>
+</div></div>
 
 ## The Redis Scaling Challenge
 

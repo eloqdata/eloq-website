@@ -15,13 +15,13 @@ In the [previous article](/blog/2025/07/15/data-substrate-detail), we discussed 
 
 ## Thread Per Core Execution Model and Async I/O
 
-<p align="center">
+<div align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
 import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
 <EnlargeableImage src={require('./img/cpu.png').default} alt="Modern CPU" />
 
-</div></p>
+</div></div>
 
 The Data Substrate adopts a [thread-per-core execution model](<https://en.wikipedia.org/wiki/Thread_(computing)#Thread_per_core>), a strategy well-aligned with modern [multicore hardware](https://en.wikipedia.org/wiki/Multi-core_processor). In this model, each core is assigned a dedicated thread that manages a variety of tasks using [cooperative multitasking](https://en.wikipedia.org/wiki/Cooperative_multitasking), eliminating the overhead of frequent context switches. This design ensures high CPU cache locality, reduces synchronization complexity, and enables fine-grained control over task scheduling. By minimizing contention and maximizing predictable performance, the thread-per-core model lays the foundation for building scalable and efficient distributed systems.
 
@@ -33,12 +33,12 @@ In Data Substrate, each thread is designed to fulfill multiple roles—it may ex
 
 ## Decoupling of Compute, Memory, Log and Data Store
 
-<p align="center">
+<div align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
 
 <EnlargeableImage src={require('./img/data_substrate_architecture.png').default} alt="Data Substrate Architecture" />
 
-</div></p>
+</div></div>
 
 Data Substrate achieves a high degree of modularity by decoupling compute, logging, and storage into separate threads, each responsible for its own function. This separation allows for clean isolation of responsibilities and avoids cross-component interference. While the current implementation may allow a thread to handle both query computation and buffer management, the architecture is designed such that these roles can be fully separated. The message-passing model abstracts away physical locality, enabling threads to interact seamlessly whether they reside on the same server or across the network. As a result, each subsystem can scale independently, allowing the system to adapt dynamically to changing workload patterns.
 

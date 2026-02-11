@@ -16,13 +16,13 @@ In the previous blog, we discussed the future [database foundation](/blog/2025/0
 
 Imagine you’re building an [agentic AI application](https://nvidianews.nvidia.com/news/nvidia-alphabet-and-google-collaborate-on-the-future-of-agentic-and-physical-ai)—a chatty, autonomous assistant that roams the digital world, helping users with everything from travel tips to life advice. Your agent is smart, proactive, and powered by a large language model ([LLM](https://chat.openai.com/)), but there’s one catch: it needs to remember _everything_. Every witty remark, every user request, every "Aha!" moment—it all needs to be stored somewhere reliable. That’s where EloqKV comes in, and today, I’m taking you on a wild tour of how this decoupled architecture saved my AI agent (and my sanity) as it grew from a humble prototype to a bustling, scalable powerhouse.
 
-<p align="center">
+<div align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
 import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
 <EnlargeableImage src={require('./img/tourbuddy.png').default} alt="Building a Data Foundation for Agentic AI Applications" />
 
-</div></p>
+</div></div>
 
 ### Starting Simple with a Memory Cache
 

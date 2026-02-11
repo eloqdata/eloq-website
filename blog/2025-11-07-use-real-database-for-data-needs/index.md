@@ -12,13 +12,15 @@ featuredMain: false
 
 The internet (or at least the IT community) had a field day when a couple of blog posts claimed you could replace Redis and Kafka with PostgreSQL. ["Redis is fast, I'll cache in Postgres"](https://dizzy.zone/2025/09/24/Redis-is-fast-Ill-cache-in-Postgres/) and ["Kafka is fast -- I'll use Postgres"](https://topicpartition.io/blog/postgres-pubsub-queue-benchmarks) have gotten much attention on HackerNews [here](https://news.ycombinator.com/item?id=45380699) and [here](https://news.ycombinator.com/item?id=45747018), and on Reddit [here](https://www.reddit.com/r/programming/comments/1nph2jh/redis_is_fast_ill_cache_in_postgres/) and [here](https://www.reddit.com/r/programming/comments/1oj7q6q/kafka_is_fast_ill_use_postgres/). Obviously, some of the claims in the posts got roasted on HN and Reddit for suggesting you could replace Redis or Kafka with PostgreSQL. Many people (correctly) pointed out that the benchmarks were far from properly set up, and the workloads were non-typical. Some of the Kafka people also posted [long articles](https://www.morling.dev/blog/you-dont-need-kafka-just-use-postgres-considered-harmful/) to clarify what Kafka is designed for and why it is not hard to use. But, on the flip side, many of the posts also (correctly) preached a valid point: keeping fewer moving parts matters, and using the right tool for the job matters even more.
 
-<p align="center">
+<!-- truncate -->
+
+<div align="center">
 <div style={{ width: '75%', textAlign: 'center'}}>
 import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
 <EnlargeableImage src={require('./img/pg_for_all.jpg').default} alt="x" />
 
-</div></p>
+</div></div>
 Those "Postgres can replace Redis/Kafka" posts usually benchmark light workloads where serious tooling simply isn't necessary, and then stretch that into a sweeping narrative that "you don't need Redis or Kafka at all". But whether a workload is small or not depends entirely on the application. For a local grocery store website, twenty concurrent checkouts might qualify as high traffic; for Instagram or Twitter, a million queries per second barely registers. We're not here to debate whether people may ever need ten thousand queries per second. Generalizing one's workload to everyone's infrastructure needs is non-productive. It's like writing an article about how much grocery a new convertable can carry and conclude that U-Haul is no longer needed. No one would post that on a trucking forum expecting a heated debate. So why does the same kind of reasoning explode into controversy every time someone applies it to databases?
 
 Sure, part of the drama is emotional. Developers get attached to their tools. Kafka, Redis, and Postgres all have cult-like followings, and any praise or criticism feels personal. But there's more to it than fandom. These debates touch on real technical trade-offs: complexity, durability, scaling, and the cost of managing multiple systems. In this article, we'll look at why it actually makes sense to use a *real* database for workloads that used to require specialized systems, and then tackle the elephant in the room: why this shift hasn't happened before and what's needed to make it possible.
@@ -31,7 +33,7 @@ Lately, there's been a growing movement to consolidate around a single database 
 
 ### 1. Avoid Cascading Failures
 
-Every engineer who's operated a large-scale system knows this pain: one small failure snowballs into a full-blown outage. This phenomenon is called [cascading failure](https://sre.google/sre-book/addressing-cascading-failures/). When you glue together multiple systems, say Kafka feeding MySQL with Redis caching on top, each layer becomes a potential failure point. A hiccup in Kafka can stall writes, which can then cause cache invalidations to fail, which can then cause a thundering herd of retries. 
+Every engineer who's operated a large-scale system knows this pain: one small failure snowballs into a full-blown outage. This phenomenon is called [cascading failure](https://sre.google/sre-book/addressing-cascading-failures/). When you glue together multiple systems, say Kafka feeding MySQL with Redis caching on top, each layer becomes a potential failure point. A hiccup in Kafka can stall writes, which can then cause cache invalidations to fail, which can then cause a thundering herd of retries.
 
 > **Example: Twitter's Cache Incident (via [Dan Luu](https://danluu.com/cache-incidents/))**
 > In 2013, Twitter experienced an outage where a minor latency issue in the caching layer caused by interrupt-affinity misconfiguration led to a GC spiral on the tweet service. As cache latency grew, more requests bypassed the cache, overwhelming downstream services and eventually collapsing success rates to near 0% in one datacenter.
@@ -57,19 +59,19 @@ def get_user(user_id):
         logger.warning("Redis timeout, falling back to DB")
     except RedisConnectionError:
         logger.error("Redis down, falling back to DB")
-    
+
     # Cache miss or Redis failed, try database
     try:
         with postgres.cursor() as cur:
             cur.execute("SELECT * FROM users WHERE id = %s", (user_id,))
             user = cur.fetchone()
-            
+
             # Try to update cache (but don't fail if Redis is down)
             try:
                 redis.set(f"user:{user_id}", json.dumps(user), ex=3600)
             except:
                 pass  # "It's fine, we'll cache it next time"
-                
+
             return user
     except PostgresConnectionError:
         # Both Redis and Postgres down? Try the read replica
@@ -105,14 +107,14 @@ A single, converged database architecture eliminates this entire class of proble
 
 ## What About Scalability and Performance?
 
-If converging everything into a single database simplifies architecture so dramatically, the obvious question is: why hasn't everyone already done it? The short answer: performance and scalability. 
+If converging everything into a single database simplifies architecture so dramatically, the obvious question is: why hasn't everyone already done it? The short answer: performance and scalability.
 
-<p align="center">
+<div align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
 
 <EnlargeableImage src={require('./img/one_size_fit_all.png').default} alt="One Size Fit All?" />
 
-</div></p>
+</div></div>
 
 
 Specialized systems like Redis and Kafka were born because traditional databases couldn't keep up. Caches were faster, queues were more scalable, and analytics engines could crunch far more data than your average OLTP database. The trade-off was fragmentation and complexity, but at least things stayed fast. For decades, this was a necessary compromise. In early 2000 the godfather of database Mike Stonebreaker famously declared ["One size does not Fit All"](https://cs.brown.edu/~ugur/fits_all.pdf) in database systems. Even as late as 2018, the CTO of Amazon Werner Vogels decalared that ["A one-size-fits-all database doesn't fit anyone"](https://www.allthingsdistributed.com/2018/06/purpose-built-databases-in-aws.html).
@@ -130,13 +132,13 @@ That's why the new generation of distributed transactional databases, often grou
 
 This changes the calculus completely. When your database can handle distributed transactions efficiently, you no longer need to glue together different engines just to scale. You get scalability and correctness in one system that can become a foundation for building truly unified data architectures.
 
-Yet, most existing distributed transactional databases are still less efficient than their single node counter part. This is an issue we need to address (see below). 
+Yet, most existing distributed transactional databases are still less efficient than their single node counter part. This is an issue we need to address (see below).
 
 ### 2. Independent Resource Scaling
 
 Different workloads stress different parts of a system. Streaming ingestion (like Kafka) is IO-bound and needs massive sequential write throughput. Caching workloads (like Redis) are memory-bound, thriving on low-latency access to hot data. Analytical queries and vector search, on the other hand, are CPU-bound, demanding large compute bursts. Traditional *shared-nothing* databases where compute, storage, and memory scale together force you to over-provision one resource just to satisfy another. You end up paying for RAM you don't use or SSDs that sit mostly idle.
 
-That's one of the reasons why people historically broke their pipelines into multiple specialized systems. You could put Kafka on write-optimized disks, Redis on high-RAM nodes, and MySQL on balanced hardware. 
+That's one of the reasons why people historically broke their pipelines into multiple specialized systems. You could put Kafka on write-optimized disks, Redis on high-RAM nodes, and MySQL on balanced hardware.
 
 Now, cloud infrastructure is changing that equation. Modern cloud platforms allow **elastic and independent scaling** of compute, storage, and memory. Databases are starting to embrace this model directly. The **separation of compute and storage**, first popularized by cloud data warehouses like Snowflake and BigQuery, is now making its way into OLTP systems as well. This decoupling lets a single database scale ingest, query, and cache layers independently.
 
@@ -148,7 +150,7 @@ C++ developers have a mantra: the **Zero-Overhead Principle**
 1. *You don't pay for what you don't use.*
 2. *What you do use is just as efficient as what you could reasonably write by hand.*
 
-That's exactly the mindset a converged database must adopt. Existing databases rarely meet this bar. Even if you just want to run an in-memory cache, most engines still insist on running full durability machinery: write-ahead logging, background checkpoints, transaction journals, and page eviction logic. The result? You're paying CPU and latency overhead for guarantees you may not need on a given workload. 
+That's exactly the mindset a converged database must adopt. Existing databases rarely meet this bar. Even if you just want to run an in-memory cache, most engines still insist on running full durability machinery: write-ahead logging, background checkpoints, transaction journals, and page eviction logic. The result? You're paying CPU and latency overhead for guarantees you may not need on a given workload.
 
 This is why Redis can outperform MySQL on pure in-memory reads even when both are running on the same hardware and the dataset is identical. The overhead isn't only in the query parser; it's in the architectural layers designed for persistence, recovery, and buffer management that never get out of the way.
 
@@ -172,6 +174,6 @@ PostgreSQL has earned its place as the default database of our time, but it's no
 
 The industry's obsession with patching and stitching different data systems together is a legacy of the past twenty years of hardware and software limits. But those limits are fading. The next generation of data infrastructure won't be defined by whether it speaks SQL or supports transactions. It will be defined by whether it can unify the data lifecycle without compromise: streaming, caching, analytics, and transactions under a single, coherent architecture.
 
-That's exactly what we're building with [**EloqData's Data Substrate**](/blog/2025/07/14/technology). Instead of bolting more features onto yesterday's database engines, we started from a clean slate: modular storage and compute layers, fully ACID-compliant distributed transactions, object storage as a first-class persistence medium, and elastic scaling across workloads. The same engine that serves as a durable operational database can act as a [high-throughput cache](/blog/2024/08/17/benchmark-single-node), a streaming log, or an analytical backend without duplicating data or wiring together half a dozen systems. 
+That's exactly what we're building with [**EloqData's Data Substrate**](/blog/2025/07/14/technology). Instead of bolting more features onto yesterday's database engines, we started from a clean slate: modular storage and compute layers, fully ACID-compliant distributed transactions, object storage as a first-class persistence medium, and elastic scaling across workloads. The same engine that serves as a durable operational database can act as a [high-throughput cache](/blog/2024/08/17/benchmark-single-node), a streaming log, or an analytical backend without duplicating data or wiring together half a dozen systems.
 
-This is the promise of a **converged data platform**: simplicity without trade-offs, scalability without fragmentation, and performance without overhead. The future of data infrastructure belongs to systems that treat data as a continuous substrate rather than a pile of disconnected silos. That's where we're headed. Of course, we still have a very long way to go, but we are working hard on this goal. Join the discussion on our [Discord Channel](https://discord.gg/nmYjBkfak6), or visit our [GitHub repo](https://github.com/eloqdata/) to contribute. We would be happy to hear your thoughts on the future of databases. 
+This is the promise of a **converged data platform**: simplicity without trade-offs, scalability without fragmentation, and performance without overhead. The future of data infrastructure belongs to systems that treat data as a continuous substrate rather than a pile of disconnected silos. That's where we're headed. Of course, we still have a very long way to go, but we are working hard on this goal. Join the discussion on our [Discord Channel](https://discord.gg/nmYjBkfak6), or visit our [GitHub repo](https://github.com/eloqdata/) to contribute. We would be happy to hear your thoughts on the future of databases.

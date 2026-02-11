@@ -75,13 +75,13 @@ eloq_benchmark --h $server_ip --p $server_port --numKeys=$keynum --numConnection
 
 Below are the performance results of batch mode of Redis and **EloqKV** among various workload. Note that the number of operations of `PUT/GET` in a batch is fixed at **6**.
 
-<p align="center">
+<div align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
 import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
 <EnlargeableImage src={require('./img/eloqkv_redis_batch_rr.png').default} alt="EloqKV vs Redis Transaction" />
 
-</div></p>
+</div></div>
 
 `X-axis`: Represents the different workload types (read/write/mixed) used in the benchmark, simulating a range of real-world scenarios.
 
@@ -99,12 +99,12 @@ Transaction size affects the efficiency of distributed transactions. In this exp
 
 Below are the performance results of **EloqKV** `Multi Exec` command with different batch size among various workload.
 
-<p align="center">
+<div align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
 
 <EnlargeableImage src={require('./img/eloqkv_cluster_batch_size.png').default} alt="EloqKV vs Redis Transaction" />
 
-</div></p>
+</div></div>
 
 `X-axis`: Represents the different workload types (read/write/mixed) used in the benchmark, simulating a range of real-world scenarios.
 

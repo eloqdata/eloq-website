@@ -5,118 +5,121 @@ title: Eloq Operator Introduction
 
 # Eloq Operator Introduction
 
-Eloq Operator is a Kubernetes operator that automates the deployment and management of EloqKV and EloqDoc database clusters on Kubernetes. It follows the Kubernetes Operator pattern and uses Custom Resource Definitions (CRDs) to provide declarative cluster configuration.
+Eloq Operator is a Kubernetes operator that automates the deployment and management of EloqDB clusters (LogService and TxService) in a cloud-native manner. It follows the Kubernetes Operator pattern and uses Custom Resource Definitions (CRDs) to provide declarative cluster configuration and lifecycle management.
 
-## Getting Started
+## Key Features
 
-### Prerequisites
+- **Multi-cloud support**: Native support for AWS EKS and GCP GKE (and other Kubernetes distributions).
+- **Template-based Provisioning**: Reusable cluster configurations with flexible override support.
+- **Full Lifecycle Management**: Handles bootstrapping, scaling, pausing (Idle), and resuming clusters.
+- **Tiered Storage**: Optimized management for block storage, local instance store, and object storage.
 
-Before installing Eloq Operator, ensure you have:
+## Core Architecture
 
-- **Kubernetes cluster** (v1.28 or higher) on AWS EKS, Baidu Cloud CCE.
-- **kubectl** (v1.28+) and **helm** (v3.0+)
-- Cloud provider CLI for cloud-specific features
+Eloq Operator uses a three-tier resource model inspired by the Kubernetes PVC/PV/StorageClass pattern. This separation of concerns allows platform admins to manage infrastructure standards while giving users self-service database provisioning.
 
-### Installation
+### Three-Tier Resource Model
 
-**Step 1: Install Operator on Public Cloud Kubernetes**
-
-Depending on your cloud platform:
-- **AWS EKS**: [Install Eloq Operator on AWS EKS](./install-operator-aws)
-- **Baidu Cloud CCE**: [Install Eloq Operator on Baidu Cloud CCE](./install-operator-baidu)
-
-**Step 2: Deploy Database Clusters**
-
-<!-- - [Deploy EloqDoc on AWS EKS](./deploy-eloqdoc) -->
-<!-- - [Deploy EloqKV on AWS EKS](./deploy-eloqkv) -->
-
-## Storage Types
-
-Eloq Operator manages three types of storage for optimal performance and cost:
-
-### Block Storage (Persistent Volumes)
-
-**Purpose**: Raft consensus logs and metadata
-
-- **Performance**: High IOPS, low latency
-- **Durability**: Data persists across pod restarts
-- **Providers**: AWS EBS, Baidu CDS
-- **Use Case**: Transaction logs, critical metadata
-
-**Example**:
-```yaml
-spec:
-  dataStore:
-    pvc:
-      spec:
-        accessModes:
-          - ReadWriteOnce
-        resources:
-          requests:
-            storage: 500Mi
-          limits:
-            storage: 3Gi
-        volumeMode: Filesystem
-        # storageClassName: gp3  # AWS EBS gp3 type
+```text
+┌─────────────────────────────────────────────────────────────────────┐
+│                        Resource Hierarchy                           │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│  ┌──────────────────────────┐                                      │
+│  │ EloqDBClusterTemplate    │  ← Platform Admin defines reusable   │
+│  │ (like StorageClass)      │    configurations (compute, storage) │
+│  └────────────┬─────────────┘                                      │
+│               │                                                     │
+│               │ references                                          │
+│               ↓                                                     │
+│  ┌──────────────────────────┐                                      │
+│  │ EloqDBClusterClaim       │  ← User requests cluster with        │
+│  │ (like PVC)               │    desired state (Running/Idle)      │
+│  └────────────┬─────────────┘                                      │
+│               │                                                     │
+│               │ binds to                                            │
+│               ↓                                                     │
+│  ┌──────────────────────────┐                                      │
+│  │ EloqDBCluster            │  ← Operator manages actual           │
+│  │ (like PV)                │    infrastructure (Pods, Services)   │
+│  └──────────────────────────┘                                      │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
 ```
 
-### Local Storage (Instance Store)
+1.  **EloqDBClusterTemplate**: Defines reusable cluster configurations (compute resources, storage types, engine versions). Usually managed by platform administrators in a central namespace.
+2.  **EloqDBClusterClaim**: The user-facing resource used to request a database cluster. Users specify a template and provide optional storage path overrides to ensures data isolation.
+3.  **EloqDBCluster**: Represents the actual infrastructure deployment. It is managed automatically by the operator and contains the resolved configuration merged from the template and claim.
 
-**Purpose**: Hot data cache and high-performance operations
+### Controller Interactions
 
-- **Performance**: Ultra-low latency with NVMe SSDs
-- **Durability**: Ephemeral (data lost on pod restart)
-- **Providers**: AWS i3/i4i instances, Baidu bcc.l5d instances
-- **Use Case**: Active data cache, temporary computations
+The operator comprises multiple controllers working in harmony to reconcile the desired state:
 
-**Example**:
-```yaml
-spec:
-  dataStore:
-    ephemeral:
-      spec:
-        accessModes:
-          - ReadWriteOnce
-        resources:
-          requests:
-            storage: 5Gi
-          limits:
-            storage: 10Gi
+```text
+   User creates Claim                       ┌─────────────────────────┐
+          │                                 │ EloqDBClusterTemplate   │
+          │                                 │ Controller              │
+          ↓                                 │                         │
+┌─────────────────────────────┐             │ • Validates templates   │
+│ EloqDBClusterClaim          │             │ • Prevents deletion if  │
+│                             │             │   in use by claims      │
+│ spec:                       │             └────────────┬────────────┘
+│   state: Running            │                          │
+│   templateRef:              │←─────────────────────────┘
+│     name: pool-eloqkv-free  │           reads
+└────────┬────────────────────┘
+         │
+         │ watches & reconciles
+         ↓
+┌─────────────────────────────────────────────────────────────────────┐
+│ EloqDBClusterClaimController                                        │
+│                                                                     │
+│ Phase: Pending                                                      │
+│   → Resolve template + merge overrides                              │
+│   → Generate unique cluster name                                    │
+│   → Create EloqDBCluster resource                                   │
+│   → Set bidirectional references (claim ↔ cluster)                  │
+│                                                                     │
+│ Phase: Binding → Attaching → Bound                                  │
+│   → Wait for cluster to reach "Deployed" phase                      │
+│   → If state=Running: ensure cluster is Attached                    │
+│   → If state=Idle: detach cluster (scale down DB process)           │
+└────────┬────────────────────────────────────────────────────────────┘
+         │
+         │ creates & manages
+         ↓
+┌─────────────────────────────────────────────────────────────────────┐
+│ EloqDBCluster                                                       │
+│                                                                     │
+│ status:                                                             │
+│   phase: Deployed           ← Current lifecycle phase               │
+│   conditions: [...]         ← Detailed status conditions            │
+│   serviceEndpoints: [...]   ← Connection info                       │
+└────────┬────────────────────────────────────────────────────────────┘
+         │
+         │ watches & reconciles
+         ↓
+┌─────────────────────────────────────────────────────────────────────┐
+│ EloqDBClusterController                                             │
+│                                                                     │
+│ Deployment Phases:                                                  │
+│   Preparing → Initializing → Bootstrapping                          │
+│   → DeployingLog → DeployingTx → Deployed                           │
+│                                                                     │
+│ Creates & manages:                                                  │
+│   • ConfigMaps, Secrets, StatefulSets, Services, PVCs               │
+└─────────────────────────────────────────────────────────────────────┘
 ```
 
-### Object Storage (S3-Compatible)
+## Design Principles
 
-**Purpose**: Long-term data persistence and cold storage
+1.  **Separation of Concerns**: Infrastructure complexity is hidden in Templates, while Users focus on Claims.
+2.  **Immutability**: Once an `EloqDBCluster` is created, its core spec is immutable to prevent risky configuration drifts.
+3.  **Self-healing**: Controllers continuously monitor Pod health and Service endpoints to ensure high availability.
+4.  **Data Isolation**: Claims force users to specify unique storage paths (bucket prefixes/paths) to prevent data overlap in shared object storage.
 
-- **Performance**: Optimized for throughput
-- **Durability**: 99.999999999% (11 9's)
-- **Providers**: AWS S3, Baidu BOS, any S3-compatible storage
-- **Use Case**: SST files, transaction log archives, backups
+## Next Steps
 
-**Example**:
-```yaml
-spec:
-  storage:
-    objectStorage:
-      type: s3
-      bucket: eloq-data-bucket
-      region: us-west-2
-```
-
-### How Storage Tiers Work Together
-
-```
-Write: Client → Local SSD (cache) → Object Storage (persistent)
-                    ↓
-              Block Storage (metadata)
-
-Read (Hot):  Client → Local SSD → Return
-Read (Cold): Client → Local SSD (miss) → Object Storage → Cache → Return
-```
-
-**Benefits**:
-- Hot data served from fast local SSDs
-- Cold data automatically tiered to cost-effective object storage
-- All data durably persisted in object storage
-- Metadata and logs stored in reliable block storage
-
+- **Installation Guides**: [AWS](./install/aws), [GCP](./install/gcp), [Baidu Cloud](./install/baidu).
+- **[EloqDBClusterTemplate](./usage/template)**: Learn how to create and manage cluster templates.
+- **[EloqDBClusterClaim](./usage/claim)**: Learn how to request and manage database instances.

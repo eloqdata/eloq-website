@@ -32,22 +32,22 @@ On the cluster creation page, configure the following options:
 
 You can proceed with the default values for a quick setup, or customize them to suit your requirements.
 
-<p align="center">
+<div align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
 import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
 <EnlargeableImage src={require('./media/eloqcloud_create_cluster.png').default} alt="Create Cluster UI" />
 
-</div></p>
+</div></div>
 
 ## 2. Cluster Dashboard
 
 Once the cluster is created, it will appear on the homepage with basic status and configuration details.
 
-<p align="center">
+<div align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
 <EnlargeableImage src={require('./media/eloqcloud_cluster_list.png').default} alt="Cluster List View" />
-</div></p>
+</div></div>
 
 Click on the cluster name to access the full dashboard.
 
@@ -74,19 +74,19 @@ Additional sections include:
 
 To connect to the database, click the **CONNECT TEST** button in the top-right corner.
 
-<p align="center">
+<div align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
 <EnlargeableImage src={require('./media/eloqcloud_cluster_detail.png').default} alt="Cluster Detail Dashboard" />
-</div></p>
+</div></div>
 
 ## 3. Database Connection
 
 The **CONNECT TEST** panel provides the necessary information and tools for integrating **EloqKV** into your environment.
 
-<p align="center">
+<div align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
 <EnlargeableImage src={require('./media/eloqcloud_cluster_connect.png').default} alt="Connection Panel" />
-</div></p>
+</div></div>
 
 Connection details include:
 

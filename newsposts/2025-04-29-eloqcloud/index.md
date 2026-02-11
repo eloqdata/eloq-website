@@ -14,13 +14,13 @@ The first product **EloqCloud for EloqKV** — a key-value database with Redis-c
 
 <!--truncate-->
 
-<p align="center">
+<div align="center">
 <div style={{ width: '640px', textAlign: 'center'}}>
 import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
 <EnlargeableImage src={require('./img/launcheloqcloud.png').default} alt="EloqCloud Public Access Now Open" />
 
-</div></p>
+</div></div>
 
 **EloqCloud** is the SaaS platform for **EloqDB**, designed to deliver an **economical, scalable, and predictable** cloud experience for developers — using the APIs they already love.
 
@@ -81,19 +81,19 @@ Auto-scaling is on our roadmap to make dynamic scaling effortless.
 Ready to experience the future of cloud databases?  
 [Apply For Access](https://cloud.eloqdata.com) today — and receive an exclusive invitation to try EloqCloud for free.
 
-<p align="center">
+<div align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
 
 <EnlargeableImage src={require('./img/joinwaitlist.png').default} alt="Building a Data Foundation for Agentic AI Applications" />
 
-</div></p>
+</div></div>
 
 📺 **Watch our quick demo video below to see EloqCloud in action!**
 
-<p align="center">
+<div align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
   <video controls src="/video/eloqcloud.mp4" width="800" />
 
-</div></p>
+</div></div>
 
 We'll be sharing detailed benchmark results and comparisons with other key-value stores in upcoming posts — stay tuned!

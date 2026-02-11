@@ -12,13 +12,13 @@ We have recently introduced [EloqKV](/news/2024/08/16/eloqkv), our distributed d
 
 <!--truncate-->
 
-<p align="center">
+<div align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
 import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
 <EnlargeableImage src={require('./img/c_old_solid.jpg').default} alt="EloqKV vs Redis Transaction" />
 
-</div></p>
+</div></div>
 
 Had we launched our product a decade ago, using C++ would have been an obvious and unremarkable choice. However, it's 2024, and the landscape has changed. Today, languages like [Rust](https://www.rust-lang.org/), [Zig](https://ziglang.org/), and other type-safe options like [Golang](https://go.dev/) are considered modern and trendy for systems programming. So, when we chose C++, a language that some might view as outdated or less "cool", or even bug-prone and "unsafe", it’s natural for people to wonder why.
 

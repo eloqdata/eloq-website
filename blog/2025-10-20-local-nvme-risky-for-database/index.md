@@ -14,13 +14,15 @@ featuredMain: false
 
 On October 20, 2025, AWS experienced a major disruption across multiple services in the **us-east-1 region**. According to [AWS Health Status](https://health.aws.amazon.com/health/status), various compute, storage, and networking services were impacted simultaneously. For many teams running OLTP databases on **instances backed by local NVMe**, this was not just a downtime problem-it was a **data durability nightmare**.
 
-<p align="center">
+<!-- truncate -->
+
+<div align="center">
 <div style={{ width: '75%', textAlign: 'center'}}>
 import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
 <EnlargeableImage src={require('./img/awsoutage.jpg').default} alt="x" />
 
-</div></p>
+</div></div>
 
 Cloud databases must constantly balance **durability, performance, and cost**. In modern cloud environments, there are three main types of storage available:
 
@@ -161,7 +163,7 @@ With the right architecture, you don’t have to choose.
 - *Stay durable.*
 - *Be outage-proof.*
 
-That’s the future we’re building at **EloqData**. 
+That’s the future we’re building at **EloqData**.
 
 Check out more on our open source databases:
 - [EloqKV](https://github.com/eloqdata/eloqkv)

@@ -16,13 +16,13 @@ After the successful launch of [EloqCloud for EloqKV](https://www.eloqdata.com/n
 
 **EloqCloud for EloqDoc**  brings a breakthrough architecture that redefines the balance between cost, scalability, and performance for document workloads.
 
-<p align="center">
+<div align="center">
 <div style={{ width: '640px', textAlign: 'center'}}>
 import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
 <EnlargeableImage src={require('./img/eloqcloudforeloqdoc.jpg').default} alt="EloqCloud for EloqDoc" />
 
-</div></p>
+</div></div>
 
 ---
 
@@ -50,12 +50,12 @@ Below is the performance comparison between MongoDB Atlas and EloqCloud for Eloq
 
 The results show a dramatic difference: EloqCloud for EloqDoc consistently outperforms MongoDB Atlas by nearly an order of magnitude, delivering up to 10× higher throughput even on its free-tier environment.
 
-<p align="center">
+<div align="center">
 <div style={{ width: '640px', textAlign: 'center'}}>
 
 <EnlargeableImage src={require('./img/eloqdocmongofreetier.jpg').default} alt="EloqCloud for EloqDoc" />
 
-</div></p>
+</div></div>
 
 ---
 
@@ -77,12 +77,12 @@ While both platforms offer similar compute and memory setups, the difference in 
 
 EloqCloud for EloqDoc leverages object storage as its primary data layer and local SSDs for caching, delivering significant cost savings compared to MongoDB Atlas, which depends on multiple replicas and EBS-based storage.
 
-<p align="center">
+<div align="center">
 <div style={{ width: '640px', textAlign: 'center'}}>
 
 <EnlargeableImage src={require('./img/mongoeloqdocprice.jpg').default} alt="EloqCloud for EloqDoc" />
 
-</div></p>
+</div></div>
 
 ---
 

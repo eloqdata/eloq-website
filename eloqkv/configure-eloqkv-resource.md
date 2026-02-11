@@ -19,7 +19,7 @@ Deploying an EloqKV cluster involves several straightforward steps. Below is an 
 2. **Configure AWS Resources**: Use the `aws-cli` to create an AWS resource access policy and attach it to a service account.
 3. **Deploy the Cluster**: Launch an EloqKV cluster within the namespace with the service account.
 
-For a detailed guide on each step, please refer to: [Deploy EloqKV on AWS EKS](deployment-eloq-kv-aws-eks.md).
+For a detailed guide on each step, please refer to: [Deploy EloqKV on AWS EKS](eks-deployment.md).
 
 Additionally, here is an example of a Custom Resource (CR) for an EloqKV cluster:
 

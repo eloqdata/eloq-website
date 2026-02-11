@@ -58,12 +58,12 @@
 }
 
 .featuredSidePosts .blogCard {
-  background: #1b1b1b;
+  background: var(--blog-featured-side-bg);
   border-radius: 16px;
   overflow: hidden;
   height: calc(50% - 0.75rem);
-  border: none;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
 }
@@ -86,9 +86,6 @@
   height: 15%;
   display: flex;
   align-items: center;
-  background: linear-gradient(to bottom,
-      rgba(27, 27, 27, 0.9),
-      rgba(27, 27, 27, 1));
 }
 
 .featuredSidePosts .blogCardTitle {
@@ -104,7 +101,7 @@
 }
 
 .featuredSidePosts .blogCardTitle a {
-  color: white;
+  color: var(--blog-featured-text);
 }
 
 .featuredSidePosts .blogCardDescription,
@@ -136,11 +133,11 @@
 }
 
 .featuredMainCard {
-  background: linear-gradient(to right, #2d1b69, #1b1b1b);
+  background: var(--blog-featured-main-bg);
   border-radius: 24px;
   overflow: hidden;
   height: 100%;
-  border: none;
+  border: 1px solid var(--ifm-color-emphasis-200);
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
 }
 
@@ -156,19 +153,19 @@
 }
 
 .featuredMainCard .blogCardTitle a {
-  color: white;
+  color: var(--blog-featured-text);
   text-decoration: none;
 }
 
 .featuredMainCard .blogCardDescription {
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--blog-featured-text-muted);
   font-size: 1.1rem;
   line-height: 1.6;
   margin-bottom: 1.5rem;
 }
 
 .featuredMainCard .blogCardMeta {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--blog-featured-text-muted);
   font-size: 1rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -185,7 +182,7 @@
 }
 
 .featuredSidePosts .blogCardTitle a {
-  color: white;
+  color: var(--blog-featured-text);
 }
 
 .featuredSidePosts .blogCardDescription,

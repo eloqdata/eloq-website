@@ -20,13 +20,13 @@ In this blog post, we re-examine this decoupled architecture through the lens of
 
 The Aurora's design decouples a database into a stateless compute node and stateful, distributed storage nodes. The compute node executes queries and transactions, while storage nodes manage the transaction logs (WAL) and data pages. Internally, storage nodes apply log records to data pages, perform log truncation, and serve read requests for data absent from the compute node's buffer pool.
 
-<p align="center">
+<div align="center">
 <div style={{ width: '15%', textAlign: 'center'}}>
 import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
 <EnlargeableImage src={require('./img/decoupled.png').default} alt="x" />
 
-</div></p>
+</div></div>
 
 The influence of the Aurora’s decoupled architecture is unmistakable across the cloud database landscape. Successors like GCP AlloyDB and Azure SQL Database Hyperscale have all embraced similar architectures. The trend continues in open-source projects like NeonDB, which implements the decoupling architecture through its pageservers (data pages) and safekeepers (WALs).
 
@@ -72,21 +72,21 @@ With NVMe and object storage serving as the storage mediums for database storage
 
 The combination of instance-level NVMe and object storage will redefine the architecture of compute-storage decoupling. In this new paradigm, object storage serves as the decoupled storage layer, which offers unlimited capacity and permanent durability. Meanwhile, instance-level NVMe acts as a local storage cache, in addition to main memory, and becomes an integral part of the compute layer. Within this framework, block-level storage finds its optimal role as a dedicated, cost-effective medium for hosting the transaction log, which is attached directly to compute nodes where low-latency writes are critical.
 
-<p align="center">
+<div align="center">
 <div style={{ width: '40%', textAlign: 'center'}}>
 
 <EnlargeableImage src={require('./img/new_shape_1.png').default} alt="x" />
 
-</div></p>
+</div></div>
 
 Of course, the established decoupled architecture can be augmented by equipping storage nodes with local NVMe, preserving the original benefits of independent scaling while enhancing storage performance. However, we argue that the value of such an enhancement is diminished in many scenarios.
 
-<p align="center">
+<div align="center">
 <div style={{ width: '40%', textAlign: 'center'}}>
 
 <EnlargeableImage src={require('./img/decoupled_2.png').default} alt="x" />
 
-</div></p>
+</div></div>
 
 A key reason lies in the fixed resource ratios inherent to cloud instances. For example, on Amazon's storage-optimized [i8g](https://aws.amazon.com/ec2/instance-types/i8g/) instances, each vCPU is paired with 8 GB of memory and 468 GB of local NVMe. While these CPU and memory resources are provisioned to handle cache-miss read requests, they often remain underutilized due to two factors: the intermittent nature of cache-miss reads depending on workload patterns, and the fact that accessing local NVMe may require much less CPU and memory than allocated.
 
@@ -96,21 +96,21 @@ Nevertheless, the original decoupling architecture maintains its relevance in so
 
 When dealing with large-scale datasets, we believe a more promising approach lies in horizontally scaling both compute nodes and their attached NVMe storage. This architecture avoids the resource overhead of the traditional decoupled model by transforming the entire system into a multi-writer distributed database, where compute, memory and storage resources are fully utilized for processing, not just for serving remote requests.
 
-<p align="center">
+<div align="center">
 <div style={{ width: '90%', textAlign: 'center'}}>
 
 <EnlargeableImage src={require('./img/new_shape_2.png').default} alt="x" />
 
-</div></p>
+</div></div>
 
 Viewing object storage as the decoupled persistence layer enables new variants of database architecture. This is evident in high availability designs: object storage natively provides cross-AZ or even cross-region reliability. By complementing this with replication of the transaction log across multiple zones, the entire database inherently achieves geo-distributed reliability. This approach eliminates the need for complex, resource-intensive storage nodes spanning multiple zones, replacing them with lightweight transaction log replicas that consume significantly fewer resources.
 
-<p align="center">
+<div align="center">
 <div style={{ width: '95%', textAlign: 'center'}}>
 
 <EnlargeableImage src={require('./img/new_shape_3.png').default} alt="x" />
 
-</div></p>
+</div></div>
 
 ## Conclusion
 

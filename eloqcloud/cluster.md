@@ -35,8 +35,8 @@ Currently, free users are limited to **3 clusters** with **fixed resource quotas
 
 The Cluster API provides programmatic access to manage cluster resources, configurations, and lifecycle operations.
 
-- **Base path**: `/api/v1`  
-- **Authentication**: All APIs require an `Authorization` header with your API key: `Authorization: {{YOUR_API_KEY}}`  
+- **Base path**: `/api/v1`
+- **Authentication**: All APIs require an `Authorization` header with your API key: `Authorization: {{YOUR_API_KEY}}`
 - **Base URL**: `https://api-prod.eloqdata.com`
 
 The following sections describe each cluster-related API individually, including its purpose, input, output, and a `curl` example.
@@ -49,7 +49,7 @@ Create a new cluster in the specified project.
 
 #### Endpoint
 
-- **Method**: `POST`  
+- **Method**: `POST`
 - **Path**: `/orgs/{orgId}/projects/{projectId}/clusters`
 
 #### Input
@@ -64,7 +64,7 @@ Create a new cluster in the specified project.
 | `orgId`    | integer | Yes      | Organization ID |
 | `projectId`| integer | Yes      | Project ID      |
 
-Parameters ordId and projectId can be found at [GET /org-info API](./basic#api---get-basic-info-get-org-info)
+Parameters ordId and projectId can be found at [GET /org-info API](./basic#org-info-api)
 
 - **Request body (JSON)**:
 
@@ -79,9 +79,9 @@ Parameters ordId and projectId can be found at [GET /org-info API](./basic#api--
 
 Field details:
 
-- `clusterName` (string, required): Cluster display name  
-- `region` (string, required): Region (for example: `us-west-1`)  
-- `requiredZone` (string, optional): Availability zone  
+- `clusterName` (string, required): Cluster display name
+- `region` (string, required): Region (for example: `us-west-1`)
+- `requiredZone` (string, optional): Availability zone
 - `skuId` (integer, required): SKU ID
 
 #### Example (`curl`)
@@ -112,8 +112,8 @@ curl -X POST "https://api-prod.eloqdata.com/api/v1/orgs/{orgId}/projects/{projec
 
 **Error responses**:
 
-- `400`: Invalid request parameters  
-- `403`: Permission denied  
+- `400`: Invalid request parameters
+- `403`: Permission denied
 - `500`: Internal server error
 
 ---
@@ -124,7 +124,7 @@ Get a paginated list of clusters under the specified project.
 
 #### Endpoint
 
-- **Method**: `GET`  
+- **Method**: `GET`
 - **Path**: `/orgs/{orgId}/projects/{projectId}/clusters`
 
 #### Input
@@ -181,14 +181,14 @@ curl -X GET "https://api-prod.eloqdata.com/api/v1/orgs/{orgId}/projects/{project
 
 Field notes:
 
-- `module_type`: `EloqSQL`, `EloqKV`, `EloqDoc`  
-- `status`: e.g. `available`, `unavailable`, `provisioning`  
+- `module_type`: `EloqSQL`, `EloqKV`, `EloqDoc`
+- `status`: e.g. `available`, `unavailable`, `provisioning`
 - `cloud_provider`: `AWS`, `GCP`
 
 **Error responses**:
 
-- `400`: Invalid request parameters  
-- `403`: Permission denied  
+- `400`: Invalid request parameters
+- `403`: Permission denied
 - `500`: Internal server error
 
 ---
@@ -199,7 +199,7 @@ Get detailed information for a specific cluster.
 
 #### Endpoint
 
-- **Method**: `GET`  
+- **Method**: `GET`
 - **Path**: `/orgs/{orgId}/projects/{projectId}/clusters/{clusterName}`
 
 #### Input
@@ -258,16 +258,16 @@ curl -X GET "https://api-prod.eloqdata.com/api/v1/orgs/{orgId}/projects/{project
 
 Field notes:
 
-- `module_type`: `EloqSQL`, `EloqKV`, `EloqDoc`  
-- `cloud_provider`: `AWS`, `GCP`  
-- `status`: e.g. `available`, `unavailable`, `provisioning`  
-- `admin_user`, `admin_password`: Base64-encoded admin credentials  
+- `module_type`: `EloqSQL`, `EloqKV`, `EloqDoc`
+- `cloud_provider`: `AWS`, `GCP`
+- `status`: e.g. `available`, `unavailable`, `provisioning`
+- `admin_user`, `admin_password`: Base64-encoded admin credentials
 - `elb_state`: e.g. `active`, `provisioning`
 
 **Error responses**:
 
-- `400`: Invalid request parameters  
-- `403`: Permission denied or cluster not found  
+- `400`: Invalid request parameters
+- `403`: Permission denied or cluster not found
 - `500`: Internal server error
 
 ---
@@ -278,7 +278,7 @@ Delete the specified cluster. The cluster must be in `available` state.
 
 #### Endpoint
 
-- **Method**: `DELETE`  
+- **Method**: `DELETE`
 - **Path**: `/orgs/{orgId}/projects/{projectId}/clusters/{clusterName}/delete`
 
 #### Input
@@ -314,9 +314,9 @@ curl -X DELETE "https://api-prod.eloqdata.com/api/v1/orgs/{orgId}/projects/{proj
 
 **Error responses**:
 
-- `400`: Invalid request parameters  
-- `403`: Permission denied or cluster not in an available state  
-- `500`: Internal server error  
+- `400`: Invalid request parameters
+- `403`: Permission denied or cluster not in an available state
+- `500`: Internal server error
 
 **Note**: The cluster must be in `available` status before it can be deleted.
 

@@ -41,7 +41,7 @@
 
 /* Product dropdown - final styling */
 .navbar__item.dropdown.dropdown--hoverable .dropdown__menu {
-  background-color: #1b1b1d !important;
+  background-color: var(--navbar-dropdown-bg) !important;
   min-width: 320px !important;
   padding: 0 !important;
 }

@@ -1,7 +1,7 @@
 # Basics
 
-> Welcome to the **Basics** documentation.  
-> This page introduces a set of **core public APIs** in Eloq Cloud, so that you can quickly understand how to query basic information and available resources from our platform.  
+> Welcome to the **Basics** documentation.
+> This page introduces a set of **core public APIs** in Eloq Cloud, so that you can quickly understand how to query basic information and available resources from our platform.
 > The base API endpoint is: `https://api-prod.eloqdata.com`
 
 ## Basic API Overview
@@ -10,16 +10,14 @@ The following sections describe each basic API individually, including its purpo
 
 ---
 
-<a id="org-info-api"></a>
-
-### API - Get basic info (`GET /org-info`)
+### API - Get basic info (`GET /org-info`) {#org-info-api}
 
 Fetch the current user’s organization information and basic profile data.
 
 #### Endpoint
 
-- **Method**: `GET`  
-- **Path**: `/api/v1/org-info`  
+- **Method**: `GET`
+- **Path**: `/api/v1/org-info`
 - **Base URL**: `https://api-prod.eloqdata.com`
 
 #### Input
@@ -63,17 +61,15 @@ Example JSON response:
 
 ---
 
-<a id="skus-by-args-api"></a>
+### API - Filter available SKUs (`GET /skus-by-args`) {#skus-by-args-api}
 
-### API - Filter available SKUs (`GET /skus-by-args`)
-
-Filter the SKU list by SKU type, module type, and cloud provider.  
+Filter the SKU list by SKU type, module type, and cloud provider.
 Only SKUs that are available in the user’s current subscription plan are returned.
 
 #### Endpoint
 
-- **Method**: `GET`  
-- **Path**: `/api/v1/skus-by-args`  
+- **Method**: `GET`
+- **Path**: `/api/v1/skus-by-args`
 - **Base URL**: `https://api-prod.eloqdata.com`
 
 #### Input
@@ -127,10 +123,10 @@ curl -X GET "https://api-prod.eloqdata.com/api/v1/skus-by-args?type=serverless&e
 
 **Error responses**:
 
-- `400`: Invalid request parameters  
+- `400`: Invalid request parameters
 - `500`: Internal server error
 
 **Notes**:
 
-- This API only returns SKUs that are included in the user’s current subscription plan  
+- This API only returns SKUs that are included in the user’s current subscription plan
 - Returned SKUs must satisfy: `available = 1` and the user has an active subscription plan

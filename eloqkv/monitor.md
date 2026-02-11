@@ -35,7 +35,7 @@ Features of Grafana in EloqKV Monitoring
 
 Here's what the EloqKV Grafana interface looks like:
 
-<p align="center">
+<div align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
 import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
@@ -43,7 +43,7 @@ import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
 <EnlargeableImage src={require('./media/grafana2.png').default} alt="EloqKV Grafana 2" />
 
-</div></p>
+</div></div>
 
 <!-- ![](./media/grafana1.png)
 

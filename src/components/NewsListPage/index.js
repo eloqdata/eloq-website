@@ -1,12 +1,11 @@
-import React from 'react';
-import clsx from 'clsx';
 import {
-  PageMetadata,
   HtmlClassNameProvider,
+  PageMetadata,
   ThemeClassNames,
 } from '@docusaurus/theme-common';
 import BlogLayout from '@theme/BlogLayout';
 import BlogListPaginator from '@theme/BlogListPaginator';
+import clsx from 'clsx';
 import NewsPostCard from '../NewsPostCard';
 import styles from './styles.module.css';
 
@@ -27,7 +26,7 @@ function NewsListPageContent(props) {
   });
 
   return (
-    <BlogLayout>
+    <BlogLayout isBlogListPage={true}>
       <div className={styles.newsContainer}>
         <div className={styles.newsGrid}>
           {sortedItems.map(item => (

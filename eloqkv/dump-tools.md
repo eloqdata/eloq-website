@@ -29,14 +29,14 @@ eloqctl backup ${cluster_name} list
 eloqctl backup ${cluster_name} remove [OPTIONS]
 ```
 
-If no option is provided, remove will delete all backups of the current cluster.  
+If no option is provided, remove will delete all backups of the current cluster.
 Options:
 
-- **--until \<PERIOD\>**:  
+- **--until \<PERIOD\>**:
   Deletes all snapshots older than the specified period.
   Accepted formats: - '2 days' - '15h' - '1 week' - '3 months' - '1y 6mo 2w 4d 3h 5m 7s'
   See https://docs.rs/humantime/latest/humantime/fn.parse_duration.html for more details.
-- **--before\>TIMESTAMP\>**:
+- **--before \<TIMESTAMP\>**:
   Deletes all snapshots created before this timestamp.
   Accepted formats: - RFC 3339: '2024-11-14T15:01:00Z' - 'YYYY-MM-DD HH:MM:SS' (assumed local time zone) - 'YYYY-MM-DDTHH:MM:SS' (assumed local time zone)
 
@@ -48,8 +48,8 @@ eloqctl backup ${cluster_name} restore --snapshot-ts <SNAPSHOT_TS>
 
 **NOTE:** Restore can only be performed when the cluster is stopped.
 
-Options:  
--**--snapshot-ts <SNAPSHOT_TS>**:
+Options:
+- **--snapshot-ts** `<SNAPSHOT_TS>`:
 Snapshot timestamp to restore. Must match a snapshot_name in t_snapshot_info table.
           Accepted formats:
           - RFC 3339: '2024-11-14T15:01:00Z'

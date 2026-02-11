@@ -17,3 +17,13 @@ hola:
   label: Hola
   permalink: /hola
   description: Hola tag description
+
+Company:
+  label: Company
+  permalink: /company
+  description: Company news and updates
+
+Benchmark:
+  label: Benchmark
+  permalink: /benchmark
+  description: Performance benchmarks and technical deep dives
