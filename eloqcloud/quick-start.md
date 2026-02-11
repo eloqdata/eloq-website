@@ -1,106 +1,112 @@
----
-title: Quick Start
-description: Get started quickly with the EloqCloud distributed database platform.
----
+## Registration
 
-# Quick Start
+The registration process is the initial step to access the EloqCloud console and its database services (such as EloqKV, EloqSQL, etc.).
 
-Welcome to **EloqCloud**, the most cost-effective cloud native database platform designed for scalability, resilience, and developer simplicity. This guide walks you through the essential steps to get up and running with **EloqKV**, our high-performance key-value store.
+**Steps to Register:**
 
-By the end of this guide, you'll be able to:
+1. **Navigate to the Registration Page:** Go to the EloqData main website and look for the "Sign Up" or "Create an Account" link.or go to the login page (`https://cloud.eloqdata.com/login`). 
+2. **Provide Account Details:**
+    - **Email Address:** Enter a valid email address. This will be used for verification and platform communications.
+    - **Password:** Create a secure password, typically requiring a minimum length (6 sizes) and a mix of uppercase/lowercase letters and numbers.
+3. **Email Verification:** An automated email will be sent to the address you provided. Follow the link in the email to verify your account.
+4. **Access the Console:** Once verified, you can proceed to the login page.
+![registration](./media/get-started.png)
 
-- Create your first database cluster.
-- Explore the monitoring dashboard.
-- Connect your application to the cluster with ease.
 
-Whether you're evaluating the platform or preparing for production use, this quick start will help you hit the ground running.
+## Login
 
----
+Once your account is registered and verified, you can access the EloqCloud management console.
 
-# User Workflow
+**Steps to Log In:**
 
-## 1. Create a Cluster
+1. **Access the Login Page:** Navigate to `https://cloud.eloqdata.com/login`.
+2. **Enter Credentials:** Input the email address and password used during the registration process.
+3. **Sign In:** Click the "Login" button.
+4. **Dashboard Access:** Upon successful login, you will be directed to your **EloqCloud Dashboard** , where you can view existing clusters and create new ones.
+![sign-in](./media/sign-in.png)
 
-After logging in, you'll be directed to the **EloqKV** dashboard. Click the **Create Cluster** button in the upper-right corner to begin setup.
 
-On the cluster creation page, configure the following options:
+## Creating Your First EloqCloud Cluster
 
-- **Cloud Provider**: Select your preferred cloud platform.
-- **Region** and **Zone**: Define the deployment location.
-- **Product Type**: Choose the type of service (e.g., EloqKV).
-- **SKU**: Select the appropriate SKU (for beginner, the `free` variant is recommended).
+After logging in, the first major step is provisioning a database cluster.
 
-You can proceed with the default values for a quick setup, or customize them to suit your requirements.
+**Steps to Create:**
 
-<div align="center">
-<div style={{ width: '720px', textAlign: 'center'}}>
-import EnlargeableImage from '@site/src/pages/enlarge_pic';
+1. From the main Dashboard, locate and click the **"Create Cluster"** button, typically found in the upper-right corner.
 
-<EnlargeableImage src={require('./media/eloqcloud_create_cluster.png').default} alt="Create Cluster UI" />
+2. You will be presented with a configuration form to define your cluster specifications.
+![create](./media/create-cluster.png)
 
-</div></div>
+**Step 2: Configure Cluster Attributes (Detailed）**
 
-## 2. Cluster Dashboard
+You must configure the following mandatory and optional settings for your new cluster:
 
-Once the cluster is created, it will appear on the homepage with basic status and configuration details.
+- **Cluster Name：**A unique, user-friendly name for your database instance.
+- **Product Type：**Specifies the type of database service you wish to deploy.
 
-<div align="center">
-<div style={{ width: '720px', textAlign: 'center'}}>
-<EnlargeableImage src={require('./media/eloqcloud_cluster_list.png').default} alt="Cluster List View" />
-</div></div>
+[**Options:** `EloqKV` (Key-Value Store),  `EloqDoc` (Document Database), etc. Select the service that fits your application's needs.]
 
-Click on the cluster name to access the full dashboard.
+- **Cloud Provider:** The physical cloud platform where your cluster resources will be provisioned.
 
-In the example shown:
+[Options: AWS, GCP]
 
-- **Tier**: `Serverless`
-- **Status**: `IDLE`
-- **Total Resource**: `CPU 0 Core, Memory 0Mi (indicates free-tier placeholder; actual resources are allocated on demand)`
-- **Created At**: `Jun 15 2025 / 16:23:36`
+- **Region and Zone:** The geographic location and specific availability zone (AZ) for your cluster.
 
-Additional sections include:
+**SKU:** Defines the cluster's performance characteristics, including compute (CPU/Memory) and storage capacity.
+![configue](./media/cluster-configuration.png)
 
-- **Core Metrics**:
 
-  - Displays real-time metrics once the cluster is in the `Available` state.
-  - If the cluster is `IDLE`, metrics may show as "Metrics Unavailable".
+**Step 3: Review and Create**
 
-- **Cluster Properties**:
-  - **Cloud Provider**: `aws`
-  - **Region**: `us-west-1`
-  - **Zone**: `us-west-1a`
-  - **Cluster Status**: `IDLE`
-  - **Product Type**: `EloqKV`
+1. Once all attributes are configured, click the **"Create"** button. The cluster status  will change to **`AVAILABLE`**  once ready.
+2. It is particularly useful during the initial provisioning phase. If your cluster status is stuck on  **`UNAVAILABLE`** or you are waiting for an **`IDLE`** cluster to wake up, clicking this button ensures the dashboard displays the most current state (e.g., transitioning to **AVAILABLE**).
+![finish](./media/create-cluster-done.png)
 
-To connect to the database, click the **CONNECT TEST** button in the top-right corner.
+## Connecting to Your Cluster
 
-<div align="center">
-<div style={{ width: '720px', textAlign: 'center'}}>
-<EnlargeableImage src={require('./media/eloqcloud_cluster_detail.png').default} alt="Cluster Detail Dashboard" />
-</div></div>
+After the cluster is **`AVAILABLE`**, you can connect your application to use a command-line interface (CLI) tool or languages.
 
-## 3. Database Connection
+**Steps to Connect：**
 
-The **CONNECT TEST** panel provides the necessary information and tools for integrating **EloqKV** into your environment.
+1. From the Dashboard, click on your newly created cluster's name to view its detailed page.
+2. Locate the **"CONNECT XXX"** panel.
+![overview](./media/cluster-overview.png)    
 
-<div align="center">
-<div style={{ width: '720px', textAlign: 'center'}}>
-<EnlargeableImage src={require('./media/eloqcloud_cluster_connect.png').default} alt="Connection Panel" />
-</div></div>
+    
+3. This panel will provide:
+- **Username:** The required username for authentication.
+- **Password:** The required password/token for authentication.
+- **Connect with：**The connection instruction to connect directly.
+![connect](./media/connect-cluster.png) 
 
-Connection details include:
-
-- **Username**
-- **Password**
-- **Command-line connection string**
-
-You’ll also find sample code snippets in popular languages:
-
+- CLI
+- Python
+- Typescript
+- Javascript
 - Go
 - Java
-- Python
-- Raw CLI
+- Parameters
 
-Select the method that best fits your application stack and follow the instructions to verify your connection.
+## Monitoring Cluster Performance
 
-You're now ready to start building your application with **EloqCloud**. For advanced uasge of **EloqKV**, please refer to [EloqKV Document](/eloqkv/introduction).
+EloqCloud provides a comprehensive monitoring dashboard that allows you to track the health and performance of your instances in real-time. Understanding these metrics is essential for optimizing your application's responsiveness and resource efficiency.
+
+**Steps to Monitor：**
+
+1. **Navigate to Cluster Details:** Click on the specific **Cluster Name** (e.g., `eloqdoc-test`) you wish to monitor. Then you will be redirected to the **Cluster Overview** page, which displays the cluster’s tier, status, and creation time
+2. **View Core Metrics:** On the Overview page, the **"Core Metrics"** section provides an immediate snapshot of your cluster's **Memory Usage**. This allows you to quickly check if the instance is reaching its allocated RAM capacity without leaving the main dashboard.
+3. **Access Advanced Metrics:** To perform a deeper analysis of your cluster’s performance locate the **"MORE"** button in the top right corner of the Core Metrics box, clicking this will take you to the full **Metrics Dashboard**, where you can adjust the **Time Range** (e.g., Past 30 minutes) and the **Refresh Interval**.
+4. **Detailed Chart Descriptions:** The following charts are available in the advanced metrics view to help you diagnose performance bottlenecks:
+    1. Total Command Latency P90：
+        1. **What it measures:** The 90th percentile latency (in microseconds, **$\mu s$**) for all commands processed by the cluster.
+        2. **Significance:** P90 latency is a critical "tail latency" metric. It means 90% of your requests are faster than the value shown. Monitoring this helps ensure that the majority of your users are experiencing consistent, high-speed performance.
+    2. Cache Hit Rate
+        1. **What it measures:** The percentage (**%**) of data requests successfully served from the cache rather than the primary storage.
+        2. **Significance:** A higher hit rate (ideally close to 100%) indicates that your cache is performing efficiently. If this rate drops significantly, it may suggest that your active dataset has grown too large for the current SKU, leading to increased latency as the system fetches data from slower storage layers.
+    3. Memory Usage
+        1. **What it measures:** The percentage (**%**) of allocated RAM currently being used by the cluster.
+        2. **Significance:** Monitoring memory is vital for preventing "Out of Memory" (OOM) errors. If this chart consistently stays above 80-90%, it is a strong signal that you should consider scaling your SKU to a higher Compute Unit (CU) level to provide more RAM.
+    4. Total Operations
+        1. **What it measures:** The total number of operations (Reads and Writes) performed per second.
+        2. **Significance:** This chart tracks the overall throughput or workload of your cluster. Rapid spikes in operations can explain corresponding increases in latency or memory usage, helping you correlate application traffic with database performance.
+        ![metrics](./media/metrics.png) 
