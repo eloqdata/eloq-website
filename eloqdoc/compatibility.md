@@ -123,7 +123,7 @@ title: EloqDoc Compatibility
 * Vector Search is supported in EloqConvergedDB.
 
 
-## Compatibility with MongoDB 4.0 and MongoDB 8.0
+## Compatibility with MongoDB 4.0 and MongoDB 8.0 {#compatibility-with-mongodb-4-0-and-mongodb-8-0}
 
 This document provides a feature compatibility matrix comparing **EloqDoc** with **MongoDB 4.0** and **MongoDB 8.0**.
 

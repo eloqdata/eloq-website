@@ -13,8 +13,7 @@
 /* Full-width wrapper to match Product Matrix background */
 .logo-wall-wrapper {
     width: 100%;
-    background-color: #0c0d16;
-    /* match Product Matrix dark background */
+    background-color: transparent;
 }
 
 .logo-wall-heading {

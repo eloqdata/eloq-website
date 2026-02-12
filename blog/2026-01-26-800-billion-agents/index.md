@@ -16,18 +16,20 @@ First, a huge thank you to **Bohan Zhang** and the OpenAI engineering team for s
 
 However, the definition of "scale" is shifting under our feet.
 
+<!-- truncate -->
+
 On January 22nd at the **Unlocked Conf** (shout out to **Khawaja** and **Daniela** at **Momento** and always smile **Madelyn** for hosting such an incredible event!), the industry saw what "real" scale looks like today. Experts from **Uber** (Yang Yang and Shawn Wang), **AWS** (Kevin and Sarthak), and **Apple** (Yiwen Zhang) shared mind-boggling numbers. Most notably, **Uber is now handling 1 billion RPS** using their cache layer. In that context, "millions of QPS" is just the starting line.
 
-<p align="center">
+<div align="center">
 <div style={{ width: '100%', textAlign: 'center'}}>
 import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
-<!-- 
+<!--
 <EnlargeableImage src={require('./img/ces26_p9999.jpg').default} alt="EloqKV P9999 Latency Comparison" />
 -->
 
 <EnlargeableImage src={require('./img/800billlionagents.jpg').default} alt="EloqKV P9999 Latency Comparison" />
-</div></p>
+</div></div>
 
 ### From 800 Million Users to 800 Billion Agents
 

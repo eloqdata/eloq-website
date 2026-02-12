@@ -1,5 +1,5 @@
 ---
-id: install-operator-baidu
+id: baidu
 title: Install Eloq Operator on Baidu Cloud CCE
 ---
 
@@ -30,7 +30,7 @@ Before you begin, ensure you have:
    - In the CCE node group settings, find the "Post-deployment script" section
    - Use the script below to automatically format and mount local SSDs with XFS filesystem (with quota support)
    - The script will run on each node after it joins the cluster
- 
+
 
 Node setup script:
 ```bash
@@ -376,7 +376,7 @@ alloy:
     registry: <CCR_VPC_ENDPOINT>/<CCR_NAMESPACE>
     repository: alloy
     tag: "v1.8.1"
-  
+
   configReloader:
     image:
       registry: <CCR_VPC_ENDPOINT>/<CCR_NAMESPACE>
@@ -402,7 +402,7 @@ localpv-provisioner:
       repository: provisioner-localpv
       tag: "4.3.0"
     resources: {}
-  
+
   helperPod:
     image:
       registry: <CCR_VPC_ENDPOINT>/<CCR_NAMESPACE>
@@ -452,7 +452,7 @@ controllerManager:
     repository: <CCR_VPC_ENDPOINT>/<CCR_NAMESPACE>/eloq-operator
     tag: 4.0.11
   imagePullPolicy: IfNotPresent
-  
+
   # Configure kube-rbac-proxy image
   kubeRbacProxy:
     image:
@@ -465,7 +465,7 @@ controllerManager:
       requests:
         cpu: 100m
         memory: 128Mi
-  
+
   # Resource requests
   resources:
     requests:
@@ -494,7 +494,7 @@ Example secret creation:
 kubectl create secret generic aws-credentials \
   --from-literal=AWS_ACCESS_KEY_ID=<YOUR_BAIDU_AK> \
   --from-literal=AWS_SECRET_ACCESS_KEY=<YOUR_BAIDU_SK> \
-  --namespace default
+  --namespace eloqdb-clusters
 ```
 
 **Notes**:
@@ -503,279 +503,11 @@ kubectl create secret generic aws-credentials \
 - Replace `<YOUR_BAIDU_AK>` and `<YOUR_BAIDU_SK>` with your actual Baidu Cloud Access Key and Secret Key.
 - BOS endpoints are typically `https://s3.<region>.bcebos.com` (e.g., `https://s3.bj.bcebos.com` for Beijing region).
 
-## Step 7 — Apply the EloqDoc CustomResource
+## Next Steps
 
-### 7.1 Create EloqDoc Cluster Configuration
+Now that you have the Eloq Operator installed and the necessary local SSD and IAM permissions configured, you can proceed to create your first database cluster.
 
-Below is the CR example (use CCR image references, AK/SK secret name, and correct BOS endpoint/region values). Edit fields such as `image`, `schedulePolicy`, `storageClassDiskType`, and bucket names before applying.
-
-**Key fields to customize**:
-- `spec.awsSecretName`: Must match the secret name created in Step 6 (e.g., `aws-credentials`)
-- `spec.tx.image`: Use your CCR VPC endpoint and namespace
-- `spec.tx.schedulePolicy.labelSelector`: Use your node group ID
-- `spec.store.rocksdbCloud.cloudObjectStorage`: Configure BOS bucket names, region, and endpoint
-
-```yaml
-apiVersion: eloqdbcluster.eloqdata.com/v1alpha1
-kind: EloqDBCluster
-metadata:
-  name: eloqdoc-rocksdbcloud-s3
-  namespace: default
-spec:
-  clusterDeployMode: txWithInternalLog
-  awsSecretName: aws-credentials  # Must match the secret name created in Step 6
-  frontend:
-    module: "eloqdoc"
-    port: 27017
-    config:
-      operation: upsert
-      rawConfig: |
-        # MongoDB configuration file for eloqdoc
-        systemLog:
-          verbosity: 0
-  tx:
-    exposedService: true
-    replica: 1
-    resources:
-      requests:
-        memory: "1Gi"
-        cpu: "500m"
-      limits:
-        memory: "1Gi"
-        cpu: "500m"
-    keySpaceName: test
-    image: <CCR_VPC_ENDPOINT>/<CCR_NAMESPACE>/eloqdoc-rocks-cloud:0.2.6
-    imagePullPolicy: Always
-    schedulePolicy:
-      policyType: required
-      preferredZone: zoneD
-      labelSelector:
-        matchExpressions:
-          - key: instance-group-id
-            operator: "In"
-            values:
-              - <YOUR_NODE_GROUP_ID>  # Replace with your CCE node group ID (e.g., cce-ig-xxxxx)
-    storageClassDiskType: hp1
-    dataStore:
-      ephemeral:
-        spec:
-          accessModes:
-            - ReadWriteOnce
-          resources:
-            requests:
-              storage: 5Gi
-            limits:
-              storage: 10Gi
-      pvc:
-        spec:
-          accessModes:
-            - ReadWriteOnce
-          resources:
-            requests:
-              storage: 5Gi
-            limits:
-              storage: 10Gi
-          volumeMode: Filesystem
-  store:
-    storageType: objectStorage
-    rocksdbCloud:
-      sstFileCacheSize: 2Gi
-      readyTimeout: 10
-      fileDeletionDelay: 3600
-      cloudObjectStorage:
-        cloudStoreType: s3
-        txLogBucketName: test  # Base name for log service bucket
-        objectStoreBucketName: test  # Base name for object store bucket (can be same as txLogBucketName)
-        bucketPrefix: eloqdoc-  # Prefix prepended to bucket names (actual bucket: eloqdoc-test)
-        region: bj  # Baidu Cloud region code (bj=Beijing, gz=Guangzhou, su=Suzhou, etc.)
-        txLogObjectPath: eloqdoc-rocksdb-s3-log  # Path for log service within bucket
-        objectStoreObjectPath: eloqdoc-rocksdb-s3-store  # Path for object store data within bucket
-        endpointUrl: "https://s3.bj.bcebos.com"  # BOS endpoint URL for the region
-
-```
-
-**BOS Bucket Configuration:**
-
-The database uses BOS for persistent storage. Understanding the bucket configuration:
-
-- **`txLogBucketName`**: Base name for the log service bucket
-- **`objectStoreBucketName`**: Base name for the object store bucket (can be the same as `txLogBucketName`)
-- **`bucketPrefix`**: Prefix that will be prepended to bucket names
-- **`txLogObjectPath`**: Path prefix for log service within the bucket
-- **`objectStoreObjectPath`**: Path prefix for object store data within the bucket
-- **`region`**: Baidu Cloud region code where buckets are located (e.g., `bj` for Beijing, `gz` for Guangzhou, `su` for Suzhou)
-- **`endpointUrl`**: BOS endpoint URL for the specified region (must match the region code)
-
-**Bucket Naming Convention:**
-
-Actual BOS bucket name = `bucketPrefix` + `bucketName`
-
-For example, with `bucketPrefix: eloqdoc-` and `txLogBucketName: my-cluster-data`, the created bucket will be `eloqdoc-my-cluster-data`.
-
-Within this bucket, data is organized by paths:
-- log service: `bos://eloqdoc-my-cluster-data/eloqdoc-rocksdb-s3-log/`
-- Object store data: `bos://eloqdoc-my-cluster-data/eloqdoc-rocksdb-s3-store/`
-
-> **Tip:** You can use the same bucket for both log service and object store data. The different paths ensure proper data separation and organization.
-
-**Region and Endpoint Configuration:**
-
-The `region` and `endpointUrl` parameters must be configured together to match your Baidu Cloud deployment region:
-
-- **`region`**: Two-letter region code identifying the Baidu Cloud region
-- **`endpointUrl`**: Complete BOS endpoint URL for that region
-
-
-> **Important**: The region code in `region` field must match the region in `endpointUrl`. For example:
-> - If `region: bj`, then `endpointUrl` must be `https://s3.bj.bcebos.com`
-> - If `region: gz`, then `endpointUrl` must be `https://s3.gz.bcebos.com`
->
-> Mismatched region and endpoint configurations will cause connection failures.
-
-**Automatic Bucket Creation:**
-
-EloqDoc will automatically create the BOS buckets if they don't exist. Ensure your AK/SK has permissions to create buckets in the specified region.
-
-**Important Bucket Naming Rules:**
-- Must be globally unique across all Baidu Cloud accounts
-- Must be between 3-63 characters long
-- Can contain only lowercase letters, numbers, and hyphens
-- Must start and end with a letter or number
-- Cannot contain consecutive hyphens
-
-### 7.2 Deploy the Cluster
-
-Apply the CR and watch the operator create resources:
-
-```bash
-kubectl apply -f eloqdoc-cluster.yaml
-kubectl -n default get eloqdbcluster eloqdoc-rocksdbcloud-s3 -o yaml
-```
-
-### 7.3 Retrieve Admin Credentials
-
-After deployment, the operator creates a secret with admin credentials.
-
-```bash
-# View the secret
-kubectl get secret eloqdoc-rocksdbcloud-s3-admin-user -n default -o yaml
-
-# Extract username
-export ELOQDOC_USERNAME=$(kubectl get secret eloqdoc-rocksdbcloud-s3-admin-user -n default -o jsonpath='{.data.username}' | base64 -d)
-
-# Extract password
-export ELOQDOC_PASSWORD=$(kubectl get secret eloqdoc-rocksdbcloud-s3-admin-user -n default -o jsonpath='{.data.password}' | base64 -d)
-
-# Display credentials
-echo "Username: $ELOQDOC_USERNAME"
-echo "Password: $ELOQDOC_PASSWORD"
-```
-
-## Step 8 — Test and verify
-
-### 8.1 Create a Test Pod
-
-Deploy a MongoDB shell pod for testing:
-
-```yaml
-# mongosh-test.yaml
-apiVersion: v1
-kind: Pod
-metadata:
-  name: mongosh-test
-  namespace: default
-spec:
-  containers:
-  - name: mongosh
-    image: mongo:5.0
-    command:
-      - sleep
-      - "3600"
-    resources:
-      requests:
-        memory: "128Mi"
-        cpu: "100m"
-      limits:
-        memory: "256Mi"
-        cpu: "200m"
-  restartPolicy: Never
-```
-
-```bash
-# Deploy the test pod
-kubectl apply -f mongosh-test.yaml
-
-# Wait for the pod to be ready
-kubectl wait --for=condition=Ready pod/mongosh-test -n default --timeout=60s
-```
-
-### 8.2 Connect to EloqDoc
-
-#### Option 1: Internal Connection (ClusterIP Service)
-
-Connect from within the cluster using the internal service:
-
-```bash
-# Exec into the mongosh pod
-kubectl exec -it mongosh-test -n default -- bash
-
-# Inside the pod, connect to EloqDoc
-mongosh "mongodb://$ELOQDOC_USERNAME:$ELOQDOC_PASSWORD@eloq-srv-tx-eloqdoc-rocksdbcloud-s3.default.svc.cluster.local:27017"
-
-# Test basic operations
-use testdb
-db.testcol.insertOne({name: "test", value: 123})
-db.testcol.find()
-```
-
-#### Option 2: External Connection (LoadBalancer Service)
-
-To connect from outside the cluster, the service should be exposed via a LoadBalancer (configured by `spec.tx.exposedService: true` in the CR):
-
-```bash
-# Get the LoadBalancer IP or hostname
-export LB_ADDRESS=$(kubectl get service eloq-srv-tx-eloqdoc-rocksdbcloud-s3-exposed -n default -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-
-echo "LoadBalancer Address: $LB_ADDRESS"
-
-# Wait for the LoadBalancer to be provisioned
-kubectl wait --for=jsonpath='{.status.loadBalancer.ingress}' \
-  service/eloq-srv-tx-eloqdoc-rocksdbcloud-s3-exposed \
-  -n default --timeout=300s
-
-# Connect from your local machine (if mongosh is installed locally)
-mongosh "mongodb://$ELOQDOC_USERNAME:$ELOQDOC_PASSWORD@$LB_ADDRESS:27017"
-```
-
-> **Security Note:** Exposing EloqDoc via a public LoadBalancer makes it accessible from the internet. Consider:
-> - Using security groups or Baidu Cloud SLB access control to restrict access to specific IP addresses
-> - Implementing network policies
-
-
-## Cleanup
-
-Remove the EloqDoc deployment and associated resources when done:
-
-```bash
-# Delete the EloqDoc cluster
-kubectl delete -f eloqdoc-cluster.yaml
-
-# Delete the test pod
-kubectl delete pod mongosh-test -n default
-
-# Uninstall the operator (optional)
-helm uninstall eloq-operator -n eloq-operator-system
-
-# Delete the operator namespace (optional)
-kubectl delete namespace eloq-operator-system
-
-# Uninstall OpenEBS (optional)
-helm uninstall openebs -n openebs
-kubectl delete namespace openebs
-
-# Uninstall cert-manager (optional)
-helm uninstall cert-manager -n cert-manager
-kubectl delete namespace cert-manager
-```
-
-> **Note:** BOS buckets and their data are not automatically deleted. If you want to delete the buckets and data, do so manually via the Baidu Cloud Console or CLI.
+Refer to the **[Manage Templates](../usage/template)** and **[Manage Claims](../usage/claim)** guides to learn how to:
+1. Create a **Cluster Template** (as an administrator).
+2. Create a **Cluster Claim** (as a user).
+3. Connect to your database and manage its lifecycle.

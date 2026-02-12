@@ -66,13 +66,13 @@ X-axis: Represents the different workload types (read/write/mixed) used in the b
 
 Y-axis: Measures the OPS (Operations Per Second).
 
-<p align="center">
+<div align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
 import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
 <EnlargeableImage src={require('./img/eloqkv_scale.png').default} alt="EloqKV Scale" />
 
-</div></p>
+</div></div>
 
 When using the regular client, the three-node **EloqKV** cluster has slightly lower throughput than the single-node instance due to the added network round trips and scheduling overhead caused by redirection. Despite this, the cluster still achieves over **one million operations per second (OPS)**. Importantly, this requires no changes to application code, allowing developers to easily scale and overcome memory capacity limits without modifying their code or relying on smart clients.
 

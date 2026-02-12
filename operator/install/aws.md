@@ -1,5 +1,5 @@
 ---
-id: install-operator-aws
+id: aws
 title: Install Eloq Operator on AWS EKS
 ---
 
@@ -8,7 +8,7 @@ title: Install Eloq Operator on AWS EKS
 This guide walks you through installing the Eloq Operator on AWS EKS.
 
 > **Region Configuration**
-> 
+>
 > This guide uses `ap-northeast-1` (Tokyo) region as an example. If you're deploying in a different AWS region, you'll need to adjust the following:
 > - Region name in the cluster configuration file
 > - Availability zones (e.g., `ap-northeast-1a` → your region's zones)
@@ -106,7 +106,7 @@ AMI_ID=$(aws ssm get-parameters \
   --names "/aws/service/canonical/ubuntu/eks/24.04/1.33/stable/current/amd64/hvm/ebs-gp3/ami-id" \
   --region ap-northeast-1 \
   --query 'Parameters[0].Value' --output text)
-  
+
 echo "AMI ID: $AMI_ID"
 ```
 
@@ -147,20 +147,20 @@ managedNodeGroups:
 
     overrideBootstrapCommand: |
       #!/bin/bash
-      
+
       # Robust EC2 data-disk setup + mount for EKS nodes (XFS + quota),
       # then bootstrap.
       # - Waits for non-root, unmounted block device >= MIN_BYTES
       # - Accepts nvme/xvd/sd (Nitro and non-Nitro)
       # - Idempotent: skips mkfs if filesystem exists,
       #   skips fstab duplicates, etc.
-     
+
       set -euo pipefail
-      
+
       ###########################################################################
       # Configuration
       ###########################################################################
-      
+
       CLUSTER_NAME="eloqdb-demo"
       CONTAINER_RUNTIME="containerd"
 
@@ -173,7 +173,7 @@ managedNodeGroups:
       # Filesystem and mount options
       FS_TYPE="xfs"
       FS_OPTS="defaults,uquota,pquota,discard"
-      
+
       # run with DEBUG=1 for verbose logs
       DEBUG=${DEBUG:-0}
       RETRIES="${RETRIES:-60}"
@@ -182,13 +182,13 @@ managedNodeGroups:
       ###########################################################################
       # Helper: print log lines with timestamp
       ###########################################################################
-      
+
       log() {
         printf '[%s] %s\n' "$(date '+%H:%M:%S')" "$*" >&2
       }
 
       [[ $DEBUG -eq 1 ]] && set -x
-      
+
       ###########################################################################
       # Helper: find root disk (e.g., nvme0n1) so we can exclude it
       ###########################################################################
@@ -270,7 +270,7 @@ managedNodeGroups:
         lsblk -b -o NAME,SIZE,TYPE,MOUNTPOINT,PKNAME
         exit 1
       }
-  
+
       log "Selected disk: ${DATA_DISK}"
 
       ###########################################################################
@@ -314,7 +314,7 @@ managedNodeGroups:
         exit 1
       fi
       log "Detected UUID : ${UUID}"
-       
+
       ###########################################################################
       # 7. Mount and persist in /etc/fstab (idempotent)
       ###########################################################################
@@ -858,268 +858,27 @@ Create a namespace and service account that can assume the IAM role.
 
 ```bash
 # Create namespace for EloqKV/EloqDoc
-kubectl create namespace ns-eloqdata
+kubectl create namespace eloqdb-clusters
 
 # Create service account with IAM role binding
 eksctl create iamserviceaccount \
   --cluster eloqdb-demo \
-  --namespace ns-eloqdata \
+  --namespace eloqdb-clusters \
   --name eloq-aws-access \
   --attach-policy-arn arn:aws:iam::<YOUR_ACCOUNT_ID>:policy/EloqDBResourceIAMPolicy \
   --region ap-northeast-1 \
   --approve
 
 # Verify service account creation
-kubectl get sa -n ns-eloqdata eloq-aws-access -o yaml
+kubectl get sa -n eloqdb-clusters eloq-aws-access -o yaml
 ```
 
-## Step 6: Deploy EloqDoc Cluster Example
+## Next Steps
 
-Now let's deploy an EloqDoc cluster as an example to demonstrate the operator capabilities. You can use similar configuration to deploy EloqKV clusters.
+Now that you have the Eloq Operator installed and the necessary IAM permissions configured, you can proceed to create your first database cluster.
 
-### 6.1 Create EloqDoc Cluster Configuration
+Refer to the **[Manage Templates](../usage/template)** and **[Manage Claims](../usage/claim)** guides to learn how to:
+1. Create a **Cluster Template** (as an administrator).
+2. Create a **Cluster Claim** (as a user).
+3. Connect to your database and manage its lifecycle.
 
-Create a file named `eloqdoc-cluster.yaml` with the following configuration:
-
-```yaml
-# eloqdoc-cluster.yaml
-apiVersion: eloqdbcluster.eloqdata.com/v1alpha1
-kind: EloqDBCluster
-metadata:
-  name: eloqdoc-rocksdbcloud-s3
-  namespace: ns-eloqdata
-spec:
-  clusterDeployMode: txWithInternalLog
-  frontend:
-    module: "eloqdoc"
-    port: 27017
-    config:
-      operation: upsert
-      rawConfig: |
-        # MongoDB configuration file for eloqdoc
-        systemLog:
-          verbosity: 0
-  tx:
-    exposedService: true
-    replica: 1
-    resources:
-      requests:
-        memory: "512Mi"
-        cpu: "1"
-      limits:
-        memory: "512Mi"
-        cpu: "1"
-    keySpaceName: e2e
-    image: eloqdata/eloqdoc-rocks-cloud:release-0.2.6
-    imagePullPolicy: Always
-    serviceAccountName: eloq-aws-access
-    schedulePolicy:
-      policyType: required
-      preferredZone: ap-northeast-1a
-      labelSelector:
-        matchExpressions:
-          - key: alpha.eksctl.io/nodegroup-name
-            operator: "In"
-            values:
-              - ap-northeast-1a-i4i-xlarge
-    dataStore:
-      ephemeral:
-        spec:
-          accessModes:
-            - ReadWriteOnce
-          resources:
-            requests:
-              storage: 5Gi
-            limits:
-              storage: 10Gi
-      pvc:
-        spec:
-          accessModes:
-            - ReadWriteOnce
-          resources:
-            requests:
-              storage: 500Mi
-            limits:
-              storage: 3Gi
-          volumeMode: Filesystem
-  store:
-    storageType: objectStorage
-    rocksdbCloud:
-      sstFileCacheSize: 2Gi
-      readyTimeout: 10
-      fileDeletionDelay: 3600
-      cloudObjectStorage:
-        cloudStoreType: s3
-        txLogBucketName: <YOUR_S3_BUCKET_BASE_NAME>
-        objectStoreBucketName: <YOUR_S3_BUCKET_BASE_NAME>
-        bucketPrefix: eloqdoc-
-        region: ap-northeast-1
-        txLogObjectPath: eloqdoc-rocksdb-s3-log
-        objectStoreObjectPath: eloqdoc-rocksdb-s3-store
-```
-
-**S3 Bucket Configuration:**
-
-The database uses S3 for persistent storage. Understanding the bucket configuration:
-
-- **`txLogBucketName`**: Base name for the log service bucket
-- **`objectStoreBucketName`**: Base name for the object store bucket (can be the same as `txLogBucketName`)
-- **`bucketPrefix`**: Prefix prepended to bucket names
-- **`txLogObjectPath`**: Path prefix for log service within the bucket
-- **`objectStoreObjectPath`**: Path prefix for object store data within the bucket
-- **`region`**: AWS region where buckets will be created
-
-**Bucket Naming Convention:**
-
-Actual S3 bucket name = `bucketPrefix` + `bucketName`
-
-For example, with `bucketPrefix: eloqdoc-` and `txLogBucketName: my-cluster-data`, the created bucket will be `eloqdoc-my-cluster-data`.
-
-Within this bucket, data is organized by paths:
-- Log service: `s3://eloqdoc-my-cluster-data/eloqdoc-rocksdb-s3-log/`
-- Object store data: `s3://eloqdoc-my-cluster-data/eloqdoc-rocksdb-s3-store/`
-
-> **Note:** Configuration requirements:
-> - Replace `<YOUR_S3_BUCKET_BASE_NAME>` with your desired bucket base name (e.g., `my-eloqdoc-data`)
-> - `txLogBucketName` and `objectStoreBucketName` can use the same value - different paths ensure proper data separation
-> - Buckets will be **automatically created** if they don't exist (requires `s3:CreateBucket` permission)
-> - Adjust `bucketPrefix`, `region`, resource limits, and storage sizes according to your requirements
-> - Ensure bucket names comply with S3 naming rules:
->   - Must be globally unique across all AWS accounts
->   - Must be between 3-63 characters long
->   - Can contain only lowercase letters, numbers, hyphens, and periods
->   - Must start and end with a letter or number
-
-### 6.2 Deploy the Cluster
-
-```bash
-# Apply the EloqDoc cluster configuration
-kubectl apply -f eloqdoc-cluster.yaml
-
-# Monitor the deployment
-kubectl get pods -n ns-eloqdata -w
-```
-
-### 6.3 Retrieve Admin Credentials
-
-After deployment, the operator creates a secret with admin credentials.
-
-```bash
-# View the secret
-kubectl get secret eloqdoc-rocksdbcloud-s3-admin-user -n ns-eloqdata -o yaml
-
-# Extract username
-export ELOQDOC_USERNAME=$(kubectl get secret eloqdoc-rocksdbcloud-s3-admin-user -n ns-eloqdata -o jsonpath='{.data.username}' | base64 -d)
-
-# Extract password
-export ELOQDOC_PASSWORD=$(kubectl get secret eloqdoc-rocksdbcloud-s3-admin-user -n ns-eloqdata -o jsonpath='{.data.password}' | base64 -d)
-
-# Display credentials
-echo "Username: $ELOQDOC_USERNAME"
-echo "Password: $ELOQDOC_PASSWORD"
-```
-
-## Step 7: Test the Deployment
-
-### 7.1 Create a Test Pod
-
-Deploy a MongoDB shell pod for testing:
-
-```yaml
-# mongosh-test.yaml
-apiVersion: v1
-kind: Pod
-metadata:
-  name: mongosh-test
-  namespace: ns-eloqdata
-spec:
-  containers:
-  - name: mongosh
-    image: mongo:5.0
-    command:
-      - sleep
-      - "3600"
-    resources:
-      requests:
-        memory: "128Mi"
-        cpu: "100m"
-      limits:
-        memory: "256Mi"
-        cpu: "200m"
-  restartPolicy: Never
-```
-
-```bash
-# Deploy the test pod
-kubectl apply -f mongosh-test.yaml
-
-# Wait for the pod to be ready
-kubectl wait --for=condition=Ready pod/mongosh-test -n ns-eloqdata --timeout=60s
-```
-
-### 7.2 Connect to EloqDoc
-
-#### Option 1: Internal Connection (ClusterIP Service)
-
-Connect from within the cluster using the internal service:
-
-```bash
-# Exec into the mongosh pod
-kubectl exec -it mongosh-test -n ns-eloqdata -- bash
-
-# Inside the pod, connect to EloqDoc
-mongosh "mongodb://$ELOQDOC_USERNAME:$ELOQDOC_PASSWORD@eloq-srv-tx-eloqdoc-rocksdbcloud-s3.ns-eloqdata.svc.cluster.local:27017"
-
-# Test basic operations
-use testdb
-db.testcol.insertOne({name: "test", value: 123})
-db.testcol.find()
-```
-
-#### Option 2: External Connection (LoadBalancer Service)
-
-To connect from outside the cluster, expose the service via an internet-facing LoadBalancer:
-
-```bash
-# Make LoadBalancer internet-facing
-kubectl annotate service eloq-srv-tx-eloqdoc-rocksdbcloud-s3-exposed \
-  -n ns-eloqdata \
-  service.beta.kubernetes.io/aws-load-balancer-scheme=internet-facing \
-  --overwrite
-
-# Get the LoadBalancer DNS name
-export LB_DNS=$(kubectl get service eloq-srv-tx-eloqdoc-rocksdbcloud-s3-exposed -n ns-eloqdata -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
-
-echo "LoadBalancer DNS: $LB_DNS"
-
-# Wait for the LoadBalancer to be provisioned (may take 2-3 minutes)
-kubectl wait --for=jsonpath='{.status.loadBalancer.ingress}' \
-  service/eloq-srv-tx-eloqdoc-rocksdbcloud-s3-exposed \
-  -n ns-eloqdata --timeout=300s
-
-# Connect from your local machine
-mongosh "mongodb://$ELOQDOC_USERNAME:$ELOQDOC_PASSWORD@$LB_DNS:27017"
-```
-
-> **Security Note:** Making the LoadBalancer internet-facing exposes your database instance to the public internet. Consider:
-> - Using security groups to restrict access to specific IP addresses
-> - Implementing network policies
-
-
-## Cleanup
-
-To remove the deployment and associated resources:
-
-```bash
-# Delete the EloqDoc cluster
-kubectl delete -f eloqdoc-cluster.yaml
-
-# Delete the namespace
-kubectl delete namespace ns-eloqdata
-
-# Uninstall the operator
-helm uninstall eloq-operator -n eloq-operator-system
-
-# Delete the operator namespace
-kubectl delete namespace eloq-operator-system
-```

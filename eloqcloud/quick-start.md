@@ -32,8 +32,6 @@ After logging in, the first major step is provisioning a database cluster.
 
 **Steps to Create:**
 
-**Step 1: Start Cluster Creation**
-
 1. From the main Dashboard, locate and click the **"Create Cluster"** button, typically found in the upper-right corner.
 
 2. You will be presented with a configuration form to define your cluster specifications.
@@ -42,8 +40,6 @@ After logging in, the first major step is provisioning a database cluster.
 **Step 2: Configure Cluster Attributes (Detailed）**
 
 You must configure the following mandatory and optional settings for your new cluster:
-
-AttributeDescriptionDetails and Options
 
 - **Cluster Name：**A unique, user-friendly name for your database instance.
 - **Product Type：**Specifies the type of database service you wish to deploy.

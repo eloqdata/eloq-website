@@ -74,13 +74,13 @@ Left Y-axis: Throughput in QPS (Queries Per Second).
 
 Right Y-axis: 99.9 Percentile latency in milli seconds (ms).
 
-<p align="center">
+<div align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
 import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
 <EnlargeableImage src={require('./img/eloqkv_dragon_redis_set_new.png').default} alt="EloqKV vs DragonflyDB vs Redis Set" />
 
-</div></p>
+</div></div>
 
 **EloqKV** and DragonflyDB both outperform Redis due to their support for multiple worker threads. **EloqKV** delivers almost the same high throughput and low latency as DragonflyDB across various concurrency scenarios.
 
@@ -96,12 +96,12 @@ memtier_benchmark -t $thread_num -c $client_num -s $server_ip -p $server_port --
 
 #### Results
 
-<p align="center">
+<div align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
 
 <EnlargeableImage src={require('./img/eloqkv_dragon_redis_get_new.png').default} alt="EloqKV vs DragonflyDB vs Redis Get" />
 
-</div></p>
+</div></div>
 
 Again, **EloqKV** offers slightly lower throughput, and slightly higher but still very respectable latency compared to DragonflyDB. Both **EloqKV** and DragonflyDB significantly outperform Redis, both in throughput and in latency.
 
@@ -115,12 +115,12 @@ memtier_benchmark -t $thread_num -c $client_num -s $server_ip -p $server_port --
 
 - `--ratio`: Set to 1:10 for mixed write-read operations.
 
-<p align="center">
+<div align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
 
 <EnlargeableImage src={require('./img/eloqkv_dragon_redis_setget_new.png').default} alt="EloqKV vs DragonflyDB vs Redis SetGet" />
 
-</div></p>
+</div></div>
 
 **EloqKV** exhibits similar throughput to DragonflyDB. As concurrency increases, **EloqKV** shows a slightly higher P999 latency than DragonflyDB, but remains under 4ms even with over a thousand concurrent connections.
 

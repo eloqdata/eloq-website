@@ -16,13 +16,13 @@ However, the backbone of these applications—the data infrastructure—faces im
 
 <!--truncate-->
 
-<p align="center">
+<div align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
 import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
 <EnlargeableImage src={require('./img/agentic.png').default} alt="Building a Data Foundation for Agentic AI Applications" />
 
-</div></p>
+</div></div>
 
 ## Why We Need New Data Infra in the AI Age
 
@@ -54,12 +54,12 @@ The third challenge, which might be much more fundamental, is the difficulty of 
 
 Consider building a simple Retrieval-Augmented Generation ([RAG](https://en.wikipedia.org/wiki/Retrieval-augmented_generation)) application to handle, say, financial reports of the public companies. RAG requires a document to be chunked and vectors of each chunk to be added to a vector database, while the document itself stored in a document DB. If the document is added while the insertion of the vectors failed, we may not be able to retrieve the document. On the other hand, if the vectors are added while the document failed to be inserted, we may get “broken links”. After a while, the developers may feel that knowledge graph of the companies might be a helpful source of information, and [GraphRAG](https://microsoft.github.io/graphrag/) might increase the recall quality. Therefore, we may need to add a graph database to the pipeline. Soon, real-time news and social media might be interesting data sources, so we need to quickly ingest these feeds. Shall we use a streaming platform? As one can imagine, the data pipeline quickly grows out of hand. How to guarantee consistent user experience when data is constantly being added to multiple complicated and independent database systems? How to make joint queries when the databases are constantly out of sync?
 
-<p align="center">
+<div align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
 
 <EnlargeableImage src={require('./img/agentic1.png').default} alt="EloqKV vs Redis Transaction" />
 
-</div></p>
+</div></div>
 
 ## How EloqData can Help
 
@@ -74,12 +74,12 @@ Why Eventual Consistency Falls Short
 
 EloqData is redefining data infrastructure for AI applications with a one-stop solution ConvergedDB, that offers high performance, scalability, and full ACID transactions. This breakthrough eliminates the need for complex middleware like [Kafka](https://kafka.apache.org/) and allows developers to focus on building applications rather than managing infrastructure. At the heart of this solution is our innovative [Data Substrate](/blog/2025/07/14/technology) architecture.
 
-<p align="center">
+<div align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
 
 <EnlargeableImage src={require('./img/agentic2.png').default} alt="EloqKV vs Redis Transaction" />
 
-</div></p>
+</div></div>
 
 ## Looking into the Future
 

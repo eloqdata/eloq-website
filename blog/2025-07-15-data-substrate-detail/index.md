@@ -24,13 +24,13 @@ Database systems have evolved over many years, and the canonical design remains 
 
 As mentioned in our previous blog post, the Data Substrate design is heavily inspired by the textbook single-node database architecture. However, before diving into its specifics, it's important to examine the limitations of the traditional approach and the solutions that have emerged to address them.
 
-<p align="center">
+<div align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
 import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
 <EnlargeableImage src={require('./img/impossible_trinity.png').default} alt="The Impossible Trinity" />
 
-</div></p>
+</div></div>
 
 One of the major challenge is [scalability](<https://en.wikipedia.org/wiki/Scalability#Horizontal_(scale_out)_and_vertical_scaling_(scale_up)>): classical designs rely on vertical scaling—using larger, more powerful machines—and do not support horizontal scaling across multiple servers, which severely limits their ability to grow with increasing workloads.
 
@@ -92,12 +92,12 @@ It's worth noting that by cleanly decoupling the concerns of distributed systems
 
 No discussion of distributed storage systems is complete without addressing the [CAP theorem](https://en.wikipedia.org/wiki/CAP_theorem). The theorem famously states that a distributed system cannot simultaneously guarantee consistency, availability, and partition tolerance. However, as ][researchers](https://www.cs.umd.edu/~abadi/papers/abadi-pacelc.pdf) have pointed out, the theorem's practical implications are most relevant in the presence of network partitions. In normal operation—when the cluster is healthy and there are no partitions—a well-designed distributed system should provide both consistency and availability. Therefore, understanding and clearly defining system behavior during partitions is key to building predictable and resilient distributed databases.
 
-<p align="center">
+<div align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>
 
 <EnlargeableImage src={require('./img/cap_and_pacelc.png').default} alt="CAP and PACELC Theorem" />
 
-</div></p>
+</div></div>
 
 A better understanding of distributed system behavior comes from the [PACELC model](https://en.wikipedia.org/wiki/PACELC_theorem), which extends the CAP theorem by considering system trade-offs both during and outside of network partitions. PACELC categorizes how a system prioritizes consistency (C) or availability (A) during a Partition (P), and how it balances latency (L) versus consistency (C) Else (E) when no partition exists. Data Substrate generally aligns with the PC/EC category, similar to fully distributed databases like [CockroachDB](https://www.cockroachlabs.com/) and [TiDB](https://www.pingcap.com/). This means that during a partition, the system prioritizes consistency over availability—it will halt database operations if it cannot ensure correctness. Outside of partitions, the system still favors consistency over latency: transactions must be fully committed and durable (e.g., WAL entries replicated and fsync'ed to disk) before acknowledging success to the client. This model ensures strong correctness guarantees, even at the cost of increased latency in normal operations.
 

@@ -12,6 +12,7 @@
   border: 1px solid var(--ifm-color-emphasis-300);
   border-radius: var(--ifm-card-border-radius);
   padding: 1rem;
+  background-color: var(--ifm-card-background-color);
 }
 
 .newsTitle {

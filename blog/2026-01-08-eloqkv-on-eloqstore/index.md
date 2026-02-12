@@ -14,22 +14,24 @@ featuredMain: false
 
 At **CES 2026**, NVIDIA CEO Jensen Huang delivered a stark warning: the industry is facing a critical shortage of DRAM. While the explosive growth of AI models is the primary driver, there is another massive consumer of memory that often flies under the radar: **Caching Services**.
 
-Traditionally, caching services like [Redis](https://redis.io/) and [Valkey](https://valkey.io/) are purely memory-based. Even though people have tried to leverage fast SSDs for caching (e.g. [Apache KVRocks](https://kvrocks.apache.org/)), for latency-sensitive workloads, DRAM-based solutions remained the only viable solution because SSD-based alternatives often have significant tail latency issues. In mission-critical environments, a latency spike can easily disrupt real-time workflows and render a service unresponsive. Until recently, how to tame tail latency for IO intensive workloads has remained an unsolved challenge. 
+Traditionally, caching services like [Redis](https://redis.io/) and [Valkey](https://valkey.io/) are purely memory-based. Even though people have tried to leverage fast SSDs for caching (e.g. [Apache KVRocks](https://kvrocks.apache.org/)), for latency-sensitive workloads, DRAM-based solutions remained the only viable solution because SSD-based alternatives often have significant tail latency issues. In mission-critical environments, a latency spike can easily disrupt real-time workflows and render a service unresponsive. Until recently, how to tame tail latency for IO intensive workloads has remained an unsolved challenge.
 
-Today, we're proud to introduce [EloqKV powered by EloqStore](https://github.com/eloqdata/eloqstore). By leveraging the innovation of a modern data storage engine, EloqKV is the first Redis-compatible KV store designed to deliver DRAM-level P9999 latency with modern NVMe SSDs. By eliminating the performance tail that plagues traditional systems, EloqKV, when powered by EloqStore, offers up to **20X cost savings** without sacrificing the millisecond-level latency your business demands. 
+<!-- truncate -->
 
-As discussed in our previous blogs, **EloqKV** is not just a cache. It can work as a full [persistent main data storage](/blog/2024/08/25/benchmark-txlog). In this blog, we re-examine the cache usage case and we will leave the full persistent evaluation in another post. In all our tests, we turn off the write ahead log (WAL) to relax the strong durability guarantee. 
+Today, we're proud to introduce [EloqKV powered by EloqStore](https://github.com/eloqdata/eloqstore). By leveraging the innovation of a modern data storage engine, EloqKV is the first Redis-compatible KV store designed to deliver DRAM-level P9999 latency with modern NVMe SSDs. By eliminating the performance tail that plagues traditional systems, EloqKV, when powered by EloqStore, offers up to **20X cost savings** without sacrificing the millisecond-level latency your business demands.
 
-<p align="center">
+As discussed in our previous blogs, **EloqKV** is not just a cache. It can work as a full [persistent main data storage](/blog/2024/08/25/benchmark-txlog). In this blog, we re-examine the cache usage case and we will leave the full persistent evaluation in another post. In all our tests, we turn off the write ahead log (WAL) to relax the strong durability guarantee.
+
+<div align="center">
 <div style={{ width: '100%', textAlign: 'center'}}>
 import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
-<!-- 
+<!--
 <EnlargeableImage src={require('./img/ces26_p9999.jpg').default} alt="EloqKV P9999 Latency Comparison" />
 -->
 
 <EnlargeableImage src={require('./img/eloqkv_redis_read.png').default} alt="EloqKV P9999 Latency Comparison" />
-</div></p>
+</div></div>
 
 <!--
 # Categories and Systems
@@ -50,19 +52,19 @@ data_get = {
 }
 -->
 
-Traditional DRAM-based systems like Redis are strictly limited by physical memory capacity. As shown in the benchmark above, while Redis is restricted to smaller datasets, EloqKV breaks this barrier by leveraging NVMe without the "tail-latency penalty" typically associated with disks. In fact, at 20GB and 100GB, EloqKV actually provides **higher throughput** than Redis while maintaining a near identical **P99.99 latency** profile. When data size exceeds main memory size, Redis fails while EloqKV continues to scale. Even with a **2TB dataset**, EloqKV maintains a stable P99.99 latency of a few milliseconds, a performance previously thought possible only in pure DRAM environments. 
+Traditional DRAM-based systems like Redis are strictly limited by physical memory capacity. As shown in the benchmark above, while Redis is restricted to smaller datasets, EloqKV breaks this barrier by leveraging NVMe without the "tail-latency penalty" typically associated with disks. In fact, at 20GB and 100GB, EloqKV actually provides **higher throughput** than Redis while maintaining a near identical **P99.99 latency** profile. When data size exceeds main memory size, Redis fails while EloqKV continues to scale. Even with a **2TB dataset**, EloqKV maintains a stable P99.99 latency of a few milliseconds, a performance previously thought possible only in pure DRAM environments.
 
-For comparison, we also tried [KVRocks](https://kvrocks.apache.org/), a solution that supports SSD serving. As shown below, the P99.99 latency grows out of control as IO intensive operations interfere with the read latencies (notice the log scale). 
+For comparison, we also tried [KVRocks](https://kvrocks.apache.org/), a solution that supports SSD serving. As shown below, the P99.99 latency grows out of control as IO intensive operations interfere with the read latencies (notice the log scale).
 
-<p align="center">
+<div align="center">
 <div style={{ width: '100%', textAlign: 'center'}}>
 
 <EnlargeableImage src={require('./img/eloqkv_kvrocks_2tb.png').default} alt="EloqKV P9999 Latency Comparison" />
-</div></p>
+</div></div>
 
 <!--
 <EnlargeableImage src={require('./img/eloqkvredis_ces26.jpg').default} alt="EloqKV vs Redis Throughput and Latency" />
-</div></p>
+</div></div>
 
 sizes = ['20GB', '100GB', '200GB', '2TB']
 eloq_throughput = [507012.93, 298712.73, 281433.00, 262198.00]
@@ -71,7 +73,7 @@ redis_throughput = [161910.38, 155415.41, None, None]
 redis_latency = [1.43100, 1.51100, None, None]
 -->
 
-For full disclosure, here is the benchmark setup: 
+For full disclosure, here is the benchmark setup:
 * **Hardware:** Single Node, GCP Z3-16 instance.
 * **Specs:** 16 vCore, 128GB RAM, 2.9TB NVMe SSD x 2.
 * **Payload:** Up to 800 Million KV pairs with variable payload sizes of 1-4KB.
@@ -92,7 +94,7 @@ Since DRAM is expensive, the obvious alternative is to use SSDs. However, for hi
 
 ## The Software-Hardware Gap
 
-Our research found that the issue with the unstable performance of current storage design is that the software stack, traditionally designed for hard-disk based storage systems, has not caught up with the times. Traditionally, disk is slow, and every effort should be made to increase the performance of disks. However, modern NVMe SSDs are incredibly fast, capable of delivering **millions of IOPS** and **gigabytes per second throughput**, even for random data accesses. To take advantage of such high performance disks, a few things need to be changed. 
+Our research found that the issue with the unstable performance of current storage design is that the software stack, traditionally designed for hard-disk based storage systems, has not caught up with the times. Traditionally, disk is slow, and every effort should be made to increase the performance of disks. However, modern NVMe SSDs are incredibly fast, capable of delivering **millions of IOPS** and **gigabytes per second throughput**, even for random data accesses. To take advantage of such high performance disks, a few things need to be changed.
 
 The first and most fundamental change is the overall database architecture, which we described in detail in our previous [blog posts](/blog/2025/07/14/technology). In this blog, we discuss several implementation issues that allow us to fully exploit modern storage devices. In addition, two specific implementation techniques are also essential:
 

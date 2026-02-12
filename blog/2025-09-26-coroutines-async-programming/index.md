@@ -18,15 +18,15 @@ Online databases are the backbone of interactive applications. Despite coming in
 
 Database implementations are closely tied to hardware development. If we look back at the past decade, the trend is clear: the performance improvement of I/O devices has far outpaced that of CPUs. And the trend is likely to continue for the [foreseeable future](https://www.tomshardware.com/tech-industry/pci-sig-announces-pcie-8-0-spec-with-twice-the-bandwidth-1tb-s-of-peak-bandwidth-256-gt-s-per-lane-and-a-possible-new-connector). As of 2025, it’s common for a single NVMe device to deliver [2 million IOPS](https://semiconductor.samsung.com/consumer-storage/internal-ssd/9100-pro/). With 6 to 8 PCIE lanes, a single server can achieve a staggering total of 12 to 16 million IOPS.
 
-<p align="center">
+<div align="center">
 <div style={{ width: '50%', textAlign: 'center'}}>
 import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
 <EnlargeableImage src={require('./img/cpu_change.png').default} alt="x" />
 
-</div></p>
+</div></div>
 
-<p align="center">
+<div align="center">
 <div style={{ 
   display: 'flex', 
   justifyContent: 'space-between', 
@@ -46,7 +46,7 @@ import EnlargeableImage from '@site/src/pages/enlarge_pic';
     />
   </div>
 </div>
-</p>
+</div>
 
 
 Such massive I/O gains, however, come at a cost. These staggering numbers can only be unlocked through massive parallelism. In the traditional multi-threading model, this means a proliferation of threads—each dispatching and waiting for an I/O request. In conventional engineering, dispatching an I/O request involves a synchronous syscall (e.g., read() or write()), and waiting for it incurs two context switches. Though these operations are fast in isolation, their aggregate CPU cost is significant in comparison to the needs of sustaining 16 million I/O operations per second.
