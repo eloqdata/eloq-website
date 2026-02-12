@@ -48,14 +48,16 @@ eloqctl backup ${cluster_name} restore --snapshot-ts <SNAPSHOT_TS>
 
 **NOTE:** Restore can only be performed when the cluster is stopped.
 
-Options:
-- **--snapshot-ts** `<SNAPSHOT_TS>`:
+Options:  
+**--snapshot-ts SNAPSHOT_TS**:
 Snapshot timestamp to restore. Must match a snapshot_name in t_snapshot_info table.
+```
           Accepted formats:
           - RFC 3339: '2024-11-14T15:01:00Z'
           - 'YYYY-MM-DD HH:MM:SS' (assumed UTC)
           - 'YYYY-MM-DDTHH:MM:SS' (assumed UTC)
           Example: '2025-11-05T03:45:45Z'
+```
 
 ## Example of Backup EloqKV and Restore from a snapshot timestamp
 
