@@ -5,8 +5,6 @@ summary: Learn how to quickly get started with the EloqKV database.
 
 # Deploy a Single Node EloqKV Instance Using Eloqctl
 
-> **Note:** EloqKV on EloqStore will support using Eloqctl to install and manage soon. This document covers EloqKV on EloqStore.
-
 `eloqctl` is a powerful tool designed for the operation and maintenance of EloqKV clusters. With Eloqctl, you can effortlessly manage daily database tasks, such as deploying, starting, stopping, upgrading, and decommissioning EloqKV clusters, as well as configuring cluster parameters.
 
 `eloqctl` supports the deployment of various cluster types, including EloqKV transactional clusters, EloqKV log clusters, persistent storage clusters like EloqStore, and associated monitoring systems. This document provides guidance on deploying EloqKV cluster on a single node.
