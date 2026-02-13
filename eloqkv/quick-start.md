@@ -233,6 +233,10 @@ deployment:
   # enable_wal: true
   # If you want to use io_uring, uncomment enable_io_uring
   # enable_io_uring: true
+  # If use the gcs as the cloud provider, the following two environment variables need to be set.
+  # environment_variables:
+  #  GOOGLE_CLOUD_PROJECT: "xxxxxxxx"
+  #  GOOGLE_APPLICATION_CREDENTIALS: "/path/to/service-account-key.json"
   tx_service:
     tx_host_ports: [127.0.0.1:6389]
     enable_cache_replacement: on
@@ -315,6 +319,18 @@ When deploying an EloqKV cluster, compared to EloqStore local mode, using EloqSt
   _Type_: `Boolean`  
   _Default_: `false`  
   Reuse files already present in the local cache directory when the server starts.
+
+**NOTE:** If use the gcs as the cloud provider, should set the environment variables on the machine that the EloqKV server deployed on.
+
+- **`GOOGLE_CLOUD_PROJECT`**  
+  _Type_: `String`  
+  _Default_: `None`  
+  Google cloud project id.
+
+- **`GOOGLE_APPLICATION_CREDENTIALS`**  
+  _Type_: `String`  
+  _Default_: `None`  
+  Google application credentials.
 
 ## 4. Run the deployment command
 
