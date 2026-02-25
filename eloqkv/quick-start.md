@@ -80,6 +80,8 @@ deployment:
   install_dir: "/home/${USER}"
   # If you want to write wal log in your cluster, uncomment enable_wal
   # enable_wal: true
+  # If you want to use io_uring, uncomment enable_io_uring
+  # enable_io_uring: true
   tx_service:
     tx_host_ports: [127.0.0.1:6389]
     enable_cache_replacement: on
@@ -94,9 +96,7 @@ deployment:
   storage_service:
     eloqdss:
       backend: !eloqstore
-        eloq_store_open_files_limit: 4096
-        eloq_store_buffer_pool_size: "1GB"
-        eloq_store_data_append_mode: true
+  # We recommend deploying monitoring-related services to a separate machine.
   monitor:
     data_dir: ""
     eloq_metrics:
@@ -113,11 +113,6 @@ deployment:
     node_exporter:
       url: "https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_exporter-1.5.0.linux-amd64.tar.gz"
       port: 9200
-  hardware:
-    127.0.0.1:
-      cpu: 8
-      memory: 4096
-
 ```
 
 Next, we'll provide detailed explanations for each configuration option available in the YAML file.
@@ -146,11 +141,16 @@ The `deployment` section covers the configurations for deploying cluster metadat
   _Default_: `'/home/${USER}'`  
   Specifies the directory where the product will be installed. The `${USER}` placeholder dynamically references the current user's home directory.
 
-- **`enable_wal`**:
+- **`enable_wal`**:  
   _Type_: `Boolean`  
   _Default_: `false`  
   If write wal log in your cluster.
-  
+
+- **`enable_io_uring`**:  
+  _Type_: `Boolean`  
+  _Default_: `false`  
+  If use io_uring as the IO engine.
+
 - **`tx_service.tx_host_ports`**:  
   _Type_: `List of Strings`  
   _Default_: `[127.0.0.1:6389]`  
@@ -187,6 +187,8 @@ The `deployment` section covers the configurations for deploying cluster metadat
 
 The `monitor` section contains configurations for deploying a Prometheus and Grafana-based monitoring system for EloqKV. Monitoring is optional; if you do not wish to include it, simply remove the monitor section. If you choose to enable monitoring, set the prometheus.host and grafana.host fields to specify the locations of Prometheus and Grafana, and leave the other fields unchanged. Note that Prometheus and Grafana cannot be shared with other software, so you must ensure that the ports used by Prometheus and Grafana are not occupied by other processes.
 
+**NOTE:** We recommend deploying monitoring-related services to a separate machine.
+
 - **`monitor.grafana.host`**:  
   _Type_: `String`  
   _Default_: `'127.0.0.1'`  
@@ -206,19 +208,6 @@ The `monitor` section contains configurations for deploying a Prometheus and Gra
   _Type_: `Integer`  
   _Default_: `'9500'`  
   The port on which prometheus service listens.
-
-The `hardware` section contains hardware resource information for the EloqKV nodes. Eloqctl uses this information to automatically determine the values ​​of the EloqKV configuration items `core_number` and `memory_limit` (cache size).
-
-- **`hardware.{eloqkv_server_host}.cpu`**:  
-  _Type_: `Integer`  
-  _Default_: `None`  
-  The cpu count of the machine that deploy the EloqKV server.
-
-- **`hardware.{eloqkv_server_host}.memory`**:  
-  _Type_: `Integer(MB)`  
-  _Default_: `None`  
-  The memory of the machine that deploy the EloqKV server. 
-
 
 2. Yaml file example for EloqStore cloud storage:
 
@@ -242,6 +231,12 @@ deployment:
   install_dir: "/home/${USER}"
   # If you want to write wal log in your cluster, uncomment enable_wal
   # enable_wal: true
+  # If you want to use io_uring, uncomment enable_io_uring
+  # enable_io_uring: true
+  # If use the gcs as the cloud provider, the following two environment variables need to be set.
+  # environment_variables:
+  #  GOOGLE_CLOUD_PROJECT: "xxxxxxxx"
+  #  GOOGLE_APPLICATION_CREDENTIALS: "/path/to/service-account-key.json"
   tx_service:
     tx_host_ports: [127.0.0.1:6389]
     enable_cache_replacement: on
@@ -256,21 +251,15 @@ deployment:
   storage_service:
     eloqdss:
       backend: !eloqstore
-        eloq_store_open_files_limit: 4096
-        eloq_store_buffer_pool_size: "1GB"
-        eloq_store_data_append_mode: true
         eloq_store_cloud_store_path: "eloqkv-cluster-singlenode"
-        eloq_store_cloud_provider: "aws"
-        eloq_store_cloud_region: "ap-northeast-1"
+        eloq_store_cloud_provider: "gcs"
+        eloq_store_cloud_region: "xxxxxxxx"
         eloq_store_cloud_access_key: "xxxxxxxxx"
         eloq_store_cloud_secret_key: "xxxxxxxx"
-        eloq_store_cloud_endpoint: "http://127.0.0.1:9900"
+        eloq_store_cloud_endpoint: "https://storage.googleapis.com"
         eloq_store_reuse_local_files: true
         eloq_store_prewarm_cloud_cache: true
-        eloq_store_prewarm_task_count: 2
-        # The following two parameters are for the archive feature
-        eloq_store_num_retained_archives: 1
-        eloq_store_archive_interval_secs: 86400
+  # We recommend deploying monitoring-related services to a separate machine.
   monitor:
     data_dir: ""
     eloq_metrics:
@@ -287,10 +276,6 @@ deployment:
     node_exporter:
       url: "https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_exporter-1.5.0.linux-amd64.tar.gz"
       port: 9200
-  hardware:
-    127.0.0.1:
-      cpu: 8
-      memory: 4096
 ```
 
 When deploying an EloqKV cluster, compared to EloqStore local mode, using EloqStore cloud mode requires configuring cloud-related settings(in the `storage_service` section). These are described below:
@@ -335,20 +320,17 @@ When deploying an EloqKV cluster, compared to EloqStore local mode, using EloqSt
   _Default_: `false`  
   Reuse files already present in the local cache directory when the server starts.
 
-- **`eloq_store_prewarm_task_count`**:  
-  _Type_: `Integer`  
-  _Default_: `3`  
-  Number of prewarm tasks when cloud cache prewarm is enabled.
+**NOTE:** If use the gcs as the cloud provider, should set the environment variables on the machine that the EloqKV server deployed on.
 
-- **`eloq_store_num_retained_archives`**:  
-  _Type_: `Integer`  
-  _Default_: `0`  
-  Limit number of retained archives(Only take effect when `eloq_store_data_append_mode` is enabled. If want to enable the archive feature, the value must not less than 1).
+- **`GOOGLE_CLOUD_PROJECT`**  
+  _Type_: `String`  
+  _Default_: `None`  
+  Google cloud project id.
 
-- **`eloq_store_archive_interval_secs`**:  
-  _Type_: `Integer`  
-  _Default_: `86400`  
-  The (minimum) archive time interval in seconds.
+- **`GOOGLE_APPLICATION_CREDENTIALS`**  
+  _Type_: `String`  
+  _Default_: `None`  
+  Google application credentials.
 
 ## 4. Run the deployment command
 
