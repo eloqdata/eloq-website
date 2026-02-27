@@ -30,6 +30,21 @@ tar -zxvf eloqkv-1.2.0-ubuntu24-amd64.tar.gz
 
 </Tabs>
 
+## System Configuration
+
+To ensure EloqKV runs optimally, update `/etc/security/limits.conf` with the following settings to increase open file limits and memory lock capabilities:
+
+```
+* soft nofile 524288
+* hard nofile 524288
+* soft core unlimited
+* hard core unlimited
+* soft memlock unlimited
+* hard memlock unlimited
+```
+
+After saving your changes, **log out and log back in** (or reboot the server) for the updated limits to take effect.
+
 ## Prepare EloqKV config file
 
 EloqKV uses a configuration file to customize settings. An example is provided in `conf/eloqkv.ini`
@@ -93,18 +108,77 @@ Edit `eloqkv.ini` and restart EloqKV to enable WAL.
 enable_wal=on
 ```
 
-## Setting Up a Cluster
+## Setting Up an EloqKV Cluster with MinIO (Cloud Object Storage)
 
-It is very simple to set up a cluster of EloqKV. Just start several EloqKV instances on different machines, each provided with a configuration file with nodes listed in the cluster section.
+To set up a EloqKV cluster that uses MinIO (or S3-compatible) object storage for persistence and durability, follow these steps:
 
-For example, assuming we are setting up a cluster with 3 servers, on 192.168.1.20, 192.168.1.21 and 192.168.1.22:
+### 1. Start the MinIO Server
+
+First, deploy a MinIO server to provide S3-compatible object storage. The following example runs MinIO locally on server `192.168.1.23` (adjust the IP as needed):
 
 ```shell
+# Download and make MinIO executable
+wget https://dl.min.io/server/minio/release/linux-amd64/minio
+chmod +x minio
+
+# Start the MinIO server (default port: 9000)
+./minio server /tmp/minio-data
+```
+
+Make sure to configure MinIO with your desired access credentials and note the endpoint URL (e.g., `http://192.168.1.23:9000`).
+
+### 2. Prepare EloqKV Node Configuration
+
+Suppose you want to run a three-node cluster (on hosts `192.168.1.20`, `192.168.1.21`, `192.168.1.22`). On each node, create or update the `eloqkv.ini` file with the appropriate settings. Below is an example configuration for the node at `192.168.1.20`:
+
+```shell
+[local]
+# Local IP address of the EloqKV node. This value is recorded in the EloqKV catalog and
+# cannot be changed once the server has been launched. It is strongly recommended to set
+# this to the actual IP address of the node.
+ip = 192.168.1.20
+
 [cluster]
 # ip_port_list should include all eloqkv nodes in the cluster.
 # Make sure to set them to match the ip:port specified in the [local]
 # section of the configuration file on each node.
 ip_port_list=192.168.1.20:6379,192.168.1.21:6379,192.168.1.22:6379
+
+# node_group_replica_num should always set to 1 when enable eloqstore.
+node_group_replica_num=1
+
+# [CLOUD REQUIRED] Cloud storage URI used for remote persistence.
+# Can be bucket_name or bucket_name/path; if empty, EloqKV stays in local mode.
+eloq_store_cloud_store_path=miniotest
+
+# [CLOUD REQUIRED] Endpoint of the object storage service
+# (e.g. http://127.0.0.1:9000 for MinIO, https://s3.<region>.amazonaws.com for S3,
+# https://storage.googleapis.com for GCS).
+eloq_store_cloud_endpoint=http://192.168.1.23:9000
+
+# [CLOUD REQUIRED] Cloud access key id.
+eloq_store_cloud_access_key=minioadmin
+
+# [CLOUD REQUIRED] Cloud secret key paired with the access key.
+eloq_store_cloud_secret_key=minioadmin
+
+# [CLOUD OPTIONAL] Warm the cloud cache on startup for hot data.
+eloq_store_prewarm_cloud_cache=true
+
+# [CLOUD OPTIONAL] Reuse existing local files when restoring from cloud.
+eloq_store_reuse_local_files=true
+```
+
+First, initialize (bootstrap) the cluster:
+
+```shell
+./bin/eloqkv --config conf/eloqkv.ini --bootstrap
+```
+
+Then, start each of the three nodes individually:
+
+```shell
+./bin/eloqkv --config conf/eloqkv.ini
 ```
 
 Now you can connect your client to any one of the servers in the cluster and enjoy the increased capacity. Data will be automatically sharded.
