@@ -22,11 +22,11 @@ interface ProductFeatures {
 const productFeatures: ProductFeatures = {
   eloqkv: {
     title: "EloqKV",
-    version: "1.1.0",
+    version: "1.2.0",
     kvtype: "eloqstore",
     storageTypes: [
       {
-        value: "eloqstore",
+        value: "eloqstore_local",
         label: "EloqStore",
       },
     ],

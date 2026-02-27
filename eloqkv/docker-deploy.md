@@ -4,6 +4,8 @@ title: Run EloqKV using Docker
 
 ## Playground
 
+> **Note:** Running EloqKV on EloqStore requires that your host machine's Linux kernel version is **6.8 or higher**.
+
 Using `docker run` is the easiest way to get started. This is the preferred method to quickly get a taste of the rich features of **EloqKV**. To deploy a full cluster or require fine-grained control, we recommend the [EloqCtl tool](../eloqkv/quick-start). For those who do not need hand-holding, one can also deploy using [binary tarball](../eloqkv/install-from-binary).
 
 If Docker isn't installed on your machine, you can install it following this [instruction](https://docs.docker.com/get-docker/).
