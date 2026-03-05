@@ -155,6 +155,13 @@
   cursor: pointer;
 }
 
+.presetButtons button.presetActive {
+  border-color: #ff7b2d;
+  background: rgba(255, 123, 45, 0.16);
+  color: #fff7ed;
+  box-shadow: 0 0 0 1px rgba(255, 123, 45, 0.3) inset;
+}
+
 .advancedToggle {
   margin-top: 1rem;
   width: 100%;

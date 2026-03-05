@@ -86,6 +86,7 @@ function formatCompact(value) {
 export default function CostSavingCalculatorPage() {
   const [inputs, setInputs] = useState(DEFAULT_INPUTS);
   const [showAdvanced, setShowAdvanced] = useState(false);
+  const [selectedPreset, setSelectedPreset] = useState(null);
 
   const results = useMemo(() => {
     const dataSize = numberValue(inputs.dataSizeGb);
@@ -138,6 +139,7 @@ export default function CostSavingCalculatorPage() {
 
   const applyPreset = presetName => {
     const preset = PRESETS[presetName];
+    setSelectedPreset(presetName);
     setInputs(prev => ({ ...prev, ...preset }));
   };
 
@@ -247,6 +249,9 @@ export default function CostSavingCalculatorPage() {
                   <button
                     key={presetName}
                     type="button"
+                    className={
+                      selectedPreset === presetName ? styles.presetActive : ''
+                    }
                     onClick={() => applyPreset(presetName)}>
                     {presetName}
                   </button>
