@@ -6,10 +6,10 @@
   - Core Features
   - Benchmark Report
   - Use Case
+- **Appendix**
+  - Assemble your database using Data Substrate
 
 <p align="center">
-<br/><br/>
-<br/><br/>
 <br/><br/>
 <br/><br/>
 <img src="./media/background.png" alt="drawing" width="720"/>
@@ -132,7 +132,7 @@ To host a **2 TB** dataset with Redis, organizations typically deploy **~20 node
 
 ---
 
-## **Customer Use Cases**
+## **Key Technical Use Cases**
 
 ### **1. AI Chat History for a Leading Smartphone Manufacturer**
 
@@ -161,3 +161,52 @@ To host a **2 TB** dataset with Redis, organizations typically deploy **~20 node
 - **EloqKV deployment:** By adopting EloqKV as the primary store for the friendship graph, the company consolidated caching and persistence into a single Redis-compatible system. Hot graph neighborhoods are served from DRAM, while the rest of the graph is efficiently stored on NVMe SSDs with database-grade durability.
 - **Outcome:** The platform achieved **around 10x cost savings** compared to the projected cost of scaling either Redis or DynamoDB for this workload, while still delivering the low-latency graph lookups required for real-time social experiences at peak traffic.
 
+<div style="page-break-after: always;"></div>
+
+# Appendix: Assemble your database using Data Substrate
+
+In today's data-driven world, organizations face mounting challenges managing and utilizing information effectively. Traditional database systems often struggle to adapt to rapidly evolving business needs, leading to complex setups, rigid scalability, and operational headaches. Introducing Data Substrate, a revolutionary abstraction layer that empowers you to build customized, dynamic databases tailored to your specific requirements.
+
+## What is Data Substrate?
+
+Think of Data Substrate as the invisible backbone of your data management solution. It acts as a unified platform, encapsulating critical functionalities commonly needed across diverse data scenarios. From ensuring consistency and data durability to handling concurrency and fault tolerance, Data Substrate takes care of the essential groundwork, freeing you to focus on building the bespoke database your business needs.
+
+Moreover, Data Substrate's modular design and vertical scalability let you tailor it to your specific requirements. This means you can independently scale each layer – compute engines, Data Substrate itself, and cloud storage – to perfectly match your workload demands. Additionally, its cloud-powered cost-efficiency utilizes low-cost storage options for cold data, keeping your resources optimized. With a range of flexible engines at your disposal, you can craft a database perfectly suited to your application, whether it's a high-performance SQL engine for online transaction processing or a kv-based engine for flexible content management, and even wasm based engine for any user defined function.
+
+<!-- ![](./media/datasubstrate.png) -->
+<p align="center">
+<img src="./media/datasubstrate_wp.png" alt="drawing" width="350"/>
+</p>
+<!-- <img src="./media/datasubstrate.png" alt="drawing" style="width:200px;"/> -->
+
+### Key Components:
+
+- Compute Engines: The architecture's top layer consists of a variety of adaptable compute engines, including SQL, KV, document, and graph engines. These engines seamlessly integrate with Data Substrate, offering flexibility in data processing and analysis.
+- Data Substrate: This core layer acts as the backbone of the architecture, providing essential functionalities:
+  - Caching: Optimizes performance by storing frequently accessed data in memory for rapid retrieval.
+  - Concurrency Control: Ensures transaction ACID and supports multi-write architecture.
+  - Data Persistence: Guarantees data durability by storing it persistently, even in case of system failures.
+  - Consistency: Maintains data coherence across multiple components and operations.
+  - Fault Tolerance: Enhances resilience by handling errors and fast recovery without data loss.
+- Cloud Storage: Data Substrate integrates with diverse cloud storage solutions like AWS DynamoDB and Google Bigtable, serving two crucial purposes:
+  - Cold Data Storage: Cost-effectively stores less frequently accessed data, reducing compute resource requirements.
+  - Cache Miss Handling: Fetches data from cloud storage when it's not found in the cache, ensuring comprehensive data accessibility.
+  - Break free from vendor lock-in and embrace true cloud independence with Data Substrate's seamless hybrid cloud storage architecture.
+
+## Why Choose Data Substrate?
+
+Modern enterprises require nimble data systems that can seamlessly adapt to their unique workload demands. Data Substrate empowers you to break free from the limitations of traditional database approaches, addressing common pain points such as:
+
+- Long, cumbersome data pipelines: Data Substrate streamlines data flow, eliminating redundant processing and simplifying your data infrastructure.
+- Repetitive hand-coding of core functionalities: No more reinventing the wheel! Data Substrate provides a robust foundation, letting you focus on your specific data logic.
+- Low resource utilization: Data Substrate ensures efficient resource allocation, scaling the right components to match your workload demands and preventing wasted capacity.
+- Inconsistent data synchronization: Eliminate data siloes and ensure seamless data consistency across your entire system with Data Substrate's transactional cache mechanism.
+- Choose your cloud, your way: Data Substrate empowers you to orchestrate your data seamlessly across multiple clouds, creating a hybrid environment that aligns perfectly with your business needs and empowers strategic decision-making.
+
+## Key Features of Data Substrate:
+
+Data Substrate shines through its unparalleled elasticity and adaptability. It automatically adjusts to your needs, ensuring optimal performance regardless of workload variations. Here are some key highlights:
+
+- Elastic Scaling: Adapt to diverse workloads effortlessly. For read-intensive scenarios, Data Substrate scales out its memory, enabling distributed caching and lightning-fast data retrieval.
+- Parallel Write Optimization: No more bottlenecks! Data Substrate's patented one-phase commit protocol and parallel logging capabilities handle write-heavy workloads with ease, guaranteeing data durability and high availability even under extreme pressure.
+- Cost-Effective Scalability: Large datasets are no match for Data Substrate. Seamlessly scale out your cloud storage without overloading compute resources, minimizing costs for infrequently accessed data.

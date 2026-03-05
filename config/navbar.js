@@ -280,9 +280,19 @@ module.exports = {
       ],
     },
     {
-      to: '/pricing',
+      type: 'dropdown',
       label: 'Pricing',
       position: 'left',
+      items: [
+        {
+          to: '/pricing',
+          label: 'Cloud Pricing',
+        },
+        {
+          to: '/costsaving',
+          label: 'Cost Saving Calculator',
+        },
+      ],
     },
     {
       type: 'dropdown',
