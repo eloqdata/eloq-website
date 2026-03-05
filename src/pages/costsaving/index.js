@@ -348,9 +348,15 @@ export default function CostSavingCalculatorPage() {
               </article>
             </div>
 
-            <Link className={styles.cta} to="/eloqkv/install-from-binary">
-              Try EloqKV →
-            </Link>
+            <div className={styles.ctaRow}>
+              <Link className={styles.ctaSecondary} to="/eloqkv/install-from-binary">
+                Install EloqKV →
+              </Link>
+              <Link className={styles.cta} to="https://cloud.eloqdata.com">
+                Try EloqCloud →
+              </Link>
+            </div>
+
           </section>
         </section>
       </main>

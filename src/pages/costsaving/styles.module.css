@@ -133,7 +133,7 @@
   margin-top: 1rem;
 }
 
-.presets > span {
+.presets>span {
   color: #cbd5e1;
   font-size: 0.9rem;
 }
@@ -215,8 +215,14 @@
   gap: 0.4rem;
 }
 
-.cta {
+.ctaRow {
   margin-top: 1rem;
+  display: flex;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.cta {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -226,6 +232,19 @@
   font-weight: 600;
   padding: 0.7rem 1.05rem;
   text-decoration: none;
+}
+
+.ctaSecondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #f8fafc;
+  font-weight: 600;
+  padding: 0.7rem 1.05rem;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.04);
 }
 
 @media (max-width: 960px) {
