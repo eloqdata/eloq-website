@@ -14,15 +14,15 @@ import {
 import styles from './styles.module.css';
 
 const DEFAULT_INPUTS = {
-  dataSizeGb: 500,
-  readQps: 150000,
-  writeQps: 30000,
+  dataSizeGb: 1000,
+  readQps: 80000,
+  writeQps: 20000,
   latencyMs: 5,
-  bigKeyPercentage: 25,
-  readReplicas: 2,
+  bigKeyPercentage: 5,
+  readReplicas: 1,
   crossRegionDr: false,
-  redisPricePerVcpu: 200,
-  eloqkvPricePerVcpu: 200,
+  redisPricePerVcpu: 103.5,
+  eloqkvPricePerVcpu: 103.5,
 };
 
 const PRESETS = {
@@ -31,8 +31,8 @@ const PRESETS = {
     readQps: 300000,
     writeQps: 120000,
     latencyMs: 2,
-    bigKeyPercentage: 10,
-    readReplicas: 3,
+    bigKeyPercentage: 2,
+    readReplicas: 2,
     crossRegionDr: true,
   },
   Gaming: {
@@ -40,26 +40,26 @@ const PRESETS = {
     readQps: 450000,
     writeQps: 70000,
     latencyMs: 8,
-    bigKeyPercentage: 20,
-    readReplicas: 3,
+    bigKeyPercentage: 10,
+    readReplicas: 1,
     crossRegionDr: false,
   },
   AdTech: {
     dataSizeGb: 2000,
     readQps: 600000,
     writeQps: 180000,
-    latencyMs: 6,
-    bigKeyPercentage: 15,
-    readReplicas: 4,
+    latencyMs: 3,
+    bigKeyPercentage: 5,
+    readReplicas: 2,
     crossRegionDr: true,
   },
   'AI Agent Memory': {
     dataSizeGb: 4000,
     readQps: 220000,
     writeQps: 150000,
-    latencyMs: 10,
-    bigKeyPercentage: 40,
-    readReplicas: 2,
+    latencyMs: 20,
+    bigKeyPercentage: 10,
+    readReplicas: 1,
     crossRegionDr: true,
   },
 };
@@ -104,9 +104,11 @@ export default function CostSavingCalculatorPage() {
     const redisCost = redisVcpu * redisPrice;
 
     const eloqBigKeyStorageVcpu = (dataSize * bigKeyRatio) / 8;
-    const eloqSmallKeyStorageVcpu = (dataSize * (1 - bigKeyRatio)) / 360;
+    // 360GB NVMe SSD, but copy on write has additional footprint, so we use 120GB as the small key storage.
+    const eloqSmallKeyStorageVcpu = (dataSize * (1 - bigKeyRatio)) / 120;
     const eloqStorageVcpu = eloqBigKeyStorageVcpu + eloqSmallKeyStorageVcpu;
-    const eloqQpsVcpu = (readQps + writeQps) / 10000;
+    const eloqQpsDivisor = numberValue(inputs.latencyMs) > 10 ? 25000 : 10000;
+    const eloqQpsVcpu = (readQps + writeQps) / eloqQpsDivisor;
     const eloqVcpu = Math.max(eloqStorageVcpu, eloqQpsVcpu) * replicas;
     const eloqCost = eloqVcpu * eloqkvPrice;
 
@@ -227,9 +229,8 @@ export default function CostSavingCalculatorPage() {
               <span>Cross Region Disaster Recovery Required</span>
               <button
                 type="button"
-                className={`${styles.toggle} ${
-                  inputs.crossRegionDr ? styles.toggleOn : ''
-                }`}
+                className={`${styles.toggle} ${inputs.crossRegionDr ? styles.toggleOn : ''
+                  }`}
                 onClick={() =>
                   setInputs(prev => ({
                     ...prev,
@@ -264,7 +265,7 @@ export default function CostSavingCalculatorPage() {
             {showAdvanced && (
               <div className={styles.fieldGrid}>
                 <label className={styles.field}>
-                  <span>Redis price per vCPU ($/month)</span>
+                  <span>Redis price per vCPU ($/month), default instance: z3-highmem</span>
                   <input
                     type="number"
                     min="0"
@@ -274,7 +275,7 @@ export default function CostSavingCalculatorPage() {
                 </label>
 
                 <label className={styles.field}>
-                  <span>EloqKV price per vCPU ($/month)</span>
+                  <span>EloqKV price per vCPU ($/month), default instance: z3-highmem</span>
                   <input
                     type="number"
                     min="0"
@@ -290,7 +291,9 @@ export default function CostSavingCalculatorPage() {
             <h2>Cost Comparison</h2>
             <div className={styles.chartWrap}>
               <ResponsiveContainer width="100%" height={280}>
-                <BarChart data={chartData} margin={{ top: 12, right: 0, left: 0, bottom: 0 }}>
+                <BarChart
+                  data={chartData}
+                  margin={{ top: 12, right: 0, left: 0, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.12)" />
                   <XAxis dataKey="name" stroke="#a1a1aa" />
                   <YAxis
@@ -306,7 +309,11 @@ export default function CostSavingCalculatorPage() {
                     formatter={value => formatMoney(Number(value))}
                     cursor={{ fill: 'rgba(255,255,255,0.05)' }}
                   />
-                  <Bar dataKey="monthlyCost" radius={[8, 8, 0, 0]} isAnimationActive>
+                  <Bar
+                    dataKey="monthlyCost"
+                    radius={[8, 8, 0, 0]}
+                    barSize={42}
+                    isAnimationActive>
                     {chartData.map(item => (
                       <Cell key={item.name} fill={item.color} />
                     ))}
