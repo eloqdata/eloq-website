@@ -122,7 +122,6 @@ export default function CostSavingCalculatorPage() {
       eloqVcpu,
       eloqCost,
       eloqDramUsageGb: eloqVcpu * 8,
-      eloqSsdUsageGb: eloqVcpu * 360,
       monthlySavings,
       savingsPct,
     };
@@ -343,15 +342,14 @@ export default function CostSavingCalculatorPage() {
                 <h4>EloqKV</h4>
                 <ul>
                   <li>Required vCPU: {formatCompact(results.eloqVcpu)}</li>
-                  <li>DRAM usage: {formatCompact(results.eloqDramUsageGb)} GB</li>
-                  <li>SSD usage: {formatCompact(results.eloqSsdUsageGb)} GB</li>
+                  <li>Memory footprint: {formatCompact(results.eloqDramUsageGb)} GB</li>
                   <li>Total monthly cost: {formatMoney(results.eloqCost)}</li>
                 </ul>
               </article>
             </div>
 
-            <Link className={styles.cta} to="/contact">
-              Talk to EloqData →
+            <Link className={styles.cta} to="/eloqkv/install-from-binary">
+              Try EloqKV →
             </Link>
           </section>
         </section>
