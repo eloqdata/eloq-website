@@ -17,7 +17,7 @@ const DEFAULT_INPUTS = {
   dataSizeGb: 1000,
   readQps: 80000,
   writeQps: 20000,
-  latencyMs: 5,
+  latencyMs: 2,
   bigKeyPercentage: 5,
   readReplicas: 1,
   crossRegionDr: false,
@@ -107,7 +107,7 @@ export default function CostSavingCalculatorPage() {
     // 360GB NVMe SSD, but copy on write has additional footprint, so we use 120GB as the small key storage.
     const eloqSmallKeyStorageVcpu = (dataSize * (1 - bigKeyRatio)) / 120;
     const eloqStorageVcpu = eloqBigKeyStorageVcpu + eloqSmallKeyStorageVcpu;
-    const eloqQpsDivisor = numberValue(inputs.latencyMs) > 10 ? 25000 : 10000;
+    const eloqQpsDivisor = numberValue(inputs.latencyMs) >= 10 ? 25000 : 10000;
     const eloqQpsVcpu = (readQps + writeQps) / eloqQpsDivisor;
     const eloqVcpu = Math.max(eloqStorageVcpu, eloqQpsVcpu) * replicas;
     const eloqCost = eloqVcpu * eloqkvPrice;
