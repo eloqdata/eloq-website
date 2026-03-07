@@ -86,6 +86,7 @@ function HeroBadge({ label }) {
 function Hero() {
     const cloudUrl = 'https://cloud.eloqdata.com';
     const benchmarkUrl = useBaseUrl('/blog/2026/01/08/eloqkv-on-eloqstore');
+    const costSavingUrl = useBaseUrl('/costsaving');
 
     return (
         <section className={styles.primaryHero}>
@@ -105,6 +106,9 @@ function Hero() {
                 <div className={styles.ctaGroup}>
                     <Link className={styles.primaryCta} to={cloudUrl}>
                         Try EloqCloud for Free
+                    </Link>
+                    <Link className={styles.secondaryCta} to={costSavingUrl}>
+                        Cost Saving Calculator
                     </Link>
                     <Link className={styles.secondaryCta} to={benchmarkUrl}>
                         Explore 10X Cost Savings V.S. Redis

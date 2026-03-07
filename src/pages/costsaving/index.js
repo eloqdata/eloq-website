@@ -64,9 +64,9 @@ const PRESETS = {
   },
 };
 
-function numberValue(value) {
+function numberValue(value, min = 0) {
   const parsed = Number(value);
-  return Number.isFinite(parsed) ? Math.max(parsed, 0) : 0;
+  return Number.isFinite(parsed) ? Math.max(parsed, min) : min;
 }
 
 function formatMoney(value) {
@@ -89,11 +89,13 @@ export default function CostSavingCalculatorPage() {
   const [selectedPreset, setSelectedPreset] = useState(null);
 
   const results = useMemo(() => {
-    const dataSize = numberValue(inputs.dataSizeGb);
-    const readQps = numberValue(inputs.readQps);
-    const writeQps = numberValue(inputs.writeQps);
+    const dataSize = numberValue(inputs.dataSizeGb, 10);
+    const readQps = numberValue(inputs.readQps, 0);
+    const writeQps = numberValue(inputs.writeQps, 0);
+    const latencyMs = numberValue(inputs.latencyMs, 1);
     const bigKeyRatio = numberValue(inputs.bigKeyPercentage) / 100;
-    const replicas = Math.max(numberValue(inputs.readReplicas), 1);
+    const readReplicas = numberValue(inputs.readReplicas, 0);
+    const copyFactor = readReplicas + 1;
     const redisPrice = numberValue(inputs.redisPricePerVcpu);
     const eloqkvPrice = numberValue(inputs.eloqkvPricePerVcpu);
 
@@ -101,16 +103,17 @@ export default function CostSavingCalculatorPage() {
     const redisVcpuQps = (readQps + writeQps) / 50000;
     const redisBaseVcpu = Math.max(redisVcpuMemory, redisVcpuQps);
     const drFactor = inputs.crossRegionDr ? 2 : 1;
-    const redisVcpu = redisBaseVcpu * replicas * drFactor;
+    const redisVcpu = redisBaseVcpu * copyFactor * drFactor;
     const redisCost = redisVcpu * redisPrice;
 
     const eloqBigKeyStorageVcpu = (dataSize * bigKeyRatio) / 8;
     // 360GB NVMe SSD, but copy on write has additional footprint, so we use 120GB as the small key storage.
     const eloqSmallKeyStorageVcpu = (dataSize * (1 - bigKeyRatio)) / 120;
     const eloqStorageVcpu = eloqBigKeyStorageVcpu + eloqSmallKeyStorageVcpu;
-    const eloqQpsDivisor = numberValue(inputs.latencyMs) >= 10 ? 25000 : 10000;
+    const clampedLatency = Math.min(Math.max(latencyMs, 1), 10);
+    const eloqQpsDivisor = 10000 + ((clampedLatency - 1) / 9) * 15000;
     const eloqQpsVcpu = (readQps + writeQps) / eloqQpsDivisor;
-    const eloqVcpu = Math.max(eloqStorageVcpu, eloqQpsVcpu) * replicas;
+    const eloqVcpu = Math.max(eloqStorageVcpu, eloqQpsVcpu) * copyFactor;
     const eloqCost = eloqVcpu * eloqkvPrice;
 
     const monthlySavings = Math.max(redisCost - eloqCost, 0);
@@ -133,8 +136,8 @@ export default function CostSavingCalculatorPage() {
     { name: 'EloqKV', monthlyCost: results.eloqCost, color: '#17c964' },
   ];
 
-  const onNumberChange = key => event => {
-    setInputs(prev => ({ ...prev, [key]: numberValue(event.target.value) }));
+  const onNumberChange = (key, min = 0) => event => {
+    setInputs(prev => ({ ...prev, [key]: numberValue(event.target.value, min) }));
   };
 
   const applyPreset = presetName => {
@@ -165,9 +168,9 @@ export default function CostSavingCalculatorPage() {
                 <span>Data Size (GB)</span>
                 <input
                   type="number"
-                  min="0"
+                  min="10"
                   value={inputs.dataSizeGb}
-                  onChange={onNumberChange('dataSizeGb')}
+                  onChange={onNumberChange('dataSizeGb', 10)}
                 />
               </label>
 
@@ -177,7 +180,7 @@ export default function CostSavingCalculatorPage() {
                   type="number"
                   min="0"
                   value={inputs.readQps}
-                  onChange={onNumberChange('readQps')}
+                  onChange={onNumberChange('readQps', 0)}
                 />
               </label>
 
@@ -187,7 +190,7 @@ export default function CostSavingCalculatorPage() {
                   type="number"
                   min="0"
                   value={inputs.writeQps}
-                  onChange={onNumberChange('writeQps')}
+                  onChange={onNumberChange('writeQps', 0)}
                 />
               </label>
 
@@ -195,9 +198,9 @@ export default function CostSavingCalculatorPage() {
                 <span>P99 Latency Requirement (ms)</span>
                 <input
                   type="number"
-                  min="0"
+                  min="1"
                   value={inputs.latencyMs}
-                  onChange={onNumberChange('latencyMs')}
+                  onChange={onNumberChange('latencyMs', 1)}
                 />
               </label>
 
@@ -205,9 +208,9 @@ export default function CostSavingCalculatorPage() {
                 <span>Number of Read Replicas</span>
                 <input
                   type="number"
-                  min="1"
+                  min="0"
                   value={inputs.readReplicas}
-                  onChange={onNumberChange('readReplicas')}
+                  onChange={onNumberChange('readReplicas', 0)}
                 />
               </label>
             </div>
@@ -274,7 +277,7 @@ export default function CostSavingCalculatorPage() {
                     type="number"
                     min="0"
                     value={inputs.redisPricePerVcpu}
-                    onChange={onNumberChange('redisPricePerVcpu')}
+                    onChange={onNumberChange('redisPricePerVcpu', 0)}
                   />
                 </label>
 
@@ -284,7 +287,7 @@ export default function CostSavingCalculatorPage() {
                     type="number"
                     min="0"
                     value={inputs.eloqkvPricePerVcpu}
-                    onChange={onNumberChange('eloqkvPricePerVcpu')}
+                    onChange={onNumberChange('eloqkvPricePerVcpu', 0)}
                   />
                 </label>
               </div>
