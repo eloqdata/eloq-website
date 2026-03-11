@@ -19,7 +19,8 @@ const sidebars = {
     'Get Started': ['install-from-binary', 'docker-deploy'],
     Deploy: [
       'quick-start',
-      'quick-start-ha-local-storage',
+      // 'quick-start-ha-local-storage',
+      'quick-start-ha-eloqstore-cloud',
       'manage-cluster',
       'upgrade',
       'prerequisite',

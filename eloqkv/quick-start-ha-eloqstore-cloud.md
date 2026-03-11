@@ -74,6 +74,15 @@ deployment:
   product: "EloqKV"
   version: "latest"
   install_dir: "/home/${USER}"
+  # If you want to write wal log in your cluster, uncomment enable_wal
+  # enable_wal: true
+  # If you want to use io_uring, uncomment enable_io_uring
+  # enable_io_uring: true
+  # If use the gcs as the cloud provider, the following two environment variables need to be set.
+  # environment_variables:
+  #   GOOGLE_CLOUD_PROJECT: "xxxxxxxx"
+  #   GOOGLE_APPLICATION_CREDENTIALS: "/path/to/service-account-key.json"
+
   tx_service:
     tx_host_ports: [10.0.0.1:6379]
     standby_host_ports: [10.0.0.2:6379]
@@ -83,11 +92,9 @@ deployment:
   storage_service:
     eloqdss:
       backend: !eloqstore
-        eloq_store_cloud_store_path: "eloqkv-cluster-singlenode"
+        eloq_store_cloud_store_path: "eloqkv-cluster-standby"
         eloq_store_cloud_provider: "gcs"
         eloq_store_cloud_region: "xxxxxxxx"
-        eloq_store_cloud_access_key: "xxxxxxxxx"
-        eloq_store_cloud_secret_key: "xxxxxxxx"
         eloq_store_cloud_endpoint: "https://storage.googleapis.com"
         eloq_store_reuse_local_files: true
         eloq_store_prewarm_cloud_cache: true
@@ -145,6 +152,14 @@ deployment:
   product: "EloqKV"
   version: "latest"
   install_dir: "/home/${USER}"
+  # If you want to write wal log in your cluster, uncomment enable_wal
+  # enable_wal: true
+  # If you want to use io_uring, uncomment enable_io_uring
+  # enable_io_uring: true
+  # If use the gcs as the cloud provider, the following two environment variables need to be set.
+  # environment_variables:
+  #   GOOGLE_CLOUD_PROJECT: "xxxxxxxx"
+  #   GOOGLE_APPLICATION_CREDENTIALS: "/path/to/service-account-key.json"
   tx_service:
     tx_host_ports: [10.0.0.1:6379,10.0.0.2:6379,10.0.0.3:6379]
     standby_host_ports: [10.0.0.5:6379,10.0.0.6:6379,10.0.0.7:6379]
@@ -157,8 +172,6 @@ deployment:
         eloq_store_cloud_store_path: "eloqkv-cluster-singlenode"
         eloq_store_cloud_provider: "gcs"
         eloq_store_cloud_region: "xxxxxxxx"
-        eloq_store_cloud_access_key: "xxxxxxxxx"
-        eloq_store_cloud_secret_key: "xxxxxxxx"
         eloq_store_cloud_endpoint: "https://storage.googleapis.com"
         eloq_store_reuse_local_files: true
         eloq_store_prewarm_cloud_cache: true
