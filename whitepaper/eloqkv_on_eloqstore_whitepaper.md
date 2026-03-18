@@ -49,10 +49,14 @@ All in all, by replacing expensive DRAM with NVMe SSDs for the majority of the d
 
 ## **Achitecture**
 
-EloqKV is a Redis-compatible distributed key value store powered by Data Substrate. Its architecture includes a frontend compute engine compatible with the Redis protocol. Within Data Substrate, the TxService is responsible for caching hot data and managing transaction processing, while the LogService handles data persistence. LogService replicas are distributed across different availability zones (AZs) to ensure tolerance to AZ-level failures. The underlying storage layer supports pluggable key-value (KV) storages, such as EloqStore, AWS DynamoDB, Google Bigtable, and Cassandra. These storage services store cold data for cache misses and provide high availability for baseline data.
+EloqKV is a Redis-compatible distributed key-value store powered by Data Substrate. Its architecture includes a frontend compute engine that is fully compatible with the Redis protocol. Within Data Substrate, the TxService is responsible for caching hot data and managing transaction processing, while the LogService handles data persistence.
+
+LogService replicas are distributed across multiple availability zones (AZs) to ensure resilience against AZ-level failures. The underlying storage layer supports pluggable key-value (KV) stores, such as EloqStore, RocksCloud, AWS DynamoDB, Google Bigtable, and Cassandra. These storage systems hold cold data for cache misses and provide high availability for baseline data.
+
+Our preferred storage engine, EloqStore, delivers unparalleled performance on high-performance NVMe SSDs. It can achieve near-DRAM-level performance on NVMe disks available in public cloud virtual machine instances.
 
 <p align="center">
-<img src="./media/eloqkvarch.png" alt="drawing" width="400"/>
+<img src="./media/eloqkvarch.png" alt="drawing" width="600"/>
 </p>
 
 ---
@@ -86,6 +90,15 @@ Conventional Redis clusters often experience latency spikes during background op
 - **Predictable long-tail latency**: checkpointing and compaction are carefully scheduled to avoid impacting the P99–P9999 latency profile.
 - **No practical per-node memory ceiling**: EloqKV comfortably supports nodes with **50 GB+** of DRAM while safely managing multi‑TB datasets on SSDs.
 - **Robust replica join and recovery**: standby nodes join without overwhelming primaries, avoiding the “rejoin storm” patterns of large Redis clusters (write-buffer OOM → rejoin → fail).
+
+
+### **Fully Elastic Scaling**
+
+EloqKV is designed for full elasticity, supporting both vertical (scale-up) and horizontal (scale-out) scaling across all resources.
+
+* **Efficient scaling up and out**: EloqKV operates efficiently at any scale. It can grow from a single node using fractional CPU cores to a fully distributed cluster with thousands of cores dynamically and without service interruption, while maintaining high performance. In addition, EloqKV preserves the same consistency and transactional semantics at all scales, eliminating the need to modify applications as the system grows.
+* **Independent resource scaling**: EloqKV takes advantage of cloud platforms’ on-demand resource allocation, allowing CPU, memory, storage, and write-ahead logging (WAL) to scale independently. This enables optimal resource utilization for different workload types.
+
 
 ### **Simplified Disaster Recovery and Instant Branching**
 
@@ -133,7 +146,7 @@ We ran multiple workloads to compare EloqKV against Redis and other SSD-capable 
 **Benchmark 1 – EloqKV vs. Redis across dataset sizes (throughput and P99.99 latency):**
 
 <p align="center">
-<img src="./benchmark/eloqkv_redis_read.png" alt="EloqKV vs Redis benchmark" width="400"/>
+<img src="./benchmark/eloqkv_redis_read.png" alt="EloqKV vs Redis benchmark" width="600"/>
 </p>
 
 Traditional DRAM-centric systems such as Redis are fundamentally limited by memory capacity. As dataset size approaches node memory, operators are forced to either overprovision DRAM or shard aggressively. In our tests, Redis delivered good performance at small sizes but could not scale beyond memory capacity, while EloqKV continued to operate smoothly by leveraging NVMe.
@@ -143,7 +156,7 @@ At **20 GB** and **100 GB**, EloqKV delivered **higher throughput than Redis** w
 **Benchmark 2 – EloqKV vs. Apache KvRocks (long-tail latency across workloads):**
 
 <p align="center">
-<img src="./benchmark/eloqkv_kvrocks_2tb.png" alt="EloqKV vs KvRocks benchmark" width="400"/>
+<img src="./benchmark/eloqkv_kvrocks_2tb.png" alt="EloqKV vs KvRocks benchmark" width="600"/>
 </p>
 
 We also compared EloqKV to Apache KvRocks, another SSD-serving key–value store. Under IO‑intensive workloads, KvRocks exhibited rapidly increasing P99.99 latency as background operations interfered with foreground reads (note the log scale on the chart). EloqKV, by contrast, kept P99.99 latency bounded and predictable.
@@ -162,7 +175,7 @@ To host a **2 TB** dataset with Redis, organizations typically deploy **~20 node
 - **Outcome:** The customer achieved approximately **10x cost reduction** compared to their previous ElastiCache deployment, while maintaining the low-latency experience required for interactive AI chat.
 
 <p align="center">
-<img src="./benchmark/eloqkvaichat.png" alt="EloqKV vs KvRocks benchmark" width="400"/>
+<img src="./benchmark/eloqkvaichat.png" alt="EloqKV vs KvRocks benchmark" width="600"/>
 </p>
 
 ### **2. Feature Store for Large-Scale E‑Commerce Recommendations**
