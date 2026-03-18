@@ -21,9 +21,29 @@
 
 ## **Introduction**
 
-EloqKV is a next-generation, Redis-compatible key–value database that delivers memory-class performance at SSD cost. Unlike traditional in-memory caches, EloqKV is designed and operated as a **primary, durable data store** rather than a best-effort cache. It guarantees data persistence, provides strong consistency across a distributed cluster, and integrates seamlessly with existing Redis clients and tooling—typically requiring **no application code changes**.
+Artificial intelligence is rapidly becoming one of the largest consumers of computing infrastructure ever deployed. Training and inference systems now rely on massive GPU clusters operating at a scale that did not exist just a few years ago. While much of the attention has focused on compute, these systems are also driving unprecedented demand for high‑performance memory, placing new pressure on the global DRAM supply chain.
 
-By replacing expensive DRAM with NVMe SSDs for the majority of the data footprint, EloqKV removes the hard capacity ceiling of DRAM-based systems while delivering up to **10x lower total cost of ownership (TCO)** for large-scale workloads.
+The result is a dramatic shift in the economics of memory. As AI infrastructure expands, large portions of global DRAM production are being allocated to GPU‑centric systems, tightening supply across the broader technology market. In 2025, average DRAM selling prices increased by more than 150 percent in some segments, and analysts expect continued pressure into 2026. In many cases, organizations are finding it difficult to acquire additional memory capacity even when they are willing to absorb the higher costs.
+
+As a result, engineering teams are beginning to reconsider architectures that depend heavily on large in‑memory data sets. Systems designed around abundant and inexpensive DRAM are now encountering new economic constraints. When memory was plentiful, this design approach was rarely questioned. Today, those assumptions are beginning to change.
+
+
+## **The Limits of DRAM‑First Architectures**
+Many modern applications achieve extremely low latency by keeping active datasets entirely in memory. Technologies such as Redis popularized this model by enabling fast access to data structures stored in DRAM.
+
+Because Redis was designed as an in‑memory system, practical dataset scale is closely tied to the amount of memory available to store the active working set. As datasets grow, additional DRAM must be provisioned to maintain performance. In an environment where memory is becoming both more expensive and harder to obtain, this dependency is beginning to introduce new economic limits on system scale.
+
+These changes raise a fundamental question: how can high‑performance data systems maintain low latency without requiring the entire dataset to reside in memory?
+
+## **Introducing EloqKV**
+
+EloqKV was designed to address this challenge. Rather than assuming that high‑performance data systems must keep the entire active dataset in DRAM, EloqKV uses an SSD‑first architecture that leverages the performance of modern NVMe storage.
+
+By combining Redis compatibility with a storage architecture optimized for solid‑state media, EloqKV enables applications to manage significantly larger datasets while reducing dependence on expensive and increasingly constrained DRAM resources.
+
+EloqKV can also utilize DRAM to cache extremely hot data, ensuring ultra‑low latency while allowing the majority of the dataset to reside on high‑performance SSDs.
+
+All in all, by replacing expensive DRAM with NVMe SSDs for the majority of the data footprint, EloqKV removes the hard capacity ceiling of DRAM-based systems while delivering up to **10x lower total cost of ownership (TCO)** for large-scale workloads.
 
 ---
 
