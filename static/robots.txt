@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+
+# Allow docs explicitly
+Allow: /product/
+Allow: /eloqkv/
+Allow: /eloqdoc/
+Allow: /eloqsql/
+Allow: /eloqcloud/
+Allow: /blog/
+Allow: /news/
+Allow: /aboutus/
+
+
+Disallow: /admin/
+Disallow: /api/
+Disallow: /internal/
+Disallow: /*?*
+
+Sitemap: https://www.eloqdata.com/sitemap.xml

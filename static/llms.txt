@@ -1,0 +1,28 @@
+# EloqData
+> SSD-first, Memory-Speed Persistence Database Architecture.
+
+## Project Overview
+EloqData is building the next generation of high-performance databases designed for the modern hardware landscape (NVMe SSDs) rather than traditional DRAM-heavy models. Our architecture focuses on extreme low tail latency (P99.99 < 6ms) and massive concurrency.
+
+## Core Technology
+- **EloqStore**: An open-source, SSD-first storage engine.
+- **Async I/O**: Deep integration with Linux io_uring for high-throughput disk operations.
+- **Concurrency**: Built using C++20 coroutines to handle millions of concurrent requests.
+- **APIs**: Provides a multi-model layer including:
+    - **EloqKV**: Redis-compatible API.
+    - **EloqDoc**: MongoDB-compatible API.
+    - Built on top of ScyllaDB for horizontal scalability.
+
+## Key Performance Targets
+- Optimized for "Memory-Speed Persistence" (using SSDs as primary storage while maintaining DRAM-like speeds).
+- Targeted at AI workloads, real-time analytics, and high-scale metadata management.
+- Designed to bypass global DRAM shortages and high infrastructure costs.
+
+## Documentation & Resources
+- Main Site: https://www.eloqdata.com
+- GitHub: https://github.com/EloqData
+- Technical Blog: https://www.eloqdata.com/blog
+
+## Team
+- Co-founded by Lintao Zhang (CEO), Hubert Zhang (CTO) and Jeff Chen (Chief Architect).
+- Engineering roots in GreenplumDB and Pivotal database internals.
