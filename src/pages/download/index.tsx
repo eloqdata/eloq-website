@@ -367,10 +367,10 @@ const EloqDBDownloadPage: React.FC = () => {
                   ))}
                 </div>
 
-                <label htmlFor="company">Company:</label>
+                <label htmlFor="company" className="required">Company:</label>
                 <input type="text" id="company" name="company" />
 
-                <label htmlFor="email">Email:</label>
+                <label htmlFor="email" className="required">Email:</label>
                 <input type="email" id="email" name="email" />
 
                 <input type="hidden" id="ip_address" name="ip_address" />
