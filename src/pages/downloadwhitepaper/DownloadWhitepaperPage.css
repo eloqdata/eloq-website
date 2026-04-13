@@ -1,0 +1,38 @@
+.whitepaper-page {
+  max-width: 1200px;
+}
+
+.whitepaper-content {
+  display: grid;
+  grid-template-columns: 1.65fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.whitepaper-info-panel {
+  min-width: 0;
+}
+
+.whitepaper-form-panel {
+  width: 100%;
+  max-width: 420px;
+  justify-self: end;
+}
+
+@media (max-width: 996px) {
+  .whitepaper-content {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .whitepaper-info-panel {
+    border-right: none;
+    padding-right: 0;
+  }
+
+  .whitepaper-form-panel {
+    max-width: none;
+    justify-self: stretch;
+    padding-left: 0;
+  }
+}

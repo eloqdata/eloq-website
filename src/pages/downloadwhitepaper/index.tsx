@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Layout from "@theme/Layout";
 import "../download/DownloadPage.css";
+import "./DownloadWhitepaperPage.css";
 
 const WhitepaperDownloadPage: React.FC = () => {
   useEffect(() => {
@@ -60,8 +61,8 @@ const WhitepaperDownloadPage: React.FC = () => {
 
   return (
     <Layout title="Download Whitepaper">
-      <div className="contact-page-container">
-        <div className="contact-page">
+      <div className="contact-page-container whitepaper-page-container">
+        <div className="contact-page whitepaper-page">
           <div className="top-description">
             <h1>DOWNLOAD WHITEPAPER</h1>
             <p>
@@ -69,8 +70,8 @@ const WhitepaperDownloadPage: React.FC = () => {
               design, and benchmark details.
             </p>
           </div>
-          <div className="content">
-            <div className="info-panel">
+          <div className="content whitepaper-content">
+            <div className="info-panel whitepaper-info-panel">
               <div className="info-section">
                 <h2>Get the Whitepaper</h2>
                 <p>
@@ -80,7 +81,7 @@ const WhitepaperDownloadPage: React.FC = () => {
                 </p>
               </div>
             </div>
-            <div className="form-panel">
+            <div className="form-panel whitepaper-form-panel">
               <h2>Download Form</h2>
               <form
                 id="whitepaperDownloadForm"
