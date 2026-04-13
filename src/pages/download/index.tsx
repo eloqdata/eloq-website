@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Layout from "@theme/Layout";
-import FormField from "@site/src/components/FormField";
 import "./DownloadPage.css";
 
 interface ProductFeatures {
@@ -109,6 +108,19 @@ const EloqDBDownloadPage: React.FC = () => {
 
   const triggerDownload = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const form = event.currentTarget;
+    const companyInput = form.elements.namedItem("company") as HTMLInputElement;
+    const emailInput = form.elements.namedItem("email") as HTMLInputElement;
+
+    if (!companyInput?.value.trim() || !emailInput?.value.trim()) {
+      alert("Please provide both company and email before downloading.");
+      if (!companyInput?.value.trim()) {
+        companyInput?.focus();
+      } else {
+        emailInput?.focus();
+      }
+      return;
+    }
 
     const os_type = (document.getElementById("os_type") as HTMLSelectElement)
       .value;
@@ -130,7 +142,7 @@ const EloqDBDownloadPage: React.FC = () => {
     document.body.removeChild(link);
 
     // Collect form data
-    const formData = new FormData(event.currentTarget);
+    const formData = new FormData(form);
     formData.append("access_key", "aabaace1-59e8-471d-9dbe-352665e8efcd");
 
     // Create a custom subject
@@ -368,10 +380,10 @@ const EloqDBDownloadPage: React.FC = () => {
                 </div>
 
                 <label htmlFor="company" className="required">Company:</label>
-                <input type="text" id="company" name="company" />
+                <input type="text" id="company" name="company" required />
 
                 <label htmlFor="email" className="required">Email:</label>
-                <input type="email" id="email" name="email" />
+                <input type="email" id="email" name="email" required />
 
                 <input type="hidden" id="ip_address" name="ip_address" />
 

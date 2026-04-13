@@ -339,6 +339,25 @@ module.exports = {
         {
           type: 'html',
           value: `
+            <a href="/downloadwhitepaper" style="display: block; padding: 16px 20px; text-decoration: none; background-color: var(--navbar-dropdown-bg); border-bottom: 1px solid var(--navbar-dropdown-border); min-width: 320px;">
+              <div style="display: flex; align-items: center;">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
+                  <rect x="2" y="2" width="28" height="28" rx="6" fill="var(--navbar-dropdown-icon-bg)" />
+                  <path d="M10 8h8l4 4v12H10V8z" stroke="var(--navbar-dropdown-title-color)" stroke-width="2" fill="none" />
+                  <path d="M18 8v4h4" stroke="var(--navbar-dropdown-title-color)" stroke-width="2" fill="none" />
+                  <path d="M12 14h8M12 18h8M12 22h5" stroke="var(--navbar-dropdown-title-color)" stroke-width="2" />
+                </svg>
+                <div style="display: flex; flex-direction: column;">
+                  <span style="font-size: 18px; font-weight: 500; color: var(--navbar-dropdown-title-color); margin: 0 0 4px 0;">Whitepaper</span>
+                  <span style="font-size: 14px; color: var(--navbar-dropdown-subtitle-color);">Download EloqKV on EloqStore PDF</span>
+                </div>
+              </div>
+            </a>
+          `,
+        },
+        {
+          type: 'html',
+          value: `
             <a href="/product-comparison" style="display: block; padding: 16px 20px; text-decoration: none; background-color: var(--navbar-dropdown-bg); min-width: 320px;">
               <div style="display: flex; align-items: center;">
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
