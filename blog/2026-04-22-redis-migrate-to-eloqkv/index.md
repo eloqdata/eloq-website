@@ -4,7 +4,7 @@ authors: eloq
 date: 2026-04-22
 tags: [Company]
 image: /img/blog/blog_redis_to_eloqkv.jpg
-description: "OpenAI just showed how to push PostgreSQL to its limit for 800 million users. But what happens when 800 billion AI agents take over?"
+description: "Demonstrates how to migrate Redis to EloqKV to eliminate the DRAM tax by transitioning to SSD-optimized storage"
 blog: true
 featured: true
 featuredMain: true
