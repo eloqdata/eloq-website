@@ -7,7 +7,7 @@ image: /img/blog/800billlionagents.jpg
 description: "OpenAI just showed how to push PostgreSQL to its limit for 800 million users. But what happens when 800 billion AI agents take over?"
 blog: true
 featured: true
-featuredMain: true
+featuredMain: false
 ---
 
 # Background
