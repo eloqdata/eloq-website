@@ -1,7 +1,8 @@
 import React from 'react';
 import BlogPostPage from '@theme/BlogPostPage';
+import {normalizeBlogPostModule} from '@site/src/utils/normalizeBlogPostModule';
 
 export default function NewsPostPage(props) {
-  // Remove the filter and just render all posts
-  return <BlogPostPage {...props} />;
+  const content = normalizeBlogPostModule(props.content);
+  return <BlogPostPage {...props} content={content} />;
 }

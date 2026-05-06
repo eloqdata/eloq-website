@@ -277,6 +277,23 @@ module.exports = {
             </a>
           `,
         },
+        {
+          type: 'html',
+          value: `
+            <a href="/post" style="display: block; padding: 16px 20px; text-decoration: none; background-color: var(--navbar-dropdown-bg); min-width: 240px;">
+              <div style="display: flex; align-items: center;">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
+                  <rect x="2" y="2" width="28" height="28" rx="6" fill="var(--navbar-dropdown-icon-bg)" />
+                  <path d="M8 8h16v4H8zM8 14h16v2H8zM8 18h10v2H8z" fill="var(--navbar-dropdown-title-color)" />
+                </svg>
+                <div style="display: flex; flex-direction: column;">
+                  <span style="font-size: 18px; font-weight: 500; color: var(--navbar-dropdown-title-color); margin: 0 0 4px 0;">Articles</span>
+                  <span style="font-size: 14px; color: var(--navbar-dropdown-subtitle-color);">Long-form guides (not the blog)</span>
+                </div>
+              </div>
+            </a>
+          `,
+        },
       ],
     },
     {

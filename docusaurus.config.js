@@ -127,6 +127,31 @@ module.exports = {
       },
     ],
     [
+      '@docusaurus/plugin-content-blog',
+      {
+        id: 'post',
+        path: 'posts',
+        routeBasePath: 'post',
+        blogTitle: 'Articles',
+        blogDescription:
+          'In-depth articles and guides from EloqData (separate from the blog).',
+        blogSidebarTitle: 'Articles',
+        blogSidebarCount: 'ALL',
+        postsPerPage: 12,
+        showReadingTime: true,
+        feedOptions: {
+          type: 'all',
+          copyright,
+        },
+        blogListComponent: require.resolve(
+          './src/components/NewsListPage/index.js'
+        ),
+        blogPostComponent: require.resolve(
+          './src/components/NewsPostPage/index.js'
+        ),
+      },
+    ],
+    [
       '@docusaurus/plugin-content-docs',
       {
         id: 'eloqsql',
