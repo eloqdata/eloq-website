@@ -6,8 +6,8 @@ tags: [Company]
 image: /img/blog/blog_redis_to_eloqkv.jpg
 description: "Demonstrates how to migrate Redis to EloqKV to eliminate the DRAM tax by transitioning to SSD-optimized storage"
 blog: true
-featured: true
-featuredMain: true
+featured: false
+featuredMain: false
 ---
 
 ## Background
