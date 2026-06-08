@@ -1,5 +1,6 @@
 ---
 title: Introduction to EloqKV
+description: Learn how EloqKV combines Redis protocol compatibility, distributed transactions, WAL, and tiered storage for scalable key-value workloads.
 ---
 
 # EloqKV: A Distributed Transactional KV store

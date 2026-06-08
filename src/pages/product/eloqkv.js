@@ -1,8 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
+import seoData from '@site/src/data/seo';
 import styles from './styles.module.css';
 import {CheckIcon, XIcon, InfoIcon} from '@heroicons/react/solid';
+
+const {seo} = seoData;
 
 const WORKLOAD_PRICES = {
   small: {
@@ -171,8 +174,8 @@ export default function EloqKV() {
 
   return (
     <Layout
-      title="EloqKV - Redis Compatible Database"
-      description="The Redis API Compatible Distributed Database for Production - High Performance, Cost Effective and Full ACID Transactions">
+      title={seo.eloqkvProduct.title}
+      description={seo.eloqkvProduct.description}>
       <main>
         {/* Hero Section */}
         <div className={styles.hero}>

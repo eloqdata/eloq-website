@@ -14,6 +14,7 @@ const trademark = `Redis, MySQL, PostgreSQL, MariaDB, MongoDB, and Kubernetes ar
 const navbar = require('./config/navbar');
 const footer = require('./config/footer');
 const headTags = require('./config/headTags');
+const {DEFAULT_OG_IMAGE, SITE_URL, seo} = require('./src/data/seo');
 
 const commonDocsOptions = {
   breadcrumbs: false,
@@ -30,7 +31,7 @@ module.exports = {
     'Data Substrate powered modular database which enables vertical and horizontal expanding of the decoupled components: compute, memory, storage and log separately.',
   organizationName: 'Eloqdb',
   projectName: 'EloqData',
-  url: 'http://www.eloqdata.com',
+  url: SITE_URL,
   baseUrl: '/',
   clientModules: [
   ],
@@ -40,7 +41,6 @@ module.exports = {
       src: 'https://cdn.jsdelivr.net/npm/focus-visible@5.2.0/dist/focus-visible.min.js',
       defer: true,
     },
-    { src: 'https://snack.expo.dev/embed.js', defer: true },
   ],
   headTags,
   favicon: 'img/eloqdata_logo.png',
@@ -72,9 +72,7 @@ module.exports = {
       '@docusaurus/preset-classic',
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
-        docs: {
-          sidebarPath: require.resolve('./sidebars.js'),
-        },
+        docs: false,
         blog: {
           path: 'blog',
           blogSidebarCount: 'ALL',
@@ -84,6 +82,23 @@ module.exports = {
             type: 'all',
             copyright,
           },
+        },
+        sitemap: {
+          ignorePatterns: [
+            '/contact/submitted',
+            '/request-paper/submitted',
+            '/markdown-page',
+            '/download_eloqdb',
+            '/docs/**',
+            '/blog/first-blog-post',
+            '/blog/long-blog-post',
+            '/blog/mdx-blog-post',
+            '/blog/welcome',
+            '/blog/tags/docusaurus',
+            '/blog/tags/facebook',
+            '/blog/tags/hello',
+            '/blog/tags/hola',
+          ],
         },
         theme: {
           customCss: [
@@ -132,9 +147,8 @@ module.exports = {
         id: 'post',
         path: 'posts',
         routeBasePath: 'post',
-        blogTitle: 'Articles',
-        blogDescription:
-          'In-depth articles and guides from EloqData (separate from the blog).',
+        blogTitle: seo.articleIndex.title,
+        blogDescription: seo.articleIndex.description,
         blogSidebarTitle: 'Articles',
         blogSidebarCount: 'ALL',
         postsPerPage: 12,
@@ -232,17 +246,17 @@ module.exports = {
         ],
       },
       navbar: navbar,
-      image: 'img/eloqdata_logo.png',
+      image: 'img/logo-og.png',
       footer: footer(copyright, trademark),
       metadata: [
         {
           property: 'og:image',
-          content: 'https://www.eloqdata.com/eloqdata_logo.png',
+          content: DEFAULT_OG_IMAGE,
         },
         { name: 'twitter:card', content: 'summary_large_image' },
         {
           name: 'twitter:image',
-          content: 'https://www.eloqdata.com/eloqdata_logo.png',
+          content: DEFAULT_OG_IMAGE,
         },
       ],
     }),

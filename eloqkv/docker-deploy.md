@@ -1,5 +1,6 @@
 ---
 title: Run EloqKV using Docker
+description: Run EloqKV with Docker, connect with redis-cli, and configure containerized EloqKV clusters for local evaluation.
 ---
 
 ## Playground

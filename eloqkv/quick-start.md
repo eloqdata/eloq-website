@@ -1,5 +1,6 @@
 ---
 title: Deploy Single Node Instance
+description: Deploy a single-node EloqKV instance with eloqctl and learn the first steps for running a Redis-compatible key-value database.
 summary: Learn how to quickly get started with the EloqKV database.
 ---
 
