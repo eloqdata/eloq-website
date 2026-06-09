@@ -16,6 +16,8 @@ In the world of high-performance data, many engineering teams hit a "memory wall
 
 Moving from Redis to **EloqKV** allows you to shift from expensive, memory-heavy instances to cost-efficient, SSD-optimized infrastructure—all while maintaining the extreme low latency your application requires. 
 
+<!-- truncate -->
+
 <div align="center">
 <div style={{ width: '100%', textAlign: 'center'}}>
 import EnlargeableImage from '@site/src/pages/enlarge_pic';

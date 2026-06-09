@@ -2,9 +2,12 @@ import React from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import seoData from '@site/src/data/seo';
+import StructuredData from '@site/src/components/StructuredData';
+import structuredData from '@site/src/data/structuredData';
 import styles from './styles.module.css';
 
 const {seo} = seoData;
+const {getStructuredDataForPath} = structuredData;
 
 const PRODUCT_COMPARISON = [
   {
@@ -98,6 +101,7 @@ export default function ProductComparison() {
     <Layout
       title={seo.productComparison.title}
       description={seo.productComparison.description}>
+      <StructuredData schemas={getStructuredDataForPath('/product-comparison')} />
       <main>
         {/* Hero Section */}
         <div className={styles.hero}>

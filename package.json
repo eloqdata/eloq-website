@@ -10,6 +10,8 @@
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
     "clear:hard": "docusaurus clear && rm -rf node_modules/.cache",
+    "test:structured-data": "node tools/check-structured-data.js",
+    "test:structured-data:build": "node tools/check-built-structured-data.js",
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids"

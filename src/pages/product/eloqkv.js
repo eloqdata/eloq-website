@@ -2,10 +2,13 @@ import React, {useState, useEffect} from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import seoData from '@site/src/data/seo';
+import StructuredData from '@site/src/components/StructuredData';
+import structuredData from '@site/src/data/structuredData';
 import styles from './styles.module.css';
 import {CheckIcon, XIcon, InfoIcon} from '@heroicons/react/solid';
 
 const {seo} = seoData;
+const {getStructuredDataForPath} = structuredData;
 
 const WORKLOAD_PRICES = {
   small: {
@@ -176,6 +179,7 @@ export default function EloqKV() {
     <Layout
       title={seo.eloqkvProduct.title}
       description={seo.eloqkvProduct.description}>
+      <StructuredData schemas={getStructuredDataForPath('/product/eloqkv')} />
       <main>
         {/* Hero Section */}
         <div className={styles.hero}>
