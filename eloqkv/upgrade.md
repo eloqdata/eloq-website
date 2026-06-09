@@ -1,5 +1,6 @@
 ---
 title: Upgrade Using Eloqctl
+description: Upgrade EloqKV clusters with eloqctl, including binary updates and Cassandra upgrade notes for existing deployments.
 summary: Learn how to quickly get started with the EloqKV database.
 ---
 

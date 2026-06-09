@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
-import Head from '@docusaurus/Head';
 import Link from '@docusaurus/Link';
 import Layout from '@theme/Layout';
 import useBaseUrl from '@docusaurus/useBaseUrl';
+import seoData from '@site/src/data/seo';
 
 import './FeatureSection.css';
 import '../css/logoWall.css';
 import styles from './styles.module.css';
+
+const {seo} = seoData;
 
 const HERO_BADGES = [
     'AI-Agent Ready',
@@ -404,14 +406,7 @@ export default function Home() {
     }, []);
 
     return (
-        <Layout>
-            <Head>
-                <title>EloqData | Converged Database Breaking the Memory Barrier</title>
-                <meta
-                    name="description"
-                    content="EloqData delivers converged NVMe and object storage with ACID guarantees and predictable tail latency for AI-native workloads."
-                />
-            </Head>
+        <Layout title={seo.home.title} description={seo.home.description}>
             <main className={styles.page}>
                 <Hero />
                 <LogoWall />
@@ -422,4 +417,3 @@ export default function Home() {
         </Layout>
     );
 }
-

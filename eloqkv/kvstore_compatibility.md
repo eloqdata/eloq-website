@@ -1,5 +1,6 @@
 ---
 title: EloqKV Compatibility with Redis Commands
+description: Check EloqKV command coverage for Redis-compatible string, hash, list, set, sorted set, bitmap, transaction, scripting, and generic commands.
 ---
 
 # EloqKV Compatibility with Redis Commands

@@ -1,5 +1,6 @@
 ---
 title: EloqKV Compatibility with different Redis Clients
+description: Review EloqKV compatibility notes for Redis client libraries including Jedis, redis-py, and go-redis.
 ---
 
 # EloqKV Compatibility with different Redis Clients

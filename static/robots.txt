@@ -1,16 +1,27 @@
 User-agent: *
 Allow: /
 
-# Allow docs explicitly
+# EloqKV growth surfaces
 Allow: /product/
 Allow: /eloqkv/
+Allow: /blog/
+Allow: /post/
+Allow: /costsaving/
+Allow: /product-comparison/
+Allow: /faq/
+Allow: /compare/
+
+# Other public EloqData surfaces
 Allow: /eloqdoc/
 Allow: /eloqsql/
 Allow: /eloqcloud/
-Allow: /blog/
+Allow: /operator/
 Allow: /news/
 Allow: /aboutus/
-
+Allow: /pricing/
+Allow: /download/
+Allow: /contact/
+Allow: /request-paper/
 
 Disallow: /admin/
 Disallow: /api/

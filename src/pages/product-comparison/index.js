@@ -1,7 +1,10 @@
 import React from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
+import seoData from '@site/src/data/seo';
 import styles from './styles.module.css';
+
+const {seo} = seoData;
 
 const PRODUCT_COMPARISON = [
   {
@@ -93,8 +96,8 @@ const PRODUCT_COMPARISON = [
 export default function ProductComparison() {
   return (
     <Layout
-      title="Product Edition Comparison"
-      description="Compare features across EloqDB Open Source, Enterprise, and Cloud editions">
+      title={seo.productComparison.title}
+      description={seo.productComparison.description}>
       <main>
         {/* Hero Section */}
         <div className={styles.hero}>

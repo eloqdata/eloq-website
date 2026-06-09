@@ -1,5 +1,6 @@
 ---
 title: Deploy High Available Cluster on Shared Storage
+description: Deploy a highly available EloqKV cluster with persistent storage, WAL, and shared storage using eloqctl.
 summary: Learn how to quickly get started with the EloqKV database.
 ---
 

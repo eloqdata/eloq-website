@@ -1,6 +1,7 @@
 ---
 id: deploy-on-kubernetes
 title: Deploy EloqKV on Kubernetes
+description: Deploy EloqKV on Kubernetes with Eloq Operator for cloud-native cluster management, scaling, and operations.
 ---
 
 # Deploy EloqKV on Kubernetes
@@ -21,4 +22,3 @@ The Eloq Operator supports deployment on:
 To deploy EloqKV using the Eloq Operator, follow the comprehensive installation guides:
 
 [Install Eloq Operator](/operator/introduction)
-

@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
+import seoData from '@site/src/data/seo';
 import {
   ResponsiveContainer,
   BarChart,
@@ -12,6 +13,8 @@ import {
   Cell,
 } from 'recharts';
 import styles from './styles.module.css';
+
+const {seo} = seoData;
 
 const DEFAULT_INPUTS = {
   dataSizeGb: 1000,
@@ -148,8 +151,8 @@ export default function CostSavingCalculatorPage() {
 
   return (
     <Layout
-      title="EloqKV Cost Saving Calculator"
-      description="Estimate infrastructure savings by using EloqKV instead of Redis.">
+      title={seo.costSaving.title}
+      description={seo.costSaving.description}>
       <main className={styles.page}>
         <section className={styles.header}>
           <h1>EloqKV Cost Saving Calculator</h1>
