@@ -1,13 +1,16 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 
-function schemasFromHtml(pathname) {
-  const html = fs.readFileSync(pathname, 'utf8');
+function schemasFromHtmlContent(html) {
   return [
     ...html.matchAll(
-      /<script[^>]+type=(?:"application\/ld\+json"|application\/ld\+json)[^>]*>(.*?)<\/script>/g
+      /<script[^>]+type=(?:"application\/ld\+json"|application\/ld\+json)[^>]*>([\s\S]*?)<\/script>/g
     ),
   ].map(match => JSON.parse(match[1]));
+}
+
+function schemasFromHtml(pathname) {
+  return schemasFromHtmlContent(fs.readFileSync(pathname, 'utf8'));
 }
 
 function schemaTypes(pathname) {
@@ -62,5 +65,12 @@ for (const page of [
 }
 
 assertLacksTypes('build/product/eloqkv.html', ['FAQPage']);
+
+assert.deepEqual(
+  schemasFromHtmlContent(`<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Thing"}
+</script>`).map(schema => schema['@type']),
+  ['Thing']
+);
 
 console.log('Built structured data checks passed.');
