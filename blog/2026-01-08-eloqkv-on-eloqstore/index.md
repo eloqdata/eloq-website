@@ -4,7 +4,8 @@ authors: eloq
 date: 2026-01-08
 tags: [Company]
 image: /img/blog/ces2026.jpg
-description: "EloqKV powered by EloqStore unlocks predictable low latency on NVMe and up to 20X cost savings vs traditional in-memory caching."
+description: "EloqKV on EloqStore benchmark: P99.99 latency of a few milliseconds on NVMe for datasets up to 2TB, where a DRAM-only Redis node cannot fit the data—at a fraction of the cost."
+keywords: [EloqKV, EloqStore, Redis benchmark, NVMe key-value store, P99.99 tail latency, Redis alternative, DRAM cost, KVRocks comparison]
 blog: true
 featured: false
 featuredMain: false
@@ -15,6 +16,8 @@ featuredMain: false
 At **CES 2026**, NVIDIA CEO Jensen Huang delivered a stark warning: the industry is facing a critical shortage of DRAM. While the explosive growth of AI models is the primary driver, there is another massive consumer of memory that often flies under the radar: **Caching Services**.
 
 Traditionally, caching services like [Redis](https://redis.io/) and [Valkey](https://valkey.io/) are purely memory-based. Even though people have tried to leverage fast SSDs for caching (e.g. [Apache KVRocks](https://kvrocks.apache.org/)), for latency-sensitive workloads, DRAM-based solutions remained the only viable solution because SSD-based alternatives often have significant tail latency issues. In mission-critical environments, a latency spike can easily disrupt real-time workflows and render a service unresponsive. Until recently, how to tame tail latency for IO intensive workloads has remained an unsolved challenge.
+
+> **Quick answer:** EloqKV on EloqStore serves Redis-style workloads from NVMe SSD while holding **P99.99 latency to a few milliseconds** — on datasets up to **2TB**, where a DRAM-only Redis node cannot fit the data at all. You get memory-like tail latency at disk-like cost, with the **20X** node reduction detailed below. See the [EloqKV product page](/product/eloqkv) and estimate your own savings with the [cost calculator](/costsaving).
 
 <!-- truncate -->
 
@@ -73,14 +76,30 @@ redis_throughput = [161910.38, 155415.41, None, None]
 redis_latency = [1.43100, 1.51100, None, None]
 -->
 
-For full disclosure, here is the benchmark setup:
-* **Hardware:** Single Node, GCP Z3-16 instance.
-* **Specs:** 16 vCore, 128GB RAM, 2.9TB NVMe SSD x 2.
-* **Payload:** Up to 800 Million KV pairs with variable payload sizes of 1-4KB.
-* **Benchmark Tool:** `memtier_benchmark`
+### Benchmark conditions
 
+These results reflect one specific setup. We share it in full so you can judge how well it maps to your own workload.
 
-By solving the P99.99 latency problem on SSDs, EloqKV allows businesses to scale their data footprint by orders of magnitude without sacrificing the sub-millisecond responsiveness their users demand. To manage a 2TB dataset with Redis, an organization would typically need a cluster of **20 nodes** to provide enough RAM. EloqKV delivers the same "long-tail" latency reliably on a single NVMe-optimized node, slashing infrastructure costs by **20X**.
+* **Hardware:** Single node, GCP `Z3-16` instance — 16 vCore, 128GB RAM, 2&nbsp;&times;&nbsp;2.9TB NVMe SSD.
+* **Dataset sizes:** 20GB, 100GB, 200GB, and 2TB (up to ~800 million KV pairs).
+* **Payload:** Variable value sizes of 1–4KB.
+* **Read/write mixes:** 95:5 (read-dominant), 50:50 (balanced), and 5:95 (write-dominant). The scaling table below uses the read-dominant (GET) workload; the balanced and write-heavy mixes appear in the charts above.
+* **Persistence mode:** Write-ahead log (WAL) **disabled** — i.e. cache mode — to isolate serving latency. Durable, WAL-backed performance is evaluated separately in [ACID in EloqKV: Durability](/blog/2024/08/25/benchmark-txlog).
+* **Benchmark tool:** `memtier_benchmark`.
+* **Metric definitions:** **P99** is the 99th-percentile latency (slower than 99% of requests). **P99.99** is the 99.99th-percentile latency — the worst 1 in 10,000 requests — the figure that exposes the tail-latency spikes SSD caches usually suffer.
+
+The scaling test holds the read-dominant workload steady while the dataset grows. EloqKV keeps a flat P99.99 profile across all four sizes; Redis cannot hold the 200GB and 2TB datasets on this single node because they exceed its RAM.
+
+| Dataset size | EloqKV throughput (ops/s) | EloqKV P99.99 GET (ms) | Redis throughput (ops/s) | Redis P99.99 GET (ms) |
+| --- | --- | --- | --- | --- |
+| 20GB | ~507,000 | 1.55 | ~162,000 | 1.43 |
+| 100GB | ~299,000 | 1.43 | ~155,000 | 1.51 |
+| 200GB | ~281,000 | 2.03 | — (exceeds RAM) | — |
+| 2TB | ~262,000 | 2.61 | — (exceeds RAM) | — |
+
+By solving the P99.99 latency problem on SSDs, EloqKV allows businesses to scale their data footprint by orders of magnitude without sacrificing the sub-millisecond responsiveness their users demand. To manage a 2TB dataset with Redis, an organization would typically need a cluster of **20 nodes** to provide enough RAM. EloqKV delivers the same "long-tail" latency reliably on a single NVMe-optimized node — a **20X** reduction in nodes for this 2TB scenario.
+
+The actual cost saving depends on your dataset size, hot working set, replica count, and durability needs, so the multiple will differ for your workload. Model your own numbers with the [EloqKV cost calculator](/costsaving), or read the full [Redis vs EloqKV cost breakdown](/post/redis-vs-eloqkv-cost-breakdown-at-scale).
 
 
 
@@ -157,4 +176,33 @@ We are excited to announce that **EloqData is a sponsor of the [Unlocked Confere
 Unlocked is the premier event for developers discussing the future of backend infrastructure. We are eager to discuss how the shift from DRAM to NVMe can unlock new possibilities for AI and hyperscale applications.
 
 Come visit our booth, chat with our engineers, and see EloqStore in action. We look forward to seeing you there.
+
+## Try EloqKV
+
+- **Product overview:** [EloqKV product page](/product/eloqkv)
+- **Estimate savings:** [Cost calculator](/costsaving)
+- **Already on Redis?** Follow the [Redis-to-EloqKV migration guide](/blog/2026/04/22/redis-migrate-to-eloqkv)
+- **Source:** [EloqKV](https://github.com/eloqdata/eloqkv) and [EloqStore](https://github.com/eloqdata/eloqstore) on GitHub
+
+## Frequently Asked Questions
+
+### How does EloqKV keep P99.99 latency low on SSD?
+
+EloqStore keeps every index's non-leaf nodes in DRAM, so each read is a single, direct NVMe access (one IOP) with no LSM-style level checks. It pairs this with coroutines and `io_uring` asynchronous I/O, and its append-only design avoids the compaction stalls that spike tail latency on other SSD stores. The result is a P99.99 of a few milliseconds even at 2TB.
+
+### What exactly were the benchmark conditions?
+
+A single GCP `Z3-16` node (16 vCore, 128GB RAM, 2&nbsp;&times;&nbsp;2.9TB NVMe), 1–4KB values, datasets from 20GB to 2TB, read/write mixes of 95:5, 50:50, and 5:95, measured with `memtier_benchmark` and the write-ahead log disabled (cache mode). See the [Benchmark conditions](#benchmark-conditions) section for the full table.
+
+### Do these results require turning off durability?
+
+These specific numbers were measured in cache mode (WAL off) to isolate serving latency. EloqKV also supports WAL-backed durable persistence; that mode is benchmarked separately in [ACID in EloqKV: Durability](/blog/2024/08/25/benchmark-txlog).
+
+### How much can EloqKV save versus Redis?
+
+In this 2TB test, EloqKV replaces a roughly 20-node Redis cluster with a single NVMe node. Real savings depend on your data size, hot working set, replicas, and durability requirements — estimate yours with the [cost calculator](/costsaving).
+
+### Is EloqKV a drop-in Redis replacement?
+
+EloqKV is Redis- and Valkey-compatible, which keeps migration effort low, but teams should validate command coverage, cluster behavior, persistence settings, and latency SLOs before cutover. The [migration guide](/blog/2026/04/22/redis-migrate-to-eloqkv) walks through this.
 

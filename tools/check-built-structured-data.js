@@ -59,10 +59,17 @@ for (const page of [
   'build/blog/2024/08/25/benchmark-txlog.html',
   'build/blog/2024/09/01/benchmark-transaction.html',
   'build/blog/spring-eloqkv-benchmark.html',
-  'build/blog/2026/04/22/redis-migrate-to-eloqkv.html',
 ]) {
   assertHasTypes(page, ['BlogPosting', 'BreadcrumbList']);
   assertLacksTypes(page, ['FAQPage', 'SoftwareApplication']);
+}
+
+for (const page of [
+  'build/blog/2026/04/22/redis-migrate-to-eloqkv.html',
+  'build/blog/2026/01/08/eloqkv-on-eloqstore.html',
+]) {
+  assertHasTypes(page, ['BlogPosting', 'BreadcrumbList', 'FAQPage']);
+  assertLacksTypes(page, ['SoftwareApplication']);
 }
 
 assert.deepEqual(

@@ -33,6 +33,7 @@ for (const pathname of [
   '/blog/2024/09/01/benchmark-transaction',
   '/blog/spring-eloqkv-benchmark',
   '/blog/2026/04/22/redis-migrate-to-eloqkv',
+  '/blog/2026/01/08/eloqkv-on-eloqstore',
 ]) {
   const schemas = getStructuredDataForPath(pathname);
   assert.ok(schemas.length > 0, `${pathname} should have route schemas`);
@@ -101,9 +102,31 @@ assert.match(
 assert.deepEqual(schemaTypesFor('/blog/2024/08/17/benchmark-single-node'), [
   'BreadcrumbList',
 ]);
+
 assert.deepEqual(schemaTypesFor('/blog/2026/04/22/redis-migrate-to-eloqkv'), [
   'BreadcrumbList',
+  'FAQPage',
 ]);
+const migrationFaqSchema = schemaFor(
+  '/blog/2026/04/22/redis-migrate-to-eloqkv',
+  'FAQPage'
+);
+assert.equal(migrationFaqSchema.mainEntity.length, 5);
+assert.match(migrationFaqSchema.mainEntity[0].name, /downtime/);
+
+assert.deepEqual(schemaTypesFor('/blog/2026/01/08/eloqkv-on-eloqstore'), [
+  'BreadcrumbList',
+  'FAQPage',
+]);
+const benchmarkFaqSchema = schemaFor(
+  '/blog/2026/01/08/eloqkv-on-eloqstore',
+  'FAQPage'
+);
+assert.equal(benchmarkFaqSchema.mainEntity.length, 5);
+assert.match(
+  benchmarkFaqSchema.mainEntity[0].acceptedAnswer.text,
+  /single direct NVMe access/
+);
 
 assert.deepEqual(getStructuredDataForPath('/contact/submitted'), []);
 assert.deepEqual(getStructuredDataForPath('/unknown-route'), []);
