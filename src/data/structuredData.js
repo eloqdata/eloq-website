@@ -134,6 +134,110 @@ const eloqkvProductFaq = withContext({
   })),
 });
 
+const benchmarkFaq = withContext({
+  '@type': 'FAQPage',
+  '@id': `${absoluteUrl('/blog/2026/01/08/eloqkv-on-eloqstore')}#faq`,
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How does EloqKV keep P99.99 latency low on SSD?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text:
+          'EloqStore keeps every index’s non-leaf nodes in DRAM, so each read is a single direct NVMe access with no LSM-style level checks. Combined with coroutines, io_uring asynchronous I/O, and an append-only design that avoids compaction stalls, EloqKV holds P99.99 latency to a few milliseconds even on a 2TB dataset.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What exactly were the benchmark conditions?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text:
+          'A single GCP Z3-16 node (16 vCore, 128GB RAM, two 2.9TB NVMe SSDs), 1-4KB values, datasets from 20GB to 2TB, read/write mixes of 95:5, 50:50, and 5:95, measured with memtier_benchmark and the write-ahead log disabled (cache mode).',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Do these results require turning off durability?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text:
+          'These specific numbers were measured in cache mode with the write-ahead log off to isolate serving latency. EloqKV also supports WAL-backed durable persistence, which is benchmarked separately.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How much can EloqKV save versus Redis?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text:
+          'In this 2TB test, EloqKV replaces a roughly 20-node Redis cluster with a single NVMe node. Actual savings depend on dataset size, hot working set, replica count, and durability requirements, so the multiple varies by workload.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is EloqKV a drop-in Redis replacement?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text:
+          'EloqKV is Redis and Valkey compatible, which keeps migration effort low, but teams should validate command coverage, cluster behavior, persistence settings, and latency SLOs before cutover.',
+      },
+    },
+  ],
+});
+
+const migrationFaq = withContext({
+  '@type': 'FAQPage',
+  '@id': `${absoluteUrl('/blog/2026/04/22/redis-migrate-to-eloqkv')}#faq`,
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Is there downtime when migrating from Redis to EloqKV?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text:
+          'No. RedisShake mirrors data into EloqKV with a full sync followed by continuous incremental sync, so Redis keeps serving until you divert traffic. The only brief pause is the final write cutover.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Which Redis commands and data types are not supported?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text:
+          'EloqKV targets core key-value and common structures, not STREAM, GEO, or HYPERLOGLOG, which the sample shake.toml blocks from sync. Validate your command and type usage against the compatibility reference before migrating.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Do existing Redis clients still work with EloqKV?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text:
+          'Most Redis and Valkey clients work without changes because EloqKV is wire-compatible. Confirm your specific driver and cluster-mode behavior against the client compatibility reference.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I validate latency before moving writes?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text:
+          'Define a latency SLO such as a P99 GET target, divert read traffic to EloqKV first, and monitor P99 and P99.99 under real load before cutover.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I roll back the migration?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text:
+          'Until the write cutover, Redis remains the source of truth, so rolling back means leaving reads and writes on Redis. Keep Redis running until EloqKV has served production writes and met your SLOs, then decommission it.',
+      },
+    },
+  ],
+});
+
 const routeStructuredData = {
   '/product/eloqkv': [
     eloqkvSoftwareApplication,
@@ -207,6 +311,18 @@ const routeStructuredData = {
         path: '/blog/2026/04/22/redis-migrate-to-eloqkv',
       },
     ]),
+    migrationFaq,
+  ],
+  '/blog/2026/01/08/eloqkv-on-eloqstore': [
+    breadcrumbList('/blog/2026/01/08/eloqkv-on-eloqstore', [
+      {name: 'Home', path: '/'},
+      {name: 'Blog', path: '/blog'},
+      {
+        name: 'EloqKV on EloqStore Benchmark',
+        path: '/blog/2026/01/08/eloqkv-on-eloqstore',
+      },
+    ]),
+    benchmarkFaq,
   ],
 };
 

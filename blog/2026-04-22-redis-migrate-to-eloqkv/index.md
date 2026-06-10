@@ -4,7 +4,8 @@ authors: eloq
 date: 2026-04-22
 tags: [Company]
 image: /img/blog/blog_redis_to_eloqkv.jpg
-description: "Demonstrates how to migrate Redis to EloqKV to eliminate the DRAM tax by transitioning to SSD-optimized storage"
+description: "Step-by-step guide to migrate from Redis to EloqKV with zero downtime using RedisShake: mirror data, divert reads, validate compatibility, then cut over writes."
+keywords: [Redis to EloqKV migration, RedisShake, Redis migration guide, Redis alternative, zero downtime migration, NVMe key-value store, DRAM cost]
 blog: true
 featured: false
 featuredMain: false
@@ -15,6 +16,8 @@ featuredMain: false
 In the world of high-performance data, many engineering teams hit a "memory wall." As data sets grow, the cost of keeping every single byte in DRAM becomes the primary bottleneck for scaling. This is particularly painful for memory-bound applications, where the performance requirements demand Redis-like speeds, but the sheer volume of data makes the cloud bills unsustainable.
 
 Moving from Redis to **EloqKV** allows you to shift from expensive, memory-heavy instances to cost-efficient, SSD-optimized infrastructure—all while maintaining the extreme low latency your application requires. 
+
+> **Quick answer:** Migrate from Redis to EloqKV with zero downtime using [RedisShake](https://github.com/tair-opensource/RedisShake). Mirror your data into EloqKV (full + incremental sync), divert read traffic and validate latency, then cut over writes and decommission Redis. The full checklist and a compatibility-validation step are below.
 
 <!-- truncate -->
 
@@ -27,10 +30,47 @@ import EnlargeableImage from '@site/src/pages/enlarge_pic';
 
 ---
 
+## Migration checklist
+
+Use this checklist to run the migration end to end. Each later section expands a step.
+
+**Before you start**
+
+- [ ] Inventory the commands and data types your app uses, and confirm EloqKV [command](/eloqkv/kvstore_compatibility) and [client](/eloqkv/client_compatibility) compatibility.
+- [ ] Provision the target EloqKV cluster and confirm TLS, auth, and cluster mode.
+- [ ] Define your latency SLO (for example, a P99 GET target) and set up monitoring on both systems.
+
+**Stage 1 — Mirror data**
+
+- [ ] Deploy RedisShake with the `shake.toml` below; run a full sync, then leave incremental sync running.
+- [ ] Confirm replication lag is minimal and stable.
+
+**Stage 2 — Divert reads**
+
+- [ ] Point read clients at EloqKV and verify P99 latency meets your SLO under real traffic.
+
+**Stage 3 — Cut over writes**
+
+- [ ] Set Redis read-only / pause ingestion, verify the final incremental batch has shipped, repoint writers to EloqKV, then decommission Redis.
+
+---
+
 ## The Migration Driver: Escaping the "DRAM Tax"
 For memory-bound use cases—such as a **Feature Store for recommendation systems**—the challenge isn't necessarily request volume, but the sheer footprint of user profiles and item embeddings. In a standard Redis setup, you are forced to pay for peak DRAM capacity, even if much of that data isn't accessed every second.
 
 **EloqKV** breaks this linear cost curve. By utilizing a sophisticated storage engine optimized for NVMe SSDs, it delivers the speed of an in-memory database at the price point of disk storage. This migration doesn't just save money; it allows your business to scale its data footprint without a proportional increase in infrastructure spend.
+
+---
+
+## Validate compatibility before cutover
+
+EloqKV is Redis- and Valkey-compatible, but treat the migration as a validated cutover rather than a drop-in swap. Confirm each of the following before you move write traffic:
+
+- **Commands and data types:** Verify the commands and types your application uses are supported. Review the [command compatibility reference](/eloqkv/kvstore_compatibility). In the `shake.toml` below we block command groups EloqKV does not target (`STREAM`, `GEO`, `HYPERLOGLOG`) and admin commands (`SELECT`, `FLUSHALL`, `FLUSHDB`) so the sync never ships them.
+- **Clients and libraries:** Most Redis clients work unchanged. Confirm your driver and version against the [client compatibility reference](/eloqkv/client_compatibility), paying attention to cluster-mode clients.
+- **Cluster behavior:** The target runs in cluster mode (`cluster = true`). Validate key distribution, multi-key operations, and how your client handles `MOVED` and `ASK` redirects.
+- **Persistence settings:** Decide between cache mode and WAL-backed durability for the target, and make sure it matches your recovery requirements. This choice is independent of Redis's own RDB/AOF settings.
+- **Latency SLOs:** Define an explicit target (for example, P99 GET latency) and monitor it on EloqKV during Stage 2 before shifting writes. See the [EloqKV on EloqStore benchmark](/blog/2026/01/08/eloqkv-on-eloqstore) for reference tail-latency numbers.
 
 ---
 
@@ -122,3 +162,31 @@ With reads successfully validated on EloqKV, it is time to move the "Source of T
 By migrating your memory-bound Feature Store to EloqKV, you effectively decouple your data growth from your DRAM budget. You gain the ability to store 10x the features on the same budget, providing your recommendation models with more context and your business with a lower TCO (Total Cost of Ownership). 
 
 The transition is low-risk, the performance remains "extreme," and the SSD-based cost model finally makes large-scale data sets sustainable.
+
+## Try it yourself
+
+- **Product overview:** [EloqKV product page](/product/eloqkv)
+- **Estimate savings:** [Cost calculator](/costsaving) and the [Redis vs EloqKV cost breakdown](/post/redis-vs-eloqkv-cost-breakdown-at-scale)
+- **Latency proof:** [EloqKV on EloqStore benchmark](/blog/2026/01/08/eloqkv-on-eloqstore)
+
+## Frequently Asked Questions
+
+### Is there downtime during the migration?
+
+No. RedisShake mirrors your data into EloqKV with a full sync followed by continuous incremental sync, so reads and writes keep serving from Redis until you choose to divert them. The only brief pause is the final write cutover in Stage 3.
+
+### Which Redis commands and data types are not supported?
+
+EloqKV targets core key-value and common structures, not `STREAM`, `GEO`, or `HYPERLOGLOG`, which the sample `shake.toml` blocks from sync. Check your command and type usage against the [command compatibility reference](/eloqkv/kvstore_compatibility) before migrating.
+
+### Do my existing Redis clients still work?
+
+Most Redis and Valkey clients work without changes because EloqKV is wire-compatible. Confirm your specific driver and cluster-mode behavior against the [client compatibility reference](/eloqkv/client_compatibility).
+
+### How do I validate latency before moving writes?
+
+Define a latency SLO such as a P99 GET target, divert read traffic to EloqKV in Stage 2, and monitor P99 and P99.99 under real load before cutover. The [benchmark article](/blog/2026/01/08/eloqkv-on-eloqstore) shows reference tail-latency numbers on NVMe.
+
+### How do I roll back if something goes wrong?
+
+Until the Stage 3 write cutover, Redis remains the source of truth, so rolling back is simply leaving reads and writes on Redis. Keep Redis running until EloqKV has served production write traffic and met your SLOs, then decommission it.
