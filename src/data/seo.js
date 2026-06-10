@@ -8,9 +8,13 @@ const seo = {
       'EloqData builds Redis-compatible and multi-model databases that move large stateful workloads from expensive DRAM to NVMe and object storage.',
   },
   eloqkvProduct: {
-    title: 'EloqKV - Redis-Compatible Database for Large Stateful Workloads',
+    title: 'EloqKV - Redis-Compatible KV for Workloads Outgrowing Redis',
     description:
-      'EloqKV is a Redis-compatible key-value database for workloads that outgrow in-memory Redis, using NVMe and object storage for lower-cost scale.',
+      'EloqKV is a Redis-compatible key-value database that uses NVMe-backed storage to lower the cost of large memory-bound workloads.',
+    ogTitle:
+      'EloqKV: Redis-Compatible KV for Workloads That Outgrow Redis',
+    ogDescription:
+      'Scale large Redis-style datasets beyond expensive DRAM with NVMe-backed storage and optional durable persistence.',
   },
   costSaving: {
     title: 'EloqKV Cost Saving Calculator',

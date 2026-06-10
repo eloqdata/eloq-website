@@ -1,4 +1,5 @@
 const {SITE_URL, seo} = require('./seo');
+const {eloqkvProductFaqItems} = require('./eloqkvFaq');
 
 const ORGANIZATION_ID = `${SITE_URL}/#organization`;
 
@@ -54,6 +55,8 @@ const eloqkvSoftwareApplication = withContext({
   url: absoluteUrl('/product/eloqkv'),
   image: absoluteUrl('/img/EloqKV-banner.png'),
   applicationCategory: 'DatabaseApplication',
+  operatingSystem: 'Linux',
+  dateModified: '2026-06-09',
   publisher: organization,
   creator: organization,
   codeRepository: 'https://github.com/eloqdata/eloqkv',
@@ -118,6 +121,19 @@ const costComparisonFaq = withContext({
   ],
 });
 
+const eloqkvProductFaq = withContext({
+  '@type': 'FAQPage',
+  '@id': `${absoluteUrl('/product/eloqkv')}#faq`,
+  mainEntity: eloqkvProductFaqItems.map(item => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+});
+
 const routeStructuredData = {
   '/product/eloqkv': [
     eloqkvSoftwareApplication,
@@ -125,6 +141,7 @@ const routeStructuredData = {
       {name: 'Home', path: '/'},
       {name: 'EloqKV', path: '/product/eloqkv'},
     ]),
+    eloqkvProductFaq,
   ],
   '/product-comparison': [
     breadcrumbList('/product-comparison', [

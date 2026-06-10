@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+/* Inter is loaded globally via config/headTags.js (preconnect + non-blocking link). */
 
 /* Add base font for the product page */
 .hero,
@@ -1289,4 +1289,2291 @@
   max-width: 1200px;
   margin: 0 auto 2rem;
   padding: 0 2rem;
+}
+
+/* EloqKV cost-led product page */
+.eloqkvPage {
+  min-height: 100vh;
+  background: #0a0a14;
+  color: #fff;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.6;
+}
+
+.eloqkvHero {
+  padding: 5rem 1rem 3.5rem;
+  background:
+    radial-gradient(circle at top right, rgba(255, 123, 45, 0.18), transparent 34rem),
+    linear-gradient(180deg, #0a0a14 0%, #0f1116 100%);
+  overflow: hidden;
+}
+
+.eloqkvHeroInner,
+.eloqkvDefinitionInner,
+.eloqkvNarrativeSection,
+.eloqkvFaqSection,
+.eloqkvFinalCtaInner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.eloqkvHeroInner {
+  text-align: center;
+}
+
+.eloqkvEyebrow {
+  margin: 0 0 0.75rem;
+  color: #17c964;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.eloqkvHeroTitle {
+  max-width: 980px;
+  margin: 0 auto 1.35rem;
+  color: #fff;
+  font-size: 3.75rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.05;
+}
+
+.eloqkvHeroSubtitle {
+  max-width: 850px;
+  margin: 0 auto 1rem;
+  color: #ff9f4a;
+  font-size: 1.28rem;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+.eloqkvProofLine {
+  max-width: 780px;
+  margin: 0 auto 2rem;
+  color: #b7bdd3;
+  font-size: 1rem;
+}
+
+.eloqkvHeroButtons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+.eloqkvPrimaryButton,
+.eloqkvSecondaryButton,
+.eloqkvTertiaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.85rem;
+  border-radius: 8px;
+  padding: 0.75rem 1.2rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.eloqkvPrimaryButton {
+  border: 1px solid transparent;
+  background: linear-gradient(120deg, #ff7b2d, #ff9f4a);
+  color: #fff;
+}
+
+.eloqkvSecondaryButton {
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff;
+}
+
+.eloqkvTertiaryButton {
+  border: 1px solid rgba(23, 201, 100, 0.38);
+  background: rgba(23, 201, 100, 0.08);
+  color: #d9ffe6;
+}
+
+.eloqkvPrimaryButton:hover,
+.eloqkvSecondaryButton:hover,
+.eloqkvTertiaryButton:hover {
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.eloqkvDefinitionSection,
+.eloqkvNarrativeSection,
+.eloqkvFaqSection,
+.eloqkvFinalCta {
+  background: #0a0a14;
+}
+
+.eloqkvDefinitionSection {
+  padding: 3rem 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.eloqkvDefinitionInner {
+  display: grid;
+  grid-template-columns: 0.75fr 1.25fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.eloqkvSectionTitle {
+  margin: 0;
+  color: #fff;
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.15;
+}
+
+.eloqkvDefinitionText {
+  margin: 0;
+  color: #b7bdd3;
+  font-size: 1.15rem;
+}
+
+.eloqkvNarrativeSection {
+  padding: 5rem 1rem 2rem;
+}
+
+.eloqkvSectionHeader {
+  max-width: 760px;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+.eloqkvNarrativeList {
+  display: grid;
+  gap: 1rem;
+}
+
+.eloqkvNarrativeText h3 {
+  margin: 0 0 0.95rem;
+  color: #ff9f4a;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.18;
+}
+
+.eloqkvNarrativeText p:last-of-type {
+  margin: 0;
+  color: #b7bdd3;
+  font-size: 1.05rem;
+}
+
+.eloqkvInlineLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.35rem;
+}
+
+.eloqkvInlineLinks a {
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 159, 74, 0.7);
+}
+
+.eloqkvInlineLinks a:hover {
+  color: #ff9f4a;
+}
+
+.eloqkvFaqSection {
+  padding: 4rem 1rem;
+}
+
+.eloqkvFaqGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.eloqkvFaqItem {
+  min-height: 13rem;
+  padding: 1.3rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background: #0f1116;
+}
+
+.eloqkvFaqItem h3 {
+  margin: 0 0 0.75rem;
+  color: #fff;
+  font-size: 1.22rem;
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+.eloqkvFaqItem p {
+  margin: 0;
+  color: #b7bdd3;
+}
+
+.eloqkvFaqItem a {
+  color: #ff9f4a;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.eloqkvFaqItem a:hover {
+  text-decoration: underline;
+}
+
+.eloqkvFinalCta {
+  padding: 0 1rem 5rem;
+}
+
+.eloqkvFinalCtaInner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2rem;
+  align-items: center;
+  padding: 2rem;
+  border: 1px solid rgba(23, 201, 100, 0.3);
+  border-radius: 8px;
+  background:
+    linear-gradient(120deg, rgba(23, 201, 100, 0.14), rgba(255, 123, 45, 0.08)),
+    #0f1116;
+}
+
+.eloqkvFinalCtaInner .eloqkvHeroButtons {
+  justify-content: flex-end;
+}
+
+@media (max-width: 1024px) {
+  .eloqkvHeroTitle {
+    font-size: 3rem;
+  }
+
+  .eloqkvFaqGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .eloqkvDefinitionInner,
+  .eloqkvFinalCtaInner {
+    grid-template-columns: 1fr;
+  }
+
+  .eloqkvFinalCtaInner .eloqkvHeroButtons {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .eloqkvHero {
+    padding: 2.5rem 1rem 1.25rem;
+  }
+
+  .eloqkvHeroTitle {
+    font-size: 2.05rem;
+  }
+
+  .eloqkvHeroSubtitle {
+    font-size: 1rem;
+  }
+
+  .eloqkvProofLine {
+    margin-bottom: 1.5rem;
+  }
+
+  .eloqkvSectionTitle {
+    font-size: 1.85rem;
+  }
+
+  .eloqkvFaqGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .eloqkvNarrativeSection {
+    padding-top: 3.5rem;
+  }
+
+  .eloqkvNarrativeText h3 {
+    font-size: 1.55rem;
+  }
+
+  .eloqkvHeroButtons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .eloqkvPrimaryButton,
+  .eloqkvSecondaryButton,
+  .eloqkvTertiaryButton {
+    min-height: 2.65rem;
+    padding: 0.65rem 1rem;
+    width: 100%;
+  }
+}
+
+/* EloqKV layout redesign */
+.eloqkvHero {
+  position: relative;
+  min-height: 620px;
+  display: flex;
+  align-items: stretch;
+  padding: 3.25rem 1rem 1.25rem;
+  background:
+    linear-gradient(90deg, rgba(10, 10, 20, 0.98) 0%, rgba(10, 10, 20, 0.88) 46%, rgba(10, 10, 20, 0.3) 100%),
+    linear-gradient(180deg, #090a12 0%, #0d1117 78%, #0a0a14 100%);
+}
+
+.eloqkvHeroBackdrop {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.eloqkvHeroBackdrop img {
+  width: 52rem;
+  max-width: 56vw;
+  margin-right: -4rem;
+  opacity: 0.76;
+  filter: drop-shadow(0 2.25rem 3rem rgba(0, 0, 0, 0.42));
+  animation: eloqkvFloat 8s ease-in-out infinite;
+}
+
+.eloqkvHeroInner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  align-content: end;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.eloqkvHeroCopy {
+  max-width: 760px;
+  animation: eloqkvFadeUp 0.7s ease both;
+}
+
+.eloqkvHeroTitle {
+  max-width: 820px;
+  margin: 0 0 1.2rem;
+  font-size: 3.25rem;
+  line-height: 1.05;
+  text-align: left;
+}
+
+.eloqkvHeroSubtitle {
+  max-width: 690px;
+  margin: 0 0 1rem;
+  color: #ffb36c;
+  font-size: 1.12rem;
+  line-height: 1.5;
+}
+
+.eloqkvProofLine {
+  max-width: 650px;
+  margin: 0 0 1.25rem;
+  color: #c7ccd8;
+}
+
+.eloqkvHeroButtons {
+  justify-content: flex-start;
+}
+
+.eloqkvHeroMetricRail {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  width: min(840px, 100%);
+  margin-top: 1.5rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.eloqkvHeroMetric {
+  padding: 0.85rem 1rem;
+  background: rgba(7, 10, 18, 0.82);
+  animation: eloqkvFadeUp 0.75s ease both;
+}
+
+.eloqkvHeroMetric:nth-child(2) {
+  animation-delay: 0.08s;
+}
+
+.eloqkvHeroMetric:nth-child(3) {
+  animation-delay: 0.16s;
+}
+
+.eloqkvHeroMetric span {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: #39d8d3;
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1.1;
+}
+
+.eloqkvHeroMetric p {
+  margin: 0;
+  color: #d4d9e5;
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
+.eloqkvDefinitionSection {
+  padding: 5rem 1rem 4rem;
+  border: 0;
+}
+
+.eloqkvDefinitionInner {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 4rem;
+  max-width: 1200px;
+}
+
+.eloqkvDefinitionLead {
+  max-width: 460px;
+}
+
+.eloqkvDefinitionBody {
+  display: grid;
+  gap: 1.4rem;
+}
+
+.eloqkvDefinitionText {
+  color: #c7ccd8;
+  font-size: 1.12rem;
+  line-height: 1.65;
+}
+
+.eloqkvFitGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.eloqkvFitItem {
+  padding: 1.15rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background: #10141d;
+}
+
+.eloqkvFitItem:first-child {
+  border-color: rgba(57, 216, 211, 0.28);
+}
+
+.eloqkvFitItem h3,
+.eloqkvCostDriver h3 {
+  margin: 0 0 0.55rem;
+  color: #fff;
+  font-size: 1.08rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1.25;
+}
+
+.eloqkvFitItem p,
+.eloqkvCostDriver p {
+  margin: 0;
+  color: #b9c1cf;
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+
+.eloqkvCostFocusSection {
+  padding: 4.5rem 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(180deg, #10141d 0%, #0d1018 100%);
+}
+
+.eloqkvCostFocusInner {
+  display: grid;
+  grid-template-columns: 0.82fr 1.18fr;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.eloqkvCostFocusCopy {
+  padding: 2rem;
+  border-left: 4px solid #ff7b2d;
+  border-radius: 8px;
+  background: #090d15;
+}
+
+.eloqkvCostFocusCopy > p:last-of-type {
+  margin: 1rem 0 0;
+  color: #c7ccd8;
+  font-size: 1.08rem;
+  line-height: 1.65;
+}
+
+.eloqkvCostComparisonCard {
+  overflow: hidden;
+  border: 1px solid rgba(57, 216, 211, 0.24);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(57, 216, 211, 0.09), rgba(255, 123, 45, 0.04)),
+    #0b0f17;
+  box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.24);
+  animation: eloqkvFadeUp 0.75s ease both;
+}
+
+.eloqkvCostComparisonHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 1.35rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.eloqkvCostComparisonHeader h3 {
+  margin: 0;
+  color: #fff;
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1.2;
+}
+
+.eloqkvCostComparisonHeader span {
+  flex: 0 0 auto;
+  padding: 0.35rem 0.55rem;
+  border: 1px solid rgba(57, 216, 211, 0.28);
+  border-radius: 8px;
+  color: #dffefe;
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.eloqkvCostTableWrap {
+  overflow-x: auto;
+}
+
+.eloqkvCostTable {
+  width: 100%;
+  min-width: 660px;
+  border-collapse: collapse;
+  color: #dce2ee;
+}
+
+.eloqkvCostTable th,
+.eloqkvCostTable td {
+  padding: 1rem 1.1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+  text-align: left;
+  vertical-align: top;
+}
+
+.eloqkvCostTable thead th {
+  color: #8e97aa;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.eloqkvCostTable tbody th {
+  width: 9.5rem;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.eloqkvCostTable td {
+  color: #b9c1cf;
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
+.eloqkvCostTable td strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #fff;
+  font-size: 1.02rem;
+  letter-spacing: 0;
+}
+
+.eloqkvCostTableFeatured th,
+.eloqkvCostTableFeatured td,
+.eloqkvCostTableFeatured td strong {
+  color: #dffefe;
+}
+
+.eloqkvCostTableBar {
+  display: block;
+  width: 100%;
+  height: 0.45rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.eloqkvCostTableBarValue {
+  display: block;
+  width: var(--bar-size);
+  min-width: 1.25rem;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #39d8d3, #ff9f4a);
+  background-size: 180% 100%;
+  animation: eloqkvBarSheen 2.4s ease-in-out infinite;
+}
+
+.eloqkvCostTable tr:nth-child(2) .eloqkvCostTableBarValue {
+  animation-delay: 0.08s;
+}
+
+.eloqkvCostTable tr:nth-child(3) .eloqkvCostTableBarValue {
+  animation-delay: 0.16s;
+}
+
+.eloqkvCostTableNote {
+  margin: 0;
+  padding: 0.95rem 1.35rem 1.15rem;
+  color: #98a2b7;
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.eloqkvCostTableNote a {
+  color: #ffb36c;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.eloqkvCostTableNote a:hover {
+  text-decoration: underline;
+}
+
+.eloqkvCostDriverGrid {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.85rem;
+}
+
+.eloqkvCostDriver {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.3rem;
+  padding: 1.15rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background: #0b0f17;
+  animation: eloqkvFadeUp 0.7s ease both;
+}
+
+.eloqkvCostDriver span {
+  color: #39d8d3;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.eloqkvNarrativeSection {
+  max-width: 1200px;
+  padding: 5rem 1rem 3.5rem;
+}
+
+.eloqkvSectionHeader {
+  max-width: 830px;
+  margin: 0 0 2.5rem;
+  text-align: left;
+}
+
+.eloqkvNarrativeList {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.eloqkvNarrativeStep {
+  display: grid;
+  grid-template-columns: 4.4rem 12rem 1fr;
+  gap: 2rem;
+  align-items: center;
+  padding: 1.45rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  animation: eloqkvFadeUp 0.65s ease both;
+}
+
+.eloqkvStepNumber {
+  color: #ff9f4a;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.eloqkvNarrativeText {
+  display: grid;
+  grid-template-columns: 11rem 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.eloqkvNarrativeText h3 {
+  margin: 0 0 0.65rem;
+  color: #fff;
+  font-size: 1.55rem;
+}
+
+.eloqkvNarrativeText p:last-of-type {
+  color: #b9c1cf;
+  font-size: 1rem;
+}
+
+.eloqkvNarrativeText > .eloqkvEyebrow {
+  margin: 0;
+  color: #7fd9c2;
+  font-size: 0.82rem;
+}
+
+.eloqkvNarrativeText > div > p {
+  margin: 0;
+  color: #b9c1cf;
+  font-size: 1rem;
+}
+
+.eloqkvFaqSection {
+  max-width: 1200px;
+  padding: 4rem 1rem 5rem;
+}
+
+.eloqkvFaqGrid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.eloqkvFaqItem {
+  min-height: 0;
+  padding: 1.15rem;
+  background: #10141d;
+}
+
+.eloqkvFaqItemFeatured {
+  grid-column: span 2;
+  background:
+    linear-gradient(180deg, rgba(57, 216, 211, 0.1), rgba(16, 20, 29, 0)),
+    #10141d;
+}
+
+.eloqkvFinalCta {
+  padding: 0 1rem 5rem;
+}
+
+.eloqkvFinalCtaInner {
+  max-width: 1200px;
+  background:
+    linear-gradient(120deg, rgba(255, 123, 45, 0.12), rgba(57, 216, 211, 0.08)),
+    #10141d;
+}
+
+@keyframes eloqkvFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes eloqkvFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -0.8rem, 0);
+  }
+}
+
+@keyframes eloqkvBarSheen {
+  from {
+    background-position: 0% 50%;
+  }
+
+  to {
+    background-position: 100% 50%;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  .eloqkvCostComparisonCard,
+  .eloqkvCostDriver,
+  .eloqkvNarrativeStep,
+  .eloqkvFaqItem {
+    animation-timeline: view();
+    animation-range: entry 8% cover 26%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eloqkvHeroBackdrop img,
+  .eloqkvHeroCopy,
+  .eloqkvHeroMetric,
+  .eloqkvCostComparisonCard,
+  .eloqkvCostTableBarValue,
+  .eloqkvCostDriver,
+  .eloqkvNarrativeStep,
+  .eloqkvFaqItem {
+    animation: none;
+    transform: none;
+  }
+}
+
+@media (max-width: 1100px) {
+  .eloqkvHero {
+    min-height: 620px;
+  }
+
+  .eloqkvHeroBackdrop img {
+    max-width: 76vw;
+    margin-right: -13rem;
+    opacity: 0.5;
+  }
+
+  .eloqkvHeroTitle {
+    font-size: 3.15rem;
+  }
+
+  .eloqkvDefinitionInner,
+  .eloqkvCostFocusInner,
+  .eloqkvFinalCtaInner {
+    grid-template-columns: 1fr;
+  }
+
+  .eloqkvCostDriverGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .eloqkvNarrativeStep {
+    grid-template-columns: 3.4rem 10rem 1fr;
+    gap: 1.3rem;
+  }
+
+  .eloqkvNarrativeText {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+
+  .eloqkvFaqGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .eloqkvHero {
+    min-height: auto;
+    padding: 2rem 1rem 0.75rem;
+  }
+
+  .eloqkvHeroBackdrop {
+    justify-content: center;
+  }
+
+  .eloqkvHeroBackdrop img {
+    width: 42rem;
+    max-width: none;
+    margin-right: -12rem;
+    opacity: 0.22;
+  }
+
+  .eloqkvHeroInner {
+    display: block;
+  }
+
+  .eloqkvHeroCopy {
+    max-width: none;
+  }
+
+  .eloqkvHeroTitle {
+    max-width: none;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    line-height: 1.08;
+  }
+
+  .eloqkvHeroSubtitle {
+    margin-bottom: 0.85rem;
+    font-size: 0.95rem;
+    line-height: 1.45;
+  }
+
+  .eloqkvProofLine {
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .eloqkvHero .eloqkvHeroButtons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .eloqkvHero .eloqkvPrimaryButton {
+    grid-column: 1 / -1;
+  }
+
+  .eloqkvHeroMetricRail {
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 1rem;
+  }
+
+  .eloqkvHeroMetric {
+    padding: 0.7rem;
+  }
+
+  .eloqkvHeroMetric span {
+    font-size: 1.05rem;
+  }
+
+  .eloqkvHeroMetric p {
+    font-size: 0.78rem;
+    line-height: 1.35;
+  }
+
+  .eloqkvDefinitionSection,
+  .eloqkvCostFocusSection,
+  .eloqkvNarrativeSection,
+  .eloqkvFaqSection {
+    padding: 3rem 1rem;
+  }
+
+  .eloqkvDefinitionInner {
+    gap: 1.5rem;
+  }
+
+  .eloqkvSectionTitle {
+    font-size: 1.85rem;
+  }
+
+  .eloqkvDefinitionText {
+    font-size: 1rem;
+  }
+
+  .eloqkvFitGrid,
+  .eloqkvFaqGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .eloqkvCostFocusCopy {
+    padding: 1.2rem;
+  }
+
+  .eloqkvCostComparisonHeader {
+    display: grid;
+    gap: 0.7rem;
+    padding: 1rem;
+  }
+
+  .eloqkvCostComparisonHeader span {
+    width: fit-content;
+  }
+
+  .eloqkvCostTableWrap {
+    overflow-x: visible;
+  }
+
+  .eloqkvCostTable,
+  .eloqkvCostTable thead,
+  .eloqkvCostTable tbody,
+  .eloqkvCostTable tr,
+  .eloqkvCostTable th,
+  .eloqkvCostTable td {
+    display: block;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .eloqkvCostTable thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .eloqkvCostTable tr {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .eloqkvCostTable th,
+  .eloqkvCostTable td {
+    padding: 0;
+    border-bottom: 0;
+  }
+
+  .eloqkvCostTable tbody th {
+    margin-bottom: 0.75rem;
+  }
+
+  .eloqkvCostTable td + td {
+    margin-top: 0.7rem;
+  }
+
+  .eloqkvCostTable td::before {
+    display: block;
+    margin-bottom: 0.25rem;
+    color: #8e97aa;
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .eloqkvCostTable td:nth-child(2)::before {
+    content: "Monthly infrastructure";
+  }
+
+  .eloqkvCostTable td:nth-child(3)::before {
+    content: "Relative cost";
+  }
+
+  .eloqkvCostTable td:nth-child(4)::before {
+    content: "Data placement";
+  }
+
+  .eloqkvCostTableNote {
+    padding: 0.9rem 1rem 1rem;
+  }
+
+  .eloqkvCostDriver span {
+    grid-row: auto;
+  }
+
+  .eloqkvNarrativeStep {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+    padding: 1.2rem 0;
+  }
+
+  .eloqkvNarrativeText {
+    grid-template-columns: 1fr;
+  }
+
+  .eloqkvNarrativeText h3 {
+    font-size: 1.35rem;
+  }
+
+  .eloqkvFaqItemFeatured {
+    grid-column: auto;
+  }
+
+  .eloqkvHeroButtons {
+    align-items: stretch;
+  }
+}
+
+/* Huashu Design pass: cost ledger, less copy, stronger first viewport */
+.eloqkvPage {
+  background: #0b0b09;
+  color: #f4efe7;
+}
+
+.eloqkvHero {
+  min-height: calc(100vh - 72px);
+  padding: 4.5rem 1rem 1.5rem;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(11, 11, 9, 0.98) 0%, rgba(11, 11, 9, 0.9) 52%, rgba(11, 11, 9, 0.42) 100%),
+    #0b0b09;
+  background-size: 48px 48px, 48px 48px, auto, auto;
+}
+
+.eloqkvHeroBackdrop img {
+  width: 46rem;
+  max-width: 46vw;
+  margin-right: -2rem;
+  opacity: 0.34;
+  filter: grayscale(0.15) contrast(1.08) drop-shadow(0 2rem 2.5rem rgba(0, 0, 0, 0.46));
+}
+
+.eloqkvHeroInner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(22rem, 28rem);
+  grid-template-rows: none;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: end;
+  min-height: calc(100vh - 9rem);
+  max-width: 1240px;
+}
+
+.eloqkvHeroCopy {
+  max-width: 820px;
+}
+
+.eloqkvEyebrow {
+  color: #f5853f;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+}
+
+.eloqkvHeroTitle {
+  max-width: 820px;
+  margin-bottom: 1rem;
+  color: #fff8ed;
+  font-family: "Avenir Next", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: clamp(3.15rem, 6.8vw, 6rem);
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 0.94;
+  text-wrap: balance;
+}
+
+.eloqkvHeroSubtitle {
+  max-width: 620px;
+  margin-bottom: 0.85rem;
+  color: #f0c58d;
+  font-size: clamp(1.08rem, 1.7vw, 1.28rem);
+  font-weight: 620;
+  line-height: 1.48;
+  text-wrap: pretty;
+}
+
+.eloqkvProofLine {
+  max-width: 560px;
+  margin-bottom: 1.4rem;
+  color: #aaa497;
+  font-size: 0.98rem;
+}
+
+.eloqkvPrimaryButton,
+.eloqkvSecondaryButton,
+.eloqkvTertiaryButton {
+  border-radius: 6px;
+  min-height: 2.75rem;
+  padding: 0.7rem 1.05rem;
+}
+
+.eloqkvPrimaryButton {
+  background: #f17224;
+  color: #130d08;
+}
+
+.eloqkvSecondaryButton {
+  border-color: rgba(244, 239, 231, 0.22);
+  background: rgba(244, 239, 231, 0.08);
+}
+
+.eloqkvTertiaryButton {
+  border-color: rgba(244, 239, 231, 0.2);
+  background: rgba(244, 239, 231, 0.04);
+  color: #d8d0c2;
+}
+
+.eloqkvHeroMetricRail {
+  width: min(620px, 100%);
+  margin-top: 1.5rem;
+  border-color: rgba(244, 239, 231, 0.16);
+  border-radius: 6px;
+  background: rgba(244, 239, 231, 0.14);
+}
+
+.eloqkvHeroMetric {
+  padding: 0.75rem 0.9rem;
+  background: rgba(13, 13, 11, 0.82);
+}
+
+.eloqkvHeroMetric span {
+  color: #f17224;
+  font-size: 1.42rem;
+}
+
+.eloqkvHeroMetric p {
+  color: #d8d0c2;
+  font-size: 0.8rem;
+}
+
+.eloqkvHeroLedger {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  border: 1px solid rgba(244, 239, 231, 0.18);
+  border-radius: 8px;
+  background: rgba(18, 18, 15, 0.84);
+  box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.34);
+  backdrop-filter: blur(18px);
+}
+
+.eloqkvHeroLedgerHeader {
+  padding: 1.1rem 1.15rem 1rem;
+  border-bottom: 1px solid rgba(244, 239, 231, 0.14);
+  background: rgba(241, 114, 36, 0.08);
+}
+
+.eloqkvHeroLedgerHeader p,
+.eloqkvHeroLedgerNote {
+  margin: 0;
+  color: #9f998c;
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+.eloqkvHeroLedgerHeader strong {
+  display: block;
+  margin: 0.18rem 0;
+  color: #fff8ed;
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.eloqkvHeroLedgerHeader span {
+  color: #f0c58d;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.eloqkvHeroLedgerRows {
+  display: grid;
+}
+
+.eloqkvHeroLedgerRow,
+.eloqkvHeroLedgerRowFeatured {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.25rem 0.8rem;
+  padding: 0.95rem 1.15rem;
+  border-bottom: 1px solid rgba(244, 239, 231, 0.12);
+}
+
+.eloqkvHeroLedgerRowFeatured {
+  background: rgba(241, 114, 36, 0.09);
+}
+
+.eloqkvHeroLedgerRow span,
+.eloqkvHeroLedgerRowFeatured span {
+  color: #f4efe7;
+  font-weight: 800;
+}
+
+.eloqkvHeroLedgerRow strong,
+.eloqkvHeroLedgerRowFeatured strong {
+  color: #fff8ed;
+  font-size: 1.12rem;
+}
+
+.eloqkvHeroLedgerRow em,
+.eloqkvHeroLedgerRowFeatured em {
+  grid-column: 1 / -1;
+  color: #9f998c;
+  font-size: 0.78rem;
+  font-style: normal;
+}
+
+.eloqkvHeroLedgerNote {
+  padding: 0.9rem 1.15rem 1rem;
+}
+
+.eloqkvDefinitionSection {
+  padding: 2.75rem 1rem;
+  background: #f5efe4;
+  color: #17130f;
+}
+
+.eloqkvDefinitionInner {
+  grid-template-columns: 0.92fr 1.08fr;
+  gap: 2rem;
+}
+
+.eloqkvDefinitionSection .eloqkvEyebrow {
+  color: #99511f;
+}
+
+.eloqkvDefinitionSection .eloqkvSectionTitle,
+.eloqkvDefinitionSection .eloqkvFitItem h3 {
+  color: #17130f;
+}
+
+.eloqkvDefinitionText {
+  max-width: 48rem;
+  color: #40392f;
+  font-size: 1.08rem;
+  line-height: 1.52;
+}
+
+.eloqkvValueStripInline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.eloqkvValueStripInline span {
+  padding: 0.35rem 0.55rem;
+  border: 1px solid rgba(23, 19, 15, 0.18);
+  border-radius: 999px;
+  color: #3a3128;
+  font-size: 0.78rem;
+  font-weight: 780;
+}
+
+.eloqkvFitGrid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.eloqkvFitItem {
+  padding: 1rem;
+  border-color: rgba(23, 19, 15, 0.16);
+  background: rgba(255, 255, 255, 0.42);
+}
+
+.eloqkvFitItem:first-child {
+  border-color: rgba(241, 114, 36, 0.42);
+}
+
+.eloqkvFitItem p {
+  color: #5b5147;
+}
+
+.eloqkvCostFocusSection {
+  padding: 4rem 1rem;
+  border: 0;
+  background: #0b0b09;
+}
+
+.eloqkvCostFocusInner {
+  grid-template-columns: minmax(17rem, 0.6fr) minmax(0, 1.4fr);
+  gap: 1.25rem;
+  max-width: 1240px;
+}
+
+.eloqkvCostFocusCopy {
+  padding: 1.5rem;
+  border: 1px solid rgba(244, 239, 231, 0.13);
+  border-radius: 8px;
+  background: #12120f;
+}
+
+.eloqkvCostFocusCopy > p:last-of-type {
+  color: #b8b0a2;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.eloqkvCostComparisonCard {
+  border-color: rgba(244, 239, 231, 0.18);
+  border-radius: 8px;
+  background: #12120f;
+  box-shadow: none;
+}
+
+.eloqkvCostComparisonHeader {
+  padding: 1.05rem 1.15rem;
+  border-bottom-color: rgba(244, 239, 231, 0.14);
+}
+
+.eloqkvCostComparisonHeader h3 {
+  color: #fff8ed;
+  font-size: 1.25rem;
+}
+
+.eloqkvCostComparisonHeader span {
+  border-color: rgba(127, 217, 194, 0.28);
+  border-radius: 999px;
+  color: #cffaf0;
+}
+
+.eloqkvCostTable th,
+.eloqkvCostTable td {
+  border-bottom-color: rgba(244, 239, 231, 0.12);
+}
+
+.eloqkvCostTable thead th {
+  color: #958e81;
+}
+
+.eloqkvCostTable tbody th,
+.eloqkvCostTable td strong {
+  color: #fff8ed;
+}
+
+.eloqkvCostTable td {
+  color: #bbb3a6;
+}
+
+.eloqkvCostTableFeatured th,
+.eloqkvCostTableFeatured td,
+.eloqkvCostTableFeatured td strong {
+  color: #fff8ed;
+}
+
+.eloqkvCostTableFeatured {
+  background: rgba(241, 114, 36, 0.07);
+}
+
+.eloqkvCostTableBar {
+  height: 0.35rem;
+  background: rgba(244, 239, 231, 0.12);
+}
+
+/* Competitor bars stay muted; the featured EloqKV row carries the accent */
+.eloqkvCostTableBarValue {
+  background: rgba(244, 239, 231, 0.32);
+}
+
+.eloqkvCostTableFeatured .eloqkvCostTableBarValue {
+  background: linear-gradient(90deg, #f17224, #ffb36c);
+  background-size: 180% 100%;
+}
+
+.eloqkvCostTableNote {
+  color: #958e81;
+}
+
+.eloqkvCostDriverGrid {
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid rgba(244, 239, 231, 0.13);
+  border-radius: 8px;
+  background: rgba(244, 239, 231, 0.13);
+}
+
+.eloqkvCostDriver {
+  border: 0;
+  border-radius: 0;
+  background: #12120f;
+}
+
+.eloqkvCostDriver span {
+  color: #f17224;
+}
+
+.eloqkvCostDriver h3 {
+  color: #fff8ed;
+}
+
+.eloqkvCostDriver p {
+  color: #bbb3a6;
+}
+
+.eloqkvNarrativeSection {
+  max-width: 1240px;
+  padding: 1.5rem 1rem 4rem;
+}
+
+.eloqkvNarrativeList {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid rgba(244, 239, 231, 0.13);
+  border-radius: 8px;
+  background: rgba(244, 239, 231, 0.13);
+}
+
+.eloqkvNarrativeStep {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-content: start;
+  gap: 1.15rem;
+  min-height: 17rem;
+  padding: 1.1rem;
+  border: 0;
+  background: #12120f;
+}
+
+.eloqkvStepNumber {
+  color: #f17224;
+}
+
+.eloqkvNarrativeText {
+  display: block;
+}
+
+.eloqkvNarrativeText h3 {
+  margin-bottom: 0.7rem;
+  color: #fff8ed;
+  font-size: 1.22rem;
+  line-height: 1.18;
+}
+
+.eloqkvNarrativeText > div > p {
+  color: #bbb3a6;
+  font-size: 0.94rem;
+  line-height: 1.48;
+}
+
+.eloqkvInlineLinks {
+  margin-top: 1rem;
+}
+
+.eloqkvInlineLinks a {
+  color: #f0c58d;
+  border-bottom-color: rgba(241, 114, 36, 0.7);
+}
+
+.eloqkvFaqSection {
+  max-width: 1240px;
+  padding: 0 1rem 4rem;
+}
+
+.eloqkvFaqGrid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.eloqkvFaqItem,
+.eloqkvFaqItemFeatured {
+  border-color: rgba(244, 239, 231, 0.13);
+  border-radius: 8px;
+  background: #12120f;
+}
+
+.eloqkvFaqItem h3 {
+  color: #fff8ed;
+}
+
+.eloqkvFaqItem p {
+  color: #bbb3a6;
+  font-size: 0.92rem;
+}
+
+.eloqkvFinalCta {
+  padding: 0 1rem 4rem;
+  background: #0b0b09;
+}
+
+.eloqkvFinalCtaInner {
+  border-color: rgba(244, 239, 231, 0.15);
+  background: #f5efe4;
+}
+
+.eloqkvFinalCtaInner .eloqkvEyebrow {
+  color: #99511f;
+}
+
+.eloqkvFinalCtaInner .eloqkvSectionTitle {
+  color: #17130f;
+}
+
+.eloqkvDefinitionSection .eloqkvFitItem {
+  background: #fffaf2;
+}
+
+.eloqkvDefinitionSection .eloqkvFitItem p,
+.eloqkvDefinitionSection .eloqkvDefinitionBody p {
+  color: #332820 !important;
+}
+
+.eloqkvCostFocusSection .eloqkvCostTable thead th,
+.eloqkvCostFocusSection .eloqkvCostTable td::before {
+  color: #c2b9aa;
+}
+
+.eloqkvCostFocusSection .eloqkvCostTable td,
+.eloqkvCostFocusSection .eloqkvCostTableNote,
+.eloqkvCostFocusSection .eloqkvCostDriver p,
+.eloqkvNarrativeSection .eloqkvNarrativeText > div > p,
+.eloqkvFaqSection .eloqkvFaqItem p {
+  color: #d3c9ba !important;
+}
+
+.eloqkvCostFocusSection .eloqkvCostFocusCopy > p:last-of-type,
+.eloqkvHeroLedgerRow em,
+.eloqkvHeroLedgerRowFeatured em,
+.eloqkvHeroLedgerNote,
+.eloqkvHeroLedgerHeader p {
+  color: #c7bdad !important;
+}
+
+@media (max-width: 1100px) {
+  .eloqkvHeroInner {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .eloqkvHeroLedger {
+    max-width: 44rem;
+  }
+
+  .eloqkvFitGrid,
+  .eloqkvNarrativeList,
+  .eloqkvFaqGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .eloqkvCostFocusInner {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .eloqkvHero {
+    min-height: auto;
+    padding: 2.6rem 1rem 1rem;
+    background-size: 32px 32px, 32px 32px, auto, auto;
+  }
+
+  .eloqkvHeroBackdrop img {
+    max-width: none;
+    width: 34rem;
+    margin-right: -12rem;
+    opacity: 0.18;
+  }
+
+  .eloqkvHeroTitle {
+    font-size: clamp(2.45rem, 13vw, 3.35rem);
+  }
+
+  .eloqkvHeroMetricRail {
+    grid-template-columns: 1fr;
+  }
+
+  .eloqkvHeroLedgerHeader strong {
+    font-size: 2.4rem;
+  }
+
+  .eloqkvDefinitionInner,
+  .eloqkvFitGrid,
+  .eloqkvNarrativeList,
+  .eloqkvFaqGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .eloqkvDefinitionSection,
+  .eloqkvCostFocusSection {
+    padding: 2.5rem 1rem;
+  }
+
+  .eloqkvCostDriverGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .eloqkvNarrativeStep {
+    min-height: 0;
+  }
+
+  .eloqkvFinalCtaInner {
+    padding: 1.4rem;
+  }
+}
+
+/* Quotable cost takeaway (GEO-citable line in the cost section) */
+.eloqkvCostTakeaway {
+  margin: 0.9rem 0 0;
+  color: #fff8ed;
+  font-size: 1.08rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+/* Takeaway is now the last <p> in the copy — keep it emphasized over the
+   muted `p:last-of-type` rule that previously styled the removed body line */
+.eloqkvCostFocusSection .eloqkvCostFocusCopy > p.eloqkvCostTakeaway {
+  color: #fff8ed !important;
+  font-size: 1.08rem;
+}
+
+/* ── Tail-latency section (dark) ── */
+.eloqkvLatencySection {
+  padding: 4.5rem 1rem;
+  border-top: 1px solid rgba(244, 239, 231, 0.08);
+  background: #0b0b09;
+}
+
+.eloqkvLatencyInner {
+  display: grid;
+  grid-template-columns: 1.02fr 1.18fr;
+  gap: 2.5rem;
+  align-items: center;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.eloqkvLatencyText {
+  margin: 1rem 0 1.5rem;
+  color: #bbb3a6;
+  font-size: 1.05rem;
+  line-height: 1.62;
+}
+
+.eloqkvLatencyStats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid rgba(244, 239, 231, 0.13);
+  border-radius: 8px;
+  background: rgba(244, 239, 231, 0.13);
+}
+
+.eloqkvLatencyStat {
+  padding: 1rem 1.1rem;
+  background: #12120f;
+}
+
+.eloqkvLatencyStat span {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: #7fd9c2;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.eloqkvLatencyStat p {
+  margin: 0;
+  color: #aaa497;
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.eloqkvLatencyFigure {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(244, 239, 231, 0.16);
+  border-radius: 10px;
+  background: #fffaf2;
+}
+
+.eloqkvLatencyChart {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.eloqkvLatencyFigure figcaption {
+  padding: 0.85rem 1.1rem;
+  border-top: 1px solid rgba(23, 19, 15, 0.12);
+  background: #f5efe4;
+  color: #5b5147;
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+/* ── Transactions section (light) ── */
+.eloqkvTxSection {
+  padding: 4.5rem 1rem;
+  background: #f5efe4;
+  color: #17130f;
+}
+
+.eloqkvTxInner {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.eloqkvTxSection .eloqkvEyebrow {
+  color: #99511f;
+}
+
+.eloqkvTxSection .eloqkvSectionTitle {
+  color: #17130f;
+}
+
+.eloqkvTxLead {
+  max-width: 720px;
+  margin-bottom: 2rem;
+}
+
+.eloqkvTxText {
+  margin: 1rem 0 0;
+  color: #40392f;
+  font-size: 1.1rem;
+  line-height: 1.55;
+}
+
+.eloqkvTxGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.eloqkvTxCard {
+  padding: 1.3rem;
+  border: 1px solid rgba(23, 19, 15, 0.16);
+  border-radius: 8px;
+  background: #fffaf2;
+}
+
+.eloqkvTxCard:first-child {
+  border-color: rgba(241, 114, 36, 0.42);
+}
+
+.eloqkvTxCard h3 {
+  margin: 0 0 0.55rem;
+  color: #17130f;
+  font-size: 1.12rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+/* Beats the global `article p { color: ...!important }` rule on this light card */
+.eloqkvTxSection .eloqkvTxCard p {
+  margin: 0;
+  color: #4a4138 !important;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.eloqkvCompatLine {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem 1.5rem;
+  margin-top: 1.25rem;
+  padding: 1.1rem 1.3rem;
+  border: 1px solid rgba(23, 19, 15, 0.16);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.eloqkvCompatLine p {
+  margin: 0;
+  color: #332820;
+  font-size: 0.98rem;
+}
+
+.eloqkvCompatLine .eloqkvInlineLinks {
+  margin: 0;
+}
+
+.eloqkvCompatLine .eloqkvInlineLinks a {
+  color: #99511f;
+  border-bottom-color: rgba(241, 114, 36, 0.6);
+}
+
+/* Ghost buttons sit on the light final-CTA card — give them dark-on-light styling */
+.eloqkvFinalCtaInner .eloqkvSecondaryButton {
+  border-color: rgba(23, 19, 15, 0.26);
+  background: rgba(23, 19, 15, 0.05);
+  color: #17130f;
+}
+
+.eloqkvFinalCtaInner .eloqkvTertiaryButton {
+  border-color: rgba(241, 114, 36, 0.5);
+  background: rgba(241, 114, 36, 0.1);
+  color: #99511f;
+}
+
+/* ── Comparison section (dark) ── */
+.eloqkvCompareSection {
+  padding: 4.5rem 1rem;
+  background: #0b0b09;
+}
+
+.eloqkvCompareInner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.eloqkvCompareSubtitle {
+  margin: 0.75rem 0 0;
+  color: #bbb3a6;
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+.eloqkvCompareWrap {
+  margin-top: 2rem;
+  overflow-x: auto;
+  border: 1px solid rgba(244, 239, 231, 0.13);
+  border-radius: 10px;
+}
+
+.eloqkvCompareTable {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.eloqkvCompareTable thead th:first-child {
+  width: 24%;
+}
+
+.eloqkvCompareTable th,
+.eloqkvCompareTable td {
+  padding: 0.95rem 1.1rem;
+  text-align: center;
+  vertical-align: middle;
+  border-bottom: 1px solid rgba(244, 239, 231, 0.1);
+}
+
+.eloqkvCompareTable thead th {
+  vertical-align: bottom;
+  background: #12120f;
+}
+
+.eloqkvCompareTable thead th strong {
+  display: block;
+  color: #fff8ed;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.eloqkvCompareTable thead th span {
+  display: block;
+  margin-top: 0.25rem;
+  color: #958e81;
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+
+.eloqkvCompareTable tbody th {
+  text-align: left;
+  color: #e9e1d4;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.eloqkvCompareTable td {
+  color: #d3c9ba;
+  font-size: 0.9rem;
+}
+
+.eloqkvCompareTable td em {
+  display: block;
+  margin-top: 0.2rem;
+  color: #8e887b;
+  font-size: 0.74rem;
+  font-style: normal;
+  line-height: 1.3;
+}
+
+.eloqkvCompareColFeatured {
+  border-top: 3px solid #f17224;
+}
+
+.eloqkvCompareColFeatured strong {
+  color: #f17224;
+}
+
+.eloqkvCompareColFeatured,
+.eloqkvCompareCellFeatured {
+  background: rgba(241, 114, 36, 0.08);
+}
+
+.eloqkvCompareValue {
+  color: #fff8ed;
+  font-weight: 700;
+}
+
+.eloqkvCompareYes,
+.eloqkvCompareNo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.55rem;
+  height: 1.55rem;
+  border-radius: 50%;
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+.eloqkvCompareYes {
+  background: rgba(127, 217, 194, 0.16);
+  color: #7fd9c2;
+}
+
+.eloqkvCompareNo {
+  background: rgba(244, 239, 231, 0.08);
+  color: #8e887b;
+}
+
+.eloqkvCompareSrOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.eloqkvCompareFootnote {
+  margin: 1rem 0 0;
+  color: #8e887b;
+  font-size: 0.82rem;
+}
+
+.eloqkvCompareFootnote a {
+  color: #f0c58d;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.eloqkvCompareFootnote a:hover {
+  text-decoration: underline;
+}
+
+/* ── Responsive for new sections ── */
+@media (max-width: 1100px) {
+  .eloqkvLatencyInner,
+  .eloqkvTxGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .eloqkvLatencyInner {
+    gap: 1.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .eloqkvLatencySection,
+  .eloqkvTxSection,
+  .eloqkvCompareSection {
+    padding: 2.75rem 1rem;
+  }
+
+  .eloqkvLatencyStats {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Visual refresh: hero data stream, scroll reveals, hover feedback ── */
+
+.eloqkvHeroStream {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: clamp(0.55rem, 1.2vw, 1.15rem);
+  padding-right: 4vw;
+  pointer-events: none;
+  mask-image: linear-gradient(90deg, transparent 30%, #000 62%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 30%, #000 62%);
+}
+
+.eloqkvStreamBar {
+  flex: 0 0 auto;
+  width: clamp(4px, 0.4vw, 7px);
+  height: var(--bar-h);
+  border-radius: 999px;
+  transform-origin: center;
+  animation: eloqkvStreamPulse var(--bar-dur) ease-in-out var(--bar-delay)
+    infinite alternate;
+}
+
+.eloqkvStreamBarDim {
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(244, 239, 231, 0.16),
+    transparent
+  );
+}
+
+.eloqkvStreamBarSoft {
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(244, 239, 231, 0.34),
+    transparent
+  );
+}
+
+.eloqkvStreamBarOrange {
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(241, 114, 36, 0.85),
+    transparent
+  );
+  box-shadow: 0 0 22px rgba(241, 114, 36, 0.3);
+}
+
+.eloqkvStreamBarTeal {
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(127, 217, 194, 0.55),
+    transparent
+  );
+  box-shadow: 0 0 18px rgba(127, 217, 194, 0.22);
+}
+
+@keyframes eloqkvStreamPulse {
+  from {
+    transform: scaleY(0.68);
+    opacity: 0.55;
+  }
+
+  to {
+    transform: scaleY(1.08);
+    opacity: 1;
+  }
+}
+
+/* Scroll reveal: elements are visible by default (no-JS / crawlers); JS adds
+   Prep only to below-fold elements, then swaps it for On when they intersect */
+.eloqkvRevealPrep {
+  opacity: 0;
+  transform: translateY(1.4rem);
+}
+
+.eloqkvRevealOn {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Cost bars grow from near-zero when their card reveals */
+.eloqkvCostTableBarValue {
+  transition: width 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.3s;
+}
+
+.eloqkvRevealPrep .eloqkvCostTableBarValue {
+  width: 1.25rem;
+}
+
+/* Hover feedback on cards — transform kept snappier than the reveal ease */
+.eloqkvFitItem,
+.eloqkvTxCard,
+.eloqkvFaqItem,
+.eloqkvLatencyStat,
+.eloqkvHeroMetric {
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.35s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.eloqkvFitItem:hover,
+.eloqkvTxCard:hover,
+.eloqkvFaqItem:hover {
+  transform: translateY(-4px);
+  border-color: rgba(241, 114, 36, 0.45);
+  box-shadow: 0 0.9rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+.eloqkvCompareTable tbody tr:hover,
+.eloqkvCostTable tbody tr:hover {
+  background: rgba(244, 239, 231, 0.03);
+}
+
+/* GitHub star count inside the secondary hero button */
+.eloqkvStarBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-left: 0.6rem;
+  padding-left: 0.6rem;
+  border-left: 1px solid rgba(244, 239, 231, 0.22);
+  color: #f0c58d;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.eloqkvStarBadge svg {
+  width: 0.85rem;
+  height: 0.85rem;
+}
+
+/* Customer logo strip under the hero */
+.eloqkvLogoStrip {
+  padding: 1.8rem 1rem;
+  border-top: 1px solid rgba(244, 239, 231, 0.08);
+  border-bottom: 1px solid rgba(244, 239, 231, 0.08);
+  background: #0b0b09;
+}
+
+.eloqkvLogoStripInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.15rem;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.eloqkvLogoStripInner p {
+  margin: 0;
+  color: #958e81;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.eloqkvLogoRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.1rem 2.6rem;
+}
+
+.eloqkvLogoRow img {
+  height: 1.3rem;
+  width: auto;
+  opacity: 0.48;
+  transition: opacity 0.25s ease;
+}
+
+.eloqkvLogoRow img:hover {
+  opacity: 0.95;
+}
+
+@media (max-width: 768px) {
+  .eloqkvLogoRow {
+    gap: 0.9rem 1.6rem;
+  }
+
+  .eloqkvLogoRow img {
+    height: 1.05rem;
+  }
+}
+
+/* Restore the featured-FAQ accent lost to the flat background override */
+.eloqkvFaqItemFeatured {
+  border-color: rgba(241, 114, 36, 0.32);
+  background:
+    linear-gradient(180deg, rgba(241, 114, 36, 0.09), rgba(18, 18, 15, 0) 55%),
+    #12120f;
+}
+
+@media (max-width: 768px) {
+  .eloqkvHeroStream {
+    opacity: 0.45;
+    mask-image: linear-gradient(90deg, transparent 45%, #000 80%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 45%, #000 80%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eloqkvStreamBar {
+    animation: none;
+  }
+
+  .eloqkvRevealPrep,
+  .eloqkvRevealOn {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .eloqkvCostTableBarValue {
+    transition: none;
+  }
+
+  .eloqkvFitItem:hover,
+  .eloqkvTxCard:hover,
+  .eloqkvFaqItem:hover {
+    transform: none;
+  }
 }
