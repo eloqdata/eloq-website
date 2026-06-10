@@ -41,6 +41,7 @@ function assertLacksTypes(pathname, blockedTypes) {
 assert.deepEqual(schemaTypes('build/product/eloqkv.html'), [
   'SoftwareApplication',
   'BreadcrumbList',
+  'FAQPage',
 ]);
 assert.deepEqual(schemaTypes('build/product-comparison.html'), [
   'BreadcrumbList',
@@ -63,8 +64,6 @@ for (const page of [
   assertHasTypes(page, ['BlogPosting', 'BreadcrumbList']);
   assertLacksTypes(page, ['FAQPage', 'SoftwareApplication']);
 }
-
-assertLacksTypes('build/product/eloqkv.html', ['FAQPage']);
 
 assert.deepEqual(
   schemasFromHtmlContent(`<script type="application/ld+json">

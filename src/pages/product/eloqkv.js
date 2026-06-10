@@ -1,789 +1,888 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
+import Head from '@docusaurus/Head';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import seoData from '@site/src/data/seo';
+import {eloqkvProductFaqItems} from '@site/src/data/eloqkvFaq';
 import StructuredData from '@site/src/components/StructuredData';
 import structuredData from '@site/src/data/structuredData';
 import styles from './styles.module.css';
-import {CheckIcon, XIcon, InfoIcon} from '@heroicons/react/solid';
 
-const {seo} = seoData;
+const {seo, SITE_URL, DEFAULT_OG_IMAGE} = seoData;
 const {getStructuredDataForPath} = structuredData;
 
-const WORKLOAD_PRICES = {
-  small: {
-    eloqkv: 10.5,
-    redis: 220,
-    elasticache: 120,
-    description: 'Based on workload of 10GB with 1M OPs per day, 90% idle time',
-  },
-  medium: {
-    eloqkv: 42.5,
-    redis: 1700,
-    elasticache: 1200,
-    description: 'Based on workload of 100GB with 100K peak QPS, 50% idle time',
-  },
-  large: {
-    eloqkv: 1025,
-    redis: 17000,
-    elasticache: 3630,
-    description: 'Based on workload of 1TB (100GB hot) with 1M peak QPS',
-  },
-};
+const PAGE_PATH = '/product/eloqkv';
+const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
+const GITHUB_URL = 'https://github.com/eloqdata/eloqkv';
+const CLOUD_SIGNUP_URL = 'https://cloud.eloqdata.com/signup';
+const OG_IMAGE_ALT =
+  'EloqKV — Redis-compatible key-value database on NVMe-backed storage';
+const GETSTARTED_URL = '/eloqkv/docker-deploy';
+const BENCHMARK_URL = '/blog/2026/01/08/eloqkv-on-eloqstore';
+const COMMANDS_URL = '/eloqkv/kvstore_compatibility';
+const TRANSACTIONS_URL = '/eloqkv/transaction/MULTI';
+const MIGRATION_URL = '/blog/2026/04/22/redis-migrate-to-eloqkv';
+const LATENCY_CHART = '/img/eloqkv-vs-kvrocks-p9999.png';
+const LAST_UPDATED = 'June 2026';
+const GITHUB_REPO = 'eloqdata/eloqkv';
+// Baseline shown before the live count loads (and to crawlers / on API failure).
+const GITHUB_STARS_FALLBACK = 1490; // checked June 2026
 
-const SHOW_TESTIMONIALS = false; // Set to true to show the testimonials section
+const CUSTOMER_LOGOS = [
+  {src: '/img/logo/placeholder-logo-1.svg', alt: 'Bitrue'},
+  {src: '/img/logo/placeholder-logo-2.svg', alt: 'Shopee'},
+  {src: '/img/logo/placeholder-logo-3.svg', alt: 'Transsion'},
+  {src: '/img/logo/placeholder-logo-4.svg', alt: 'Memobase'},
+  {src: '/img/logo/placeholder-logo-5.svg', alt: 'IGG'},
+  {src: '/img/logo/placeholder-logo-6.svg', alt: 'Pine'},
+  {src: '/img/logo/placeholder-logo-7.svg', alt: 'INKE'},
+  {src: '/img/logo/placeholder-logo-8.svg', alt: 'FlickBloom'},
+];
 
-const testimonials = [
+const VALUE_POINTS = [
+  'Datasets beyond RAM',
+  'Redis/Valkey compatible',
+  'Stable P99.99 latency',
+];
+
+// Deterministic bar field for the hero "data stream" visual (SSR-safe).
+const STREAM_BARS = [
+  {tone: 'Dim', h: 30, dur: 4.4, delay: 0.2},
+  {tone: 'Soft', h: 52, dur: 3.6, delay: 1.1},
+  {tone: 'Dim', h: 22, dur: 5.2, delay: 0.6},
+  {tone: 'Orange', h: 64, dur: 3.2, delay: 0},
+  {tone: 'Dim', h: 40, dur: 4.8, delay: 1.7},
+  {tone: 'Teal', h: 48, dur: 3.9, delay: 0.9},
+  {tone: 'Dim', h: 26, dur: 4.2, delay: 2.2},
+  {tone: 'Soft', h: 70, dur: 3.4, delay: 0.4},
+  {tone: 'Dim', h: 34, dur: 5.6, delay: 1.3},
+  {tone: 'Orange', h: 82, dur: 2.9, delay: 0.7},
+  {tone: 'Dim', h: 46, dur: 4.6, delay: 0.1},
+  {tone: 'Soft', h: 58, dur: 3.8, delay: 1.9},
+  {tone: 'Dim', h: 24, dur: 5.0, delay: 0.8},
+  {tone: 'Teal', h: 38, dur: 4.1, delay: 1.5},
+  {tone: 'Dim', h: 62, dur: 3.5, delay: 0.3},
+  {tone: 'Orange', h: 50, dur: 3.1, delay: 1.0},
+  {tone: 'Dim', h: 30, dur: 4.9, delay: 2.0},
+  {tone: 'Soft', h: 74, dur: 3.3, delay: 0.5},
+  {tone: 'Dim', h: 42, dur: 5.4, delay: 1.2},
+  {tone: 'Dim', h: 20, dur: 4.3, delay: 0},
+  {tone: 'Orange', h: 68, dur: 2.8, delay: 1.6},
+  {tone: 'Soft', h: 36, dur: 3.7, delay: 0.9},
+  {tone: 'Dim', h: 56, dur: 4.7, delay: 2.3},
+  {tone: 'Teal', h: 28, dur: 4.0, delay: 0.2},
+  {tone: 'Dim', h: 48, dur: 5.1, delay: 1.4},
+  {tone: 'Soft', h: 60, dur: 3.6, delay: 0.6},
+];
+
+function HeroStream() {
+  return (
+    <div className={styles.eloqkvHeroStream}>
+      {STREAM_BARS.map((bar, index) => (
+        <span
+          key={index}
+          className={`${styles.eloqkvStreamBar} ${
+            styles[`eloqkvStreamBar${bar.tone}`]
+          }`}
+          style={{
+            '--bar-h': `${bar.h}%`,
+            '--bar-dur': `${bar.dur}s`,
+            '--bar-delay': `${bar.delay}s`,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+// Renders the final value on the server so SEO/no-JS readers see real numbers,
+// then counts up from zero once mounted.
+function CountUp({to, suffix = '', format, duration = 1400}) {
+  const formatValue = React.useCallback(
+    value => (format ? format(value) : String(value)),
+    [format]
+  );
+  const [display, setDisplay] = React.useState(() => formatValue(to));
+
+  React.useEffect(() => {
+    if (
+      typeof window === 'undefined' ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      return undefined;
+    }
+    let raf;
+    const start = performance.now();
+    const tick = now => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setDisplay(formatValue(Math.round(to * eased)));
+      if (progress < 1) {
+        raf = requestAnimationFrame(tick);
+      }
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [to, duration, formatValue]);
+
+  return (
+    <>
+      {display}
+      {suffix}
+    </>
+  );
+}
+
+function formatStarCount(count) {
+  return count >= 1000
+    ? `${(count / 1000).toFixed(1).replace(/\.0$/, '')}k`
+    : String(count);
+}
+
+function useGitHubStars(repo, fallback) {
+  const [stars, setStars] = React.useState(fallback);
+  React.useEffect(() => {
+    const cacheKey = `gh-stars:${repo}`;
+    try {
+      const cached = JSON.parse(window.localStorage.getItem(cacheKey));
+      if (cached && Date.now() - cached.at < 24 * 60 * 60 * 1000) {
+        setStars(cached.count);
+        return;
+      }
+    } catch (err) {
+      // ignore unreadable cache
+    }
+    fetch(`https://api.github.com/repos/${repo}`)
+      .then(res => (res.ok ? res.json() : null))
+      .then(data => {
+        if (data && typeof data.stargazers_count === 'number') {
+          setStars(data.stargazers_count);
+          try {
+            window.localStorage.setItem(
+              cacheKey,
+              JSON.stringify({count: data.stargazers_count, at: Date.now()})
+            );
+          } catch (err) {
+            // ignore quota/storage errors
+          }
+        }
+      })
+      .catch(() => {});
+  }, [repo]);
+  return stars;
+}
+
+function StarIcon() {
+  return (
+    <svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor">
+      <path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7L8 .8z" />
+    </svg>
+  );
+}
+
+// Scroll-triggered reveals for [data-reveal] elements. Elements stay visible
+// without JS; we only hide-and-reveal once we know we can animate them.
+function useScrollReveal(rootRef) {
+  React.useEffect(() => {
+    const root = rootRef.current;
+    if (
+      !root ||
+      typeof IntersectionObserver === 'undefined' ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      return undefined;
+    }
+    const targets = Array.from(root.querySelectorAll('[data-reveal]')).filter(
+      el => el.getBoundingClientRect().top > window.innerHeight * 0.85
+    );
+    // Stagger siblings revealed from the same container.
+    const groups = new Map();
+    targets.forEach(el => {
+      const siblings = groups.get(el.parentElement) || [];
+      siblings.push(el);
+      groups.set(el.parentElement, siblings);
+    });
+    groups.forEach(siblings => {
+      siblings.forEach((el, index) => {
+        el.style.transitionDelay = `${Math.min(index * 90, 360)}ms`;
+      });
+    });
+    targets.forEach(el => el.classList.add(styles.eloqkvRevealPrep));
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add(styles.eloqkvRevealOn);
+            entry.target.classList.remove(styles.eloqkvRevealPrep);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {rootMargin: '0px 0px -10% 0px', threshold: 0}
+    );
+    targets.forEach(el => observer.observe(el));
+    return () => observer.disconnect();
+  }, [rootRef]);
+}
+
+const HERO_METRICS = [
   {
-    quote:
-      'EloqKV enables us to develop faster than ever before, while its tiered storage significantly reduces costs',
-    name: 'Rocky Shi',
-    title: 'Director of Engineering',
-    company: 'Transsion',
+    value: '50x+',
+    countTo: 50,
+    countSuffix: 'x+',
+    label: 'lower infra cost (1TB example)',
   },
   {
-    quote:
-      'EloqKV provides us with a unified caching solution for hybrid cloud environments, making it a perfect fit for our business',
-    name: 'Jack Wang',
-    title: 'DBA Manager',
-    company: 'Inke',
+    value: '<5ms',
+    label: 'P99.99 latency on NVMe',
   },
   {
-    quote:
-      'We are a startup in need of a database that is both easy to use and scalable. EloqKV seamlessly integrates caching and database capabilities into a single solution',
-    name: 'Liang Liang',
-    title: 'Developer',
-    company: 'SeeCube',
+    value: 'Redis/Valkey',
+    label: 'compatible API',
   },
 ];
 
-const PRODUCT_COMPARISON = [
+const FIT_ITEMS = [
   {
-    feature: 'In-Memory Cache with Redis API',
-    eloqkv: true,
-    redis: true,
-    dragonfly: true,
-    upstash: true,
+    title: 'Best fit',
+    body:
+      'Large Redis-style datasets where DRAM, replicas, and shards dominate cost.',
   },
   {
-    feature: 'Work as Durable Primary Storage',
-    eloqkv: true,
-    redis: false,
-    dragonfly: false,
-    upstash: true,
-  },
-  {
-    feature: 'Distributed Transaction',
-    eloqkv: true,
-    redis: false,
-    dragonfly: false,
-    upstash: false,
-  },
-  {
-    feature: 'Tiered Storage',
-    eloqkv: true,
-    redis: false,
-    dragonfly: true,
-    upstash: true,
-  },
-  {
-    feature: 'Scale Out',
-    eloqkv: 'Native Multi Master',
-    redis: 'Sharding Based',
-    dragonfly: 'Sharding Based',
-    upstash: 'Can Only Scale Out Read',
-  },
-  {
-    feature: 'Scale Up',
-    eloqkv: true,
-    redis: 'Single Worker Thread',
-    dragonfly: true,
-    upstash: 'Single Worker Thread',
-  },
-  {
-    feature: 'Distributed Lua',
-    eloqkv: true,
-    redis: false,
-    dragonfly: false,
-    upstash: false,
-  },
-  {
-    feature: 'Session Style Transaction',
-    eloqkv: true,
-    redis: false,
-    dragonfly: false,
-    upstash: false,
-  },
-  {
-    feature: 'Open Source',
-    eloqkv: true,
-    redis: 'Complicated',
-    dragonfly: 'Source Available: BSL',
-    upstash: false,
+    title: 'Common uses',
+    body:
+      'Session stores, user profiles, shopping carts, feature stores, and leaderboards — where the dataset dwarfs the hot working set.',
   },
 ];
+
+const HOURS_PER_MONTH = 730;
+const ELOQKV_I4I_2XLARGE_RESERVED_HOURLY = 0.445;
+const ELOQKV_NODE_COUNT = 2;
+const ELOQKV_MONTHLY_ESTIMATE =
+  ELOQKV_NODE_COUNT *
+  ELOQKV_I4I_2XLARGE_RESERVED_HOURLY *
+  HOURS_PER_MONTH;
+const ELASTICACHE_R7G_4XLARGE_HOURLY = 1.745;
+const ELASTICACHE_R7G_4XLARGE_MEMORY_GIB = 105.81;
+const ELASTICACHE_USABLE_MEMORY_RATIO = 0.75;
+const ELASTICACHE_DATASET_GIB = 1024;
+const ELASTICACHE_REPLICA_FACTOR = 2;
+const ELASTICACHE_USABLE_MEMORY_GIB =
+  ELASTICACHE_R7G_4XLARGE_MEMORY_GIB * ELASTICACHE_USABLE_MEMORY_RATIO;
+const ELASTICACHE_SHARD_COUNT = Math.ceil(
+  ELASTICACHE_DATASET_GIB / ELASTICACHE_USABLE_MEMORY_GIB
+);
+const ELASTICACHE_NODE_COUNT =
+  ELASTICACHE_SHARD_COUNT * ELASTICACHE_REPLICA_FACTOR;
+const ELASTICACHE_MONTHLY_COST =
+  ELASTICACHE_NODE_COUNT *
+  ELASTICACHE_R7G_4XLARGE_HOURLY *
+  HOURS_PER_MONTH;
+const REDIS_CLOUD_PRO_SHARD_COUNT = 82;
+const REDIS_CLOUD_PRO_SHARD_HOURLY = 0.585;
+const REDIS_CLOUD_PRO_HOURLY =
+  REDIS_CLOUD_PRO_SHARD_COUNT * REDIS_CLOUD_PRO_SHARD_HOURLY;
+const REDIS_CLOUD_PRO_MONTHLY_COST =
+  REDIS_CLOUD_PRO_HOURLY * HOURS_PER_MONTH;
+const MAX_COMPARISON_MONTHLY_COST = Math.max(
+  ELASTICACHE_MONTHLY_COST,
+  REDIS_CLOUD_PRO_MONTHLY_COST
+);
+
+function formatMonthlyCost(value) {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 0,
+  }).format(value);
+}
+
+const COST_COMPARISON_ROWS = [
+  {
+    provider: 'EloqKV',
+    monthlyCost: `${formatMonthlyCost(ELOQKV_MONTHLY_ESTIMATE)}/mo`,
+    relativeCost: '1x baseline',
+    dataPlacement: '2 x i4i.2xlarge, each with 8 vCPU and 1 x 1875 NVMe SSD',
+    barSize: `${Math.round(
+      (ELOQKV_MONTHLY_ESTIMATE / MAX_COMPARISON_MONTHLY_COST) * 100
+    )}%`,
+    featured: true,
+  },
+  {
+    provider: 'ElastiCache for Redis OSS',
+    monthlyCost: `${formatMonthlyCost(ELASTICACHE_MONTHLY_COST)}/mo`,
+    relativeCost: `${(ELASTICACHE_MONTHLY_COST / ELOQKV_MONTHLY_ESTIMATE).toFixed(
+      1
+    )}x vs EloqKV`,
+    dataPlacement: `${ELASTICACHE_NODE_COUNT} x cache.r7g.4xlarge (${ELASTICACHE_SHARD_COUNT} shards x primary+replica)`,
+    barSize: `${Math.round(
+      (ELASTICACHE_MONTHLY_COST / MAX_COMPARISON_MONTHLY_COST) * 100
+    )}%`,
+  },
+  {
+    provider: 'Redis Cloud Pro',
+    monthlyCost: `${formatMonthlyCost(REDIS_CLOUD_PRO_MONTHLY_COST)}/mo`,
+    relativeCost: `${(
+      REDIS_CLOUD_PRO_MONTHLY_COST / ELOQKV_MONTHLY_ESTIMATE
+    ).toFixed(1)}x vs EloqKV`,
+    dataPlacement:
+      'Official Redis calculator estimate: 82 x Large shards for 2TB effective HA memory',
+    barSize: '100%',
+  },
+];
+
+const LATENCY_STATS = [
+  {value: '<5ms', label: 'P99.99 at 2TB on NVMe'},
+  {value: '1 IOP', label: 'per read — no LSM levels'},
+  {value: '2TB', label: 'stable on a single node'},
+];
+
+const TX_CARDS = [
+  {
+    title: 'Distributed ACID',
+    body:
+      'Cross-shard MULTI/EXEC with consistent reads and writes — not just single-key atomics.',
+  },
+  {
+    title: 'Ditch the Duo',
+    body:
+      'Retire the MySQL + Redis combo and its cache-invalidation logic. One system is the source of truth and serves it at cache speed.',
+  },
+  {
+    title: 'Durability optional',
+    body:
+      'Run cache-style for raw speed, or enable WAL-backed recovery when the workload needs durable state.',
+  },
+];
+
+const COMPARE_COLUMNS = [
+  {name: 'EloqKV', caption: 'Redis API on NVMe', featured: true},
+  {name: 'In-memory cache', caption: 'Redis · Valkey · ElastiCache'},
+  {name: 'SSD / tiered KV', caption: 'e.g. KVRocks'},
+];
+
+const COMPARE_ROWS = [
+  {
+    label: 'Serves datasets beyond RAM',
+    cells: [{mark: 'yes'}, {mark: 'no', note: 'capped by DRAM'}, {mark: 'yes'}],
+  },
+  {
+    label: 'P99.99 below 5ms under load',
+    cells: [
+      {mark: 'yes', note: 'non-LSM engine'},
+      {mark: 'yes', note: 'all-DRAM'},
+      {mark: 'no', note: 'LSM compaction jitter'},
+    ],
+  },
+  {
+    label: 'Distributed ACID transactions',
+    cells: [
+      {mark: 'yes', note: 'cross-shard MULTI/EXEC'},
+      {mark: 'no', note: 'single-shard only'},
+      {mark: 'no', note: 'limited'},
+    ],
+  },
+  {
+    label: 'Infra cost, 1TB + HA',
+    cells: [
+      {text: `1× · ${formatMonthlyCost(ELOQKV_MONTHLY_ESTIMATE)}/mo`},
+      {
+        text: `~${Math.round(
+          ELASTICACHE_MONTHLY_COST / ELOQKV_MONTHLY_ESTIMATE
+        )}×`,
+      },
+      {text: 'Lower DRAM', note: 'but unstable tail'},
+    ],
+  },
+  {
+    label: 'Redis / Valkey wire API',
+    cells: [{mark: 'yes'}, {mark: 'yes'}, {mark: 'yes'}],
+  },
+];
+
+function PageMetadata() {
+  return (
+    <Head>
+      <link rel="canonical" href={PAGE_URL} />
+      <meta property="og:title" content={seo.eloqkvProduct.ogTitle} />
+      <meta property="og:description" content={seo.eloqkvProduct.ogDescription} />
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content={PAGE_URL} />
+      <meta property="og:image" content={DEFAULT_OG_IMAGE} />
+      <meta property="og:image:alt" content={OG_IMAGE_ALT} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta name="twitter:title" content={seo.eloqkvProduct.ogTitle} />
+      <meta name="twitter:description" content={seo.eloqkvProduct.ogDescription} />
+      <meta name="twitter:image" content={DEFAULT_OG_IMAGE} />
+      <meta name="twitter:image:alt" content={OG_IMAGE_ALT} />
+    </Head>
+  );
+}
+
+function Hero() {
+  const stars = useGitHubStars(GITHUB_REPO, GITHUB_STARS_FALLBACK);
+  return (
+    <section className={styles.eloqkvHero}>
+      <div className={styles.eloqkvHeroBackdrop} aria-hidden="true">
+        <HeroStream />
+      </div>
+      <div className={styles.eloqkvHeroInner}>
+        <div className={styles.eloqkvHeroCopy}>
+          <p className={styles.eloqkvEyebrow}>EloqKV</p>
+          <h1 className={styles.eloqkvHeroTitle}>
+            Scale Redis-Compatible Data Without Scaling DRAM
+          </h1>
+          <p className={styles.eloqkvHeroSubtitle}>
+            EloqKV uses NVMe-backed storage to keep large datasets fast at much
+            lower cost.
+          </p>
+          <div className={styles.eloqkvHeroButtons}>
+            <Link className={styles.eloqkvPrimaryButton} to="/costsaving">
+              Calculate Redis Savings
+            </Link>
+            <Link className={styles.eloqkvSecondaryButton} href={GITHUB_URL}>
+              View GitHub
+              <span className={styles.eloqkvStarBadge}>
+                <StarIcon />
+                {formatStarCount(stars)}
+              </span>
+            </Link>
+            <Link className={styles.eloqkvTertiaryButton} to="/contact">
+              Talk to Us
+            </Link>
+          </div>
+          <div
+            className={styles.eloqkvHeroMetricRail}
+            aria-label="EloqKV headline proof points">
+            {HERO_METRICS.map(metric => (
+              <div key={metric.value} className={styles.eloqkvHeroMetric}>
+                <span>
+                  {metric.countTo ? (
+                    <CountUp to={metric.countTo} suffix={metric.countSuffix} />
+                  ) : (
+                    metric.value
+                  )}
+                </span>
+                <p>{metric.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <HeroCostLedger />
+      </div>
+    </section>
+  );
+}
+
+function HeroCostLedger() {
+  return (
+    <aside className={styles.eloqkvHeroLedger} aria-label="Cost example">
+      <div className={styles.eloqkvHeroLedgerHeader}>
+        <p>1TB / 100K QPS / HA</p>
+        <strong>
+          <CountUp
+            to={ELOQKV_MONTHLY_ESTIMATE}
+            format={formatMonthlyCost}
+            suffix="/mo"
+          />
+        </strong>
+        <span>P99.99 under 5ms</span>
+      </div>
+      <div className={styles.eloqkvHeroLedgerRows}>
+        {COST_COMPARISON_ROWS.slice(0, 2).map(row => (
+          <div
+            key={row.provider}
+            className={
+              row.featured
+                ? styles.eloqkvHeroLedgerRowFeatured
+                : styles.eloqkvHeroLedgerRow
+            }>
+            <span>{row.provider}</span>
+            <strong>{row.monthlyCost}</strong>
+            <em>{row.relativeCost}</em>
+          </div>
+        ))}
+      </div>
+      <p className={styles.eloqkvHeroLedgerNote}>
+        EloqKV uses EC2 Reserved pricing. Full breakdown below.
+      </p>
+    </aside>
+  );
+}
+
+function LogoStrip() {
+  return (
+    <section
+      className={styles.eloqkvLogoStrip}
+      aria-label="Companies using EloqData">
+      <div className={styles.eloqkvLogoStripInner} data-reveal>
+        <p>Trusted by teams running data at scale</p>
+        <div className={styles.eloqkvLogoRow}>
+          {CUSTOMER_LOGOS.map(logo => (
+            <img key={logo.alt} src={logo.src} alt={logo.alt} loading="lazy" />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function DefinitionAndFit() {
+  return (
+    <section className={styles.eloqkvDefinitionSection}>
+      <div className={styles.eloqkvDefinitionInner}>
+        <div className={styles.eloqkvDefinitionLead} data-reveal>
+          <p className={styles.eloqkvEyebrow}>What is EloqKV?</p>
+          <h2 className={styles.eloqkvSectionTitle}>
+            A Redis-compatible database for large stateful workloads
+          </h2>
+        </div>
+        <div className={styles.eloqkvDefinitionBody} data-reveal>
+          <p className={styles.eloqkvDefinitionText}>
+            EloqKV is a Redis- and Valkey-compatible database that serves
+            datasets far larger than RAM — at cache speed, with full ACID
+            transactions.
+          </p>
+          <div className={styles.eloqkvValueStripInline}>
+            {VALUE_POINTS.map(point => (
+              <span key={point}>{point}</span>
+            ))}
+          </div>
+          <div className={styles.eloqkvFitGrid}>
+            {FIT_ITEMS.map(item => (
+              <article key={item.title} className={styles.eloqkvFitItem}>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CostComparisonTable() {
+  return (
+    <div className={styles.eloqkvCostComparisonCard} data-reveal>
+      <div className={styles.eloqkvCostComparisonHeader}>
+        <div>
+          <h3>1TB Redis-style workload at 100K QPS</h3>
+        </div>
+      </div>
+      <div className={styles.eloqkvCostTableWrap}>
+        <table className={styles.eloqkvCostTable}>
+          <thead>
+            <tr>
+              <th scope="col">Option</th>
+              <th scope="col">Monthly infrastructure</th>
+              <th scope="col">Relative cost</th>
+              <th scope="col">Data placement</th>
+            </tr>
+          </thead>
+          <tbody>
+            {COST_COMPARISON_ROWS.map(row => (
+              <tr
+                key={row.provider}
+                className={row.featured ? styles.eloqkvCostTableFeatured : ''}>
+                <th scope="row">{row.provider}</th>
+                <td>
+                  <strong>{row.monthlyCost}</strong>
+                  {row.barSize && (
+                    <span className={styles.eloqkvCostTableBar}>
+                      <span
+                        className={styles.eloqkvCostTableBarValue}
+                        style={{'--bar-size': row.barSize}}
+                      />
+                    </span>
+                  )}
+                </td>
+                <td>{row.relativeCost}</td>
+                <td>{row.dataPlacement}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p className={styles.eloqkvCostTableNote}>
+        Assumptions: 1TB logical dataset, 100K QPS, P99.99-under-5ms latency
+        target, HA included, us-east-1, and 730 hours/month. EloqKV uses EC2
+        1-year Standard Reserved, No Upfront pricing. Excludes transfer,
+        snapshots, support, and discounts. Pricing reviewed {LAST_UPDATED}.{' '}
+        <Link to="/costsaving">Calculate savings for your workload.</Link>
+      </p>
+    </div>
+  );
+}
+
+function CostFocus() {
+  return (
+    <section className={styles.eloqkvCostFocusSection}>
+      <div className={styles.eloqkvCostFocusInner}>
+        <div className={styles.eloqkvCostFocusCopy} data-reveal>
+          <p className={styles.eloqkvEyebrow}>DRAM to NVMe economics</p>
+          <h2 className={styles.eloqkvSectionTitle}>
+            The cost changes when capacity leaves DRAM
+          </h2>
+          <p className={styles.eloqkvCostTakeaway}>
+            In the 1TB / 100K QPS / HA example below, EloqKV runs at about{' '}
+            {formatMonthlyCost(ELOQKV_MONTHLY_ESTIMATE)}/mo versus about{' '}
+            {formatMonthlyCost(ELASTICACHE_MONTHLY_COST)}/mo on ElastiCache —
+            more than 50× lower infrastructure cost.
+          </p>
+          <div className={styles.eloqkvInlineLinks}>
+            <Link to="/post/redis-vs-eloqkv-cost-breakdown-at-scale">
+              Read cost breakdown
+            </Link>
+          </div>
+        </div>
+        <CostComparisonTable />
+      </div>
+    </section>
+  );
+}
+
+function TailLatency() {
+  return (
+    <section className={styles.eloqkvLatencySection}>
+      <div className={styles.eloqkvLatencyInner}>
+        <div className={styles.eloqkvLatencyCopy} data-reveal>
+          <p className={styles.eloqkvEyebrow}>Predictable tail latency</p>
+          <h2 className={styles.eloqkvSectionTitle}>
+            P99.99 under 5ms on NVMe
+          </h2>
+          <p className={styles.eloqkvLatencyText}>
+            The tail-latency spikes that break other SSD-backed caches come from
+            LSM compaction stalls and write amplification. EloqKV&apos;s storage
+            engine drops the LSM design entirely — one disk access per read, no
+            background
+            compaction — so P99.99 stays flat. A 2TB dataset holds P99.99
+            under 5ms on a single NVMe node, work that would otherwise need a
+            ~20-node all-RAM Redis cluster.
+          </p>
+          <div className={styles.eloqkvLatencyStats}>
+            {LATENCY_STATS.map(stat => (
+              <div key={stat.value} className={styles.eloqkvLatencyStat}>
+                <span>{stat.value}</span>
+                <p>{stat.label}</p>
+              </div>
+            ))}
+          </div>
+          <div className={styles.eloqkvInlineLinks}>
+            <Link to={BENCHMARK_URL}>Review the latency benchmark</Link>
+          </div>
+        </div>
+        <figure className={styles.eloqkvLatencyFigure} data-reveal>
+          <img
+            className={styles.eloqkvLatencyChart}
+            src={LATENCY_CHART}
+            width="2540"
+            height="1680"
+            loading="lazy"
+            alt="EloqKV vs KVRocks P99.99 latency on a 2TB on-disk dataset at 100K QPS: EloqKV stays under about 3ms across read/write ratios while KVRocks spikes to tens of milliseconds."
+          />
+          <figcaption>
+            P99.99 latency, 2TB on disk, 100K QPS. EloqKV stays flat; the
+            LSM-based store spikes more than 20×.
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+  );
+}
+
+function Transactions() {
+  return (
+    <section className={styles.eloqkvTxSection}>
+      <div className={styles.eloqkvTxInner}>
+        <div className={styles.eloqkvTxLead} data-reveal>
+          <p className={styles.eloqkvEyebrow}>Beyond cache</p>
+          <h2 className={styles.eloqkvSectionTitle}>
+            A transactional database behind a Redis API
+          </h2>
+          <p className={styles.eloqkvTxText}>
+            EloqKV is full ACID with distributed transactions, so it covers
+            workloads a cache cannot — without giving up the Redis interface.
+          </p>
+        </div>
+        <div className={styles.eloqkvTxGrid}>
+          {TX_CARDS.map(card => (
+            <article key={card.title} className={styles.eloqkvTxCard} data-reveal>
+              <h3>{card.title}</h3>
+              <p>{card.body}</p>
+            </article>
+          ))}
+        </div>
+        <div className={styles.eloqkvCompatLine} data-reveal>
+          <p>
+            <strong>Redis &amp; Valkey wire-compatible.</strong> Point your
+            existing clients, libraries, and tooling at EloqKV unchanged.
+          </p>
+          <div className={styles.eloqkvInlineLinks}>
+            <Link to={COMMANDS_URL}>Supported commands</Link>
+            <Link to={TRANSACTIONS_URL}>Explore transactions</Link>
+            <Link to={MIGRATION_URL}>Migration guide</Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Comparison() {
+  return (
+    <section className={styles.eloqkvCompareSection}>
+      <div className={styles.eloqkvCompareInner}>
+        <div className={styles.eloqkvSectionHeader} data-reveal>
+          <p className={styles.eloqkvEyebrow}>How it compares</p>
+          <h2 className={styles.eloqkvSectionTitle}>
+            Every Redis alternative trades something away
+          </h2>
+          <p className={styles.eloqkvCompareSubtitle}>
+            EloqKV&apos;s goal is to trade nothing — capacity, tail latency, and
+            transactions at once.
+          </p>
+        </div>
+        <div className={styles.eloqkvCompareWrap} data-reveal>
+          <table className={styles.eloqkvCompareTable}>
+            <thead>
+              <tr>
+                <th scope="col">
+                  <span className={styles.eloqkvCompareSrOnly}>Capability</span>
+                </th>
+                {COMPARE_COLUMNS.map(col => (
+                  <th
+                    key={col.name}
+                    scope="col"
+                    className={
+                      col.featured ? styles.eloqkvCompareColFeatured : undefined
+                    }>
+                    <strong>{col.name}</strong>
+                    <span>{col.caption}</span>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {COMPARE_ROWS.map(row => (
+                <tr key={row.label}>
+                  <th scope="row">{row.label}</th>
+                  {row.cells.map((cell, index) => (
+                    <td
+                      key={COMPARE_COLUMNS[index].name}
+                      className={
+                        COMPARE_COLUMNS[index].featured
+                          ? styles.eloqkvCompareCellFeatured
+                          : undefined
+                      }>
+                      {cell.mark ? (
+                        <span
+                          className={
+                            cell.mark === 'yes'
+                              ? styles.eloqkvCompareYes
+                              : styles.eloqkvCompareNo
+                          }
+                          role="img"
+                          aria-label={cell.mark === 'yes' ? 'Yes' : 'No'}>
+                          {cell.mark === 'yes' ? '✓' : '✗'}
+                        </span>
+                      ) : (
+                        <span className={styles.eloqkvCompareValue}>
+                          {cell.text}
+                        </span>
+                      )}
+                      {cell.note && <em>{cell.note}</em>}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className={styles.eloqkvCompareFootnote}>
+          P99.99 vs KVRocks measured on a 2TB on-disk dataset at 100K QPS.{' '}
+          <Link to={BENCHMARK_URL}>See the benchmark.</Link>
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function FaqSection() {
+  return (
+    <section className={styles.eloqkvFaqSection}>
+      <div className={styles.eloqkvSectionHeader} data-reveal>
+        <p className={styles.eloqkvEyebrow}>FAQ</p>
+        <h2 className={styles.eloqkvSectionTitle}>
+          Common Redis migration questions
+        </h2>
+      </div>
+      <div className={styles.eloqkvFaqGrid}>
+        {eloqkvProductFaqItems.map((item, index) => (
+          <article
+            key={item.question}
+            data-reveal
+            className={`${styles.eloqkvFaqItem} ${
+              index === 0 ? styles.eloqkvFaqItemFeatured : ''
+            }`}>
+            <h3>{item.question}</h3>
+            <p>
+              {item.answer}{' '}
+              <Link to={item.linkPath}>{item.linkLabel}</Link>.
+            </p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function FinalCta() {
+  return (
+    <section className={styles.eloqkvFinalCta}>
+      <div className={styles.eloqkvFinalCtaInner} data-reveal>
+        <div>
+          <p className={styles.eloqkvEyebrow}>Evaluate EloqKV</p>
+          <h2 className={styles.eloqkvSectionTitle}>
+            Evaluate EloqKV for memory-bound Redis workloads
+          </h2>
+        </div>
+        <div className={styles.eloqkvHeroButtons}>
+          <Link className={styles.eloqkvPrimaryButton} to="/costsaving">
+            Calculate Redis Savings
+          </Link>
+          <Link className={styles.eloqkvSecondaryButton} to={GETSTARTED_URL}>
+            Get Started
+          </Link>
+          <Link className={styles.eloqkvTertiaryButton} href={CLOUD_SIGNUP_URL}>
+            Try EloqCloud
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export default function EloqKV() {
-  const [workload, setWorkload] = useState('small');
-  const [isAutoSwitching, setIsAutoSwitching] = useState(true);
-  const [activeTestimonial, setActiveTestimonial] = useState(0);
-
-  useEffect(() => {
-    if (!isAutoSwitching) return;
-
-    const workloadTypes = Object.keys(WORKLOAD_PRICES);
-    const interval = setInterval(() => {
-      setWorkload(current => {
-        const currentIndex = workloadTypes.indexOf(current);
-        const nextIndex = (currentIndex + 1) % workloadTypes.length;
-        return workloadTypes[nextIndex];
-      });
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [isAutoSwitching]);
-
-  useEffect(() => {
-    const options = {
-      root: null,
-      rootMargin: '-50% 0px -50% 0px', // Trigger when testimonial is in center
-      threshold: 0,
-    };
-
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const index = parseInt(entry.target.dataset.index);
-          setActiveTestimonial(index);
-        }
-      });
-    }, options);
-
-    // Observe all testimonial items
-    document
-      .querySelectorAll(`.${styles.testimonialItem}`)
-      .forEach((el, index) => {
-        el.dataset.index = index;
-        observer.observe(el);
-      });
-
-    return () => observer.disconnect();
-  }, []);
-
-  const handleTabClick = size => {
-    setIsAutoSwitching(false);
-    setWorkload(size);
-  };
-
+  const mainRef = React.useRef(null);
+  useScrollReveal(mainRef);
   return (
     <Layout
       title={seo.eloqkvProduct.title}
       description={seo.eloqkvProduct.description}>
-      <StructuredData schemas={getStructuredDataForPath('/product/eloqkv')} />
-      <main>
-        {/* Hero Section */}
-        <div className={styles.hero}>
-          <div className={styles.heroInner}>
-            <h1 className={styles.heroTitle}>EloqKV</h1>
-            <h1 className={styles.heroTitleSecondary}>
-              Redis API, Database Power
-            </h1>
-            <p className={styles.heroSubtitle}>
-              The Redis-API Compatible Distributed Database for Production, High
-              Performance, Cost Effective and Full ACID Transactions
-            </p>
-            <div className={styles.heroButtons}>
-              <Link
-                className={`button button--primary button--lg ${styles.heroButton}`}
-                href="https://cloud.eloqdata.com/signup"
-                style={{
-                  background: 'linear-gradient(120deg, #ff7b2d, #ff9f4a)',
-                  border: 'none',
-                }}>
-                Get Started
-              </Link>
-              <Link
-                className={`button button--secondary button--lg ${styles.heroButton}`}
-                href="https://github.com/eloqdata/eloqkv"
-                style={{
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
-                  color: '#fff',
-                }}>
-                Star on GitHub ⭐
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        {/* Features Section for EloqKV */}
-        <div className="section-container">
-          <h2 className="section-title">EloqKV Features</h2>
-          <p className="section-subtitle">
-            Redis-compatible database built for durability, scalability, and
-            performance
-          </p>
-
-          {/* Primary Database Section */}
-          <div className={styles.acidSection}>
-            <div className={styles.acidInner}>
-              <div className={styles.acidContent}>
-                <div className={styles.acidInfo}>
-                  <h2 className={styles.acidTitle}>
-                    Primary Database with Redis API
-                  </h2>
-                  <p className={styles.acidDescription}>
-                    EloqKV is not just a cache—it's a full-fledged transactional
-                    key-value database. It eliminates the need for a
-                    Redis+database combo and resolves cache consistency issues.
-                    By combining persistence, high availability, and full Redis
-                    API compatibility, EloqKV enables developers to use Redis
-                    commands in real database workloads.
-                  </p>
-                </div>
-                <div className={styles.acidImageContainer}>
-                  <img
-                    src="/img/eloqkv-feature-primary.png"
-                    alt="Primary Database with Redis API"
-                    className={styles.acidImage}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Tiered Storage Section */}
-          <div className={styles.tieredSection}>
-            <div className={styles.tieredInner}>
-              <div className={styles.tieredContent}>
-                <div className={styles.tieredImageContainer}>
-                  <img
-                    src="/img/tiered-storage.jpg"
-                    alt="Tiered Storage"
-                    className={styles.tieredImage}
-                  />
-                </div>
-                <div className={styles.tieredInfo}>
-                  <h2 className={styles.tieredTitle}>Tiered Storage</h2>
-                  <p className={styles.tieredDescription}>
-                    EloqKV automatically optimizes hot, warm, and cold data
-                    across memory, SSD, and object storage. Hot data stays in
-                    memory, warm data transitions to SSDs, and rarely accessed
-                    data moves to object storage—cutting storage costs without
-                    hurting performance.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Multi-Threaded Section */}
-          <div className={styles.acidSection}>
-            <div className={styles.acidInner}>
-              <div className={styles.acidContent}>
-                <div className={styles.acidInfo}>
-                  <h2 className={styles.acidTitle}>Multi-Threaded Execution</h2>
-                  <p className={styles.acidDescription}>
-                    EloqKV breaks Redis’s single-thread limitation and leverages
-                    modern multi-core hardware. With a multi-threaded engine, it
-                    can process millions of QPS on a single machine—unlocking
-                    unprecedented vertical scaling.
-                  </p>
-                </div>
-                <div className={styles.acidImageContainer}>
-                  <img
-                    src="/img/eloqkv-feature-multithread.png"
-                    alt="Multi Threaded Execution"
-                    className={styles.acidImage}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Truly Distributed Section */}
-          <div className={styles.tieredSection}>
-            <div className={styles.tieredInner}>
-              <div className={styles.tieredContent}>
-                <div className={styles.tieredImageContainer}>
-                  <img
-                    src="/img/eloqkv-feature-distributed.png"
-                    alt="Truly Distributed Architecture"
-                    className={styles.tieredImage}
-                  />
-                </div>
-                <div className={styles.tieredInfo}>
-                  <h2 className={styles.tieredTitle}>
-                    Truly Distributed Architecture
-                  </h2>
-                  <p className={styles.tieredDescription}>
-                    Unlike Redis Cluster which relies on smart clients and lacks
-                    cross-shard capabilities, EloqKV nodes collaborate
-                    internally to fetch and operate on remote keys. Cross-shard
-                    transactions and Lua scripts work seamlessly—true
-                    distribution, no client burden.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Client Transparency Section */}
-          <div className={styles.acidSection}>
-            <div className={styles.acidInner}>
-              <div className={styles.acidContent}>
-                <div className={styles.acidInfo}>
-                  <h2 className={styles.acidTitle}>Client Transparency</h2>
-                  <p className={styles.acidDescription}>
-                    Redis Cluster requires a special client that handles
-                    cluster-specific logic. EloqKV hides this complexity—your
-                    application can use the same Redis client to connect to both
-                    single-node and distributed deployments, with zero code
-                    changes.
-                  </p>
-                </div>
-                <div className={styles.acidImageContainer}>
-                  <img
-                    src="/img/eloqkv-feature-client.png"
-                    alt="Client Transparency"
-                    className={styles.acidImage}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* SQL-Style Transaction Section */}
-          <div className={styles.tieredSection}>
-            <div className={styles.tieredInner}>
-              <div className={styles.tieredContent}>
-                <div className={styles.tieredImageContainer}>
-                  <img
-                    src="/img/eloqkv-feature-transaction.png"
-                    alt="SQL Style Transaction"
-                    className={styles.tieredImage}
-                  />
-                </div>
-                <div className={styles.tieredInfo}>
-                  <h2 className={styles.tieredTitle}>SQL-Style Transactions</h2>
-                  <p className={styles.tieredDescription}>
-                    Go beyond Redis's MULTI/EXEC limitations. EloqKV introduces
-                    SQL-style transaction control, with `BEGIN`, `COMMIT`, and
-                    `ROLLBACK`—making it easier to write robust,
-                    rollback-capable application logic.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Code Comparison Section */}
-        <div className={styles.codeComparison}>
-          <div className={styles.codeComparisonInner}>
-            <div className={styles.codeBlock}>
-              <h3>Redis</h3>
-              <pre className={styles.codeContent}>
-                <code>
-                  {`MULTI
-SET user:1000:balance 500
-SET user:2000:balance 1500
-EXEC`}
-                </code>
-              </pre>
-            </div>
-            <div className={styles.codeBlock}>
-              <h3>EloqKV</h3>
-              <pre className={styles.codeContent}>
-                <code>
-                  {`BEGIN
-SET user:1000:balance 500
--- Perform Other Operations In-Between
-SET user:2000:balance 1500
-COMMIT`}
-                </code>
-              </pre>
-            </div>
-            <p style={{color: 'grey', fontSize: 'smaller'}}>
-              *EloqKV also support MULTI/EXEC style Redis atomic transactions,
-              even in distributed setting.
-            </p>
-          </div>
-        </div>
-
-        {/* Product Comparison Section */}
-        <div className={styles.comparisonSection}>
-          <div className={styles.comparisonInner}>
-            <h2 className={styles.comparisonTitle}>Database Comparison</h2>
-            <p className={styles.comparisonSubtitle}>
-              See how EloqKV compares to Redis, DragonflyDB and Upstash
-            </p>
-
-            <div className={styles.comparisonTable}>
-              <div
-                className={`${styles.comparisonHeader} ${styles.comparisonHeader5}`}>
-                <div className={styles.featureColumn}>
-                  <h3>Features</h3>
-                </div>
-                <div className={styles.comparisonColumn}>
-                  <h3>EloqKV</h3>
-                </div>
-                <div className={styles.comparisonColumn}>
-                  <h3>Redis</h3>
-                </div>
-                <div className={styles.comparisonColumn}>
-                  <h3>DragonflyDB</h3>
-                </div>
-                <div className={styles.comparisonColumn}>
-                  <h3>Upstash</h3>
-                </div>
-              </div>
-
-              {PRODUCT_COMPARISON.map((item, index) => (
-                <div
-                  key={index}
-                  className={`${styles.comparisonRow} ${
-                    styles.comparisonRow5
-                  } ${index % 2 === 0 ? styles.rowEven : styles.rowOdd}`}>
-                  <div className={styles.featureColumn}>{item.feature}</div>
-                  <div className={styles.comparisonColumn}>
-                    {typeof item.eloqkv === 'boolean' ? (
-                      item.eloqkv ? (
-                        <div className={styles.checkIcon}>
-                          <svg
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            className={styles.icon}>
-                            <path
-                              fillRule="evenodd"
-                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        </div>
-                      ) : (
-                        <div className={styles.xIcon}>
-                          <svg
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            className={styles.icon}>
-                            <path
-                              fillRule="evenodd"
-                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        </div>
-                      )
-                    ) : (
-                      <span>{item.eloqkv}</span>
-                    )}
-                  </div>
-                  <div className={styles.comparisonColumn}>
-                    {typeof item.redis === 'boolean' ? (
-                      item.redis ? (
-                        <div className={styles.checkIcon}>
-                          <svg
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            className={styles.icon}>
-                            <path
-                              fillRule="evenodd"
-                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        </div>
-                      ) : (
-                        <div className={styles.xIcon}>
-                          <svg
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            className={styles.icon}>
-                            <path
-                              fillRule="evenodd"
-                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        </div>
-                      )
-                    ) : (
-                      <span>{item.redis}</span>
-                    )}
-                  </div>
-                  <div className={styles.comparisonColumn}>
-                    {typeof item.dragonfly === 'boolean' ? (
-                      item.dragonfly ? (
-                        <div className={styles.checkIcon}>
-                          <svg
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            className={styles.icon}>
-                            <path
-                              fillRule="evenodd"
-                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        </div>
-                      ) : (
-                        <div className={styles.xIcon}>
-                          <svg
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            className={styles.icon}>
-                            <path
-                              fillRule="evenodd"
-                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        </div>
-                      )
-                    ) : (
-                      <span>{item.dragonfly}</span>
-                    )}
-                  </div>
-                  <div className={styles.comparisonColumn}>
-                    {typeof item.upstash === 'boolean' ? (
-                      item.upstash ? (
-                        <div className={styles.checkIcon}>
-                          <svg
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            className={styles.icon}>
-                            <path
-                              fillRule="evenodd"
-                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        </div>
-                      ) : (
-                        <div className={styles.xIcon}>
-                          <svg
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            className={styles.icon}>
-                            <path
-                              fillRule="evenodd"
-                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        </div>
-                      )
-                    ) : (
-                      <span>{item.upstash}</span>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className={styles.comparisonCTA}>
-              <Link
-                className={`button button--primary ${styles.ctaButton}`}
-                to="/eloqkv/introduction">
-                Learn More
-              </Link>
-              <Link
-                className={`button button--secondary ${styles.ctaButton}`}
-                href="https://github.com/eloqdata/eloqkv">
-                View on GitHub
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        {/* Cost Comparison Section */}
-        {SHOW_TESTIMONIALS && (
-          <div className={styles.costSection}>
-            <div className={styles.costInner}>
-              <div className={styles.costContent}>
-                <div className={styles.costCards}>
-                  <div className={styles.workloadTabs}>
-                    {Object.keys(WORKLOAD_PRICES).map(size => (
-                      <button
-                        key={size}
-                        className={`${styles.workloadTab} ${
-                          workload === size ? styles.workloadTabActive : ''
-                        }`}
-                        onClick={() => handleTabClick(size)}>
-                        {size.charAt(0).toUpperCase() + size.slice(1)}
-                      </button>
-                    ))}
-                  </div>
-                  <div className={styles.costCard}>
-                    <div className={styles.costAmount}>
-                      ${WORKLOAD_PRICES[workload].eloqkv}
-                    </div>
-                    <div className={styles.costPeriod}>/month</div>
-                    <div className={styles.costProvider} data-provider="eloqkv">
-                      EloqKV
-                    </div>
-                  </div>
-                  <div className={styles.costCard}>
-                    <div className={styles.costAmount}>
-                      ${WORKLOAD_PRICES[workload].redis}
-                    </div>
-                    <div className={styles.costPeriod}>/month</div>
-                    <div className={styles.costProvider}>Redis Enterprise</div>
-                  </div>
-                  <div className={styles.costCard}>
-                    <div className={styles.costAmount}>
-                      ${WORKLOAD_PRICES[workload].elasticache}
-                    </div>
-                    <div className={styles.costPeriod}>/month</div>
-                    <div className={styles.costProvider}>ElastiCache</div>
-                  </div>
-                  <div className={styles.workloadDescription}>
-                    {WORKLOAD_PRICES[workload].description}
-                  </div>
-                </div>
-                <div className={styles.costInfo}>
-                  <h2 className={styles.costTitle}>Cost Effective</h2>
-                  <p className={styles.costDescription}>
-                    EloqKV is built for efficiency, leveraging a thread-per-core
-                    model for maximum performance at the best cost. With
-                    Scale-to-Zero support, it eliminates idle-time expenses,
-                    making it a cost-effective choice. Optimize your Redis-like
-                    workloads and reduce TCO with EloqKV.
-                  </p>
-                  <div className={styles.costButtons}>
-                    <Link
-                      className={`button button--primary ${styles.costButton}`}
-                      to="/contact"
-                      style={{
-                        background: 'linear-gradient(120deg, #ff7b2d, #ff9f4a)',
-                        border: 'none',
-                      }}>
-                      Try Cloud Free
-                    </Link>
-                    <Link
-                      className={`button button--secondary ${styles.costButton}`}
-                      to="/pricing"
-                      style={{
-                        background: 'rgba(255, 255, 255, 0.1)',
-                        border: '1px solid rgba(255, 255, 255, 0.2)',
-                        color: '#fff',
-                      }}>
-                      Pricing
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Industry Leaders Section */}
-        {SHOW_TESTIMONIALS && (
-          <div className={styles.leadersSection}>
-            <div className={styles.leadersInner}>
-              <h2 className={styles.leadersTitle}>
-                EloqKV is loved by developers
-              </h2>
-              <Link to="/customers" className={styles.leadersCTA}>
-                Dive into success stories →
-              </Link>
-              <div className={styles.leadersContent}>
-                {testimonials.map((testimonial, index) => (
-                  <div key={index} className={styles.testimonialGroup}>
-                    <div
-                      className={`${styles.logo} ${
-                        activeTestimonial === index ? styles.logoActive : ''
-                      }`}>
-                      <span>{testimonial.company}</span>
-                    </div>
-                    <div
-                      className={`${styles.testimonialItem} ${
-                        activeTestimonial === index ? styles.active : ''
-                      }`}>
-                      <p className={styles.quote}>{testimonial.quote}</p>
-                      <div className={styles.testimonialAuthor}>
-                        <div>
-                          <div className={styles.authorName}>
-                            {testimonial.name}
-                          </div>
-                          <div className={styles.authorTitle}>
-                            {testimonial.title} at {testimonial.company}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Community Section */}
-        <div className={styles.communitySection}>
-          <div className={styles.communityInner}>
-            <h2 className={styles.communityTitle}>Community</h2>
-            <p className={styles.communitySubtitle}>
-              Let's build the next generation of AI native databases together
-            </p>
-            <div className={styles.communityGrid}>
-              <Link to="/blog" className={styles.communityCard}>
-                <div className={styles.communityIcon}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path
-                      d="M19 5v14H5V5h14zm0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
-                      fill="currentColor"
-                    />
-                    <path
-                      d="M14 17H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                </div>
-                <h3>Blog</h3>
-                <p>
-                  Explore technical insights on database innovations in the AI
-                  era.
-                </p>
-              </Link>
-
-              <Link
-                href="https://discord.gg/nmYjBkfak6"
-                className={styles.communityCard}>
-                <div className={styles.communityIcon}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path
-                      d="M19.27 5.33C17.94 4.71 16.5 4.26 15 4a.09.09 0 0 0-.07.03c-.18.33-.39.76-.53 1.09a16.09 16.09 0 0 0-4.8 0c-.14-.34-.35-.76-.54-1.09c-.01-.02-.04-.03-.07-.03c-1.5.26-2.93.71-4.27 1.33c-.01 0-.02.01-.03.02c-2.72 4.07-3.47 8.03-3.1 11.95c0 .02.01.04.03.05c1.8 1.32 3.53 2.12 5.24 2.65c.03.01.06 0 .07-.02c.4-.55.76-1.13 1.07-1.74c.02-.04 0-.08-.04-.09c-.57-.22-1.11-.48-1.64-.78c-.04-.02-.04-.08-.01-.11c.11-.08.22-.17.33-.25c.02-.02.05-.02.07-.01c3.44 1.57 7.15 1.57 10.55 0c.02-.01.05-.01.07.01c.11.09.22.17.33.26c.04.03.04.09-.01.11c-.52.31-1.07.56-1.64.78c-.04.01-.05.06-.04.09c.32.61.68 1.19 1.07 1.74c.03.01.06.02.09.01c1.72-.53 3.45-1.33 5.25-2.65c.02-.01.03-.03.03-.05c.44-4.53-.73-8.46-3.1-11.95c-.01-.01-.02-.02-.04-.02zM8.52 14.91c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.84 2.12-1.89 2.12zm6.97 0c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.83 2.12-1.89 2.12z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                </div>
-                <h3>Discord</h3>
-                <p>
-                  Join our Discord community to discuss ideas with developers.
-                </p>
-              </Link>
-
-              <Link
-                href="https://github.com/eloqdata/eloqkv"
-                className={styles.communityCard}>
-                <div className={styles.communityIcon}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path
-                      d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.341-3.369-1.341-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                </div>
-                <h3>Github</h3>
-                <p>
-                  Explore our open source projects on our GitHub repository.
-                </p>
-              </Link>
-            </div>
-          </div>
-        </div>
+      <PageMetadata />
+      <StructuredData schemas={getStructuredDataForPath(PAGE_PATH)} />
+      <main ref={mainRef} className={styles.eloqkvPage}>
+        <Hero />
+        <LogoStrip />
+        <DefinitionAndFit />
+        <CostFocus />
+        <TailLatency />
+        <Transactions />
+        <Comparison />
+        <FaqSection />
+        <FinalCta />
       </main>
     </Layout>
   );

@@ -47,14 +47,15 @@ for (const pathname of [
   }
 }
 
-const productSchemas = getStructuredDataForPath('/product/eloqkv');
 assert.deepEqual(schemaTypesFor('/product/eloqkv'), [
   'SoftwareApplication',
   'BreadcrumbList',
+  'FAQPage',
 ]);
 assert.deepEqual(schemaTypesFor('/product/eloqkv/'), [
   'SoftwareApplication',
   'BreadcrumbList',
+  'FAQPage',
 ]);
 const productSchema = schemaFor('/product/eloqkv', 'SoftwareApplication');
 assert.equal(productSchema.name, 'EloqKV');
@@ -62,10 +63,15 @@ assert.equal(productSchema.description, seo.eloqkvProduct.description);
 assert.equal(productSchema.url, `${SITE_URL}/product/eloqkv`);
 assert.equal(productSchema.applicationCategory, 'DatabaseApplication');
 assertNoUnsupportedProductClaims(productSchema);
+const productFaqSchema = schemaFor('/product/eloqkv', 'FAQPage');
+assert.equal(productFaqSchema.mainEntity.length, 6);
 assert.equal(
-  productSchemas.some(schema => schema['@type'] === 'FAQPage'),
-  false,
-  '/product/eloqkv should not emit FAQPage without visible FAQ content'
+  productFaqSchema.mainEntity[0].name,
+  'What is EloqKV?'
+);
+assert.match(
+  productFaqSchema.mainEntity[0].acceptedAnswer.text,
+  /Redis-compatible key-value database/
 );
 
 const comparisonBreadcrumb = schemaFor('/product-comparison', 'BreadcrumbList');
