@@ -84,11 +84,11 @@ const costComparisonFaq = withContext({
     },
     {
       '@type': 'Question',
-      name: 'How does EloqKV reduce infrastructure cost?',
+      name: 'Is EloqKV cheaper than Amazon ElastiCache or Valkey?',
       acceptedAnswer: {
         '@type': 'Answer',
         text:
-          'EloqKV keeps hot data in memory while using SSD and S3-compatible object storage for warmer or colder data. This reduces the amount of expensive DRAM required.',
+          'For large datasets it usually is. ElastiCache bills per cache node and per replica, so a multi-terabyte working set with high availability is dominated by DRAM-priced node hours, and Valkey only narrows that by roughly 20% versus the Redis OSS engine. EloqKV serves the same working set from NVMe at stable latency, using memory only as a cache. The exact savings depend on dataset size, latency target, and whether you use reserved pricing.',
       },
     },
     {
@@ -115,7 +115,7 @@ const costComparisonFaq = withContext({
       acceptedAnswer: {
         '@type': 'Answer',
         text:
-          'EloqKV is strongest when total data size is much larger than the hot working set. Examples include shopping carts, customer profiles, personalization stores, session data, and flash-sale workloads.',
+          'EloqKV is strongest when a large working set would be expensive to keep entirely in DRAM. Because NVMe serves hot access at stable, predictable latency — even for random reads — the savings apply whether access is concentrated on a few keys or spread across the whole keyspace. Examples include shopping carts, customer profiles, personalization stores, session data, and flash-sale workloads.',
       },
     },
   ],
@@ -154,7 +154,7 @@ const routeStructuredData = {
       {name: 'Home', path: '/'},
       {name: 'Articles', path: '/post'},
       {
-        name: 'Redis vs EloqKV Cost Breakdown at Scale',
+        name: 'Redis vs EloqKV Cost Comparison: NVMe Economics at Scale',
         path: '/post/redis-vs-eloqkv-cost-breakdown-at-scale',
       },
     ]),
