@@ -319,17 +319,17 @@ module.exports = {
         {
           type: 'html',
           value: `
-            <a href="/download" style="display: block; padding: 16px 20px; text-decoration: none; background-color: var(--navbar-dropdown-bg); border-bottom: 1px solid var(--navbar-dropdown-border); min-width: 320px;">
+            <a href="https://github.com/eloqdata/eloqkv/releases" style="display: block; padding: 16px 20px; text-decoration: none; background-color: var(--navbar-dropdown-bg); border-bottom: 1px solid var(--navbar-dropdown-border); min-width: 320px;">
               <div style="display: flex; align-items: center;">
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
                   <rect x="2" y="2" width="28" height="28" rx="6" fill="var(--navbar-dropdown-icon-bg)" />
-                  <ellipse cx="16" cy="10" rx="8" ry="3" fill="var(--navbar-dropdown-title-color)" />
-                  <path d="M8 10v8c0 1.5 3.5 3 8 3s8-1.5 8-3v-8" stroke="var(--navbar-dropdown-title-color)" stroke-width="2" fill="none" />
-                  <path d="M8 18v4c0 1.5 3.5 3 8 3s8-1.5 8-3v-4" stroke="var(--navbar-dropdown-title-color)" stroke-width="2" fill="none" />
+                  <rect x="6" y="8" width="8" height="16" rx="1" fill="var(--navbar-dropdown-title-color)" />
+                  <rect x="18" y="8" width="8" height="16" rx="1" fill="var(--navbar-dropdown-title-color)" />
+                  <rect x="14" y="15" width="4" height="2" fill="var(--navbar-dropdown-title-color)" />
                 </svg>
                 <div style="display: flex; flex-direction: column;">
-                  <span style="font-size: 18px; font-weight: 500; color: var(--navbar-dropdown-title-color); margin: 0 0 4px 0;">Eloq Database</span>
-                  <span style="font-size: 14px; color: var(--navbar-dropdown-subtitle-color);">Download EloqKV, EloqDoc and EloqSQL</span>
+                  <span style="font-size: 18px; font-weight: 500; color: var(--navbar-dropdown-title-color); margin: 0 0 4px 0;">EloqKV</span>
+                  <span style="font-size: 14px; color: var(--navbar-dropdown-subtitle-color);">Download EloqKV releases</span>
                 </div>
               </div>
             </a>
@@ -338,7 +338,7 @@ module.exports = {
         {
           type: 'html',
           value: `
-            <a href="/downloadeloqctl" style="display: block; padding: 16px 20px; text-decoration: none; background-color: var(--navbar-dropdown-bg); border-bottom: 1px solid var(--navbar-dropdown-border); min-width: 320px;">
+            <a href="https://github.com/monographdb/eloq_waiter/releases" style="display: block; padding: 16px 20px; text-decoration: none; background-color: var(--navbar-dropdown-bg); border-bottom: 1px solid var(--navbar-dropdown-border); min-width: 320px;">
               <div style="display: flex; align-items: center;">
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
                   <rect x="2" y="2" width="28" height="28" rx="6" fill="var(--navbar-dropdown-icon-bg)" />
