@@ -1,195 +1,253 @@
 ---
-title: Deploy High Available Cache Cluster (Compitable With Redis Master-Replica Mode)
-summary: Deploy High Available Cache Cluster on Local Storage.
+title: Deploy High Availability Cluster with MinIO
+description: Deploy a highly available EloqKV cluster with MinIO using either RocksDB Cloud or EloqStore Cloud.
+summary: Deploy a highly available EloqKV cluster backed by MinIO.
 ---
 
-# Deploy a High Available Cache Cluster (Compitable With Redis Master-Replica Mode)
+# Deploy a High Availability EloqKV Cluster with MinIO
 
-> **Note:** EloqKV on EloqStore will support using Eloqctl to install and manage soon. This document covers EloqKV on RocksDB.
+For a clustered EloqKV deployment with primary, standby, and voter nodes, use MinIO or another S3-compatible service as the object-storage backend.
 
-[Previously](./quick-start), we covered how to deploy a single node EloqKV cluster using `eloqctl`. In this document, we will focus on deploying a highly available cache cluster on local storage (RocksDB). This deployment is compatible with Redis Master-Replica Mode
+With `eloqctl`, the two MinIO-backed cluster shapes you should use are:
+
+1. `RocksDB Cloud + MinIO`
+2. `EloqStore Cloud + MinIO`
+
+Both deployment options use:
+
+1. `cluster_mode: true`
+2. tx, standby, and voter nodes
+3. a `log_service` section
+4. a MinIO endpoint that you provision separately
 
 ## 1. Prerequisites
 
-Please ensure you've reviewed the following document:
+- Review [Deploy Single Node Instance](./quick-start) first.
+- Review the host checklist:
+  - [Configuration Checklist](./prerequisite)
+- Prepare a reachable MinIO service and bucket.
+- Make sure the control machine can SSH to every target host.
 
-- [Configuration Checklist](./prerequisite)
+Before running `eloqctl`, prepare every target machine with the steps in [Configuration Checklist](./prerequisite).
 
-## 2. Deploy eloqctl on the control machine
+`eloqctl` does not deploy MinIO or any other S3-compatible object store for you. You must provision the object storage service first, then point the topology YAML at that endpoint.
 
-1. Get your eloqctl installation script here:
+## 1.1 Deploy a Minimal MinIO for Testing
 
-- [Eloqctl Install Script](../downloadeloqctl)
-
-2. To install eloqctl, simply run the following command:
-
-```
-bash eloqctl_installer.sh
-```
-
-If the following message is displayed, you have successfully installed `eloqctl`:
-
-```
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-100 16.6M  100 16.6M    0     0   203M      0 --:--:-- --:--:-- --:--:--  205M
-/home/eloq/.bash_profile has been modified to add eloqctl to PATH
-===============================================
-To use it, open a new terminal or execute:
-source /home/eloq/.bash_profile
-===============================================
-```
-
-This command installs eloqctl in the $HOME/.eloqctl directory, where the cluster metadata and downloaded components are also stored.
-
-Please run `source $HOME/.bash_profile` to add `$HOME/.eloqctl` to the PATH environment variable, so you can use `eloqctl` directly.
-
-Once installed, you can verify the `eloqctl` version by running:
-
-```
-eloqctl --version
-```
-
-## 3. Initialize the cluster topology file
-
-Example cluster topology files can be found in the `.eloqctl/config/examples/` directory.
-
-To deploy a highly available cluster, use `eloqkv_rocksdb_standby_with_voter.yaml` as the default configuration template.
-
-```
-# example yaml file
-.eloqctl/config/examples/eloqkv_rocksdb_standby_with_voter.yaml
-```
-
-To enable high availability, edit the `eloqkv_rocksdb_standby_with_voter.yaml` file. Setup primary, standby and voter nodes among different machines.
-
-```
-connection:
-  username: "${USER}"
-  auth_type: "keypair"
-  auth:
-    keypair: "/home/${USER}/.ssh/id_rsa"
-deployment:
-  cluster_name: "eloqkv_with_hot_standby_and_voter"
-  product: "EloqKV"
-  version: "latest"
-  install_dir: "/home/${USER}"
-  tx_service:
-    tx_host_ports: [10.0.0.1:6379]
-    standby_host_ports: [10.0.0.2:6379]
-    voter_host_ports: [10.0.0.3:6379]
-    enable_cache_replacement: on
-
-  storage_service:
-    rocksdb: Local
-
-  monitor:
-    data_dir: ""
-    eloq_metrics:
-      path: "/eloq_metrics"
-      port: 18081
-    prometheus:
-      download_url: "https://github.com/prometheus/prometheus/releases/download/v2.42.0/prometheus-2.42.0.linux-amd64.tar.gz"
-      port: 9500
-      host: 10.0.0.4
-    grafana:
-      download_url: "https://dl.grafana.com/oss/release/grafana-9.3.6.linux-amd64.tar.gz"
-      port: 3301
-      host: 10.0.0.4
-    node_exporter:
-      url: "https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_exporter-1.5.0.linux-amd64.tar.gz"
-      port: 9200
-```
-
-For detailed explanations for each configuration option in the YAML file, please refer to the previous document [Deploy Single Node Cluster](./quick-start). In this document, we will focus specifically on the high availability aspects of the configuration file.
-
-- **`tx_service.tx_host_ports`**:  
-  _Type_: `List of Strings`  
-  List of primary nodes. Each primary node handles both read and write operations, continuously replicating new changes to the standby nodes. Each primary node is separated by `,`.
-
-- **`tx_service.standby_host_ports`**:  
-  _Type_: `List of Strings`  
-  List of hot standby nodes. Each standby node handles read operations and automatically takes over as the primary node in case of a primary node failure. Use `|` to separate standby nodes for the same primary node and use `,` to separate standby nodes for different primary nodes. For example, `[10.0.0.2:6379| 10.0.0.3:6379, 10.0.0.4:6379| 10.0.0.5:6379]` means 2 standby nodes for the first primary node in tx_host_ports, and 2 standby nodes for the second primary node in tx_host_ports.
-
-- **`tx_service.voter_host_ports`**:  
-  _Type_: `Integer`  
-  List of voter nodes. In the event of a primary node failure, voters participate in electing a new primary node. Voter nodes do not store any data and are not eligible for election as the primary node. You only need to deploy a voter node when the total number of nodes in cluster is less than 3.
-
-- **`tx_service.enable_cache_replacement`**:  
-  _Type_: `Boolean`  
-   _Default_: `on`  
-   If persisted cold data can be evicted out of memory cache. If set to false, all data will be cached in memory and new data insertion will fail if memory is full. Less data can be stored in this mode, but all requests is handled in memory. If set to false, cold data will be evicted out of memory so that new write request can succeed. More data can be stored in this mode but a cache miss request will result in a disk read.
-
-- **`storage_service.rocksdb`**:  
-  _Type_: `String`  
-  `Local` indicates that an embedded RocksDB engine is used for on-disk data storage.
-
-The following example demonstrates how to configure a distributed, highly available cluster. It features three primary nodes, each paired with a dedicated standby node. A single voter node is shared across the cluster to manage failover events. To implement this, modify your YAML configuration as shown below:
-
-```
-connection:
-  username: "${USER}"
-  auth_type: "keypair"
-  auth:
-    keypair: "/home/${USER}/.ssh/id_rsa"
-deployment:
-  cluster_name: "eloqkv_with_hot_standby_and_voter"
-  product: "EloqKV"
-  version: "latest"
-  install_dir: "/home/${USER}"
-  tx_service:
-    tx_host_ports: [10.0.0.1:6379,10.0.0.2:6379,10.0.0.3:6379]
-    standby_host_ports: [10.0.0.5:6379,10.0.0.6:6379,10.0.0.7:6379]
-    voter_host_ports: [10.0.0.4:6379,10.0.0.4:6379,10.0.0.4:6379]
-    enable_cache_replacement: on
-
-  storage_service:
-    rocksdb: Local
-
-  monitor:
-    data_dir: ""
-    eloq_metrics:
-      path: "/eloq_metrics"
-      port: 18081
-    prometheus:
-      download_url: "https://github.com/prometheus/prometheus/releases/download/v2.42.0/prometheus-2.42.0.linux-amd64.tar.gz"
-      port: 9500
-      host: 10.0.0.4
-    grafana:
-      download_url: "https://dl.grafana.com/oss/release/grafana-9.3.6.linux-amd64.tar.gz"
-      port: 3301
-      host: 10.0.0.4
-    node_exporter:
-      url: "https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_exporter-1.5.0.linux-amd64.tar.gz"
-      port: 9200
-```
-
-## 4. Run the deployment command
-
-After you modified the `eloqkv_rocksdb_standby_with_voter.yaml`. Use the `eloqctl launch` command to provision an EloqKV cluster
+For a lab or local test environment, one simple way to start MinIO is:
 
 ```shell
-eloqctl launch -s ${HOME}/.eloqctl/config/examples/eloqkv_rocksdb_standby_with_voter.yaml
+mkdir -p /data/minio
+
+docker run -d \
+  --name eloq-minio \
+  -p 9000:9000 \
+  -p 9001:9001 \
+  -e MINIO_ROOT_USER=minioadmin \
+  -e MINIO_ROOT_PASSWORD=minioadmin \
+  -v /data/minio:/data \
+  quay.io/minio/minio server /data --console-address ":9001"
 ```
 
-The command will installed the EloqKV componnets in the specified cluster.
+Then create the bucket used by EloqKV. For example, with the MinIO client:
 
-If you see the following message, the EloqKV cluster has been successfully provisioned:
-
+```shell
+docker run --rm --network host --entrypoint /bin/sh quay.io/minio/mc -lc '
+  mc alias set local http://127.0.0.1:9000 minioadmin minioadmin &&
+  mc mb -p local/eloqservice || true
+'
 ```
-Launch cluster finished, Enjoy!
+
+After that, use:
+
+- endpoint: `http://<minio-host>:9000`
+- access key: `minioadmin`
+- secret key: `minioadmin`
+- bucket: `eloqservice`
+
+For production, deploy MinIO with durable disks, proper credentials, TLS, and backup policies. The example above is only a minimal test setup.
+
+## 2. Choose the Storage Backend
+
+Single-node EloqKV can use local storage such as:
+
+```yaml
+storage_service:
+  rocksdb: !LOCAL
 ```
 
-Feel free to use `eloqkv-cli` or any other Redis client to connect to EloqKV and enjoy exploring its features.
+For a tx/standby/voter cluster backed by MinIO, choose one of these storage backends:
 
-## 5. Auto Failover
+- `RocksDB Cloud + MinIO`
+- `EloqStore Cloud + MinIO`
 
-EloqKV can auto failover when primary node fails and the standby node will be elected as the new leader node to receive the write workload.
+For the complete field-by-field YAML reference, see [Eloqctl Topology Reference](./topology-reference).
 
-To make client transparent to primary failover, either deploy a proxy in front of EloqKV cluster or connect to EloqKV with a Redis Cluster SDK.
+## 3. Option A: Deploy with RocksDB Cloud + MinIO
 
-EloqKV Proxy is a high-performance proxy server written in Go, designed to manage multiple EloqKV clusters seamlessly. It allows clients to connect to different EloqKV clusters using tokens (passwords), enabling a multi-tenant environment. The proxy supports dynamic addition and removal of clusters via a RESTful web service, making it ideal for production environments where scalability and flexibility are essential.
+Create a topology like this:
 
-Follow the document below to setup EloqKV Proxy.
+```yaml
+connection:
+  username: "${USER}"
+  auth_type: "keypair"
+  auth:
+    keypair: "/home/${USER}/.ssh/id_rsa"
 
-- [Eloqctl Proxy](./eloqkv-proxy)
+deployment:
+  cluster_name: "eloqkv-ha-rocksdb-cloud"
+  product: "EloqKV"
+  version: "latest"
+  install_dir: "/home/${USER}"
+  cluster_mode: true
+  enable_wal: true
+  enable_io_uring: false
+  enable_tls: true
+  checkpointer_interval: 120
+
+  tx_service:
+    tx_host_ports: [10.0.0.11:6379]
+    standby_host_ports: [10.0.0.12:6379]
+    voter_host_ports: [10.0.0.13:6379]
+    enable_cache_replacement: on
+
+  log_service:
+    nodes:
+      - host: 10.0.0.13
+        port: 9000
+        data_dir:
+          - "/home/${USER}/eloqkv-ha-rocksdb-cloud/wal_eloqkv"
+    replica: 1
+    aws_access_key_id: "minioadmin"
+    aws_secret_key: "minioadmin"
+    bucket_name: "eloqservice"
+    endpoint: "http://10.0.0.20:9000"
+
+  storage_service:
+    rocksdb: !MINIO
+      aws_access_key_id: "minioadmin"
+      aws_secret_key: "minioadmin"
+      bucket_name: "eloqservice"
+      bucket_prefix: "store"
+      endpoint: "http://10.0.0.20:9000"
+
+  hardware:
+    10.0.0.11:
+      cpu: 8
+      memory: 32768
+    10.0.0.12:
+      cpu: 8
+      memory: 32768
+    10.0.0.13:
+      cpu: 4
+      memory: 16384
+```
+
+Use this option if you want the KV layer to run on RocksDB Cloud and use MinIO for object storage.
+
+Validate and launch:
+
+```shell
+eloqctl check ./eloqkv-ha-rocksdb-cloud.yaml
+eloqctl launch ./eloqkv-ha-rocksdb-cloud.yaml
+eloqctl status eloqkv-ha-rocksdb-cloud --wait 120
+```
+
+## 4. Option B: Deploy with EloqStore Cloud + MinIO
+
+Start from the bundled example:
+
+```shell
+cp "${ELOQCTL_HOME:-$HOME/.eloqctl}/config/examples/eloqkv_eloqstore_cloud_standby_with_voter.yaml" \
+  ./eloqkv-ha-eloqstore-cloud.yaml
+```
+
+Then use a topology like this:
+
+```yaml
+connection:
+  username: "${USER}"
+  auth_type: "keypair"
+  auth:
+    keypair: "/home/${USER}/.ssh/id_rsa"
+
+deployment:
+  cluster_name: "eloqkv-ha-eloqstore-cloud"
+  product: "EloqKV"
+  version: "latest"
+  install_dir: "/home/${USER}"
+  cluster_mode: true
+  enable_wal: false
+  enable_io_uring: false
+  enable_tls: true
+  checkpointer_interval: 120
+
+  tx_service:
+    tx_host_ports: [10.0.0.11:6379]
+    standby_host_ports: [10.0.0.12:6379]
+    voter_host_ports: [10.0.0.13:6379]
+    requirepass: "testpass"
+
+  log_service:
+    nodes:
+      - host: 10.0.0.13
+        port: 9000
+        data_dir:
+          - "/home/${USER}/log-data"
+    replica: 1
+    aws_access_key_id: "minioadmin"
+    aws_secret_key: "minioadmin"
+    bucket_name: "eloqservice"
+    bucket_prefix: "wal"
+    endpoint: "http://10.0.0.20:9000"
+
+  storage_service:
+    eloqdss:
+      backend: !eloqstore
+        eloq_store_cloud_store_path: "storeeloqservice"
+        eloq_store_cloud_provider: "minio"
+        eloq_store_cloud_access_key: "minioadmin"
+        eloq_store_cloud_secret_key: "minioadmin"
+        eloq_store_cloud_endpoint: "http://10.0.0.20:9000"
+        eloq_store_cloud_region: "us-east-1"
+        eloq_store_cloud_verify_ssl: false
+        eloq_store_reuse_local_files: true
+        eloq_store_prewarm_cloud_cache: true
+
+  hardware:
+    10.0.0.11:
+      cpu: 8
+      memory: 32768
+    10.0.0.12:
+      cpu: 8
+      memory: 32768
+    10.0.0.13:
+      cpu: 4
+      memory: 16384
+```
+
+Use this option if you want the same cluster shape but store data through `EloqStore Cloud`.
+
+Validate and launch:
+
+```shell
+eloqctl check ./eloqkv-ha-eloqstore-cloud.yaml
+eloqctl launch ./eloqkv-ha-eloqstore-cloud.yaml
+eloqctl status eloqkv-ha-eloqstore-cloud --wait 120
+```
+
+## 5. After Deployment
+
+Print a client command for either cluster:
+
+```shell
+CLIENT=$(eloqctl -q connect <cluster-name>)
+echo "$CLIENT"
+```
+
+Preview and apply supported topology changes later:
+
+```shell
+eloqctl plan ./topology.yaml
+eloqctl apply ./topology.yaml
+```

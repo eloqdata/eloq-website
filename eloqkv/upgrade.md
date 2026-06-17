@@ -1,12 +1,12 @@
 ---
 title: Upgrade Using Eloqctl
-description: Upgrade EloqKV clusters with eloqctl, including binary updates and Cassandra upgrade notes for existing deployments.
-summary: Learn how to quickly get started with the EloqKV database.
+description: Upgrade EloqKV clusters with eloqctl.
+summary: Upgrade an existing EloqKV deployment with eloqctl.
 ---
 
 # Upgrade an EloqKV Cluster Using Eloqctl
 
-In this document, we will illustrate how to use `eloqctl` to upgrade EloqKV cluster to a newer version.
+Use `eloqctl` to upgrade an EloqKV cluster to a newer version.
 
 Note that this upgrade process is only compatible with minor version upgrades, where a binary swap is sufficient.
 
@@ -37,13 +37,3 @@ eloqctl update ${cluster_name} ${version}
 ```
 
 The upgrade tool will firstly stop the cluster, then update all the binaries across the cluster and finally start the cluster with the new binaries.
-
-## Upgrade Cassandra
-
-If you deploy EloqKV with Cassandra as perisistent storage engine, you can also use `eloqctl` to upgrade your cassandra cluster.
-
-```
-eloqctl update ${cluster_name} --cassandra ${version}
-```
-
-The upgrade tool will firstly stop the cluster with `-a` option, then upgrade Cassandra, move the data directory from old Cassandra cluster to new Cassandra cluster. Finally start the EloqKV cluster again.

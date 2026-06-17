@@ -1,168 +1,85 @@
 ---
-title: Configuration Checklist
-summary: Learn how to quickly get started with the EloqSQL database.
+title: Prepare Machines for EloqKV Deployment
+summary: Prepare target machines for EloqKV deployment with eloqctl.
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+# Prepare Machines for EloqKV Deployment
 
-# Prerequisite of Installing EloqKV
+Run the host setup script from the `eloqctl` repository on every target host:
 
-The `eloqctl` utility is installed and operated on a control node, it manages several EloqKV server nodes. We discuss how to establish trust between control node and the server nodes,
-and some system setting adjustments on the server nodes to make them run EloqKV better.
-
-## Establish Passwordless SSH and Sudo
-
-Before proceeding, please manually configure SSH mutual trust and passwordless sudo between the control node and the server nodes:
-
-1. Log in on control machine and each server machine as the root user. Create the `eloq` user account on each machine and set a login password:
-
-```
-useradd -m eloq && \
-passwd eloq
-```
-
-2. To configure passwordless sudo, run the following command and append the line `eloq ALL=(ALL) NOPASSWD: ALL` to the end of the file on each machine:
-
-```
-visudo
-```
-
-```
-eloq ALL=(ALL) NOPASSWD: ALL
-```
-
-3. Please ensure that both password authentication and public key authentication are enabled on each machine. Password authentication is necessary for the control machine to copy the public key to the `authorized_keys` file of the EloqKV nodes. Public key authentication, on the other hand, is used by the `eloqctl` tool to deploy EloqKV clusters. You can verify and configure these settings in the SSH configuration file as follows:
-
-```
-sudo vi /etc/ssh/sshd_config
-```
-
-Ensure the following line is set (uncomment if necessary):
-
-```
-PasswordAuthentication yes
-PubkeyAuthentication yes
-AuthorizedKeysFile .ssh/authorized_keys
-```
-
-If you see the following line in `/etc/ssh/sshd_config`
-
-```
-Include /etc/ssh/sshd_config.d/*.conf
-```
-
-Make sure that all config files under `/etc/ssh/sshd_config.d/` do not have the previous settings set.
-
-```
-grep -ri PasswordAuthentication /etc/ssh/sshd_config.d/
-grep -ri PubkeyAuthentication /etc/ssh/sshd_config.d/
-grep -ri AuthorizedKeysFile /etc/ssh/sshd_config.d/
-```
-
-Comment out these lines so that they won't override the settings in `/etc/ssh/sshd_config`.
-
-Restart the SSH service to apply the changes:
-
-<Tabs
-groupId="language"
-defaultValue="rhel"
-values={[
-{ label: 'Rhel', value: 'rhel', },
-{ label: 'Ubuntu', value: 'ubuntu', }
-]
-}>
-
-<TabItem value="rhel">
 ```shell
-sudo systemctl restart sshd
+curl -fsSL https://raw.githubusercontent.com/eloqdata/eloq_waiter/main/scripts/setup-host.sh | sudo bash
 ```
-</TabItem>
 
-<TabItem value="ubuntu">
+Run that command on every machine that will run EloqKV, log service, DSS, Prometheus, or Grafana.
+
+## What the Script Does
+
+The script prepares the machine for `eloqctl` deployment:
+
+- installs baseline packages such as `openssh-server`, `sudo`, `curl`, `wget`, `tar`, `xz`, and `rsync`
+- creates the `eloq` user if it does not already exist
+- grants passwordless `sudo` to the `eloq` user
+- enables SSH password authentication and public-key authentication
+- configures `AuthorizedKeysFile .ssh/authorized_keys`
+- raises file-descriptor and core-dump limits
+- configures `kernel.core_pattern`
+- creates `/var/crash` and gives the deployment user access
+- appends `ulimit -c unlimited` to the deployment user's shell profile
+
+To set the hostname during bootstrap, pass `HOSTNAME_VALUE`:
+
 ```shell
-sudo systemctl restart ssh
+curl -fsSL https://raw.githubusercontent.com/eloqdata/eloq_waiter/main/scripts/setup-host.sh | \
+  sudo HOSTNAME_VALUE=eloq-node-1 bash
 ```
-</TabItem>
-</Tabs>
 
-4. Log in to the control machine as the `eloq` user, generate an SSH key, and configure SSH mutual trust between the control machine and itself. Note that password should be skipped when running `ssk-keygen`.
+To preload an SSH public key during bootstrap, pass `SSH_PUBKEY`:
 
+```shell
+curl -fsSL https://raw.githubusercontent.com/eloqdata/eloq_waiter/main/scripts/setup-host.sh | \
+  sudo SSH_PUBKEY="$(cat ~/.ssh/id_rsa.pub)" bash
 ```
+
+## What You Still Need To Do
+
+After the script finishes, install the control-machine SSH public key on each target host.
+
+On the control machine:
+
+```shell
 ssh-keygen -t rsa
-cat .ssh/id_rsa.pub >> .ssh/authorized_keys
+ssh-copy-id -i ~/.ssh/id_rsa.pub eloq@10.0.0.1
+ssh eloq@10.0.0.1
 ```
 
-Please check permissions on .ssh directory.
+Repeat `ssh-copy-id` for each target host. When `ssh eloq@<host>` no longer asks for a password, the host is ready.
 
-```
-chmod 700 ~/.ssh
-chmod 600 ~/.ssh/authorized_keys
+## Minimal Verification
 
-```
+On each target host, verify the important state:
 
-5. Configure SSH mutual trust between the control machine and the server machines. Replace 10.0.0.1 with the IP address of your target machine, and enter the `eloq` user password for the target machine when prompted. Once the command is executed, SSH mutual trust will be established. Repeat this process for each EloqKV machine.
-
-```
-ssh-copy-id -i ~/.ssh/id_rsa.pub 10.0.0.1
-```
-
-6. Log in to the control machine using the `eloq` user account, and then attempt to log in to the target machine's IP address using SSH. If you can log in without entering a password, SSH mutual trust has been successfully configured.
-
-```
-ssh 10.0.0.1
+```shell
+id eloq
+sudo -l -U eloq
+sudo systemctl status ssh || sudo systemctl status sshd
+sudo cat /etc/security/limits.d/90-eloq.conf
+sudo cat /etc/sysctl.d/90-eloq-core.conf
+ls -ld /var/crash
 ```
 
+On the control machine, verify SSH access:
+
+```shell
+ssh eloq@10.0.0.1 'sudo -n true && ulimit -n'
 ```
-eloq@10.0.0.1:~$
-```
 
-## System configuration for EloqKV Server Nodes
+## Deployment YAML Expectations
 
-Below are some necessary configurations to be made before installing EloqKV
+After the hosts are ready, make sure the topology YAML is complete before you run `eloqctl`:
 
-- Ensure your system is connected to the network and can update its package repositories using `yum update` or `apt update`.
-- Edit the system configuration file `/etc/security/limits.conf or /etc/security/limits.d/20-nproc.conf` using the following command
-  ```shell
-  sudo vi /etc/security/limits.conf
-  ```
-  Add the following resource limit parameters at the end of the corresponding file
-  ```shell
-  * soft nofile 524288
-  * hard nofile 524288
-  * hard core unlimited
-  * soft core unlimited
-  ```
-- Ensure DNS server is configured in `/etc/resolv.conf`.
-- Ensure hostname is configured.
-  ```shell
-  sudo hostnamectl set-hostname my_hostname
-  ```
-  Edit /etc/hosts
-  ```shell
-  my_ip my_hostname
-  ```
-- Use the following command to edit the configuration file `/etc/sysctl.conf`
-  ```shell
-  sudo vi /etc/sysctl.conf
-  ```
-  Add the following configuration parameters at the end of the corresponding file
-  ```shell
-  kernel.core_pattern=/var/crash/core-%e-%s-%u-%g-%p-%t
-  ```
-- Execute the following command to load the above parameter modification.
-  ```shell
-  sudo sysctl -p
-  ```
-- In order to display all limit resource information of the current system, modify the bash configuration file
-  ```shell
-  sudo vi ~/.bashrc
-  ```
-  Add at the end of the corresponding file
-  ```
-  ulimit -c unlimited
-  ```
-- Add current user and group ownership to `/var/crash` folder
-  ```shell
-  sudo chown -R $USER:$USER /var/crash
-  ```
+- `deployment.install_dir` should always be explicit.
+- `deployment.enable_wal`, `deployment.enable_io_uring`, and `deployment.enable_tls` should always be explicit.
+- `deployment.cluster_mode` must be explicit.
+- `deployment.hardware` must contain every host used by `tx_host_ports`, `standby_host_ports`, and `voter_host_ports`.
+- `hardware` is keyed by host only. If several EloqKV processes run on one machine, define that host once, not once per port.

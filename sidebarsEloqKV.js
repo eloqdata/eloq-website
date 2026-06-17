@@ -24,6 +24,7 @@ const sidebars = {
       'upgrade',
       'prerequisite',
       'deploy-on-kubernetes',
+      'topology-reference',
     ],
     Manage: [
       'monitor',
