@@ -19,6 +19,7 @@ const sidebars = {
     'Get Started': ['install-from-binary', 'docker-deploy'],
     Deploy: [
       'quick-start',
+      'topology-reference',
       'quick-start-ha-local-storage',
       'manage-cluster',
       'upgrade',

@@ -1,120 +1,136 @@
 ---
 title: Manage Cluster Using Eloqctl
-summary: Learn how to quickly get started with the EloqKV database.
+summary: Operate an existing EloqKV deployment with eloqctl.
 ---
 
 # Manage Cluster Using Eloqctl
 
-In this document, we will illustrate how to use `eloqctl` to manage EloqKV cluster.
+This page covers the day-2 workflow for an existing EloqKV deployment managed by `eloqctl`.
 
-Please ensure the cluster is already provisioned. For how to deploy EloqKV cluster, please refer to [Deploy Cluster](./quick-start).
+`eloqctl` stores a saved topology for each launched cluster under:
 
-## Check Cluster Status
-
-Cluster name is set in the configuration file when you provision the cluster. The default cluser name is `eloqkv-cluster`. You can also check the cluster name using command below.
-
+```text
+${ELOQCTL_HOME:-$HOME/.eloqctl}/clusters/<cluster>/topology.yaml
 ```
+
+After launch, most commands work by cluster name and do not require the original YAML file path.
+
+## Inspect Clusters
+
+List locally registered clusters:
+
+```shell
 eloqctl list
 ```
 
-The expected output will be:
+Check one cluster:
 
-```
-+----------------+---------+---------+---------+-------+
-| name           | product | store   | version | user  |
-+----------------+---------+---------+---------+-------+
-| eloqkv-cluster | EloqKV  | rocksdb | 0.7.4   | rocky |
-+----------------+---------+---------+---------+-------+
+```shell
+eloqctl status eloqkv-cluster --wait 60
 ```
 
-Use the following command to query the cluster status:
+Add `--detail` for more live-state information:
 
-```
-eloqctl status ${cluster_name}
-```
-
-If you see `Success` in the output for every node , then the cluster runs normally.
-
-## Start Cluster
-
-Use the following
-
-```
-eloqctl start ${cluster_name}
+```shell
+eloqctl status eloqkv-cluster --detail
 ```
 
-To start specified nodes, use the following
+## Connect to EloqKV
 
-```
-eloqctl start --nodes node1_ip:node1_port,node2_ip:node2_port ${cluster_name}
-```
+Print a ready-to-use client command:
 
-## Stop Cluster
-
-1. Graceful Shutdown. The following command will stop the transaction cluster and log cluster gracefully which means that all the data in memory will be flushed to persistent storage before the processes exit. In this case, the next launch of cluster is fast since there is no redo logs to be replayed.
-
-```
-eloqctl stop ${cluster_name}
+```shell
+CLIENT=$(eloqctl -q connect eloqkv-cluster)
+eval "$CLIENT" ping
 ```
 
-2. Force Shutdown. You can also stop the cluster immediately by passing `-f` option. It actually send SIGKILL signal to all the transaction processes and log processes.
+## Start and Stop
 
-```
-eloqctl stop ${cluster_name} -f
-```
+Start the whole cluster:
 
-3. Stop Persistent Storage. When you deploy a decoupled persistent storage, i.e. Cassandra, the Cassandra cluster will not be stopped automatically by `eloqctl stop`. You should pass `-a` option to tell `eloqctl` to stop every components except monitor.
-
-```
-eloqctl stop ${cluster_name} -a
+```shell
+eloqctl start eloqkv-cluster
 ```
 
-4. Stop Monitor. Prometheus and grafana will be stopped by the following command:
+Start only specific nodes that already exist in the saved topology:
 
-```
-eloqctl monitor stop ${cluster_name}
-```
-
-5. If cluster is deployed with a password, all of the above commands needs to add `--password` option
-
-```
-eloqctl stop ${cluster_name} --password xxxxx
+```shell
+eloqctl start eloqkv-cluster --nodes 10.0.0.11:6379,10.0.0.12:6379
 ```
 
-6. To stop specified nodes, use the following
+Gracefully stop the cluster:
 
-```
-eloqctl stop --nodes node1_ip:node1_port,node2_ip:node2_port ${cluster_name}
-```
-
-## Update Cluster Configuration
-
-EloqKV offers various configurations, some of which enable features. For example, `enable_data_store` activates persistent data storage, and `enable_wal` enables the Write-Ahead Log for durability. Other configurations are performance-related, such as `core_number` for specifying the number of worker threads, and `node_memory_limit_mb` to set the memory limit.
-
-You can easily adjust these settings using eloqctl. The process is as follows:
-
-1. Edit the configuration file located at `$HOME/.eloqctl/upload/${cluster_name}/{node_ip}/EloqKv-tx-{port}.ini` to update config for corresponding node. In the example below, core_number is set to 8, and both the persistent data store and Write-Ahead Log are enabled.
-
-```
-[local]
-path=data
-ip=127.0.0.1
-port=6379
-core_number=8
-enable_data_store=on
-enable_wal=on
-[cluster]
-[store]
-[metrics]
-enable_metrics=on
+```shell
+eloqctl stop eloqkv-cluster
 ```
 
-2. Use `eloqctl update-conf` to update the configuration file across the cluster and restart it with a single command.
+Force stop everything:
 
+```shell
+eloqctl stop eloqkv-cluster --all --force
 ```
-eloqctl update-conf ${cluster_name} --restart
+
+Stop only specific nodes:
+
+```shell
+eloqctl stop eloqkv-cluster --nodes 10.0.0.11:6379 --force
 ```
 
-## Scale Cluster
+Manage monitor components separately when monitor config is present:
 
-Cluster expansion and shrinkage using `eloqctl` will be available soon!
+```shell
+eloqctl monitor status --cluster eloqkv-cluster
+eloqctl monitor stop --cluster eloqkv-cluster
+eloqctl monitor start --cluster eloqkv-cluster
+```
+
+If the cluster uses `requirepass`, add `--password <value>` to commands that need Redis access.
+
+## Export the Saved Topology
+
+Export the topology currently saved in local state:
+
+```shell
+eloqctl export eloqkv-cluster --output ./eloqkv-cluster.yaml
+```
+
+This is the right starting point when you want to review or evolve an existing deployment declaratively.
+
+## Update the Topology Declaratively
+
+For supported topology and deployment changes, edit the YAML and use:
+
+```shell
+eloqctl plan ./eloqkv-cluster.yaml
+eloqctl apply ./eloqkv-cluster.yaml
+```
+
+`plan` is read-only. `apply` executes the same plan after checking live cluster health.
+
+## Update Runtime Config Fields
+
+For supported EloqKV config fields, use `update-conf` instead of manually editing generated ini files.
+
+Examples:
+
+```shell
+eloqctl update-conf eloqkv-cluster --fields checkpointer_interval:300
+eloqctl update-conf eloqkv-cluster --fields checkpointer_interval:300 --restart
+eloqctl update-conf eloqkv-cluster --fields checkpointer_interval:300 --tx-node-id 1
+```
+
+Use `update-conf` when you want to push a small set of field changes to generated node config. Use `plan` and `apply` when you want to change the topology YAML itself.
+
+## Remove a Cluster
+
+Stop the cluster first if it is still running:
+
+```shell
+eloqctl stop eloqkv-cluster --all --force
+```
+
+Then remove local metadata and perform best-effort remote cleanup:
+
+```shell
+eloqctl remove eloqkv-cluster --force
+```
