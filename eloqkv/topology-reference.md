@@ -25,7 +25,7 @@ Write these fields explicitly:
 
 `deployment.hardware` must contain every host used by `tx_host_ports`, `standby_host_ports`, and `voter_host_ports`.
 
-`hardware` is keyed by host only. If several EloqKV processes run on one machine, define that host once, not once per port.
+`hardware` keys may be `ip:port` (recommended) or `ip` (legacy). Use an `ip:port` key to size each node individually — this is required when several EloqKV processes run on one machine (same IP, different ports). A bare `ip` key applies to every node on that host and is used as a fallback when no matching `ip:port` key exists.
 
 ## Top-Level Shape
 
@@ -39,7 +39,7 @@ connection:
 deployment:
   cluster_name: "eloqkv-cluster"
   product: "EloqKV"
-  version: "latest"
+  version: "1.3.1"
   install_dir: "/home/${USER}"
   enable_wal: false
   enable_io_uring: false
@@ -72,7 +72,7 @@ Use `ssh_endpoints` and `service_endpoints` when the control machine cannot reac
 
 - `deployment.cluster_name`: Unique cluster name in local `eloqctl` state.
 - `deployment.product`: Must be `EloqKV`.
-- `deployment.version`: EloqKV release version to deploy. Use `latest` unless you need a pinned release.
+- `deployment.version`: EloqKV release version to deploy. Must be a concrete published release such as `1.3.1`. `latest` is no longer published and will not resolve to a downloadable artifact. Run `eloqctl versions` to list available versions.
 - `deployment.install_dir`: Base directory on the target host.
 - `deployment.enable_wal`: Whether each write is appended to WAL before completion.
 - `deployment.enable_io_uring`: Whether to use the `io_uring` I/O path.
@@ -116,7 +116,23 @@ Common shapes:
 - `deployment.storage_service.rocksdb: !LOCAL`: Embedded local RocksDB.
 - `deployment.storage_service.rocksdb: !MINIO`: RocksDB Cloud backed by MinIO.
 - `deployment.storage_service.rocksdb: !S3`: RocksDB Cloud backed by AWS S3 or another S3-compatible service.
-- `deployment.storage_service.eloqdss.backend: !eloqstore`: EloqStore backend.
+- `deployment.storage_service.rocksdb: !GCS`: RocksDB Cloud backed by Google Cloud Storage.
+- `deployment.storage_service.rocksdb: !ELOQDSS_ROCKSDB`: RocksDB served by a separate Data Store Service (DSS) process; requires `peer_host_ports`.
+- `deployment.storage_service.eloqdss.backend: !eloqstore`: EloqStore backend (local or cloud).
+- Omit `storage_service` entirely for a pure in-memory deployment.
+
+### Choosing a Storage Backend
+
+| Goal | Use |
+| --- | --- |
+| Single node or dev/test on local disk | `rocksdb: !LOCAL` |
+| KV layer on RocksDB Cloud + object storage | `rocksdb: !S3` (AWS S3), `!MINIO` (self-hosted S3), or `!GCS` (Google Cloud Storage) |
+| RocksDB through a decoupled remote DSS process | `rocksdb: !ELOQDSS_ROCKSDB` with `peer_host_ports` |
+| EloqStore on local disk (single node or local master/standby, no object store) | `eloqdss.backend: !eloqstore` with no `eloq_store_cloud_store_path` |
+| EloqStore reading/writing object storage directly | `eloqdss.backend: !eloqstore` with `eloq_store_cloud_store_path` + `eloq_store_cloud_provider` (`aws`/`minio` → S3-compatible, `gcs` → GCS) |
+| In-memory only, no durable backend | omit `storage_service` |
+
+EloqStore mode is selected by `eloq_store_cloud_store_path`: empty or unset means local mode; a non-empty value enables cloud mode.
 
 ### RocksDB Cloud Fields
 
@@ -131,23 +147,61 @@ Common shapes:
 
 ### EloqStore Cloud Fields
 
-- `storage_service.eloqdss.backend.eloq_store_cloud_store_path`
-- `storage_service.eloqdss.backend.eloq_store_cloud_provider`
-- `storage_service.eloqdss.backend.eloq_store_cloud_access_key`
-- `storage_service.eloqdss.backend.eloq_store_cloud_secret_key`
-- `storage_service.eloqdss.backend.eloq_store_cloud_endpoint`
-- `storage_service.eloqdss.backend.eloq_store_cloud_region`
-- `storage_service.eloqdss.backend.eloq_store_cloud_verify_ssl`
-- `storage_service.eloqdss.backend.eloq_store_reuse_local_files`
-- `storage_service.eloqdss.backend.eloq_store_prewarm_cloud_cache`
+- `storage_service.eloqdss.backend.eloq_store_cloud_store_path`: Bucket/path that enables cloud mode (non-empty turns cloud mode on).
+- `storage_service.eloqdss.backend.eloq_store_cloud_provider`: `aws`, `minio`, or `gcs`.
+- `storage_service.eloqdss.backend.eloq_store_cloud_access_key`: Access key (required for `aws`/`minio`).
+- `storage_service.eloqdss.backend.eloq_store_cloud_secret_key`: Secret key (required for `aws`/`minio`).
+- `storage_service.eloqdss.backend.eloq_store_cloud_endpoint`: Object-storage endpoint URL. Specify it to target a custom or S3-compatible endpoint such as MinIO (`http://<host>:9000`) or GCS (`https://storage.googleapis.com`); overrides the provider's default endpoint.
+- `storage_service.eloqdss.backend.eloq_store_cloud_region`: Storage region (for example `us-east-1`).
+- `storage_service.eloqdss.backend.eloq_store_reuse_local_files`: Reuse local cache files across restarts.
+- `storage_service.eloqdss.backend.eloq_store_prewarm_cloud_cache`: Prewarm the local cache from cloud on startup.
+
+### EloqStore Common Fields
+
+These apply to both local and cloud mode:
+
+- `storage_service.eloqdss.backend.eloq_store_data_path_list`: EloqStore data directory(ies), comma-separated. In local mode this is where data is stored; in cloud mode it is the local data/cache directory. Optional — defaults to `{install_dir}/EloqKV/data/port-{port}/eloq_dss/eloqstore_data`, which is already distinct per node. For per-node overrides (for example, placing co-located nodes on different disks), set it per node under `hardware` instead (see [`deployment.hardware`](#deploymenthardware)).
+
+Other `eloq_store_*` tuning fields are optional advanced knobs; set them only when needed.
+
+### EloqStore Standby
+
+EloqStore master/standby replication is enabled automatically when `tx_service.standby_host_ports` is set — there is no separate enable flag, and the replication source is assigned at runtime (do not set it in YAML). It requires an EloqStore-backed EloqKV build.
+
+- `storage_service.eloqdss.backend.eloq_store_standby_max_concurrency`: Maximum concurrent standby `rsync`/`ssh` jobs per node. Optional; defaults to `100`.
+
+For local (non-object-storage) standby, replicas sync from the master with `rsync`. Same-machine replicas copy files locally (no SSH); cross-machine replicas pull over SSH and require passwordless key-based SSH and sufficient SSH server concurrency. See [Deploy a High Availability Cluster with Local Storage](./quick-start-ha-local-storage) for the SSH setup.
 
 ## `deployment.hardware`
 
-- `deployment.hardware.<host>.cpu`: Required host CPU count used by `eloqctl` to derive runtime config.
-- `deployment.hardware.<host>.memory`: Required host memory in MiB.
-- `deployment.hardware.<host>.event_dispatcher_num`: Optional explicit dispatcher count.
+Keys are either `ip:port` (recommended) or `ip` (legacy). An `ip:port` key sizes one specific node; a bare `ip` key applies to every node on that host and is used only as a fallback when no `ip:port` key matches. To give co-located nodes (same host, different ports) distinct settings, key them by `ip:port`.
 
-If multiple EloqKV processes run on the same host with different ports, define that host once in `hardware`.
+Per-node fields:
+
+- `cpu`: Required CPU count for the node; used by `eloqctl` to derive `core_number` and the memory limit.
+- `memory`: Required memory in MiB.
+- `event_dispatcher_num`: Optional explicit dispatcher count.
+- `eloq_data_path`: Optional override of the node's base data directory. Defaults to `{install_dir}/EloqKV/data/port-{port}`. Overriding it relocates the whole node data tree, and the EloqStore data directory follows this base unless `eloq_store_data_path_list` is also set.
+- `eloq_store_data_path_list`: Optional per-node EloqStore data directory(ies), comma-separated. Takes precedence over the shared `storage_service` value and the auto-derived default. Useful for placing co-located nodes on different disks.
+
+```yaml
+deployment:
+  hardware:
+    127.0.0.1:6379:
+      cpu: 2
+      memory: 10240
+      event_dispatcher_num: 1
+      eloq_data_path: /data/disk1/master
+    127.0.0.1:7379:
+      cpu: 2
+      memory: 10240
+      eloq_store_data_path_list: /data/disk2/standby
+    127.0.0.1:8379:
+      cpu: 2
+      memory: 10240
+```
+
+Default data directories are already distinct per port, so multiple nodes on one machine work without overrides; use `eloq_data_path` / `eloq_store_data_path_list` only when you want specific paths or disks.
 
 ## `deployment.monitor`
 

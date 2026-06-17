@@ -236,7 +236,85 @@ eloqctl launch ./eloqkv-ha-eloqstore-cloud.yaml
 eloqctl status eloqkv-ha-eloqstore-cloud --wait 120
 ```
 
-## 5. After Deployment
+## 5. Option C: EloqStore Local Storage HA (No Object Store)
+
+You can also run a tx/standby/voter cluster on **EloqStore in local mode**, with no object storage. In this mode standby replicas sync data from the master with `rsync` instead of through a shared bucket.
+
+Use an EloqStore backend **without** `eloq_store_cloud_store_path`:
+
+```yaml
+deployment:
+  cluster_name: "eloqkv-ha-eloqstore-local"
+  product: "EloqKV"
+  version: "1.3.1"
+  install_dir: "/home/${USER}"
+  cluster_mode: true
+  enable_wal: false
+  enable_io_uring: true
+
+  tx_service:
+    tx_host_ports: [10.0.0.11:6379]
+    standby_host_ports: [10.0.0.12:6379]
+    voter_host_ports: [10.0.0.13:6379]
+    enable_cache_replacement: on
+
+  storage_service:
+    eloqdss:
+      backend: !eloqstore
+        # Optional: cap on concurrent standby rsync/ssh jobs per node (default 100).
+        eloq_store_standby_max_concurrency: 100
+
+  hardware:
+    10.0.0.11: { cpu: 8, memory: 32768 }
+    10.0.0.12: { cpu: 8, memory: 32768 }
+    10.0.0.13: { cpu: 4, memory: 16384 }
+```
+
+EloqStore standby replication turns on automatically because `standby_host_ports` is set; the replication source is assigned at runtime, so you do not configure it in YAML. This requires an EloqStore-backed EloqKV build.
+
+> Object-storage modes (Option A and Option B above) replicate through the shared bucket and do **not** use `rsync` or SSH. The SSH requirements below apply only to this local-storage mode.
+
+### 5.1 SSH Requirements for Local Standby
+
+How the replica pulls from the master depends on placement:
+
+- **Same machine** (all nodes share one IP, different ports): the replica syncs with a local `rsync` file copy. **No SSH or passwordless login is required.** Co-located master and replica must use **distinct data directories** — this is the default (paths are port-distinct), or set them explicitly per node with `eloq_data_path` / `eloq_store_data_path_list` (see the [Topology Reference](./topology-reference#deploymenthardware)).
+- **Cross machine** (nodes on different hosts): the replica pulls with `rsync` over `ssh` and runs `ssh` to list remote files. These run non-interactively, so you must prepare:
+  1. **Passwordless, key-based SSH** from each replica host to the master host, as the EloqKV run user:
+     ```shell
+     # On each standby/replica host, as the run user:
+     ssh-keygen -t ed25519 -N "" -f ~/.ssh/id_ed25519   # if no key yet
+     ssh-copy-id -i ~/.ssh/id_ed25519.pub <run-user>@<master-host>
+     ssh <run-user>@<master-host> true   # confirm it connects with no prompt
+     ```
+  2. The master host key already in the replica's `~/.ssh/known_hosts` (the `ssh` above records it). Otherwise `ssh` blocks on the host-key prompt until it times out.
+  3. The login account having read access to the master's EloqStore data directories.
+
+  This node-to-node SSH is separate from `connection.auth`, which `eloqctl` uses only for deployment.
+
+### 5.2 SSH Server Concurrency on the Master
+
+Each replica can launch up to `eloq_store_standby_max_concurrency` (default `100`) concurrent `rsync`/`ssh` connections, and every replica pulls from the master. The master's SSH daemon must accept the total:
+
+```text
+required sshd concurrency  ≥  number of standby/replica nodes  ×  eloq_store_standby_max_concurrency
+```
+
+The default `sshd` limit is low (`MaxStartups 10:30:100`), so concurrent pulls get throttled or refused and `rsync` fails. Raise it on the **master** host in `/etc/ssh/sshd_config`, then restart `sshd`:
+
+```text
+# Example for 2 replicas × 100 = 200 concurrent connections
+MaxStartups 200:30:400
+MaxSessions 200
+```
+
+```shell
+sudo systemctl restart ssh   # or: sudo systemctl restart sshd
+```
+
+Either lower `eloq_store_standby_max_concurrency` or raise the master's `MaxStartups`/`MaxSessions` so the product fits within the SSH server limit.
+
+## 6. After Deployment
 
 Print a client command for either cluster:
 
