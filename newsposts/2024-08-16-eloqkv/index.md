@@ -51,7 +51,7 @@ One key point to note is that some of **EloqKV**'s advanced features — such as
 
 ## Introducing **EloqKV** for Public Preview
 
-Today, we are releasing **EloqKV** for public preview. This release supports two persistent stores: Apache Cassandra and RocksDB. Cassandra is a disaggregated store that can run on a different set of nodes from **EloqKV** servers for high availability, while RocksDB is an embedded store. You can learn about how to set up a [single node](/eloqkv/quick-start) test server or a [cluster](/eloqkv/quick-start-ha) following our documents.
+Today, we are releasing **EloqKV** for public preview. This release supports two persistent stores: Apache Cassandra and RocksDB. Cassandra is a disaggregated store that can run on a different set of nodes from **EloqKV** servers for high availability, while RocksDB is an embedded store. You can learn about how to set up a [single node](/eloqkv/quick-start) test server or a [high-availability cluster](/eloqkv/quick-start-ha-local-storage) following our documents.
 
 <div align="center">
 <div style={{ width: '720px', textAlign: 'center'}}>

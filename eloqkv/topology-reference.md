@@ -1,17 +1,17 @@
 ---
-title: Eloqctl Topology Reference
-summary: Reference for the deployment YAML used by eloqctl.
+title: Deployment YAML Reference
+summary: Reference for the EloqKV deployment YAML used by eloqctl.
 ---
 
-# Eloqctl Topology Reference
+# Deployment YAML Reference
 
-This page describes the topology YAML consumed by `eloqctl check`, `eloqctl launch`, `eloqctl plan`, and `eloqctl apply`.
+This page describes the YAML file used by `eloqctl check`, `eloqctl launch`, `eloqctl plan`, and `eloqctl apply`.
 
-The topology YAML is the source of truth for deployment shape, storage backend, monitor placement, and host sizing.
+This YAML defines the deployment shape, storage backend, monitor placement, and host sizing.
 
 ## Required Deployment Fields
 
-Write these fields explicitly in deployment YAML:
+Write these fields explicitly:
 
 - `deployment.cluster_name`
 - `deployment.product`
@@ -63,10 +63,10 @@ deployment:
 - `connection.username`: SSH username used by the control machine.
 - `connection.auth_type`: SSH authentication type. Current examples use `keypair`.
 - `connection.auth.keypair`: Private key path on the control machine.
-- `connection.ssh_endpoints`: Optional mapping from deployment host to control-plane reachable SSH endpoint.
-- `connection.service_endpoints`: Optional mapping from deployment service address to control-plane reachable service endpoint.
+- `connection.ssh_endpoints`: Optional mapping from deployment host to the SSH endpoint reachable from the control machine.
+- `connection.service_endpoints`: Optional mapping from deployment service address to the service endpoint reachable from the control machine.
 
-Use `ssh_endpoints` and `service_endpoints` when the deployment hostnames or ports differ from what the control machine can reach directly, such as in Docker, NAT, or bastion setups.
+Use `ssh_endpoints` and `service_endpoints` when the control machine cannot reach the deployment hosts or service ports directly, such as in Docker, NAT, or bastion setups.
 
 ## `deployment`
 

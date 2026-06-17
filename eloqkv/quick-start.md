@@ -1,12 +1,12 @@
 ---
 title: Deploy Single Node Instance
-description: Deploy a single-node EloqKV instance with eloqctl using a current topology YAML and validate it before launch.
+description: Deploy a single-node EloqKV instance with eloqctl.
 summary: Learn how to quickly get started with the EloqKV database.
 ---
 
 # Deploy a Single Node EloqKV Instance Using Eloqctl
 
-`eloqctl` is the current control-plane tool for deploying and operating EloqKV on SSH-accessible machines. A typical workflow is:
+Use `eloqctl` to prepare the topology, deploy the node, and verify that the instance is running:
 
 ```shell
 eloqctl check ./topology.yaml
@@ -14,7 +14,7 @@ eloqctl launch ./topology.yaml
 eloqctl status <cluster-name> --wait 60
 ```
 
-This page covers the smallest useful deployment: one EloqKV node on one machine.
+This page shows the simplest deployment: one EloqKV node on one machine.
 
 ## 1. Prerequisites
 
@@ -24,14 +24,7 @@ This page covers the smallest useful deployment: one EloqKV node on one machine.
 - Review the platform checklist first:
   - [Configuration Checklist](./prerequisite)
 
-Before using `eloqctl`, complete the target-host preparation checklist on every machine:
-
-- create the deployment user
-- configure passwordless SSH from the control machine
-- configure passwordless `sudo`
-- apply the documented limits, hostname, DNS, and core-dump settings
-
-The detailed procedure is in [Configuration Checklist](./prerequisite). `eloqctl` assumes the machines are already prepared; it does not bootstrap that initial host state for you.
+Before running `eloqctl`, prepare the target machine with the setup steps in [Configuration Checklist](./prerequisite). That page covers user creation, SSH, `sudo`, limits, and other required host settings.
 
 ## 2. Install `eloqctl`
 
@@ -43,11 +36,11 @@ source "${HOME}/.bash_profile"
 eloqctl --version
 ```
 
-By default, `eloqctl` stores its local state under `${ELOQCTL_HOME:-$HOME/.eloqctl}`.
+`eloqctl` stores its local state under `${ELOQCTL_HOME:-$HOME/.eloqctl}` by default.
 
 ## 3. Create a Topology YAML
 
-The latest installer bundles example files under:
+The installer places example topology files under:
 
 ```text
 ${ELOQCTL_HOME:-$HOME/.eloqctl}/config/examples/
@@ -110,7 +103,7 @@ Important points:
 - `storage_service.rocksdb: !LOCAL` is the simplest persistent local-storage option for a first deployment.
 - `log_service` is optional in general, but this example keeps a standalone single-node log service so the deployment shape is explicit and easy to inspect.
 
-## 3.1 YAML Field Reference
+## 3.1 YAML Reference
 
 For the complete field-by-field reference, see [Eloqctl Topology Reference](./topology-reference).
 
@@ -146,7 +139,7 @@ eloqctl status eloqkv-local-demo --wait 60
 ${ELOQCTL_HOME:-$HOME/.eloqctl}/clusters/eloqkv-local-demo/topology.yaml
 ```
 
-After that, most operational commands use the cluster name and do not need the original YAML path.
+After launch, most commands use the cluster name and do not need the original YAML path.
 
 ## 5. Connect to EloqKV
 
@@ -174,6 +167,5 @@ eloqctl remove eloqkv-local-demo --force
 
 ## Next Steps
 
-- For the `RocksDB Cloud + MinIO` HA topology, continue with [Deploy High Availability Cluster with MinIO](./quick-start-ha-local-storage).
-- For the `EloqStore Cloud + MinIO` HA topology, continue with [Deploy High Availability Cluster with EloqStore Cloud](./quick-start-ha).
-- For day-2 operations such as status, stop, export, and config updates, see [Manage Cluster Using Eloqctl](./manage-cluster).
+- For the `RocksDB Cloud + MinIO` and `EloqStore Cloud + MinIO` HA topologies, continue with [Deploy High Availability Cluster with MinIO](./quick-start-ha-local-storage).
+- For common operations after deployment, such as status, stop, export, and config updates, see [Manage Cluster Using Eloqctl](./manage-cluster).

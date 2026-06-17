@@ -5,7 +5,7 @@ summary: Operate an existing EloqKV deployment with eloqctl.
 
 # Manage Cluster Using Eloqctl
 
-This page covers the day-2 workflow for an existing EloqKV deployment managed by `eloqctl`.
+This page explains the commands you are most likely to use after the cluster has already been deployed.
 
 `eloqctl` stores a saved topology for each launched cluster under:
 
@@ -13,7 +13,7 @@ This page covers the day-2 workflow for an existing EloqKV deployment managed by
 ${ELOQCTL_HOME:-$HOME/.eloqctl}/clusters/<cluster>/topology.yaml
 ```
 
-After launch, most commands work by cluster name and do not require the original YAML file path.
+After deployment, most commands work by cluster name and do not require the original YAML file path.
 
 ## Inspect Clusters
 
@@ -94,7 +94,7 @@ Export the topology currently saved in local state:
 eloqctl export eloqkv-cluster --output ./eloqkv-cluster.yaml
 ```
 
-This is the right starting point when you want to review or evolve an existing deployment declaratively.
+Use this when you want to review the saved topology or make declarative changes to an existing cluster.
 
 ## Update the Topology Declaratively
 

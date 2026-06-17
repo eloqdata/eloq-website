@@ -1,9 +1,9 @@
 ---
-title: Configuration Checklist
+title: Prepare Machines for EloqKV Deployment
 summary: Prepare target machines for EloqKV deployment with eloqctl.
 ---
 
-# Prerequisite of Installing EloqKV
+# Prepare Machines for EloqKV Deployment
 
 Run the host setup script from the `eloqctl` repository on every target host:
 
@@ -11,11 +11,11 @@ Run the host setup script from the `eloqctl` repository on every target host:
 curl -fsSL https://raw.githubusercontent.com/eloqdata/eloq_waiter/main/scripts/setup-host.sh | sudo bash
 ```
 
-Run that command on every machine that will run EloqKV, log service, DSS, Prometheus, or Grafana components.
+Run that command on every machine that will run EloqKV, log service, DSS, Prometheus, or Grafana.
 
 ## What the Script Does
 
-The script performs the machine setup that `eloqctl` expects before deployment:
+The script prepares the machine for `eloqctl` deployment:
 
 - installs baseline packages such as `openssh-server`, `sudo`, `curl`, `wget`, `tar`, `xz`, and `rsync`
 - creates the `eloq` user if it does not already exist
@@ -53,7 +53,7 @@ ssh-copy-id -i ~/.ssh/id_rsa.pub eloq@10.0.0.1
 ssh eloq@10.0.0.1
 ```
 
-Repeat `ssh-copy-id` for each target host. The host is ready when `ssh eloq@<host>` no longer asks for a password.
+Repeat `ssh-copy-id` for each target host. When `ssh eloq@<host>` no longer asks for a password, the host is ready.
 
 ## Minimal Verification
 
@@ -76,7 +76,7 @@ ssh eloq@10.0.0.1 'sudo -n true && ulimit -n'
 
 ## Deployment YAML Expectations
 
-After the hosts are prepared, make sure the topology YAML is complete before you run `eloqctl`:
+After the hosts are ready, make sure the topology YAML is complete before you run `eloqctl`:
 
 - `deployment.install_dir` should always be explicit.
 - `deployment.enable_wal`, `deployment.enable_io_uring`, and `deployment.enable_tls` should always be explicit.
