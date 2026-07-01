@@ -6,6 +6,7 @@ import seoData from '@site/src/data/seo';
 import {eloqkvProductFaqItems} from '@site/src/data/eloqkvFaq';
 import StructuredData from '@site/src/components/StructuredData';
 import structuredData from '@site/src/data/structuredData';
+import {ELOQCLOUD_STAY_TUNED_PATH} from '@site/src/constants/eloqcloud';
 import styles from './styles.module.css';
 
 const {seo, SITE_URL, DEFAULT_OG_IMAGE} = seoData;
@@ -14,7 +15,7 @@ const {getStructuredDataForPath} = structuredData;
 const PAGE_PATH = '/product/eloqkv';
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 const GITHUB_URL = 'https://github.com/eloqdata/eloqkv';
-const CLOUD_SIGNUP_URL = 'https://cloud.eloqdata.com/signup';
+const CLOUD_SIGNUP_URL = ELOQCLOUD_STAY_TUNED_PATH;
 const OG_IMAGE_ALT =
   'EloqKV — Redis-compatible key-value database on NVMe-backed storage';
 const GETSTARTED_URL = '/eloqkv/docker-deploy';
@@ -855,7 +856,7 @@ function FinalCta() {
           <Link className={styles.eloqkvSecondaryButton} to={GETSTARTED_URL}>
             Get Started
           </Link>
-          <Link className={styles.eloqkvTertiaryButton} href={CLOUD_SIGNUP_URL}>
+          <Link className={styles.eloqkvTertiaryButton} to={CLOUD_SIGNUP_URL}>
             Try EloqCloud
           </Link>
         </div>

@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import seoData from '@site/src/data/seo';
+import {ELOQCLOUD_STAY_TUNED_PATH} from '@site/src/constants/eloqcloud';
 import {
   ResponsiveContainer,
   BarChart,
@@ -363,7 +364,7 @@ export default function CostSavingCalculatorPage() {
               <Link className={styles.ctaSecondary} to="/eloqkv/install-from-binary">
                 Install EloqKV →
               </Link>
-              <Link className={styles.cta} to="https://cloud.eloqdata.com">
+              <Link className={styles.cta} to={ELOQCLOUD_STAY_TUNED_PATH}>
                 Try EloqCloud →
               </Link>
             </div>

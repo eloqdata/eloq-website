@@ -3,6 +3,7 @@ import Link from '@docusaurus/Link';
 import Layout from '@theme/Layout';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import seoData from '@site/src/data/seo';
+import {ELOQCLOUD_STAY_TUNED_PATH} from '@site/src/constants/eloqcloud';
 
 import './FeatureSection.css';
 import '../css/logoWall.css';
@@ -86,7 +87,7 @@ function HeroBadge({ label }) {
 }
 
 function Hero() {
-    const cloudUrl = 'https://cloud.eloqdata.com';
+    const cloudUrl = ELOQCLOUD_STAY_TUNED_PATH;
     const benchmarkUrl = useBaseUrl('/blog/2026/01/08/eloqkv-on-eloqstore');
     const costSavingUrl = useBaseUrl('/costsaving');
 
@@ -351,13 +352,11 @@ function SecurityComplianceSection() {
                         with confidence that your customers&apos; information stays protected.
                     </p>
                     <div className={styles.soc2Actions}>
-                        <a
+                        <Link
                             className={styles.soc2Button}
-                            href="https://cloud.eloqdata.com"
-                            target="_blank"
-                            rel="noopener noreferrer">
+                            to={ELOQCLOUD_STAY_TUNED_PATH}>
                             Try EloqCloud
-                        </a>
+                        </Link>
                     </div>
                 </div>
                 <div className={styles.soc2Image}>

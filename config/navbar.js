@@ -1,3 +1,5 @@
+const {ELOQCLOUD_STAY_TUNED_PATH} = require('../src/constants/eloqcloud');
+
 module.exports = {
   title: 'EloqData',
   logo: {
@@ -21,14 +23,14 @@ module.exports = {
     },
     // Log In link
     {
-      href: 'https://cloud.eloqdata.com/login',
+      href: ELOQCLOUD_STAY_TUNED_PATH,
       position: 'right',
       className: 'header-login-link',
       label: 'Log In',
     },
     // Sign Up button with orange background
     {
-      href: 'https://cloud.eloqdata.com/signup',
+      href: ELOQCLOUD_STAY_TUNED_PATH,
       position: 'right',
       className: 'header-signup-link',
       label: 'Sign Up',
@@ -119,7 +121,7 @@ module.exports = {
         {
           type: 'html',
           value: `
-            <a href="https://cloud.eloqdata.com/signup" style="display: block; padding: 16px 20px; text-decoration: none; background-color: var(--navbar-dropdown-bg); border-bottom: 1px solid var(--navbar-dropdown-border); min-width: 340px;">
+            <a href="${ELOQCLOUD_STAY_TUNED_PATH}" style="display: block; padding: 16px 20px; text-decoration: none; background-color: var(--navbar-dropdown-bg); border-bottom: 1px solid var(--navbar-dropdown-border); min-width: 340px;">
               <div style="display: flex; align-items: center;">
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
                   <rect x="2" y="2" width="28" height="28" rx="6" fill="var(--navbar-dropdown-icon-bg)" />

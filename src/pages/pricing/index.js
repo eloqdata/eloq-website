@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
+import {ELOQCLOUD_STAY_TUNED_PATH} from '@site/src/constants/eloqcloud';
 import styles from './styles.module.css';
 import pcStyles from '../product-comparison/styles.module.css';
 
@@ -21,7 +22,7 @@ const PRICING_PLANS = {
       'Redis/MongoDB compatible',
     ],
     cta: 'Start for free',
-    ctaLink: 'https://cloud.eloqdata.com/login',
+    ctaLink: ELOQCLOUD_STAY_TUNED_PATH,
   },
   launch: {
     name: 'Business',
@@ -39,7 +40,7 @@ const PRICING_PLANS = {
       'Redis/MongoDB compatible',
     ],
     cta: 'Get started',
-    ctaLink: 'https://cloud.eloqdata.com/login',
+    ctaLink: ELOQCLOUD_STAY_TUNED_PATH,
   },
   large: {
     name: 'Enterprise',
@@ -183,7 +184,7 @@ export default function Pricing() {
                   <div className={styles.planFooter}>
                     {plan.name === 'Free' ? (
                       <Link
-                        to="https://cloud.eloqdata.com/login"
+                        to={ELOQCLOUD_STAY_TUNED_PATH}
                         className={`button button--lg ${styles.planButton}`}>
                         {plan.cta}
                       </Link>

@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
+import {ELOQCLOUD_STAY_TUNED_PATH} from '@site/src/constants/eloqcloud';
 import styles from './styles.module.css';
 import {CheckIcon, XIcon, InfoIcon} from '@heroicons/react/solid';
 
@@ -69,7 +70,7 @@ export default function EloqDoc() {
             <div className={styles.heroButtons}>
               <Link
                 className={`button button--primary button--lg ${styles.heroButton}`}
-                href="https://cloud.eloqdata.com/signup"
+                to={ELOQCLOUD_STAY_TUNED_PATH}
                 style={{
                   background: 'linear-gradient(120deg, #ff7b2d, #ff9f4a)',
                   border: 'none',
