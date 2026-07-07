@@ -145,6 +145,10 @@ EloqStore mode is selected by `eloq_store_cloud_store_path`: empty or unset mean
 - `storage_service.rocksdb.region`
 - `storage_service.rocksdb.target_file_size_base`
 - `storage_service.rocksdb.sst_file_cache_size`
+- `storage_service.rocksdb.rocksdb_periodic_compaction_seconds`: Optional RocksDB periodic compaction interval in seconds.
+- `storage_service.rocksdb.rocksdb_delete_obsolete_files_period_micros`: Optional interval in microseconds between RocksDB obsolete-file deletion passes.
+
+`rocksdb_periodic_compaction_seconds` and `rocksdb_delete_obsolete_files_period_micros` are also accepted under `storage_service.rocksdb: !ELOQDSS_ROCKSDB`.
 
 ### EloqStore Cloud Fields
 
