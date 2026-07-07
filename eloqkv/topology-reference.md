@@ -77,6 +77,7 @@ Use `ssh_endpoints` and `service_endpoints` when the control machine cannot reac
 - `deployment.enable_wal`: Whether each write is appended to WAL before completion.
 - `deployment.enable_io_uring`: Whether to use the `io_uring` I/O path.
 - `deployment.enable_tls`: Whether to enable TLS for EloqKV client traffic.
+- `deployment.bind_all`: Optional. Whether each EloqKV node listens on all interfaces (`0.0.0.0`) instead of only the address given in `tx_host_ports`. Defaults to `false`. Set it to `true` when clients need to reach a node through an address other than its configured one, such as `127.0.0.1` on a node deployed with an internal IP.
 - `deployment.cluster_mode`: `false` for single-node topology, `true` for clustered tx/standby/voter topology.
 - `deployment.checkpointer_interval`: Checkpoint interval in seconds.
 - `deployment.maxclients`: Optional Redis client connection limit.
