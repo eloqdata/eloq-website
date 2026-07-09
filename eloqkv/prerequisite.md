@@ -8,7 +8,7 @@ summary: Prepare target machines for EloqKV deployment with eloqctl.
 Run the host setup script from the `eloqctl` repository on every target host:
 
 ```shell
-curl -fsSL https://raw.githubusercontent.com/eloqdata/eloq_waiter/main/scripts/setup-host.sh | sudo bash
+curl -fsSL https://raw.githubusercontent.com/eloqdata/eloqctl/main/scripts/setup-host.sh | sudo bash
 ```
 
 Run that command on every machine that will run EloqKV, log service, DSS, Prometheus, or Grafana.
@@ -30,14 +30,14 @@ The script prepares the machine for `eloqctl` deployment:
 To set the hostname during bootstrap, pass `HOSTNAME_VALUE`:
 
 ```shell
-curl -fsSL https://raw.githubusercontent.com/eloqdata/eloq_waiter/main/scripts/setup-host.sh | \
+curl -fsSL https://raw.githubusercontent.com/eloqdata/eloqctl/main/scripts/setup-host.sh | \
   sudo HOSTNAME_VALUE=eloq-node-1 bash
 ```
 
 To preload an SSH public key during bootstrap, pass `SSH_PUBKEY`:
 
 ```shell
-curl -fsSL https://raw.githubusercontent.com/eloqdata/eloq_waiter/main/scripts/setup-host.sh | \
+curl -fsSL https://raw.githubusercontent.com/eloqdata/eloqctl/main/scripts/setup-host.sh | \
   sudo SSH_PUBKEY="$(cat ~/.ssh/id_rsa.pub)" bash
 ```
 
