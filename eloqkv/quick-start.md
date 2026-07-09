@@ -31,7 +31,7 @@ Before running `eloqctl`, prepare the target machine with the setup steps in [Co
 Install the latest `eloqctl` release on the control machine:
 
 ```shell
-curl -fsSL https://raw.githubusercontent.com/eloqdata/eloq_waiter/main/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/eloqdata/eloqctl/main/install.sh | sh
 source "${HOME}/.bash_profile"
 eloqctl --version
 ```

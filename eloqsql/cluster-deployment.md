@@ -37,7 +37,7 @@ For the EloqSQL cluster topology, you can configure the required number of clust
 
 ### Deployment implementation
 
-The `Eloq_waiter` tool can realize the installation and deployment on multiple servers by modifying the parameters in deployment YAML files. For the details of `Eloq_waiter `, please refer to [Single Node Eloq Deployment Network Configuration](./quick-start.md)
+The `eloqctl` tool can realize the installation and deployment on multiple servers by modifying the parameters in deployment YAML files. For the details of `eloqctl`, please refer to [Single Node Eloq Deployment Network Configuration](./quick-start.md)
 
 - Create and start the cluster
   According to the following configuration template, edit the configuration file deployment.yaml as you need, where:
@@ -111,5 +111,5 @@ deployment:
 - Launch cluster
 
   ```shell
-  cluster_mgr launch .eloqwaiter/config/examples/eloqsql_cassandra.yaml
+  eloqctl launch .eloqctl/config/examples/eloqsql_cassandra.yaml
   ```
