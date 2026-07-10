@@ -18,6 +18,7 @@ const sidebars = {
     'EloqKV Introduction': ['introduction'],
     'Get Started': ['install-from-binary', 'docker-deploy'],
     Deploy: [
+      'install-eloqctl',
       'quick-start',
       'quick-start-ha-local-storage',
       'manage-cluster',

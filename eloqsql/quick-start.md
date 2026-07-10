@@ -19,38 +19,17 @@ Please ensure you've reviewed the following documents:
 
 ## 2. Deploy eloqctl on the control machine
 
-1. Get your eloqctl installation script here:
+Install the latest `eloqctl` release on the control machine:
 
-- [Eloqctl Install Script](/downloadeloqctl)
-
-2. To install eloqctl, simply run the following command:
-
-```
-bash eloqctl_installer.sh
-```
-
-If the following message is displayed, you have successfully installed `eloqctl`:
-
-```
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-100 16.6M  100 16.6M    0     0   203M      0 --:--:-- --:--:-- --:--:--  205M
-/home/eloq/.bash_profile has been modified to add eloqctl to PATH
-===============================================
-To use it, open a new terminal or execute:
-source /home/eloq/.bash_profile
-===============================================
-```
-
-This command installs eloqctl in the $HOME/.eloqctl directory, where the cluster metadata and downloaded components are also stored.
-
-Please run `source $HOME/.bash_profile` to add `$HOME/.eloqctl` to the PATH environment variable, so you can use `eloqctl` directly.
-
-Once installed, you can verify the `eloqctl` version by running:
-
-```
+```shell
+curl -fsSL https://raw.githubusercontent.com/eloqdata/eloqctl/main/install.sh | sh
+source "${HOME}/.bash_profile"
 eloqctl --version
 ```
+
+This installs eloqctl in the `$HOME/.eloqctl` directory, where the cluster metadata and downloaded components are also stored. If `eloqctl --version` prints a version number, the installation succeeded.
+
+See [Install EloqCtl](/eloqkv/install-eloqctl) for details.
 
 ## 3. Initialize the cluster topology file
 

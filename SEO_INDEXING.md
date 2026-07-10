@@ -16,7 +16,7 @@ These surfaces should remain crawlable and eligible for indexing.
 - `/post/` - citation-oriented long-form articles, including Redis vs EloqKV cost comparison content.
 - `/costsaving` - EloqKV cost saving calculator.
 - `/product-comparison` - EloqData edition comparison.
-- `/pricing`, `/aboutus`, `/contact`, `/download`, `/downloadeloqctl`, `/downloadwhitepaper`, `/request-paper` - public business and conversion pages.
+- `/pricing`, `/aboutus`, `/contact`, `/download`, `/downloadwhitepaper`, `/request-paper` - public business and conversion pages. (`/downloadeloqctl` is retired; eloqctl install docs now live at `/eloqkv/install-eloqctl`.)
 - Future `/faq/` and `/compare/` routes once implemented by follow-up roadmap issues.
 
 ## Noindexed

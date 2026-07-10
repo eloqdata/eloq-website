@@ -36,7 +36,7 @@ source "${HOME}/.bash_profile"
 eloqctl --version
 ```
 
-`eloqctl` stores its local state under `${ELOQCTL_HOME:-$HOME/.eloqctl}` by default.
+`eloqctl` stores its local state under `${ELOQCTL_HOME:-$HOME/.eloqctl}` by default. See [Install EloqCtl](./install-eloqctl) for details.
 
 ## 3. Create a Topology YAML
 
