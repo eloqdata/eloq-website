@@ -252,7 +252,7 @@ const EloqDBDownloadPage: React.FC = () => {
                         <br />
                         If you're interested in a more in-depth experience, we
                         recommend trying our
-                        <a href="/downloadeloqctl"> Eloqctl </a> tool to deploy a
+                        <a href="/eloqkv/install-eloqctl"> Eloqctl </a> tool to deploy a
                         cluster.
                       </>
                     )}

@@ -340,7 +340,7 @@ module.exports = {
         {
           type: 'html',
           value: `
-            <a href="https://github.com/eloqdata/eloqctl/releases" style="display: block; padding: 16px 20px; text-decoration: none; background-color: var(--navbar-dropdown-bg); border-bottom: 1px solid var(--navbar-dropdown-border); min-width: 320px;">
+            <a href="/eloqkv/install-eloqctl" style="display: block; padding: 16px 20px; text-decoration: none; background-color: var(--navbar-dropdown-bg); border-bottom: 1px solid var(--navbar-dropdown-border); min-width: 320px;">
               <div style="display: flex; align-items: center;">
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" style="margin-right: 16px; flex-shrink: 0;">
                   <rect x="2" y="2" width="28" height="28" rx="6" fill="var(--navbar-dropdown-icon-bg)" />
