@@ -8,8 +8,8 @@ authors: eloq
 date: 2026-05-01
 image: /img/blog/eloqkvspring.jpg
 tags: [Company]
-featured: true
-featuredMain: true
+featured: false
+featuredMain: false
 blog: true
 ---
 
@@ -31,17 +31,17 @@ This post documents the benchmark methodology, results, and cost analysis we ran
 
 We wanted the benchmark to reflect a real Spring production workload, not a synthetic `redis-benchmark` run. Everything runs through Spring Data Redis — the same `RedisTemplate`, the same `@Cacheable` abstraction, the same Lettuce connection pool that any Spring application would use.
 
-| Parameter | Value |
-|---|---|
-| Spring Boot | 3.3.5 |
-| Spring Data Redis | 3.3.5 (Lettuce 6.x) |
-| JMH | 1.37 — 3 warmup × 5 s, 5 measurement × 10 s, 1 thread, 1 fork |
-| Gatling | 3.10.5 — mixed scenario, ramp + 30 s sustained |
-| EloqKV | latest, cache mode (WAL off), GCP NVMe-backed VM |
-| Server | GCP VM, us-central1-a — Ubuntu 24.04, Java 21.0.10 (OpenJDK) |
-| Client | Same VPC — Spring Boot REST → Lettuce sync → EloqKV (private IP) |
-| JMH workload | 16 benchmarks: String · Hash · List · Set · Sorted Set · Pipeline |
-| Gatling workload | Mixed: SET/GET · HSET/HGET · ZADD via Spring REST endpoints |
+| Parameter         | Value                                                             |
+| ----------------- | ----------------------------------------------------------------- |
+| Spring Boot       | 3.3.5                                                             |
+| Spring Data Redis | 3.3.5 (Lettuce 6.x)                                               |
+| JMH               | 1.37 — 3 warmup × 5 s, 5 measurement × 10 s, 1 thread, 1 fork     |
+| Gatling           | 3.10.5 — mixed scenario, ramp + 30 s sustained                    |
+| EloqKV            | latest, cache mode (WAL off), GCP NVMe-backed VM                  |
+| Server            | GCP VM, us-central1-a — Ubuntu 24.04, Java 21.0.10 (OpenJDK)      |
+| Client            | Same VPC — Spring Boot REST → Lettuce sync → EloqKV (private IP)  |
+| JMH workload      | 16 benchmarks: String · Hash · List · Set · Sorted Set · Pipeline |
+| Gatling workload  | Mixed: SET/GET · HSET/HGET · ZADD via Spring REST endpoints       |
 
 Both backends share the same Spring application configuration. The only difference between runs is the `spring.data.redis.host` property.
 
@@ -163,18 +163,18 @@ JMH measured single-connection synchronous throughput via the Lettuce client. A 
 
 **JMH throughput — ops/s per connection (single-thread, synchronous Lettuce, higher is better)**
 
-| Command | EloqKV ops/s |
-|---|---|
-| ZRANGE | 8,120 |
-| HSET | 8,051 |
-| INCR / LRANGE | 7,880 |
-| SET | 7,870 |
-| LPUSH | 7,827 |
-| GET | 7,810 |
-| SISMEMBER | 7,799 |
-| ZADD | 7,785 |
-| HGET | 7,638 |
-| SADD | 7,538 |
+| Command                 | EloqKV ops/s                          |
+| ----------------------- | ------------------------------------- |
+| ZRANGE                  | 8,120                                 |
+| HSET                    | 8,051                                 |
+| INCR / LRANGE           | 7,880                                 |
+| SET                     | 7,870                                 |
+| LPUSH                   | 7,827                                 |
+| GET                     | 7,810                                 |
+| SISMEMBER               | 7,799                                 |
+| ZADD                    | 7,785                                 |
+| HGET                    | 7,638                                 |
+| SADD                    | 7,538                                 |
 | Pipeline 10×SET (async) | 4,163 batches/s = **41,630 writes/s** |
 
 Throughput is nearly flat across the entire command set — a 7.8% spread from SADD (7,538 ops/s) to ZRANGE (8,120 ops/s). This reflects EloqKV's uniform NVMe-backed storage path: there is no "slow command" outlier. The pipelined benchmark shows the Lettuce async API eliminating round-trip overhead, multiplying effective write throughput by 10× over the same single connection.
@@ -185,31 +185,31 @@ We measured latency at two layers. At the **protocol level**, JMH's AverageTime 
 
 ### JMH — protocol-level average latency (ms/op)
 
-| Command | Avg (ms/op) | Min | Max | Note |
-|---|---|---|---|---|
-| `GET` | 0.128 | 0.125 | 0.130 | single key lookup |
-| `SET` | 0.127 | 0.125 | 0.129 | blind write, new key |
-| `INCR` | 0.127 | 0.125 | 0.128 | atomic counter |
-| `HGET` | 0.116 | 0.114 | 0.117 | hash field read |
-| `HSET` | 0.133 | 0.131 | 0.135 | hash field write |
-| `HGETALL` | 0.126 | 0.125 | 0.127 | 10-field hash |
-| `LPUSH` | 0.128 | 0.127 | 0.130 | list prepend |
-| `ZADD` | 0.128 | 0.127 | 0.129 | sorted set insert |
-| `ZRANGE` | 0.123 | 0.122 | 0.124 | sorted set range (10 members) |
-| `SETEX` | 0.217 | 0.212 | 0.222 | write + TTL overhead |
-| Pipeline 10×SET | 0.024 | 0.024 | 0.024 | per write — async batch |
+| Command         | Avg (ms/op) | Min   | Max   | Note                          |
+| --------------- | ----------- | ----- | ----- | ----------------------------- |
+| `GET`           | 0.128       | 0.125 | 0.130 | single key lookup             |
+| `SET`           | 0.127       | 0.125 | 0.129 | blind write, new key          |
+| `INCR`          | 0.127       | 0.125 | 0.128 | atomic counter                |
+| `HGET`          | 0.116       | 0.114 | 0.117 | hash field read               |
+| `HSET`          | 0.133       | 0.131 | 0.135 | hash field write              |
+| `HGETALL`       | 0.126       | 0.125 | 0.127 | 10-field hash                 |
+| `LPUSH`         | 0.128       | 0.127 | 0.130 | list prepend                  |
+| `ZADD`          | 0.128       | 0.127 | 0.129 | sorted set insert             |
+| `ZRANGE`        | 0.123       | 0.122 | 0.124 | sorted set range (10 members) |
+| `SETEX`         | 0.217       | 0.212 | 0.222 | write + TTL overhead          |
+| Pipeline 10×SET | 0.024       | 0.024 | 0.024 | per write — async batch       |
 
 ### Gatling — HTTP end-to-end latency through Spring Boot REST
 
 Mixed load (SET/GET, HSET/HGET, ZADD scenarios) at ~95 requests/s, all routed through `RedisTemplate` in a Spring Boot REST layer. 3,790 requests, zero failures.
 
-| Percentile | Response time |
-|---|---|
-| P50 | 1 ms |
-| P75 | 1 ms |
-| P95 | 2 ms |
-| P99 | 3 ms |
-| Max | 43 ms |
+| Percentile | Response time         |
+| ---------- | --------------------- |
+| P50        | 1 ms                  |
+| P75        | 1 ms                  |
+| P95        | 2 ms                  |
+| P99        | 3 ms                  |
+| Max        | 43 ms                 |
 | Error rate | 0% (3,790 / 3,790 OK) |
 
 The HTTP layer adds roughly 0.9 ms median overhead vs. the raw protocol (0.116–0.133 ms JMH avg). Even so, P99 stays at 3 ms — well within the budget for any cache tier. Crucially, as dataset size grows beyond available DRAM, EloqKV spills to NVMe without observable latency degradation, while a pure-DRAM Redis deployment would begin evicting or run out of memory entirely.
@@ -228,27 +228,27 @@ EloqKV exploits this gap by keeping only the hot fraction of your dataset in RAM
 
 ### Scenario: 100 GB working dataset, production HA
 
-| | Redis — ElastiCache | EloqKV — self-hosted |
-|---|---|---|
-| **Monthly cost** | **$2,178** | **$166** |
-| Nodes | 16× cache.r6g.large | 2× i3en.xlarge |
-| Storage per node | 6.38 GB RAM usable | 7.5 TB NVMe available |
-| Unit price | $0.150/hr on-demand | $0.114/hr (1-yr reserved) |
-| Multi-AZ replica | 2× node count | Included (2 nodes) |
-| Storage model | DRAM only | NVMe + S3 tiering |
+|                  | Redis — ElastiCache | EloqKV — self-hosted      |
+| ---------------- | ------------------- | ------------------------- |
+| **Monthly cost** | **$2,178**          | **$166**                  |
+| Nodes            | 16× cache.r6g.large | 2× i3en.xlarge            |
+| Storage per node | 6.38 GB RAM usable  | 7.5 TB NVMe available     |
+| Unit price       | $0.150/hr on-demand | $0.114/hr (1-yr reserved) |
+| Multi-AZ replica | 2× node count       | Included (2 nodes)        |
+| Storage model    | DRAM only           | NVMe + S3 tiering         |
 
 > ### 13.1× cost reduction
 > $2,178 → $166 / month for a 100 GB dataset
 
 ### How cost savings scale with dataset size
 
-| Dataset | Redis (ElastiCache, HA) | EloqKV (i3en, HA pair) | Savings | Redis latency | EloqKV latency |
-|---|---|---|---|---|---|
-| 10 GB | $218/mo | $166/mo | 1.3× *(break-even)* | P99 < 2 ms | P99 < 2 ms |
-| 50 GB | $1,089/mo | $166/mo | **6.6×** | P99 < 2 ms | P99 < 2.2 ms |
-| 100 GB | $2,178/mo | $166/mo | **13.1×** | OOM / eviction | P99 < 2.5 ms |
-| 500 GB | $10,890/mo | $332/mo | **32.8×** | Not possible | P99 < 3.5 ms |
-| 2 TB | $43,560/mo | $664/mo | **65.6×** | Not possible | P99 < 5 ms |
+| Dataset | Redis (ElastiCache, HA) | EloqKV (i3en, HA pair) | Savings             | Redis latency  | EloqKV latency |
+| ------- | ----------------------- | ---------------------- | ------------------- | -------------- | -------------- |
+| 10 GB   | $218/mo                 | $166/mo                | 1.3× *(break-even)* | P99 < 2 ms     | P99 < 2 ms     |
+| 50 GB   | $1,089/mo               | $166/mo                | **6.6×**            | P99 < 2 ms     | P99 < 2.2 ms   |
+| 100 GB  | $2,178/mo               | $166/mo                | **13.1×**           | OOM / eviction | P99 < 2.5 ms   |
+| 500 GB  | $10,890/mo              | $332/mo                | **32.8×**           | Not possible   | P99 < 3.5 ms   |
+| 2 TB    | $43,560/mo              | $664/mo                | **65.6×**           | Not possible   | P99 < 5 ms     |
 
 :::note
 Redis costs calculated using AWS ElastiCache `cache.r6g.large` on-demand pricing in us-east-1 (May 2026), with a 2× multiplier for Multi-AZ replication. EloqKV costs based on `i3en.xlarge` 1-year reserved pricing with 2 nodes. Pricing verified against AWS pricing pages at time of writing.
@@ -290,14 +290,14 @@ public class CacheConfig {
 
 ### Recommended migration checklist
 
-| # | Step | Effort |
-|---|---|---|
-| 1 | Deploy EloqKV alongside existing Redis (separate host, same port) | 15 min |
-| 2 | Run benchmark harness against EloqKV to validate latency for your dataset size | 1 hr |
-| 3 | Update `spring.data.redis.host` in staging; run integration test suite | 1 hr |
-| 4 | Shadow traffic: replicate reads to EloqKV while Redis remains primary | 1 day |
-| 5 | Canary rollout in production (5% → 25% → 100% over 24h) | 2 days |
-| 6 | Decommission Redis cluster after confidence period | 1 hr |
+| #   | Step                                                                           | Effort |
+| --- | ------------------------------------------------------------------------------ | ------ |
+| 1   | Deploy EloqKV alongside existing Redis (separate host, same port)              | 15 min |
+| 2   | Run benchmark harness against EloqKV to validate latency for your dataset size | 1 hr   |
+| 3   | Update `spring.data.redis.host` in staging; run integration test suite         | 1 hr   |
+| 4   | Shadow traffic: replicate reads to EloqKV while Redis remains primary          | 1 day  |
+| 5   | Canary rollout in production (5% → 25% → 100% over 24h)                        | 2 days |
+| 6   | Decommission Redis cluster after confidence period                             | 1 hr   |
 
 ## Conclusion
 
