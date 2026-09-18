@@ -2,6 +2,24 @@
 
 This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
 
+## Content and growth operations
+
+- [SEO/GEO framework](docs/SEO_GEO_FRAMEWORK.md): strategy, content priorities, 90-day rollout, measurement, and ownership.
+- [Publishing workflow](docs/CONTENT_WORKFLOW.md): create or refresh a draft, review it, publish locally, and configure daily automation.
+- [Indexing policy](SEO_INDEXING.md): public pages, preview protection, and machine discovery.
+
+```bash
+npm run content:plan
+npm run content -- help
+npm run test:content
+npm run test:editorial-seo
+npm run build
+npm run test:structured-data:build
+npm run seo:audit
+```
+
+Blog posts live in `blog/`, company news in `newsposts/`, and evergreen articles in `posts/`. Working briefs and drafts live in `content/` and are not published by the website build. The daily job produces a review PR; publishing uses the normal website merge and deployment process. No external CMS is required.
+
 ## Installation
 
 ```bash

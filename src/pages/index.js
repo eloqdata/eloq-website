@@ -3,6 +3,8 @@ import Link from '@docusaurus/Link';
 import Layout from '@theme/Layout';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import seoData from '@site/src/data/seo';
+import StructuredData from '@site/src/components/StructuredData';
+import structuredData from '@site/src/data/structuredData';
 import {ELOQCLOUD_STAY_TUNED_PATH} from '@site/src/constants/eloqcloud';
 
 import './FeatureSection.css';
@@ -406,6 +408,7 @@ export default function Home() {
 
     return (
         <Layout title={seo.home.title} description={seo.home.description}>
+            <StructuredData schemas={structuredData.getStructuredDataForPath('/')} />
             <main className={styles.page}>
                 <Hero />
                 <LogoWall />

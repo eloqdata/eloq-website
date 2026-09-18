@@ -1,3 +1,11 @@
+.listContent {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 2rem);
+  box-sizing: border-box;
+}
+
 /* Common container styles */
 .blogPostContainer {
   display: flex;
@@ -11,31 +19,11 @@
   box-sizing: border-box;
 }
 
-/* Blog list page - smaller sidebars */
-:global(.blog-list-page) .blogSidebar {
-  flex: 1;
-  min-width: 100px;
-  max-width: 150px;
-}
-
-:global(.blog-list-page) .blogContent {
-  flex: 1 1 900px;
-  margin: 0 1rem;
-  max-width: 100%;
-  box-sizing: border-box;
-}
-
-/* Blog post page - wider sidebars */
-:global(.blog-post-page) .blogSidebar {
-  flex: 1;
-  min-width: 150px;
-  max-width: 250px;
-}
-
 :global(.blog-post-page) .blogContent {
   flex: 1 1 800px;
-  margin: 0 2rem;
-  max-width: 100%;
+  min-width: 0;
+  max-width: 800px;
+  width: 100%;
   box-sizing: border-box;
 }
 
@@ -45,10 +33,6 @@
     align-items: center;
     padding: 1rem;
     gap: 1.5rem;
-  }
-
-  .blogSidebar {
-    display: none;
   }
 
   .blogContent {

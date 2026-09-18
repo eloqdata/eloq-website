@@ -1,0 +1,31 @@
+name: Content and SEO checks
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: content-quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: yarn
+      - run: yarn install --frozen-lockfile
+      - run: npm run test:content
+      - run: npm run content:validate
+      - run: npm run test:structured-data
+      - run: npm run test:editorial-seo
+      - run: npm run build
+      - run: npm run test:structured-data:build
+      - run: npm run seo:audit

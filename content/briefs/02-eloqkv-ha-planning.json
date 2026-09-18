@@ -1,0 +1,16 @@
+{
+  "id": "eloqkv-ha-planning",
+  "approved": false,
+  "operation": "create",
+  "collection": "article",
+  "slug": "eloqkv-high-availability-planning",
+  "title": "Planning an EloqKV high availability evaluation",
+  "audience": "Platform engineers planning a database reliability evaluation",
+  "question": "Which failover and deployment behaviors should an engineer validate in an EloqKV high availability evaluation?",
+  "tags": ["EloqKV"],
+  "internal_links": ["/eloqkv/ha_intro", "/eloqkv/failover", "/product/eloqkv"],
+  "sources": [
+    {"title": "EloqKV high availability", "path": "eloqkv/ha_intro.md", "url": "https://www.eloqdata.com/eloqkv/ha_intro"},
+    {"title": "EloqKV failover", "path": "eloqkv/failover.md", "url": "https://www.eloqdata.com/eloqkv/failover"}
+  ]
+}

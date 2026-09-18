@@ -1,0 +1,152 @@
+.resources {
+  width: 100%;
+  padding-bottom: 3rem;
+}
+
+.header {
+  padding: clamp(2rem, 6vw, 4.5rem) 0 2.5rem;
+  max-width: 850px;
+}
+
+.eyebrow {
+  margin-bottom: 1rem;
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.header h1 {
+  margin-bottom: 1.25rem;
+  font-size: clamp(2.25rem, 5vw, 3.6rem);
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.description {
+  max-width: 690px;
+  margin-bottom: 0;
+  color: var(--ifm-color-emphasis-700);
+  font-size: 1.08rem;
+  line-height: 1.75;
+}
+
+.navigation {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  margin-bottom: 2.5rem;
+  padding: 0 0 1rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.sections {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.sectionLink {
+  padding: 0.55rem 1.1rem;
+  border-radius: 8px;
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.sectionLink:hover {
+  background: var(--ifm-color-emphasis-100);
+  color: var(--ifm-heading-color);
+}
+
+.sectionLink.active {
+  background: var(--ifm-color-emphasis-900);
+  color: var(--ifm-background-color);
+}
+
+.utilities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.3rem;
+  font-size: 0.78rem;
+}
+
+.navigation a:focus-visible {
+  outline: 2px solid var(--ifm-link-color);
+  outline-offset: 4px;
+}
+
+.featured {
+  margin-bottom: 3rem;
+}
+
+.listHeading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.listLabel {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.count {
+  margin: 0;
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.78rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.pagination {
+  margin-top: 3rem;
+}
+
+.empty {
+  padding: 3rem 1.5rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 16px;
+  text-align: center;
+}
+
+@media (max-width: 996px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .header {
+    padding-top: 2rem;
+  }
+
+  .navigation {
+    margin-bottom: 1.5rem;
+  }
+
+  .sectionLink {
+    padding: 0.5rem 0.85rem;
+  }
+
+  .utilities {
+    width: 100%;
+    padding-left: 0.85rem;
+  }
+}

@@ -9,7 +9,11 @@ export default function BlogPostPage(props) {
   const permalink =
     props.content?.metadata?.permalink ??
     props.content?.default?.metadata?.permalink;
-  const schemas = getStructuredDataForPath(permalink);
+  // The shared post schema component adds current breadcrumbs for every post.
+  // Route-specific FAQ markup stays tied to the existing visible FAQ content.
+  const schemas = getStructuredDataForPath(permalink).filter(
+    schema => schema['@type'] !== 'BreadcrumbList'
+  );
 
   return (
     <>

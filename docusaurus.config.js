@@ -15,6 +15,7 @@ const navbar = require('./config/navbar');
 const footer = require('./config/footer');
 const headTags = require('./config/headTags');
 const {DEFAULT_OG_IMAGE, SITE_URL, seo} = require('./src/data/seo');
+const {GlobExcludeDefault} = require('@docusaurus/utils');
 
 const commonDocsOptions = {
   breadcrumbs: false,
@@ -22,17 +23,19 @@ const commonDocsOptions = {
   showLastUpdateTime: true,
 };
 
-const isDeployPreview = process.env.PREVIEW_DEPLOY === 'true';
+const isDeployPreview =
+  process.env.PREVIEW_DEPLOY === 'true' || process.env.VERCEL_ENV === 'preview';
 
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
-  title: 'EloqData: Next Generation Multi-model Database',
+  title: 'EloqData',
   tagline:
     'Data Substrate powered modular database which enables vertical and horizontal expanding of the decoupled components: compute, memory, storage and log separately.',
   organizationName: 'Eloqdb',
   projectName: 'EloqData',
   url: SITE_URL,
   baseUrl: '/',
+  noIndex: isDeployPreview,
   clientModules: [
   ],
   trailingSlash: false, // because trailing slashes can break some existing relative links
@@ -73,8 +76,15 @@ module.exports = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: false,
+        pages: {
+          // This imported image component is not a public page.
+          exclude: [...GlobExcludeDefault, '**/enlarge_pic.js'],
+        },
         blog: {
           path: 'blog',
+          blogTitle: 'EloqData Blog: Redis Alternatives & Database Engineering',
+          blogDescription:
+            'Engineering guides, migration checklists, and benchmarks for EloqKV, Redis-compatible databases, NVMe storage, and distributed systems.',
           blogSidebarCount: 'ALL',
           blogSidebarTitle: 'All Blog Posts',
           postsPerPage: 20,
@@ -87,6 +97,8 @@ module.exports = {
           ignorePatterns: [
             '/contact/submitted',
             '/request-paper/submitted',
+            '/cloud-stay-tuned',
+            '/status',
             '/markdown-page',
             '/download_eloqdb',
             '/docs/**',
@@ -117,6 +129,7 @@ module.exports = {
   ],
   plugins: [
     'docusaurus-plugin-sass',
+    require.resolve('./tools/seo-plugin'),
     [
       '@docusaurus/plugin-content-blog',
       {
@@ -170,6 +183,22 @@ module.exports = {
       {
         id: 'eloqsql',
         path: 'eloqsql',
+        // Empty legacy placeholders have no content to index. Remove an entry
+        // here when its documentation has actually been written and reviewed.
+        exclude: [
+          ...GlobExcludeDefault,
+          'deploy-a-local-test-cluster.md',
+          'guide-connect-to-eloqdb.md',
+          'migration-overview.md',
+          'monograph-in-cloud.md',
+          'monographdb-in-kubernetes.md',
+          'overview.md',
+          'production-deployment-using-eloqdb.md',
+          'production-deployment-using-monoup.md',
+          'simulate-production-deployment-on-a-single-machine.md',
+          'sql-reference/alter-database.md',
+          'sql-reference/alter_index.md',
+        ],
         routeBasePath: 'eloqsql',
         sidebarPath: require.resolve('./sidebarsEloqSQL.js'),
         // ... other options

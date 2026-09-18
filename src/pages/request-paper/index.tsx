@@ -59,7 +59,7 @@ const RequestPaperPage: React.FC = () => {
     };
 
     return (
-        <Layout title="Request the Paper">
+        <Layout title="Request the EloqData Technical Paper" description="Request EloqData's technical paper to explore its database architecture, storage design, and approach to scalable data infrastructure.">
             <div className="contact-page-container">
                 <div className="contact-page">
                     <div className="top-description">
@@ -145,4 +145,3 @@ const RequestPaperPage: React.FC = () => {
 };
 
 export default RequestPaperPage;
-

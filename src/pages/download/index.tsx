@@ -220,7 +220,7 @@ const EloqDBDownloadPage: React.FC = () => {
   };
 
   return (
-    <Layout title={`Download ${productFeatures[selectedProduct].title}`}>
+    <Layout title={`Download ${productFeatures[selectedProduct].title}`} description="Download EloqKV, EloqDoc, and EloqSQL. Find installation options and get started evaluating EloqData databases for your application.">
       <div className="contact-page-container">
         <div className="contact-page">
           <div className="top-description">

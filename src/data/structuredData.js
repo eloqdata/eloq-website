@@ -144,7 +144,7 @@ const benchmarkFaq = withContext({
       acceptedAnswer: {
         '@type': 'Answer',
         text:
-          'EloqStore keeps every index’s non-leaf nodes in DRAM, so each read is a single direct NVMe access with no LSM-style level checks. Combined with coroutines, io_uring asynchronous I/O, and an append-only design that avoids compaction stalls, EloqKV holds P99.99 latency to a few milliseconds even on a 2TB dataset.',
+          "EloqStore keeps every index's non-leaf nodes in DRAM, so each read is a single, direct NVMe access (one IOP) with no LSM-style level checks. It pairs this with coroutines and io_uring asynchronous I/O, and its append-only design avoids the compaction stalls that spike tail latency on other SSD stores. The result is a P99.99 of a few milliseconds even at 2TB.",
       },
     },
     {
@@ -153,7 +153,7 @@ const benchmarkFaq = withContext({
       acceptedAnswer: {
         '@type': 'Answer',
         text:
-          'A single GCP Z3-16 node (16 vCore, 128GB RAM, two 2.9TB NVMe SSDs), 1-4KB values, datasets from 20GB to 2TB, read/write mixes of 95:5, 50:50, and 5:95, measured with memtier_benchmark and the write-ahead log disabled (cache mode).',
+          'A single GCP Z3-16 node (16 vCore, 128GB RAM, 2 × 2.9TB NVMe), 1–4KB values, datasets from 20GB to 2TB, read/write mixes of 95:5, 50:50, and 5:95, measured with memtier_benchmark and the write-ahead log disabled (cache mode). See the Benchmark conditions section for the full table.',
       },
     },
     {
@@ -162,7 +162,7 @@ const benchmarkFaq = withContext({
       acceptedAnswer: {
         '@type': 'Answer',
         text:
-          'These specific numbers were measured in cache mode with the write-ahead log off to isolate serving latency. EloqKV also supports WAL-backed durable persistence, which is benchmarked separately.',
+          'These specific numbers were measured in cache mode (WAL off) to isolate serving latency. EloqKV also supports WAL-backed durable persistence; that mode is benchmarked separately in ACID in EloqKV: Durability.',
       },
     },
     {
@@ -171,7 +171,7 @@ const benchmarkFaq = withContext({
       acceptedAnswer: {
         '@type': 'Answer',
         text:
-          'In this 2TB test, EloqKV replaces a roughly 20-node Redis cluster with a single NVMe node. Actual savings depend on dataset size, hot working set, replica count, and durability requirements, so the multiple varies by workload.',
+          'In this 2TB test, EloqKV replaces a roughly 20-node Redis cluster with a single NVMe node. Real savings depend on your data size, hot working set, replicas, and durability requirements — estimate yours with the cost calculator.',
       },
     },
     {
@@ -180,7 +180,7 @@ const benchmarkFaq = withContext({
       acceptedAnswer: {
         '@type': 'Answer',
         text:
-          'EloqKV is Redis and Valkey compatible, which keeps migration effort low, but teams should validate command coverage, cluster behavior, persistence settings, and latency SLOs before cutover.',
+          'EloqKV is Redis- and Valkey-compatible, which keeps migration effort low, but teams should validate command coverage, cluster behavior, persistence settings, and latency SLOs before cutover. The migration guide walks through this.',
       },
     },
   ],
@@ -192,11 +192,11 @@ const migrationFaq = withContext({
   mainEntity: [
     {
       '@type': 'Question',
-      name: 'Is there downtime when migrating from Redis to EloqKV?',
+      name: 'Is there downtime during the migration?',
       acceptedAnswer: {
         '@type': 'Answer',
         text:
-          'No. RedisShake mirrors data into EloqKV with a full sync followed by continuous incremental sync, so Redis keeps serving until you divert traffic. The only brief pause is the final write cutover.',
+          'No. RedisShake mirrors your data into EloqKV with a full sync followed by continuous incremental sync, so reads and writes keep serving from Redis until you choose to divert them. The only brief pause is the final write cutover in Stage 3.',
       },
     },
     {
@@ -205,12 +205,12 @@ const migrationFaq = withContext({
       acceptedAnswer: {
         '@type': 'Answer',
         text:
-          'EloqKV targets core key-value and common structures, not STREAM, GEO, or HYPERLOGLOG, which the sample shake.toml blocks from sync. Validate your command and type usage against the compatibility reference before migrating.',
+          'EloqKV targets core key-value and common structures, not STREAM, GEO, or HYPERLOGLOG, which the sample shake.toml blocks from sync. Check your command and type usage against the command compatibility reference before migrating.',
       },
     },
     {
       '@type': 'Question',
-      name: 'Do existing Redis clients still work with EloqKV?',
+      name: 'Do my existing Redis clients still work?',
       acceptedAnswer: {
         '@type': 'Answer',
         text:
@@ -223,22 +223,34 @@ const migrationFaq = withContext({
       acceptedAnswer: {
         '@type': 'Answer',
         text:
-          'Define a latency SLO such as a P99 GET target, divert read traffic to EloqKV first, and monitor P99 and P99.99 under real load before cutover.',
+          'Define a latency SLO such as a P99 GET target, divert read traffic to EloqKV in Stage 2, and monitor P99 and P99.99 under real load before cutover. The benchmark article shows reference tail-latency numbers on NVMe.',
       },
     },
     {
       '@type': 'Question',
-      name: 'How do I roll back the migration?',
+      name: 'How do I roll back if something goes wrong?',
       acceptedAnswer: {
         '@type': 'Answer',
         text:
-          'Until the write cutover, Redis remains the source of truth, so rolling back means leaving reads and writes on Redis. Keep Redis running until EloqKV has served production writes and met your SLOs, then decommission it.',
+          'Until the Stage 3 write cutover, Redis remains the source of truth, so rolling back is simply leaving reads and writes on Redis. Keep Redis running until EloqKV has served production write traffic and met your SLOs, then decommission it.',
       },
     },
   ],
 });
 
 const routeStructuredData = {
+  '/': [
+    withContext(organization),
+    withContext({
+      '@type': 'WebSite',
+      '@id': `${SITE_URL}/#website`,
+      name: 'EloqData',
+      url: SITE_URL,
+      description: seo.home.description,
+      inLanguage: 'en',
+      publisher: {'@id': ORGANIZATION_ID},
+    }),
+  ],
   '/product/eloqkv': [
     eloqkvSoftwareApplication,
     breadcrumbList('/product/eloqkv', [
@@ -330,8 +342,85 @@ function getStructuredDataForPath(pathname) {
   return routeStructuredData[normalizePath(pathname)] || [];
 }
 
+function getArticleSection(pathname = '') {
+  if (pathname.startsWith('/news/')) {
+    return {name: 'News', path: '/news', type: 'NewsArticle'};
+  }
+  if (pathname.startsWith('/post/')) {
+    return {name: 'Articles', path: '/post', type: 'Article'};
+  }
+  return {name: 'Blog', path: '/blog', type: 'BlogPosting'};
+}
+
+// Only explicit editorial dates count as updates. Git checkout or build dates
+// must never imply that the article's claims have been reviewed or refreshed.
+function editorialDate(value) {
+  if (!value) return undefined;
+  const date = value instanceof Date ? value : new Date(value);
+  return Number.isNaN(date.getTime()) ? undefined : date.toISOString();
+}
+
+function getArticleBreadcrumbs(metadata) {
+  const section = getArticleSection(metadata.permalink);
+  return breadcrumbList(metadata.permalink, [
+    {name: 'Home', path: '/'},
+    {name: section.name, path: section.path},
+    {name: metadata.title, path: metadata.permalink},
+  ]);
+}
+
+function getEditorialDetails(frontMatter = {}) {
+  return {
+    summary: typeof frontMatter.summary === 'string' ? frontMatter.summary : '',
+    takeaways: Array.isArray(frontMatter.key_takeaways)
+      ? frontMatter.key_takeaways.filter(item => typeof item === 'string' && item.trim())
+      : [],
+    sources: Array.isArray(frontMatter.sources)
+      ? frontMatter.sources.filter(source =>
+          source && typeof source.title === 'string' &&
+          typeof source.url === 'string' && /^https?:\/\//i.test(source.url))
+      : [],
+    modified: editorialDate(frontMatter.last_update?.date),
+    reviewed: editorialDate(frontMatter.last_reviewed),
+    reviewer: typeof frontMatter.reviewed_by === 'string' ? frontMatter.reviewed_by : '',
+  };
+}
+
+function buildArticleStructuredData(baseSchema, metadata) {
+  const {dateModified: _inferredDate, author: _author, ...base} = baseSchema;
+  const editorial = getEditorialDetails(metadata.frontMatter);
+  const authors = (metadata.authors || []).filter(author => author.name).map(author =>
+    author.name === organization.name
+      ? organization
+      : {
+          '@type': 'Person',
+          name: author.name,
+          ...(author.url ? {url: author.url} : {}),
+          ...(author.title ? {description: author.title} : {}),
+        });
+  return {
+    ...base,
+    '@type': getArticleSection(metadata.permalink).type,
+    inLanguage: 'en',
+    publisher: organization,
+    ...(authors.length ? {author: authors.length === 1 ? authors[0] : authors} : {}),
+    ...(editorial.modified ? {dateModified: editorial.modified} : {}),
+    ...(editorial.summary ? {abstract: editorial.summary} : {}),
+    ...(editorial.sources.length ? {
+      citation: editorial.sources.map(source => ({
+        '@type': 'CreativeWork', name: source.title, url: source.url,
+      })),
+    } : {}),
+  };
+}
+
 module.exports = {
   absoluteUrl,
+  buildArticleStructuredData,
+  editorialDate,
+  getArticleBreadcrumbs,
+  getArticleSection,
+  getEditorialDetails,
   getStructuredDataForPath,
   normalizePath,
   routeStructuredData,

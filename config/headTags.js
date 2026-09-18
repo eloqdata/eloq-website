@@ -40,7 +40,7 @@ module.exports = [
           function forceDarkTheme() {
             if (typeof window === 'undefined') return;
             var path = window.location.pathname;
-            var isWhiteAllowed = /^\\/(docs|blog|news|eloqkv|eloqdoc|eloqsql|eloqcloud|operator)/i.test(path);
+            var isWhiteAllowed = /^\\/(docs|blog|news|post|eloqkv|eloqdoc|eloqsql|eloqcloud|operator)/i.test(path);
             if (!isWhiteAllowed && document.documentElement.getAttribute('data-theme') === 'light') {
               document.documentElement.setAttribute('data-theme', 'dark');
             }

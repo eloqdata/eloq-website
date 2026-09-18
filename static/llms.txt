@@ -1,28 +1,33 @@
 # EloqData
-> SSD-first, Memory-Speed Persistence Database Architecture.
 
-## Project Overview
-EloqData is building the next generation of high-performance databases designed for the modern hardware landscape (NVMe SSDs) rather than traditional DRAM-heavy models. Our architecture focuses on extreme low tail latency (P99.99 < 6ms) and massive concurrency.
+> EloqData develops distributed databases built on a shared Data Substrate architecture, including Redis-compatible EloqKV, MongoDB-compatible EloqDoc, and MySQL-compatible EloqSQL.
 
-## Core Technology
-- **EloqStore**: An open-source, SSD-first storage engine.
-- **Async I/O**: Deep integration with Linux io_uring for high-throughput disk operations.
-- **Concurrency**: Built using C++20 coroutines to handle millions of concurrent requests.
-- **APIs**: Provides a multi-model layer including:
-    - **EloqKV**: Redis-compatible API.
-    - **EloqDoc**: MongoDB-compatible API.
-    - Built on top of ScyllaDB for horizontal scalability.
+Use the linked product and compatibility documentation for supported features. Benchmark and cost results describe the workload, hardware, pricing date, and durability settings in the individual report; they are not guarantees for every deployment.
 
-## Key Performance Targets
-- Optimized for "Memory-Speed Persistence" (using SSDs as primary storage while maintaining DRAM-like speeds).
-- Targeted at AI workloads, real-time analytics, and high-scale metadata management.
-- Designed to bypass global DRAM shortages and high infrastructure costs.
+## Products and documentation
 
-## Documentation & Resources
-- Main Site: https://www.eloqdata.com
-- GitHub: https://github.com/EloqData
-- Technical Blog: https://www.eloqdata.com/blog
+- [EloqKV](https://www.eloqdata.com/product/eloqkv): Redis-compatible key-value database with NVMe-backed storage options.
+- [EloqKV architecture](https://www.eloqdata.com/eloqkv/introduction): Data Substrate, transactions, persistence, and storage architecture.
+- [EloqKV quick start](https://www.eloqdata.com/eloqkv/quick-start): Installation and initial usage.
+- [Redis command compatibility](https://www.eloqdata.com/eloqkv/kvstore_compatibility): Check supported commands before migration.
+- [Redis client compatibility](https://www.eloqdata.com/eloqkv/client_compatibility): Client and connection guidance.
+- [EloqDoc](https://www.eloqdata.com/product/eloqdoc): MongoDB-compatible document database.
+- [EloqDoc compatibility](https://www.eloqdata.com/eloqdoc/compatibility): Supported MongoDB features and limitations.
+- [EloqSQL](https://www.eloqdata.com/eloqsql/introduction): MySQL-compatible distributed SQL database.
+- [Product editions](https://www.eloqdata.com/product-comparison): Product edition capabilities.
+- [EloqData on GitHub](https://github.com/eloqdata): Source repositories and project documentation.
 
-## Team
-- Co-founded by Lintao Zhang (CEO), Hubert Zhang (CTO) and Jeff Chen (Chief Architect).
-- Engineering roots in GreenplumDB and Pivotal database internals.
+## Articles and announcements
+
+- [Technical blog](https://www.eloqdata.com/blog): Architecture, operations, and benchmark reports.
+- [Articles](https://www.eloqdata.com/post): In-depth product and infrastructure analysis.
+- [News](https://www.eloqdata.com/news): Dated company and product announcements.
+- [Public content index](https://www.eloqdata.com/content-index.json): Build-generated canonical article URLs, publication dates, descriptions, and editorial sources when provided.
+- [Sitemap](https://www.eloqdata.com/sitemap.xml): Indexable site routes.
+- [Blog RSS feed](https://www.eloqdata.com/blog/rss.xml)
+- [News RSS feed](https://www.eloqdata.com/news/rss.xml)
+- [Article RSS feed](https://www.eloqdata.com/post/rss.xml)
+
+## Contact
+
+- [Contact EloqData](https://www.eloqdata.com/contact): Product, deployment, and business inquiries.

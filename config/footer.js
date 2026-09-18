@@ -37,6 +37,10 @@ module.exports = (copyright, trademark) => ({
                     label: 'News',
                     to: '/news',
                 },
+                {
+                    label: 'Articles',
+                    to: '/post',
+                },
             ],
         },
     ],

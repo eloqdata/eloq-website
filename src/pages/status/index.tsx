@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Head from "@docusaurus/Head";
 
 const SERVICE_URL = "https://cloud.eloqdata.com/";
 
@@ -92,6 +93,10 @@ export default function StatusPage() {
 
   return (
     <div className="flex min-h-[60vh] items-center justify-center">
+      <Head>
+        <title>EloqCloud Service Status</title>
+        <meta name="robots" content="noindex, follow" />
+      </Head>
       <div
         className="flex w-80 flex-col items-center rounded-xl px-8 py-6 shadow-xl"
         style={{

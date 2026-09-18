@@ -1,0 +1,16 @@
+{
+  "id": "redis-compatibility-checklist",
+  "approved": false,
+  "operation": "create",
+  "collection": "blog",
+  "slug": "redis-compatibility-checklist",
+  "title": "How to evaluate Redis client compatibility before adopting EloqKV",
+  "audience": "Backend engineers evaluating EloqKV for an existing Redis workload",
+  "question": "What should a team check before connecting an existing Redis client to EloqKV?",
+  "tags": ["EloqKV"],
+  "internal_links": ["/eloqkv/client_compatibility", "/eloqkv/quick-start", "/product/eloqkv"],
+  "sources": [
+    {"title": "EloqKV client compatibility", "path": "eloqkv/client_compatibility.md", "url": "https://www.eloqdata.com/eloqkv/client_compatibility"},
+    {"title": "EloqKV quick start", "path": "eloqkv/quick-start.md", "url": "https://www.eloqdata.com/eloqkv/quick-start"}
+  ]
+}

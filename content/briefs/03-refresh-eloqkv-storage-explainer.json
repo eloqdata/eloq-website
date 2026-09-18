@@ -1,0 +1,17 @@
+{
+  "id": "refresh-eloqkv-storage-explainer",
+  "approved": false,
+  "operation": "refresh",
+  "collection": "blog",
+  "article": "blog/2026-01-08-eloqkv-on-eloqstore/index.md",
+  "slug": "eloqkv-on-eloqstore",
+  "title": "Clarify the scope and limitations of EloqKV on EloqStore benchmarks",
+  "audience": "Database engineers evaluating NVMe storage for Redis workloads",
+  "question": "What do the January 2026 EloqKV on EloqStore benchmarks test, and which durability and workload limitations must a reader understand?",
+  "tags": ["EloqKV"],
+  "internal_links": ["/product/eloqkv", "/eloqkv/introduction", "/costsaving"],
+  "sources": [
+    {"title": "Original January 2026 EloqKV on EloqStore benchmark", "path": "blog/2026-01-08-eloqkv-on-eloqstore/index.md", "url": "https://www.eloqdata.com/blog/2026/01/08/eloqkv-on-eloqstore"},
+    {"title": "EloqKV introduction", "path": "eloqkv/introduction.md", "url": "https://www.eloqdata.com/eloqkv/introduction"}
+  ]
+}

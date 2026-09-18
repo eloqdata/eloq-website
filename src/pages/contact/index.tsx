@@ -59,7 +59,7 @@ const ContactPage: React.FC = () => {
   };
 
   return (
-    <Layout title="Contact Us">
+    <Layout title="Contact EloqData" description="Talk with EloqData about database architecture, EloqKV evaluation, Redis migration, enterprise support, and your workload requirements.">
       <div className="contact-page-container">
         <div className="contact-page">
           <div className="top-description">

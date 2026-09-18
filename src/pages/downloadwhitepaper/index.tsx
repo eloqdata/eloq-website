@@ -60,7 +60,7 @@ const WhitepaperDownloadPage: React.FC = () => {
   };
 
   return (
-    <Layout title="Download Whitepaper">
+    <Layout title="Download the EloqKV Whitepaper" description="Download the EloqKV on EloqStore whitepaper for technical details on NVMe-backed storage, database design, and benchmark methodology.">
       <div className="contact-page-container whitepaper-page-container">
         <div className="contact-page whitepaper-page">
           <div className="top-description">

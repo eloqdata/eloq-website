@@ -1,0 +1,9 @@
+.breadcrumbs { margin-bottom: 1.5rem; font-size: .875rem; color: var(--ifm-color-emphasis-700); }
+.breadcrumbs ol { display: flex; flex-wrap: wrap; gap: .4rem; list-style: none; margin: 0; padding: 0; }
+.breadcrumbs li:not(:last-child)::after { content: '/'; margin-left: .4rem; color: var(--ifm-color-emphasis-500); }
+.summary { padding: 1.5rem; margin-bottom: 2rem; background: var(--ifm-background-surface-color); border: 1px solid var(--ifm-color-emphasis-300); border-left: 3px solid var(--ifm-color-primary); border-radius: .5rem; }
+.summary h2 { margin-top: 0; font-size: 1.25rem; }
+.summary :last-child { margin-bottom: 0; }
+.sources { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid var(--ifm-color-emphasis-300); }
+.review { margin-top: 1.5rem; color: var(--ifm-color-emphasis-700); font-size: .875rem; }
+.review p { margin: .25rem 0; }

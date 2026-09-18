@@ -1,0 +1,96 @@
+name: Daily editorial draft
+
+on:
+  schedule:
+    - cron: '23 14 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: daily-editorial-draft
+  cancel-in-progress: false
+
+jobs:
+  draft:
+    if: vars.CONTENT_AUTOMATION_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      CONTENT_AUTOMATION_ENABLED: ${{ vars.CONTENT_AUTOMATION_ENABLED }}
+      OPENAI_CONTENT_MODEL: ${{ vars.OPENAI_CONTENT_MODEL }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check credentials and outstanding draft PRs
+        id: gate
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          if [ -z "$OPENAI_API_KEY" ] || [ -z "$OPENAI_CONTENT_MODEL" ]; then
+            echo 'Configure OPENAI_API_KEY and OPENAI_CONTENT_MODEL before enabling daily content.' >&2
+            exit 1
+          fi
+          pending=$(gh pr list --state open --limit 1000 --json headRefName --jq '[.[] | select(.headRefName | startswith("automation/content-"))] | length')
+          branch="automation/content-$(date -u +%Y-%m-%d)"
+          queue_ready=$(node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          import path from 'node:path';
+          const read = file => JSON.parse(fs.readFileSync(file, 'utf8'));
+          const drafts = fs.readdirSync('content/drafts', {withFileTypes: true})
+            .filter(entry => entry.isDirectory())
+            .map(entry => read(path.join('content/drafts', entry.name, 'manifest.json')));
+          const briefs = fs.readdirSync('content/briefs').filter(name => name.endsWith('.json'))
+            .map(name => read(path.join('content/briefs', name)));
+          console.log(!drafts.some(draft => draft.status !== 'published') &&
+            briefs.some(brief => brief.approved === true && !drafts.some(draft => draft.id === brief.id)));
+          JS
+          )
+          if [ "$pending" != '0' ] || [ "$queue_ready" != 'true' ] || git ls-remote --exit-code --heads origin "$branch" >/dev/null 2>&1; then
+            echo 'No approved unused brief, an editorial draft is awaiting review, or today already has a draft branch. No generation requested.'
+            echo 'ready=false' >> "$GITHUB_OUTPUT"
+          else
+            echo 'ready=true' >> "$GITHUB_OUTPUT"
+            echo "branch=$branch" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/setup-node@v4
+        if: steps.gate.outputs.ready == 'true'
+        with:
+          node-version: 22
+          cache: yarn
+      - name: Install locked dependencies
+        if: steps.gate.outputs.ready == 'true'
+        run: yarn install --frozen-lockfile
+      - name: Generate at most one approved draft
+        if: steps.gate.outputs.ready == 'true'
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          node tools/content/cli.mjs plan
+          node tools/content/cli.mjs daily
+          node tools/content/cli.mjs validate
+      - name: Open draft PR with editorial evidence
+        if: steps.gate.outputs.ready == 'true'
+        env:
+          DRAFT_BRANCH: ${{ steps.gate.outputs.branch }}
+        run: |
+          if [ -z "$(git status --porcelain -- content/drafts)" ]; then
+            echo 'No new draft. Approve a queued brief or finish an existing draft.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git switch -c "$DRAFT_BRANCH"
+          git add content/drafts
+          git commit -m "Prepare editorial draft with source evidence"
+          git push origin "$DRAFT_BRANCH"
+          cat > /tmp/editorial-pr.md <<'BODY'
+          This PR contains one unpublished article draft, its source hashes, claim evidence, and editorial review notes in `content/drafts/`.
+
+          An editor and product expert should check the complete article, citations, compatibility, and any dated claims. Follow `docs/CONTENT_WORKFLOW.md` to run `review` and then `publish` on this branch. Those commands add the reviewed article to the public collection. Run the production build and inspect the preview before merging.
+
+          Merging this draft alone does not publish it. No live article is overwritten by generation. The next scheduled draft waits until this PR and any unpublished draft are resolved.
+          BODY
+          gh pr create --draft --head "$DRAFT_BRANCH" --title 'Editorial draft: review evidence and article' --body-file /tmp/editorial-pr.md

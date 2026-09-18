@@ -9,6 +9,16 @@ keywords: [Redis to EloqKV migration, RedisShake, Redis migration guide, Redis a
 blog: true
 featured: false
 featuredMain: false
+summary: "Use RedisShake to mirror Redis data into EloqKV, validate client and command compatibility, then test read and write cutover before switching production traffic. Migration behavior depends on the application and deployment."
+key_takeaways:
+  - "Check client compatibility and command behavior before migrating the workload."
+  - "Validate replicated data and application latency before redirecting production traffic."
+  - "Plan the cutover and rollback procedure for your deployment; do not assume a universal downtime guarantee."
+sources:
+  - title: "EloqKV Redis client compatibility"
+    url: "https://www.eloqdata.com/eloqkv/client_compatibility"
+  - title: "RedisShake source and documentation"
+    url: "https://github.com/tair-opensource/RedisShake"
 ---
 
 ## Background

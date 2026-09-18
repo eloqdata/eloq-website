@@ -125,7 +125,7 @@ const benchmarkFaqSchema = schemaFor(
 assert.equal(benchmarkFaqSchema.mainEntity.length, 5);
 assert.match(
   benchmarkFaqSchema.mainEntity[0].acceptedAnswer.text,
-  /single direct NVMe access/
+  /single, direct NVMe access/
 );
 
 assert.deepEqual(getStructuredDataForPath('/contact/submitted'), []);

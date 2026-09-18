@@ -21,6 +21,8 @@ This is where EloqKV's hot/warm/cold architecture matters.
 
 EloqKV is a Redis- and Valkey-compatible database for large stateful workloads. It keeps active data fast, serves datasets beyond DRAM from local NVMe SSD, and uses object storage for durable capacity. The application still speaks Redis-compatible APIs, but the storage architecture is no longer forced to keep every byte in memory.
 
+<!-- truncate -->
+
 ## TL;DR
 
 For user-state workloads, EloqKV maps data temperature to storage cost:

@@ -11,7 +11,7 @@ import techImage from "./aboutustech.jpg"; // Adjust the path to your actual ima
 
 const CompanyPage: React.FC = () => {
   return (
-    <Layout title="About Us">
+    <Layout title="About EloqData" description="Meet EloqData, the team building Redis-compatible and multi-model databases with independently scalable compute, memory, and storage.">
       <div className="company-page-container">
         <div className="company-page">
           {/* Header Section */}
@@ -57,7 +57,7 @@ const CompanyPage: React.FC = () => {
                 <h2 className="mission-heading">Our Technology</h2>
                 <p className="large-text">
                   At the heart of EloqData is{" "}
-                  <a href="blog/2025/07/14/technology">Data Substrate</a>—a
+                  <a href="/blog/2025/07/14/technology">Data Substrate</a>—a
                   modular database architecture that redefines how databases are
                   built. By abstracting the core components of database
                   functionality, Data Substrate enables us to create

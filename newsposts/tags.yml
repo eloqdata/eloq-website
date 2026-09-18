@@ -1,0 +1,9 @@
+Product:
+  label: Product
+  permalink: /product
+  description: EloqData product announcements, database releases, and updates to EloqKV, EloqDoc, EloqSQL, and EloqCloud.
+
+Open Source:
+  label: Open Source
+  permalink: /open-source
+  description: Open source news from EloqData, including database projects, community announcements, and ways to get involved.

@@ -14,11 +14,13 @@ export default function BlogLayout(props) {
       )}
       noSidebar={true}
     >
-      <div className={styles.blogPostContainer}>
-        <aside className={styles.blogSidebar}></aside>
-        <main className={styles.blogContent}>{children}</main>
-        <aside className={styles.blogSidebar}></aside>
-      </div>
+      {isBlogListPage ? (
+        <main className={styles.listContent}>{children}</main>
+      ) : (
+        <div className={styles.blogPostContainer}>
+          <main className={styles.blogContent}>{children}</main>
+        </div>
+      )}
     </Layout>
   );
 }
